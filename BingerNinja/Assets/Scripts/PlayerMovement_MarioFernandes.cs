@@ -4,7 +4,7 @@
 ///!!!!!!!!!!!!Needs Rigidbody2D to Work!!!!!!!!!!
 
 // Mário 16/10/2020 - Abstract Movement code from old Character class
-
+// Mário 18/10/2020 - Add reset speed function
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +18,13 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
     protected Vector2 m_direction = new Vector2(0, 0);
 
     public float m_speed = 5.0f;
+
+    public float m_baseSpeed = 5.0f;
+
+    public void ResetSpeed()
+    {
+        m_speed = m_baseSpeed;
+    }
 
 #region Movement Directions
     public void MoveUp()
@@ -43,6 +50,7 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
 
     void Start()
     {
+        ResetSpeed();
         Physics2D.gravity = Vector2.zero;
         m_rb = GetComponent<Rigidbody2D>();
     }
