@@ -1,8 +1,8 @@
 ﻿//Joao Beijinho
 ///This class handles interaction with phone, makes player stealth for a while but unable to move
 
-//Joao Beijinho 18/10/2020 - Created draft for
-//Update Movement
+//Joao Beijinho 18/10/2020 - Created draft for Phone interaction, making the player stealth and unable to move for a few seconds
+//Joao Beijinho 19/10/2020 - Updated Movement restriction using PlayerController, and now the player can move after a specific set of time
 
 using System.Collections;
 using System.Collections.Generic;
@@ -11,41 +11,35 @@ using UnityEngine;
 public class Phone_JoaoBeijinho : MonoBehaviour
 {
     StealthObject_JoaoBeijinho steathObjectScript;
-    PlayerMovement_MarioFernandes playerMovementScript;
-
-    //Variable to store player speed
-    private float playerSpeed;
+    PlayerController_JamieG playerControllerScript;
 
     // Start is called before the first frame update
     void Start()
     {
-
         steathObjectScript = FindObjectOfType<StealthObject_JoaoBeijinho>();
-        playerMovementScript = FindObjectOfType<PlayerMovement_MarioFernandes>();
-        
-        //Store player movement speed
-        playerSpeed = playerMovementScript.m_speed;
+        playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        steathObjectScript.Hide();
-
         StartCoroutine(PhoneDuration());
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        steathObjectScript.Hide();
 
-        playerMovementScript.m_speed = playerSpeed;
     }
 
+    //Time for stealth and movement restriction while on phone, resume after a set time
     IEnumerator PhoneDuration()
     {
-        playerMovementScript.m_speed = 0;
+        steathObjectScript.Hide();
+        playerControllerScript.m_movement.Disable();
 
         yield return new WaitForSeconds(5);
+
+        steathObjectScript.Hide();
+        playerControllerScript.m_movement.Enable();
     }
 
     // Update is called once per frame
