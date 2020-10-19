@@ -80,7 +80,10 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
         // Run death sequence
     private void Die()
     {
-        gameObject.SetActive(false);
+        // gameObject.SetActive(false);
+        gameObject.transform.position = GameObject.FindGameObjectWithTag("SaveCheckpoint").GetComponent<SaveSystem_ElliottDesouza>().m_currentCheckpoint.position;
+        m_currentHealth = 100;
+        m_currentHunger = 100;
         print("GAME OVER");
 	}
 
