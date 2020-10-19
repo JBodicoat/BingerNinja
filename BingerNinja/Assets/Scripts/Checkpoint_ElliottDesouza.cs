@@ -1,5 +1,7 @@
 ﻿//Elliott Desouza
-// my class saves the check point
+/// my class creates a check point
+
+//Elliott 19/10/2020 - added collision which sets the current checkpoint
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

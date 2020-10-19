@@ -3,6 +3,7 @@
 
 // Mário 16/10/2020 - Abstract Health&Hunger code from old Character class
 // Mário 18/10/2020 - Add max health increase/decrease functions
+// Elliott 19/10/2020 - Added respawn on Death
 
 using System.Collections;
 using System.Collections.Generic;
