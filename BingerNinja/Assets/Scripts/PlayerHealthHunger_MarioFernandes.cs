@@ -2,6 +2,7 @@
 /// My class takes care of Health and Hunger
 
 // Mário 16/10/2020 - Abstract Health&Hunger code from old Character class
+// Mário 18/10/2020 - Add max health increase/decrease functions
 
 using System.Collections;
 using System.Collections.Generic;
@@ -45,7 +46,8 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
         {
             Die();
 		}
-
+        
+        print(m_currentHealth);
         m_healthSlider.value = m_currentHealth;
     }
 
@@ -64,6 +66,15 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
     public void SetMaxHealth(float amount)
     {
         m_maxHealth = amount;
+    }
+
+    public void IncreaseMaxHealt(float amount)
+    {
+        m_maxHealth += amount;
+    }
+     public void DecreaseMaxHealt(float amount)
+    {
+        m_maxHealth -= amount;
     }
 
         // Run death sequence
@@ -86,6 +97,7 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         m_currentHunger -= m_fullnessDrainRate * Time.deltaTime;
         m_hungerSlider.value = m_currentHunger;
         if (m_currentHunger < 0)
