@@ -1,4 +1,5 @@
 ﻿// Jack 20/10 Updated to support new input system
+//            Added support for the buff/debuff system
 
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +16,9 @@ public class Weapon_Morgan : MonoBehaviour
     //Character characterScript;
 
     PlayerHealthHunger_MarioFernandes playerHealthAndHungerScript;
+    EffectManager_MarioFernandes statusEffectManager;
+    PoisionDefuff_MarioFernandes squidStatusEffect = new PoisionDefuff_MarioFernandes(2, 3, 0.5f);
+    HealBuff_MarioFernandes onigiriStatusEffect = new HealBuff_MarioFernandes(5, 3, 1.5f);
 
     GameObject clone = null;
 
@@ -40,6 +44,7 @@ public class Weapon_Morgan : MonoBehaviour
     {
         //characterScript = FindObjectOfType<Character>();
         playerHealthAndHungerScript = FindObjectOfType<PlayerHealthHunger_MarioFernandes>();
+        statusEffectManager = FindObjectOfType<EffectManager_MarioFernandes>();
     }
 
     // Update is called once per frame
@@ -199,6 +204,17 @@ public class Weapon_Morgan : MonoBehaviour
             //characterScript.Eat(60);
             playerHealthAndHungerScript.Eat(60);
             isWeaponHeld = false;
+
+            switch(currentWeapon)
+            {
+                case weaponType.squid:
+                    statusEffectManager.AddEffect(squidStatusEffect);
+                    break;
+
+                case weaponType.onigiri:
+                    statusEffectManager.AddEffect(onigiriStatusEffect);
+                    break;
+			}
 
             if(clone)
             {
