@@ -17,8 +17,8 @@ public class Weapon_Morgan : MonoBehaviour
 
     PlayerHealthHunger_MarioFernandes playerHealthAndHungerScript;
     EffectManager_MarioFernandes statusEffectManager;
-    PoisionDefuff_MarioFernandes squidStatusEffect = new PoisionDefuff_MarioFernandes(2, 3, 0.5f);
-    HealBuff_MarioFernandes onigiriStatusEffect = new HealBuff_MarioFernandes(5, 3, 1.5f);
+    PoisionDefuff_MarioFernandes squidStatusEffect = new PoisionDefuff_MarioFernandes(10, 5, 0.5f);
+    HealBuff_MarioFernandes onigiriStatusEffect = new HealBuff_MarioFernandes(50, 3, 1.5f);
 
     GameObject clone = null;
 
@@ -59,6 +59,8 @@ public class Weapon_Morgan : MonoBehaviour
         if (isWeaponHeld)
         {
             var mouse = Mouse.current;
+            MousePos = Camera.main.ScreenToWorldPoint(mouse.position.ReadValue());
+
             switch (currentWeapon)
             {
                 case weaponType.onigiri:
