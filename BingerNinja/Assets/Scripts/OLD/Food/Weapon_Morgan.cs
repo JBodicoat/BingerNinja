@@ -50,10 +50,12 @@ public class Weapon_Morgan : MonoBehaviour
             switch (currentWeapon)
             {
                 case weaponType.onigiri:
+                    /* Commented out for new input system
                     if (Input.GetMouseButtonDown(0))
                     {
                         LeftClickOnigiri();
                     }
+                    */
                     break;
 
                 case weaponType.squid:
@@ -78,6 +80,7 @@ public class Weapon_Morgan : MonoBehaviour
 						}
                         else
                         {
+                            /* Commented out for new input system
                             if (Input.GetMouseButtonDown(0))
                             {
                                 SquidLeftClick();
@@ -90,6 +93,7 @@ public class Weapon_Morgan : MonoBehaviour
                                 squidScript.isPreparing = false;
                                 squidCooldown = 0.5f;
                             }
+                            */
                         }
                     }
                     break;
@@ -102,7 +106,7 @@ public class Weapon_Morgan : MonoBehaviour
 
     void LeftClickOnigiri()
     {
-        MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         if (attackCooldown <= 0)
         {

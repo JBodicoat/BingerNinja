@@ -113,8 +113,7 @@ public class EnemyAi : MonoBehaviour
     {
         if(Vector2.Distance(transform.position, playerTransform.position) < detectionRange)
         {
-            //shoot
-            //aim at the oplayer
+
             Vector3 dir = Vector3.Normalize(playerTransform.position - transform.position);
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             aim.transform.eulerAngles = new Vector3(0, 0, angle);
@@ -134,7 +133,6 @@ public class EnemyAi : MonoBehaviour
         }
         else
         {
-            //chase
             transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, speed * Time.deltaTime);
         }
     }
