@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿// Jack 20/10 changed to support new PlayerHealthAndHunger script
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +21,7 @@ public class BulletMovment : MonoBehaviour
 	{
 		if(collision.tag == "Player")
         {
-            FindObjectOfType<Character>().Hit(20);
+            FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(20);
             Destroy(gameObject);
 		}
 	}

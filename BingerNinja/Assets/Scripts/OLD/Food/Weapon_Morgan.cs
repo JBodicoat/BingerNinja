@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿// Jack 20/10 Updated to support new input system
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public enum weaponType { onigiri, squid };
 
@@ -9,7 +12,9 @@ public class Weapon_Morgan : MonoBehaviour
     //scripts 
     OnigiriWeapon_Morgan onigiriScript;
     SquidWeapon_Morgan squidScript;
-    Character characterScript;
+    //Character characterScript;
+
+    PlayerHealthHunger_MarioFernandes playerHealthAndHungerScript;
 
     GameObject clone = null;
 
@@ -33,7 +38,8 @@ public class Weapon_Morgan : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        characterScript = FindObjectOfType<Character>();
+        //characterScript = FindObjectOfType<Character>();
+        playerHealthAndHungerScript = FindObjectOfType<PlayerHealthHunger_MarioFernandes>();
     }
 
     // Update is called once per frame
@@ -47,9 +53,15 @@ public class Weapon_Morgan : MonoBehaviour
 
         if (isWeaponHeld)
         {
+            var mouse = Mouse.current;
             switch (currentWeapon)
             {
                 case weaponType.onigiri:
+                    if (mouse.leftButton.wasPressedThisFrame)
+                    {
+                        LeftClickOnigiri();
+                    }
+
                     /* Commented out for new input system
                     if (Input.GetMouseButtonDown(0))
                     {
@@ -80,27 +92,46 @@ public class Weapon_Morgan : MonoBehaviour
 						}
                         else
                         {
-                            /* Commented out for new input system
-                            if (Input.GetMouseButtonDown(0))
+                            if (mouse.leftButton.wasPressedThisFrame)
                             {
                                 SquidLeftClick();
                             }
 
-                            if (Input.GetMouseButtonUp(0))
+                            if (mouse.leftButton.wasReleasedThisFrame)
                             {
                                 attackCooldown = 1;
                                 squidScript.isAttacking = true;
                                 squidScript.isPreparing = false;
                                 squidCooldown = 0.5f;
                             }
-                            */
+
+                        /* Commented out for new input system
+                        if (Input.GetMouseButtonDown(0))
+                        {
+                            SquidLeftClick();
                         }
+
+                        if (Input.GetMouseButtonUp(0))
+                        {
+                            attackCooldown = 1;
+                            squidScript.isAttacking = true;
+                            squidScript.isPreparing = false;
+                            squidCooldown = 0.5f;
+                        }
+                        */
+                    }
                     }
                     break;
 
                 default:
                     break;
             }
+
+            var keyboard = Keyboard.current;
+            if(keyboard.eKey.wasPressedThisFrame)
+            {
+                EatWeapon();
+			}
         }
     }
 
@@ -133,7 +164,8 @@ public class Weapon_Morgan : MonoBehaviour
 
             // actions
 
-            clone = Instantiate(squid, gameObject.transform.position, Quaternion.identity, characterScript.gameObject.transform);
+            //clone = Instantiate(squid, gameObject.transform.position, Quaternion.identity, characterScript.gameObject.transform);
+            clone = Instantiate(squid, gameObject.transform.position, Quaternion.identity, playerHealthAndHungerScript.gameObject.transform);
             squidScript = clone.GetComponent<SquidWeapon_Morgan>();
             squidScript.isPreparing = true;
             squidScript.mouseDirection = velocity;
@@ -164,7 +196,8 @@ public class Weapon_Morgan : MonoBehaviour
     {
         if(isWeaponHeld)
         {
-            characterScript.Eat(60);
+            //characterScript.Eat(60);
+            playerHealthAndHungerScript.Eat(60);
             isWeaponHeld = false;
 
             if(clone)

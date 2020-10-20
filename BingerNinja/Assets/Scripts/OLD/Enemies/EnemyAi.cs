@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿// Jack 20/10 - Changed Update to Execute, a public function that needs to be called. This is for demonstration of the prototype
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Networking.PlayerConnection;
 using UnityEngine;
@@ -31,9 +33,10 @@ public class EnemyAi : MonoBehaviour
 	}
 
 	// Update is called once per frame
-	void Update()
+	public void Execute()
     {
-        if (playerTransform.gameObject.activeSelf && !characterScript.isStealthed)
+        //if (playerTransform.gameObject.activeSelf && !characterScript.isStealthed)
+        if (playerTransform.gameObject.activeSelf)
         {
             switch (type)
             {
