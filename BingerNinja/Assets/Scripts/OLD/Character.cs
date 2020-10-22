@@ -45,6 +45,7 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /* Done in "PlayerMovement_MarioFernandes" script
         var curKeyboard= Keyboard.current;
 
         // Movement
@@ -72,17 +73,19 @@ public class Character : MonoBehaviour
 		direction *= speed;
 
 		rb.velocity = direction;
-
+        */
         // Hunger
         currentHunger -= fullnessDrainRate * Time.deltaTime;
         hungerSlider.value = currentHunger;
         if (currentHunger < 0)
             currentHunger = 0;
 
+        /* Commented out for new input system
         if(Input.GetKeyDown(KeyCode.E))
         {
             weaponScript.EatWeapon();
         }
+        */
 
         if (currentHunger == 0)
         {
