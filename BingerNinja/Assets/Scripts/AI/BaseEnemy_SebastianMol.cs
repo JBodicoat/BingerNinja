@@ -10,12 +10,15 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 {
     public Transform rayCastStart; //start position of the ray cast
     public PolygonCollider2D detectionCollider; // the collder cone used for player detection
-    public GameObject DropItem; // itme that i sdropped when enemie dies
-    public float Health; ///enemy health with getter and setter
-    public Transform playerTransform; //used to get playe position can be null if undedteceted
+    internal Transform playerTransform; //used to get playe position can be null if undedteceted
     public bool PlayerDetected = false;
     public enum state { WONDER, CHASE, ATTACK, RETREAT};
-    public state currentState = state.WONDER;
+    internal state currentState = state.WONDER;
+    [Header("designers Section")]
+    [Tooltip("the item the enemy drops on death")]
+    public GameObject DropItem; // itme that i sdropped when enemie dies
+    [Tooltip("health of the enemy")]
+    public float Health; ///enemy health with getter and setter
 
     internal void PlayerDetection(GameObject collision) //detect player in vision cone the establishes line of sight
     {

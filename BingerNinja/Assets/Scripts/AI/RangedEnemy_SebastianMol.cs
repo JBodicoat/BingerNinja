@@ -4,8 +4,10 @@ using UnityEngine;
 
 class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
 {
+    [Header("projectile prefabs")]
     public GameObject aimer;
     public GameObject bullet;
+    [Header("projectile Variables")]
     [Tooltip("how fast the projectile moves")]
     public float shootDeley;
     [Tooltip("speed of the projectile")]
@@ -43,8 +45,7 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
                     currentState = state.ATTACK;
                 }
                 break;
-        }
-       
+        }     
     }
 
     private void RangedAttack()
@@ -58,19 +59,16 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
                 Vector3 dir = Vector3.Normalize(playerTransform.position - transform.position);
                 float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
                 aimer.transform.eulerAngles = new Vector3(0, 0, angle);
-                //instanciate bullet
                 if (timer <= 0)
                 {
                     GameObject projectile = Instantiate(bullet, transform.position, Quaternion.Euler(new Vector3(dir.x, dir.y, 0)));
                     projectile.GetComponent<Rigidbody2D>().velocity = new Vector2(dir.x * projectileSpeed, dir.y * projectileSpeed);
                     timer = shootDeley;
-
                 }
                 else
                 {
                     timer -= Time.deltaTime;
                 }
-
             }
             else
             {
