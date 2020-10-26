@@ -27,13 +27,7 @@ public class DialogueTrigger_MarioFernandes : MonoBehaviour
 
 	private void Start() {
 		Player = GameObject.FindWithTag("Player");
-	}
-	void Update()
-	{
-
-	}
-
-	
+	}	
 }
 
 

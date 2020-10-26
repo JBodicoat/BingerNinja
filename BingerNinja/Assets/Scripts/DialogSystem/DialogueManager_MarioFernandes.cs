@@ -2,7 +2,8 @@
 /// My class takes care of Displaying the Dialog on the screen
 
 // Mário 24/10/2020 - Creation of the class
-// Mário 24/10/2020 - Read from csvFile
+// Mário 25/10/2020 - Read from csvFile
+// Mário 26/10/2020 - Ajust Dialog to the boss Dialog script
 
 using System.Collections;
 using System.Collections.Generic;
@@ -84,46 +85,60 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
 	}
 
 	void LoadDialog()
-	{
-
-		print("aa");
+	{		
+		GameObject Target;
 		GameObject dialogtrig;
+
 		string[] lines = csvFile.text.Split ("\n" [0]);
 		for (int i = 0; i < lines.Length; i++)
 		{
-			string[] parts = lines[i].Split ("," [0]);
-
-			print(parts[0]);
+			List<string> parts = lines[i].Split ("," [0]).ToList();
 			
 			if(parts[0] == level.ToString())
-			{
-				dialogtrig = null;
+			{				
+				//Remove unecessary spaces
+				for (int e = parts.Count-1; e >= 0; e--)
+				{									
+					if(parts[e] == "" || parts[e][0] == (char)13)
+					{
+						parts.RemoveAt(e);					
+					}
+				}	
+
 				
-
-				dialogtrig = GameObject.Find(parts[1]).transform.Find("DialogTrigger").gameObject;
-
-				if(dialogtrig)
-				{
-					
+				dialogtrig = null;
+				Target = null;
+				
+				Target = GameObject.Find(parts[1]);
+				dialogtrig = Target.transform.Find("DialogTrigger")?.gameObject ;
+				//Use Dialog triger For normal gameobjects and Boss Dialog to Bosses
+				if(dialogtrig && dialogtrig.GetComponent<DialogueTrigger_MarioFernandes>())
+				{				
+					//Give the name in the VCs file to the dialog
 					dialogtrig.GetComponent<DialogueTrigger_MarioFernandes>().dialogue.name = parts[1];
 
-					string[] a = new string[parts.Length - 2];
-					for (int u = 2; u < parts.Length; u++)
-					{
-						a[u-2] = parts[u];
-					}				
+					//Remove level and name value
+					parts.RemoveRange(0,2);
+					dialogtrig.GetComponent<DialogueTrigger_MarioFernandes>().dialogue.sentences = parts.ToArray();					
 					
-					dialogtrig.GetComponent<DialogueTrigger_MarioFernandes>().dialogue.sentences = a;					
+				}				
+				else if(Target.GetComponent<BossDialog_MarioFernandes>())
+				{
 					
+					Dialogue a = new Dialogue();
+					//Give the name in the VCs file to the dialog
+					a.name = parts[1];
+
+					//Remove level and name value
+					parts.RemoveRange(0,2);
+					a.sentences = parts.ToArray();
+					Target.GetComponent<BossDialog_MarioFernandes>().dialogue.Add(a);
 				}
 			}
 		}
 	}
 
-	private void Awake() {
-		
-	}
-		// Use this for initialization
+	// Use this for initialization
 	void Start () {
 		sentences = new Queue<string>();
 
