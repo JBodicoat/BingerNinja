@@ -13,8 +13,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveLoadSystem
 {
-
-    
     public static void SaveSettings()
     {
         //Setup formatter
