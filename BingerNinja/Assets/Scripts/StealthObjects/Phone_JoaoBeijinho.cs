@@ -8,15 +8,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Phone_JoaoBeijinho : MonoBehaviour
+public class Phone_JoaoBeijinho : StealthObject_JoaoBeijinho
 {
-    StealthObject_JoaoBeijinho steathObjectScript;
     PlayerController_JamieG playerControllerScript;
 
     // Start is called before the first frame update
     void Start()
     {
-        steathObjectScript = FindObjectOfType<StealthObject_JoaoBeijinho>();
         playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
     }
 
@@ -30,21 +28,15 @@ public class Phone_JoaoBeijinho : MonoBehaviour
 
     }
 
-    //Time for stealth and movement restriction while on phone, resume after a set time
+    //Go into stealth and stop movement while on phone, unstealth and resume movement after a set time
     IEnumerator PhoneDuration()
     {
-        steathObjectScript.Hide();
+        Hide();
         playerControllerScript.m_movement.Disable();
 
         yield return new WaitForSeconds(5);
 
-        steathObjectScript.Hide();
+        Hide();
         playerControllerScript.m_movement.Enable();
     }
-
-    // Update is called once per frame
-    //void Update()
-    //{
-    //    
-    //}
 }

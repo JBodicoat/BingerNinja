@@ -3,15 +3,14 @@
 
 //Joao Beijinho 19/10/2020 - Created draft of the enter and exit states for the vents
 //Joao Beijinho 20/10/2020 - Implemented vent walls and vent path. Moved trigger events to StealthObject
+//Joao Beijinho 25/10/2020 - Moved Triggers back into this script
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Vent_JoaoBeijinho : MonoBehaviour
+public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
 {
-    StealthObject_JoaoBeijinho steathObjectScript;
-
     private GameObject m_player;
     private GameObject m_ventPath;
     private GameObject m_walls;
@@ -29,10 +28,32 @@ public class Vent_JoaoBeijinho : MonoBehaviour
     private Transform m_playerPos;
     private Transform m_ventPos;
 
+    #region Enter and Exit triggers
+    private void OnTriggerEnter2D(Collider2D collision)//Enter and Exit vent
+    {
+        if (collision.tag == "Player")
+        {
+            if (m_playerStealthScript.m_stealthed == false)//If player isn't stealthed he's not inside the vent
+            {
+                VentEnter();
+            }
+            else
+            {
+                VentExit();
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+
+    }
+    #endregion
+
     //On enter contact snap player to the position of the vent, disable collision with wall tiles
     public void VentEnter()
     {
-        steathObjectScript.Hide();
+        Hide();
 
         m_playerPos.position = new Vector3(m_ventPos.position.x, m_ventPos.position.y, m_ventPos.position.z);
 
@@ -47,7 +68,7 @@ public class Vent_JoaoBeijinho : MonoBehaviour
     //On exit contact snap player to the position of the vent, enable collision with wall tiles
     public void VentExit()
     {
-        steathObjectScript.Hide();
+        Hide();
 
         m_playerPos.position = new Vector2(m_ventPos.position.x, m_ventPos.position.y);
 
@@ -62,8 +83,6 @@ public class Vent_JoaoBeijinho : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        steathObjectScript = FindObjectOfType<StealthObject_JoaoBeijinho>();
-
         //Get the player, its position and its collider
         m_player = GameObject.Find("Player");
         m_playerPos = m_player.GetComponent<Transform>();
