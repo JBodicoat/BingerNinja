@@ -8,48 +8,49 @@ using UnityEngine.Experimental.GlobalIllumination;
 //base class for enemies to inherit from with some functionality.
 abstract class BaseEnemy_SebastianMol : MonoBehaviour
 {
-    public Transform rayCastStart; //start position of the ray cast
-    public PolygonCollider2D detectionCollider; // the collder cone used for player detection
-    internal Transform playerTransform; //used to get playe position can be null if undedteceted
-    public bool PlayerDetected = false;
+    public Transform m_rayCastStart; //start position of the ray cast
+    public PolygonCollider2D m_detectionCollider; // the collder cone used for player detection
+    internal Transform m_playerTransform; //used to get playe position can be null if undedteceted
+    public bool m_playerDetected = false;
     public enum state { WONDER, CHASE, ATTACK, RETREAT};
-    internal state currentState = state.WONDER;
+    internal state m_currentState = state.WONDER;
     [Header("designers Section")]
     [Tooltip("the item the enemy drops on death")]
-    public GameObject DropItem; // itme that i sdropped when enemie dies
+    public GameObject m_dropItem; // itme that i sdropped when enemie dies
     [Tooltip("health of the enemy")]
-    public float Health; ///enemy health with getter and setter
+    public float m_health; ///enemy health with getter and setter
 
+    abstract internal void EnemyBehaviour();
     internal void PlayerDetection(GameObject collision) //detect player in vision cone the establishes line of sight
     {
         if(collision.CompareTag("Player"))
         {
-            detectionCollider.enabled = false;
-            RaycastHit2D hit = Physics2D.Linecast(rayCastStart.position, collision.transform.position);
-            Debug.DrawLine(rayCastStart.position, collision.transform.position, Color.red);
+            m_detectionCollider.enabled = false;
+            RaycastHit2D hit = Physics2D.Linecast(m_rayCastStart.position, collision.transform.position);
+            Debug.DrawLine(m_rayCastStart.position, collision.transform.position, Color.red);
 
             if(hit.collider.gameObject.name == "Player")
             {
                 Debug.Log("hit player");
-                PlayerDetected = true;
-                playerTransform = hit.transform;
+                m_playerDetected = true;
+                m_playerTransform = hit.transform;
                 Debug.Log("state.attck");
-                currentState = state.ATTACK;
+                m_currentState = state.ATTACK;
             }
             else
             {
-                detectionCollider.enabled = true;
+                m_detectionCollider.enabled = true;
                 Debug.Log("hit " + hit.collider.gameObject.name);
             }
         }
     } 
     internal void Death() //actions that happen befor enemy death
     {
-        if(Health <= 0)
+        if(m_health <= 0)
         {
-            if (DropItem != null)
+            if (m_dropItem != null)
             {
-                Instantiate(DropItem, transform.position, Quaternion.identity);
+                Instantiate(m_dropItem, transform.position, Quaternion.identity);
                 gameObject.SetActive(false);
             }
             else
@@ -61,14 +62,13 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
     internal void IsPlayerDetected()
     {
-        if (PlayerDetected == true)
+        if (m_playerDetected == true)
         {
             //currentState = state.CHASE;
             //detectionCollider.enabled = false;
         }
     }
 
-    abstract internal void EnemyBehaviour();
 
     private void Update()
     {
@@ -78,7 +78,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(PlayerDetected == false)
+        if(m_playerDetected == false)
         {
             PlayerDetection(collision.gameObject);
         }

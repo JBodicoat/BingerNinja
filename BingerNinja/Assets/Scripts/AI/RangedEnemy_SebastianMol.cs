@@ -19,7 +19,7 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
     internal override void EnemyBehaviour()
     {
         IsPlayerDetected();
-        switch (currentState)
+        switch (m_currentState)
         {
             case state.WONDER:
                 //move form one postion to another
@@ -27,9 +27,9 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
 
             case state.CHASE:
                 //move towards the player if he has been detected
-                if (Vector2.Distance(transform.position, playerTransform.position) < shootingRange)
+                if (Vector2.Distance(transform.position, m_playerTransform.position) < shootingRange)
                 {
-                    currentState = state.ATTACK;
+                    m_currentState = state.ATTACK;
                 }
                 break;
 
@@ -40,9 +40,9 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
                 break;
 
             case state.RETREAT:
-                if (Vector2.Distance(transform.position, playerTransform.position) < shootingRange)
+                if (Vector2.Distance(transform.position, m_playerTransform.position) < shootingRange)
                 {
-                    currentState = state.ATTACK;
+                    m_currentState = state.ATTACK;
                 }
                 break;
         }     
@@ -50,13 +50,13 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
 
     private void RangedAttack()
     {
-        if (Vector2.Distance(transform.position, playerTransform.position) < shootingRange)
+        if (Vector2.Distance(transform.position, m_playerTransform.position) < shootingRange)
         {
             Debug.Log("whitin range");
-            if (playerTransform != null)
+            if (m_playerTransform != null)
             {
                 Debug.Log("see the player");
-                Vector3 dir = Vector3.Normalize(playerTransform.position - transform.position);
+                Vector3 dir = Vector3.Normalize(m_playerTransform.position - transform.position);
                 float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
                 aimer.transform.eulerAngles = new Vector3(0, 0, angle);
                 if (timer <= 0)
@@ -72,12 +72,12 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
             }
             else
             {
-                currentState = state.RETREAT;
+                m_currentState = state.RETREAT;
             }
         }
         else 
         {
-            currentState = state.CHASE;
+            m_currentState = state.CHASE;
         }
     }
     
