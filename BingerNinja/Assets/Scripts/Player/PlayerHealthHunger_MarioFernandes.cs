@@ -48,7 +48,7 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
             Die();
 		}
         
-        print(m_currentHealth);
+        //print(m_currentHealth);
         m_healthSlider.value = m_currentHealth;
     }
 
