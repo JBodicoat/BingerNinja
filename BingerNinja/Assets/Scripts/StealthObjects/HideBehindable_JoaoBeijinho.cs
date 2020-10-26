@@ -11,9 +11,12 @@ using UnityEngine.InputSystem;
 
 public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
 {
-    private bool m_canHide = false;
-    private bool m_isHiding = false;
+    public bool m_canHide = false;
+    public bool m_isHiding = false;
 
+    /// <summary>
+    /// Enable player ability to hide
+    /// </summary>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
@@ -22,11 +25,20 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
         }
     }
 
+    /// <summary>
+    /// Disable player ability to hide
+    /// </summary>
     private void OnTriggerExit2D(Collider2D collision)
     {
-        
+        if (collision.tag == "Player")
+        {
+            m_canHide = false;
+        }
     }
-
+    
+    /// <summary>
+    /// Check if player can hide a chooses to do so, also checks if player is already hiding and chooses to get out of hiding
+    /// </summary>
     void Update()
     {
         if (m_playerControllerScript.m_interact.triggered && m_canHide == true)

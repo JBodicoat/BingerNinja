@@ -7,7 +7,7 @@
 // Jamie 17/10/2020 - Removed some unneeded code and implemented function used by PlayerController class
 // Mário 18/10/2020 - Add reset speed function
 // Joao 23/10/2020 - Added reference to playerStealth script and stop movement while crouched in update
-// Joao 26/10/2020 - Updated crouch restriction in update to check if player is not crouched
+// Joao 26/10/2020 - *OUTDATED*Updated crouch restriction in update to check if player is not crouched*OUTDATED* Moved movement restriction to playerStealth Script
 
 using System.Collections;
 using System.Collections.Generic;
@@ -17,8 +17,6 @@ using UnityEngine.InputSystem;
 public class PlayerMovement_MarioFernandes : MonoBehaviour
 {
     protected Rigidbody2D m_rb;
-    
-    protected PlayerStealth_JoaoBeijinho m_playerStealthScript;
 
     //Direction the character is moving
     protected Vector2 m_direction = new Vector2(0, 0);
@@ -43,17 +41,13 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
         ResetSpeed();
         Physics2D.gravity = Vector2.zero;
         m_rb = GetComponent<Rigidbody2D>();
-        m_playerStealthScript = GetComponent<PlayerStealth_JoaoBeijinho>();
     }
   
     void Update()
     {
-        if (!m_playerStealthScript.m_crouched)
-        {
             m_direction.Normalize();
             m_direction *= m_speed;
 
             m_rb.velocity = m_direction;
-        }
     }
 }
