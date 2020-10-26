@@ -11,11 +11,12 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 {
 
 
-    bool IsHoldingFood()
-    {
+  public  bool IsHoldingFood()
+         {
+       
         //Temp, should go the current weapon
         return false;
-    }
+         }
 
     void PickUpFood()
     {
