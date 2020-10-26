@@ -37,9 +37,9 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_playerStealthScript.m_crouched)
+        if (!m_playerStealthScript.m_crouched)
         {
-            return;
+
         }
     }
 }

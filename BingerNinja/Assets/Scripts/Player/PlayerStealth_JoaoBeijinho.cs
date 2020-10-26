@@ -3,6 +3,7 @@
 
 //Joao 18/10/2020 - Added IsStealthed Function
 //Joao 23/10/2020 - Added IsCrouched Function
+//Joao 26/10/2020 - Simplified Crouch() function to only enable/disable crouching
 
 using System.Collections;
 using System.Collections.Generic;
@@ -24,21 +25,11 @@ public class PlayerStealth_JoaoBeijinho : MonoBehaviour
         return m_crouched;
     }
 
+    /// <summary>
+    /// Crouch Function enables/disables player crouching when called    !!!NEED ENEMY CLASS TO TEST!!!
+    /// </summary>
     public void Crouch()
     {
-        List<Collider2D> playerCollisions = new List<Collider2D>();
-        ContactFilter2D filter = new ContactFilter2D().NoFilter();
-        
-        if (gameObject.GetComponent<BoxCollider2D>().OverlapCollider(filter, playerCollisions) > 0)
-        {
-            foreach (BoxCollider2D crouchObjectCollider in playerCollisions)
-            {
-                if (crouchObjectCollider.GetComponentInParent<HideBehindable_JoaoBeijinho>().IsCrouchable())
-                {
-                    m_stealthed = !m_stealthed;
-                    m_crouched = !m_crouched;
-                }
-            }
-        }
+        m_crouched = !m_crouched;
     }
 }

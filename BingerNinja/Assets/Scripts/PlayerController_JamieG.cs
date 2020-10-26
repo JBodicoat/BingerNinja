@@ -4,6 +4,7 @@
 //Jamie 18/10/20 - first implemented
 //Joao 23/10/20 - Added input for interactions.
 //Joao 25/10/20 - Added interaction in update.
+//Joao 26/10/20 - Added input for crouching, the input used for this was interact.
 
 using System.Collections;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ public class PlayerController_JamieG : MonoBehaviour
     //Reference to the InputAction component
     public InputAction m_movement;
     public InputAction m_interact;
+    public InputAction m_crouch;
 
     //Reference to the other player scripts
     private PlayerMovement_MarioFernandes m_playerMovementScript;
@@ -44,7 +46,7 @@ public class PlayerController_JamieG : MonoBehaviour
 
     private void Update()
     {
-        if (m_interact.triggered)
+        if (m_crouch.triggered)
         {
             m_playerStealthScript.Crouch();
         }
@@ -56,12 +58,14 @@ public class PlayerController_JamieG : MonoBehaviour
     {
         m_movement.Enable();
         m_interact.Enable();
+        m_crouch.Enable();
     }
 
     private void OnDisable()
     {
         m_movement.Disable();
         m_interact.Disable();
+        m_crouch.Disable();
     }
     #endregion
 

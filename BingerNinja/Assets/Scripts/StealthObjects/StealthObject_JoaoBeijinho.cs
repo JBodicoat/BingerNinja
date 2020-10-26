@@ -11,10 +11,12 @@ using UnityEngine;
 
 public abstract class StealthObject_JoaoBeijinho : MonoBehaviour
 {
+    protected PlayerController_JamieG m_playerControllerScript;
     protected PlayerStealth_JoaoBeijinho m_playerStealthScript;
 
     public void Awake()
     {
+        m_playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
         m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
     }
 

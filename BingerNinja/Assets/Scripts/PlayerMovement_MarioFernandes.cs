@@ -7,6 +7,7 @@
 // Jamie 17/10/2020 - Removed some unneeded code and implemented function used by PlayerController class
 // Mário 18/10/2020 - Add reset speed function
 // Joao 23/10/2020 - Added reference to playerStealth script and stop movement while crouched in update
+// Joao 26/10/2020 - Updated crouch restriction in update to check if player is not crouched
 
 using System.Collections;
 using System.Collections.Generic;
@@ -47,14 +48,12 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
   
     void Update()
     {
-        if (m_playerStealthScript.m_crouched)
+        if (!m_playerStealthScript.m_crouched)
         {
-            return;
+            m_direction.Normalize();
+            m_direction *= m_speed;
+
+            m_rb.velocity = m_direction;
         }
-
-        m_direction.Normalize();
-		    m_direction *= m_speed;
-
-		    m_rb.velocity = m_direction;
     }
 }
