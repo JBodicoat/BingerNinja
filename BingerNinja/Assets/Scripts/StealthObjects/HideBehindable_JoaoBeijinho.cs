@@ -1,14 +1,16 @@
 ﻿//Joao Beijinho
-///This class allows player to interact with objects that can be used to crouch behind.
 
 //Joao Beijinho 23/10/2020 - Created class to work with crouching
-//Joao Beijinho 26/10/2020 - Removed Crouching. Created trigger that toggles stealth/unstealth the player and disable/enable movement
+//Joao Beijinho 26/10/2020 - Removed Crouching. Created trigger that toggles stealth/unstealth in the player and disable/enable movement
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+///This class allows player to interact with objects that can be used to crouch behind.
+/// </summary>
 public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
 {
     public bool m_canHide = false;
