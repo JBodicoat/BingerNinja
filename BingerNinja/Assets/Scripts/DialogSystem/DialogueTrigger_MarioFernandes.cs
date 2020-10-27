@@ -9,24 +9,17 @@ using UnityEngine;
 
 public class DialogueTrigger_MarioFernandes : MonoBehaviour
 {
-	public Dialogue dialogue;
+	public Dialogue m_dialogue;
 
-	bool a = true;
-
-	private GameObject Player;
-
+	///<summary>Call the dialog </summary>
 	public void TriggerDialogue ()
 	{
-		FindObjectOfType<DialogueManager_MarioFernandes>().StartDialogue(dialogue);
+		FindObjectOfType<DialogueManager_MarioFernandes>().StartDialogue(m_dialogue);
 	}
 
 	private void OnTriggerEnter2D(Collider2D other) {
 
 		TriggerDialogue();
-	}
-
-	private void Start() {
-		Player = GameObject.FindWithTag("Player");
 	}	
 }
 

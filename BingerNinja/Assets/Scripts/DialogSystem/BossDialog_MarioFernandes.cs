@@ -8,16 +8,12 @@ using UnityEngine;
 
 public class BossDialog_MarioFernandes : MonoBehaviour
 {
-    public List<Dialogue> dialogue;
-
-	bool a = true;
-
-	private GameObject Player;
+    public List<Dialogue> m_dialogue;
     
-    ///<summary>Call the dialog you Want Giving it the number on the index</summary>
+    ///<summary>Call the dialog you want, giving it the number on the index</summary>
 	public void TriggerDialogue (int index)
 	{
-		FindObjectOfType<DialogueManager_MarioFernandes>().StartDialogue(dialogue[index]);
+		FindObjectOfType<DialogueManager_MarioFernandes>().StartDialogue(m_dialogue[index]);
 	}
 
 }

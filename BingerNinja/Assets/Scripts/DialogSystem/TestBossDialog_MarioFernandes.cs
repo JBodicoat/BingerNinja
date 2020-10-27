@@ -5,23 +5,17 @@ using UnityEngine.InputSystem;
 
 public class TestBossDialog_MarioFernandes : MonoBehaviour
 {
+    public bool dial = false;
     int a = 0;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
-        var curKeyboard= Keyboard.current;        
-    
-
-        if (curKeyboard.spaceKey.IsPressed())
+        
+        if (dial)
         {
             gameObject.GetComponent<BossDialog_MarioFernandes>().TriggerDialogue(a);
-            
+            dial = false;
             a++;
 		}
     }
