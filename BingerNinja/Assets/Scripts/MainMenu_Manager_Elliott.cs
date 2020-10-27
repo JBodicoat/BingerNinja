@@ -1,14 +1,17 @@
-﻿using System.Collections;
+﻿//Elliott Desouza
+/// class holds values for mainmenu UI
+
+//Elliott 26/10/2020 - can open up settings menu and quit game
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class MainMenu_Manager_Elliott : MonoBehaviour
 {
-
-
-    public GameObject SettingMenu;
+    public GameObject m_settingMenu;
     protected bool m_openSettings;
 
     public void Resume()
@@ -18,20 +21,20 @@ public class MainMenu_Manager_Elliott : MonoBehaviour
 
     public void StartNewGame()
     {
-        //load level 1 here
+        ///load level 1 here
        // SceneManager.LoadScene("Level 1");
     }
 
     public void OpenSettingsMenu()
     {
-        //open up settings
-        Debug.Log("forward");
-            SettingMenu.SetActive(true);
+        ///open up settings
+        Debug.Log("open Settings");
+        m_settingMenu.SetActive(true);
     }
 
     public void Quit()
     {
-        //quit application
+        ///quit application
         Debug.Log("quit");
         Application.Quit();
     }
@@ -44,17 +47,14 @@ public class MainMenu_Manager_Elliott : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var gamepad = Mouse.current;
+        var gamepad = Keyboard.current;
         if (gamepad == null)
-            return; // No gamepad connected.
+            return; 
 
-        if (gamepad.leftButton.wasPressedThisFrame)
-        {
-            // 'Use' code here
-          //  Quit();
+        if (gamepad.sKey.wasPressedThisFrame)
+        {       
+            //  Quit();
             OpenSettingsMenu();
         }
-       // Vector2 move = gamepad.leftStick.ReadValue();
-        // 'Move' code here
     }
 }
