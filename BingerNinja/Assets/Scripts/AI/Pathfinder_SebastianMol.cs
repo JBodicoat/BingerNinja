@@ -26,11 +26,17 @@ public class Node
     }
 }
 
-public class AIAttempt : MonoBehaviour
+public class Pathfinder_SebastianMol : MonoBehaviour
 {
     const float MOVE_COST = 1;
     const float MOVE_COST_DIAG = 1.414f;
     Node[,] m_allTiles;
+    public Tile[] m_wallTiles;
+    public bool m_button = false;
+    public Vector2Int m_startPos;
+    public Vector2Int m_targetPos;
+    public Tile m_pathTile;
+    public Tilemap m_tileMap;
 
     private void Start()
     {
@@ -41,9 +47,41 @@ public class AIAttempt : MonoBehaviour
         for (int y = 0; y < size.y; y++)
             for (int x = 0; x < size.x; x++)
             {
-                //if tille != wall
                 m_allTiles[x, y] = new Node(true, new Vector2Int(x, y));
             }
+
+
+        m_tileMap = GetComponent<Tilemap>();
+        for (int y = 0; y < m_tileMap.size.y; y++)
+        {
+            for (int x = 0; x < m_tileMap.size.x; x++)
+            {
+                for (int i = 0; i < m_wallTiles.Length; i++)
+                {
+                    if (m_tileMap.GetTile(new Vector3Int( x, y, 0)) == m_wallTiles[i])
+                    {
+                        m_allTiles[x, y].m_traversable = false;
+                    }
+                }
+            }
+        }      
+    }
+
+    private void Update()
+    {
+        if (m_button)
+        {
+            m_button = false;
+            List <Vector2Int> path = PathFind(m_startPos, m_targetPos);
+            for (int i = 0; i < path.Count; i++)
+            {
+                m_tileMap.SetTile(new Vector3Int(path[i].x, path[i].y, 0), m_pathTile);
+
+                //m_tileMap.SetTileFlags(new Vector3Int(path[i].x, path[i].y, 0), TileFlags.None);
+                //m_tileMap.SetColor(new Vector3Int(path[i].x, path[i].y, 0), Color.green);
+                //Debug.Log(m_tileMap.GetCellCenterWorld(new Vector3Int(path[i].x, path[i].y, 0)));
+            }
+        }
     }
 
     public List<Vector2Int> PathFind(Vector2Int startPos, Vector2Int targetPos)
@@ -149,10 +187,8 @@ public class AIAttempt : MonoBehaviour
         foreach (Node item in closedList) item.ResetData();
         foreach (Node item in openList) item.ResetData();
         #endregion
-
         return DaPath;
     }
-
     private List<Node> AddNodeToPath(Node n, List<Node> path)
     {
         path.Add(n);

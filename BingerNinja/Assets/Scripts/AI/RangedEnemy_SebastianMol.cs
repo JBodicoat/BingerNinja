@@ -15,10 +15,19 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
     [Tooltip("how far the player can be befor enemy shoots")]
     public float shootingRange;
     private float timer;
+    public Vector3 pos;
+    public bool button = false;
 
     internal override void EnemyBehaviour()
     {
         IsPlayerDetected();
+
+        if(button)
+        {
+            MoveToWorldPos(pos);
+            button = false;
+        }
+
         switch (m_currentState)
         {
             case state.WONDER:
