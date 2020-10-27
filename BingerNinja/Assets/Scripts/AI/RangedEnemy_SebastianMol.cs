@@ -21,10 +21,11 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
     internal override void EnemyBehaviour()
     {
         IsPlayerDetected();
-
-        if(button)
+        
+        if (button)
         {
             MoveToWorldPos(pos);
+            FollowPath();
             button = false;
         }
 

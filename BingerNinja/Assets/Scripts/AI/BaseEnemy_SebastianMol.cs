@@ -15,6 +15,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public bool m_playerDetected = false;
     public enum state { WONDER, CHASE, ATTACK, RETREAT};
     public state m_currentState = state.WONDER;
+
     [Header("designers Section")]
     [Tooltip("the item the enemy drops on death")]
     public GameObject m_dropItem; // itme that i sdropped when enemie dies
@@ -23,7 +24,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public float m_speed; //movment speed
 
     private Pathfinder_SebastianMol m_pathfinder;
-    private List<Vector2Int> m_currentPath;
+    internal List<Vector2Int> m_currentPath;
 
     abstract internal void EnemyBehaviour();
     internal void PlayerDetection(GameObject collision) //detect player in vision cone the establishes line of sight
@@ -85,7 +86,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     {
         float movmentLeftOver = m_speed * Time.deltaTime; //movment allowed this frame
 
-        while (movmentLeftOver >= 0)
+        while (movmentLeftOver <= 0)
         {
             //gets the center of the target tile
            Vector2 targetTileCenter = (Vector2)(Vector3)m_pathfinder.m_tileMap.WorldToCell(transform.position) + ((Vector2)m_pathfinder.m_tileMap.cellSize / 2);
@@ -118,7 +119,6 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     private void Update()
     {
         EnemyBehaviour(); // behaviour of the enemy what stste it is in and what it dose
-        if (m_currentPath != null) FollowPath();
         Death();//checks to see if enemy is dead 
     }
 

@@ -171,11 +171,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_wallTiles:
   - {fileID: 11400000, guid: f55be863e6022054a9693df6520c1a5b, type: 2}
-  m_button: 0
-  m_startPos: {x: 18, y: 14}
-  m_targetPos: {x: 17, y: 22}
-  m_pathTile: {fileID: 11400000, guid: e36c7a8ca6e2ec7488bf78cae90527c3, type: 2}
   m_tileMap: {fileID: 0}
+  m_testButton: 0
+  m_startPos: {x: 18, y: 14}
+  m_targetPos: {x: 25, y: 22}
+  m_pathTile: {fileID: 11400000, guid: e36c7a8ca6e2ec7488bf78cae90527c3, type: 2}
 --- !u!19719996 &942362250
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -12055,7 +12055,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5157954882409207611, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
       propertyPath: m_speed
-      value: 5
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5157954882409207611, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
       propertyPath: pos.x
@@ -12064,6 +12064,18 @@ PrefabInstance:
     - target: {fileID: 5157954882409207611, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
       propertyPath: pos.y
       value: 8.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157954882409207611, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+      propertyPath: m_rayCastStart
+      value: 
+      objectReference: {fileID: 1696090139}
+    - target: {fileID: 5157954882409207611, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+      propertyPath: m_detectionCollider
+      value: 
+      objectReference: {fileID: 1796699900}
+    - target: {fileID: 5157954882409207611, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+      propertyPath: button
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5157954882409207612, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12121,8 +12133,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: CookEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 5157954882409207616, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+--- !u!4 &1696090139 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5157954881687136811, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+  m_PrefabInstance: {fileID: 1398484798}
+  m_PrefabAsset: {fileID: 0}
+--- !u!60 &1796699900 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 5157954882409207614, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+  m_PrefabInstance: {fileID: 1398484798}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1815145782
 GameObject:
   m_ObjectHideFlags: 0
