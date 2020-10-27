@@ -9,14 +9,13 @@ public class SFX_Manager_LouieWilliamson : MonoBehaviour
     public List<AudioClip> SFXList = new List<AudioClip>();
     private Dictionary<SFX, AudioClip> SFXDictionary = new Dictionary<SFX, AudioClip>();
     public GameObject SFXPrefab;
+
     //Music enum and Dictionary setup
     public enum Music { MainMenu, Level1 };
     public AudioSource MusicPrefab;
     public List<AudioClip> MusicList = new List<AudioClip>();
     private Dictionary<Music, AudioClip> MusicDictionary = new Dictionary<Music, AudioClip>();
 
-    //test
-    float timer;
     void Start()
     {
         //Populate Dictionaries
@@ -26,20 +25,13 @@ public class SFX_Manager_LouieWilliamson : MonoBehaviour
         MusicDictionary.Add(Music.MainMenu, MusicList[0]);
         MusicDictionary.Add(Music.Level1, MusicList[1]);
 
-        timer = 0;
         ChangeMusic(Music.MainMenu);
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
 
-        if (timer > 5.0f)
-        {
-            ToggleMusic();
-            timer = 0;
-        }
     }
     public void PlaySFX(SFX s)
     {
