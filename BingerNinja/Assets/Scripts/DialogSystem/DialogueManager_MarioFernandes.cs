@@ -1,5 +1,4 @@
 ﻿// Mário Fernandes
-/// My class takes care of Displaying the Dialog on the screen
 
 // Mário 24/10/2020 - Creation of the class
 // Mário 25/10/2020 - Read from m_csvFile
@@ -12,6 +11,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
+/// <summary>
+/// My class takes care of Displaying the Dialog on the screen
+/// </summary>
 public class DialogueManager_MarioFernandes : MonoBehaviour
 {
     public Text m_nameText;
