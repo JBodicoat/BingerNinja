@@ -1,18 +1,13 @@
-﻿
+﻿//Jamie G - Button that can be used to pause the game when clicked on. Should only show on mobile platforms and mobile
 using UnityEngine;
-using UnityEngine.InputSystem;
 
+//28/10/20 - Jamie - First implemented
 
 public class PauseButtonMobile_JamieG : MonoBehaviour
 {
-    public InputAction Touch;
-
-    
-
-    void Update()
+    //This function is ran when the button is clicked on, so put what you want to happen in it definition.
+    public void ButtonClicked()
     {
-        
+        Debug.Log("Test");
     }
-
-    
 }
