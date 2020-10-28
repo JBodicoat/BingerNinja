@@ -4,6 +4,7 @@
 
 // Jann 21/10/20 - GUI Layout implemented
 // Jann 25/10/20 - Added frequency generation
+// Jann 28/10/20 - QA improvements
 
 using System.Collections.Generic;
 using UnityEditor;
@@ -45,31 +46,36 @@ class Synthesizer_Jann : EditorWindow
         m_settingsBounds = new Rect(0, 0, position.width, 120);
         m_notesBounds = new Rect(0, m_settingsBounds.height, position.width, position.height - m_settingsBounds.height);
 
+        // Create settings menu
         GUILayout.BeginArea(m_settingsBounds);
         OnCreateSynthesizerSettings();
         GUILayout.EndArea();
         
         GUILayout.Space(100);
         
+        // Generate notes based on settings menu
         if(m_channelsData.Length * m_channelsData[0].Count != m_length * m_channels)
             SetupNotes();
 
+        // Create notes UI
         GUILayout.BeginArea(m_notesBounds);
         OnCreateNotesInterface();
         GUILayout.EndArea();
     }
 
+    // Creates the settings UI: Title, bpm, notes per channel, number of channels and buttons for reset and save
     private void OnCreateSynthesizerSettings()
     {
         GUILayout.Label("Audio Settings", EditorStyles.boldLabel);
         m_title = EditorGUILayout.TextField ("Title", m_title);
 
+        // Clamp values
         m_bpm = Mathf.Clamp(EditorGUILayout.IntField("BPM", m_bpm), 50, 120);
         m_length = Mathf.Clamp(EditorGUILayout.IntField("Length", m_length), 1, 100);
-        m_channels = Mathf.Clamp(EditorGUILayout.IntField("Channels", m_channels), 1, 5);
+        m_channels = Mathf.Clamp(EditorGUILayout.IntField("Channels", m_channels), 1, 3);
 
+        #region Generate and handle buttons
         EditorGUILayout.BeginHorizontal();
-        
         if(GUILayout.Button("Reset", GUILayout.Width(100), GUILayout.Height(20)))
         {
             ResetNotes();
@@ -83,8 +89,10 @@ class Synthesizer_Jann : EditorWindow
         }
         
         EditorGUILayout.EndHorizontal();
+        #endregion
     }
 
+    // Creates the notes for each channel
     private void OnCreateNotesInterface()
     {
         GUILayout.Label("Create Notes", EditorStyles.boldLabel);
@@ -99,7 +107,7 @@ class Synthesizer_Jann : EditorWindow
                 m_channelsData[y][x].MNoteName = (NotesCreator_Jann.Note) EditorGUILayout.EnumPopup(
                     "", m_channelsData[y][x].MNoteName,
                     GUILayout.Width(50));
-                m_channelsData[y][x].Frequence = m_noteCreator.getFrequency(m_channelsData[y][x].MNoteName);
+                m_channelsData[y][x].Frequence = m_noteCreator.GetFrequency(m_channelsData[y][x].MNoteName);
             }
             EditorGUILayout.EndHorizontal();
         }
