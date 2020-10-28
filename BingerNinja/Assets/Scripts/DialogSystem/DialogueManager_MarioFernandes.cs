@@ -3,7 +3,8 @@
 
 // Mário 24/10/2020 - Creation of the class
 // Mário 25/10/2020 - Read from m_csvFile
-// Mário 26/10/2020 - Ajust Dialog to the boss Dialog script
+// Mário 26/10/2020 - Ajust Dialogue to the boss Dialogue script
+// Mário 28/10/2020 - Optimisation and Stop player whene in dialogs
 
 using System.Collections;
 using System.Collections.Generic;
@@ -22,14 +23,19 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
 
     public TextAsset m_csvFile;
 
+    string m_TrigerDialoguePrefab = "DialogTrigger";
+    PlayerController_JamieG playerControllerScript;
+
     public void StartDialogue(Dialogue dialogue)
     {
 
         ///////////////////
         //Insert Start Animation here if needed
         ///////////////////
-        m_nameText.transform.parent.gameObject.SetActive(true);
 
+        playerControllerScript.m_movement.Disable();
+
+        m_nameText.transform.parent.gameObject.SetActive(true);
 
         m_nameText.text = dialogue.m_name;
 
@@ -79,6 +85,8 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         //End Effect
 
         m_nameText.transform.parent.gameObject.SetActive(false);
+
+        playerControllerScript.m_movement.Enable();
     }
 
 	///<summary>Load the Level dialog from CSV doc</summary>
@@ -112,21 +120,25 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
                 Target = null;
 
                 Target = GameObject.Find(parts[1]);
-                dialogtrig = Target.transform.Find("DialogTrigger")?.gameObject;
+                dialogtrig = Target.transform.Find(m_TrigerDialoguePrefab)?.gameObject;
 
                 //Use Dialog triger For normal gameobjects and Boss Dialog to Bosses
-                if (dialogtrig && dialogtrig.GetComponent<DialogueTrigger_MarioFernandes>())
+                if (dialogtrig)
                 {
-                    //Give the m_name in the VCs file to the dialog
-                    dialogtrig.GetComponent<DialogueTrigger_MarioFernandes>().m_dialogue.m_name = parts[1];
+                    DialogueTrigger_MarioFernandes dialogTrigScript = dialogtrig.GetComponent<DialogueTrigger_MarioFernandes>();
+                    if(dialogTrigScript)
+                    {
+                        //Give the m_name in the VCs file to the dialog
+                        dialogTrigScript.m_dialogue.m_name = parts[1];
 
-                    //Remove level and m_name value
-                    parts.RemoveRange(0, 2);
-                    dialogtrig.GetComponent<DialogueTrigger_MarioFernandes>().m_dialogue.m_sentences = parts.ToArray();
+                        //Remove level and m_name value
+                        parts.RemoveRange(0, 2);
+                        dialogTrigScript.m_dialogue.m_sentences = parts.ToArray();
 
+                    }
                 }
 				//Check if Boss DIalog existes on the scene
-                else if (Target.GetComponent<BossDialog_MarioFernandes>())
+                else if (Target.GetComponent<BossDialogue_MarioFernandes>())
                 {
 
                     Dialogue a = new Dialogue();
@@ -136,7 +148,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
                     //Remove level and m_name value
                     parts.RemoveRange(0, 2);
                     a.m_sentences = parts.ToArray();
-                    Target.GetComponent<BossDialog_MarioFernandes>().m_dialogue.Add(a);
+                    Target.GetComponent<BossDialogue_MarioFernandes>().m_dialogue.Add(a);
                 }
             }
         }
@@ -145,6 +157,8 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
+
         m_sentences = new Queue<string>();
 
         LoadDialog();
@@ -152,7 +166,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
 }
 
 [System.Serializable]
-public class Dialogue
+public struct Dialogue
 {
 
     public string m_name;

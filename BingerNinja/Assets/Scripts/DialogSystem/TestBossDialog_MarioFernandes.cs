@@ -14,7 +14,7 @@ public class TestBossDialog_MarioFernandes : MonoBehaviour
         
         if (dial)
         {
-            gameObject.GetComponent<BossDialog_MarioFernandes>().TriggerDialogue(a);
+            gameObject.GetComponent<BossDialogue_MarioFernandes>().TriggerDialogue(a);
             dial = false;
             a++;
 		}
