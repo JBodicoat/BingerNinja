@@ -8,7 +8,8 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
 {
     public float m_meleeRange;
     public float m_hitSpeed;
-    private float timer;
+    public GameObject m_attackCollider;
+    private float m_timer;
     internal override void EnemyBehaviour()
     {
         switch (m_currentState)
@@ -36,7 +37,16 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
 
     private void MeleeAttack()
     {
-
+        if (m_timer <= 0)
+        {
+            m_attackCollider.SetActive(true);
+            m_attackCollider.SetActive(false);
+            m_timer = m_hitSpeed;
+        }
+        else
+        {
+            m_timer -= Time.deltaTime;
+        }
     }
 
 }
