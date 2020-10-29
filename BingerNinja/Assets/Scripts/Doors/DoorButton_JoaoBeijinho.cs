@@ -11,7 +11,7 @@ using UnityEngine;
 /// </summary>
 public class DoorButton_JoaoBeijinho : MonoBehaviour
 {
-    PlayerController_JamieG m_playerControllerScript;
+    protected PlayerController_JamieG m_playerControllerScript;
 
     public GameObject m_door;
 

@@ -192,7 +192,6 @@ GameObject:
   - component: {fileID: 114411568}
   - component: {fileID: 114411567}
   - component: {fileID: 114411569}
-  - component: {fileID: 114411570}
   m_Layer: 0
   m_Name: Key
   m_TagString: Untagged
@@ -303,24 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f5176dc6ef37084387c9238aebe69af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114411570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 114411565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5507c713ebdf164ea8da141cfe3e18d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_door: {fileID: 1015293021}
-  m_triggerDoor:
-  - MeleeWeapon
-  - Crate
-  - Player
-  - Projectile
+  m_item: 0
 --- !u!1 &287775554
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +334,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00000078976154, y: 0}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -424,7 +406,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 287775554}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.715317, y: 3.8406563, z: 1.1823312}
+  m_LocalPosition: {x: -8.64, y: 4.49, z: 1.1823312}
   m_LocalScale: {x: 0.699727, y: 0.86654544, z: 1}
   m_Children: []
   m_Father: {fileID: 1173564801}
@@ -462,11 +444,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_door: {fileID: 1788130690}
-  m_triggerDoor:
-  - MeleeWeapon
-  - Crate
-  - Player
-  - Projectile
 --- !u!61 &333049480
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -480,7 +457,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00000078976154, y: 0}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -491,8 +468,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.11, y: 1.12}
-  m_EdgeRadius: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0.11
 --- !u!212 &333049481
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -552,7 +529,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 333049478}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.9653163, y: 1.7706563, z: 1.1823312}
+  m_LocalPosition: {x: -0.17, y: 1.02, z: 1.1823312}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1173564801}
@@ -616,15 +593,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 580788070}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5507c713ebdf164ea8da141cfe3e18d, type: 3}
+  m_Script: {fileID: 11500000, guid: 25102250ae35fef419ba8ec8a6f66c5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_door: {fileID: 975730610}
-  m_triggerDoor:
-  - MeleeWeapon
-  - Crate
-  - Player
-  - Projectile
 --- !u!61 &580788072
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -710,7 +682,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 580788070}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.0346835, y: 1.0606565, z: 1.1823312}
+  m_LocalPosition: {x: 1.72, y: -0.6, z: 1.1823312}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1173564801}
@@ -889,7 +861,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.38278043}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -900,7 +872,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.23443913}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &660171118
 MonoBehaviour:
@@ -1158,10 +1130,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 660171116}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d9021b421e580f42948ac125480fa7a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7acb3cddcf324204b8352f4788468992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_itemDatabase: {fileID: 674497395}
+  m_inventoryItems:
+  - itemType: 1
+    numberHeld: 0
 --- !u!114 &660171128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1741,7 +1715,7 @@ GameObject:
   - component: {fileID: 1041516621}
   m_Layer: 0
   m_Name: Projectile
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1852,7 +1826,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1041516620}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.65, y: -10.28, z: 0}
+  m_LocalPosition: {x: -4.94, y: -10.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2089,15 +2063,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1167648101}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5507c713ebdf164ea8da141cfe3e18d, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a6ecfd0e4bad4844a14142d4121a2e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_door: {fileID: 287775554}
-  m_triggerDoor:
-  - MeleeWeapon
-  - Crate
-  - Player
-  - Projectile
+  m_canPressButton: 0
 --- !u!61 &1167648103
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2111,7 +2081,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00000078976154, y: 0}
+  m_Offset: {x: 0, y: -0.11}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2122,7 +2092,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.11, y: 1.12}
+  m_Size: {x: 1.34, y: 1.33}
   m_EdgeRadius: 0
 --- !u!212 &1167648104
 SpriteRenderer:
@@ -2182,13 +2152,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1167648101}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.505317, y: 0.9506564, z: 1.1823312}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.23743394, w: 0.9714038}
+  m_LocalPosition: {x: -5.974, y: 3.914, z: 1.1823312}
+  m_LocalScale: {x: 1, y: 0.49, z: 1}
   m_Children: []
   m_Father: {fileID: 1173564801}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -27.47}
 --- !u!1 &1173564800
 GameObject:
   m_ObjectHideFlags: 0
@@ -3907,7 +3877,7 @@ GameObject:
   - component: {fileID: 1688587489}
   m_Layer: 0
   m_Name: MeleeWeapon
-  m_TagString: Untagged
+  m_TagString: MeleeWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3953,7 +3923,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -4018,7 +3988,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1688587488}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.84, y: -10.33, z: 0}
+  m_LocalPosition: {x: -6.903, y: -10.297, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4036,9 +4006,10 @@ GameObject:
   - component: {fileID: 1706550703}
   - component: {fileID: 1706550705}
   - component: {fileID: 1706550702}
+  - component: {fileID: 1706550706}
   m_Layer: 0
   m_Name: Crate
-  m_TagString: Untagged
+  m_TagString: Crate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4128,7 +4099,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1706550701}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.67, y: -10.33, z: 0}
+  m_LocalPosition: {x: -3.72, y: -4.73, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4142,11 +4113,11 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1706550701}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -4155,6 +4126,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1706550706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706550701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1fb6033efb5b8a48a7c8349acf52ad2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1788022477
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4315,7 +4298,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1788130690}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.4553165, y: 2.6806564, z: 1.1823312}
+  m_LocalPosition: {x: -4, y: 1.78, z: 1.1823312}
   m_LocalScale: {x: 0.699727, y: 0.86654544, z: 1}
   m_Children: []
   m_Father: {fileID: 1173564801}
