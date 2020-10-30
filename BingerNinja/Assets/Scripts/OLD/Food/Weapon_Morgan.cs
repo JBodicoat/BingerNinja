@@ -166,10 +166,10 @@ public class Weapon_Morgan : MonoBehaviour
 
             // actions
 
-            clone = Instantiate(squid, gameObject.transform.position, Quaternion.identity, characterScript.gameObject.transform);
-            squidScript = clone.GetComponent<SquidWeapon_Morgan>();
-            squidScript.isPreparing = true;
-            squidScript.mouseDirection = velocity;
+            //clone = Instantiate(squid, gameObject.transform.position, Quaternion.identity, characterScript.gameObject.transform);
+            //squidScript = clone.GetComponent<SquidWeapon_Morgan>();
+            //squidScript.isPreparing = true;
+            //squidScript.mouseDirection = velocity;
             
         }
     }
@@ -203,13 +203,13 @@ public class Weapon_Morgan : MonoBehaviour
 
             switch(currentWeapon)
             {
-                case weaponType.squid:
-                    statusEffectManager.AddEffect(squidStatusEffect);
-                    break;
+                //case weaponType.squid:
+                //    statusEffectManager.AddEffect(squidStatusEffect);
+                //    break;
 
-                case weaponType.onigiri:
-                    statusEffectManager.AddEffect(onigiriStatusEffect);
-                    break;
+                //case weaponType.onigiri:
+                //    statusEffectManager.AddEffect(onigiriStatusEffect);
+                //    break;
 			}
 
             if(clone)
