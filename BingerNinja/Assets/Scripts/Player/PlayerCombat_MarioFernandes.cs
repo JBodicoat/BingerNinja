@@ -12,11 +12,12 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 {
     protected PlayerStealth_JoaoBeijinho m_playerStealthScript;
 
-    bool IsHoldingFood()
-    {
+  public  bool IsHoldingFood()
+         {
+       
         //Temp, should go the current weapon
         return false;
-    }
+         }
 
     void PickUpFood()
     {

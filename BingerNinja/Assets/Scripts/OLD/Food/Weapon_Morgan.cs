@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public enum weaponType { onigiri, squid };
+public enum weaponType { Fugu, Squid, Rice_ball, Kobe_Beef, Sashimi }; //Added Extra Weapons
 
 public class Weapon_Morgan : MonoBehaviour
 {
@@ -36,8 +36,8 @@ public class Weapon_Morgan : MonoBehaviour
     float squidCooldown;
 
     //projectiles / weapons
-    public GameObject onigiri;
-    public GameObject squid; 
+    public GameObject Fugu;
+    public GameObject Squid; 
 
     // Start is called before the first frame update
     void Start()
@@ -63,12 +63,7 @@ public class Weapon_Morgan : MonoBehaviour
 
             switch (currentWeapon)
             {
-                case weaponType.onigiri:
-                    if (mouse.leftButton.wasPressedThisFrame)
-                    {
-                        LeftClickOnigiri();
-                    }
-
+                case weaponType.Fugu:
                     /* Commented out for new input system
                     if (Input.GetMouseButtonDown(0))
                     {
@@ -77,7 +72,7 @@ public class Weapon_Morgan : MonoBehaviour
                     */
                     break;
 
-                case weaponType.squid:
+                case weaponType.Squid:
                     {
                         if(squidScript && squidScript.isAttacking)
                         {
@@ -154,7 +149,7 @@ public class Weapon_Morgan : MonoBehaviour
             //Debug.Log("x" + velocity.x + "y" + velocity.y);
 
             //create instance of damaging projectile
-            clone = Instantiate(onigiri, gameObject.transform.position, Quaternion.identity);
+            clone = Instantiate(Fugu, gameObject.transform.position, Quaternion.identity);
             onigiriScript = clone.GetComponent<OnigiriWeapon_Morgan>();
             onigiriScript.velocity = velocity;
 
@@ -171,8 +166,7 @@ public class Weapon_Morgan : MonoBehaviour
 
             // actions
 
-            //clone = Instantiate(squid, gameObject.transform.position, Quaternion.identity, characterScript.gameObject.transform);
-            clone = Instantiate(squid, gameObject.transform.position, Quaternion.identity, playerHealthAndHungerScript.gameObject.transform);
+            clone = Instantiate(squid, gameObject.transform.position, Quaternion.identity, characterScript.gameObject.transform);
             squidScript = clone.GetComponent<SquidWeapon_Morgan>();
             squidScript.isPreparing = true;
             squidScript.mouseDirection = velocity;
