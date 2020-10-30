@@ -19,6 +19,16 @@ public class Weapons_AlannaPaxton : MonoBehaviour
     public GameObject Rice_Ball;
     public GameObject Kobe_Beef;
     public GameObject Sashimi;
+    public GameObject Intern;
+    private GameObject Chef;
+    private GameObject Barista;
+    private GameObject SecurityGuard;
+    private GameObject PetTiger;
+    private GameObject Alien;
+    private GameObject SpaceNinja;
+    private GameObject YakuzaThug;
+    private GameObject BusinessMan;
+    private GameObject Janitor;
     
     protected int rand;
     protected PlayerHealthHunger_MarioFernandes player;
@@ -50,7 +60,7 @@ public class Weapons_AlannaPaxton : MonoBehaviour
     void Eat()
     {
 
-        if(HoldingItem.IsHoldingFood() == true)  //&& has the eat button been pressed
+        if(HoldingItem.IsHoldingFood() == true && Input.GetKeyDown(KeyCode.E)) //if the player is holding an item and e for eat is being pressed 
         {
             switch (CurrentWeapon)
             {
@@ -106,26 +116,51 @@ class RangedWeapon : Weapons_AlannaPaxton
     WeaponType CurrentWeapon;
     private void Update()
     {
-        switch (CurrentWeapon)
+        if (HoldingItem.IsHoldingFood() == true && Input.GetMouseButtonDown(0))
         {
-            case WeaponType.Rice_ball:
-                {
+            switch (CurrentWeapon)
+            {
+                case WeaponType.Rice_ball:
+                    {
+                        if(Input.GetMouseButton(0)) // code to be added to different enemies to see if player has clicked on them? 
+                        {
 
-                }
-                break;
-            case WeaponType.Sashimi:
-                {
+                        }
+                        else
+                        {
 
-                }
-                break;
-            case WeaponType.Squid:
-                {
+                        }
 
-                }
-                break;
+                    }
+                    break;
+                case WeaponType.Sashimi:
+                    {
+                        if (Input.GetMouseButton(0))
+                        {
 
-            default:
-                break;
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    break;
+                case WeaponType.Squid:
+                    {
+                        if (Input.GetMouseButton(0))
+                        {
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    break;
+
+                default:
+                    break;
+            }
         }
 
     }
@@ -136,21 +171,24 @@ class MeleeWeapon: Weapons_AlannaPaxton
     WeaponType CurrentWeapon;
     private void Update()
     {
-        switch (CurrentWeapon)
+        if (Input.GetMouseButtonDown(0))
         {
-            case WeaponType.Fugu:
-                {
+            switch (CurrentWeapon)
+            {
+                case WeaponType.Fugu:
+                    {
+                        
+                    }
+                    break;
+                case WeaponType.Kobe_Beef:
+                    {
 
-                }
-                break;
-            case WeaponType.Kobe_Beef:
-                {
+                    }
+                    break;
 
-                }
-                break;
-
-            default:
-                break;
+                default:
+                    break;
+            }
         }
     }
 }
