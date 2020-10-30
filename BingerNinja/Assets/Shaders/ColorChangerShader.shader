@@ -1,59 +1,94 @@
-﻿Shader "BingerNinja/ColorChangerShader"
-{
-    Properties 
+﻿Shader "Custom/PixelColors" {
+    Properties
     {
-        _Color1 ("Color1", Color) = (1, 1, 1, 1)
-        _Color2 ("Color2", Color) = (1, 1, 1, 1)
-        _Color3 ("Color3", Color) = (1, 1, 1, 1)
-        _Grey1 ("Grey1", Color) = (0.478, 0.478, 0.478, 1)
+        [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
+        _ColorTint ("Tint", Color) = (1,1,1,1)
+        _Color1in ("Color 1 In", Color) = (1,1,1,1)
+        _Color1out ("Color 1 Out", Color) = (1,1,1,1)
+        _Color2in ("Color 2 In", Color) = (1,1,1,1)
+        _Color2out ("Color 2 Out", Color) = (1,1,1,1)
+        _Color3in ("Color 3 In", Color) = (1,1,1,1)
+        _Color3out ("Color 3 Out", Color) = (1,1,1,1)
+        _Color4in ("Transparent In", Color) = (1,1,1,1)
+        _Color4out ("Transparent Out", Color) = (1,1,1,1)
+        [MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
     }
-    
+ 
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
-        LOD 100
-
+        Tags
+        {
+            "Queue"="Transparent"
+            "IgnoreProjector"="True"
+            "RenderType"="Transparent"
+            "PreviewType"="Plane"
+            "CanUseSpriteAtlas"="True"
+        }
+ 
+        Cull Off
+        Lighting Off
+        ZWrite Off
+        Fog { Mode Off }
+        Blend SrcAlpha OneMinusSrcAlpha
+ 
         Pass
         {
-            CGPROGRAM
+        CGPROGRAM
             #pragma vertex vert
-            #pragma fragment frag
-
+            #pragma fragment frag          
+            #pragma multi_compile DUMMY PIXELSNAP_ON
             #include "UnityCG.cginc"
-
-            float4 _Color1;
-            float4 _Color2;
-            float4 _Color3;
-
-            float4 _Grey1;
-
-            struct appdata
+           
+            struct appdata_t
             {
-                float4 vertex : POSITION;
+                float4 vertex   : POSITION;
+                float4 color    : COLOR;
+                float2 texcoord : TEXCOORD0;
             };
-
+ 
             struct v2f
             {
-                float4 vertex : SV_POSITION;
-                float4 color : COLOR;
+                float4 vertex   : SV_POSITION;
+                fixed4 color    : COLOR;
+                half2 texcoord  : TEXCOORD0;
             };
-
-            v2f vert (appdata v)
+           
+            fixed4 _ColorTint;
+            fixed4 _Color1in;
+            fixed4 _Color1out;
+            fixed4 _Color2in;
+            fixed4 _Color2out;
+            fixed4 _Color3in;
+            fixed4 _Color3out;
+            fixed4 _Color4in;
+            fixed4 _Color4out;
+ 
+            v2f vert(appdata_t IN)
             {
-                v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
-                // o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                // UNITY_TRANSFER_FOG(o,o.vertex);
-                return o;
+                v2f OUT;
+                OUT.vertex = UnityObjectToClipPos(IN.vertex);
+                OUT.texcoord = IN.texcoord;            
+                OUT.color = IN.color * _ColorTint;
+                #ifdef PIXELSNAP_ON
+                OUT.vertex = UnityPixelSnap (OUT.vertex);
+                #endif
+ 
+                return OUT;
             }
-
-            float4 frag (v2f i) : SV_Target
+ 
+            sampler2D _MainTex;        
+           
+            fixed4 frag(v2f IN) : COLOR
             {
-                if(i.color.r == 0.1)           
-                    return 1;
-                return 0;
+                float4 texColor = tex2D( _MainTex, IN.texcoord );
+                texColor = all(texColor == _Color1in) ? _Color1out : texColor;
+                texColor = all(texColor == _Color2in) ? _Color2out : texColor;
+                texColor = all(texColor == _Color3in) ? _Color3out : texColor;
+                texColor = all(texColor == _Color4in) ? _Color4out : texColor;
+                 
+                return texColor * IN.color;
             }
-            ENDCG
+        ENDCG
         }
     }
 }
