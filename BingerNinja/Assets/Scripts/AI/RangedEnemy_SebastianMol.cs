@@ -45,18 +45,33 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
 
             case state.CHASE:
                 //move towards the player if he has been detected
-                if (Vector2.Distance(transform.position, m_playerTransform.position) < m_shootingRange / 1.5f)
+                if (IsPlayerInLineOfSight())
                 {
-                    ClearPath();
-                    m_currentState = state.ATTACK;
+                    if (Vector2.Distance(transform.position, m_playerTransform.position) < m_shootingRange / 1.5f)
+                    {
+                        ClearPath();
+                        m_currentState = state.ATTACK;
+                    }
+                    else
+                    {
+                        PathfindTo(m_playerTransform.position);
+                    }
                 }
                 else
                 {
-                    if(m_currentPath.Count == 0)
+                    if (m_currentPath.Count == 0)
                     {
-                        MoveToWorldPos(m_playerTransform.position);
+                        if (m_timer2 <= 0)
+                        {
+                            m_currentState = state.WONDER;
+                            m_playerDetected = false;
+                        }
+                        else
+                        {
+                            m_timer2 -= Time.deltaTime;
+                        }
                     }
-                    FollowPath();
+
                 }
                 break;
 
@@ -64,14 +79,12 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
                 //personalized attack
                 if (IsPlayerInLineOfSight())
                 {
-                    Debug.Log("can see player");
                     RangedAttack();
                     m_timer2 = m_outOfSightDeley;
                     m_playerDetected = true;
                 }
                 else
                 {
-                    Debug.Log("cant see player");
                     m_playerDetected = false;
                     if (m_timer2 <= 0)
                     {

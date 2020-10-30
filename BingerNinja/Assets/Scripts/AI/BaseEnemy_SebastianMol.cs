@@ -31,8 +31,9 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     private Pathfinder_SebastianMol m_pathfinder;
     protected List<Vector2Int> m_currentPath = new List<Vector2Int>();
     protected Transform m_playerTransform; //used to get playe position can be null if undedteceted
-    private float m_scale;
+    protected float m_scale;
     private Vector3 m_lastPos;
+    protected Vector3 m_startPos;
 
 
     abstract internal void EnemyBehaviour();
@@ -81,7 +82,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         if (m_playerDetected == true)
         {
             //currentState = state.CHASE;
-            //detectionCollider.enabled = false;
+            m_detectionCollider.enabled = false;
         }
     }
 
@@ -134,7 +135,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
     }
 
-    protected void ClearPath() // use this to stop walking
+    protected void ClearPath(bool goBackToCenter = true) // use this to stop walking
     {
         if (showPath)
         {
@@ -144,7 +145,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             }
         }
         m_currentPath.Clear();
-        m_currentPath.Add((Vector2Int)m_pathfinder.m_tileMap.WorldToCell(transform.position));
+        if(goBackToCenter) m_currentPath.Add((Vector2Int)m_pathfinder.m_tileMap.WorldToCell(transform.position));
     }
 
     protected bool IsPlayerInLineOfSight() // can you see the player
@@ -155,6 +156,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
         if (hit.collider.gameObject.CompareTag("Player"))
         {
+            m_detectionCollider.enabled = false;
             return true;
         }
         else
@@ -199,15 +201,26 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         m_health -= damage;
     }
 
+    protected void PathfindTo(Vector3 pos)
+    {
+        if (m_currentPath.Count == 0)
+        {
+            MoveToWorldPos(pos);
+        }
+        FollowPath();
+    }
+
     private void Start()
     {
         m_pathfinder = GameObject.FindObjectOfType<Pathfinder_SebastianMol>();
         m_scale = transform.localScale.x;
         m_lastPos = transform.position;
+        m_startPos = transform.position;
     }
 
     private void Update()
     {
+        IsPlayerDetected();
         EnemyBehaviour(); // behaviour of the enemy what stste it is in and what it dose
         FollowPath();
         SwapDirections();
