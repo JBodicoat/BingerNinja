@@ -4,46 +4,58 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -807754411271642417
-    second: Office_Sprites_0
+    second: Office_Sprites_Start
   - first:
       213: 7947372585484339455
-    second: Office_Sprites_1
+    second: Office_Sprites_Stair
   - first:
       213: -5746699617785277724
-    second: Office_Sprites_2
+    second: Office_Sprites_Chair1
   - first:
       213: 9581759134367758
-    second: Office_Sprites_3
+    second: Office_Sprites_Table
   - first:
       213: 2679451396924706721
-    second: Office_Sprites_4
+    second: Office_Sprites_Vent
   - first:
       213: -3263152616937194734
-    second: Office_Sprites_5
+    second: Office_Sprites_Floor1
   - first:
       213: -7367600535031245739
-    second: Office_Sprites_6
+    second: Office_Sprites_Chair2
   - first:
       213: -966137919272107150
-    second: Office_Sprites_7
+    second: Office_Sprites_Wall1
   - first:
       213: 6176653685065835947
-    second: Office_Sprites_8
+    second: Office_Sprites_DoorTop
   - first:
       213: -5226900887163401915
-    second: Office_Sprites_9
+    second: Office_Sprites_Floor2
   - first:
       213: -4914457265557181338
-    second: Office_Sprites_10
+    second: Office_Sprites_Wall2
   - first:
       213: 6837262402352866451
-    second: Office_Sprites_11
+    second: Office_Sprites_DoorBottom
+  - first:
+      213: 3152981959925983702
+    second: Office_Sprites_LiftTop1
+  - first:
+      213: -4916004226046291781
+    second: Office_Sprites_LiftTop2
+  - first:
+      213: 7690062806556003530
+    second: Office_Sprites_LiftBottom1
+  - first:
+      213: -1613144170542432060
+    second: Office_Sprites_LiftBottom2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
-    sRGBTexture: 0
+    sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
@@ -68,12 +80,12 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
-    aniso: 2
+    filterMode: -1
+    aniso: -1
     mipBias: -100
     wrapU: 1
     wrapV: 1
-    wrapW: 0
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -99,7 +111,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 16384
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -111,7 +123,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 16384
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -123,7 +135,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: iPhone
-    maxTextureSize: 16384
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -135,19 +147,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
-    maxTextureSize: 16384
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
-    maxTextureSize: 8192
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -159,7 +159,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
-    maxTextureSize: 16384
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -173,11 +173,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Office_Sprites_0
+      name: Office_Sprites_Start
       rect:
         serializedVersion: 2
         x: 0
-        y: 96
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -194,11 +194,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Office_Sprites_1
+      name: Office_Sprites_Stair
       rect:
         serializedVersion: 2
         x: 32
-        y: 96
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -215,11 +215,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Office_Sprites_2
+      name: Office_Sprites_Chair1
       rect:
         serializedVersion: 2
         x: 64
-        y: 96
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -236,11 +236,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Office_Sprites_3
+      name: Office_Sprites_Table
       rect:
         serializedVersion: 2
         x: 96
-        y: 96
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -257,11 +257,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Office_Sprites_4
+      name: Office_Sprites_Vent
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -278,11 +278,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Office_Sprites_5
+      name: Office_Sprites_Floor1
       rect:
         serializedVersion: 2
         x: 32
-        y: 64
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -299,11 +299,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Office_Sprites_6
+      name: Office_Sprites_Chair2
       rect:
         serializedVersion: 2
         x: 64
-        y: 64
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -320,15 +320,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Office_Sprites_7
+      name: Office_Sprites_Wall1
       rect:
         serializedVersion: 2
         x: 96
-        y: 64
+        y: 96
         width: 32
         height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -341,11 +341,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Office_Sprites_8
+      name: Office_Sprites_DoorTop
       rect:
         serializedVersion: 2
         x: 0
-        y: 32
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -362,11 +362,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Office_Sprites_9
+      name: Office_Sprites_Floor2
       rect:
         serializedVersion: 2
         x: 32
-        y: 32
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -383,15 +383,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Office_Sprites_10
+      name: Office_Sprites_Wall2
       rect:
         serializedVersion: 2
         x: 96
-        y: 32
+        y: 64
         width: 32
         height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -404,11 +404,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Office_Sprites_11
+      name: Office_Sprites_DoorBottom
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -424,10 +424,94 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Office_Sprites_LiftTop1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d96a982364a1cb20800000000000000
+      internalID: 3152981959925983702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Office_Sprites_LiftTop2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb01138d338d6cbb0800000000000000
+      internalID: -4916004226046291781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Office_Sprites_LiftBottom1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: accc63df06798ba60800000000000000
+      internalID: 7690062806556003530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Office_Sprites_LiftBottom2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c083577ce5fc99e0800000000000000
+      internalID: -1613144170542432060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 9b8ddd0eaf151ae49816d523ce0a72a1
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
