@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 //sebastian mol
-//class that manages enemy can ask it questions like has tegh player been seen
+//class that manages enemy can ask it questions like has the player been seen
 public class EnemyManager_SebastianMol : MonoBehaviour
 {
     private GameObject[] m_allEnemies;

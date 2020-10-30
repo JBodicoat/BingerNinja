@@ -9,7 +9,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-
+//dose that represt the tiles on the tile map
 public class Node
 {
     public Node m_parentNode = null;
@@ -32,11 +32,14 @@ public class Pathfinder_SebastianMol : MonoBehaviour
     const float MOVE_COST_DIAG = 1.414f;
     Node[,] m_allTiles;
     public Tile[] m_wallTiles;
-    public bool m_button = false;
+    public Tilemap m_tileMap;
+
+    [Header("testing variables")]
+    [Tooltip("press this button to start path finding")]
+    public bool m_testButton = false;
     public Vector2Int m_startPos;
     public Vector2Int m_targetPos;
     public Tile m_pathTile;
-    public Tilemap m_tileMap;
 
     private void Start()
     {
@@ -69,9 +72,9 @@ public class Pathfinder_SebastianMol : MonoBehaviour
 
     private void Update()
     {
-        if (m_button)
+        if (m_testButton)
         {
-            m_button = false;
+            m_testButton = false;
             List <Vector2Int> path = PathFind(m_startPos, m_targetPos);
             for (int i = 0; i < path.Count; i++)
             {
@@ -187,8 +190,14 @@ public class Pathfinder_SebastianMol : MonoBehaviour
         foreach (Node item in closedList) item.ResetData();
         foreach (Node item in openList) item.ResetData();
         #endregion
+
         return DaPath;
     }
+    public void setTravercible(Vector2Int pos, bool trav)
+    {
+        m_allTiles[pos.x, pos.y].m_traversable = trav;
+    }
+
     private List<Node> AddNodeToPath(Node n, List<Node> path)
     {
         path.Add(n);
@@ -196,13 +205,10 @@ public class Pathfinder_SebastianMol : MonoBehaviour
         return path;
     }
 
-    bool CheckOutOfBounds(Vector2Int pos)
+    private bool CheckOutOfBounds(Vector2Int pos)
     {
         return pos.x < 0 || pos.x > m_allTiles.GetLength(0) - 1 || pos.y < 0 || pos.y > m_allTiles.GetLength(1) - 1 ? true : false;
     }
 
-    public void setTravercible(Vector2Int pos, bool trav)
-    {
-        m_allTiles[pos.x, pos.y].m_traversable = trav;
-    }
+   
 }
