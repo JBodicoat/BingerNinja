@@ -4,6 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// used to move the projectile used by enemies
+/// </summary>
 public class BulletMovment_SebastianMol : MonoBehaviour
 {
     public float speed;

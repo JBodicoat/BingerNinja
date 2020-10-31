@@ -1,4 +1,8 @@
-﻿using JetBrains.Annotations;
+﻿//sebastian mol
+//sebastian mol 21/10/20 started to create the pathfindig class
+//sebastian mol 30/10/20 added headers to classes and functions
+
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +13,10 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-//dose that represt the tiles on the tile map
+
+/// <summary>
+/// node class that reprisents a tile on the tilemap
+/// </summary>
 public class Node
 {
     public Node m_parentNode = null;
@@ -26,6 +33,9 @@ public class Node
     }
 }
 
+/// <summary>
+/// hold logic that fids paths on the tilemap
+/// </summary>
 public class Pathfinder_SebastianMol : MonoBehaviour
 {
     const float MOVE_COST = 1;
@@ -41,52 +51,12 @@ public class Pathfinder_SebastianMol : MonoBehaviour
     public Vector2Int m_targetPos;
     public Tile m_pathTile;
 
-    private void Start()
-    {
-        Vector3Int size = GetComponent<Tilemap>().size;
-
-        //might need to change script order
-        m_allTiles = new Node[size.x, size.y];
-        for (int y = 0; y < size.y; y++)
-            for (int x = 0; x < size.x; x++)
-            {
-                m_allTiles[x, y] = new Node(true, new Vector2Int(x, y));
-            }
-
-
-        m_tileMap = GetComponent<Tilemap>();
-        for (int y = 0; y < m_tileMap.size.y; y++)
-        {
-            for (int x = 0; x < m_tileMap.size.x; x++)
-            {
-                for (int i = 0; i < m_wallTiles.Length; i++)
-                {
-                    if (m_tileMap.GetTile(new Vector3Int( x, y, 0)) == m_wallTiles[i])
-                    {
-                        m_allTiles[x, y].m_traversable = false;
-                    }
-                }
-            }
-        }      
-    }
-
-    private void Update()
-    {
-        if (m_testButton)
-        {
-            m_testButton = false;
-            List <Vector2Int> path = PathFind(m_startPos, m_targetPos);
-            for (int i = 0; i < path.Count; i++)
-            {
-                m_tileMap.SetTile(new Vector3Int(path[i].x, path[i].y, 0), m_pathTile);
-
-                //m_tileMap.SetTileFlags(new Vector3Int(path[i].x, path[i].y, 0), TileFlags.None);
-                //m_tileMap.SetColor(new Vector3Int(path[i].x, path[i].y, 0), Color.green);
-                //Debug.Log(m_tileMap.GetCellCenterWorld(new Vector3Int(path[i].x, path[i].y, 0)));
-            }
-        }
-    }
-
+    /// <summary>
+    /// creates a list of nodes that represents a path
+    /// </summary>
+    /// <param name="startPos"> the start of the path</param>
+    /// <param name="targetPos">the end of the path</param>
+    /// <returns></returns>
     public List<Vector2Int> PathFind(Vector2Int startPos, Vector2Int targetPos)
     {
         #region prep
@@ -193,11 +163,23 @@ public class Pathfinder_SebastianMol : MonoBehaviour
 
         return DaPath;
     }
+
+    /// <summary>
+    /// set a tile to be travercible.
+    /// </summary>
+    /// <param name="pos">postition of the tile</param>
+    /// <param name="trav">the travercibilty of the tile</param>
     public void setTravercible(Vector2Int pos, bool trav)
     {
         m_allTiles[pos.x, pos.y].m_traversable = trav;
     }
 
+    /// <summary>
+    /// adds a node to a list of nodes with reccursion.
+    /// </summary>
+    /// <param name="n"></param>
+    /// <param name="path"></param>
+    /// <returns></returns>
     private List<Node> AddNodeToPath(Node n, List<Node> path)
     {
         path.Add(n);
@@ -205,10 +187,59 @@ public class Pathfinder_SebastianMol : MonoBehaviour
         return path;
     }
 
+    /// <summary>
+    /// cheack to see if  atile is out of bounds
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <returns></returns>
     private bool CheckOutOfBounds(Vector2Int pos)
     {
         return pos.x < 0 || pos.x > m_allTiles.GetLength(0) - 1 || pos.y < 0 || pos.y > m_allTiles.GetLength(1) - 1 ? true : false;
     }
 
-   
+    private void Start()
+    {
+        Vector3Int size = GetComponent<Tilemap>().size;
+
+        //might need to change script order
+        m_allTiles = new Node[size.x, size.y];
+        for (int y = 0; y < size.y; y++)
+            for (int x = 0; x < size.x; x++)
+            {
+                m_allTiles[x, y] = new Node(true, new Vector2Int(x, y));
+            }
+
+
+        m_tileMap = GetComponent<Tilemap>();
+        for (int y = 0; y < m_tileMap.size.y; y++)
+        {
+            for (int x = 0; x < m_tileMap.size.x; x++)
+            {
+                for (int i = 0; i < m_wallTiles.Length; i++)
+                {
+                    if (m_tileMap.GetTile(new Vector3Int(x, y, 0)) == m_wallTiles[i])
+                    {
+                        m_allTiles[x, y].m_traversable = false;
+                    }
+                }
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if (m_testButton)
+        {
+            m_testButton = false;
+            List<Vector2Int> path = PathFind(m_startPos, m_targetPos);
+            for (int i = 0; i < path.Count; i++)
+            {
+                m_tileMap.SetTile(new Vector3Int(path[i].x, path[i].y, 0), m_pathTile);
+
+                //m_tileMap.SetTileFlags(new Vector3Int(path[i].x, path[i].y, 0), TileFlags.None);
+                //m_tileMap.SetColor(new Vector3Int(path[i].x, path[i].y, 0), Color.green);
+                //Debug.Log(m_tileMap.GetCellCenterWorld(new Vector3Int(path[i].x, path[i].y, 0)));
+            }
+        }
+    }
 }

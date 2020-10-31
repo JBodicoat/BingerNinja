@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// used by the melee type enemies to damage the player.
+/// </summary>
 public class EnemyDamager_SebastianMol : MonoBehaviour
 {
 	private void OnTriggerEnter2D(Collider2D collision)
