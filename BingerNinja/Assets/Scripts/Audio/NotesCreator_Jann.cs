@@ -1,86 +1,58 @@
-﻿using System;
-using System.Collections;
+﻿// Jann
+
+/// This script creates notes based on this: https://pages.mtu.edu/~suits/NoteFreqCalcs.html
+
+// Jann 16/10/20 - Implemented note calculation
+// Jann 21/10/20 - Adjustments
+// Jann 25/10/20 - Refactored parts to PlayTrack_Jann.cs
+// Jann 28/10/20 - QA improvements
+
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class NotesCreator_Jann : MonoBehaviour
+public class NotesCreator_Jann
 {
     private const int BaseFrequency = 440;
-    private const int From = -57;
-    private const int To = 50;
+    private const int From = -21;
+    private const int To = 15;
     private const float FrequencyRation = 1.059463094359f;
-    private const float SamplingFrequency = 48000f;
 
-    public float m_currentNote;
-    public float m_gain;
-    public float m_volume = 0.1f;
-    public float[] m_notes;
-
+    private int m_position;
+    private int m_audioLength;
     private float m_increment;
     private float m_phase;
     private int m_currentNoteIndex;
-    
-    void Start()
+
+    private Dictionary<Note, float> notesFrequencies = new Dictionary<Note, float>();
+
+    public enum Note
     {
-        int numberOfNotes = Mathf.Abs(From) + To + 1;
-        m_notes = new float[numberOfNotes];
+        None = 0, 
+        C3, Db3, D3, Eb3, E3, F3, Gb3, G3, Ab3, A3, Bb3, B3, 
+        C4, Db4, D4, Eb4, E4, F4, Gb4, G4, Ab4, A4, Bb4, B4, 
+        C5, Db5, D5, Eb5, E5, F5, Gb5, G5, Ab5, A5, Bb5, B5, 
+        C6
+    };
+
+    public NotesCreator_Jann()
+    {
+        GenerateNotes();
+    }
+
+    public float GetFrequency(Note note)
+    {
+        return notesFrequencies[note];
+    }
+    
+    private void GenerateNotes()
+    {
+        notesFrequencies.Add(Note.None, 0f);
 
         int index = 0;
         for (int frequency = From; frequency < To + 1; frequency++)
         {
-            m_notes[index] = BaseFrequency * Mathf.Pow(FrequencyRation, frequency); 
             index++;
-        }
-
-        m_currentNote = m_notes[m_currentNoteIndex];
-    }
-    
-    void Update()
-    {
-        // TODO: Add volume control
-        m_gain = m_volume;
-
-        var curKeyboard= Keyboard.current;
-        
-        if (curKeyboard.rightArrowKey.wasPressedThisFrame)
-        {
-            m_currentNoteIndex = (m_currentNoteIndex + 1) % m_notes.Length;
-            m_currentNote = m_notes[m_currentNoteIndex];
-            print(m_currentNoteIndex);
-        }
-        
-        if (curKeyboard.leftArrowKey.wasPressedThisFrame)
-        {
-            m_currentNoteIndex = (m_currentNoteIndex - 1) % m_notes.Length;
-
-            if (m_currentNoteIndex < 0)
-                m_currentNoteIndex = m_notes.Length - 1;
-            
-            m_currentNote = m_notes[m_currentNoteIndex];
-            print(m_currentNoteIndex);
-        }
-    }
-
-    private void OnAudioFilterRead(float[] data, int channels)
-    {
-        m_increment = m_currentNote * 2f * Mathf.PI / SamplingFrequency;
-
-        for (int i = 0; i < data.Length; i += channels)
-        {
-            m_phase += m_increment;
-            data[i] = m_gain * Mathf.Sin(m_phase);
-
-            // TODO: Make it channel independent
-            if (channels == 2)
-            {
-                data[i + 1] = data[i];
-            }
-
-            if (m_phase > Mathf.PI * 2)
-            {
-                m_phase = 0f;
-            }
+            notesFrequencies.Add((Note) index, BaseFrequency * Mathf.Pow(FrequencyRation, frequency));
         }
     }
 }
