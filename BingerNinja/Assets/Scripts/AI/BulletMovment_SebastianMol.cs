@@ -9,8 +9,9 @@ using UnityEngine;
 /// </summary>
 public class BulletMovment_SebastianMol : MonoBehaviour
 {
-    public float speed;
-    public Vector2 direction;
+    public float m_speed;
+    public Vector2 m_direction;
+    public float m_damage;
 
     private void Start()
     {
@@ -18,14 +19,14 @@ public class BulletMovment_SebastianMol : MonoBehaviour
     }
     void Update()
     {
-        transform.position += (Vector3)direction * speed * Time.deltaTime ;
+        transform.position += (Vector3)m_direction * m_speed * Time.deltaTime ;
     }
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if(collision.tag == "Player")
         {
-           // FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(20);
+           FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damage);
             Destroy(gameObject);
 		}
 	}

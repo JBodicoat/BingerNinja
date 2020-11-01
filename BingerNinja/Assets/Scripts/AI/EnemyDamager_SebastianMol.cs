@@ -7,11 +7,13 @@ using UnityEngine;
 /// </summary>
 public class EnemyDamager_SebastianMol : MonoBehaviour
 {
+	public float m_baseDamage;
+	public float m_damage;
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.tag == "Player")
 		{
-			// FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(20);
+			 FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damage);
 		}
 	}
 }

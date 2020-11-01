@@ -22,6 +22,8 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     public float attackDeactivationSpeed;
     [Tooltip("deley between line of sight checks")]
     public float m_outOfSightDeley;
+    public bool m_hasChargeAttack = false;
+    public float m_chargeAttackDeley;
     internal override void EnemyBehaviour()
     {
         switch (m_currentState)
@@ -104,8 +106,19 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     {
         if (m_attackTimer <= 0)
         {
-
-            StartCoroutine(QuickAttack());
+            int rand = Random.Range(0, 2);
+            Debug.Log(rand);
+            switch (rand)
+            {
+                case 0:
+                    StartCoroutine(QuickAttack());
+                    break;
+                
+                case 1:
+                    StartCoroutine(ChargeAttack());
+                    break;
+            }
+           
             m_attackTimer = m_hitSpeed;
         }
         else
@@ -115,11 +128,27 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     }
 
     /// <summary>
-    /// activates the "enemy weapon" object that damages the player
+    /// activates the "enemy weapon" object that damages the player uses quick attack
     /// </summary>
     /// <returns></returns>
     private IEnumerator QuickAttack()
     {
+        m_attackCollider.GetComponent<EnemyDamager_SebastianMol>().m_damage
+            = m_attackCollider.GetComponent<EnemyDamager_SebastianMol>().m_baseDamage;
+        m_attackCollider.SetActive(true);
+        yield return new WaitForSeconds(attackDeactivationSpeed);
+        m_attackCollider.SetActive(false);
+    }
+    
+    /// <summary>
+    /// activates the "enemy weapon" object that damages the player uses charge attack
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator ChargeAttack()
+    {
+        new WaitForSeconds(m_chargeAttackDeley);
+        m_attackCollider.GetComponent<EnemyDamager_SebastianMol>().m_damage 
+            = m_attackCollider.GetComponent<EnemyDamager_SebastianMol>().m_baseDamage * 3;
         m_attackCollider.SetActive(true);
         yield return new WaitForSeconds(attackDeactivationSpeed);
         m_attackCollider.SetActive(false);

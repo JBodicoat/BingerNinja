@@ -315,7 +315,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         m_startPos = transform.position;
         m_patrolIteratorMax = m_patrolPoints.Length-1;
         m_patroleTimer = m_deleyBetweenPatrol;
-        if (m_patrolPoints[0] != null) m_currentPatrolePos = m_patrolPoints[0];
+        //if (m_patrolPoints[0] != null) m_currentPatrolePos = m_patrolPoints[0];
     }
 
     private void Update()
