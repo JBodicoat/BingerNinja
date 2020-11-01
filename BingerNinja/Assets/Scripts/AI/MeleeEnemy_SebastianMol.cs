@@ -1,24 +1,32 @@
-﻿using System.Collections;
+﻿//sebastian mol
+//sebastian mol 30/10/20 melee enemy shoudl be completed
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//sebastian mol
-//melee enemy class can aslo be used for brute enemy
+
+/// <summary>
+/// melee enemy class esed by any enemy that has melle attack
+/// </summary>
 class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
 {
+    [Header("desighner variables")]
+    [Tooltip("how fast the how far away can the enemy be befor attacking")]
     public float m_meleeRange;
+    [Tooltip("speed of the enemies attack")]
     public float m_hitSpeed;
+    [Tooltip("object used to damage the enemy coudl be called the enemy weapon")]
     public GameObject m_attackCollider;
+    [Tooltip("time it takess for the attck gameobject to be turneed off this shoudl be realy short")]
     public float attackDeactivationSpeed;
+    [Tooltip("deley between line of sight checks")]
     public float m_outOfSightDeley;
-    private float m_timer;
-    private float m_timer2;
     internal override void EnemyBehaviour()
     {
         switch (m_currentState)
         {
             case state.WONDER:
-                //if (m_playerDetected) m_currentState = state.CHASE;
                 m_detectionCollider.enabled = true;
                 if(transform.position != m_startPos)
                 {
@@ -29,7 +37,6 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
                 break;
 
             case state.CHASE:
-                //move towards the player if he has been detected
                 if (IsPlayerInLineOfSight())
                 {
                     if (Vector2.Distance(transform.position, m_playerTransform.position) < m_meleeRange)
@@ -46,14 +53,14 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
                 {
                     if (m_currentPath.Count == 0)
                     {
-                        if (m_timer2 <= 0)
+                        if (m_outOfSightTimer <= 0)
                         {
                             m_currentState = state.WONDER;
                             m_playerDetected = false;
                         }
                         else
                         {
-                            m_timer2 -= Time.deltaTime;
+                            m_outOfSightTimer -= Time.deltaTime;
                         }
                     } 
                 }
@@ -70,19 +77,19 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
                     {
                         m_currentState = state.CHASE;
                     }
-                    m_timer2 = m_outOfSightDeley;
+                    m_outOfSightTimer = m_outOfSightDeley;
                     m_playerDetected = true;
                 }
                 else
                 {
                     m_playerDetected = false;
-                    if (m_timer2 <= 0)
+                    if (m_outOfSightTimer <= 0)
                     {
                         m_currentState = state.WONDER;
                     }
                     else
                     {
-                        m_timer2 -= Time.deltaTime;
+                        m_outOfSightTimer -= Time.deltaTime;
                     }
                 }
                 break;
@@ -90,20 +97,27 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
         }
     }
 
+    /// <summary>
+    /// funtionality for the melee attack
+    /// </summary>
     private void MeleeAttack()
     {
-        if (m_timer <= 0)
+        if (m_attackTimer <= 0)
         {
 
             StartCoroutine(QuickAttack());
-            m_timer = m_hitSpeed;
+            m_attackTimer = m_hitSpeed;
         }
         else
         {
-            m_timer -= Time.deltaTime;
+            m_attackTimer -= Time.deltaTime;
         }
     }
 
+    /// <summary>
+    /// activates the "enemy weapon" object that damages the player
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator QuickAttack()
     {
         m_attackCollider.SetActive(true);
