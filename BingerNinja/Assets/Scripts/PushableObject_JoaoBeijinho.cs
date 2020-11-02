@@ -2,6 +2,7 @@
 
 //Joao Beijinho 29/10/2020 - Created this scripted, collision and object attachment/detachment to player
 //Joao Beijinho 30/10/2020 - Created m_isClose bool so that the player can only grab when its colliding
+//Joao Beijinho 02/10/2020 - Replaced m_isClose with m_isGrabbed, removed collider.trigger and put collider.enable
 
 using System.Collections;
 using System.Collections.Generic;
@@ -18,8 +19,8 @@ public class PushableObject_JoaoBeijinho : MonoBehaviour
     private BoxCollider2D m_collider; 
 
     private string m_playerTag = "Player";
-    private bool m_isClose = false;
-    private bool m_canGrab = false;
+    public bool m_canGrab = false;
+    public bool m_isGrabbed = false;
 
     private void Start()
     {
@@ -32,7 +33,6 @@ public class PushableObject_JoaoBeijinho : MonoBehaviour
     {
         if (collision.gameObject.tag == m_playerTag)
         {
-            m_isClose = true;
             m_canGrab = true;
         }
     }
@@ -41,24 +41,25 @@ public class PushableObject_JoaoBeijinho : MonoBehaviour
     {
         if (collision.gameObject.tag == m_playerTag)
         {
-            m_isClose = false;
             m_canGrab = false;
         }
     }
 
     void Update()
     {
-        if (m_playerControllerScript.m_interact.triggered && m_canGrab == true && m_isClose == true)//Press interact to grab object and move it freely
+        if (m_playerControllerScript.m_interact.triggered && m_canGrab == true)//Press interact to grab object and move it freely
         {
             m_canGrab = false;
+            m_isGrabbed = true;
             gameObject.transform.parent = m_player.transform;
-            m_collider.isTrigger = true;
+            Physics2D.IgnoreCollision(m_player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         }
-        else if (m_playerControllerScript.m_interact.triggered && m_canGrab == false && m_isClose == true)//Press interact to let go of object
+        else if (m_playerControllerScript.m_interact.triggered && m_isGrabbed == true)//Press interact to let go of object
         {
             m_canGrab = true;
+            m_isGrabbed = false;
             gameObject.transform.parent = null;
-            m_collider.isTrigger = false;
+            Physics2D.IgnoreCollision(m_player.GetComponent<Collider2D>(), m_collider, false);
         }
     }
 }

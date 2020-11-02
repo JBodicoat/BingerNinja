@@ -865,21 +865,37 @@ MonoBehaviour:
       m_Action: Movement
       m_Flags: 8
   m_interact:
-    m_Name: 
+    m_Name: Interact
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 8af200a7-153a-4926-a58c-2ec40d80544b
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: df44753e-971e-4467-a6ff-e0e993a19cda
+      m_Path: <Keyboard>/e
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Interact
+      m_Flags: 0
   m_crouch:
-    m_Name: 
+    m_Name: Crouch
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: d2fa8643-5130-4e57-9a5c-97d64b3e15c8
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 218a4d90-374f-4d61-9922-6673a3cd0b56
+      m_Path: <Keyboard>/ctrl
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Crouch
+      m_Flags: 0
 --- !u!114 &738372663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3154,6 +3170,7 @@ GameObject:
   - component: {fileID: 1026021146}
   - component: {fileID: 1026021145}
   - component: {fileID: 1026021144}
+  - component: {fileID: 1026021147}
   m_Layer: 0
   m_Name: Crate
   m_TagString: Crate
@@ -3252,6 +3269,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1026021147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026021143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1fb6033efb5b8a48a7c8349acf52ad2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_canGrab: 0
+  m_isGrabbed: 0
 --- !u!1 &1250802903
 GameObject:
   m_ObjectHideFlags: 0
@@ -15528,7 +15559,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1773593535}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.498, y: 4.885, z: 0}
+  m_LocalPosition: {x: 4.96, y: 4.42, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 743983669}
