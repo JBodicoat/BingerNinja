@@ -46,12 +46,15 @@ public class Inventory_JoaoBeijinho : MonoBehaviour
     }
     public bool HasItem(ItemType item)
     {
+        Debug.Log("yay");
         if (m_inventoryItems.ContainsKey(item))
         {
+            Debug.Log("woo");
             return true;
         }
         else
         {
+            Debug.Log("o no");
             return false;
         }
 

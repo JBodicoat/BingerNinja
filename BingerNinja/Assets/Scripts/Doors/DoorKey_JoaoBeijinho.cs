@@ -21,7 +21,7 @@ public class DoorKey_JoaoBeijinho : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == m_playerTag && m_inventory.HasItem(itemNeeded))//Collision with Player
+        if (collision.gameObject.tag == m_playerTag && m_inventory.HasItem(itemNeeded))//Collision with Player
         {
             gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
             gameObject.SetActive(false);

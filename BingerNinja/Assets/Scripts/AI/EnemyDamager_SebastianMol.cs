@@ -11,7 +11,7 @@ public class EnemyDamager_SebastianMol : MonoBehaviour
 	{
 		if (collision.tag == "Player")
 		{
-			// FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(20);
+			 FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(20);
 		}
 	}
 }
