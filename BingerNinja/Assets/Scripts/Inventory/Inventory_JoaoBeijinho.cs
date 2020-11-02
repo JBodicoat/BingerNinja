@@ -14,6 +14,7 @@ using UnityEngine;
 public enum ItemType
 {
     Key,
+    LiftKey,
     type2,
 }
 
