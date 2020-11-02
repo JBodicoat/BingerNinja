@@ -13,18 +13,25 @@ public class PlayerAnimation_LouieWilliamson : MonoBehaviour
     private bool isFacingLeft;
     private Animator m_playerAnim;
     private Rigidbody2D m_rb;
-
+    private bool wasFacingLeft;
     public void TriggerAttackAnim()
     {
+        if (isFacingLeft)
+        {
+            if (transform.localScale.x < 0)
+            {
+                FlipSprite();
+            }
+        }
         m_playerAnim.SetTrigger("isAttacking");
     }
     void Start()
     {
         isFacingLeft = true;
+        wasFacingLeft = false;
 
         m_playerAnim = GetComponent<Animator>();
         m_rb = GetComponent<Rigidbody2D>();
-        
     }
 
     // Update is called once per frame
@@ -46,16 +53,15 @@ public class PlayerAnimation_LouieWilliamson : MonoBehaviour
             //is he already facing left?
             if (!isFacingLeft)
             {
-                //transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
                 FlipSprite();
                 isFacingLeft = true;
+                wasFacingLeft = true;
             }
         }
-        else
+        else if (m_rb.velocity.x > 0)
         {
             if (isFacingLeft)
             {
-                //transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
                 FlipSprite();
                 isFacingLeft = false;
             }
