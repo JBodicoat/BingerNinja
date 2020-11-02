@@ -23,12 +23,11 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 {
     public GameObject m_projectile = null;
 
-    public float attackSpeed = 0;
-
-    protected float currentatktime = 0;
-    public Collider2D EnemyDetection;
+    public float attackSpeed = 1;
+    public float currentatktime = 0;
+    //public Collider2D EnemyDetection = null;
     
-    public float m_playerMeleeRange;
+    public float RangeAttribute = 3;
     protected PlayerStealth_JoaoBeijinho m_playerStealthScript;
 
     [SerializeField]
@@ -55,36 +54,62 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         }
         else
         {
-            EnemyDetection.enabled = true;
+                float distanceToClosestsEnemy = Mathf.Infinity;
+                GameObject CloseEnemy = null;
+                GameObject[] allEnemys = GameObject.FindGameObjectsWithTag("Enemy");
 
-            Collider2D[] results = new Collider2D[10];
-            ContactFilter2D contact = new ContactFilter2D();            
-
-            if(EnemyDetection.OverlapCollider(contact.NoFilter(), results) > 0)
-            {
-            GameObject CloseEnemy = null;
-            float distance = 100;
-
-            foreach (var enemy in results)
-            {
-                if(enemy.tag == "Enemy")
+                foreach (GameObject CurrentEnemy in allEnemys)
                 {
-                    if (distance > Vector3.Distance(transform.position, enemy.transform.position))
+                    float distanceToEnemy = (CurrentEnemy.transform.position - this.transform.position).sqrMagnitude;
+                    if(distanceToEnemy < distanceToClosestsEnemy)
                     {
-                    distance = Vector3.Distance(transform.position, enemy.transform.position);
-                    CloseEnemy = enemy.gameObject;
+                        distanceToClosestsEnemy = distanceToEnemy;
+                        CloseEnemy = CurrentEnemy;
                     }
                 }
+
+
+            // --------------
+
+
+            //print("Activate Detection");
+            ////EnemyDetection.enabled = true;
+            //print("Detect enemy");
+            //Collider2D[] results = new Collider2D[10];
+            //ContactFilter2D contact = new ContactFilter2D();   
+            //contact.NoFilter();
+//
+            //GetComponent<CircleCollider2D>().OverlapCollider(contact, results);
+            //
+            //
+            //print("Detected enemys: " + results.Length);            
+            // 
+            //if(results[0] )
+            //{
+            //    
+            //    GameObject CloseEnemy = null;
+            //    float distance = 100;
+//
+            //    foreach (var enemy in results)
+            //    {
+            //        if(enemy.tag == "Enemy")
+            //        {
+            //            if (distance > Vector3.Distance(transform.position, enemy.transform.position))
+            //            {
+            //            distance = Vector3.Distance(transform.position, enemy.transform.position);
+            //            CloseEnemy = enemy.gameObject;
+            //            }
+            //        }
+            //    }
+
+                if(CloseEnemy && distanceToClosestsEnemy <= RangeAttribute)
+                {
+                    CloseEnemy.GetComponent<EnemyAi>().Hit(m_currentWeapon.dmg);
+                }                
             }
 
-            if(CloseEnemy)
-            {
-                CloseEnemy.GetComponent<BaseEnemy_SebastianMol>().TakeDamage(m_currentWeapon.dmg);
-            }
-            }
-
-            EnemyDetection.enabled = false;
-        }
+            //EnemyDetection.enabled = false;
+        
     }
 
     public void eat()
@@ -129,17 +154,24 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(currentatktime <= 0)
+         
+
+        if(currentatktime < 0)
         {
-            if (!m_playerStealthScript.m_crouched && m_currentWeapon)
-            {            
-                if(Mouse.current.leftButton.ReadValue() > 0)            
-                Attack();
-            }
-            currentatktime = attackSpeed;
+              if (!m_playerStealthScript.m_crouched && m_currentWeapon &&  GetComponent<PlayerController_JamieG>().m_attack.triggered)
+            {                           
+                currentatktime = attackSpeed;
+                print("Attack");
+                Attack();        
+            }          
         }
         else
         currentatktime -= Time.deltaTime;
+
+        if(GetComponent<PlayerController_JamieG>().m_eat.triggered)
+        {
+            eat();
+        }
 
 
     }

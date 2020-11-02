@@ -47,7 +47,7 @@ public class Projectile_MarioFernandes : MonoBehaviour
         
         if(other.tag == "Enemy")
         {
-            GetComponent<BaseEnemy_SebastianMol>().TakeDamage(m_dmg);
+            other.GetComponent<EnemyAi>().Hit(m_dmg);
             Destroy(gameObject);
         }
     }
