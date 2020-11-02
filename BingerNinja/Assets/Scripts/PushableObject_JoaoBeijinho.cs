@@ -15,7 +15,7 @@ public class PushableObject_JoaoBeijinho : MonoBehaviour
 {
     protected PlayerController_JamieG m_playerControllerScript;
 
-    private GameObject m_player;
+    private Transform m_playerTransform;
     private BoxCollider2D m_collider; 
 
     private string m_playerTag = "Player";
@@ -24,7 +24,7 @@ public class PushableObject_JoaoBeijinho : MonoBehaviour
 
     private void Start()
     {
-        m_player = GameObject.Find("Player");
+        m_playerTransform = GameObject.Find("Player").transform;
         m_playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
         m_collider = GetComponent<BoxCollider2D>();
     }
@@ -51,15 +51,15 @@ public class PushableObject_JoaoBeijinho : MonoBehaviour
         {
             m_canGrab = false;
             m_isGrabbed = true;
-            gameObject.transform.parent = m_player.transform;
-            Physics2D.IgnoreCollision(m_player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+            transform.parent = m_playerTransform;
+            Physics2D.IgnoreCollision(gameObject.transform.parent.GetComponent<Collider2D>(), m_collider);
         }
         else if (m_playerControllerScript.m_interact.triggered && m_isGrabbed == true)//Press interact to let go of object
         {
             m_canGrab = true;
             m_isGrabbed = false;
-            gameObject.transform.parent = null;
-            Physics2D.IgnoreCollision(m_player.GetComponent<Collider2D>(), m_collider, false);
+            Physics2D.IgnoreCollision(gameObject.transform.parent.GetComponent<Collider2D>(), m_collider, false);
+            transform.parent = null;
         }
     }
 }
