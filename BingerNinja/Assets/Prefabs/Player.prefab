@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 4362767424123825806}
   - component: {fileID: 4362767424123825807}
   - component: {fileID: 4362767424123825804}
+  - component: {fileID: -126679910950930257}
   - component: {fileID: 4362767424123825805}
   - component: {fileID: 4362767424123825802}
   - component: {fileID: 4362767424123825803}
@@ -123,6 +124,7 @@ GameObject:
   - component: {fileID: 4362767424123825801}
   - component: {fileID: 4362767424123825798}
   - component: {fileID: 4272470005486940903}
+  - component: {fileID: 1777221697}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -139,7 +141,7 @@ Transform:
   m_GameObject: {fileID: 4362767424123825799}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -21.01, y: 5.81, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 0.8108961, y: 0.8108961, z: 0.8108961}
   m_Children:
   - {fileID: 1726433805828800157}
   - {fileID: 4362767422803623032}
@@ -231,7 +233,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0018587708, y: 0.003270924}
+  m_Offset: {x: 0.0048828125, y: 0.020989567}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -242,8 +244,27 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.62295854, y: 0.76664007}
+  m_Size: {x: 0.6870768, y: 0.8705421}
   m_EdgeRadius: 0
+--- !u!95 &-126679910950930257
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4362767424123825799}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0ee7a595a1293a44891e184978476194, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &4362767424123825805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,7 +358,15 @@ MonoBehaviour:
     m_Id: 8447ad5f-e82a-48b2-8581-371f96ecb07c
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 992bf304-d57a-4e37-a3f5-127989f6d29e
+      m_Path: <Keyboard>/f
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Interact
+      m_Flags: 0
   m_crouch:
     m_Name: Crouch
     m_Type: 0
@@ -397,6 +426,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d9021b421e580f42948ac125480fa7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1777221697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4362767424123825799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 139246ae6a1c4324f9ac2007a58a30fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &4362767424130163976
