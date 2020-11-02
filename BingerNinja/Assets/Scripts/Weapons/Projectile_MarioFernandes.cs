@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Projectile_MarioFernandes : MonoBehaviour
 {
     public int m_dmg = 0;
     public float m_speed = 0;
+
+    float timeAlive = 3;
 
     Vector3 mousePos;
     Vector3 direction;
@@ -14,22 +17,30 @@ public class Projectile_MarioFernandes : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         
+        mousePos = mousePos- transform.position;
+
         mousePos.z = 0; 
 
-        mousePos.Normalize();
+        mousePos.Normalize();       
+        
 
-        transform.rotation = Quaternion.Euler(new Vector3(mousePos.x, mousePos.y, 0));
-
-        transform.position = GameObject.FindWithTag("Player").transform.position;
+        transform.rotation = Quaternion.Euler(new Vector3(mousePos.x, mousePos.y, 0));        
         
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         transform.position += mousePos * m_speed * Time.deltaTime ;
+    }
+
+     void Update() {
+        if(timeAlive <= 0)
+        Destroy(gameObject);
+        else
+        timeAlive -= Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D other) {

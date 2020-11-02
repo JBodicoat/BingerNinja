@@ -7,24 +7,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
+public enum FoodType
+{
+    FUGU,
+    SQUID,
+    RICEBALL,
+    KOBEBEEF,
+    SASHIMI,
+    PIZZA,
+    SAKE,
+    NOODLES,
+} 
 public class PlayerCombat_MarioFernandes : MonoBehaviour
 {
-    public GameObject m_projectile;
+    public GameObject m_projectile = null;
 
+    public float attackSpeed = 0;
+
+    protected float currentatktime = 0;
     public Collider2D EnemyDetection;
     
     public float m_playerMeleeRange;
     protected PlayerStealth_JoaoBeijinho m_playerStealthScript;
 
+    [SerializeField]
     protected WeaponsTemplate_MarioFernandes m_currentWeapon;
 
   public  bool IsHoldingFood()
-         {
+        {
        
         //Temp, should go the current weapon
         return false;
-         }
+        }
 
     void PickUpFood()
     {
@@ -40,12 +55,13 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         }
         else
         {
+            EnemyDetection.enabled = true;
+
             Collider2D[] results = new Collider2D[10];
-            ContactFilter2D contact = new ContactFilter2D();
-            
+            ContactFilter2D contact = new ContactFilter2D();            
 
-            EnemyDetection.OverlapCollider(contact.NoFilter(), results);            
-
+            if(EnemyDetection.OverlapCollider(contact.NoFilter(), results) > 0)
+            {
             GameObject CloseEnemy = null;
             float distance = 100;
 
@@ -63,11 +79,47 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
             if(CloseEnemy)
             {
-                GetComponent<BaseEnemy_SebastianMol>().TakeDamage(m_currentWeapon.dmg);
+                CloseEnemy.GetComponent<BaseEnemy_SebastianMol>().TakeDamage(m_currentWeapon.dmg);
             }
+            }
+
+            EnemyDetection.enabled = false;
         }
     }
 
+    public void eat()
+    {
+        switch (m_currentWeapon.m_foodType)
+        {
+            case  FoodType.FUGU:
+                GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon.m_instaHeal);
+                if(Random.Range(0,101) >= 50)
+                gameObject.GetComponent<EffectManager_MarioFernandes>().AddEffect(new PoisionDefuff_MarioFernandes(m_currentWeapon.m_poisonDmg,5));
+            break;
+            case  FoodType.SQUID:
+                GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon.m_instaHeal);
+            break;
+            case  FoodType.RICEBALL:
+                GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon.m_instaHeal);
+            break;
+            case  FoodType.KOBEBEEF:
+                GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon.m_instaHeal);
+                gameObject.GetComponent<EffectManager_MarioFernandes>().AddEffect(new PoisionDefuff_MarioFernandes(0,5,m_currentWeapon.m_speedModifier));
+            break;
+            case  FoodType.SASHIMI:
+                GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon.m_instaHeal);
+            break;
+            case  FoodType.PIZZA:
+            break;
+            case  FoodType.SAKE:
+            break;
+            case  FoodType.NOODLES:
+            break;
+            default:
+            break;
+        }    
+        
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -77,11 +129,17 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!m_playerStealthScript.m_crouched)
+        if(currentatktime <= 0)
         {
-            if(Input.GetMouseButton(0))
-            Attack();
+            if (!m_playerStealthScript.m_crouched && m_currentWeapon)
+            {            
+                if(Mouse.current.leftButton.ReadValue() > 0)            
+                Attack();
+            }
+            currentatktime = attackSpeed;
         }
+        else
+        currentatktime -= Time.deltaTime;
 
 
     }
@@ -91,6 +149,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 		if(collision.GetComponent<WeaponsTemplate_MarioFernandes>())
         {
             m_currentWeapon = collision.GetComponent<WeaponsTemplate_MarioFernandes>();
+            collision.gameObject.SetActive(false);
 		}
 	}
 }
