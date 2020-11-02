@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿// Jack 02/11/2020 Changed "other.GetComponent<EnemyAi>().Hit(m_dmg);" to
+//                         "other.GetComponent<BaseEnemy_SebastianMol>().TakeDamage(m_dmg);"
+//                         in OnTriggerEnter2d
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -47,7 +51,7 @@ public class Projectile_MarioFernandes : MonoBehaviour
         
         if(other.tag == "Enemy")
         {
-            other.GetComponent<EnemyAi>().Hit(m_dmg);
+            other.GetComponent<BaseEnemy_SebastianMol>().TakeDamage(m_dmg);
             Destroy(gameObject);
         }
     }

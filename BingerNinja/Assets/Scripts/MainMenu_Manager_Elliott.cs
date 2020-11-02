@@ -1,7 +1,10 @@
 ﻿//Elliott Desouza
-/// class holds values for mainmenu UI
 
 //Elliott 26/10/2020 - can open up settings menu and quit game
+// Jack 02/11/2020 - set StartNewGame() to open scene of build index 1 for VS
+//                   moved class header comment to the correct place and reformated.
+//                   linked this scripts functions with the MainMenu scene buttons
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +12,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// class holds values for mainmenu UI
+/// </summary>
 public class MainMenu_Manager_Elliott : MonoBehaviour
 {
     public GameObject m_settingMenu;

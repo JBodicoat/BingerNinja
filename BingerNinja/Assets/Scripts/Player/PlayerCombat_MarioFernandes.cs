@@ -4,6 +4,9 @@
 // Mário 17/10/2020 - Create class and Attack, PickUpFood, IIsHoldingFood Funcions
 // Joao 25/10/2020 - Stop weapon usage while crouched in update
 // Louie 02/11/2020 - added player attack animation code
+// Jack 02/11/2020 - changed "CloseEnemy.GetComponent<EnemyAi>().Hit(m_currentWeapon.dmg);" to GetComponent<BaseEnemy_SebastianMol>().TakeDamage(m_currentWeapon.dmg);
+//                   in Attack function
+//                   added reference to PlayerHealthAndHunger script and extended the eat function so that it actually restores your hunger bar
 
 using System.Collections;
 using System.Collections.Generic;
@@ -34,6 +37,8 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
     [SerializeField]
     protected WeaponsTemplate_MarioFernandes m_currentWeapon;
+
+    PlayerHealthHunger_MarioFernandes m_playerHealthHungerScript;
 
   public  bool IsHoldingFood()
         {
@@ -109,7 +114,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
                 if(CloseEnemy && distanceToClosestsEnemy <= RangeAttribute)
                 {
-                    CloseEnemy.GetComponent<EnemyAi>().Hit(m_currentWeapon.dmg);
+                    CloseEnemy.GetComponent<BaseEnemy_SebastianMol>().TakeDamage(m_currentWeapon.dmg);
                 }                
             }
 
@@ -119,42 +124,47 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
     public void eat()
     {
-        switch (m_currentWeapon.m_foodType)
+        if (m_currentWeapon)
         {
-            case  FoodType.FUGU:
-                GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon.m_instaHeal);
-                if(Random.Range(0,101) >= 50)
-                gameObject.GetComponent<EffectManager_MarioFernandes>().AddEffect(new PoisionDefuff_MarioFernandes(m_currentWeapon.m_poisonDmg,5));
-            break;
-            case  FoodType.SQUID:
-                GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon.m_instaHeal);
-            break;
-            case  FoodType.RICEBALL:
-                GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon.m_instaHeal);
-            break;
-            case  FoodType.KOBEBEEF:
-                GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon.m_instaHeal);
-                gameObject.GetComponent<EffectManager_MarioFernandes>().AddEffect(new PoisionDefuff_MarioFernandes(0,5,m_currentWeapon.m_speedModifier));
-            break;
-            case  FoodType.SASHIMI:
-                GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon.m_instaHeal);
-            break;
-            case  FoodType.PIZZA:
-            break;
-            case  FoodType.SAKE:
-            break;
-            case  FoodType.NOODLES:
-            break;
-            default:
-            break;
-        }    
-        
+            switch (m_currentWeapon.m_foodType)
+            {
+                case FoodType.FUGU:
+                    GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon.m_instaHeal);
+                    if (Random.Range(0, 101) >= 50)
+                        gameObject.GetComponent<EffectManager_MarioFernandes>().AddEffect(new PoisionDefuff_MarioFernandes(m_currentWeapon.m_poisonDmg, 5));
+                    break;
+                case FoodType.SQUID:
+                    GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon.m_instaHeal);
+                    break;
+                case FoodType.RICEBALL:
+                    GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon.m_instaHeal);
+                    break;
+                case FoodType.KOBEBEEF:
+                    GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon.m_instaHeal);
+                    gameObject.GetComponent<EffectManager_MarioFernandes>().AddEffect(new PoisionDefuff_MarioFernandes(0, 5, m_currentWeapon.m_speedModifier));
+                    break;
+                case FoodType.SASHIMI:
+                    GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon.m_instaHeal);
+                    break;
+                case FoodType.PIZZA:
+                    break;
+                case FoodType.SAKE:
+                    break;
+                case FoodType.NOODLES:
+                    break;
+                default:
+                    break;
+            }
+
+            m_playerHealthHungerScript.Eat(m_currentWeapon.m_hungerRestoreAmount);
+        }
     }
     // Start is called before the first frame update
     void Start()
     {
         m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
         m_animationScript = GetComponent<PlayerAnimation_LouieWilliamson>();
+        m_playerHealthHungerScript = FindObjectOfType<PlayerHealthHunger_MarioFernandes>();
     }
 
     // Update is called once per frame
