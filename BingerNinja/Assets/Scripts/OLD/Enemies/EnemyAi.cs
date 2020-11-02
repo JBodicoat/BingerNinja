@@ -22,6 +22,7 @@ public class EnemyAi : MonoBehaviour
 
 
     private const float maxHealth = 100;
+    [SerializeField]
     private float currentHealth = maxHealth;
 
 
