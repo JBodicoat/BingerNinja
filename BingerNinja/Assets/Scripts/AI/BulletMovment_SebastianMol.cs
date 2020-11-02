@@ -10,7 +10,7 @@ using UnityEngine;
 public class BulletMovment_SebastianMol : MonoBehaviour
 {
     public float m_speed;
-    public Vector2 m_direction;
+    internal Vector2 m_direction;
     public float m_damage;
 
     private void Start()

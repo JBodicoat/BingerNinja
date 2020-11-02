@@ -1,5 +1,6 @@
 ﻿//sebastian mol
 //sebastian mol 30/10/20 melee enemy shoudl be completed
+//sebastian mol 02/11/20 removed player behaviour switch replaced it with abstract functions
 
 using System.Collections;
 using System.Collections.Generic;
@@ -24,80 +25,6 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     public float m_outOfSightDeley;
     public bool m_hasChargeAttack = false;
     public float m_chargeAttackDeley;
-    internal override void EnemyBehaviour()
-    {
-        switch (m_currentState)
-        {
-            case state.WONDER:
-                m_detectionCollider.enabled = true;
-                if(transform.position != m_startPos)
-                {
-                    PathfindTo(m_startPos);
-                }
-                if (transform.localScale.x != m_scale) transform.localScale = new Vector3(m_scale, transform.localScale.y, transform.localScale.z);
-
-                break;
-
-            case state.CHASE:
-                if (IsPlayerInLineOfSight())
-                {
-                    if (Vector2.Distance(transform.position, m_playerTransform.position) < m_meleeRange)
-                    {
-                        ClearPath(false);
-                        m_currentState = state.ATTACK;
-                    }
-                    else
-                    {
-                        PathfindTo(m_playerTransform.position);
-                    }
-                }
-                else
-                {
-                    if (m_currentPath.Count == 0)
-                    {
-                        if (m_outOfSightTimer <= 0)
-                        {
-                            m_currentState = state.WONDER;
-                            m_playerDetected = false;
-                        }
-                        else
-                        {
-                            m_outOfSightTimer -= Time.deltaTime;
-                        }
-                    } 
-                }
-                break;
-
-            case state.ATTACK:
-                if (IsPlayerInLineOfSight())
-                {
-                    if (Vector2.Distance(transform.position, m_playerTransform.position) < m_meleeRange)
-                    {
-                        MeleeAttack();
-                    }
-                    else
-                    {
-                        m_currentState = state.CHASE;
-                    }
-                    m_outOfSightTimer = m_outOfSightDeley;
-                    m_playerDetected = true;
-                }
-                else
-                {
-                    m_playerDetected = false;
-                    if (m_outOfSightTimer <= 0)
-                    {
-                        m_currentState = state.WONDER;
-                    }
-                    else
-                    {
-                        m_outOfSightTimer -= Time.deltaTime;
-                    }
-                }
-                break;
-
-        }
-    }
 
     /// <summary>
     /// funtionality for the melee attack
@@ -107,7 +34,6 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
         if (m_attackTimer <= 0)
         {
             int rand = Random.Range(0, 2);
-            Debug.Log(rand);
             switch (rand)
             {
                 case 0:
@@ -154,4 +80,79 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
         m_attackCollider.SetActive(false);
     }
 
+    internal override void WonderState()
+    {
+        m_detectionCollider.enabled = true;
+        if (transform.position != m_startPos)
+        {
+            PathfindTo(m_startPos);
+        }
+        if (transform.localScale.x != m_scale) transform.localScale
+                = new Vector3(m_scale, transform.localScale.y, transform.localScale.z);
+
+    }
+
+    internal override void ChaseState()
+    {
+        if (IsPlayerInLineOfSight())
+        {
+            if (Vector2.Distance(transform.position, m_playerTransform.position) < m_meleeRange)
+            {
+                ClearPath(false);
+                m_currentState = state.ATTACK;
+            }
+            else
+            {
+                PathfindTo(m_playerTransform.position);
+            }
+        }
+        else
+        {
+            if (m_currentPath.Count == 0)
+            {
+                if (m_outOfSightTimer <= 0)
+                {
+                    m_currentState = state.WONDER;
+                    m_playerDetected = false;
+                }
+                else
+                {
+                    m_outOfSightTimer -= Time.deltaTime;
+                }
+            }
+        }
+    }
+
+    internal override void AttackState()
+    {
+        if (IsPlayerInLineOfSight())
+        {
+            if (Vector2.Distance(transform.position, m_playerTransform.position) < m_meleeRange)
+            {
+                MeleeAttack();
+            }
+            else
+            {
+                m_currentState = state.CHASE;
+            }
+            m_outOfSightTimer = m_outOfSightDeley;
+            m_playerDetected = true;
+        }
+        else
+        {
+            m_playerDetected = false;
+            if (m_outOfSightTimer <= 0)
+            {
+                m_currentState = state.WONDER;
+            }
+            else
+            {
+                m_outOfSightTimer -= Time.deltaTime;
+            }
+        }
+    }
+
+    internal override void RetreatState()
+    {
+    }
 }
