@@ -3,6 +3,7 @@
 
 // Mário 17/10/2020 - Create class and Attack, PickUpFood, IIsHoldingFood Funcions
 // Joao 25/10/2020 - Stop weapon usage while crouched in update
+// Louie 02/11/2020 - added player attack animation code
 
 using System.Collections;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ public enum FoodType
 } 
 public class PlayerCombat_MarioFernandes : MonoBehaviour
 {
+    private PlayerAnimation_LouieWilliamson m_animationScript;
     public GameObject m_projectile = null;
 
     public float attackSpeed = 1;
@@ -47,6 +49,9 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
     void Attack()
     {
+        print("attacking");
+        m_animationScript.TriggerAttackAnim();
+
         if(m_currentWeapon.IsRanged())
         {
              GameObject projectile = Instantiate(m_projectile, transform.position, transform.rotation);
@@ -149,6 +154,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
     void Start()
     {
         m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
+        m_animationScript = GetComponent<PlayerAnimation_LouieWilliamson>();
     }
 
     // Update is called once per frame
