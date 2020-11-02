@@ -22,7 +22,7 @@ public class MainMenu_Manager_Elliott : MonoBehaviour
     public void StartNewGame()
     {
         ///load level 1 here
-       // SceneManager.LoadScene("Level 1");
+        SceneManager.LoadScene(1);
     }
 
     public void OpenSettingsMenu()
