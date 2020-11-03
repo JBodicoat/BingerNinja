@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿//sebastian mol
+//sebastian mol 30/10/20 removed patrol function
+
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.Networking;
@@ -21,17 +23,6 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
     public float m_shootingRange;
     [Tooltip("how long the player has to be out of sight befor enemy losses intrest")]
     public float m_outOfSightDeley;
-    private float m_timer;
-    private float m_timer2;
-
-    [Tooltip("point of patrole")]
-    public Vector2 m_patrolPos1;
-    [Tooltip("second point of patrole")]
-    public Vector2 m_patrolPos2;
-
-    public float m_deleyBetweenPatrol;
-    private float m_timer3;
-    private Vector2 m_currentPatrolePos;
 
     internal override void EnemyBehaviour()
     {
@@ -40,7 +31,7 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
             case state.WONDER:
                 //move form one postion to another
                 if (m_playerDetected) m_currentState = state.CHASE;
-                Patrole();
+                Patrol();
                 break;
 
             case state.CHASE:
@@ -61,17 +52,16 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
                 {
                     if (m_currentPath.Count == 0)
                     {
-                        if (m_timer2 <= 0)
+                        if (m_outOfSightTimer <= 0)
                         {
                             m_currentState = state.WONDER;
                             m_playerDetected = false;
                         }
                         else
                         {
-                            m_timer2 -= Time.deltaTime;
+                            m_outOfSightTimer -= Time.deltaTime;
                         }
                     }
-
                 }
                 break;
 
@@ -80,51 +70,25 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
                 if (IsPlayerInLineOfSight())
                 {
                     RangedAttack();
-                    m_timer2 = m_outOfSightDeley;
+                    m_outOfSightTimer = m_outOfSightDeley;
                     m_playerDetected = true;
                 }
                 else
                 {
                     m_playerDetected = false;
-                    if (m_timer2 <= 0)
+                    if (m_outOfSightTimer <= 0)
                     {
                         m_currentState = state.WONDER;
                     }
                     else
                     {
-                        m_timer2 -= Time.deltaTime;
+                        m_outOfSightTimer -= Time.deltaTime;
                     }
                 }
                 break;
         }     
     }
-    private void Patrole()
-    {
-        if (m_currentPatrolePos.x == 0 && m_currentPatrolePos.y == 0) m_currentPatrolePos = m_patrolPos1;
-        if (m_currentPath.Count == 0) MoveToWorldPos(m_currentPatrolePos);
-        if (Vector2.Distance(transform.position, m_currentPatrolePos) <= 0.4f) SwapPatrolePoints();
-        FollowPath();
-    }
-
-    private void SwapPatrolePoints()
-    {
-        if (m_timer3 <= 0)
-        {
-            if (m_currentPatrolePos == m_patrolPos1)
-            {
-                m_currentPatrolePos = m_patrolPos2;
-            }
-            else
-            {
-                m_currentPatrolePos = m_patrolPos1;
-            }
-            m_timer3 = m_deleyBetweenPatrol;
-        }
-        else
-        {
-            m_timer3 -= Time.deltaTime;
-        }
-    }
+   
     private void RangedAttack()
     {
         if (Vector2.Distance(transform.position, m_playerTransform.position) < m_shootingRange)
@@ -135,15 +99,15 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
                 float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
                 m_aimer.transform.eulerAngles = new Vector3(0, 0, angle);
 
-                if (m_timer <= 0)
+                if (m_attackTimer <= 0)
                 {
                     GameObject projectile = Instantiate(m_projectile, transform.position, Quaternion.Euler(new Vector3(dir.x, dir.y, 0)));
                     projectile.GetComponent<BulletMovment_SebastianMol>().direction = (m_playerTransform.position - transform.position).normalized;
-                    m_timer = m_shootDeley;
+                    m_attackTimer = m_shootDeley;
                 }
                 else
                 {
-                    m_timer -= Time.deltaTime;
+                    m_attackTimer -= Time.deltaTime;
                 }
             }
         }

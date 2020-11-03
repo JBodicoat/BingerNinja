@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// My class takes care of Displaying the Dialog on the screen
@@ -163,7 +164,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
 
         m_sentences = new Queue<string>();
 
-        LoadDialog();
+        LoadDialog(SceneManager.GetActiveScene().buildIndex);
     }
 }
 
