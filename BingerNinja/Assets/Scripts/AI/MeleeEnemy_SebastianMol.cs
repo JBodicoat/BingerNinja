@@ -94,8 +94,8 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     {
         if (m_timer <= 0)
         {
-
             StartCoroutine(QuickAttack());
+            m_audioManager_LouieWilliamson.PlaySFX(AudioManager_LouieWilliamson.SFX.EnemyAttack);
             m_timer = m_hitSpeed;
         }
         else

@@ -35,6 +35,8 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     private Vector3 m_lastPos;
     protected Vector3 m_startPos;
 
+    protected AudioManager_LouieWilliamson m_audioManager_LouieWilliamson;
+
 
     abstract internal void EnemyBehaviour();
     protected void PlayerDetection(GameObject collision) //detect player in vision cone the establishes line of sight
@@ -216,6 +218,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         m_scale = transform.localScale.x;
         m_lastPos = transform.position;
         m_startPos = transform.position;
+        m_audioManager_LouieWilliamson = FindObjectOfType<AudioManager_LouieWilliamson>();
     }
 
     private void Update()

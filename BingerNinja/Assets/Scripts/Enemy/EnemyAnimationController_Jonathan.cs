@@ -19,8 +19,6 @@ public class EnemyAnimationController_Jonathan : MonoBehaviour
 
     private void Update()
     {
-        transform.position += new Vector3(-0.001f, -0.001f);
-
         m_xMovement = m_lastPosition.x - transform.position.x;
         m_yMovement = m_lastPosition.y - transform.position.y;
         

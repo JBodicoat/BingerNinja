@@ -139,6 +139,7 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
                 {
                     GameObject projectile = Instantiate(m_projectile, transform.position, Quaternion.Euler(new Vector3(dir.x, dir.y, 0)));
                     projectile.GetComponent<BulletMovment_SebastianMol>().direction = (m_playerTransform.position - transform.position).normalized;
+                    m_audioManager_LouieWilliamson.PlaySFX(AudioManager_LouieWilliamson.SFX.EnemyThrowAttack);
                     m_timer = m_shootDeley;
                 }
                 else
