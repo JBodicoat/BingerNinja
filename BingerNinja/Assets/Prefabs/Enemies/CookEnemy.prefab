@@ -101,6 +101,8 @@ GameObject:
   - component: {fileID: 5157954882409207615}
   - component: {fileID: 5157954882409207611}
   - component: {fileID: 5157954882409207617}
+  - component: {fileID: 7153223109118705155}
+  - component: {fileID: -7874919301859133517}
   m_Layer: 0
   m_Name: CookEnemy
   m_TagString: Untagged
@@ -284,6 +286,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &7153223109118705155
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5157954882409207616}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e32c9c61dce78014ea06211015986e15, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-7874919301859133517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5157954882409207616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fca5277414edd16449b9509211994980, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5751295711232786928
 GameObject:
   m_ObjectHideFlags: 0
