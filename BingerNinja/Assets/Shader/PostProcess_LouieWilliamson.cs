@@ -26,8 +26,6 @@ public class PostProcess_LouieWilliamson : MonoBehaviour
     public Vector2 greenOffset = new Vector2(0, 0);
 
     private Material material;
-
-    // Use this for initialization
     void Start()
     {
         material = new Material(shader);

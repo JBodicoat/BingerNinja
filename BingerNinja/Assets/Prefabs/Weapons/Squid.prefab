@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 26396045094078236}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.9, y: -3.33, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -5.9, y: -3.33, z: -11.121444}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -72,8 +72,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 446125921
   m_SortingLayer: 6
-  m_SortingOrder: 1000
-  m_Sprite: {fileID: 21300000, guid: 79f2d9466685789488990af03a8ad7da, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 1801263428120863714, guid: fb38f55d6d714d8419d881fd4bac7a92, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -114,10 +114,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ranged: 1
   m_foodType: 1
-  m_instaHeal: 10
+  m_instaHeal: 5
   m_healOverTime: 0
   m_duration: 0
   m_poisonDmg: 0
   m_speedModifier: 1
-  dmg: 20
-  m_hungerRestoreAmount: 33
+  dmg: 0
+  m_hungerRestoreAmount: 0
