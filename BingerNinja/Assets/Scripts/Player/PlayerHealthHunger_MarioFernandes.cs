@@ -24,6 +24,7 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
     public Slider m_healthSlider;
     public Slider m_hungerSlider;
 
+
     // Increase players health by amount passed
     public void Eat(float amount)
     {
@@ -96,6 +97,7 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
 
         m_hungerSlider.maxValue = m_maxHunger;
         m_hungerSlider.value = m_currentHunger;
+
     }
 
     // Update is called once per frame

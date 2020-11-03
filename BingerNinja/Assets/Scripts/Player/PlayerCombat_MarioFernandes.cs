@@ -10,6 +10,7 @@
 //                   set m_currentWeapon to null after eating & added check when pickup up weapon so only 1 can be held
 //                   changed GetComponent in above to GetComponentInParent to support new EnemyCollider child on enemy prefabs
 //                   EnemyCollider child needed because otherwise projectiles collide with enemy view cone triggers
+// Louie 03/11/2020 - Added Player Sound Effects
 
 using System.Collections;
 using System.Collections.Generic;
@@ -43,6 +44,8 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
     PlayerHealthHunger_MarioFernandes m_playerHealthHungerScript;
 
+    private AudioManager_LouieWilliamson m_audioManager;
+
   public  bool IsHoldingFood()
         {
        
@@ -57,17 +60,19 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
     void Attack()
     {
-        print("attacking");
         m_animationScript.TriggerAttackAnim();
 
         if(m_currentWeapon.IsRanged())
         {
+             m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
              GameObject projectile = Instantiate(m_projectile, transform.position, transform.rotation);
              projectile.GetComponent<Projectile_MarioFernandes>().m_dmg = m_currentWeapon.dmg;
         }
         else
         {
-                float distanceToClosestsEnemy = Mathf.Infinity;
+            m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
+
+            float distanceToClosestsEnemy = Mathf.Infinity;
                 GameObject CloseEnemy = null;
                 GameObject[] allEnemys = GameObject.FindGameObjectsWithTag("Enemy");
 
@@ -127,6 +132,8 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
     public void eat()
     {
+        m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Eating);
+
         if (m_currentWeapon)
         {
             switch (m_currentWeapon.m_foodType)
@@ -171,6 +178,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
         m_animationScript = GetComponent<PlayerAnimation_LouieWilliamson>();
         m_playerHealthHungerScript = FindObjectOfType<PlayerHealthHunger_MarioFernandes>();
+        m_audioManager = FindObjectOfType<AudioManager_LouieWilliamson>();
     }
 
     // Update is called once per frame
