@@ -7,6 +7,7 @@ Shader "BingerNinja/SwapTextureShader"
 		[PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
 		_SwapTex("Color Data", 2D) = "transparent" {}
 		_Color ("Tint", Color) = (1,1,1,1)
+		_TransparentColor ("Transparent Color", Color) = (0,0,0,1)
 		[MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
 	}
 
@@ -49,6 +50,7 @@ Shader "BingerNinja/SwapTextureShader"
 			};
 			
 			fixed4 _Color;
+			fixed4 _TransparentColor;
 
 			v2f vert(appdata_t IN)
 			{
@@ -64,24 +66,23 @@ Shader "BingerNinja/SwapTextureShader"
 			}
 
 			sampler2D _MainTex;
-			sampler2D _AlphaTex;
-			float _AlphaSplitEnabled;
-
 			sampler2D _SwapTex;
 
 			fixed4 SampleSpriteTexture (float2 uv)
 			{
 				fixed4 color = tex2D (_MainTex, uv);
-				if (_AlphaSplitEnabled)
-					color.a = tex2D (_AlphaTex, uv).r;
-
 				return color;
 			}
 
 			fixed4 frag(v2f IN) : SV_Target
-			{
+			{				
 				fixed4 c = SampleSpriteTexture (IN.texcoord);
 				fixed4 swapCol = tex2D(_SwapTex, float2(c.x, 0));
+
+				// return transparent pixel if color matches
+				if(all(c == _TransparentColor))
+					return 0;
+				
 				fixed4 final = lerp(c, swapCol, swapCol.a) * IN.color;
 				final.a = c.a;
 				final.rgb *= c.a;

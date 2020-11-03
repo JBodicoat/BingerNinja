@@ -1,4 +1,5 @@
 ﻿// Jack 20/10 changed to support new PlayerHealthAndHunger script
+// Jack 02/11/2020 added damage dealt as a variable replacing magic number
 
 using System.Collections;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ public class BulletMovment_SebastianMol : MonoBehaviour
 {
     public float speed;
     public Vector2 direction;
+
+    public float m_damageDealt;
 
     private void Start()
     {
@@ -25,7 +28,7 @@ public class BulletMovment_SebastianMol : MonoBehaviour
 	{
 		if(collision.tag == "Player")
         {
-            FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(20);
+            FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damageDealt);
             Destroy(gameObject);
 		}
 	}

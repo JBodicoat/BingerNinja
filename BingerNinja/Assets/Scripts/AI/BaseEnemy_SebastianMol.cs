@@ -1,5 +1,7 @@
 ﻿//sebastian mol
 //sebastian mol 30/10/2020 patrol now handles multiple patrol points
+// Jack 02/11/2020 changed "if (m_patrolPoints[0] != null) m_currentPatrolePos = m_patrolPoints[0];" in Start to
+//                         "if (m_patrolPoints.Length > 0) m_currentPatrolePos = m_patrolPoints[0];" to prevent index out of bounds error
 
 using System.Collections;
 using System.Collections.Generic;
@@ -315,7 +317,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         m_startPos = transform.position;
         m_patrolIteratorMax = m_patrolPoints.Length-1;
         m_patroleTimer = m_deleyBetweenPatrol;
-        if (m_patrolPoints[0] != null) m_currentPatrolePos = m_patrolPoints[0];
+        if (m_patrolPoints.Length > 0) m_currentPatrolePos = m_patrolPoints[0];
     }
 
     private void Update()

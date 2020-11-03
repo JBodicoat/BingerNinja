@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿// Jack 02/11/2020 Changed "other.GetComponent<EnemyAi>().Hit(m_dmg);" to
+//                         "other.GetComponent<BaseEnemy_SebastianMol>().TakeDamage(m_dmg);" in OnTriggerEnter2d
+//                         changed GetComponent in above to GetComponentInParent to support new EnemyCollider child on enemy prefabs
+//                         EnemyCollider child needed because otherwise projectiles collide with enemy view cone triggers
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -47,7 +52,7 @@ public class Projectile_MarioFernandes : MonoBehaviour
         
         if(other.tag == "Enemy")
         {
-            other.GetComponent<EnemyAi>().Hit(m_dmg);
+            other.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage(m_dmg);
             Destroy(gameObject);
         }
     }

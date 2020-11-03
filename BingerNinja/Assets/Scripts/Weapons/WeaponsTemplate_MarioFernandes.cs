@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿// Jack 02/11/2020 added m_hungerRestoreAmount
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +18,8 @@ public class WeaponsTemplate_MarioFernandes : MonoBehaviour
 
     public float m_speedModifier = 1;
     public int dmg;
+
+    public float m_hungerRestoreAmount;
 
     public bool IsRanged()
     {
