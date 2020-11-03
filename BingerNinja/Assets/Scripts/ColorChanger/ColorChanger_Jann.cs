@@ -4,8 +4,11 @@
 
 // Jann 29/10/20 - Proof of concept implementation
 // Jann 01/11/20 - Inspector UI, finalizing implementation
+// Jann 03/11/20 - Added TilemapRenderer and Image (UI) support
 
 using UnityEngine;
+using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class ColorChanger_Jann : MonoBehaviour
 {
@@ -16,15 +19,19 @@ public class ColorChanger_Jann : MonoBehaviour
     public Color m_colorOutGrey60 = new Color(0, 0, 0, 1);
     public Color m_colorOutGrey122 = new Color(0, 0, 0, 1);
     public Color m_colorOutGrey174 = new Color(0, 0, 0, 1);
-    
+
     private SpriteRenderer[] m_spriteRenderers;
-    
+    private TilemapRenderer[] m_tilemapRenderers;
+    private Image[] m_images;
+
     private Texture2D m_colorSwapTexture;
     private Color[] m_spriteColors;
     
     private void Awake()
     {
         m_spriteRenderers = FindObjectsOfType<SpriteRenderer>();
+        m_tilemapRenderers = FindObjectsOfType<TilemapRenderer>();
+        m_images = FindObjectsOfType<Image>();
     }
 
     private void Start()
@@ -51,7 +58,17 @@ public class ColorChanger_Jann : MonoBehaviour
         {
             spriteRenderer.material.SetTexture("_SwapTex", colorSwapTex);
         }
+        
+        foreach (TilemapRenderer tilemapRenderer in m_tilemapRenderers)
+        {
+            tilemapRenderer.material.SetTexture("_SwapTex", colorSwapTex);
+        }
 
+        foreach (Image image in m_images)
+        {
+            image.material.SetTexture("_SwapTex", colorSwapTex);
+        }
+        
         m_spriteColors = new Color[colorSwapTex.width];
         m_colorSwapTexture = colorSwapTex;
     }
