@@ -5,6 +5,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager_LouieWilliamson : MonoBehaviour
 {
@@ -64,11 +65,34 @@ public class AudioManager_LouieWilliamson : MonoBehaviour
 
         MusicDictionary.Add(Music.MainMenu, MusicList[0]);
         MusicDictionary.Add(Music.Level1, MusicList[1]);
+
+        GetBuildIndex();
     }
 
 
     void Update()
     {
 
+    }
+    private void GetBuildIndex()
+    {
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+
+        switch (currentScene)
+        {
+            case 0:
+                SetMusicSource(Music.MainMenu);
+                break;
+            case 1:
+                SetMusicSource(Music.Level1);
+                break;
+            case 2:
+                SetMusicSource(Music.Level1);
+                break;
+            case 3:
+                break;
+            default:
+                break;
+        }
     }
 }

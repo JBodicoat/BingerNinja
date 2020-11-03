@@ -29,6 +29,7 @@ public class MainMenu_Manager_Elliott : MonoBehaviour
     {
         ///load level 1 here
         SceneManager.LoadScene(1);
+        print("start");
     }
 
     public void OpenSettingsMenu()

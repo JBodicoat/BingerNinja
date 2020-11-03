@@ -11,9 +11,9 @@ public class PlayerAnimation_LouieWilliamson : MonoBehaviour
 {
     // Start is called before the first frame update
     private bool isFacingLeft;
+
     private Animator m_playerAnim;
     private Rigidbody2D m_rb;
-    private bool wasFacingLeft;
     public void TriggerAttackAnim()
     {
         if (isFacingLeft)
@@ -28,7 +28,6 @@ public class PlayerAnimation_LouieWilliamson : MonoBehaviour
     void Start()
     {
         isFacingLeft = true;
-        wasFacingLeft = false;
 
         m_playerAnim = GetComponent<Animator>();
         m_rb = GetComponent<Rigidbody2D>();
@@ -55,7 +54,6 @@ public class PlayerAnimation_LouieWilliamson : MonoBehaviour
             {
                 FlipSprite();
                 isFacingLeft = true;
-                wasFacingLeft = true;
             }
         }
         else if (m_rb.velocity.x > 0)
