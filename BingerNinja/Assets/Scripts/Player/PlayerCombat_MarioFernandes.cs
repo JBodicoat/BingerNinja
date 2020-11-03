@@ -7,6 +7,9 @@
 // Jack 02/11/2020 - changed "CloseEnemy.GetComponent<EnemyAi>().Hit(m_currentWeapon.dmg);" to GetComponent<BaseEnemy_SebastianMol>().TakeDamage(m_currentWeapon.dmg);
 //                   in Attack function
 //                   added reference to PlayerHealthAndHunger script and extended the eat function so that it actually restores your hunger bar
+//                   set m_currentWeapon to null after eating & added check when pickup up weapon so only 1 can be held
+//                   changed GetComponent in above to GetComponentInParent to support new EnemyCollider child on enemy prefabs
+//                   EnemyCollider child needed because otherwise projectiles collide with enemy view cone triggers
 
 using System.Collections;
 using System.Collections.Generic;
@@ -114,7 +117,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
                 if(CloseEnemy && distanceToClosestsEnemy <= RangeAttribute)
                 {
-                    CloseEnemy.GetComponent<BaseEnemy_SebastianMol>().TakeDamage(m_currentWeapon.dmg);
+                    CloseEnemy.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage(m_currentWeapon.dmg);
                 }                
             }
 
@@ -157,6 +160,9 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             }
 
             m_playerHealthHungerScript.Eat(m_currentWeapon.m_hungerRestoreAmount);
+
+            m_currentWeapon.enabled = false;
+            m_currentWeapon = null;
         }
     }
     // Start is called before the first frame update
@@ -194,7 +200,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if(collision.GetComponent<WeaponsTemplate_MarioFernandes>())
+		if(!m_currentWeapon && collision.GetComponent<WeaponsTemplate_MarioFernandes>())
         {
             m_currentWeapon = collision.GetComponent<WeaponsTemplate_MarioFernandes>();
             collision.gameObject.SetActive(false);
