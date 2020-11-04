@@ -1,113 +1,220 @@
 ﻿//Jamie - This class will save and load game information like settings, upgrades and current checkpoint. Uses alot of temp values until the scripts with the data is actually created
 
 //Jamie - 26/10/20 - First implemented
+//Jann  - 04/11/20 - Saving and loading implemented as far as possible with the current dependencies
+
+using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-///IMPORTANT - As the other classes and structs havent been made yet/finished, this system uses alot of temporary values to ensure the system actually works,
-///until these classes and structs are made by other people. When they are done i will revisit this system and change it so it actually saves the information.
-
-///To save the settings in SettingMenu class - SaveLoadSystem.SaveSetting(this); 
-///To save the settings in VendingMachineClass class - SaveLoadSystem.SaveUpgrades(this); 
-
-public static class SaveLoadSystem
+public static class SaveLoadSystem_JamieG
 {
-    public static void SaveSettings()
+    private const string SettingsFile  = "/Settings.save";
+    private const string EffectsFile   = "/Effects.save";
+    private const string InventoryFile = "/Inventory.save";
+    private const string GameplayFile  = "/Gameplay.save";
+
+    private static void SaveToFile(string fileName, object data)
     {
         //Setup formatter
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/SettingSave.test";
+        string path = Application.persistentDataPath + fileName;
         FileStream stream = new FileStream(path, FileMode.Create);
-
-        //Get new values from SettingData struct
-        SettingsData SD = new SettingsData(0); //Will take in SettingMenu class when done
-
+        
         //Save to file
-        formatter.Serialize(stream, SD);
-        stream.Close();
-
-    }
-
-    public static void SaveUpgrades()
-    {
-        //Setup formatter
-        BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/UpgradeSave.test";
-        FileStream stream = new FileStream(path, FileMode.Create);
-
-        //Get new values from SettingData struct
-        SettingsData SU = new SettingsData(0); //Will take in SettingMenu class when done
-
-        //Save to file
-        formatter.Serialize(stream, SU);
+        formatter.Serialize(stream, data);
         stream.Close();
     }
-
-    public static void SaveCheckpointNum()
+    
+    public static object LoadFromFile(string filename)
     {
-        int checkpointNum = 1; //TEMP until the checkpoint class is fully made
-
-        //Setup formatter
-        BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/CheckpointSave.test";
-        FileStream stream = new FileStream(path, FileMode.Create);
-
-        //Get new values from SettingData struct
-        SettingsData SC = new SettingsData(0); //Will take in SettingMenu class when done
-
-        //Save to file
-        formatter.Serialize(stream, SC);
-        stream.Close();
-    }
-
-    public static int GetCurCheckpoint()
-    {
-        string path = Application.persistentDataPath + "CheckpointSave.test";
+        string path = Application.persistentDataPath + filename;
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
-            //int CheckpointNum = formatter.Deserialize(stream) as int;
-            return 1;
-
+            return formatter.Deserialize(stream);
         }
         else
         {
             Debug.LogError("Save file not found in " + path);
-            return 0;
+            return null;
         }
     }
 
+    #region Saving
+    public static void SaveSettings(SettingsMenu_ElliottDesouza settingsMenu)
+    {
+        SettingsData settingsData = new SettingsData(settingsMenu);
+        SaveToFile(SettingsFile, settingsData);
+    }
+
+    public static void SaveInventory(Inventory_JoaoBeijinho inventory)
+    {
+        InventoryData inventoryData = new InventoryData(inventory);
+        SaveToFile(InventoryFile, inventoryData);
+    }
+    
+    public static void SaveGameplay(Vector3 checkpointPosition)
+    {
+        GameplayData gameplayData = new GameplayData(checkpointPosition);
+        SaveToFile(GameplayFile, gameplayData);
+    }
+    
+    // public static void SaveEffects(EffectManager_MarioFernandes effectManager)
+    // {
+    //     EffectsData effectsData = new EffectsData(effectManager);
+    //     SaveToFile(EffectsFile, effectsData);
+    // }
+    #endregion
+    
+    #region Loading
+    public static SettingsData LoadSettings()
+    {
+        object data = LoadFromFile(SettingsFile);
+        if (data is SettingsData settingsData)
+        {
+            return settingsData;
+        }
+
+        Debug.LogError("Loading settings didn't return object of type SettingsData");
+        return default;
+    }
+
+    public static InventoryData LoadInventory()
+    {
+        object data = LoadFromFile(InventoryFile);
+        if (data is InventoryData inventoryData)
+        {
+            return inventoryData;
+        }
+        
+        Debug.LogError("Loading inventory didn't return object of type InventoryData");
+        return default;
+    }
+    
+    public static GameplayData LoadGameplay()
+    {
+        object data = LoadFromFile(GameplayFile);
+        if (data is GameplayData gameplayData)
+        {
+            return gameplayData;
+        }
+        
+        Debug.LogError("Loading gameplayData didn't return object of type GameplayData");
+        return default;
+    }
+    
+    // public static EffectsData LoadEffects()
+    // {
+    //     object data = LoadFromFile(EffectsFile);
+    //     if (data is EffectsData effectsData)
+    //     {
+    //         return effectsData;
+    //     }
+    //     
+    //     Debug.LogError("Loading effects didn't return object of type EffectsData");
+    //     return default;
+    // }
+    #endregion
 }
 
+#region Serializable data
 [System.Serializable]
-//As the SettingsMenu and VendingMachineMenu scripts havent been made, the system will use temp values. These will be used to ensure the save system actually works until they are made properly
-struct SettingsData
+public struct GameplayData
 {
-    public int MusicVolume;
-    public int SFXVolume;
+    public float[] m_checkpointPosition;
 
-    public SettingsData(int temp = 0) //Will take in the SettingsMenu class when it is made 
+    public GameplayData(Vector3 checkpointPosition)
     {
-        //Temp values
-        MusicVolume = 40;
-        SFXVolume = 30;
+        m_checkpointPosition = new[] {checkpointPosition.x, checkpointPosition.y, checkpointPosition.z};
     }
 };
 
-struct UpgradesData
+[System.Serializable]
+public struct SettingsData
 {
-    public int UpgradeType;
-    public bool Active;
-    public bool ActiveNextLevel;
+    public float m_musicVolume;
+    public float m_sfxVolume;
+    //TODO: Implement after SettingsMenu is finished
+    //public Language m_chosenLanguage;
 
-    public UpgradesData(int temp = 0) //Will take in the VendingMachineMenu class when it is made 
+    public SettingsData(SettingsMenu_ElliottDesouza settingsMenu)
     {
-        //Temp values
-        UpgradeType = 1;
-        Active = true;
-        ActiveNextLevel = false;
+        m_musicVolume = settingsMenu.m_musicSlider.normalizedValue;
+        m_sfxVolume = settingsMenu.m_SFXSlider.normalizedValue;
+        //m_chosenLanguage = settingsMenu.m_language.value;
     }
 };
+
+[System.Serializable]
+public struct InventoryData
+{
+    public ItemData[] m_items;
+
+    public InventoryData(Inventory_JoaoBeijinho inventory) 
+    {
+        m_items = new ItemData[inventory.m_inventoryItems.Count];
+
+        int index = 0;
+        foreach (KeyValuePair<ItemType, int> pair in inventory.m_inventoryItems)
+        {
+            m_items[index] = new ItemData(pair.Key, pair.Value);
+            index++;
+        }
+    }
+};
+
+[System.Serializable]
+public struct ItemData
+{
+    public ItemType m_type;
+    public int m_amount;
+
+    public ItemData(ItemType type, int amount)
+    {
+        m_type = type;
+        m_amount = amount;
+    }
+}
+
+// Removed for now ///////////////////////////
+//
+// [System.Serializable]
+// public struct EffectsData
+// {
+//     public Effect[] m_effects;
+//
+//     public EffectsData(EffectManager_MarioFernandes effectManager)
+//     {
+//         m_effects = new Effect[effectManager.Effects.Count];
+//
+//         int index = 0;
+//         foreach (StatusEffect_MarioFernandes effect in effectManager.Effects)
+//         {
+//             m_effects[index] = new Effect(effect.GetType().Name, true);
+//             index++;
+//         }
+//     }
+// };
+
+// [System.Serializable]
+// public struct Effect
+// {
+//     public string m_effectType;
+//     public bool m_active;
+//     // public float m_duration;
+//     // public float m_speedMultiplier;
+//
+//
+//     public Effect(string effectType, bool isActive)//, float duration, float speedMultiplier)
+//     {
+//         m_effectType = effectType;
+//         m_active = isActive;
+//         // m_duration = duration;
+//         // m_speedMultiplier = speedMultiplier;
+//     }
+// };
+#endregion
