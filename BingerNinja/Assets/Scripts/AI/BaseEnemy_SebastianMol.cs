@@ -26,6 +26,10 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public enum state { WONDER, CHASE, ATTACK, RETREAT};
     public state m_currentState = state.WONDER;//current state of teh enemy
 
+    public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN};
+    public m_enemyType m_currentEnemyType;
+    public enum m_damageType { MELEE, RANGE, SNAEK};
+
     [Header("designers Section")]
     [Tooltip("the item the enemy drops on death")]
     public GameObject m_dropItem; // itme that i sdropped when enemie dies
@@ -45,6 +49,10 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public float m_playerMoveAllowance;
     [Tooltip("the deley in second whan at a patrol pos and waiting to go to the next")]
     public float m_deleyBetweenPatrol;
+    [Tooltip("the multiply for how much damge to take when enemy cant see player")]
+    public float m_sneakDamageMultiplier;
+    [Tooltip("the multiply for how much damge to take on enemie sthat take more sneka damage then normal thsi stacks additivley with the sneakDamageMultiplier")]
+    public float m_sneakDamageMultiplierStack;
 
     private Pathfinder_SebastianMol m_pathfinder;
     protected List<Vector2Int> m_currentPath = new List<Vector2Int>();
@@ -382,10 +390,82 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// used to make the enemy take damage
     /// </summary>
     /// <param name="damage">amount of damage to take</param>
-    public void TakeDamage(float damage)
+    public void TakeDamage(m_damageType damageType, m_enemyType enemyType, float damage)
     {
-        //m_health -= m_DamageToTake;
-        m_health -= damage;
+        switch (enemyType)
+        {
+            case m_enemyType.NORMAL:
+                NormalTakeDamage(damage);
+                break;
+
+            case m_enemyType.CHEF:
+                //melle more affective
+                if (damageType == m_damageType.MELEE)
+                {
+                    NormalTakeDamage(damage * 1.5f);
+                }
+                else
+                {
+                    NormalTakeDamage(damage);
+                }   
+                break;
+
+            case m_enemyType.BARISTA:
+                if(m_playerTransform.position.x < transform.position.x) //player on the left
+                {
+                    if(transform.localScale.x < 0) NormalTakeDamage(damage); //looking left
+                }
+                else if(m_playerTransform.position.x > transform.position.x) //player on the right
+                {
+                    if (transform.localScale.x > 0) NormalTakeDamage(damage); //looking right
+                }
+                break;
+
+            case m_enemyType.NINJA:
+                //half damage melle when not sneaked
+                if (damageType == m_damageType.MELEE)
+                {
+                    if(m_playerDetected == false) // in stealth
+                    {
+                        NormalTakeDamage(damage); // normal melle stealth attack
+                    }
+                    else // not stealth 
+                    {
+                        NormalTakeDamage(damage * 0.5f); //half damage stealth atatck
+                    }                  
+                }
+                else
+                {
+                    NormalTakeDamage(damage); // normal
+                }
+                break;
+
+            case m_enemyType.BUSSINESMAN:
+            case m_enemyType.INTERN:
+                //sneak multiplier
+                if (m_playerDetected == false)
+                {
+                    m_health -= damage * (m_sneakDamageMultiplier + m_sneakDamageMultiplierStack);
+                }
+                else
+                {
+                    m_health -= damage;
+                }
+                break;
+
+        }
+    }
+
+    private void NormalTakeDamage( float damage )
+    {
+        if (m_playerDetected == false)
+        {
+            m_health -= damage * m_sneakDamageMultiplier;
+        }
+        else
+        {
+            m_health -= damage;
+        }
     }
 
 
