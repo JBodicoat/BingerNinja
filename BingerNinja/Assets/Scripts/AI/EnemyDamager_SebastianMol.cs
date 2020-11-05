@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿// Jack 02/11/2020 changed damage to be a public variable rather than magic number
+// Louie 03/11/2020 added player damage sfx
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,4 +18,6 @@ public class EnemyDamager_SebastianMol : MonoBehaviour
 			 FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damage);
 		}
 	}
+
 }
+

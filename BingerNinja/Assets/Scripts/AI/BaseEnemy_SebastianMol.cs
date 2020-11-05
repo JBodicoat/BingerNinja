@@ -131,6 +131,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
                 if (hit.collider.gameObject.CompareTag("Player")) //did it hit the play first
                 {
+                  //  m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Detection);
                     m_playerDetected = true;
                     m_playerTransform = hit.transform;
                     m_currentState = state.ATTACK;
