@@ -184,22 +184,26 @@ MonoBehaviour:
   m_detectionCollider: {fileID: 4434442803191826814}
   m_playerDetected: 0
   m_currentState: 0
+  m_currentEnemyType: 0
   m_dropItem: {fileID: 0}
   m_health: 10
   m_speed: 2
-  m_DamageToTake: 2
   showPath: 1
   floortilemap: {fileID: 0}
   m_patrolPoints: []
   m_playerMoveAllowance: 2
   m_deleyBetweenPatrol: 0
+  m_sneakDamageMultiplier: 0
+  m_sneakDamageMultiplierStack: 0
   m_meleeRange: 0.6
   m_hitSpeed: 2
   m_attackCollider: {fileID: 5282640114672852741}
   attackDeactivationSpeed: 0.1
   m_outOfSightDeley: 2
-  m_hasChargeAttack: 0
+  m_hasChargeAttack: 1
   m_chargeAttackDeley: 0
+  m_dosePatrole: 1
+  m_chargAttackPosibility: 2
 --- !u!1 &4434442803275330668
 GameObject:
   m_ObjectHideFlags: 0

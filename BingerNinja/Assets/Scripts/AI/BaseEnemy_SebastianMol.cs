@@ -4,6 +4,7 @@
 //sebastian mol 02/11/20 changed enemy behaviour funstion int AILogic function and created more abstract functions.
 //sebastian mol 02/11/20 now path gets recalculated when player moves away from original position 
 //sebastian mol 02/11/20 improved player detection with second raycast
+//sebastian mol 05/11/20 new damage sysetm
 
 using System.Collections;
 using System.Collections.Generic;
@@ -37,8 +38,6 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public float m_health; //enemy health with getter and setter
     [Tooltip("speed of the enemy")]
     public float m_speed; //movment speed
-    [Tooltip("amaount of damage an enemy takes")]
-    public float m_DamageToTake;
     [Tooltip("shows the path the enemy is taking")]
     public bool showPath = false;
     [Tooltip("teh tile map u want to show the path onto")]
@@ -49,9 +48,9 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public float m_playerMoveAllowance;
     [Tooltip("the deley in second whan at a patrol pos and waiting to go to the next")]
     public float m_deleyBetweenPatrol;
-    [Tooltip("the multiply for how much damge to take when enemy cant see player")]
+    [Tooltip("the multiply for how much damage to take when enemy cant see player")]
     public float m_sneakDamageMultiplier;
-    [Tooltip("the multiply for how much damge to take on enemie sthat take more sneka damage then normal thsi stacks additivley with the sneakDamageMultiplier")]
+    [Tooltip("the multiply for how much damage to take on enemie sthat take more sneka damage then normal thsi stacks additivley with the sneakDamageMultiplier")]
     public float m_sneakDamageMultiplierStack;
 
     private Pathfinder_SebastianMol m_pathfinder;
@@ -391,9 +390,9 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// used to make the enemy take damage
     /// </summary>
     /// <param name="damage">amount of damage to take</param>
-    public void TakeDamage(m_damageType damageType, m_enemyType enemyType, float damage)
+    public void TakeDamage(m_damageType damageType, float damage)
     {
-        switch (enemyType)
+        switch (m_currentEnemyType)
         {
             case m_enemyType.NORMAL:
                 NormalTakeDamage(damage);

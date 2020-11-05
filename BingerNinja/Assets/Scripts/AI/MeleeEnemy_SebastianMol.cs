@@ -12,7 +12,6 @@ using UnityEngine;
 /// </summary>
 class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
 {
-    [Header("desighner variables")]
     [Tooltip("how fast the how far away can the enemy be befor attacking")]
     public float m_meleeRange;
     [Tooltip("speed of the enemies attack")]
@@ -23,8 +22,14 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     public float attackDeactivationSpeed;
     [Tooltip("deley between line of sight checks")]
     public float m_outOfSightDeley;
+    [Tooltip("should the nemey patrole")]
+    public bool m_dosePatrole;
+    [Tooltip("dose the enemy have a harge attack")]
     public bool m_hasChargeAttack = false;
+    [Tooltip("the deley befor chareg attack is carried out")]
     public float m_chargeAttackDeley;
+    [Tooltip("possiility of a charge attack (1/m_chargAttackPosibility)")]
+    public int m_chargAttackPosibility;
 
     /// <summary>
     /// funtionality for the melee attack
@@ -33,7 +38,7 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     {
         if (m_attackTimer <= 0)
         {
-            int rand = Random.Range(0, 2);
+            int rand = Random.Range(0, m_chargAttackPosibility);
             switch (rand)
             {
                 case 0:
@@ -82,13 +87,21 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
 
     internal override void WonderState()
     {
-        m_detectionCollider.enabled = true;
-        if (transform.position != m_startPos)
+        if(m_dosePatrole)
         {
-            PathfindTo(m_startPos);
+            if (m_playerDetected) m_currentState = state.CHASE;
+            Patrol();
         }
-        if (transform.localScale.x != m_scale) transform.localScale
-                = new Vector3(m_scale, transform.localScale.y, transform.localScale.z);
+        else
+        {
+            m_detectionCollider.enabled = true;
+            if (transform.position != m_startPos)
+            {
+                PathfindTo(m_startPos);
+            }
+            if (transform.localScale.x != m_scale) transform.localScale
+                    = new Vector3(m_scale, transform.localScale.y, transform.localScale.z);
+        }
 
     }
 
