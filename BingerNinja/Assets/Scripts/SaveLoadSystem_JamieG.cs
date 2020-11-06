@@ -11,38 +11,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 public static class SaveLoadSystem_JamieG
 {
     private const string SettingsFile  = "/Settings.save";
-    private const string EffectsFile   = "/Effects.save";
     private const string InventoryFile = "/Inventory.save";
     private const string GameplayFile  = "/Gameplay.save";
-
-    private static void SaveToFile(string fileName, object data)
-    {
-        //Setup formatter
-        BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + fileName;
-        FileStream stream = new FileStream(path, FileMode.Create);
-        
-        //Save to file
-        formatter.Serialize(stream, data);
-        stream.Close();
-    }
-    
-    public static object LoadFromFile(string filename)
-    {
-        string path = Application.persistentDataPath + filename;
-        if (File.Exists(path))
-        {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
-
-            return formatter.Deserialize(stream);
-        }
-        else
-        {
-            Debug.LogError("Save file not found in " + path);
-            return null;
-        }
-    }
 
     #region Saving
     public static void SaveSettings(SettingsMenu_ElliottDesouza settingsMenu)
@@ -62,12 +32,6 @@ public static class SaveLoadSystem_JamieG
         GameplayData gameplayData = new GameplayData(checkpointPosition);
         SaveToFile(GameplayFile, gameplayData);
     }
-    
-    // public static void SaveEffects(EffectManager_MarioFernandes effectManager)
-    // {
-    //     EffectsData effectsData = new EffectsData(effectManager);
-    //     SaveToFile(EffectsFile, effectsData);
-    // }
     #endregion
     
     #region Loading
@@ -106,19 +70,36 @@ public static class SaveLoadSystem_JamieG
         Debug.LogError("Loading gameplayData didn't return object of type GameplayData");
         return default;
     }
-    
-    // public static EffectsData LoadEffects()
-    // {
-    //     object data = LoadFromFile(EffectsFile);
-    //     if (data is EffectsData effectsData)
-    //     {
-    //         return effectsData;
-    //     }
-    //     
-    //     Debug.LogError("Loading effects didn't return object of type EffectsData");
-    //     return default;
-    // }
     #endregion
+    
+    private static void SaveToFile(string fileName, object data)
+    {
+        //Setup formatter
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + fileName;
+        FileStream stream = new FileStream(path, FileMode.Create);
+        
+        //Save to file
+        formatter.Serialize(stream, data);
+        stream.Close();
+    }
+    
+    public static object LoadFromFile(string filename)
+    {
+        string path = Application.persistentDataPath + filename;
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            return formatter.Deserialize(stream);
+        }
+        else
+        {
+            Debug.LogError("Save file not found in " + path);
+            return null;
+        }
+    }
 }
 
 #region Serializable data

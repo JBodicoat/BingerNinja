@@ -32,25 +32,6 @@ public class TestingSaveSystem : MonoBehaviour
     
     void Update()
     {
-        #region Scene manager
-        // Testing for scene manager
-        if (loadMainMenu)
-        {
-            loadMainMenu = false;
-            SceneManager_JamieG.LoadMainMenu();
-        }
-        else if(loadNextLevel)
-        {
-            loadNextLevel = false;
-            SceneManager_JamieG.LoadNextLevel();
-		}
-        else if(loadCurrentLevel)
-        {
-            loadCurrentLevel = false;
-            SceneManager_JamieG.LoadCurrentLevel();
-		}
-        #endregion
-
         #region Save system
         // Testing for save system
         if(saveGameplay)
@@ -124,4 +105,12 @@ public class TestingSaveSystem : MonoBehaviour
     }
 
     public void OnSaveSettings() => SaveLoadSystem_JamieG.SaveSettings(settingsMenu);
+    
+    public void OnLoadMainMenu() => SceneManager_JamieG.Instance.LoadMainMenu();
+
+    public void OnLoadNextLevel() => SceneManager_JamieG.Instance.LoadNextLevel();
+        
+    public void OnResetLevel() => SceneManager_JamieG.Instance.ResetLevel();
+
+    public void OnResetToCheckpoint() => SceneManager_JamieG.Instance.ResetToCheckpoint();
 }
