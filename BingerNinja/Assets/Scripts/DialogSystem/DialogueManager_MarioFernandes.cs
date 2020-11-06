@@ -4,6 +4,7 @@
 // Mário 25/10/2020 - Read from m_csvFile
 // Mário 26/10/2020 - Ajust Dialogue to the boss Dialogue script
 // Mário 28/10/2020 - Optimisation and Stop player whene in dialogs
+// Mário 06/11/2020 - Dialog Title update, Pause Systems, Use "|" to saperate Dialogues
 
 using System.Collections;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// My class takes care of Displaying the Dialog on the screen
@@ -36,7 +38,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         //Insert Start Animation here if needed
         ///////////////////
 
-        playerControllerScript.m_movement.Disable();
+        PauseGame();        
 
         m_nameText.transform.parent.gameObject.SetActive(true);
 
@@ -89,7 +91,8 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
 
         m_nameText.transform.parent.gameObject.SetActive(false);
 
-        playerControllerScript.m_movement.Enable();
+
+        ResumeGame();
     }
 
 	///<summary>Load the Level dialog from CSV doc</summary>
@@ -104,7 +107,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         for (int i = 0; i < lines.Length; i++)
         {
 			//Split sentence using "," as reference
-            List<string> parts = lines[i].Split(","[0]).ToList();
+            List<string> parts = lines[i].Split("|"[0]).ToList();
 
 			//Delete empty spaces
             if (parts[0] == level.ToString())
@@ -157,6 +160,29 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         }
     }
 
+    void PauseGame()
+    {
+        playerControllerScript.m_movement.Disable();
+        playerControllerScript.m_attack.Disable();
+        playerControllerScript.m_crouch.Disable();
+        playerControllerScript.m_eat.Disable();
+        playerControllerScript.m_interact.Disable();
+        playerControllerScript.GetComponentInParent<PlayerHealthHunger_MarioFernandes>().m_paused = true;
+        playerControllerScript.GetComponentInParent<EffectManager_MarioFernandes>().m_paused = true;
+        
+    }
+
+    void ResumeGame()
+    {
+        playerControllerScript.m_movement.Enable();
+        playerControllerScript.m_attack.Enable();
+        playerControllerScript.m_crouch.Enable();
+        playerControllerScript.m_eat.Enable();
+        playerControllerScript.m_interact.Enable();
+        playerControllerScript.GetComponentInParent<PlayerHealthHunger_MarioFernandes>().m_paused = false;
+        playerControllerScript.GetComponentInParent<EffectManager_MarioFernandes>().m_paused = false;
+        
+    }
     // Use this for initialization
     void Start()
     {
