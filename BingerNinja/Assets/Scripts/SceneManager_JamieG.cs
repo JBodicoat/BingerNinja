@@ -59,7 +59,7 @@ public class SceneManager_JamieG : MonoBehaviour
     }
 
     //Reloads the current scene using its buildIndex
-    public void LoadCurrentLevel()
+    private void LoadCurrentLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
