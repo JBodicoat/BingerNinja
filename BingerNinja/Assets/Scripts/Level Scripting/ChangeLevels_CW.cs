@@ -8,7 +8,7 @@ public class ChangeLevels_CW : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            SceneManager_JamieG.LoadNextLevel();
+            SceneManager_JamieG.Instance.LoadNextLevel();
         }
     }
 }
