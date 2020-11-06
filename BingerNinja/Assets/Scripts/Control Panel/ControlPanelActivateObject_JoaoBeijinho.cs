@@ -30,10 +30,10 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
         switch (m_functionality)//Define object functionality
         {
             case ObjectType.Door:
-                this.gameObject.GetComponent<Collider2D>().enabled = false;//Unlock door
+                gameObject.GetComponent<Collider2D>().enabled = false;//Unlock door
                 break;
             case ObjectType.Light:
-                this.gameObject.GetComponent<SpriteRenderer>().enabled = false;//Lights On
+                gameObject.GetComponent<SpriteRenderer>().enabled = !gameObject.GetComponent<SpriteRenderer>().enabled;//Lights On
                 break;
             case ObjectType.Computer:
                 print("This a computer");
