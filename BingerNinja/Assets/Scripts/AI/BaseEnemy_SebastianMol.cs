@@ -4,7 +4,7 @@
 //sebastian mol 02/11/20 changed enemy behaviour funstion int AILogic function and created more abstract functions.
 //sebastian mol 02/11/20 now path gets recalculated when player moves away from original position 
 //sebastian mol 02/11/20 improved player detection with second raycast
-//sebastian mol 05/11/20 new damage sysetm
+//sebastian mol 06/11/20 new damage sysetm
 
 using System.Collections;
 using System.Collections.Generic;
@@ -444,7 +444,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
     private void NormalTakeDamage( float damage )
     {
-        if (m_playerDetected == false)
+        if (m_playerDetected == false) //if sneak damage
         {
             m_health -= damage * m_sneakDamageMultiplier;
         }
