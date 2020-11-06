@@ -44,19 +44,9 @@ public class Inventory_JoaoBeijinho : MonoBehaviour
     /// <summary>
     /// Check if the inventory contains a certain item and that item's quantity
     /// </summary>
-    public bool HasItem(ItemType itemCheck, int itemQuantityCheck)
+    public bool HasItem(ItemType itemCheck, int amountNeeded)
     {
-        int enoughQuantity = itemQuantityCheck;
-        itemQuantityCheck = m_inventoryItems[itemCheck];
-
-        if (itemQuantityCheck >= enoughQuantity)
-        {
-            return m_inventoryItems.ContainsKey(itemCheck) && m_inventoryItems.ContainsValue(itemQuantityCheck);
-        }
-        else
-        {
-            return false;
-        }
+            return m_inventoryItems.ContainsKey(itemCheck) && m_inventoryItems[itemCheck] >= amountNeeded;
     }
 
     ///// <summary>
@@ -64,16 +54,9 @@ public class Inventory_JoaoBeijinho : MonoBehaviour
     /// </summary>
     public void RemoveItem(ItemType itemToRemove, int quantityToRemove)
     {
-        //ItemType removeItem = HasItem();
         if (HasItem(itemToRemove, quantityToRemove))
         {
             m_inventoryItems[itemToRemove] -= quantityToRemove;
-            print("Removed from Inventory: " + quantityToRemove + " " + itemToRemove);
-        }
-
-        foreach (KeyValuePair<ItemType, int> pair in m_inventoryItems)
-        {
-            print("You have: " + pair.Value + " " + pair.Key);
         }
     }
 }
