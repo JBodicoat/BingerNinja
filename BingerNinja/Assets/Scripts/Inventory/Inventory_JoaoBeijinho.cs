@@ -39,22 +39,22 @@ public class Inventory_JoaoBeijinho : MonoBehaviour
 
         foreach (KeyValuePair<ItemType, int> pair in m_inventoryItems)
         {
-            print("You have: " + pair.Value + " " + pair.Key);
+           // print("You have: " + pair.Value + " " + pair.Key);
            
         }
-            print(howMany + " " + whatType + " added to Inventory!");
+            //print(howMany + " " + whatType + " added to Inventory!");
     }
     public bool HasItem(ItemType item)
     {
-        Debug.Log("yay");
+        //Debug.Log("yay");
         if (m_inventoryItems.ContainsKey(item))
         {
-            Debug.Log("woo");
+           // Debug.Log("woo");
             return true;
         }
         else
         {
-            Debug.Log("o no");
+           // Debug.Log("o no");
             return false;
         }
 

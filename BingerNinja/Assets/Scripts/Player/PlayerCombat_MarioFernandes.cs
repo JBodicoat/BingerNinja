@@ -191,7 +191,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
               if (!m_playerStealthScript.m_crouched && m_currentWeapon &&  GetComponent<PlayerController_JamieG>().m_attack.triggered)
             {                           
                 currentatktime = attackSpeed;
-                print("Attack");
+                //print("Attack");
                 Attack();        
             }          
         }
