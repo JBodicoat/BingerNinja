@@ -35,7 +35,15 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
 
     private void Awake()
     {
+        SettingsData settingsData = SaveLoadSystem_JamieG.LoadSettings();
         
+        // TODO: Remove this line, it's for testing only
+        settingsData.m_chosenLanguage = "Portuguese";
+        
+        if(settingsData.m_chosenLanguage != null && settingsData.m_chosenLanguage.Equals("Portuguese")) // TODO: Will probably be changed to an enum
+        {
+            m_csvFile = m_csvFilePortuguese;
+        };
     }
 
     public void StartDialogue(Dialogue dialogue)

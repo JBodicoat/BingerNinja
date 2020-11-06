@@ -43,7 +43,7 @@ public static class SaveLoadSystem_JamieG
             return settingsData;
         }
 
-        Debug.LogError("Loading settings didn't return object of type SettingsData");
+        Debug.Log("Loading settings didn't return object of type SettingsData");
         return default;
     }
 
@@ -55,7 +55,7 @@ public static class SaveLoadSystem_JamieG
             return inventoryData;
         }
         
-        Debug.LogError("Loading inventory didn't return object of type InventoryData");
+        Debug.Log("Loading inventory didn't return object of type InventoryData");
         return default;
     }
     
@@ -67,7 +67,7 @@ public static class SaveLoadSystem_JamieG
             return gameplayData;
         }
         
-        Debug.LogError("Loading gameplayData didn't return object of type GameplayData");
+        Debug.Log("Loading gameplayData didn't return object of type GameplayData");
         return default;
     }
     #endregion
@@ -96,7 +96,7 @@ public static class SaveLoadSystem_JamieG
         }
         else
         {
-            Debug.LogError("Save file not found in " + path);
+            Debug.Log("Save file not found in " + path);
             return null;
         }
     }
@@ -119,14 +119,13 @@ public struct SettingsData
 {
     public float m_musicVolume;
     public float m_sfxVolume;
-    //TODO: Implement after SettingsMenu is finished
-    //public Language m_chosenLanguage;
+    public string m_chosenLanguage;
 
     public SettingsData(SettingsMenu_ElliottDesouza settingsMenu)
     {
         m_musicVolume = settingsMenu.m_musicSlider.normalizedValue;
         m_sfxVolume = settingsMenu.m_SFXSlider.normalizedValue;
-        //m_chosenLanguage = settingsMenu.m_language.value;
+        m_chosenLanguage = "English";  //TODO: Get value from settings menu when implemented settingsMenu.m_language.value;
     }
 };
 
