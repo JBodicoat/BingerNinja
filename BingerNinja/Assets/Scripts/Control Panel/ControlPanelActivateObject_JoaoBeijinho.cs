@@ -25,26 +25,22 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
     private GameObject m_freezerBoss;//Reference enemy to do damage
     private FreezerTrigger_JoaoBeijinho m_freezerArea;//Reference script that checks if enemy is in the freezer
 
-    public bool m_freezerDoorLock = false;//Lock/Unlock door
-
     public void ActivateObject()//Call this function to activate object functionality
     {
         switch (m_functionality)//Define object functionality
         {
             case ObjectType.Door:
-                print("This a door");
-                gameObject.GetComponent<Collider2D>().enabled = false;
+                this.gameObject.GetComponent<Collider2D>().enabled = false;//Unlock door
                 break;
             case ObjectType.Light:
-                print("This a light");
+                this.gameObject.GetComponent<SpriteRenderer>().enabled = false;//Lights On
                 break;
             case ObjectType.Computer:
                 print("This a computer");
                 //make computer sound
                 break;
             case ObjectType.Freezer:
-                gameObject.GetComponent<Collider2D>().enabled = true;//Lock
-                m_freezerDoorLock = true;//Check if freezer door is locked
+                gameObject.GetComponent<Collider2D>().enabled = true;//Lock freezer door
                 StartCoroutine(FreezerLockAndDamage(5, 1.5f, 3f));
                 break;
         }
@@ -63,8 +59,9 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
 
                 i++;
             }
+
         }
-        
+
         gameObject.GetComponent<Collider2D>().enabled = false;//Unlock freezer door
     }
 

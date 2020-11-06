@@ -15,7 +15,7 @@ public class FreezerTrigger_JoaoBeijinho : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")//Player for testing
+        if (collision.gameObject.tag == "Enemy" && collision is BoxCollider2D)//Player for testing
         {
             m_enemyInFreezer = true;
         }
@@ -23,7 +23,7 @@ public class FreezerTrigger_JoaoBeijinho : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")//Player for testing
+        if (collision.gameObject.tag == "Enemy" && collision is BoxCollider2D)//Player for testing
         {
             m_enemyInFreezer = false;
         }
