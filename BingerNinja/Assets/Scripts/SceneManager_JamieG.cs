@@ -3,7 +3,6 @@
 //Jamie - 26/10/20 - First implemented
 //Jann  - 06/11/20 - Hooked up the savesystem and the checkpoints
 
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,6 +14,7 @@ public class SceneManager_JamieG : MonoBehaviour
     private static SceneManager_JamieG m_instance;
 
     private GameObject m_player;
+    private Vector3 checkpointOnReset;
     
     private void Awake()
     {
@@ -35,26 +35,15 @@ public class SceneManager_JamieG : MonoBehaviour
     
     public void ResetToCheckpoint()
     {
+        GameplayData gameplayData = SaveLoadSystem_JamieG.LoadGameplay();
+        checkpointOnReset = new Vector3(
+            gameplayData.m_checkpointPosition[0],
+            gameplayData.m_checkpointPosition[1],
+            gameplayData.m_checkpointPosition[2]);
+        
         LoadCurrentLevel();
 
-        if (m_player != null)
-        {
-            SaveSystem_ElliottDesouza checkpoint = GameObject.FindGameObjectWithTag("SaveCheckpoint")
-                .GetComponent<SaveSystem_ElliottDesouza>();
-
-            if (checkpoint != null)
-            {
-                m_player.transform.position = checkpoint.m_currentCheckpoint.position;
-            }
-            else
-            {
-                GameplayData gameplayData = SaveLoadSystem_JamieG.LoadGameplay();
-                m_player.transform.position = new Vector3(
-                    gameplayData.m_checkpointPosition[0],
-                    gameplayData.m_checkpointPosition[1],
-                    gameplayData.m_checkpointPosition[2]);
-            }
-        }
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     //This will assume that the MainMenu scene is build index 0
@@ -67,17 +56,22 @@ public class SceneManager_JamieG : MonoBehaviour
     public void LoadNextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-
-        if (!m_player)
-        {
-            m_player = GameObject.FindWithTag("Player");
-        }
     }
 
     //Reloads the current scene using its buildIndex
     public void LoadCurrentLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (m_player == null)
+        {
+            m_player = GameObject.FindWithTag("Player");
+        }
+
+        m_player.transform.position = checkpointOnReset;
     }
 
     public static SceneManager_JamieG Instance => m_instance;
