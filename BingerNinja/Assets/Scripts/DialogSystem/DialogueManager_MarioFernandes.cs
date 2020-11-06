@@ -132,10 +132,10 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
                     if(dialogTrigScript)
                     {
                         //Give the m_name in the VCs file to the dialog
-                        dialogTrigScript.m_dialogue.m_name = parts[1];
+                        dialogTrigScript.m_dialogue.m_name = parts[2];
 
                         //Remove level and m_name value
-                        parts.RemoveRange(0, 2);
+                        parts.RemoveRange(0, 3);
                         dialogTrigScript.m_dialogue.m_sentences = parts.ToArray();
 
                     }
@@ -146,10 +146,10 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
 
                     Dialogue a = new Dialogue();
                     //Give the m_name in the VCs file to the dialog
-                    a.m_name = parts[1];
+                    a.m_name = parts[2];
 
                     //Remove level and m_name value
-                    parts.RemoveRange(0, 2);
+                    parts.RemoveRange(0, 3);
                     a.m_sentences = parts.ToArray();
                     Target.GetComponent<BossDialogue_MarioFernandes>().m_dialogue.Add(a);
                 }
