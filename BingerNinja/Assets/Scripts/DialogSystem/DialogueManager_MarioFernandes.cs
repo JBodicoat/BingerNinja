@@ -6,6 +6,7 @@
 // Mário 28/10/2020 - Optimisation and Stop player whene in dialogs
 // Mário 06/11/2020 - Dialog Title update, Pause Systems, Use "|" to saperate Dialogues
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,9 +28,15 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     private Queue<string> m_sentences;
 
     public TextAsset m_csvFile;
+    public TextAsset m_csvFilePortuguese;
 
     string m_TrigerDialoguePrefab = "DialogTrigger";
     PlayerController_JamieG playerControllerScript;
+
+    private void Awake()
+    {
+        
+    }
 
     public void StartDialogue(Dialogue dialogue)
     {
