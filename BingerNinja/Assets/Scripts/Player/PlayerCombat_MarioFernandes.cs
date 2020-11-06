@@ -65,13 +65,15 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
         if(m_currentWeapon.IsRanged())
         {
-             m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
+            //TODO undo this comment
+             //m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
              GameObject projectile = Instantiate(m_projectile, transform.position, transform.rotation);
              projectile.GetComponent<Projectile_MarioFernandes>().m_dmg = m_currentWeapon.dmg;
         }
         else
         {
-            m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
+            //TODO uncomment this
+           // m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
 
             float distanceToClosestsEnemy = Mathf.Infinity;
                 GameObject CloseEnemy = null;

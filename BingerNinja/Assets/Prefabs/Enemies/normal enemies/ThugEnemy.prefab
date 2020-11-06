@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4202125626246644408}
   - component: {fileID: 3825102873797564499}
   - component: {fileID: 1386623927498531794}
+  - component: {fileID: 8802191557362704687}
   m_Layer: 0
   m_Name: enemyDamager
   m_TagString: Untagged
@@ -79,6 +80,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &8802191557362704687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220513390732296407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be6def35fff5c7d48811166bd65116d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_baseDamage: 1
 --- !u!1 &2962778701667265248
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,8 +168,8 @@ GameObject:
   - component: {fileID: 8631870844753434323}
   - component: {fileID: 8631870844753434320}
   m_Layer: 0
-  m_Name: BussinessmanEnemy
-  m_TagString: Untagged
+  m_Name: ThugEnemy
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -293,7 +307,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
+  m_Offset: {x: 0, y: -0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -323,7 +337,7 @@ MonoBehaviour:
   m_detectionCollider: {fileID: 8631870844753434284}
   m_playerDetected: 0
   m_currentState: 0
-  m_currentEnemyType: 5
+  m_currentEnemyType: 0
   m_dropItem: {fileID: 0}
   m_health: 100
   m_speed: 2
@@ -331,11 +345,11 @@ MonoBehaviour:
   floortilemap: {fileID: 0}
   m_patrolPoints: []
   m_playerMoveAllowance: 2
-  m_deleyBetweenPatrol: 1
-  m_sneakDamageMultiplier: 1.5
+  m_deleyBetweenPatrol: 0
+  m_sneakDamageMultiplier: 0
   m_sneakDamageMultiplierStack: 0
   m_meleeRange: 0.6
-  m_hitSpeed: 1
+  m_hitSpeed: 2
   m_attackCollider: {fileID: 220513390732296407}
   attackDeactivationSpeed: 0.1
   m_outOfSightDeley: 2

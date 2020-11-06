@@ -10,7 +10,7 @@ using UnityEngine;
 public class EnemyDamager_SebastianMol : MonoBehaviour
 {
 	public float m_baseDamage;
-	public float m_damage;
+	internal float m_damage;
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.tag == "Player")

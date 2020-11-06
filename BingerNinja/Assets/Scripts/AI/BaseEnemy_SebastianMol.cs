@@ -141,19 +141,6 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                     m_detectionCollider.enabled = true;
                 }
             }
-
-        }
-    }
-
-    /// <summary>
-    /// functionality for when the player is detected
-    /// </summary>
-    protected void IsPlayerDetected()
-    {
-        if (m_playerDetected == true)
-        {
-            //currentState = state.CHASE;
-            m_detectionCollider.enabled = false;
         }
     }
 
@@ -399,7 +386,6 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 break;
 
             case m_enemyType.CHEF:
-                //melle more affective
                 if (damageType == m_damageType.MELEE)
                 {
                     NormalTakeDamage(damage * 1.5f);
@@ -482,7 +468,6 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
     private void Update()
     {
-        IsPlayerDetected(); // has the playeer been detected
         AILogic(); // behaviour of the enemy what stste it is in and what it dose
         FollowPath(); //walk the path that the enemy currently has
         SwapDirections(); //chnge the scale of the player
