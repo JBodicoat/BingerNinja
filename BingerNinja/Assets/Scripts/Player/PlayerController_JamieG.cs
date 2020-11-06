@@ -5,8 +5,6 @@
 //Joao 23/10/20 - Added input for interactions.
 //Joao 25/10/20 - Added interaction in update.
 //Joao 26/10/20 - Added input for crouching, the input used for this was interact.
-//Mário 02/11/20 - Added Input for Attack and Eat
-//Mário 06/11/20 - Addaed Imput to switch Weapons
 
 using System.Collections;
 using System.Collections.Generic;
@@ -24,8 +22,6 @@ public class PlayerController_JamieG : MonoBehaviour
     public InputAction m_crouch;
     public InputAction m_eat;
     public InputAction m_attack;
-
-    public InputAction m_switchWeapon;
 
     //Reference to the other player scripts
     private PlayerMovement_MarioFernandes m_playerMovementScript;
@@ -67,7 +63,6 @@ public class PlayerController_JamieG : MonoBehaviour
         m_crouch.Enable();
         m_eat.Enable();
         m_attack.Enable();
-        m_switchWeapon.Enable();
     }
 
     private void OnDisable()
@@ -77,7 +72,6 @@ public class PlayerController_JamieG : MonoBehaviour
         m_crouch.Disable();
         m_eat.Disable();
         m_attack.Disable();
-        m_switchWeapon.Disable();
     }
     #endregion
 
