@@ -28,5 +28,18 @@ public abstract class StealthObject_JoaoBeijinho : MonoBehaviour
     public void Hide()
     {
         m_playerStealthScript.m_stealthed = !m_playerStealthScript.m_stealthed;
+        /*
+        if (m_playerStealthScript.m_stealthed)
+        {
+            GetComponent<ParticleSystem>().Play();
+            ParticleSystem.EmissionModule em = GetComponent<ParticleSystem>().emission;
+            em.enabled = true;
+        }
+        //else
+        //{
+         //   GetComponent<ParticleSystem>().Play();
+         //   ParticleSystem.EmissionModule em = GetComponent<ParticleSystem>().emission;
+         //   em.enabled = false;
+      /  }*/
     }
 }
