@@ -2,6 +2,7 @@
 /// class holds values for the Vendingmachine menu
 
 //Elliott 31/10/2020 - can now select an item which brings up a discription about said item, also adds item to inventory when item is brought
+//Elliott 06/10/2020 - added a check for the one time buy items, made a DeselectAll fuction.
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,72 +11,78 @@ using UnityEngine.InputSystem;
 
 public class VendingMachineMenu_Elliott : MonoBehaviour
 {
-    public GameObject PizzaInfoText;
-    public GameObject CookieInfoText;
-    public GameObject SakeInfoText;
-    public GameObject NoodleInfoText;
+    public Text CookieColor;
+    public bool OneTimePurchaseCookie = true;
+    public bool OneTimePurchaseNoodle = true;
+    public GameObject SelectPizza;
+    public GameObject SelectCookie;
+    public GameObject SelectSake;
+    public GameObject SelectNoodle;
+  //  public GameObject CookieColor;
     protected Inventory_JoaoBeijinho Inventory;
     
     /// <summary>
     /// shuts all decriptions and opens up the one selected
     /// </summary>
+    public void DeSelectAll()
+    {
+        SelectPizza.SetActive(false);
+        SelectCookie.SetActive(false);
+        SelectSake.SetActive(false);
+        SelectNoodle.SetActive(false);
+    }
     public void Pizza()
     {
-       PizzaInfoText.SetActive (true);
-       CookieInfoText.SetActive(false);      
-       SakeInfoText.SetActive(false);
-       NoodleInfoText.SetActive(false);
+       DeSelectAll();
+       SelectPizza.SetActive (true);
     }
 
     public void Cookie()
     {
-        PizzaInfoText.SetActive(false);
-        CookieInfoText.SetActive(true);
-        SakeInfoText.SetActive(false);
-        NoodleInfoText.SetActive(false);
+        DeSelectAll();
+        SelectCookie.SetActive(true);
     }
 
     public void Sake()
     {
-        PizzaInfoText.SetActive(false);
-        CookieInfoText.SetActive(false);
-        SakeInfoText.SetActive(true);
-        NoodleInfoText.SetActive(false);
+        DeSelectAll();
+        SelectSake.SetActive(true);
     }
 
     public void Noodle()
     {
-        PizzaInfoText.SetActive(false);
-        CookieInfoText.SetActive(false);
-        SakeInfoText.SetActive(false);
-        NoodleInfoText.SetActive(true);
+        DeSelectAll();
+        SelectNoodle.SetActive(true);
     }
 
-    public void Upgrade()
+    public void PurchaseUpgrade()
     {
-        if(PizzaInfoText.activeInHierarchy /*&& ninja point >= 15*/)
+        if (SelectPizza.activeInHierarchy /*&& ninja point >= 15*/)
         {
             Debug.Log("pizza");
             //take away ninja points      
             Inventory.GiveItem("Pizza");
         }
-        else if (CookieInfoText.activeInHierarchy /*&& ninja point >= 50*/)
+        else if (SelectCookie.activeInHierarchy && OneTimePurchaseCookie == true /*&& ninja point >= 50*/)
         {
             Debug.Log("cookies");
             //take away ninja points
             Inventory.GiveItem("Cookies");
+            OneTimePurchaseCookie = false;
+            CookieColor.GetComponent<Text>().color = Color.blue;
         }
-        else if (SakeInfoText.activeInHierarchy /*&& ninja point >= 25*/)
+        else if (SelectSake.activeInHierarchy /*&& ninja point >= 25*/)
         {
             Debug.Log("sake");
             //take away ninja points
             Inventory.GiveItem("Sake");
         }
-        else if (NoodleInfoText.activeInHierarchy /*&& ninja point >= 50*/)
+        else if (SelectNoodle.activeInHierarchy && OneTimePurchaseNoodle == true /*&& ninja point >= 50*/)
         {
             Debug.Log("noodles");
             //take away ninja points
             Inventory.GiveItem("Noodles");
+            OneTimePurchaseNoodle = false;
         }
     }
 
@@ -111,7 +118,7 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
         }
         if (gamepad.digit5Key.wasPressedThisFrame)
         {
-            Upgrade();
+            PurchaseUpgrade();
         }
     }
 }
