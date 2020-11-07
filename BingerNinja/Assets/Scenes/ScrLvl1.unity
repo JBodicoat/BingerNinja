@@ -10646,7 +10646,7 @@ PrefabInstance:
     - target: {fileID: 682521576906220322, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
       propertyPath: m_smoke
       value: 
-      objectReference: {fileID: 1406558352995564598, guid: ce2d2597f3950ab43b6dadbc647f12d6, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 682521576906220325, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
       propertyPath: m_Name
       value: PottedPlant
@@ -13370,7 +13370,7 @@ PrefabInstance:
     - target: {fileID: 682521576906220322, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
       propertyPath: m_smoke
       value: 
-      objectReference: {fileID: 1406558352995564598, guid: ce2d2597f3950ab43b6dadbc647f12d6, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 682521576906220325, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
       propertyPath: m_Name
       value: PottedPlant (3)
@@ -14139,7 +14139,7 @@ PrefabInstance:
     - target: {fileID: 682521576906220322, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
       propertyPath: m_smoke
       value: 
-      objectReference: {fileID: 1406558352995564598, guid: ce2d2597f3950ab43b6dadbc647f12d6, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 682521576906220325, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
       propertyPath: m_Name
       value: PottedPlant (1)
@@ -14233,7 +14233,7 @@ PrefabInstance:
     - target: {fileID: 682521576906220322, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
       propertyPath: m_smoke
       value: 
-      objectReference: {fileID: 1406558352995564598, guid: ce2d2597f3950ab43b6dadbc647f12d6, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 682521576906220325, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
       propertyPath: m_Name
       value: PottedPlant (2)
@@ -17941,7 +17941,7 @@ PrefabInstance:
     - target: {fileID: 682521576906220322, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
       propertyPath: m_smoke
       value: 
-      objectReference: {fileID: 1406558352995564598, guid: ce2d2597f3950ab43b6dadbc647f12d6, type: 3}
+      objectReference: {fileID: 1406558352995564592, guid: ce2d2597f3950ab43b6dadbc647f12d6, type: 3}
     - target: {fileID: 682521576906220325, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
       propertyPath: m_Name
       value: PottedPlant
@@ -18241,6 +18241,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8145170164367872022, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: stopAction
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8145170164367872022, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: ColorModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8145170164367872022, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: lengthInSec
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8145170164367872022, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8145170164367872022, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8145170164367872023, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 126326fb385628f48915dd9419c89498, type: 3}
 --- !u!114 &4362767423532714276 stripped

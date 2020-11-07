@@ -3,6 +3,7 @@
 //Joao Beijinho 23/10/2020 - Created class to work with crouching
 //Joao Beijinho 26/10/2020 - Removed Crouching. Created trigger that toggles stealth/unstealth in the player and disable/enable movement
 //Joao Beijinho 27/10/2020 - Changed order of if statemants in update. Created m_isCrouching so that the player can't hide while crouched and n_changeLayer
+//Elliott Desouza 07/11/2020 - 
 
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
     //change layer in sprite renderer to render this gameObject above or below the player
     SpriteRenderer m_changeLayer;
 
-   // public GameObject m_smoke;
+    public ParticleSystem m_smoke;
     public bool m_canHide = false;
     public bool m_isHiding = false;
     private bool m_isCrouching;
@@ -76,7 +77,7 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
             Hide();
             m_playerControllerScript.m_movement.Disable();
             m_playerControllerScript.m_crouch.Disable();
-           // Instantiate(m_smoke, this.transform.position, Quaternion.identity);
+            m_smoke.Play();
         }
     }
 }
