@@ -17,6 +17,7 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
     //change layer in sprite renderer to render this gameObject above or below the player
     SpriteRenderer m_changeLayer;
 
+   // public GameObject m_smoke;
     public bool m_canHide = false;
     public bool m_isHiding = false;
     private bool m_isCrouching;
@@ -65,6 +66,7 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
             Hide();
             m_playerControllerScript.m_movement.Enable();
             m_playerControllerScript.m_crouch.Enable();
+           
         }
         else if (m_playerControllerScript.m_interact.triggered && m_canHide == true && m_isCrouching == false)
         {
@@ -74,6 +76,7 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
             Hide();
             m_playerControllerScript.m_movement.Disable();
             m_playerControllerScript.m_crouch.Disable();
+           // Instantiate(m_smoke, this.transform.position, Quaternion.identity);
         }
     }
 }
