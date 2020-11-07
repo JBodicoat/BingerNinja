@@ -50,6 +50,8 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
     void Start()
     {
         m_changeLayer = GetComponent<SpriteRenderer>();
+        m_smoke = GameObject.Find("SmokeParticleSystem").GetComponent<ParticleSystem>();
+    
     }
 
     /// <summary>
