@@ -86,15 +86,47 @@ public class HealBuff_MarioFernandes : StatusEffect_MarioFernandes
 {
     protected float m_healthIncrease = 0;
 
-        ///<summary>
+    ///<summary>
     ///To create you need to give:
     /// * The Heal (Max hp and heal)
     /// * Duration (How many seconds)
     /// * The speed, to increace (1-2), Default is 1 (Normal speed)
     ///</summary>
-    public HealBuff_MarioFernandes(float healthIncrease, float duration, float speedMultiplier = 1)
+    public HealBuff_MarioFernandes(float healthIncrease, float duration)
     {
         m_healthIncrease = healthIncrease;
+        m_duration = duration;    
+    }
+
+    public override void Activate(GameObject target)
+    {
+        m_isEnable = true;
+        m_target = target;
+        m_target.GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_healthIncrease);
+    }
+    public override void DeactivateEffect()
+    {
+        m_isEnable = false;
+        
+    }
+
+    protected override void Effect()
+    {        
+    }    
+
+}
+
+public class SpeedEffect_MarioFernandes : StatusEffect_MarioFernandes
+{
+    protected float m_healthIncrease = 0;
+
+        ///<summary>
+    ///To create you need to give:
+    /// * Duration (How many seconds)
+    /// * The speed, to increace (1-2), Default is 1 (Normal speed)
+    ///</summary>
+    public SpeedEffect_MarioFernandes(float duration, float speedMultiplier = 1)
+    {
         m_duration = duration;
         m_speedMultiplier = speedMultiplier;        
     }
@@ -104,13 +136,44 @@ public class HealBuff_MarioFernandes : StatusEffect_MarioFernandes
         m_isEnable = true;
         m_target = target;
         m_target.GetComponent<PlayerMovement_MarioFernandes>().m_speed =  (m_target.GetComponent<PlayerMovement_MarioFernandes>().m_baseSpeed * m_speedMultiplier);
-        m_target.GetComponent<PlayerHealthHunger_MarioFernandes>().IncreaseMaxHealt(m_healthIncrease);
-        m_target.GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_healthIncrease);
     }
     public override void DeactivateEffect()
     {
         m_target.GetComponent<PlayerMovement_MarioFernandes>().ResetSpeed();
-        m_target.GetComponent<PlayerHealthHunger_MarioFernandes>().DecreaseMaxHealt(m_healthIncrease);
+        m_isEnable = false;
+        
+    }
+
+    protected override void Effect()
+    {        
+    }    
+
+}
+
+public class StrengthEffect_MarioFernandes : StatusEffect_MarioFernandes
+{
+    protected float m_strengthModifier = 0;
+
+    ///<summary>
+    ///To create you need to give:
+    /// * Duration (How many seconds)
+    /// * Strength Modifier
+    ///</summary>
+    public StrengthEffect_MarioFernandes(float duration, float strengthModifier = 1)
+    {
+        m_duration = duration;
+        m_strengthModifier = strengthModifier;        
+    }
+
+    public override void Activate(GameObject target)
+    {
+        m_isEnable = true;
+        m_target = target;
+        
+    }
+    public override void DeactivateEffect()
+    {
+       
         m_isEnable = false;
         
     }
