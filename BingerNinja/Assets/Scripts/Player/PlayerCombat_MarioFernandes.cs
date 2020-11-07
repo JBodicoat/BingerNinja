@@ -11,6 +11,7 @@
 //                   changed GetComponent in above to GetComponentInParent to support new EnemyCollider child on enemy prefabs
 //                   EnemyCollider child needed because otherwise projectiles collide with enemy view cone triggers
 // Louie 03/11/2020 - Added Player Sound Effects
+//sebastian mol 05/11/20 changed enemy take damage function call
 
 using System.Collections;
 using System.Collections.Generic;
@@ -64,13 +65,15 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
         if(m_currentWeapon.IsRanged())
         {
-             m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
+            //TODO undo this comment
+             //m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
              GameObject projectile = Instantiate(m_projectile, transform.position, transform.rotation);
              projectile.GetComponent<Projectile_MarioFernandes>().m_dmg = m_currentWeapon.dmg;
         }
         else
         {
-            m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
+            //TODO uncomment this
+           // m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
 
             float distanceToClosestsEnemy = Mathf.Infinity;
                 GameObject CloseEnemy = null;
@@ -122,7 +125,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
                 if(CloseEnemy && distanceToClosestsEnemy <= RangeAttribute)
                 {
-                    CloseEnemy.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage(m_currentWeapon.dmg);
+                    CloseEnemy.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage( BaseEnemy_SebastianMol.m_damageType.MELEE , m_currentWeapon.dmg);
                 }                
             }
 

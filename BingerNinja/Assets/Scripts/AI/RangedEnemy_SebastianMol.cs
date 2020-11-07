@@ -1,5 +1,6 @@
 ﻿//sebastian mol
 //sebastian mol 30/10/20 removed patrol function
+//sebastian mol 02/11/20 removed player behaviour switch replaced it with abstract functions
 
 using System.Collections;
 using System.Collections.Generic;
@@ -22,73 +23,7 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
     [Tooltip("how far the player can be befor enemy shoots")]
     public float m_shootingRange;
     [Tooltip("how long the player has to be out of sight befor enemy losses intrest")]
-    public float m_outOfSightDeley;
-
-    internal override void EnemyBehaviour()
-    {
-        switch (m_currentState)
-        {
-            case state.WONDER:
-                //move form one postion to another
-                if (m_playerDetected) m_currentState = state.CHASE;
-                Patrol();
-                break;
-
-            case state.CHASE:
-                //move towards the player if he has been detected
-                if (IsPlayerInLineOfSight())
-                {
-                    if (Vector2.Distance(transform.position, m_playerTransform.position) < m_shootingRange / 1.5f)
-                    {
-                        ClearPath();
-                        m_currentState = state.ATTACK;
-                    }
-                    else
-                    {
-                        PathfindTo(m_playerTransform.position);
-                    }
-                }
-                else
-                {
-                    if (m_currentPath.Count == 0)
-                    {
-                        if (m_outOfSightTimer <= 0)
-                        {
-                            m_currentState = state.WONDER;
-                            m_playerDetected = false;
-                        }
-                        else
-                        {
-                            m_outOfSightTimer -= Time.deltaTime;
-                        }
-                    }
-                }
-                break;
-
-            case state.ATTACK:
-                //personalized attack
-                if (IsPlayerInLineOfSight())
-                {
-                    RangedAttack();
-                    m_outOfSightTimer = m_outOfSightDeley;
-                    m_playerDetected = true;
-                }
-                else
-                {
-                    m_playerDetected = false;
-                    if (m_outOfSightTimer <= 0)
-                    {
-                        m_currentState = state.WONDER;
-                    }
-                    else
-                    {
-                        m_outOfSightTimer -= Time.deltaTime;
-                    }
-                }
-                break;
-        }     
-    }
-   
+    public float m_outOfSightDeley;  
     private void RangedAttack()
     {
         if (Vector2.Distance(transform.position, m_playerTransform.position) < m_shootingRange)
@@ -102,7 +37,7 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
                 if (m_attackTimer <= 0)
                 {
                     GameObject projectile = Instantiate(m_projectile, transform.position, Quaternion.Euler(new Vector3(dir.x, dir.y, 0)));
-                    projectile.GetComponent<BulletMovment_SebastianMol>().direction = (m_playerTransform.position - transform.position).normalized;
+                    projectile.GetComponent<BulletMovment_SebastianMol>().m_direction = (m_playerTransform.position - transform.position).normalized;
                     m_attackTimer = m_shootDeley;
                 }
                 else
@@ -122,4 +57,68 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, m_shootingRange);
    }
+
+    internal override void WonderState()
+    {
+        //move form one postion to another
+        if (m_playerDetected) m_currentState = state.CHASE;
+        Patrol();
+    }
+
+    internal override void ChaseState()
+    {
+        if (IsPlayerInLineOfSight()) // if you can see player
+        {
+            if (Vector2.Distance(transform.position, m_playerTransform.position) < m_shootingRange / 1.5f) //if the player is in range
+            {
+                ClearPath();
+                m_currentState = state.ATTACK;
+            }
+            else// if the [layer is out fo range
+            {
+                PathfindTo(m_playerTransform.position);
+            }
+        }
+        else
+        {
+            if (m_currentPath.Count == 0)
+            {
+                if (m_outOfSightTimer <= 0)
+                {
+                    m_currentState = state.WONDER;
+                    m_playerDetected = false;
+                }
+                else
+                {
+                    m_outOfSightTimer -= Time.deltaTime;
+                }
+            }
+        }
+    }
+
+    internal override void AttackState()
+    {
+        if (IsPlayerInLineOfSight())
+        {
+            RangedAttack();
+            m_outOfSightTimer = m_outOfSightDeley;
+            m_playerDetected = true;
+        }
+        else
+        {
+            m_playerDetected = false;
+            if (m_outOfSightTimer <= 0)
+            {
+                m_currentState = state.WONDER;
+            }
+            else
+            {
+                m_outOfSightTimer -= Time.deltaTime;
+            }
+        }
+    }
+
+    internal override void RetreatState()
+    {
+    }
 }
