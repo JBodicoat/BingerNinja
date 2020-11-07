@@ -28,7 +28,7 @@ public class ColorChanger_Jann : MonoBehaviour
     private Image[] m_images;
 
     private Texture2D m_colorSwapTexture;
-    private Color[] m_spriteColors;
+    public Color[] m_spriteColors;
     
     private void Awake()
     {

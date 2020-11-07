@@ -20,6 +20,8 @@ using UnityEngine.Tilemaps;
 /// </summary>
 abstract class BaseEnemy_SebastianMol : MonoBehaviour
 {
+    private HitEffectElliott HitEffectElliott;
+    public CameraShake cameraShake; 
     public Transform m_rayCastStart; //start position of the ray cast
     public Transform m_rayCastStartBackup; //secondary rey cast for better detection neer walls
     public PolygonCollider2D m_detectionCollider; // the collder cone used for player detection
@@ -447,10 +449,13 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         if (m_playerDetected == false) //if sneak damage
         {
             m_health -= damage * m_sneakDamageMultiplier;
+            StartCoroutine(cameraShake.Shake(.15f, .4f));
+            HitEffectElliott.StartHitEffect(true);
         }
         else
         {
             m_health -= damage;
+            HitEffectElliott.StartHitEffect(false);
         }
     }
 
@@ -464,6 +469,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         m_patrolIteratorMax = m_patrolPoints.Length-1;
         m_patroleTimer = m_deleyBetweenPatrol;
         if (m_patrolPoints.Length > 0) m_currentPatrolePos = m_patrolPoints[0];
+        HitEffectElliott = GetComponent<HitEffectElliott>();
     }
 
     private void Update()
