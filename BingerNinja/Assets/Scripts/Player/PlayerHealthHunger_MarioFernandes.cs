@@ -21,6 +21,7 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
     protected float m_fullnessDrainRate = 5.0f;
     protected float m_healthDrainRate = 7.5f;
 
+    public bool m_paused = false;
     public Slider m_healthSlider;
     public Slider m_hungerSlider;
 
@@ -103,18 +104,20 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        m_currentHunger -= m_fullnessDrainRate * Time.deltaTime;
-        m_hungerSlider.value = m_currentHunger;
-        if (m_currentHunger < 0)
-            m_currentHunger = 0;
-
-        
-
-        if (m_currentHunger == 0)
+        if(!m_paused)
         {
-            Hit(m_healthDrainRate * Time.deltaTime);
-		}
+            m_currentHunger -= m_fullnessDrainRate * Time.deltaTime;
+            m_hungerSlider.value = m_currentHunger;
+            if (m_currentHunger < 0)
+                m_currentHunger = 0;
+
+
+
+            if (m_currentHunger == 0)
+            {
+                Hit(m_healthDrainRate * Time.deltaTime);
+		    }
+        }
     }
 
 

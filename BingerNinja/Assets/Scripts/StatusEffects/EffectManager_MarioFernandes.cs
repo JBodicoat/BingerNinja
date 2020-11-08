@@ -16,6 +16,8 @@ public class EffectManager_MarioFernandes : MonoBehaviour
 
     private float m_tickDuration = 0;
 
+    public bool m_paused = false;
+
     //List of effects
     private List<StatusEffect_MarioFernandes> m_effects = new List<StatusEffect_MarioFernandes>{};
 
@@ -29,22 +31,25 @@ public class EffectManager_MarioFernandes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {        
-        //Detects if you have an effect each tick
-        if(m_effects.Count > 0 && m_tickDuration >= (m_Tick))
+        if(!m_paused)
         {
-            //Update or destroy the  effects every tick
-            for (int i = 0; i <= m_effects.Count - 1; i++)
-            {                
-                if( m_effects[i].m_isEnable)
-                {
-                m_effects[i].Update();
+            //Detects if you have an effect each tick
+            if(m_effects.Count > 0 && m_tickDuration >= (m_Tick))
+            {
+                //Update or destroy the  effects every tick
+                for (int i = 0; i <= m_effects.Count - 1; i++)
+                {                
+                    if( m_effects[i].m_isEnable)
+                    {
+                    m_effects[i].Update();
+                    }
+                    else
+                    m_effects.Remove(m_effects[i]);
                 }
-                else
-                m_effects.Remove(m_effects[i]);
+            m_tickDuration =0;
             }
-        m_tickDuration =0;
+            else
+            m_tickDuration += Time.deltaTime;
         }
-        else
-        m_tickDuration += Time.deltaTime;
     }
 }
