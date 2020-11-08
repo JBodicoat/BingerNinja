@@ -194,8 +194,8 @@ GameObject:
   - component: {fileID: 8631870844753434285}
   - component: {fileID: 8631870844753434323}
   - component: {fileID: 8631870844753434320}
-  - component: {fileID: -7478939352485185638}
-  - component: {fileID: 3796340646064231464}
+  - component: {fileID: -5306601603759338291}
+  - component: {fileID: -2397900747304388267}
   m_Layer: 0
   m_Name: ThugEnemy
   m_TagString: Untagged
@@ -378,7 +378,7 @@ MonoBehaviour:
   m_attackCollider: {fileID: 220513390732296407}
   attackDeactivationSpeed: 0.1
   m_outOfSightDeley: 2
---- !u!95 &-7478939352485185638
+--- !u!95 &-5306601603759338291
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -397,7 +397,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3796340646064231464
+--- !u!114 &-2397900747304388267
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
