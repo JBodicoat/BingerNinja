@@ -5,6 +5,7 @@
 // Mário 26/10/2020 - Ajust Dialogue to the boss Dialogue script
 // Mário 28/10/2020 - Optimisation and Stop player whene in dialogs
 // Mário 06/11/2020 - Dialog Title update, Pause Systems, Use "|" to saperate Dialogues
+// Jann  07/11/2020 - Added a quick check to swap the dialogue file based on the settings
 
 using System;
 using System.Collections;
