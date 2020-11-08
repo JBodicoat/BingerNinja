@@ -9,6 +9,7 @@
 //For the Heal i created the m_healthIncreaseariable and overrided the the basic functions to make increace the max health and heal
 
 // Jack 02/11/2020 Changed StatusEffect class to no longer inherit from MonoBehaviour as this was not needed (and caused a warning)
+// Mario 08/11/2020 - Update Heal and poison, Create Speed and Strength modifier effects
 
 
 using System.Collections;
@@ -51,15 +52,13 @@ public class PoisionDefuff_MarioFernandes : StatusEffect_MarioFernandes
 
     ///<summary>
     ///To create you need to give:
-    /// * The Damage (per second)
     /// * Duration (How many seconds)
-    /// * The speed to slow (0-1), Default is 1 (Normal speed)
+    /// * The Damage (per second)    
     ///</summary>
-    public PoisionDefuff_MarioFernandes(float damagePerTick, float duration, float speedMultiplier = 1)
+    public PoisionDefuff_MarioFernandes(float duration, float damagePerTick)
 
     {
         m_duration = duration;
-        m_speedMultiplier = speedMultiplier;
         m_damagePerTick = damagePerTick;        
     }
 
@@ -67,7 +66,6 @@ public class PoisionDefuff_MarioFernandes : StatusEffect_MarioFernandes
     {
         m_isEnable = true;
         m_target = target;
-        m_target.GetComponent<PlayerMovement_MarioFernandes>().m_speed =  (m_target.GetComponent<PlayerMovement_MarioFernandes>().m_baseSpeed * m_speedMultiplier);
     }
     protected override void Effect()
     {        
@@ -76,7 +74,6 @@ public class PoisionDefuff_MarioFernandes : StatusEffect_MarioFernandes
 
     public override void DeactivateEffect()
     {
-        m_target.GetComponent<PlayerMovement_MarioFernandes>().ResetSpeed();
         m_isEnable = false;
     }
 }
@@ -88,11 +85,10 @@ public class HealBuff_MarioFernandes : StatusEffect_MarioFernandes
 
     ///<summary>
     ///To create you need to give:
-    /// * The Heal (Max hp and heal)
     /// * Duration (How many seconds)
-    /// * The speed, to increace (1-2), Default is 1 (Normal speed)
+    /// * The Heal (Max hp and heal)    
     ///</summary>
-    public HealBuff_MarioFernandes(float healthIncrease, float duration)
+    public HealBuff_MarioFernandes(float duration, float healthIncrease)
     {
         m_healthIncrease = healthIncrease;
         m_duration = duration;    

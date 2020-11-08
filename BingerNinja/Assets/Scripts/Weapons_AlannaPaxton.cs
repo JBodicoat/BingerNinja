@@ -66,19 +66,19 @@ public class Weapons_AlannaPaxton : MonoBehaviour
             {
                 case WeaponType.Rice_ball:
                     {
-                        HealBuff_MarioFernandes heal = new HealBuff_MarioFernandes(20.0f, 2.0f, 1.0f);
+                        HealBuff_MarioFernandes heal = new HealBuff_MarioFernandes(2, 20.0f);
                         Buffs.AddEffect(heal);
                     }
                     break;
                 case WeaponType.Sashimi:
                     {
-                        HealBuff_MarioFernandes heal = new HealBuff_MarioFernandes(30.0f, 5.0f, 1.5f);
+                        HealBuff_MarioFernandes heal = new HealBuff_MarioFernandes(5, 30.0f);
                         Buffs.AddEffect(heal);
                     }
                     break;
                 case WeaponType.Squid:
                     {
-                        HealBuff_MarioFernandes heal = new HealBuff_MarioFernandes(15.0f, 2.0f, 1.0f);
+                        HealBuff_MarioFernandes heal = new HealBuff_MarioFernandes(2, 15.0f);
                         Buffs.AddEffect(heal);
                     }
                     break;
@@ -86,19 +86,19 @@ public class Weapons_AlannaPaxton : MonoBehaviour
                     {
                                if(rand ==0 )
                                 {
-                                    PoisionDefuff_MarioFernandes poison = new PoisionDefuff_MarioFernandes(5.0f, 5.0f, 0.5f);
+                                    PoisionDefuff_MarioFernandes poison = new PoisionDefuff_MarioFernandes(5.0f, 5.0f);
                                     Buffs.AddEffect(poison);
                                 }
                                 else
                                 {
-                                    HealBuff_MarioFernandes heal = new HealBuff_MarioFernandes(30.0f, 2.0f, 1.0f);
+                                    HealBuff_MarioFernandes heal = new HealBuff_MarioFernandes(2, 30.0f);
                                     Buffs.AddEffect(heal);
                                 };
                     }
                     break;
                 case WeaponType.Kobe_Beef:
                     {
-                        HealBuff_MarioFernandes heal = new HealBuff_MarioFernandes(50.0f, 5.0f, 1.5f);
+                        HealBuff_MarioFernandes heal = new HealBuff_MarioFernandes(5, 50.0f);
                         Buffs.AddEffect(heal);
                     }
                     break;

@@ -1,5 +1,6 @@
 ﻿// Jack 20/10 Updated to support new input system
 //            Added support for the buff/debuff system
+// Mario 08/11/2020 - Update Effects
 
 using System.Collections;
 using System.Collections.Generic;
@@ -17,8 +18,8 @@ public class Weapon_Morgan : MonoBehaviour
 
     PlayerHealthHunger_MarioFernandes playerHealthAndHungerScript;
     EffectManager_MarioFernandes statusEffectManager;
-    PoisionDefuff_MarioFernandes squidStatusEffect = new PoisionDefuff_MarioFernandes(10, 5, 0.5f);
-    HealBuff_MarioFernandes onigiriStatusEffect = new HealBuff_MarioFernandes(50, 3, 1.5f);
+    PoisionDefuff_MarioFernandes squidStatusEffect = new PoisionDefuff_MarioFernandes(5, 10);
+    HealBuff_MarioFernandes onigiriStatusEffect = new HealBuff_MarioFernandes(3, 50);
 
     GameObject clone = null;
 

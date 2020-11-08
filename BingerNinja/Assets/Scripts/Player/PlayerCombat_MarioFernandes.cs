@@ -11,6 +11,7 @@
 //                   changed GetComponent in above to GetComponentInParent to support new EnemyCollider child on enemy prefabs
 //                   EnemyCollider child needed because otherwise projectiles collide with enemy view cone triggers
 // Louie 03/11/2020 - Added Player Sound Effects
+// Mario 08/11/2020 - Update Effects
 
 using System.Collections;
 using System.Collections.Generic;
@@ -142,7 +143,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
                 case FoodType.FUGU:
                     GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon[m_weaponsIndex].m_instaHeal);
                     if (Random.Range(0, 101) >= 50)
-                        gameObject.GetComponent<EffectManager_MarioFernandes>().AddEffect(new PoisionDefuff_MarioFernandes(m_currentWeapon[m_weaponsIndex].m_poisonDmg, 5));
+                        gameObject.GetComponent<EffectManager_MarioFernandes>().AddEffect(new PoisionDefuff_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_poisonDmg));                        
                     break;
                 case FoodType.SQUID:
                     GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon[m_weaponsIndex].m_instaHeal);
@@ -152,10 +153,11 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
                     break;
                 case FoodType.KOBEBEEF:
                     GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon[m_weaponsIndex].m_instaHeal);
-                    gameObject.GetComponent<EffectManager_MarioFernandes>().AddEffect(new PoisionDefuff_MarioFernandes(0, 5, m_currentWeapon[m_weaponsIndex].m_speedModifier));
+                    gameObject.GetComponent<EffectManager_MarioFernandes>().AddEffect(new SpeedEffect_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_speedModifier));
                     break;
                 case FoodType.SASHIMI:
                     GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon[m_weaponsIndex].m_instaHeal);
+                    gameObject.GetComponent<EffectManager_MarioFernandes>().AddEffect(new StrengthEffect_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_strengthModifier));
                     break;
                 case FoodType.PIZZA:
                     break;
