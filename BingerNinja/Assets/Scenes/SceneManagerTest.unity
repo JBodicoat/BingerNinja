@@ -324,6 +324,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 231744184}
   m_CullTransparentMesh: 0
+--- !u!114 &384191177 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8116379989679312700, guid: 6cbfc7c48ee7185429be86257d6dc2dd, type: 3}
+  m_PrefabInstance: {fileID: 4657285344773801649}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa608d854a4ceaf4d82c0afa46d09163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &454722963
 GameObject:
   m_ObjectHideFlags: 0
@@ -9224,7 +9235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4003713460872805708, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4003713460872805708, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -9252,7 +9263,6 @@ GameObject:
   - component: {fileID: 899406710}
   - component: {fileID: 899406709}
   - component: {fileID: 899406708}
-  - component: {fileID: 899406707}
   m_Layer: 5
   m_Name: ResetToCheckpoint
   m_TagString: Untagged
@@ -9280,29 +9290,6 @@ RectTransform:
   m_AnchoredPosition: {x: 307, y: 1}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &899406707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 899406705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b63379c31eef2d74f82caaf9b2bca472, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loadMainMenu: 0
-  loadNextLevel: 0
-  loadCurrentLevel: 0
-  saveInventory: 0
-  saveGameplay: 0
-  loadSettings: 0
-  loadInventory: 0
-  loadGameplay: 0
-  settingsMenu: {fileID: 0}
-  inventory: {fileID: 0}
-  checkPoint: {fileID: 0}
 --- !u!114 &899406708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9346,9 +9333,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 899406707}
-        m_TargetAssemblyTypeName: TestingSaveSystem, Assembly-CSharp
-        m_MethodName: OnResetToCheckpoint
+      - m_Target: {fileID: 384191177}
+        m_TargetAssemblyTypeName: SceneManager_JamieG, Assembly-CSharp
+        m_MethodName: ResetToCheckpoint
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15715,7 +15702,6 @@ GameObject:
   - component: {fileID: 2072636440}
   - component: {fileID: 2072636439}
   - component: {fileID: 2072636438}
-  - component: {fileID: 2072636437}
   m_Layer: 5
   m_Name: ResetLevel
   m_TagString: Untagged
@@ -15743,29 +15729,6 @@ RectTransform:
   m_AnchoredPosition: {x: 306.99997, y: 37.3}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2072636437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2072636435}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b63379c31eef2d74f82caaf9b2bca472, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loadMainMenu: 0
-  loadNextLevel: 0
-  loadCurrentLevel: 0
-  saveInventory: 0
-  saveGameplay: 0
-  loadSettings: 0
-  loadInventory: 0
-  loadGameplay: 0
-  settingsMenu: {fileID: 0}
-  inventory: {fileID: 0}
-  checkPoint: {fileID: 0}
 --- !u!114 &2072636438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15809,9 +15772,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2072636437}
-        m_TargetAssemblyTypeName: TestingSaveSystem, Assembly-CSharp
-        m_MethodName: OnResetLevel
+      - m_Target: {fileID: 384191177}
+        m_TargetAssemblyTypeName: SceneManager_JamieG, Assembly-CSharp
+        m_MethodName: ResetLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15970,7 +15933,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4657285344850603716, guid: 6cbfc7c48ee7185429be86257d6dc2dd, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4657285344850603716, guid: 6cbfc7c48ee7185429be86257d6dc2dd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
