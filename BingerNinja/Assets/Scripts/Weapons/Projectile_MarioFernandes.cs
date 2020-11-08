@@ -2,6 +2,7 @@
 //                         "other.GetComponent<BaseEnemy_SebastianMol>().TakeDamage(m_dmg);" in OnTriggerEnter2d
 //                         changed GetComponent in above to GetComponentInParent to support new EnemyCollider child on enemy prefabs
 //                         EnemyCollider child needed because otherwise projectiles collide with enemy view cone triggers
+//sebastian mol 05/11/20 changed enemy take damage function call
 
 using System.Collections;
 using System.Collections.Generic;
@@ -52,7 +53,7 @@ public class Projectile_MarioFernandes : MonoBehaviour
         
         if(other.tag == "Enemy")
         {
-            other.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage(m_dmg);
+            other.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage( BaseEnemy_SebastianMol.m_damageType.RANGE ,m_dmg);
             Destroy(gameObject);
         }
     }
