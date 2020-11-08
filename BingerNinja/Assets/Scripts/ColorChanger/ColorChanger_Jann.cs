@@ -6,6 +6,7 @@
 // Jann 01/11/20 - Inspector UI, finalizing implementation
 // Jann 03/11/20 - Added TilemapRenderer and Image (UI) support
 // Jann 07/11/20 - Materials are now assigned in code and don't need to be set for everything in Unity
+// Elliott 07/11/2020 = made color arry public
 
 using UnityEngine;
 using UnityEngine.Tilemaps;
