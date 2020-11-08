@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 5157954882409207617}
   - component: {fileID: 2826013104151739926}
   - component: {fileID: -5461466053410985718}
+  - component: {fileID: -5742421847180390033}
   m_Layer: 0
   m_Name: ChefEnemy
   m_TagString: Enemy
@@ -215,6 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6d75813f5b8f543aa3dbdb51792783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraShake: {fileID: 0}
   m_rayCastStart: {fileID: 5157954881687136811}
   m_rayCastStartBackup: {fileID: 1166715896695560533}
   m_detectionCollider: {fileID: 5157954882409207614}
@@ -294,6 +296,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fca5277414edd16449b9509211994980, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5742421847180390033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5157954882409207616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed50febb1b4ddb0458fccfa2239e59f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mSpriteRenderer: {fileID: 0}
+  mColorSwapTex: {fileID: 0}
+  mSpriteColors: []
 --- !u!1 &5751295711232786928
 GameObject:
   m_ObjectHideFlags: 0

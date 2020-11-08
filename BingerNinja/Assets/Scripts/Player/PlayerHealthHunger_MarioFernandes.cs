@@ -12,6 +12,7 @@ using UnityEngine.UI;
 
 public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
 {
+
     protected float m_maxHealth = 100.0f;
     protected float m_currentHealth = 100.0f;
 
@@ -98,6 +99,7 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
         m_hungerSlider.maxValue = m_maxHunger;
         m_hungerSlider.value = m_currentHunger;
 
+       
     }
 
     // Update is called once per frame

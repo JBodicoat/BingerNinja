@@ -1,8 +1,12 @@
-﻿using System.Collections;
+﻿//Elliott Desouza
+/// this script makes the main camara shake
+
+//Elliott 07/10/2020 - implented the shake
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraShake : MonoBehaviour
+public class CameraShakeElliott : MonoBehaviour
 {
    public IEnumerator Shake (float duration, float magnitude)
    {

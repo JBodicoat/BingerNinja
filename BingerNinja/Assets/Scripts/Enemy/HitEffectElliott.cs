@@ -8,9 +8,9 @@ using UnityEngine;
 
 public class HitEffectElliott : MonoBehaviour
 {
-    public SpriteRenderer mSpriteRenderer;
-    public Texture2D mColorSwapTex;
-    public Color [] mSpriteColors;
+    internal SpriteRenderer mSpriteRenderer;
+    internal Texture2D mColorSwapTex;
+    internal Color [] mSpriteColors;
     float mHitEffectTimer = 0.0f;
     const float cHitEffectTime = 0.3f;
     private Color[] mStoreColor;

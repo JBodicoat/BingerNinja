@@ -5,6 +5,7 @@
 //sebastian mol 02/11/20 now path gets recalculated when player moves away from original position 
 //sebastian mol 02/11/20 improved player detection with second raycast
 //sebastian mol 06/11/20 new damage sysetm
+//Elliott Desouza 08/11/2020 added hit effect and camera shake when taken damage
 
 using System.Collections;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ using UnityEngine.Tilemaps;
 abstract class BaseEnemy_SebastianMol : MonoBehaviour
 {
     private HitEffectElliott HitEffectElliott;
-    public CameraShake cameraShake; 
+    public CameraShakeElliott cameraShake; 
     public Transform m_rayCastStart; //start position of the ray cast
     public Transform m_rayCastStartBackup; //secondary rey cast for better detection neer walls
     public PolygonCollider2D m_detectionCollider; // the collder cone used for player detection
