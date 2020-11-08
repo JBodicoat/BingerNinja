@@ -8,13 +8,15 @@
 //For the Poison i created the m_damagePerTick variable and overrided the the basic functions to make it do damge per tick
 //For the Heal i created the m_healthIncreaseariable and overrided the the basic functions to make increace the max health and heal
 
+// Jack 02/11/2020 Changed StatusEffect class to no longer inherit from MonoBehaviour as this was not needed (and caused a warning)
+
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 //Template class used as base to any effet
-public abstract class StatusEffect_MarioFernandes : MonoBehaviour
+public abstract class StatusEffect_MarioFernandes
 {
     public bool m_isEnable;
     protected GameObject m_target = null;

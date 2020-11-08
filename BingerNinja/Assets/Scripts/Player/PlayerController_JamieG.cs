@@ -20,6 +20,8 @@ public class PlayerController_JamieG : MonoBehaviour
     public InputAction m_movement;
     public InputAction m_interact;
     public InputAction m_crouch;
+    public InputAction m_eat;
+    public InputAction m_attack;
 
     //Reference to the other player scripts
     private PlayerMovement_MarioFernandes m_playerMovementScript;
@@ -59,6 +61,8 @@ public class PlayerController_JamieG : MonoBehaviour
         m_movement.Enable();
         m_interact.Enable();
         m_crouch.Enable();
+        m_eat.Enable();
+        m_attack.Enable();
     }
 
     private void OnDisable()
@@ -66,6 +70,8 @@ public class PlayerController_JamieG : MonoBehaviour
         m_movement.Disable();
         m_interact.Disable();
         m_crouch.Disable();
+        m_eat.Disable();
+        m_attack.Disable();
     }
     #endregion
 

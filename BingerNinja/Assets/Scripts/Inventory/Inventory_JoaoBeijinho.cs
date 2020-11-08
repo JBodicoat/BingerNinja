@@ -16,6 +16,7 @@ public enum ItemType
 {
     Key,
     NinjaPoints,
+    LiftKey,
 }
 
 /// <summary>

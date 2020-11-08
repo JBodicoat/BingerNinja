@@ -5,6 +5,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager_LouieWilliamson : MonoBehaviour
 {
@@ -19,11 +20,6 @@ public class AudioManager_LouieWilliamson : MonoBehaviour
     public AudioSource MusicPrefab;
     public List<AudioClip> MusicList = new List<AudioClip>();
     private Dictionary<Music, AudioClip> MusicDictionary = new Dictionary<Music, AudioClip>();
-
-    //Used for testing functionality
-    float timer;
-    bool eaten;
-    bool died;
     
     //This function plays a sfx given an enum value from the SFX enum
     public void PlaySFX(SFX s)
@@ -70,32 +66,33 @@ public class AudioManager_LouieWilliamson : MonoBehaviour
         MusicDictionary.Add(Music.MainMenu, MusicList[0]);
         MusicDictionary.Add(Music.Level1, MusicList[1]);
 
-        //testing-----------------------------
-        timer = 0.0f;
-        eaten = false;
-        died = false;
-        SetMusicSource(Music.Level1);
-        //testing-----------------------------
+        GetBuildIndex();
     }
 
 
     void Update()
     {
-        //testing-----------------------------
-        timer += Time.deltaTime;
 
-        if (timer > 5 && eaten == false)
-        {
-            SetMusicOnorOff(false);
-            PlaySFX(SFX.Eating);
-            eaten = true;
-        }
-        else if (timer > 10 && eaten == true && died == false)
-        {
-            PlaySFX(SFX.PlayerDeath);
-            died = true;
-        }
-        //testing-----------------------------
     }
+    private void GetBuildIndex()
+    {
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
 
+        switch (currentScene)
+        {
+            case 0:
+                SetMusicSource(Music.MainMenu);
+                break;
+            case 1:
+                SetMusicSource(Music.Level1);
+                break;
+            case 2:
+                SetMusicSource(Music.Level1);
+                break;
+            case 3:
+                break;
+            default:
+                break;
+        }
+    }
 }

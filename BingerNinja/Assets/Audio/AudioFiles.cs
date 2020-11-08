@@ -18,12 +18,14 @@ public static class AudioFiles
 
     public static TextAsset GetAudio(string filename)
     {
-        TextAsset file = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Audio/" + filename + ".json");
-        if (file == null)
-        {
-            throw new FileNotFoundException("File not found at: Assets/Audio/" + filename + ".json");
-        }
+        //TextAsset file = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Audio/" + filename + ".json");
+        //if (file == null)
+        //{
+        //    throw new FileNotFoundException("File not found at: Assets/Audio/" + filename + ".json");
+        //}
 
-        return file;
+        //return file;
+
+        return null;
     }
 }

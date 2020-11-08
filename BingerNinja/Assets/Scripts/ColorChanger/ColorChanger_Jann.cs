@@ -1,61 +1,49 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿// Jann
+
+/// Swaps the pixels with a given color to the desired color
+
+// Jann 29/10/20 - Proof of concept implementation
+// Jann 01/11/20 - Inspector UI, finalizing implementation
+// Jann 03/11/20 - Added TilemapRenderer and Image (UI) support
+// Jann 07/11/20 - Materials are now assigned in code and don't need to be set for everything in Unity
+
 using UnityEngine;
+using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class ColorChanger_Jann : MonoBehaviour
 {
-    public enum SwapIndex
-    {
-        Outline = 25,
-        SkinPrim = 254,
-        SkinSec = 239,
-        HandPrim = 235,
-        HandSec = 204,
-        ShirtPrim = 62,
-        ShirtSec = 70,
-        ShoePrim = 253,
-        ShoeSec = 248,
-        Pants = 72,
-    }
-    
-    private const int Black = 0;
-    private const int Grey1 = 11;
-    private const int Grey2 = 49;
-    private const int Grey3 = 108;
+    private const int Grey60 = 60;
+    private const int Grey122 = 122;
+    private const int Grey174 = 174;
 
-    // private SpriteRenderer[] m_spriteRenderers;
-    private SpriteRenderer m_spriteRenderer;
+    public Material m_swapMaterial;
     
+    public Color m_colorOutGrey60 = new Color(0, 0, 0, 1);
+    public Color m_colorOutGrey122 = new Color(0, 0, 0, 1);
+    public Color m_colorOutGrey174 = new Color(0, 0, 0, 1);
+
+    private SpriteRenderer[] m_spriteRenderers;
+    private TilemapRenderer[] m_tilemapRenderers;
+    private Image[] m_images;
+
     private Texture2D m_colorSwapTexture;
     private Color[] m_spriteColors;
-
+    
     private void Awake()
     {
-        // m_spriteRenderers = FindObjectsOfType<SpriteRenderer>();
-        m_spriteRenderer = GetComponent<SpriteRenderer>();
+        m_spriteRenderers = FindObjectsOfType<SpriteRenderer>();
+        m_tilemapRenderers = FindObjectsOfType<TilemapRenderer>();
+        m_images = FindObjectsOfType<Image>();
     }
 
     private void Start()
     {
         InitializeColorChanger();
-        
-        // SwapColor(255, ColorFromInt(0x781100));
-        // SwapColor(239, ColorFromInt(0x784a00));
-        // SwapColor(62, ColorFromInt(0x784a00));
-        // SwapColor(70, ColorFromInt(0x784a00));
-        // SwapColor(72, ColorFromInt(0x784a00));
-        //m_colorSwapTexture.Apply();
 
-        for (int i = 109; i < 110; i++)
-        {
-            SwapColor(i, ColorFromInt(0x781100));
-        }
-        
-        SwapColor(Grey1, ColorFromInt(0x784a00));
-        SwapColor(Grey2, ColorFromInt(0x4c2d00));
-        SwapColor(Grey3, ColorFromInt(0xc4ce00));
-        SwapColor(Grey3, ColorFromIntRGB(255, 0, 0));
+        SwapColor(Grey60, m_colorOutGrey60);
+        SwapColor(Grey122, m_colorOutGrey122);
+        SwapColor(Grey174, m_colorOutGrey174);
         m_colorSwapTexture.Apply();
     }
 
@@ -69,67 +57,30 @@ public class ColorChanger_Jann : MonoBehaviour
 
         colorSwapTex.Apply();
 
-        // foreach (SpriteRenderer spriteRenderer in m_spriteRenderers)
-        // {
-        //     spriteRenderer.material.SetTexture("_SwapTex", colorSwapTex);
-        // }
-        m_spriteRenderer.material.SetTexture("_SwapTex", colorSwapTex);
+        m_swapMaterial.SetTexture("_SwapTex", colorSwapTex);
+        
+        foreach (SpriteRenderer spriteRenderer in m_spriteRenderers)
+        {
+            spriteRenderer.material = m_swapMaterial;
+        }
+        
+        foreach (TilemapRenderer tilemapRenderer in m_tilemapRenderers)
+        {
+            tilemapRenderer.material = m_swapMaterial;
+        }
 
+        foreach (Image image in m_images)
+        {
+            image.material = m_swapMaterial;
+        }
+        
         m_spriteColors = new Color[colorSwapTex.width];
         m_colorSwapTexture = colorSwapTex;
     }
 
-    public void SwapColor(int index, Color color)
+    private void SwapColor(int index, Color color)
     {
         m_spriteColors[index] = color;
         m_colorSwapTexture.SetPixel(index, 0, color);
-    }
-    
-    public static Color ColorFromInt(int c, float alpha = 1.0f)
-    {
-        int r = (c >> 16) & 0x000000FF;
-        int g = (c >> 8) & 0x000000FF;
-        int b = c & 0x000000FF;
-
-        Color ret = ColorFromIntRGB(r, g, b);
-        ret.a = alpha;
-
-        return ret;
-    }
-
-    public static Color ColorFromIntRGB(int r, int g, int b)
-    {
-        return new Color((float)r / 255.0f, (float)g / 255.0f, (float)b / 255.0f, 1.0f);
-    }
-    
-    public void ClearColor(int index)
-    {
-        Color c = new Color(0.0f, 0.0f, 0.0f, 0.0f);
-        m_spriteColors[(int)index] = c;
-        m_colorSwapTexture.SetPixel((int)index, 0, c);
-    }
-
-    public void SwapAllSpritesColorsTemporarily(Color color)
-    {
-        for (int i = 0; i < m_colorSwapTexture.width; ++i)
-            m_colorSwapTexture.SetPixel(i, 0, color);
-        m_colorSwapTexture.Apply();
-    }
-
-    public void ResetAllSpritesColors()
-    {
-        for (int i = 0; i < m_colorSwapTexture.width; ++i)
-            m_colorSwapTexture.SetPixel(i, 0, m_spriteColors[i]);
-        m_colorSwapTexture.Apply();
-    }
-
-    public void ClearAllSpritesColors()
-    {
-        for (int i = 0; i < m_colorSwapTexture.width; ++i)
-        {
-            m_colorSwapTexture.SetPixel(i, 0, new Color(0.0f, 0.0f, 0.0f, 0.0f));
-            m_spriteColors[i] = new Color(0.0f, 0.0f, 0.0f, 0.0f);
-        }
-        m_colorSwapTexture.Apply();
     }
 }
