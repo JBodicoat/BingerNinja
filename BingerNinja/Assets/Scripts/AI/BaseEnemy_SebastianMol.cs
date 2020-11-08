@@ -1,5 +1,8 @@
 ﻿//sebastian mol
 //sebastian mol 30/10/2020 patrol now handles multiple patrol points
+// Jack 02/11/2020 changed "if (m_patrolPoints[0] != null) m_currentPatrolePos = m_patrolPoints[0];" in Start to
+//                         "if (m_patrolPoints.Length > 0) m_currentPatrolePos = m_patrolPoints[0];" to prevent index out of bounds error
+// Louie 03/11/2020 - Added detection sound effect
 
 using System.Collections;
 using System.Collections.Generic;
@@ -50,7 +53,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public float m_deleyBetweenPatrol;
     private float m_patroleTimer;
     private Transform m_currentPatrolePos;
-
+    private AudioManager_LouieWilliamson m_audioManager;
     /// <summary>
     /// abtract class for each enemys behaviour
     /// </summary>
@@ -72,6 +75,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
                 if (hit.collider.gameObject.CompareTag("Player")) //did it hit the play first
                 {
+                  //  m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Detection);
                     m_playerDetected = true;
                     m_playerTransform = hit.transform;
                     m_currentState = state.ATTACK;
@@ -315,7 +319,9 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         m_startPos = transform.position;
         m_patrolIteratorMax = m_patrolPoints.Length-1;
         m_patroleTimer = m_deleyBetweenPatrol;
-        if (m_patrolPoints[0] != null) m_currentPatrolePos = m_patrolPoints[0];
+        if (m_patrolPoints.Length > 0) m_currentPatrolePos = m_patrolPoints[0];
+
+        m_audioManager = FindObjectOfType<AudioManager_LouieWilliamson>();
     }
 
     private void Update()
