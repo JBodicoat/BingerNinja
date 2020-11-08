@@ -8,11 +8,12 @@
 // Mário 18/10/2020 - Add reset speed function
 // Joao 23/10/2020 - Added reference to playerStealth script and stop movement while crouched in update
 // Joao 26/10/2020 - *OUTDATED*Updated crouch restriction in update to check if player is not crouched*OUTDATED* Moved movement restriction to playerStealth Script
-
+// Alanna 08/11/2020 - Added roll movement, changed the speed to 7.5 for one second. unable to get previous movement as a variable because of the way input is set up.
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR.WSA.Input;
 
 public class PlayerMovement_MarioFernandes : MonoBehaviour
 {
@@ -20,19 +21,65 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
 
     //Direction the character is moving
     protected Vector2 m_direction = new Vector2(0, 0);
+    protected Vector2 m_old_direction = new Vector2(0, 0);
 
     public float m_speed = 5.0f;
- 
+
     public float m_baseSpeed = 5.0f;
 
     public void ResetSpeed()
     {
         m_speed = m_baseSpeed;
     }
-    
+    public void RollMovement()
+    {
+        if ((m_direction.x == 0) && (m_direction.y == 0))
+        {
+            m_speed = 5.0f;
+        }
+        else
+        {
+            if(m_direction.y < 0)
+            {
+                m_speed = 7.5f;
+                //go down
+                m_direction.y -= m_speed;
+                StartCoroutine("RollTimer");
+            }
+            if(m_direction.y > 0)
+            {
+                m_speed = 7.5f;
+                m_direction.y += m_speed;
+                StartCoroutine("RollTimer");
+                //roll up
+            }
+            if(m_direction.x < 0)
+            {
+                m_speed = 7.5f;
+                m_direction.x -= m_speed;
+                StartCoroutine("RollTimer");
+                //goleft
+            }
+            if(m_direction.x > 0)
+            {
+                m_speed = 7.5f;
+                m_direction.x += m_speed;
+                StartCoroutine("RollTimer");
+            }
+
+          
+        }
+        //m_direction = m_speed * m_old_direction;
+        //m_direction.Normalize();
+
+        //m_rb.velocity = m_direction;
+
+       
+    }
     //Recieves vector from the PlayerController script and is assigned to the m_direction vector
     public void RecieveVector(Vector2 vector)
     {
+        m_old_direction = m_direction;
         m_direction = vector;
     }
 
@@ -42,12 +89,18 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
         Physics2D.gravity = Vector2.zero;
         m_rb = GetComponent<Rigidbody2D>();
     }
-  
+
     void Update()
     {
-            m_direction.Normalize();
-            m_direction *= m_speed;
+       
+        m_direction.Normalize();
+        m_direction *= m_speed;
 
-            m_rb.velocity = m_direction;
+        m_rb.velocity = m_direction;
+    }
+    IEnumerator RollTimer()
+    {
+        yield return new WaitForSeconds(1.0f);
+        m_speed = 5.0f;
     }
 }
