@@ -9,37 +9,26 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// IMPORTANT - Correct scene order must be setup in projects build settings scene index
 /// </summary>
-public class SceneManager_JamieG : MonoBehaviour
+public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
 {
-    private static SceneManager_JamieG m_instance;
-
     private GameObject m_player;
-    private Vector3 checkpointOnReset;
-    
-    private void Awake()
-    {
-        // Singleton setup
-        if (m_instance != null && m_instance != this)
-        {
-            Destroy(gameObject);
-        } else {
-            m_instance = this;
-        }
-        DontDestroyOnLoad(gameObject);
-    }
+    private Vector3 m_checkpointOnReset;
+    private bool m_loadLastCheckpoint = false;
 
     public void ResetLevel()
     {
         LoadCurrentLevel();
     }
-    
+
     public void ResetToCheckpoint()
     {
         GameplayData gameplayData = SaveLoadSystem_JamieG.LoadGameplay();
-        checkpointOnReset = new Vector3(
+        m_checkpointOnReset = new Vector3(
             gameplayData.m_checkpointPosition[0],
             gameplayData.m_checkpointPosition[1],
             gameplayData.m_checkpointPosition[2]);
+
+        m_loadLastCheckpoint = true;
         
         LoadCurrentLevel();
 
@@ -64,15 +53,22 @@ public class SceneManager_JamieG : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    //This is called everytime a scene is loaded
+    //It moves the player to the last checkpoint if m_loadLastCheckpoint is true
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (!m_loadLastCheckpoint)
+        {
+            return;
+        }
+        
         if (m_player == null)
         {
             m_player = GameObject.FindWithTag("Player");
         }
 
-        m_player.transform.position = checkpointOnReset;
-    }
+        m_player.transform.position = m_checkpointOnReset;
 
-    public static SceneManager_JamieG Instance => m_instance;
+        m_loadLastCheckpoint = false;
+    }
 }
