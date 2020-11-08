@@ -3,6 +3,7 @@
 
 //Elliott 31/10/2020 - can now select an item which brings up a discription about said item, also adds item to inventory when item is brought
 //Elliott 06/10/2020 - added a check for the one time buy items, made a DeselectAll fuction.
+//Elliott 09/10/2020 - changed the color of the text when item is brought changes, give item now uses enum.
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ using UnityEngine.InputSystem;
 
 public class VendingMachineMenu_Elliott : MonoBehaviour
 {
+    public Text NoodleColor;
     public Text CookieColor;    
     public GameObject SelectPizza;
     public GameObject SelectCookie;
@@ -18,8 +20,8 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
     public GameObject SelectNoodle;
     protected Inventory_JoaoBeijinho Inventory;
     private Color newcolor;
-    private bool OneTimePurchaseCookie = true;
-    private bool OneTimePurchaseNoodle = true;
+    private bool PurchasedCookie = false;
+    private bool PurchasedNoodle = false;
 
     /// <summary>
     /// shuts all decriptions and opens up the one selected
@@ -61,29 +63,30 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
         {
             Debug.Log("pizza");
             //take away ninja points      
-            Inventory.GiveItem("Pizza");
+            Inventory.GiveItem(ItemType.Pizza, 1);
         }
-        else if (SelectCookie.activeInHierarchy && OneTimePurchaseCookie == true /*&& ninja point >= 50*/)
+        else if (SelectCookie.activeInHierarchy && !PurchasedCookie /*&& ninja point >= 50*/)
         {
             Debug.Log("cookies");
             //take away ninja points
-            Inventory.GiveItem("Cookies");
+            Inventory.GiveItem(ItemType.Cookie, 1);
             CookieColor.color = Color.red;
-            OneTimePurchaseCookie = false;
+            PurchasedCookie = true;
             
         }
         else if (SelectSake.activeInHierarchy /*&& ninja point >= 25*/)
         {
             Debug.Log("sake");
             //take away ninja points
-            Inventory.GiveItem("Sake");
+            Inventory.GiveItem(ItemType.Sake,1);
         }
-        else if (SelectNoodle.activeInHierarchy && OneTimePurchaseNoodle == true /*&& ninja point >= 50*/)
+        else if (SelectNoodle.activeInHierarchy && !PurchasedNoodle /*&& ninja point >= 50*/)
         {
             Debug.Log("noodles");
             //take away ninja points
-            Inventory.GiveItem("Noodles");
-            OneTimePurchaseNoodle = false;
+            Inventory.GiveItem(ItemType.Noodles,1);
+            NoodleColor.color = Color.red;
+            PurchasedNoodle = true;
         }
     }
 

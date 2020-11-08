@@ -16,6 +16,10 @@ public enum ItemType
 {
     Key,
     NinjaPoints,
+    Pizza,
+    Cookie,
+    Sake,
+    Noodles
 }
 
 /// <summary>
