@@ -7,13 +7,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 
 public class LevelScripting : MonoBehaviour
 {
-    bool enemyDead = false, levelThreeBossIntro, businessBossDead = false;
-    GameObject levelTwoLiftTrigger, levelThreeLiftTrigger;
+    #region VARIABLES
+    bool enemyDead = false, keyUsed = false, levelThreeBossIntro, businessBossDead = false;
+    GameObject levelTwoLiftTrigger, levelThreeLiftTrigger, keyTrigger;
     BaseEnemy_SebastianMol businessBoss, level2Enemy1, level2Enemy2;
     BossDialogue_MarioFernandes bossDialogue, level2End;
+    Tilemap objInfWalls, objWalls;
+    
+    #endregion
 
     private void Awake()
     {
@@ -29,7 +34,13 @@ public class LevelScripting : MonoBehaviour
             businessBoss = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BaseEnemy_SebastianMol>();
             bossDialogue = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BossDialogue_MarioFernandes>();
             levelThreeLiftTrigger = GameObject.Find("Level 3 Lift");
-        } 
+        }
+        if (SceneManager.GetActiveScene().buildIndex == 4)
+        {
+            keyTrigger = GameObject.Find("Key Trigger");
+            objWalls = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
+            objInfWalls = GameObject.Find("ObjectsInFrontOfWalls_map").GetComponent<Tilemap>();
+        }
     }
     private void Start()
     {
@@ -44,6 +55,17 @@ public class LevelScripting : MonoBehaviour
     }
     private void Update()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 2 && !enemyDead)
+        {
+            if (level2Enemy1.m_health <= 0 || level2Enemy2.m_health <= 0)
+            {
+                levelTwoLiftTrigger.SetActive(true);
+                level2End.TriggerDialogue(0);
+                enemyDead = true;
+
+            }
+        }
+
         if (SceneManager.GetActiveScene().buildIndex == 3 && !businessBossDead)
         {
             if (businessBoss.m_health <= 0)
@@ -56,18 +78,19 @@ public class LevelScripting : MonoBehaviour
               
             }   
         }
-
-        if (SceneManager.GetActiveScene().buildIndex == 2 && !enemyDead)
+      
+        if (SceneManager.GetActiveScene().buildIndex == 4 && !keyUsed)
         {
-            if (level2Enemy1.m_health <= 0 || level2Enemy2.m_health <= 0)
-            {                
-                levelTwoLiftTrigger.SetActive(true);
-                level2End.TriggerDialogue(0);
-                enemyDead = true;
-
+           if(!keyTrigger.activeInHierarchy)
+            {
+                objInfWalls.SetTile(new Vector3Int(25, 9, 0), null);
+                objInfWalls.SetTile(new Vector3Int(25, 10, 0), null);
+                objInfWalls.SetTile(new Vector3Int(25, 11, 0), null);
+                objWalls.SetTile(new Vector3Int(24, 8, 0), null);
+                objWalls.SetTile(new Vector3Int(24, 9, 0), null);
+                objWalls.SetTile(new Vector3Int(24, 10, 0), null);
             }
         }
-
     }
    
 }
