@@ -10,13 +10,17 @@
 
 // Jack 02/11/2020 Changed StatusEffect class to no longer inherit from MonoBehaviour as this was not needed (and caused a warning)
 // Mario 08/11/2020 - Update Heal and poison, Create Speed and Strength modifier effects
+// Jack 08/11/2020 - Changed StatusEffect functions from abstract to virtual to cut down on repeated code and empty functions. Some minor format changes
 
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.Interactions;
 
-//Template class used as base to any effet
+/// <summary>
+/// Template class used as base to any effet
+/// </summary>
 public abstract class StatusEffect_MarioFernandes
 {
     public bool m_isEnable;
@@ -27,20 +31,29 @@ public abstract class StatusEffect_MarioFernandes
     protected float m_speedMultiplier = 1;
 
     //Expecific to every effect
-    protected abstract void Effect();
+    protected virtual void Effect()
+    { 
+    }
+
     //Expecific to every effect
-    public abstract void Activate(GameObject target);
+    public virtual void Activate(GameObject target) 
+    {
+        m_isEnable = true;
+        m_target = target;
+    }
+
     //Expecific to every effect
-    public abstract void DeactivateEffect();
+    public virtual void DeactivateEffect() 
+    { 
+        m_isEnable = false;
+    }
+
     public void Update()
     {
-        if(m_duration >0)
-        {
-        Effect();
-        m_duration --;
-        }
+        if(m_duration-- > 0)
+            Effect();
         else
-        DeactivateEffect();                
+            DeactivateEffect();                
     }
 
 }
@@ -62,19 +75,9 @@ public class PoisionDefuff_MarioFernandes : StatusEffect_MarioFernandes
         m_damagePerTick = damagePerTick;        
     }
 
-    public override void Activate(GameObject target)
-    {
-        m_isEnable = true;
-        m_target = target;
-    }
     protected override void Effect()
     {        
         m_target.GetComponent<PlayerHealthHunger_MarioFernandes>().Hit(m_damagePerTick);
-    }
-
-    public override void DeactivateEffect()
-    {
-        m_isEnable = false;
     }
 }
 
@@ -100,16 +103,6 @@ public class HealBuff_MarioFernandes : StatusEffect_MarioFernandes
         m_target = target;
         m_target.GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_healthIncrease);
     }
-    public override void DeactivateEffect()
-    {
-        m_isEnable = false;
-        
-    }
-
-    protected override void Effect()
-    {        
-    }    
-
 }
 
 public class SpeedEffect_MarioFernandes : StatusEffect_MarioFernandes
@@ -136,14 +129,8 @@ public class SpeedEffect_MarioFernandes : StatusEffect_MarioFernandes
     public override void DeactivateEffect()
     {
         m_target.GetComponent<PlayerMovement_MarioFernandes>().ResetSpeed();
-        m_isEnable = false;
-        
-    }
-
-    protected override void Effect()
-    {        
-    }    
-
+        m_isEnable = false; 
+    } 
 }
 
 public class StrengthEffect_MarioFernandes : StatusEffect_MarioFernandes
@@ -160,22 +147,4 @@ public class StrengthEffect_MarioFernandes : StatusEffect_MarioFernandes
         m_duration = duration;
         m_strengthModifier = strengthModifier;        
     }
-
-    public override void Activate(GameObject target)
-    {
-        m_isEnable = true;
-        m_target = target;
-        
-    }
-    public override void DeactivateEffect()
-    {
-       
-        m_isEnable = false;
-        
-    }
-
-    protected override void Effect()
-    {        
-    }    
-
 }
