@@ -11,16 +11,16 @@ using UnityEngine.InputSystem;
 
 public class VendingMachineMenu_Elliott : MonoBehaviour
 {
-    public Text CookieColor;
-    public bool OneTimePurchaseCookie = true;
-    public bool OneTimePurchaseNoodle = true;
+    public Text CookieColor;    
     public GameObject SelectPizza;
     public GameObject SelectCookie;
     public GameObject SelectSake;
     public GameObject SelectNoodle;
-  //  public GameObject CookieColor;
     protected Inventory_JoaoBeijinho Inventory;
-    
+    private Color newcolor;
+    private bool OneTimePurchaseCookie = true;
+    private bool OneTimePurchaseNoodle = true;
+
     /// <summary>
     /// shuts all decriptions and opens up the one selected
     /// </summary>
@@ -68,8 +68,9 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
             Debug.Log("cookies");
             //take away ninja points
             Inventory.GiveItem("Cookies");
+            CookieColor.color = Color.red;
             OneTimePurchaseCookie = false;
-            CookieColor.GetComponent<Text>().color = Color.blue;
+            
         }
         else if (SelectSake.activeInHierarchy /*&& ninja point >= 25*/)
         {
@@ -89,6 +90,8 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
     void Start()
     {
         Inventory = GameObject.FindObjectOfType<Inventory_JoaoBeijinho>();
+        //Color newcolor = Color.red;
+        //CookieColor.color = Color.red;
     }
 
     /// <summary>
