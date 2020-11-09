@@ -29,7 +29,7 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
     private Image[] m_images;
 
     private Texture2D m_colorSwapTexture;
-    private Color[] m_spriteColors;
+    internal Color[] m_spriteColors;
     
     private void Awake()
     {
