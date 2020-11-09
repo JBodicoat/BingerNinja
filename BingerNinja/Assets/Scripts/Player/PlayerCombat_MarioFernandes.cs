@@ -1,5 +1,5 @@
 ﻿// Mário Fernandes
-/// This class stores the current weapon on the player and make im abel to use it 
+
 
 // Mário 17/10/2020 - Create class and Attack, PickUpFood, IIsHoldingFood Funcions
 // Joao 25/10/2020 - Stop weapon usage while crouched in update
@@ -29,17 +29,30 @@ public enum FoodType
     SAKE,
     NOODLES,
 } 
+
+public enum WeaponType
+{
+    Melee,
+    Ranged
+}
+
+///<summary>
+/// This class stores the current weapon on the player and make im abel to use it 
+///<summary>
 public class PlayerCombat_MarioFernandes : MonoBehaviour
 {
     private PlayerAnimation_LouieWilliamson m_animationScript;
     public GameObject m_projectile = null;
-    public float m_attackSpeed = 1;
-    public float m_currentAttackime = 0;
+    public float m_attackDelay = 1;
+    public float m_timeSinceLastAttack = 0;
     //public Collider2D EnemyDetection = null;    
-    public float m_angeAttribute = 3;
+    public float m_meleeAttackRadius = 3;
     public float m_strenght = 1;
     protected PlayerStealth_JoaoBeijinho m_playerStealthScript;
 
+    //This weapons are represented by an array of weapons of size 2
+    // 0 - Melee weapon
+    // 1 - Ranged weapon
     [SerializeField]
     protected WeaponsTemplate_MarioFernandes[] m_currentWeapon;
 
@@ -47,6 +60,8 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
     PlayerHealthHunger_MarioFernandes m_playerHealthHungerScript;
 
     private AudioManager_LouieWilliamson m_audioManager;
+
+    private PlayerController_JamieG Controller;
 
   public  bool IsHoldingFood()
         {
@@ -88,7 +103,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
                     }
                 }
 
-                if(CloseEnemy && distanceToClosestsEnemy <= m_angeAttribute)
+                if(CloseEnemy && distanceToClosestsEnemy <= m_meleeAttackRadius)
                 {
                     CloseEnemy.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage((int)(m_currentWeapon[m_weaponsIndex].dmg * m_strenght));
                 }                
@@ -97,7 +112,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             //EnemyDetection.enabled = false;        
     }
 
-    public void eat()
+    public void Eat()
     {
         m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Eating);
 
@@ -145,12 +160,15 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         m_animationScript = GetComponent<PlayerAnimation_LouieWilliamson>();
         m_playerHealthHungerScript = FindObjectOfType<PlayerHealthHunger_MarioFernandes>();
         m_audioManager = FindObjectOfType<AudioManager_LouieWilliamson>();
+        Controller = GetComponent<PlayerController_JamieG>();
     }
 
     // Update is called once per frame
     void Update()
     {
-         if(GetComponent<PlayerController_JamieG>().m_switchWeapons.triggered)
+        // 0 - Melee weapon
+        // 1 - Ranged weapon
+         if(Controller.m_switchWeapons.triggered)
          {
              if(m_weaponsIndex == 1)
              m_weaponsIndex = 0;
@@ -160,21 +178,21 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
              print(m_currentWeapon[m_weaponsIndex]);
          }
 
-        if(m_currentAttackime < 0)
+        if(m_timeSinceLastAttack < 0)
         {
-              if (!m_playerStealthScript.m_crouched && m_currentWeapon[m_weaponsIndex] &&  GetComponent<PlayerController_JamieG>().m_attack.triggered)
+              if (!m_playerStealthScript.m_crouched && m_currentWeapon[m_weaponsIndex] &&  Controller.m_attack.triggered)
             {                           
-                m_currentAttackime = m_attackSpeed;
+                m_timeSinceLastAttack = m_attackDelay;
                 print("Attack");
                 Attack();        
             }          
         }
         else
-        m_currentAttackime -= Time.deltaTime;
+        m_timeSinceLastAttack -= Time.deltaTime;
 
-        if(GetComponent<PlayerController_JamieG>().m_eat.triggered)
+        if(Controller.m_eat.triggered)
         {
-            eat();
+            Eat();
         }
 
 

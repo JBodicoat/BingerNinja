@@ -1,11 +1,16 @@
-﻿// Jack 02/11/2020 added m_hungerRestoreAmount
+﻿///Mário Fernandes
+
+// Mario 02/11/2020 - Create the Class
+// Jack 02/11/2020 added m_hungerRestoreAmount
 // Mario 08/11/2020 - Add strength modifier 
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+///<Summary>
+///This class serves as the template for all the weapons
+///<Summary>
 public class WeaponsTemplate_MarioFernandes : MonoBehaviour
 {
     [SerializeField]
