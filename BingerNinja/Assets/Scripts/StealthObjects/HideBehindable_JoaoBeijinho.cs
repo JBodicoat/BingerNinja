@@ -53,7 +53,7 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
     void Start()
     {
         m_changeLayer = GetComponent<SpriteRenderer>();
-        m_smokeParticleSystem = GetComponent<ParticleSystem>();
+        m_smokeParticleSystem = GetComponentInChildren<ParticleSystem>();
     
     }
 
