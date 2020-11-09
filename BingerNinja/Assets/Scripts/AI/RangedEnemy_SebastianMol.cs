@@ -26,18 +26,18 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
     public float m_outOfSightDeley;  
     private void RangedAttack()
     {
-        if (Vector2.Distance(transform.position, m_playerTransform.position) < m_shootingRange)
+        if (Vector2.Distance(transform.position, m_targetTransform.position) < m_shootingRange)
         {
-            if (m_playerTransform != null)
+            if (m_targetTransform != null)
             {
-                Vector3 dir = Vector3.Normalize(m_playerTransform.position - transform.position);
+                Vector3 dir = Vector3.Normalize(m_targetTransform.position - transform.position);
                 float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
                 m_aimer.transform.eulerAngles = new Vector3(0, 0, angle);
 
                 if (m_attackTimer <= 0)
                 {
                     GameObject projectile = Instantiate(m_projectile, transform.position, Quaternion.Euler(new Vector3(dir.x, dir.y, 0)));
-                    projectile.GetComponent<BulletMovment_SebastianMol>().m_direction = (m_playerTransform.position - transform.position).normalized;
+                    projectile.GetComponent<BulletMovment_SebastianMol>().m_direction = (m_targetTransform.position - transform.position).normalized;
                     m_attackTimer = m_shootDeley;
                 }
                 else
@@ -67,16 +67,16 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
 
     internal override void ChaseState()
     {
-        if (IsPlayerInLineOfSight()) // if you can see player
+        if (IsTargetInLineOfSight()) // if you can see player
         {
-            if (Vector2.Distance(transform.position, m_playerTransform.position) < m_shootingRange / 1.5f) //if the player is in range
+            if (Vector2.Distance(transform.position, m_targetTransform.position) < m_shootingRange / 1.5f) //if the player is in range
             {
                 ClearPath();
                 m_currentState = state.ATTACK;
             }
             else// if the [layer is out fo range
             {
-                PathfindTo(m_playerTransform.position);
+                PathfindTo(m_targetTransform.position);
             }
         }
         else
@@ -98,7 +98,7 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
 
     internal override void AttackState()
     {
-        if (IsPlayerInLineOfSight())
+        if (IsTargetInLineOfSight())
         {
             RangedAttack();
             m_outOfSightTimer = m_outOfSightDeley;

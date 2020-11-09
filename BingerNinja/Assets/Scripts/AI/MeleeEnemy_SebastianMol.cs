@@ -116,18 +116,19 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     }
 
     internal override void ChaseState()
-    {
-        if (IsPlayerInLineOfSight())
+    {   
+        if (IsTargetInLineOfSight())
         {
-            if (Vector2.Distance(transform.position, m_playerTransform.position) < m_meleeRange)
+            if (Vector2.Distance(transform.position, m_targetTransform.position) < m_meleeRange)
             {
                 ClearPath(false);
                 m_currentState = state.ATTACK;
             }
             else
             {
-                PathfindTo(m_playerTransform.position);
+                PathfindTo(m_targetTransform.position);
             }
+            
         }
         else
         {
@@ -148,9 +149,9 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
 
     internal override void AttackState()
     {
-        if (IsPlayerInLineOfSight())
+        if (IsTargetInLineOfSight())
         {
-            if (Vector2.Distance(transform.position, m_playerTransform.position) < m_meleeRange)
+            if (Vector2.Distance(transform.position, m_targetTransform.position) < m_meleeRange)
             {
                 MeleeAttack();
             }

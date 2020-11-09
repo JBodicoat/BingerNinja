@@ -5,6 +5,7 @@
 //sebastian mol 02/11/20 now path gets recalculated when player moves away from original position 
 //sebastian mol 02/11/20 improved player detection with second raycast
 //sebastian mol 06/11/20 new damage sysetm
+//sebastian mol 06/11/20 inplamented magic/logic of distraction projectile
 
 using System.Collections;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UIElements;
 using UnityEngine.Tilemaps;
-
+using UnityEngine.AI;
 
 /// <summary>
 ///base class for enemies to inherit from with logic for detection, patrole, movment, stats managment
@@ -55,7 +56,9 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
     private Pathfinder_SebastianMol m_pathfinder;
     protected List<Vector2Int> m_currentPath = new List<Vector2Int>();
-    protected Transform m_playerTransform; //used to get player position can be null if undedteceted
+
+    protected Transform m_targetTransform; //used to get player position can be null if undedteceted
+
     protected float m_scale; //player scale at start
     private Vector3 m_lastPos; //the last position the enemy was at
     protected Vector3 m_startPos;//the starting position of the enemy
@@ -119,7 +122,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <param name="collision"> the collion date from the onTrigger functions</param>
     protected void PlayerDetection(GameObject collision)
     {
-        if(collision.CompareTag("Player")) // is it a the player 
+        if(collision.CompareTag("Player") ) // is it a the player 
         {
             if(collision.GetComponent<PlayerStealth_JoaoBeijinho>().IsStealthed() == false) //is the player in stealth/
             {
@@ -130,9 +133,10 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
                 if (hit.collider.gameObject.CompareTag("Player")) //did it hit the play first
                 {
+                    //TODO uncomment this
                   //  m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Detection);
                     m_playerDetected = true;
-                    m_playerTransform = hit.transform;
+                    m_targetTransform = hit.transform;
                     m_currentState = state.ATTACK;
                     ClearPath();
                 }
@@ -142,41 +146,99 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 }
             }
         }
-    }
-
-    /// <summary>
-    /// returns waeether the player is in line of sight of the enemy
-    /// </summary>
-    /// <returns>weather the player is in line of sight</returns>
-    protected bool IsPlayerInLineOfSight()
-    {
-        m_detectionCollider.enabled = false;
-        RaycastHit2D hit = Physics2D.Linecast(m_rayCastStart.position, m_playerTransform.position);
-        Debug.DrawLine(m_rayCastStart.position, m_playerTransform.position, Color.red);
-
-        if (hit.collider.gameObject.CompareTag("Player"))
+        else if ( collision.CompareTag("DistractionProjectile"))
         {
             m_detectionCollider.enabled = false;
-            return true;
-        }
-        else
-        {
+            RaycastHit2D hit = Physics2D.Linecast(m_rayCastStart.position, collision.transform.position);
+            Debug.DrawLine(m_rayCastStart.position, collision.transform.position, Color.red);
 
-            RaycastHit2D hitTwo = Physics2D.Linecast(m_rayCastStartBackup.position, m_playerTransform.position);
-            Debug.DrawLine(m_rayCastStartBackup.position, m_playerTransform.position, Color.red);
-
-            if (hitTwo.collider.gameObject.CompareTag("Player"))
+            if (hit.collider.gameObject.CompareTag("DistractionProjectile"))
             {
-                m_detectionCollider.enabled = false;
-                return true;
+                //TODO uncomment this
+                //  m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Detection);
+                m_playerDetected = true;
+                m_targetTransform = hit.transform;
+                m_currentState = state.ATTACK;
+                ClearPath();
             }
             else
             {
                 m_detectionCollider.enabled = true;
-                return false;
             }
         }
-        
+    }
+
+    /// <summary>
+    /// returns waether the player is in line of sight of the enemy
+    /// </summary>
+    /// <returns>weather the player is in line of sight</returns>
+    protected bool IsTargetInLineOfSight()
+    { 
+        GameObject distract = GameObject.FindGameObjectWithTag("DistractionProjectile"); // see if ther is a distraction
+
+        if(distract == null)
+        {
+            return RayCastToTag("Player", m_targetTransform);
+        }
+        else
+        {
+            if (RayCastToTag("Player", m_targetTransform) && distract.activeSelf)
+            {
+                return RayCastToTag("DistractionProjectile", m_targetTransform);
+            }
+            else if (RayCastToTag("Player", m_targetTransform) == false && distract.activeSelf)
+            {
+                return RayCastToTag("DistractionProjectile", m_targetTransform);
+            }
+            else if (RayCastToTag("Player", m_targetTransform) && distract.activeSelf == false)
+            {
+                return RayCastToTag("Player", m_targetTransform);
+            }
+            else
+            {
+                return false;
+            }
+        }        
+    }
+
+    private bool RayCastToTag(string tag, Transform rayCastPos)
+    {
+        if(rayCastPos != null && rayCastPos.position != Vector3.zero)
+        {
+            m_detectionCollider.enabled = false;
+            RaycastHit2D hit = Physics2D.Linecast(m_rayCastStart.position, rayCastPos.position);
+            Debug.DrawLine(m_rayCastStart.position, rayCastPos.position, Color.red);
+            if (hit.collider.gameObject.CompareTag(tag))
+            {
+                m_detectionCollider.enabled = false;
+                m_targetTransform = hit.transform;
+                return true;
+            }
+            else
+            {
+
+                RaycastHit2D hitTwo = Physics2D.Linecast(m_rayCastStartBackup.position, rayCastPos.position);
+                Debug.DrawLine(m_rayCastStartBackup.position, rayCastPos.position, Color.red);
+
+                if (hitTwo.collider.gameObject.CompareTag(tag))
+                {
+                    m_detectionCollider.enabled = false;
+                    m_targetTransform = hit.transform;
+                    return true;
+                }
+                else
+                {
+                    m_detectionCollider.enabled = true;
+                    m_targetTransform = hit.transform;
+                    return false;
+                }
+            }
+        }
+        else
+        {
+            return false;
+        }
+       
     }
 
     #endregion
@@ -349,7 +411,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     {
         if(m_playerDetected)
         {
-            if(m_playerTransform.position.x > transform.position.x)
+            if(m_targetTransform.position.x > transform.position.x)
             {
                 transform.localScale = new Vector3( -m_scale, transform.localScale.y, transform.localScale.z);
             }
@@ -397,11 +459,11 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 break;
 
             case m_enemyType.BARISTA:
-                if(m_playerTransform.position.x < transform.position.x) //player on the left
+                if(m_targetTransform.position.x < transform.position.x) //player on the left
                 {
                     if(transform.localScale.x < 0) NormalTakeDamage(damage); //looking left
                 }
-                else if(m_playerTransform.position.x > transform.position.x) //player on the right
+                else if(m_targetTransform.position.x > transform.position.x) //player on the right
                 {
                     if (transform.localScale.x > 0) NormalTakeDamage(damage); //looking right
                 }
