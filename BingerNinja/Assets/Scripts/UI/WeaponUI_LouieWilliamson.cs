@@ -1,7 +1,8 @@
 ﻿///Louie Williamson
-///This scripts handles the UI values for the weapons, pickups and keys.
+///This scripts handles the UI values and animations for the weapons, pickups and keys.
 
 //Louie 08/11/2020 - First created
+//Louie 09/11/2020 - Added animations
 
 using System.Collections;
 using System.Collections.Generic;
@@ -12,14 +13,9 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    private bool hasKey;
-    private bool isKeyOnScreen;
-
     private string weaponName;
     private string rangedName;
     private string rangedAmmo;
-
-    private bool isWeaponUIonScreen; // use this to animate in and out
 
     public Text weaponText;
     public Image weaponImage;
@@ -30,14 +26,16 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
 
     public Image pickupImage;
 
+    private Animator weaponsAnim;
+    public Animator pickupAnim;
+    public Animator keyAnim;
+
     private float timer;
-    private float timer2;
     void Start()
     {
-        hasKey = false;
-        isKeyOnScreen = false;
-        isWeaponUIonScreen = false;
+        timer = 0;
 
+        weaponsAnim = GetComponent<Animator>();
         weaponName = "";
         rangedName = "";
         rangedAmmo = "";
@@ -46,7 +44,32 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timer += Time.deltaTime;
 
+        if (timer > 20)
+        {
+            SetWeaponsUIAnimation(false);
+            setPickupAnim(false);
+            setKey(false);
+
+            timer = 0;
+        }
+        else if (timer > 15)
+        {
+            setPickupAnim(true);
+        }
+        else if (timer > 10)
+        {
+            setKey(true);
+        }
+        else if (timer > 5)
+        {
+            SetWeaponsUIAnimation(true);
+        }
+    }
+    public void SetWeaponsUIAnimation(bool isShownIfTrue)
+    {
+        weaponsAnim.SetBool("isOnScreen", isShownIfTrue);
     }
     public void WeaponChange(FoodType newWeapon, bool isRanged, int ammo)
     {
@@ -59,35 +82,35 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
         {
             case FoodType.FUGU:
                 setName("Fugu", isRanged);
-                //setImage();
+                //setImage(, isRanged);
                 break;
             case FoodType.SQUID:
                 setName("Squid", isRanged);
-                //setImage();
+                //setImage(, isRanged);
                 break;
             case FoodType.RICEBALL:
                 setName("Riceball", isRanged);
-                //setImage();
+                //setImage(, isRanged);
                 break;
             case FoodType.KOBEBEEF:
                 setName("Kobe Beef", isRanged);
-                //setImage();
+                //setImage(, isRanged);
                 break;
             case FoodType.SASHIMI:
                 setName("Sashimi", isRanged);
-                //setImage();
+                //setImage(, isRanged);
                 break;
             case FoodType.PIZZA:
                 setName("Pizza", isRanged);
-                //setImage();
+                //setImage(, isRanged);
                 break;
             case FoodType.SAKE:
                 setName("Sake", isRanged);
-                //setImage();
+                //setImage(, isRanged);
                 break;
             case FoodType.NOODLES:
                 setName("Noodles", isRanged);
-                //setImage();
+                //setImage(, isRanged);
                 break;
             default:
                 break;
@@ -120,20 +143,18 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
         ammoText.text = ammo;
     }
 
-    void setPickup()
+    public void setPickupImage()
     {
         //pickupImage = ;
     }
 
-    void setKey(bool hasKey)
+    public void setKey(bool hasKey)
     {
-        if (hasKey)
-        {
-            //enable key ui - could animate in
-        }
-        else
-        {
-            //disable key ui - could animate out
-        }
+        keyAnim.SetBool("hasKey", hasKey);
+    }
+    
+    public void setPickupAnim(bool hasPickup)
+    {
+        pickupAnim.SetBool("isPickupShown", hasPickup);
     }
 }

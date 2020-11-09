@@ -111,7 +111,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -136.1, y: 0.977211}
+  m_AnchoredPosition: {x: -136.1, y: -199}
   m_SizeDelta: {x: 35.585922, y: 120.65073}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &433488356
@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 663309855}
   - component: {fileID: 663309857}
   - component: {fileID: 663309856}
+  - component: {fileID: 289310619}
   m_Layer: 5
   m_Name: Pickup
   m_TagString: Untagged
@@ -228,6 +229,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &289310619
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663309854}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 34900ef1b9f250a4eb7f5273ed21a01a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &768828153
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,7 +260,7 @@ GameObject:
   - component: {fileID: 768828156}
   - component: {fileID: 768828155}
   m_Layer: 5
-  m_Name: Image
+  m_Name: PickupImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -314,6 +334,7 @@ GameObject:
   - component: {fileID: 824856599}
   - component: {fileID: 824856601}
   - component: {fileID: 824856600}
+  - component: {fileID: 1228400497}
   m_Layer: 5
   m_Name: Key
   m_TagString: Untagged
@@ -379,6 +400,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &1228400497
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824856598}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 21ef18cf52dd5cb4984cc2726eb8846b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &859598736
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,7 +456,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -31.930023, y: 0.977211}
+  m_AnchoredPosition: {x: -31.930023, y: -199}
   m_SizeDelta: {x: 35.585922, y: 120.65073}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &859598739
@@ -700,6 +740,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1799900213}
   - component: {fileID: 1799900214}
+  - component: {fileID: 1072227366}
   m_Layer: 5
   m_Name: WeaponsUI
   m_TagString: Untagged
@@ -748,6 +789,27 @@ MonoBehaviour:
   rangedImage: {fileID: 1027272990}
   ammoText: {fileID: 1870285865}
   pickupImage: {fileID: 768828155}
+  pickupAnim: {fileID: 289310619}
+  keyAnim: {fileID: 1228400497}
+--- !u!95 &1072227366
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799900212}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d0b502b866dd8ec4e91ee41e603dd21a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1870285863
 GameObject:
   m_ObjectHideFlags: 0
