@@ -1,6 +1,7 @@
 ﻿//sebastian mol
 //sebastian mol 30/10/20 melee enemy shoudl be completed
 //sebastian mol 02/11/20 removed player behaviour switch replaced it with abstract functions
+//sebastian mol 09/11/20 chrage attack fixed 
 
 using System.Collections;
 using System.Collections.Generic;
@@ -30,6 +31,8 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     public float m_chargeAttackDeley;
     [Tooltip("possiility of a charge attack (1/m_chargAttackPosibility)")]
     public int m_chargAttackPosibility;
+    [Tooltip("the amaount the charge attack is multiplied by")]
+    public float m_chargeAttackMultiplier = 3;
 
     /// <summary>
     /// funtionality for the melee attack
@@ -38,17 +41,24 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     {
         if (m_attackTimer <= 0)
         {
-            int rand = Random.Range(0, m_chargAttackPosibility);
-            switch (rand)
+            if(m_hasChargeAttack)
             {
-                case 0:
-                    StartCoroutine(QuickAttack());
-                    break;
-                
-                case 1:
-                    StartCoroutine(ChargeAttack());
-                    break;
+                int rand = Random.Range(0, m_chargAttackPosibility);
+                switch (rand)
+                {
+                    case 0:
+                        StartCoroutine(QuickAttack());
+                        break;
+
+                    case 1:
+                        StartCoroutine(ChargeAttack());
+                        break;
+                }
             }
+            else
+            {
+                StartCoroutine(QuickAttack());
+            }            
            
             m_attackTimer = m_hitSpeed;
         }
@@ -77,9 +87,9 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     /// <returns></returns>
     private IEnumerator ChargeAttack()
     {
-        new WaitForSeconds(m_chargeAttackDeley);
-        m_attackCollider.GetComponent<EnemyDamager_SebastianMol>().m_damage 
-            = m_attackCollider.GetComponent<EnemyDamager_SebastianMol>().m_baseDamage * 3;
+        yield return new WaitForSeconds(m_chargeAttackDeley);
+        EnemyDamager_SebastianMol dameger = m_attackCollider.GetComponent<EnemyDamager_SebastianMol>();
+        dameger.m_damage = dameger.m_baseDamage * m_chargeAttackMultiplier;
         m_attackCollider.SetActive(true);
         yield return new WaitForSeconds(attackDeactivationSpeed);
         m_attackCollider.SetActive(false);
@@ -106,18 +116,19 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     }
 
     internal override void ChaseState()
-    {
-        if (IsPlayerInLineOfSight())
+    {   
+        if (IsTargetInLineOfSight())
         {
-            if (Vector2.Distance(transform.position, m_playerTransform.position) < m_meleeRange)
+            if (Vector2.Distance(transform.position, m_targetTransform.position) < m_meleeRange)
             {
                 ClearPath(false);
                 m_currentState = state.ATTACK;
             }
             else
             {
-                PathfindTo(m_playerTransform.position);
+                PathfindTo(m_targetTransform.position);
             }
+            
         }
         else
         {
@@ -138,9 +149,9 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
 
     internal override void AttackState()
     {
-        if (IsPlayerInLineOfSight())
+        if (IsTargetInLineOfSight())
         {
-            if (Vector2.Distance(transform.position, m_playerTransform.position) < m_meleeRange)
+            if (Vector2.Distance(transform.position, m_targetTransform.position) < m_meleeRange)
             {
                 MeleeAttack();
             }
