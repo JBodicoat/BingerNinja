@@ -6,12 +6,13 @@
 // Jann 01/11/20 - Inspector UI, finalizing implementation
 // Jann 03/11/20 - Added TilemapRenderer and Image (UI) support
 // Jann 07/11/20 - Materials are now assigned in code and don't need to be set for everything in Unity
+// Jann 08/11/20 - Turned it into a singleton (used by HitEffect_Elliot)
 
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
-public class ColorChanger_Jann : MonoBehaviour
+public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
 {
     private const int Grey60 = 60;
     private const int Grey122 = 122;
@@ -19,9 +20,9 @@ public class ColorChanger_Jann : MonoBehaviour
 
     public Material m_swapMaterial;
     
-    public Color m_colorOutGrey60 = new Color(0, 0, 0, 1);
-    public Color m_colorOutGrey122 = new Color(0, 0, 0, 1);
-    public Color m_colorOutGrey174 = new Color(0, 0, 0, 1);
+    [SerializeField] private Color m_colorOutGrey60 = new Color(0, 0, 0, 1);
+    [SerializeField] private Color m_colorOutGrey122 = new Color(0, 0, 0, 1);
+    [SerializeField] private Color m_colorOutGrey174 = new Color(0, 0, 0, 1);
 
     private SpriteRenderer[] m_spriteRenderers;
     private TilemapRenderer[] m_tilemapRenderers;
@@ -83,4 +84,12 @@ public class ColorChanger_Jann : MonoBehaviour
         m_spriteColors[index] = color;
         m_colorSwapTexture.SetPixel(index, 0, color);
     }
+
+    public Color ColorOutGrey60 => m_colorOutGrey60;
+
+    public Color ColorOutGrey122 => m_colorOutGrey122;
+
+    public Color ColorOutGrey174 => m_colorOutGrey174;
+
+    public Color[] SpriteColors => m_spriteColors;
 }
