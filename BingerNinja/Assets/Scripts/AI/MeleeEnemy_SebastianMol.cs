@@ -1,6 +1,7 @@
 ﻿//sebastian mol
 //sebastian mol 30/10/20 melee enemy shoudl be completed
 //sebastian mol 02/11/20 removed player behaviour switch replaced it with abstract functions
+//sebastian mol 09/11/20 chrage attack fixed 
 
 using System.Collections;
 using System.Collections.Generic;
@@ -40,17 +41,24 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     {
         if (m_attackTimer <= 0)
         {
-            int rand = Random.Range(0, m_chargAttackPosibility);
-            switch (rand)
+            if(m_hasChargeAttack)
             {
-                case 0:
-                    StartCoroutine(QuickAttack());
-                    break;
-                
-                case 1:
-                    StartCoroutine(ChargeAttack());
-                    break;
+                int rand = Random.Range(0, m_chargAttackPosibility);
+                switch (rand)
+                {
+                    case 0:
+                        StartCoroutine(QuickAttack());
+                        break;
+
+                    case 1:
+                        StartCoroutine(ChargeAttack());
+                        break;
+                }
             }
+            else
+            {
+                StartCoroutine(QuickAttack());
+            }            
            
             m_attackTimer = m_hitSpeed;
         }
