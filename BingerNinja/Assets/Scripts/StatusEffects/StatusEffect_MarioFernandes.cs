@@ -30,20 +30,20 @@ public abstract class StatusEffect_MarioFernandes
     protected float m_duration = 0;
     protected float m_speedMultiplier = 1;
 
-    //Expecific to every effect
+    //Called Every tick
     protected virtual void Effect()
     { 
     }
 
-    //Expecific to every effect
+    //Called whene the effect starts
     public virtual void Activate(GameObject target) 
     {
         m_isEnable = true;
         m_target = target;
     }
 
-    //Expecific to every effect
-    public virtual void DeactivateEffect() 
+    //Called when the effect ends
+     public virtual void DeactivateEffect() 
     { 
         m_isEnable = false;
     }
@@ -146,5 +146,17 @@ public class StrengthEffect_MarioFernandes : StatusEffect_MarioFernandes
     {
         m_duration = duration;
         m_strengthModifier = strengthModifier;        
+    }
+
+    public override void Activate(GameObject target)
+    {
+        base.Activate(target);
+        m_target.GetComponent<PlayerCombat_MarioFernandes>().m_strenght = m_strengthModifier;
+    }
+
+    public override void DeactivateEffect()
+    {
+        m_target.GetComponent<PlayerCombat_MarioFernandes>().ResetStrength();
+        base.DeactivateEffect();
     }
 }
