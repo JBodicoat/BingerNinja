@@ -30,6 +30,8 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     public float m_chargeAttackDeley;
     [Tooltip("possiility of a charge attack (1/m_chargAttackPosibility)")]
     public int m_chargAttackPosibility;
+    [Tooltip("the amaount the charge attack is multiplied by")]
+    public float m_chargeAttackMultiplier = 3;
 
     /// <summary>
     /// funtionality for the melee attack
@@ -77,9 +79,9 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     /// <returns></returns>
     private IEnumerator ChargeAttack()
     {
-        new WaitForSeconds(m_chargeAttackDeley);
-        m_attackCollider.GetComponent<EnemyDamager_SebastianMol>().m_damage 
-            = m_attackCollider.GetComponent<EnemyDamager_SebastianMol>().m_baseDamage * 3;
+        yield return new WaitForSeconds(m_chargeAttackDeley);
+        EnemyDamager_SebastianMol dameger = m_attackCollider.GetComponent<EnemyDamager_SebastianMol>();
+        dameger.m_damage = dameger.m_baseDamage * m_chargeAttackMultiplier;
         m_attackCollider.SetActive(true);
         yield return new WaitForSeconds(attackDeactivationSpeed);
         m_attackCollider.SetActive(false);
