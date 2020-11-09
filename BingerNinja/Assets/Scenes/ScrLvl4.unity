@@ -208,9 +208,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gong
       objectReference: {fileID: 0}
+    - target: {fileID: 4003713460872805705, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
+      propertyPath: m_TagString
+      value: SaveCheckpoint
+      objectReference: {fileID: 0}
     - target: {fileID: 4003713460872805708, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.586622
+      value: -9.13
       objectReference: {fileID: 0}
     - target: {fileID: 4003713460872805708, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
       propertyPath: m_LocalPosition.y
@@ -238,7 +242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4003713460872805708, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4003713460872805708, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -261,6 +265,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 841874676130060992, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157954881687136812, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5157954882409207611, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
       propertyPath: m_patrolPoints.Array.size
       value: 2
@@ -329,9 +341,21 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5157954882409207613, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c32d50fb846c662449889d803366ef5d, type: 2}
     - target: {fileID: 5157954882409207616, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
       propertyPath: m_Name
       value: ChefEnemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157954882409207616, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5751295711232786928, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
@@ -605,13 +629,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gong (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4003713460872805705, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
+      propertyPath: m_TagString
+      value: SaveCheckpoint
+      objectReference: {fileID: 0}
     - target: {fileID: 4003713460872805708, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.6
+      value: -1.99
       objectReference: {fileID: 0}
     - target: {fileID: 4003713460872805708, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.42
+      value: 8.38
       objectReference: {fileID: 0}
     - target: {fileID: 4003713460872805708, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
       propertyPath: m_LocalPosition.z
@@ -635,7 +663,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4003713460872805708, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4003713460872805708, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1186,11 +1214,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3370610988660356901, guid: de9a44f8c7667ca408413c25f0f1ee5c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -15.32
       objectReference: {fileID: 0}
     - target: {fileID: 3370610988660356901, guid: de9a44f8c7667ca408413c25f0f1ee5c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 13.04
       objectReference: {fileID: 0}
     - target: {fileID: 3370610988660356901, guid: de9a44f8c7667ca408413c25f0f1ee5c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -26372,6 +26400,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 185714203, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6499968375723911184, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -26617,6 +26649,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 841874676130060992, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157954881687136812, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5157954882409207611, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
       propertyPath: m_patrolPoints.Array.size
       value: 2
@@ -26688,6 +26728,14 @@ PrefabInstance:
     - target: {fileID: 5157954882409207616, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
       propertyPath: m_Name
       value: ChefEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157954882409207616, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5751295711232786928, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}

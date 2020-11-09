@@ -197,7 +197,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c32d50fb846c662449889d803366ef5d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -319,7 +319,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131872bffc30dbd4bb3013b65a7f2c34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraShake: {fileID: 0}
   m_rayCastStart: {fileID: 8631870843932011449}
   m_rayCastStartBackup: {fileID: 4073614791533693554}
   m_detectionCollider: {fileID: 8631870844753434284}
@@ -345,6 +344,7 @@ MonoBehaviour:
   m_hasChargeAttack: 0
   m_chargeAttackDeley: 0
   m_chargAttackPosibility: 0
+  m_chargeAttackMultiplier: 3
 --- !u!114 &7078063693103841903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,6 +357,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed50febb1b4ddb0458fccfa2239e59f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mSpriteRenderer: {fileID: 0}
-  mColorSwapTex: {fileID: 0}
-  mSpriteColors: []

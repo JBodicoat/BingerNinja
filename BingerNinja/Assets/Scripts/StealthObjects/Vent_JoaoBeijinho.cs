@@ -94,7 +94,7 @@ public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
         m_playerCollider = m_player.GetComponent<BoxCollider2D>();
 
         //Get the wall tiles and their collider
-        m_walls = GameObject.Find("Wall Tiles");
+        m_walls = GameObject.Find("Walls1_map");
         m_wallsCollider = m_walls.GetComponent<Collider2D>();
 
         //Get the vent, vent path and the vent walls collider

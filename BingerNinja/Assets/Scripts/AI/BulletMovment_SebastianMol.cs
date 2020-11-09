@@ -34,7 +34,7 @@ public class BulletMovment_SebastianMol : MonoBehaviour
 		if(collision.tag == "Player")
         {
            FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damage);
-           collision.GetComponent<HitEffectElliott>().StartHitEffect(false);
+          // collision.GetComponent<HitEffectElliott>().StartHitEffect(false);
             Destroy(gameObject);
             
 		}
