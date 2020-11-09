@@ -1,6 +1,7 @@
 ﻿//Joao Beijinho
 
 //Joao Beijinho 05/11/2020 - Created the script, triggers to check if player can interact, and calling interaction in update
+//Joao Beijinho 09/11/2020 - Replaced tags with the tags in the Tags_JoaoBeijinho script
 
 using System.Collections;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ public class ControlPanel_JoaoBeijinho : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == m_playerTag)
+        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
         {
             m_canPressButton = true;
         }
@@ -28,7 +29,7 @@ public class ControlPanel_JoaoBeijinho : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == m_playerTag)
+        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
         {
             m_canPressButton = false;
         }

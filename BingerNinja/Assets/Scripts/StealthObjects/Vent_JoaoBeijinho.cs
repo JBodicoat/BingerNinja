@@ -3,8 +3,7 @@
 //Joao Beijinho 19/10/2020 - Created draft of the enter and exit states for the vents
 //Joao Beijinho 20/10/2020 - Implemented vent walls and vent path. Moved trigger events to StealthObject
 //Joao Beijinho 25/10/2020 - Moved Triggers back into this script 
-
-//!!!CHECK IF CAN REMOVE M_ENABLEVENTWALLCOLLISION BOOL!!!
+//Joao Beijinho 09/11/2020 - Replaced tag with the tag in the Tags_JoaoBeijinho script
 
 using System.Collections;
 using System.Collections.Generic;
@@ -32,7 +31,7 @@ public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
     #region Enter and Exit triggers
     private void OnTriggerEnter2D(Collider2D collision)//Enter and Exit vent
     {
-        if (collision.tag == "Player")
+        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
         {
             if (m_playerStealthScript.m_stealthed == false)//If player isn't stealthed he's not inside the vent
             {
