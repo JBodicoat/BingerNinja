@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4434442803191826815}
   - component: {fileID: 4434442803191826689}
   - component: {fileID: 4434442803191826690}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: bussinesManBOSS
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -204,6 +204,7 @@ MonoBehaviour:
   m_hasChargeAttack: 1
   m_chargeAttackDeley: 0
   m_chargAttackPosibility: 2
+  m_chargeAttackMultiplier: 3
 --- !u!1 &4434442803275330668
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +214,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4434442803275330667}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: RayCastStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +247,7 @@ GameObject:
   - component: {fileID: 9175415997603678081}
   - component: {fileID: 6448760960399604736}
   - component: {fileID: 5282640114672852740}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: enemyDamager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -336,7 +337,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 557739978283802439}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: RayCastStartBackUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}

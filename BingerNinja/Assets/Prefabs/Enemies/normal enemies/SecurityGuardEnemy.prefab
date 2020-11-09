@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4202125626246644408}
   - component: {fileID: 3825102873797564499}
   - component: {fileID: 1386623927498531794}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: enemyDamager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4073614791533693554}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: RayCastStartBackUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8631870843932011449}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: RayCastStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 8631870844753434285}
   - component: {fileID: 8631870844753434323}
   - component: {fileID: 8631870844753434320}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SecurityGuardEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -343,3 +343,4 @@ MonoBehaviour:
   m_hasChargeAttack: 1
   m_chargeAttackDeley: 2
   m_chargAttackPosibility: 3
+  m_chargeAttackMultiplier: 3

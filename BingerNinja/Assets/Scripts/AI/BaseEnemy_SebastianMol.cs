@@ -27,7 +27,6 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public bool m_playerDetected = false; //has the player been detected
     public enum state { WONDER, CHASE, ATTACK, RETREAT};
     public state m_currentState = state.WONDER;//current state of teh enemy
-
     public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN};
     public m_enemyType m_currentEnemyType;
     public enum m_damageType { MELEE, RANGE, SNAEK};
@@ -56,9 +55,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
     private Pathfinder_SebastianMol m_pathfinder;
     protected List<Vector2Int> m_currentPath = new List<Vector2Int>();
-
     protected Transform m_targetTransform; //used to get player position can be null if undedteceted
-
     protected float m_scale; //player scale at start
     private Vector3 m_lastPos; //the last position the enemy was at
     protected Vector3 m_startPos;//the starting position of the enemy
@@ -176,31 +173,37 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     { 
         GameObject distract = GameObject.FindGameObjectWithTag("DistractionProjectile"); // see if ther is a distraction
 
-        if(distract == null)
+        if(distract == null) //if there isent just go for player
         {
             return RayCastToTag("Player", m_targetTransform);
         }
         else
         {
-            if (RayCastToTag("Player", m_targetTransform) && distract.activeSelf)
+            if (RayCastToTag("Player", m_targetTransform) && distract.activeSelf) // if thers both player and distraction go for distraction
             {
                 return RayCastToTag("DistractionProjectile", m_targetTransform);
             }
-            else if (RayCastToTag("Player", m_targetTransform) == false && distract.activeSelf)
+            else if (RayCastToTag("Player", m_targetTransform) == false && distract.activeSelf) //if theres no player and distraction go for distraction
             {
                 return RayCastToTag("DistractionProjectile", m_targetTransform);
             }
-            else if (RayCastToTag("Player", m_targetTransform) && distract.activeSelf == false)
+            else if (RayCastToTag("Player", m_targetTransform) && distract.activeSelf == false) //if there is no distraction go for player
             {
                 return RayCastToTag("Player", m_targetTransform);
             }
-            else
+            else // if everthing fails you have no line of sight on anything
             {
                 return false;
             }
         }        
     }
 
+    /// <summary>
+    /// cast a ray to the target position and sees if there is a clear line of sight based on given tag
+    /// </summary>
+    /// <param name="tag"> the tag of the target used to see if there is not an obsticle in the way</param>
+    /// <param name="rayCastPos"> position of the target </param>
+    /// <returns></returns>
     private bool RayCastToTag(string tag, Transform rayCastPos)
     {
         if(rayCastPos != null && rayCastPos.position != Vector3.zero)
