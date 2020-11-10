@@ -26,6 +26,7 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
     public float m_speed = 5.0f;
 
     public float m_baseSpeed = 5.0f;
+    public bool isRolling= false;
 
     public void ResetSpeed()
     {
@@ -33,34 +34,29 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
     }
     public void RollMovement()
     {
-        if ((m_direction.x == 0) && (m_direction.y == 0))
-        {
-            m_speed = 5.0f;
-        }
-        else
-        {
-            if(m_direction.y < 0)
+       
+            if(m_old_direction.y < 0)
             {
                 m_speed = 7.5f;
                 //go down
                 m_direction.y -= m_speed;
                 StartCoroutine("RollTimer");
             }
-            if(m_direction.y > 0)
+            if(m_old_direction.y > 0)
             {
                 m_speed = 7.5f;
                 m_direction.y += m_speed;
                 StartCoroutine("RollTimer");
                 //roll up
             }
-            if(m_direction.x < 0)
+            if(m_old_direction.x < 0)
             {
                 m_speed = 7.5f;
                 m_direction.x -= m_speed;
                 StartCoroutine("RollTimer");
                 //goleft
             }
-            if(m_direction.x > 0)
+            if(m_old_direction.x > 0)
             {
                 m_speed = 7.5f;
                 m_direction.x += m_speed;
@@ -68,19 +64,26 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
             }
 
           
-        }
+      }
         //m_direction = m_speed * m_old_direction;
         //m_direction.Normalize();
 
         //m_rb.velocity = m_direction;
 
        
-    }
+    
     //Recieves vector from the PlayerController script and is assigned to the m_direction vector
     public void RecieveVector(Vector2 vector)
     {
-        m_old_direction = m_direction;
-        m_direction = vector;
+        if (!isRolling)
+        {
+            if (m_direction.x != 0 || m_direction.y != 0)
+            {
+                m_old_direction = m_direction;
+            }
+            m_direction = vector;
+            
+        }
     }
 
     void Start()
@@ -101,6 +104,7 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
     IEnumerator RollTimer()
     {
         yield return new WaitForSeconds(1.0f);
+        isRolling = false;
         m_speed = 5.0f;
     }
 }

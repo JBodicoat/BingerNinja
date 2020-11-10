@@ -49,9 +49,9 @@ public class PlayerController_JamieG : MonoBehaviour
 
     private void Update()
     {   
-        if(m_roll.triggered)
+        if(m_roll.triggered&& m_playerMovementScript.isRolling==false)
         {
-           
+            m_playerMovementScript.isRolling = true;
             m_playerMovementScript.RollMovement();
         }
         if (m_crouch.triggered)
