@@ -1,13 +1,15 @@
 ﻿//Elliott Desouza
-/// this script changes the color to an object that has been hit
 
 //Elliott 07/10/2020 - made it so it applys a texture to the object
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// this script changes the color to an object that has been hit
 public class HitEffectElliott : MonoBehaviour
 {
+    public int m_critical = 174;
+    public int m_nonCritical  = 122; 
     internal SpriteRenderer mSpriteRenderer;
     internal Texture2D mColorSwapTex;
     internal Color [] mSpriteColors;
@@ -15,29 +17,36 @@ public class HitEffectElliott : MonoBehaviour
     const float cHitEffectTime = 0.3f;
     private Color[] mStoreColor;
 
+    //Sets every pixel’s color of the sprite to the passed color
     public void SwapAllSpritesColorsTemporarily(Color color)
-    {       
+    {
         for (int i = 0; i < mColorSwapTex.width; ++i)
-        mColorSwapTex.SetPixel(i, 0, color);
-        mColorSwapTex.Apply();
+        {
+            mColorSwapTex.SetPixel(i, 0, color);
+            mColorSwapTex.Apply();
+        }
     }
 
+    // Resets the sprites original color 
     public void ResetAllSpritesColors()
     {
         for (int i = 0; i < mColorSwapTex.width; ++i)
-        mColorSwapTex.SetPixel(i, 0, mStoreColor[i]);
-        mColorSwapTex.Apply();
+        {
+            mColorSwapTex.SetPixel(i, 0, mStoreColor[i]);
+            mColorSwapTex.Apply();
+        }
     }
 
     public void StartHitEffect(bool isCritical)
     {
-        mStoreColor = GameObject.Find("ColorChanger").GetComponent<ColorChanger_Jann>().m_spriteColors;
+        //mStoreColor = GameObject.Find("ColorChanger").GetComponent<ColorChanger_Jann>().m_spriteColors;
+        mStoreColor = FindObjectOfType<ColorChanger_Jann>().m_spriteColors;
         InitColorSwapTex();
         mHitEffectTimer = cHitEffectTime;
-        SwapAllSpritesColorsTemporarily(mStoreColor[isCritical ? 174 : 122]);
-        //SwapAllSpritesColorsTemporarily(new Color(0.679f, 0f, 0f, 1f));
+        SwapAllSpritesColorsTemporarily(mStoreColor[isCritical ? m_critical : m_nonCritical]);
 
     }
+
 
     public void InitColorSwapTex()
     {
@@ -45,14 +54,16 @@ public class HitEffectElliott : MonoBehaviour
         colorSwapTex.filterMode = FilterMode.Point;
 
         for (int i = 0; i < colorSwapTex.width; ++i)
-        colorSwapTex.SetPixel(i, 0, new Color(0.0f, 0.0f, 0.0f, 0.0f));
+        {
+            colorSwapTex.SetPixel(i, 0, new Color(0.0f, 0.0f, 0.0f, 0.0f));
+        }
+            colorSwapTex.Apply();
 
-        colorSwapTex.Apply();
+            mSpriteRenderer.material.SetTexture("_SwapTex", colorSwapTex);
 
-        mSpriteRenderer.material.SetTexture("_SwapTex", colorSwapTex);
-
-        mSpriteColors = new Color[colorSwapTex.width];
-        mColorSwapTex = colorSwapTex;
+            mSpriteColors = new Color[colorSwapTex.width];
+            mColorSwapTex = colorSwapTex;
+        
     }
 
     // Start is called before the first frame update
@@ -60,7 +71,7 @@ public class HitEffectElliott : MonoBehaviour
     {
         mSpriteRenderer = GetComponent<SpriteRenderer>();
         InitColorSwapTex();
-       // StartHitEffect();
+       
     }
 
     // Update is called once per frame

@@ -1,23 +1,29 @@
 ﻿//Elliott Desouza
-/// this script makes the main camara shake
 
-//Elliott 07/10/2020 - implented the shake
+//Elliott 07/11/2020 - implented the shake
+//Elliott 09/11/2020 - made public variables so its easyer to edit
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// this script makes the main camara shake
 public class CameraShakeElliott : MonoBehaviour
 {
-   public IEnumerator Shake (float duration, float magnitude)
+   public float m_duration ;
+   public float m_magnitude ;
+   public IEnumerator Shake ( float duration, float magnitude)
    {
+        duration = m_duration;
+        magnitude = m_magnitude;
+
         Vector3 orgignalPos = transform.localPosition;
 
         float elapsed = 0.0f;
 
-        while(elapsed <duration)
+        while(elapsed <m_duration)
         {
-            float x = Random.Range(-1f, 1f) * magnitude;
-            float y = Random.Range(-1f, 1f) * magnitude;
+            float x = Random.Range(-1f, 1f) * m_magnitude;
+            float y = Random.Range(-1f, 1f) * m_magnitude;
 
             transform.localPosition = new Vector3(x, y, orgignalPos.z);
 
@@ -27,4 +33,11 @@ public class CameraShakeElliott : MonoBehaviour
         }
         transform.localPosition = orgignalPos;
    }
+
+    public void StartShake()
+    {
+        StartCoroutine(Shake(m_duration, m_magnitude));
+    }
+
+    
 }

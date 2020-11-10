@@ -288,7 +288,7 @@ PrefabInstance:
     - target: {fileID: 8631870844753434320, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
       propertyPath: cameraShake
       value: 
-      objectReference: {fileID: 1745642039}
+      objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434322, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
       propertyPath: m_Name
       value: ThugEnemy (2)
@@ -406,7 +406,7 @@ PrefabInstance:
     - target: {fileID: 8631870844753434320, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
       propertyPath: cameraShake
       value: 
-      objectReference: {fileID: 1745642039}
+      objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434322, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
       propertyPath: m_Name
       value: ThugEnemy (4)
@@ -435,6 +435,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed50febb1b4ddb0458fccfa2239e59f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_critical: 174
+  m_nonCritical: 122
 --- !u!1 &108384619
 GameObject:
   m_ObjectHideFlags: 0
@@ -10290,6 +10292,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed50febb1b4ddb0458fccfa2239e59f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_critical: 174
+  m_nonCritical: 122
 --- !u!1 &754139394
 GameObject:
   m_ObjectHideFlags: 0
@@ -10829,7 +10833,7 @@ PrefabInstance:
     - target: {fileID: 8631870844753434320, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
       propertyPath: cameraShake
       value: 
-      objectReference: {fileID: 1745642039}
+      objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434322, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
       propertyPath: m_Name
       value: ThugEnemy
@@ -11084,7 +11088,7 @@ PrefabInstance:
     - target: {fileID: 8631870844753434320, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
       propertyPath: cameraShake
       value: 
-      objectReference: {fileID: 1745642039}
+      objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434322, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
       propertyPath: m_Name
       value: ThugEnemy (3)
@@ -11193,7 +11197,7 @@ PrefabInstance:
     - target: {fileID: 8631870844753434320, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
       propertyPath: cameraShake
       value: 
-      objectReference: {fileID: 1745642039}
+      objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434322, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
       propertyPath: m_Name
       value: ThugEnemy (1)
@@ -14219,6 +14223,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed50febb1b4ddb0458fccfa2239e59f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_critical: 174
+  m_nonCritical: 122
 --- !u!1001 &1293225659
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14727,6 +14733,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed50febb1b4ddb0458fccfa2239e59f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_critical: 174
+  m_nonCritical: 122
 --- !u!1 &1469756532 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8631870844753434322, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
@@ -14744,6 +14752,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed50febb1b4ddb0458fccfa2239e59f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_critical: 174
+  m_nonCritical: 122
 --- !u!1001 &1565619968
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14818,6 +14828,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed50febb1b4ddb0458fccfa2239e59f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_critical: 174
+  m_nonCritical: 122
 --- !u!1 &1574482577
 GameObject:
   m_ObjectHideFlags: 0
@@ -17173,23 +17185,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5717853694840726511, guid: 50bb58f1a68b5684daf4f4843ee6c34a, type: 3}
   m_PrefabInstance: {fileID: 1677400278}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1745642033 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4362767422803623033, guid: 126326fb385628f48915dd9419c89498, type: 3}
-  m_PrefabInstance: {fileID: 4362767423532714273}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1745642039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1745642033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e221c3009ff7f64eb398883fb21b39f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!213 &1751961663
 Sprite:
   m_ObjectHideFlags: 0
@@ -18312,6 +18307,14 @@ PrefabInstance:
     - target: {fileID: 1089274357, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_Size.y
       value: 0.3329749
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888784909998871894, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_duration
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888784909998871894, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_magnitude
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 4362767422803623033, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_IsActive
