@@ -13,7 +13,7 @@ public class LevelScripting : MonoBehaviour
 {
     #region VARIABLES
     bool enemyDead = false, keyUsed = false, levelThreeBossIntro, businessBossDead = false;
-    GameObject levelTwoLiftTrigger, levelThreeLiftTrigger, keyTrigger;
+    GameObject levelTrigger, keyTrigger;
     BaseEnemy_SebastianMol businessBoss, level2Enemy1, level2Enemy2;
     BossDialogue_MarioFernandes bossDialogue, level2End;
     Tilemap objInfWalls, objWalls;
@@ -27,13 +27,13 @@ public class LevelScripting : MonoBehaviour
             level2End = GameObject.Find("EndLevelTwo").GetComponent<BossDialogue_MarioFernandes>();
             level2Enemy1 = GameObject.Find("Enemy 1").GetComponent<BaseEnemy_SebastianMol>();
             level2Enemy2 = GameObject.Find("Enemy 2").GetComponent<BaseEnemy_SebastianMol>();
-            levelTwoLiftTrigger = GameObject.Find("Level 2 Lift");
+            levelTrigger = GameObject.Find("Level 2 Lift");
         }
         if (SceneManager.GetActiveScene().buildIndex == 3)
         {
             businessBoss = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BaseEnemy_SebastianMol>();
             bossDialogue = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BossDialogue_MarioFernandes>();
-            levelThreeLiftTrigger = GameObject.Find("Level 3 Lift");
+            levelTrigger = GameObject.Find("Level 3 Lift");
         }
         if (SceneManager.GetActiveScene().buildIndex == 4)
         {
@@ -41,17 +41,26 @@ public class LevelScripting : MonoBehaviour
             objWalls = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
             objInfWalls = GameObject.Find("ObjectsInFrontOfWalls_map").GetComponent<Tilemap>();
         }
+        if (SceneManager.GetActiveScene().buildIndex == 5)
+        {
+            keyTrigger = GameObject.Find("Key Trigger");
+            levelTrigger = GameObject.Find("Level 5 Lift");
+        }
     }
     private void Start()
     {
         if (SceneManager.GetActiveScene().buildIndex == 2)
         {
-            levelTwoLiftTrigger.SetActive(false);
+            levelTrigger.SetActive(false);
         }
         if (SceneManager.GetActiveScene().buildIndex == 3)
         {
-            levelThreeLiftTrigger.SetActive(false);
-        }        
+            levelTrigger.SetActive(false);
+        }    
+        if(SceneManager.GetActiveScene().buildIndex == 5)
+        {
+            levelTrigger.SetActive(false);
+        }
     }
     private void Update()
     {
@@ -59,7 +68,7 @@ public class LevelScripting : MonoBehaviour
         {
             if (level2Enemy1.m_health <= 0 || level2Enemy2.m_health <= 0)
             {
-                levelTwoLiftTrigger.SetActive(true);
+                levelTrigger.SetActive(true);
                 level2End.TriggerDialogue(0);
                 enemyDead = true;
 
@@ -73,7 +82,7 @@ public class LevelScripting : MonoBehaviour
                 //dramatic death SE
                 //freeze on enemy as he dies  
                 bossDialogue.TriggerDialogue(0);
-                levelThreeLiftTrigger.SetActive(true);
+                levelTrigger.SetActive(true);
                 businessBossDead = true;
               
             }   
@@ -90,6 +99,15 @@ public class LevelScripting : MonoBehaviour
                 objWalls.SetTile(new Vector3Int(24, 9, 0), null);
                 objWalls.SetTile(new Vector3Int(24, 10, 0), null);
             }
+        }
+
+        if(SceneManager.GetActiveScene().buildIndex == 5)
+        {
+            if(!keyTrigger.activeInHierarchy)
+            {
+                levelTrigger.SetActive(true);
+            }
+
         }
     }
    
