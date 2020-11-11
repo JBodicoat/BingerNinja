@@ -1,7 +1,9 @@
 ﻿//Joao Beijinho
 
 //Joao Beijinho 26/10/2020 - Created this script and the trigger for pickUp
-//Joao Beijinho 29/10/2020 - update
+//Joao Beijinho 29/10/2020 - update trigger to use new Inventory function, GiveItem()
+//Joao Beijinho 02/11/2020 - Added m_itemQuantity int
+//Joao Beijinho 09/11/2020 - Replaced tag with the tag in the Tags_JoaoBeijinho script
 
 using System.Collections;
 using System.Collections.Generic;
@@ -18,7 +20,7 @@ public class PickupItem_JoaoBeijinho : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
         {
             m_inventory.GiveItem(m_item, 1);
             gameObject.SetActive(false);

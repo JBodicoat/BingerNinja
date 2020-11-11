@@ -58,7 +58,7 @@ public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
     {
         Hide();
 
-        m_playerPos.position = new Vector3(m_ventPos.position.x, m_ventPos.position.y, m_ventPos.position.z);
+        m_playerPos.position = new Vector2(m_ventPos.position.x, m_ventPos.position.y);
 
         foreach (BoxCollider2D ventWall in m_ventWallsCollider)
         {
