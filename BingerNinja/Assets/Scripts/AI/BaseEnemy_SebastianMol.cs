@@ -6,6 +6,7 @@
 //sebastian mol 02/11/20 improved player detection with second raycast
 //sebastian mol 06/11/20 new damage sysetm
 //sebastian mol 11/11/2020 enemy can now be stunned
+//sebastian mol 11/11/2020 tiger enemy cant see player in vent now
 
 using System.Collections;
 using System.Collections.Generic;
@@ -27,7 +28,6 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public bool m_playerDetected = false; //has the player been detected
     public enum state { WONDER, CHASE, ATTACK, RETREAT};
     public state m_currentState = state.WONDER;//current state of teh enemy
-
     public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN, PETTIGER};
     public m_enemyType m_currentEnemyType;
     public enum m_damageType { MELEE, RANGE, SNEAK, STUN };
@@ -123,16 +123,15 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     {
         if(collision.CompareTag("Player")) // is it a the player 
         {
-            if(m_currentEnemyType == m_enemyType.PETTIGER)
+            PlayerStealth_JoaoBeijinho playerStealth = collision.GetComponent<PlayerStealth_JoaoBeijinho>();
+            if (m_currentEnemyType == m_enemyType.PETTIGER)
             {
-                //TODO
-                //if enemy in vent leave function
-                //else
-                //cast the ray
-                PlayerDetectionRaycasLogic(collision);
-              
+                if(!playerStealth.IsinVent())
+                {
+                    PlayerDetectionRaycasLogic(collision);
+                }          
             }
-            else if(collision.GetComponent<PlayerStealth_JoaoBeijinho>().IsStealthed() == false) //is the player in stealth/
+            else if(!playerStealth.IsStealthed()) //is the player in stealth/
             {
                 PlayerDetectionRaycasLogic(collision);
             }
