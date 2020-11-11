@@ -2,7 +2,6 @@
 
 //Joao Beijinho 29/10/2020 - Created triggers for weighted pressure pads
 //Joao Beijinho 02/11/2020 - Replaced m_door GameObject with m_doorCollider Collider2D
-//Joao Beijinho 09/11/2020 - Replaced tags with the tags in the Tags_JoaoBeijinho script
 
 using System.Collections;
 using System.Collections.Generic;
@@ -13,21 +12,26 @@ using UnityEngine;
 /// </summary>
 public class WeightedPressurePad_JoaoBeijinho : MonoBehaviour
 {
-    public GameObject m_door;
+    //Reference the door collider to turn if on/off(closed/open)
+    public Collider2D m_doorCollider;
+
+    private string m_playerTag = "Player";
+    private string m_crateTag = "Crate";
+    private string m_meleeWeaponTag = "MeleeWeapon";
 
     private void OnTriggerEnter2D(Collider2D collision)//Open door when an Object is on top of it
     {
-        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag) || collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_crateTag) || collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_meleeWeaponTag))//collision with every array object except Projectile
+        if (collision.tag == m_playerTag || collision.tag == m_crateTag || collision.tag == m_meleeWeaponTag)//collision with every array object except Projectile
         {
-            m_door.GetComponent<BoxCollider2D>().isTrigger = true;
+            m_doorCollider.GetComponent<Collider2D>().enabled = false;//Open door
         }
     }
         
     private void OnTriggerExit2D(Collider2D collision)//Close door when an object is removed from it
     {
-        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag) || collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_crateTag) || collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_meleeWeaponTag))//if this scirpt is in a Pressure Pad
+        if (collision.tag == m_playerTag || collision.tag == m_crateTag || collision.tag == m_meleeWeaponTag)//if this scirpt is in a Pressure Pad
         {
-            m_door.GetComponent<BoxCollider2D>().isTrigger = false;
+            m_doorCollider.GetComponent<Collider2D>().enabled = true;//Close door
         }
     }
 }
