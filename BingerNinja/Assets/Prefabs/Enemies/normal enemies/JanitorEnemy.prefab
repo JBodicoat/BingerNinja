@@ -46,7 +46,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.28255796, y: -0.24377573}
+  m_Offset: {x: -0.061142266, y: -0.6357143}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -57,7 +57,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5651155, y: 2.1302354}
+  m_Size: {x: 2.2525158, y: 2.914113}
   m_EdgeRadius: 0
 --- !u!50 &1386623927498531794
 Rigidbody2D:
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 8631870844753434323}
   - component: {fileID: 8631870844753434320}
   m_Layer: 2
-  m_Name: ThugEnemy
+  m_Name: JanitorEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -348,13 +348,13 @@ MonoBehaviour:
   m_deleyBetweenPatrol: 0
   m_sneakDamageMultiplier: 0
   m_sneakDamageMultiplierStack: 0
-  m_meleeRange: 0.6
+  m_meleeRange: 1
   m_hitSpeed: 2
   m_attackCollider: {fileID: 220513390732296407}
   attackDeactivationSpeed: 0.1
   m_outOfSightDeley: 2
   m_dosePatrole: 0
-  m_hasChargeAttack: 0
-  m_chargeAttackDeley: 0
-  m_chargAttackPosibility: 0
-  m_chargeAttackMultiplier: 3
+  m_hasChargeAttack: 1
+  m_chargeAttackDeley: 1
+  m_chargAttackPosibility: 100000
+  m_chargeAttackMultiplier: 1

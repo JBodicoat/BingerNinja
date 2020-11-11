@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 8631870844753434323}
   - component: {fileID: 8631870844753434320}
   m_Layer: 2
-  m_Name: ThugEnemy
+  m_Name: YakuzaThugEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,7 +183,7 @@ Transform:
   m_GameObject: {fileID: 8631870844753434322}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 12.21, y: 8.67, z: 0}
-  m_LocalScale: {x: 0.25322, y: 0.25322, z: 0.50644}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8631870843932011449}
   - {fileID: 4202125626246644408}
@@ -340,7 +340,7 @@ MonoBehaviour:
   m_currentEnemyType: 0
   m_dropItem: {fileID: 0}
   m_health: 100
-  m_speed: 2
+  m_speed: 1
   showPath: 0
   floortilemap: {fileID: 0}
   m_patrolPoints: []

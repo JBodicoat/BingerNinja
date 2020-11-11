@@ -33,6 +33,9 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     public int m_chargAttackPosibility;
     [Tooltip("the amaount the charge attack is multiplied by")]
     public float m_chargeAttackMultiplier = 3;
+    [Tooltip("the amount of time teh pet tigre is frozen for after it dose its attack")]
+    public float m_petTigerDeley;
+
 
     /// <summary>
     /// funtionality for the melee attack
@@ -59,7 +62,12 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
             {
                 StartCoroutine(QuickAttack());
             }            
-           
+
+            if(m_currentEnemyType == m_enemyType.PETTIGER)
+            {
+                StunEnemyWithDeley(m_petTigerDeley);
+            }
+
             m_attackTimer = m_hitSpeed;
         }
         else
@@ -177,5 +185,10 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
 
     internal override void RetreatState()
     {
+    }
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, m_meleeRange);
     }
 }

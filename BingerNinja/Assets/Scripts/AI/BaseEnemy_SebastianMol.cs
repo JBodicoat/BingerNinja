@@ -28,7 +28,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public enum state { WONDER, CHASE, ATTACK, RETREAT};
     public state m_currentState = state.WONDER;//current state of teh enemy
 
-    public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN};
+    public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN, PETTIGER};
     public m_enemyType m_currentEnemyType;
     public enum m_damageType { MELEE, RANGE, SNEAK, STUN };
 
@@ -123,26 +123,43 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     {
         if(collision.CompareTag("Player")) // is it a the player 
         {
-            if(collision.GetComponent<PlayerStealth_JoaoBeijinho>().IsStealthed() == false) //is the player in stealth/
+            if(m_currentEnemyType == m_enemyType.PETTIGER)
             {
+                //TODO
+                //if enemy in vent leave function
+                //else
                 //cast the ray
-                m_detectionCollider.enabled = false;
-                RaycastHit2D hit = Physics2D.Linecast(m_rayCastStart.position, collision.transform.position);
-                Debug.DrawLine(m_rayCastStart.position, collision.transform.position, Color.red);
-
-                if (hit.collider.gameObject.CompareTag("Player")) //did it hit the play first
-                {
-                  //  m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Detection);
-                    m_playerDetected = true;
-                    m_playerTransform = hit.transform;
-                    m_currentState = state.ATTACK;
-                    ClearPath();
-                }
-                else
-                {
-                    m_detectionCollider.enabled = true;
-                }
+                PlayerDetectionRaycasLogic(collision);
+              
             }
+            else if(collision.GetComponent<PlayerStealth_JoaoBeijinho>().IsStealthed() == false) //is the player in stealth/
+            {
+                PlayerDetectionRaycasLogic(collision);
+            }
+        }
+    }
+
+    /// <summary>
+    /// holds the logic for casting a ray when the player is first detected
+    /// </summary>
+    /// <param name="col"> a collsion that is checked to see if it is the player</param>
+    private void PlayerDetectionRaycasLogic(GameObject col)
+    {
+        m_detectionCollider.enabled = false;
+        RaycastHit2D hit = Physics2D.Linecast(m_rayCastStart.position, col.transform.position);
+        Debug.DrawLine(m_rayCastStart.position, col.transform.position, Color.red);
+
+        if (hit.collider.gameObject.CompareTag("Player")) //did it hit the play first
+        {
+            //  m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Detection);
+            m_playerDetected = true;
+            m_playerTransform = hit.transform;
+            m_currentState = state.ATTACK;
+            ClearPath();
+        }
+        else
+        {
+            m_detectionCollider.enabled = true;
         }
     }
 
@@ -460,6 +477,18 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             m_isStuned = true;
         }
         
+    }
+
+    /// <summary>
+    /// stund the enemy for an amount of time in seconds
+    /// </summary>
+    /// <param name="amountOfTime"> the amaount of time the enemy is stunend for</param>
+    /// <returns></returns>
+    public IEnumerator StunEnemyWithDeley(float amountOfTime)
+    {
+        StunEnemy();
+        yield return new WaitForSeconds(amountOfTime);
+        StunEnemy();
     }
 
     private void NormalTakeDamage( float damage )
