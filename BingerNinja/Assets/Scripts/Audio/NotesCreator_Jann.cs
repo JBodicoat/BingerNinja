@@ -6,8 +6,11 @@
 // Jann 21/10/20 - Adjustments
 // Jann 25/10/20 - Refactored parts to PlayTrack_Jann.cs
 // Jann 28/10/20 - QA improvements
+// Jann 11/11/20 - Added GetNotes(frequency)
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class NotesCreator_Jann
@@ -42,6 +45,11 @@ public class NotesCreator_Jann
     public float GetFrequency(Note note)
     {
         return notesFrequencies[note];
+    }
+
+    public Note GetNote(float frequency)
+    {
+        return notesFrequencies.FirstOrDefault(pair => Math.Abs(pair.Value - frequency) < 0.1f).Key;
     }
     
     private void GenerateNotes()
