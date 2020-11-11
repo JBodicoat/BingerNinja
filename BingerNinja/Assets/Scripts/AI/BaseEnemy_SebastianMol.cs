@@ -5,6 +5,7 @@
 //sebastian mol 02/11/20 now path gets recalculated when player moves away from original position 
 //sebastian mol 02/11/20 improved player detection with second raycast
 //sebastian mol 06/11/20 new damage sysetm
+//sebastian mol 11/11/2020 enemy can now be stunned
 
 using System.Collections;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
     public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN};
     public m_enemyType m_currentEnemyType;
-    public enum m_damageType { MELEE, RANGE, SNAEK};
+    public enum m_damageType { MELEE, RANGE, SNEAK, STUN };
 
     [Header("designers Section")]
     [Tooltip("the item the enemy drops on death")]
@@ -66,6 +67,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     private float m_patroleTimer; // timer for waiting at each patrole pos
     private Transform m_currentPatrolePos; //the current patrole pos were haeding to / are at 
     private Vector3 m_lastPathFinfToPos; //last given to the path finder to find a path e.g. player position
+    private bool m_isStuned = false; //used to stunn the enemy
 
     #region behaviour tree
     /// <summary>
@@ -373,12 +375,10 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// used to make the enemy take damage
-    /// </summary>
-    /// <param name="damage">amount of damage to take</param>
+
     public void TakeDamage(m_damageType damageType, float damage)
     {
+
         switch (m_currentEnemyType)
         {
             case m_enemyType.NORMAL:
@@ -404,6 +404,10 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 else if(m_playerTransform.position.x > transform.position.x) //player on the right
                 {
                     if (transform.localScale.x > 0) NormalTakeDamage(damage); //looking right
+                }
+                else
+                {
+                    NormalTakeDamage(damage*0.25f);
                 }
                 break;
 
@@ -442,6 +446,22 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// stop the enemys movment and attack, makes it look liek enemy ios tsunned but can stil be damaged
+    /// </summary>
+    public void StunEnemy()
+    {
+        if(m_isStuned)
+        {
+            m_isStuned = false;
+        }
+        else
+        {
+            m_isStuned = true;
+        }
+        
+    }
+
     private void NormalTakeDamage( float damage )
     {
         if (m_playerDetected == false) //if sneak damage
@@ -468,25 +488,30 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
     private void Update()
     {
-        AILogic(); // behaviour of the enemy what stste it is in and what it dose
-        FollowPath(); //walk the path that the enemy currently has
-        SwapDirections(); //chnge the scale of the player
+        if(!m_isStuned)
+        {
+            AILogic(); // behaviour of the enemy what stste it is in and what it dose
+            FollowPath(); //walk the path that the enemy currently has
+            SwapDirections(); //chnge the scale of the player
+        }    
         OnDeath();//checks to see if enemy is dead 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(m_playerDetected == false)
-        {
-            PlayerDetection(collision.gameObject);
-        }      
+        if(!m_isStuned)
+            if(m_playerDetected == false)
+            {
+                PlayerDetection(collision.gameObject);
+            }      
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (m_playerDetected == false)
-        {
-            PlayerDetection(collision.gameObject);
-        }
+        if (!m_isStuned)
+            if (m_playerDetected == false)
+            {
+                PlayerDetection(collision.gameObject);
+            }
     }
 }
