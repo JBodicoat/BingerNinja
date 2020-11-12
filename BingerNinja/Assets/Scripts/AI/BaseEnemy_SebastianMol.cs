@@ -7,6 +7,10 @@
 //sebastian mol 06/11/20 new damage sysetm
 //sebastian mol 11/11/2020 enemy can now be stunned
 //sebastian mol 11/11/2020 tiger enemy cant see player in vent now
+//Joao Beijinho 12/11/2020  Added layerMask for crouchObjectLayer and reference to playerStealth()
+//                          Added layerMask to raycast in PlayerDetectionRaycasLogic() and IsPlayerInLineOfSight()
+//                          Added m_playerStealthScript.IsCrouched() to PlayerDetectionRaycasLogic() and two else if inside
+//                          Changed tags in PlayerDetectionRaycasLogic() to use the Tags_JoaoBeijinho() tags
 
 using System.Collections;
 using System.Collections.Generic;
@@ -70,6 +74,9 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     private Transform m_currentPatrolePos; //the current patrole pos were haeding to / are at 
     private Vector3 m_lastPathFinfToPos; //last given to the path finder to find a path e.g. player position
     private bool m_isStuned = false; //used to stunn the enemy
+
+    protected PlayerStealth_JoaoBeijinho m_playerStealthScript;
+    private int m_crouchObjectLayer = 1 << 8;
 
     #region finite state machine
     /// <summary>
@@ -165,16 +172,31 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     private void PlayerDetectionRaycasLogic(GameObject col)
     {
         m_detectionCollider.enabled = false;
-        RaycastHit2D hit = Physics2D.Linecast(m_rayCastStart.position, col.transform.position);
+        RaycastHit2D hit = Physics2D.Linecast(m_rayCastStart.position, col.transform.position, m_crouchObjectLayer);
         Debug.DrawLine(m_rayCastStart.position, col.transform.position, Color.red);
 
-        if (hit.collider.gameObject.CompareTag("Player")) //did it hit the play first
+        RaycastHit2D crouchedHit = Physics2D.Linecast(m_rayCastStart.position, col.transform.position);
+        Debug.DrawLine(m_rayCastStart.position, col.transform.position, Color.green);
+
+        if (!m_playerStealthScript.IsCrouched() && hit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag)) //did it hit the play first
         {
             //  m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Detection);
             m_playerDetected = true;
             m_playerTransform = hit.transform;
             m_currentState = state.ATTACK;
             ClearPath();
+        }
+        else if (m_playerStealthScript.IsCrouched() && crouchedHit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        {
+            //  m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Detection);
+            m_playerDetected = true;
+            m_playerTransform = hit.transform;
+            m_currentState = state.ATTACK;
+            ClearPath();
+        }
+        else if (m_playerStealthScript.IsCrouched() && !crouchedHit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        {
+            m_detectionCollider.enabled = true;
         }
         else
         {
@@ -189,7 +211,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     protected bool IsPlayerInLineOfSight()
     {
         m_detectionCollider.enabled = false;
-        RaycastHit2D hit = Physics2D.Linecast(m_rayCastStart.position, m_playerTransform.position);
+        RaycastHit2D hit = Physics2D.Linecast(m_rayCastStart.position, m_playerTransform.position, m_crouchObjectLayer);
         Debug.DrawLine(m_rayCastStart.position, m_playerTransform.position, Color.red);
 
         if (hit.collider.gameObject.CompareTag("Player"))
@@ -529,6 +551,9 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         m_patrolIteratorMax = m_patrolPoints.Length-1;
         m_patroleTimer = m_deleyBetweenPatrol;
         if (m_patrolPoints.Length > 0) m_currentPatrolePos = m_patrolPoints[0];
+
+        m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
+        m_crouchObjectLayer = ~m_crouchObjectLayer;
     }
 
     private void Update()
