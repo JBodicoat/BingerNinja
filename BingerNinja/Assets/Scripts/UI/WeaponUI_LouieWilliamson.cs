@@ -44,28 +44,7 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
 
-        if (timer > 20)
-        {
-            SetWeaponsUIAnimation(false);
-            setPickupAnim(false);
-            setKey(false);
-
-            timer = 0;
-        }
-        else if (timer > 15)
-        {
-            setPickupAnim(true);
-        }
-        else if (timer > 10)
-        {
-            setKey(true);
-        }
-        else if (timer > 5)
-        {
-            SetWeaponsUIAnimation(true);
-        }
     }
     public void SetWeaponsUIAnimation(bool isShownIfTrue)
     {
