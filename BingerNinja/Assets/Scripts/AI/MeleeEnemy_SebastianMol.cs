@@ -23,8 +23,6 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     public float attackDeactivationSpeed;
     [Tooltip("deley between line of sight checks")]
     public float m_outOfSightDeley;
-    [Tooltip("should the nemey patrole")]
-    public bool m_dosePatrole;
     [Tooltip("dose the enemy have a harge attack")]
     public bool m_hasChargeAttack = false;
     [Tooltip("the deley befor chareg attack is carried out")]
@@ -101,26 +99,6 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
         m_attackCollider.SetActive(true);
         yield return new WaitForSeconds(attackDeactivationSpeed);
         m_attackCollider.SetActive(false);
-    }
-
-    internal override void WonderState()
-    {
-        if(m_dosePatrole)
-        {
-            if (m_playerDetected) m_currentState = state.CHASE;
-            Patrol();
-        }
-        else
-        {
-            m_detectionCollider.enabled = true;
-            if (transform.position != m_startPos)
-            {
-                PathfindTo(m_startPos);
-            }
-            if (transform.localScale.x != m_scale) transform.localScale
-                    = new Vector3(m_scale, transform.localScale.y, transform.localScale.z);
-        }
-
     }
 
     internal override void ChaseState()

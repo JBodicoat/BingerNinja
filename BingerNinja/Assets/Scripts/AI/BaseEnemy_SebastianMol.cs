@@ -53,6 +53,8 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public float m_sneakDamageMultiplier;
     [Tooltip("the multiply for how much damage to take on enemie sthat take more sneka damage then normal thsi stacks additivley with the sneakDamageMultiplier")]
     public float m_sneakDamageMultiplierStack;
+    [Tooltip("should the nemey patrole")]
+    public bool m_dosePatrole;
 
     private Pathfinder_SebastianMol m_pathfinder;
     protected List<Vector2Int> m_currentPath = new List<Vector2Int>();
@@ -69,11 +71,29 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     private Vector3 m_lastPathFinfToPos; //last given to the path finder to find a path e.g. player position
     private bool m_isStuned = false; //used to stunn the enemy
 
-    #region behaviour tree
+    #region finite state machine
     /// <summary>
     /// abstract class used to provied the logic for the wonder state
     /// </summary>
-    abstract internal void WonderState();
+    private void WonderState()
+    {
+        if (m_dosePatrole)
+        {
+            if (m_playerDetected) m_currentState = state.CHASE;
+            Patrol();
+        }
+        else
+        {
+            m_detectionCollider.enabled = true;
+            if (transform.position != m_startPos)
+            {
+                PathfindTo(m_startPos);
+            }
+            if (transform.localScale.x != m_scale) transform.localScale
+                    = new Vector3(m_scale, transform.localScale.y, transform.localScale.z);
+        }
+
+    }
 
     /// <summary>
     /// abstract class used to provied the logic for the chase state
@@ -303,8 +323,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 }
                 else// else go through the list 
                 {
-                    m_patrolIterator++;
-                    m_currentPatrolePos = m_patrolPoints[m_patrolIterator];
+                    m_currentPatrolePos = m_patrolPoints[++m_patrolIterator];
                 }
                 m_patroleTimer = m_deleyBetweenPatrol; //reset the timer
             }
@@ -348,15 +367,11 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     {
         if(m_health <= 0)
         {
-            if (m_dropItem != null)
+            if (m_dropItem)
             {
                 Instantiate(m_dropItem, transform.position, Quaternion.identity);
-                gameObject.SetActive(false);
             }
-            else
-            {
-                gameObject.SetActive(false);
-            }
+            gameObject.SetActive(false);
         }    
     }
 
@@ -460,6 +475,8 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 break;
 
         }
+
+        OnDeath();//checks to see if enemy is dead 
     }
 
     /// <summary>
@@ -522,13 +539,12 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             FollowPath(); //walk the path that the enemy currently has
             SwapDirections(); //chnge the scale of the player
         }    
-        OnDeath();//checks to see if enemy is dead 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(!m_isStuned)
-            if(m_playerDetected == false)
+            if(!m_playerDetected)
             {
                 PlayerDetection(collision.gameObject);
             }      
@@ -537,7 +553,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (!m_isStuned)
-            if (m_playerDetected == false)
+            if (!m_playerDetected)
             {
                 PlayerDetection(collision.gameObject);
             }

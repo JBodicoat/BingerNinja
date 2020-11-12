@@ -58,13 +58,6 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
         Gizmos.DrawWireSphere(transform.position, m_shootingRange);
    }
 
-    internal override void WonderState()
-    {
-        //move form one postion to another
-        if (m_playerDetected) m_currentState = state.CHASE;
-        Patrol();
-    }
-
     internal override void ChaseState()
     {
         if (IsPlayerInLineOfSight()) // if you can see player
