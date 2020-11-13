@@ -14,6 +14,7 @@
 //sebastian mol 05/11/20 changed enemy take damage function call
 // Mario 08/11/2020 - Update Effects
 // Mario 09/11/2020 - Update Names and Add strength
+// Mario 13/11/2020 - Add Distraction time to progectile
 
 using System.Collections;
 using System.Collections.Generic;
@@ -86,6 +87,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
              //m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
              GameObject projectile = Instantiate(m_projectile, transform.position, transform.rotation);
              projectile.GetComponent<Projectile_MarioFernandes>().m_dmg = (int)(m_currentWeapon[m_weaponsIndex].dmg * m_strenght);
+             projectile.GetComponent<Projectile_MarioFernandes>().m_distractTime = m_currentWeapon[m_weaponsIndex].m_distractTime;
         }
         else
         {
