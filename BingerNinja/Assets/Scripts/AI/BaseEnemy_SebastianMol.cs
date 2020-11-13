@@ -569,17 +569,9 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <summary>
     /// stop the enemys movment and attack, makes it look liek enemy ios tsunned but can stil be damaged
     /// </summary>
-    public void StunEnemy()
+    private void StunEnemyToggle()
     {
-        if(m_isStuned)
-        {
-            m_isStuned = false;
-        }
-        else
-        {
-            m_isStuned = true;
-        }
-        
+        m_isStuned = !m_isStuned;
     }
 
     /// <summary>
@@ -589,9 +581,9 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <returns></returns>
     public IEnumerator StunEnemyWithDeley(float amountOfTime)
     {
-        StunEnemy();
+        StunEnemyToggle();
         yield return new WaitForSeconds(amountOfTime);
-        StunEnemy();
+        StunEnemyToggle();
     }
 
     private void NormalTakeDamage( float damage )

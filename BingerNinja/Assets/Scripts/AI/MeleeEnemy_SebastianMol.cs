@@ -82,7 +82,7 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
 
             if (m_currentEnemyType == m_enemyType.PETTIGER)
             {
-                StunEnemyWithDeley(m_petTigerDeley);
+                StartCoroutine( StunEnemyWithDeley(m_petTigerDeley));
             }
 
             m_attackTimer = m_hitSpeed;
