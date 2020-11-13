@@ -123,7 +123,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         for (int i = 0; i < lines.Length; i++)
         {
 			//Split sentence using "," as reference
-            List<string> parts = lines[i].Split("|"[0]).ToList();
+            List<string> parts = lines[i].Split(","[0]).ToList();
 
 			//Delete empty spaces
             if (parts[0] == level.ToString())
