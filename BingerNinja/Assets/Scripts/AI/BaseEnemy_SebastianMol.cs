@@ -20,7 +20,9 @@ using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UIElements;
 using UnityEngine.Tilemaps;
 
-
+public enum state { WONDER, CHASE, ATTACK };
+public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN, PETTIGER };
+public enum m_damageType { MELEE, RANGE, SNEAK, STUN };
 /// <summary>
 ///base class for enemies to inherit from with logic for detection, patrole, movment, stats managment
 /// </summary>
@@ -29,12 +31,10 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public Transform m_rayCastStart; //start position of the ray cast
     public Transform m_rayCastStartBackup; //secondary rey cast for better detection neer walls
     public PolygonCollider2D m_detectionCollider; // the collder cone used for player detection
-    public bool m_playerDetected = false; //has the player been detected
-    public enum state { WONDER, CHASE, ATTACK};
-    public state m_currentState = state.WONDER;//current state of teh enemy
-    public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN, PETTIGER};
+    public bool m_playerDetected = false; //has the player been detected   
+    public state m_currentState = state.WONDER;//current state of teh enemy   
     public m_enemyType m_currentEnemyType;
-    public enum m_damageType { MELEE, RANGE, SNEAK, STUN };
+   
 
     [Header("designers Section")]
     [Tooltip("the item the enemy drops on death")]
@@ -584,6 +584,11 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         StunEnemyToggle();
         yield return new WaitForSeconds(amountOfTime);
         StunEnemyToggle();
+    }
+
+    public void StunEnemyWithDeleyFunc(float amaountOfTime)
+    {
+        StartCoroutine(StunEnemyWithDeley(amaountOfTime));
     }
 
     private void NormalTakeDamage( float damage )

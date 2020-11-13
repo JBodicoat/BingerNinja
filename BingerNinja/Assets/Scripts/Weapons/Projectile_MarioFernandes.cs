@@ -53,7 +53,7 @@ public class Projectile_MarioFernandes : MonoBehaviour
         
         if(other.tag == "Enemy")
         {
-            other.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage( BaseEnemy_SebastianMol.m_damageType.RANGE ,m_dmg);
+            other.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage( m_damageType.RANGE ,m_dmg);
             Destroy(gameObject);
         }
     }

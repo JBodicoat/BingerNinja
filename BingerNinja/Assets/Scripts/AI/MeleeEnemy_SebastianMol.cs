@@ -3,6 +3,7 @@
 //sebastian mol 02/11/20 removed player behaviour switch replaced it with abstract functions
 //sebastian mol 09/11/20 chrage attack fixed 
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,11 +31,13 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     [Tooltip("the amount of time the pet tigre is frozen for after it dose its attack")]
     public float m_petTigerDeley;
 
+    private EnemyAttacks_SebastianMol m_attacks;
+
     /// <summary>
     /// activates the "enemy weapon" object that damages the player uses quick attack
     /// </summary>
     /// <returns></returns>
-    private IEnumerator QuickAttack()
+    private IEnumerator QuickAttackCo()
     {
         m_attackCollider.GetComponent<EnemyDamager_SebastianMol>().m_damage
             = m_attackCollider.GetComponent<EnemyDamager_SebastianMol>().m_baseDamage;
@@ -47,7 +50,7 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     /// activates the "enemy weapon" object that damages the player uses charge attack
     /// </summary>
     /// <returns></returns>
-    private IEnumerator ChargeAttack()
+    private IEnumerator ChargeAttackCo()
     {
         yield return new WaitForSeconds(m_chargeAttackDeley);
         EnemyDamager_SebastianMol dameger = m_attackCollider.GetComponent<EnemyDamager_SebastianMol>();
@@ -57,40 +60,24 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
         m_attackCollider.SetActive(false);
     }
 
+    private void QuickAttack()
+    {
+        StartCoroutine(QuickAttackCo());
+    }
+
+    private void ChargeAttack()
+    {
+        StartCoroutine(ChargeAttackCo());
+    }
+
+    private void StunIfTiger()
+    {
+        StunEnemyWithDeleyFunc(m_petTigerDeley);
+    }
+
     internal override void AttackBehaviour()
     {
-        if (m_attackTimer <= 0)
-        {
-            if (m_hasChargeAttack)
-            {
-                int rand = Random.Range(0, m_chargAttackPosibility);
-                switch (rand)
-                {
-                    case 0:
-                        StartCoroutine(QuickAttack());
-                        break;
-
-                    case 1:
-                        StartCoroutine(ChargeAttack());
-                        break;
-                }
-            }
-            else
-            {
-                StartCoroutine(QuickAttack());
-            }
-
-            if (m_currentEnemyType == m_enemyType.PETTIGER)
-            {
-                StartCoroutine( StunEnemyWithDeley(m_petTigerDeley));
-            }
-
-            m_attackTimer = m_hitSpeed;
-        }
-        else
-        {
-            m_attackTimer -= Time.deltaTime;
-        }
+        m_attacks.MelleAttack(m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility, QuickAttack, ChargeAttack, StunIfTiger, m_petTigerDeley, m_currentEnemyType, m_hitSpeed);
     }
 
     void OnDrawGizmosSelected()
