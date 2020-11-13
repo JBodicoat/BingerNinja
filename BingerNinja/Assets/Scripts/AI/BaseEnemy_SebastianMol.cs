@@ -30,7 +30,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public Transform m_rayCastStartBackup; //secondary rey cast for better detection neer walls
     public PolygonCollider2D m_detectionCollider; // the collder cone used for player detection
     public bool m_playerDetected = false; //has the player been detected
-    public enum state { WONDER, CHASE, ATTACK, RETREAT};
+    public enum state { WONDER, CHASE, ATTACK};
     public state m_currentState = state.WONDER;//current state of teh enemy
     public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN, PETTIGER};
     public m_enemyType m_currentEnemyType;
@@ -59,6 +59,13 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public float m_sneakDamageMultiplierStack;
     [Tooltip("should the nemey patrole")]
     public bool m_dosePatrole;
+    [Tooltip("the disteance between th enemy and the player befor he starts attack")]
+    public float m_attckRange;
+    [Tooltip("for ranged enemies only how much to devide the attack range by befor starts attack")]
+    [Range(1.0f, 1.5f)]
+    public float m_attckRangeDevider = 1f;
+    [Tooltip("deley between line of sight checks")]
+    public float m_outOfSightDeley;
 
     private Pathfinder_SebastianMol m_pathfinder;
     protected List<Vector2Int> m_currentPath = new List<Vector2Int>();
@@ -105,17 +112,78 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <summary>
     /// abstract class used to provied the logic for the chase state
     /// </summary>
-    abstract internal void ChaseState();
+    private void ChaseState()
+    {
+        if (IsPlayerInLineOfSight()) // if you can see player
+        {
+            if (Vector2.Distance(transform.position, m_playerTransform.position) < m_attckRange / m_attckRangeDevider) //if the player is in range
+            {
+                ClearPath(false);
+                m_currentState = state.ATTACK;
+            }
+            else// if the [layer is out fo range
+            {
+                PathfindTo(m_playerTransform.position);
+            }
+        }
+        else
+        {
+            if (m_currentPath.Count == 0)
+            {
+                if (m_outOfSightTimer <= 0)
+                {
+                    m_currentState = state.WONDER;
+                    m_playerDetected = false;
+                }
+                else
+                {
+                    m_outOfSightTimer -= Time.deltaTime;
+                }
+            }
+        }
+    }
 
     /// <summary>
     /// abstract class used to provied the logic for the attack state
     /// </summary>
-    abstract internal void AttackState();
+    abstract internal void AttackBehaviour();
 
-    /// <summary>
-    /// abstract class used to provied the logic for the retreat state
-    /// </summary>
-    abstract internal void RetreatState();
+    private void AttackState()
+    {
+        if (IsPlayerInLineOfSight())
+        {
+            if (Vector2.Distance(transform.position, m_playerTransform.position) < m_attckRange)
+            {
+                AttackBehaviour();
+
+            }
+            else
+            {
+                m_currentState = state.CHASE;
+            }
+
+            m_outOfSightTimer = m_outOfSightDeley;
+            m_playerDetected = true;
+
+        }
+        else
+        {
+            m_playerDetected = false;
+            if (m_outOfSightTimer <= 0)
+            {
+                m_currentState = state.WONDER;
+            }
+            else
+            {
+                m_outOfSightTimer -= Time.deltaTime;
+            }
+        }
+    }
+
+    ///// <summary>
+    ///// abstract class used to provied the logic for the retreat state
+    ///// </summary>
+    //abstract internal void RetreatState();
 
     /// <summary>
     /// contaisn the switch that stores the dofferent behavoiurs the enemy dose in each state
@@ -132,9 +200,6 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 break;
             case state.ATTACK:
                 AttackState();
-                break;
-            case state.RETREAT:
-                RetreatState();
                 break;
         }
     }

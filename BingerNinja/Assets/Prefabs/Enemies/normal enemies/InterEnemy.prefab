@@ -231,11 +231,13 @@ MonoBehaviour:
   m_deleyBetweenPatrol: 2
   m_sneakDamageMultiplier: 1.5
   m_sneakDamageMultiplierStack: 0
+  m_dosePatrole: 0
+  m_attckRange: 3
+  m_attckRangeDevider: 1.5
   m_aimer: {fileID: 5751295711232786928}
   m_projectile: {fileID: 1986204507551107328, guid: 4cffbeeab73b78d49afbe716680e88a1, type: 3}
   m_shootDeley: 2
   m_projectileSpeed: 2
-  m_shootingRange: 3
   m_outOfSightDeley: 2
 --- !u!61 &5157954882409207617
 BoxCollider2D:
