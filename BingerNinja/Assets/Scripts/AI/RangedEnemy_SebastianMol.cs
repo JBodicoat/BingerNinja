@@ -22,10 +22,10 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
     public float m_projectileSpeed;
 
     void OnDrawGizmosSelected()
-   {
+    {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, m_attckRange);
-   }
+    }
 
     internal override void AttackBehaviour()
     {
