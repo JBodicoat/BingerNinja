@@ -7,6 +7,7 @@
 //                         EnemyCollider child needed because otherwise projectiles collide with enemy view cone triggers
 //sebastian mol 05/11/20 changed enemy take damage function call
 // Mario 13/11/2020 - Add Distraction time to progectile
+// Mario 14/11/2020 - Solve distraction bugs
 
 using System.Collections;
 using System.Collections.Generic;
@@ -60,13 +61,13 @@ public class Projectile_MarioFernandes : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         
-        if(other.tag == "Enemy")
+        if(!other.isTrigger && other.tag == "Enemy")
         {
-            other.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage( BaseEnemy_SebastianMol.m_damageType.RANGE ,m_dmg);
+            other.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage( m_damageType.RANGE ,m_dmg);
 
             if(m_distractTime >0)
             {
-                StartCoroutine(other.GetComponentInParent<BaseEnemy_SebastianMol>().StunEnemyWithDeley(m_distractTime));
+                other.GetComponentInParent<BaseEnemy_SebastianMol>().StunEnemyWithDeleyFunc(m_distractTime);
             }
 
             Destroy(gameObject);
