@@ -31,13 +31,11 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     [Tooltip("the amount of time the pet tigre is frozen for after it dose its attack")]
     public float m_petTigerDeley;
 
-    private EnemyAttacks_SebastianMol m_attacks;
-
     /// <summary>
     /// activates the "enemy weapon" object that damages the player uses quick attack
     /// </summary>
     /// <returns></returns>
-    private IEnumerator QuickAttackCo()
+    protected IEnumerator QuickAttackCo()
     {
         m_attackCollider.GetComponent<EnemyDamager_SebastianMol>().m_damage
             = m_attackCollider.GetComponent<EnemyDamager_SebastianMol>().m_baseDamage;
@@ -45,12 +43,12 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
         yield return new WaitForSeconds(attackDeactivationSpeed);
         m_attackCollider.SetActive(false);
     }
-    
+
     /// <summary>
     /// activates the "enemy weapon" object that damages the player uses charge attack
     /// </summary>
     /// <returns></returns>
-    private IEnumerator ChargeAttackCo()
+    protected IEnumerator ChargeAttackCo()
     {
         yield return new WaitForSeconds(m_chargeAttackDeley);
         EnemyDamager_SebastianMol dameger = m_attackCollider.GetComponent<EnemyDamager_SebastianMol>();
@@ -60,29 +58,30 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
         m_attackCollider.SetActive(false);
     }
 
-    private void QuickAttack()
+    protected void QuickAttack()
     {
         StartCoroutine(QuickAttackCo());
     }
 
-    private void ChargeAttack()
+    protected void ChargeAttack()
     {
         StartCoroutine(ChargeAttackCo());
     }
 
-    private void StunIfTiger()
+    protected void StunIfTiger()
     {
         StunEnemyWithDeleyFunc(m_petTigerDeley);
     }
 
     internal override void AttackBehaviour()
     {
-        m_attacks.MelleAttack(m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility, QuickAttack, ChargeAttack, StunIfTiger, m_petTigerDeley, m_currentEnemyType, m_hitSpeed);
+        EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility, QuickAttack, 
+                                                ChargeAttack, StunIfTiger, m_petTigerDeley, m_currentEnemyType, m_hitSpeed);
     }
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, m_attckRange);
+        Gizmos.DrawWireSphere(transform.position, m_attackRange);
     }
 }

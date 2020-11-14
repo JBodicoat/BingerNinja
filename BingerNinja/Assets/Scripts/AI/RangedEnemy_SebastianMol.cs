@@ -24,28 +24,12 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, m_attckRange);
+        Gizmos.DrawWireSphere(transform.position, m_attackRange);
     }
 
     internal override void AttackBehaviour()
     {
-        if (m_playerTransform != null)
-        {
-            Vector3 dir = Vector3.Normalize(m_playerTransform.position - transform.position);
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            m_aimer.transform.eulerAngles = new Vector3(0, 0, angle);
-
-            if (m_attackTimer <= 0)
-            {
-                GameObject projectile = Instantiate(m_projectile, transform.position, Quaternion.Euler(new Vector3(dir.x, dir.y, 0)));
-                projectile.GetComponent<BulletMovment_SebastianMol>().m_direction = (m_playerTransform.position - transform.position).normalized;
-                m_attackTimer = m_shootDeley;
-            }
-            else
-            {
-                m_attackTimer -= Time.deltaTime;
-            }
-        }
+        EnemyAttacks_SebastianMol.RangedAttack(m_playerTransform, transform, m_aimer, ref m_attackTimer, m_projectile, m_shootDeley);
     }
 
 }

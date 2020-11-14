@@ -93,6 +93,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_baseDamage: 1
+--- !u!1 &1488481114249787428
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1881472514458205555}
+  m_Layer: 2
+  m_Name: aimer (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1881472514458205555
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488481114249787428}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.64, y: 0.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8631870844753434286}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2962778701667265248
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,9 +196,9 @@ GameObject:
   - component: {fileID: 8631870844753434284}
   - component: {fileID: 8631870844753434285}
   - component: {fileID: 8631870844753434323}
-  - component: {fileID: 8631870844753434320}
+  - component: {fileID: 4230729524680630626}
   m_Layer: 2
-  m_Name: JanitorEnemy
+  m_Name: JanitorTechBOSS
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -188,6 +218,7 @@ Transform:
   - {fileID: 8631870843932011449}
   - {fileID: 4202125626246644408}
   - {fileID: 4073614791533693554}
+  - {fileID: 1881472514458205555}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -320,7 +351,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &8631870844753434320
+--- !u!114 &4230729524680630626
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -329,7 +360,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8631870844753434322}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 131872bffc30dbd4bb3013b65a7f2c34, type: 3}
+  m_Script: {fileID: 11500000, guid: c031e2360a0cf864fa5aefaf2f790995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_rayCastStart: {fileID: 8631870843932011449}
@@ -350,13 +381,18 @@ MonoBehaviour:
   m_outOfSightDeley: 2
   m_sneakDamageMultiplier: 1.5
   m_sneakDamageMultiplierStack: 0
-  m_attackRange: 0.6
+  m_attackRange: 0
   m_attckRangeDevider: 1
   m_hitSpeed: 2
   m_attackCollider: {fileID: 220513390732296407}
   attackDeactivationSpeed: 0.1
-  m_hasChargeAttack: 1
+  m_hasChargeAttack: 0
   m_chargeAttackDeley: 1
   m_chargAttackPosibility: 0
-  m_chargeAttackMultiplier: 1
+  m_chargeAttackMultiplier: 3
   m_petTigerDeley: 0
+  m_aimer: {fileID: 1488481114249787428}
+  m_projectile: {fileID: 0}
+  m_shootDeley: 0
+  m_projectileSpeed: 5
+  m_RangedAttackRandomChance: 4

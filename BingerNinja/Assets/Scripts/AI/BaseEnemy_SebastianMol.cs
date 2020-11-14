@@ -11,7 +11,7 @@
 //                          Added layerMask to raycast in PlayerDetectionRaycasLogic() and IsPlayerInLineOfSight()
 //                          Added m_playerStealthScript.IsCrouched() to PlayerDetectionRaycasLogic() and two else if inside
 //                          Changed tags in PlayerDetectionRaycasLogic() to use the Tags_JoaoBeijinho() tags
-
+//sebastian mol 14/11/2020 moved logic out of child classes and moved into here
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -37,12 +37,15 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
    
 
     [Header("designers Section")]
+    [Header("stats variables")]
     [Tooltip("the item the enemy drops on death")]
     public GameObject m_dropItem; // itme that i sdropped when enemie dies
     [Tooltip("health of the enemy")]
     public float m_health; //enemy health with getter and setter
     [Tooltip("speed of the enemy")]
     public float m_speed; //movment speed
+
+    [Header("enemie movment variables")]
     [Tooltip("shows the path the enemy is taking")]
     public bool showPath = false;
     [Tooltip("teh tile map u want to show the path onto")]
@@ -53,19 +56,21 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public float m_playerMoveAllowance;
     [Tooltip("the deley in second whan at a patrol pos and waiting to go to the next")]
     public float m_deleyBetweenPatrol;
+    [Tooltip("should the nemey patrole")]
+    public bool m_dosePatrole;
+    [Tooltip("deley between line of sight checks")]
+    public float m_outOfSightDeley;
+
+    [Header("damage variables")]
     [Tooltip("the multiply for how much damage to take when enemy cant see player")]
     public float m_sneakDamageMultiplier;
     [Tooltip("the multiply for how much damage to take on enemie sthat take more sneka damage then normal thsi stacks additivley with the sneakDamageMultiplier")]
     public float m_sneakDamageMultiplierStack;
-    [Tooltip("should the nemey patrole")]
-    public bool m_dosePatrole;
     [Tooltip("the disteance between th enemy and the player befor he starts attack")]
-    public float m_attckRange;
+    public float m_attackRange;
     [Tooltip("for ranged enemies only how much to devide the attack range by befor starts attack")]
     [Range(1.0f, 1.5f)]
     public float m_attckRangeDevider = 1f;
-    [Tooltip("deley between line of sight checks")]
-    public float m_outOfSightDeley;
 
     private Pathfinder_SebastianMol m_pathfinder;
     protected List<Vector2Int> m_currentPath = new List<Vector2Int>();
@@ -116,7 +121,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     {
         if (IsPlayerInLineOfSight()) // if you can see player
         {
-            if (Vector2.Distance(transform.position, m_playerTransform.position) < m_attckRange / m_attckRangeDevider) //if the player is in range
+            if (Vector2.Distance(transform.position, m_playerTransform.position) < m_attackRange / m_attckRangeDevider) //if the player is in range
             {
                 ClearPath(false);
                 m_currentState = state.ATTACK;
@@ -152,7 +157,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     {
         if (IsPlayerInLineOfSight())
         {
-            if (Vector2.Distance(transform.position, m_playerTransform.position) < m_attckRange)
+            if (Vector2.Distance(transform.position, m_playerTransform.position) < m_attackRange)
             {
                 AttackBehaviour();
 
@@ -625,7 +630,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             AILogic(); // behaviour of the enemy what stste it is in and what it dose
             FollowPath(); //walk the path that the enemy currently has
             SwapDirections(); //chnge the scale of the player
-        }    
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

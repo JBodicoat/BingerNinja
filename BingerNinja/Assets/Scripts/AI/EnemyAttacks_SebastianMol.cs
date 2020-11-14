@@ -1,4 +1,6 @@
-﻿using System;
+﻿//sebastian mol 14/11/2020 script created
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,22 +8,22 @@ using UnityEngine;
 
 public class EnemyAttacks_SebastianMol : MonoBehaviour
 {
-    public void MelleAttack(float m_attackTimer, bool m_hasChargeAttack, int m_chargAttackPosibility, Action QuickAttack, Action ChargeAttack, Action StunIfTiger, float m_petTigerDeley, m_enemyType m_currentEnemyType, float m_hitSpeed)
+    public static void MelleAttack(ref float m_attackTimer, bool m_hasChargeAttack, int m_chargAttackPosibility, Action QuickAttack, Action ChargeAttack, Action StunIfTiger, float m_petTigerDeley, m_enemyType m_currentEnemyType, float m_hitSpeed, bool hasRangedAttack = false)
     {
         if (m_attackTimer <= 0)
         {
             if (m_hasChargeAttack)
             {
-                int rand = UnityEngine.Random.Range(0, m_chargAttackPosibility);
-                switch (rand)
+                int rand = UnityEngine.Random.Range(0, m_chargAttackPosibility+1);
+                if(rand == m_chargAttackPosibility)
                 {
-                    case 0:
-                        QuickAttack();
-                        break;
-
-                    case 1:
-                        ChargeAttack();
-                        break;
+                    ChargeAttack();
+                    Debug.Log("charge");
+                }
+                else
+                {
+                    QuickAttack();
+                    Debug.Log("quick");
                 }
             }
             else
@@ -42,5 +44,25 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
         }
     }
 
+    public static void RangedAttack(Transform m_playerTransform, Transform transform, GameObject m_aimer, ref float m_attackTimer, GameObject m_projectile, float m_shootDeley)
+    {
+        if (m_playerTransform != null)
+        {
+            Vector3 dir = Vector3.Normalize(m_playerTransform.position - transform.position);
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            m_aimer.transform.eulerAngles = new Vector3(0, 0, angle);
+
+            if (m_attackTimer <= 0)
+            {
+                GameObject projectile = Instantiate(m_projectile, transform.position, Quaternion.Euler(new Vector3(dir.x, dir.y, 0)));
+                projectile.GetComponent<BulletMovment_SebastianMol>().m_direction = (m_playerTransform.position - transform.position).normalized;
+                m_attackTimer = m_shootDeley;
+            }
+            else
+            {
+                m_attackTimer -= Time.deltaTime;
+            }
+        }
+    }
 
 }
