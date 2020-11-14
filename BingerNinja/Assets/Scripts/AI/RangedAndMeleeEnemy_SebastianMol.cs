@@ -16,18 +16,50 @@ using UnityEngine;
     [Tooltip("random chance of the enemy doing a ranged attack its is 1/ m_RangedAttackRandomChance")]
     public int m_RangedAttackRandomChance;
 
+    private int m_randomChanceOfRangedAttack;
+    private bool m_generateRandomNumberOnce = false;
+    private int rand;
+
 
     internal override void AttackBehaviour()
     {
-        int rand = Random.Range(0, m_RangedAttackRandomChance+1);
-        if(rand == m_RangedAttackRandomChance)
+        
+         
+        if(rand == m_RangedAttackRandomChance-1)
         {
-            EnemyAttacks_SebastianMol.RangedAttack(m_playerTransform, transform, m_aimer, ref m_attackTimer, m_projectile, m_shootDeley);
+            if(EnemyAttacks_SebastianMol.RangedAttack(m_playerTransform, transform, m_aimer, ref m_attackTimer, m_projectile, m_shootDeley))
+            {
+                m_generateRandomNumberOnce = false;
+                Debug.Log("ranged");
+
+            }
+
         }
         else
         {
-            EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility, QuickAttack, 
-                                                    ChargeAttack, StunIfTiger, m_petTigerDeley, m_currentEnemyType, m_hitSpeed);
+           if( EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility, QuickAttack, ChargeAttack, StunIfTiger, m_petTigerDeley, m_currentEnemyType, m_hitSpeed))
+           {
+                m_generateRandomNumberOnce = false;
+                Debug.Log("melle");
+           }
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (!m_generateRandomNumberOnce)
+        {
+            rand = Random.Range(0, m_RangedAttackRandomChance);
+            m_generateRandomNumberOnce = true;
+        }
+
+        if (rand == m_RangedAttackRandomChance - 1)
+        {
+            m_attackRange = 3;
+        }
+        else
+        {
+            m_attackRange = 0.6f;
         }
     }
 
