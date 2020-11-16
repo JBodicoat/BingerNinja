@@ -409,6 +409,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 2344591196226749973, guid: 85ac18158d176e74ea034de43cd70491, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2344591196226749974, guid: 85ac18158d176e74ea034de43cd70491, type: 3}
       propertyPath: m_Offset.x
       value: 0.019544078
@@ -470,6 +474,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1799900213, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6499968375723911184, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -800,7 +808,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 925935566}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Tutorial Part 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -863,7 +871,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1100930745}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Post Fight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1033,6 +1041,10 @@ PrefabInstance:
     - target: {fileID: 2344591196226749973, guid: 85ac18158d176e74ea034de43cd70491, type: 3}
       propertyPath: m_Name
       value: DialogTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344591196226749973, guid: 85ac18158d176e74ea034de43cd70491, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2344591196226749974, guid: 85ac18158d176e74ea034de43cd70491, type: 3}
       propertyPath: m_Offset.x
@@ -1789,7 +1801,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1782537353}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Pre Fight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1947,7 +1959,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1830757975}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Tutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2133,6 +2145,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 2344591196226749973, guid: 85ac18158d176e74ea034de43cd70491, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2344591196226749974, guid: 85ac18158d176e74ea034de43cd70491, type: 3}
       propertyPath: m_Offset.x
       value: 1.9459546
@@ -2255,6 +2271,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 2344591196226749973, guid: 85ac18158d176e74ea034de43cd70491, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2344591196226749974, guid: 85ac18158d176e74ea034de43cd70491, type: 3}
       propertyPath: m_Offset.x
       value: 0.019544078
@@ -2331,6 +2351,10 @@ PrefabInstance:
       propertyPath: m_ChunkCullingBounds.y
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 5163191988416862380, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c32d50fb846c662449889d803366ef5d, type: 2}
     - target: {fileID: 5888528098225431806, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
       propertyPath: m_Tiles.Array.size
       value: 526
@@ -15147,6 +15171,10 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6674240104814263018, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c32d50fb846c662449889d803366ef5d, type: 2}
     - target: {fileID: 6674240104814263019, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
       propertyPath: m_Tiles.Array.size
       value: 114
@@ -17643,6 +17671,10 @@ PrefabInstance:
       propertyPath: m_ChunkCullingBounds.y
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 6674240104884466794, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c32d50fb846c662449889d803366ef5d, type: 2}
     - target: {fileID: 6674240104884466795, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
       propertyPath: m_Tiles.Array.size
       value: 4
@@ -51931,6 +51963,10 @@ PrefabInstance:
       propertyPath: m_ChunkCullingBounds.y
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 6674240106099362087, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c32d50fb846c662449889d803366ef5d, type: 2}
     - target: {fileID: 6674240106099362136, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
       propertyPath: m_Tiles.Array.size
       value: 111
@@ -53847,6 +53883,10 @@ PrefabInstance:
       propertyPath: m_ChunkCullingBounds.y
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 6674240106452199666, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c32d50fb846c662449889d803366ef5d, type: 2}
     - target: {fileID: 6674240106452199667, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
       propertyPath: m_Tiles.Array.size
       value: 24
