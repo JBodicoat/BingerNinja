@@ -11,7 +11,7 @@ public class Test_MarioFernandes : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        myPoison = new PoisionDefuff_MarioFernandes(10,5,0.5f);
+        myPoison = new PoisionDefuff_MarioFernandes(5, 10);
     }
 
     // Update is called once per frame
