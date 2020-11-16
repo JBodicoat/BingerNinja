@@ -1,4 +1,4 @@
-﻿// Jann
+// Jann
 
 // Jann - 13/11/20 - Abstraction of MonoBehaviour
 
