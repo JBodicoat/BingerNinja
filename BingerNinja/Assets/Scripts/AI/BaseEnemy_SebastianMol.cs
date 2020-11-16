@@ -86,6 +86,8 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     private Transform m_currentPatrolePos; //the current patrole pos were haeding to / are at 
     private Vector3 m_lastPathFinfToPos; //last given to the path finder to find a path e.g. player position
     private bool m_isStuned = false; //used to stunn the enemy
+    private float m_lookLeftAndRightTimer = 0.5f;
+    private bool m_isSerching = false;
 
     protected PlayerStealth_JoaoBeijinho m_playerStealthScript;
     private int m_crouchObjectLayer = 1 << 8;
@@ -108,8 +110,6 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             {
                 PathfindTo(m_startPos);
             }
-            if (transform.localScale.x != m_scale) transform.localScale
-                    = new Vector3(m_scale, transform.localScale.y, transform.localScale.z);
         }
 
     }
@@ -133,18 +133,41 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         }
         else
         {
+            m_isSerching = true;
             if (m_currentPath.Count == 0)
             {
                 if (m_outOfSightTimer <= 0)
                 {
+                    m_isSerching = false;
                     m_currentState = state.WONDER;
                     m_playerDetected = false;
                 }
                 else
                 {
+                    LookLeftAndRight();
                     m_outOfSightTimer -= Time.deltaTime;
                 }
             }
+        }
+    }
+
+    private void LookLeftAndRight()
+    {
+        if(m_lookLeftAndRightTimer <= 0)
+        {
+            if(transform.localScale.x > 0)
+            {
+                transform.localScale = new Vector3(-m_scale, transform.localScale.y, transform.localScale.z);
+            }
+            else
+            {
+                transform.localScale = new Vector3(m_scale, transform.localScale.y, transform.localScale.z);
+            }
+            m_lookLeftAndRightTimer = 0.5f;
+        }
+        else
+        {
+            m_lookLeftAndRightTimer -= Time.deltaTime;
         }
     }
 
@@ -472,6 +495,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// </summary>
     protected void SwapDirections()
     {
+        if(!m_isSerching)
         if(m_playerDetected)
         {
             if(m_playerTransform.position.x > transform.position.x)
@@ -482,13 +506,13 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             {
                 transform.localScale = new Vector3(m_scale, transform.localScale.y, transform.localScale.z);
             }
+
         }
         else
         {
             if(m_lastPos.x > transform.position.x)
             {
                 transform.localScale = new Vector3(m_scale, transform.localScale.y, transform.localScale.z);
-             
             }
             else if(m_lastPos.x < transform.position.x)
             {
@@ -628,7 +652,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         if(!m_isStuned)
         {
             AILogic(); // behaviour of the enemy what stste it is in and what it dose
-            FollowPath(); //walk the path that the enemy currently has
+            FollowPath(); //walk the path that the enemy currently has  
             SwapDirections(); //chnge the scale of the player
         }
     }

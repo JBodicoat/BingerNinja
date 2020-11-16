@@ -22,9 +22,7 @@ using UnityEngine;
 
 
     internal override void AttackBehaviour()
-    {
-        
-         
+    {             
         if(rand == m_RangedAttackRandomChance-1)
         {
             if(EnemyAttacks_SebastianMol.RangedAttack(m_playerTransform, transform, m_aimer, ref m_attackTimer, m_projectile, m_shootDeley))
