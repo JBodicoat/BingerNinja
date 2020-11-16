@@ -13,7 +13,7 @@ public class LevelScripting : MonoBehaviour
 {
     #region VARIABLES
     bool enemyDead = false, keyUsed = false, levelThreeBossIntro, bossDead = false;
-    GameObject levelLiftTrigger, keyTrigger;
+    GameObject levelLiftTrigger, keyTrigger, keyTriggerTwo;
     BaseEnemy_SebastianMol boss, level2Enemy1, level2Enemy2;
     BossDialogue_MarioFernandes bossDialogue, level2End;
     Tilemap objInfWalls, objWalls;
@@ -51,6 +51,13 @@ public class LevelScripting : MonoBehaviour
             boss = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BaseEnemy_SebastianMol>();
             bossDialogue = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BossDialogue_MarioFernandes>();
             levelLiftTrigger = GameObject.Find("Level 6 Lift");
+        }
+        if (SceneManager.GetActiveScene().buildIndex == 8)
+        {
+            keyTrigger = GameObject.Find("Key Trigger");
+            keyTriggerTwo = GameObject.Find("Key Trigger 2");
+            objWalls = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
+            objInfWalls = GameObject.Find("ObjectsInFrontOfWalls_map").GetComponent<Tilemap>();
         }
     }
 
@@ -126,6 +133,27 @@ public class LevelScripting : MonoBehaviour
                 levelLiftTrigger.SetActive(true);
                 bossDead = true;
 
+            }
+        }
+        if (SceneManager.GetActiveScene().buildIndex == 8 && !keyUsed)
+        {
+            if (!keyTrigger.activeInHierarchy)
+            {
+                objInfWalls.SetTile(new Vector3Int(25, 9, 0), null);
+                objInfWalls.SetTile(new Vector3Int(25, 10, 0), null);
+                objInfWalls.SetTile(new Vector3Int(25, 11, 0), null);
+                objWalls.SetTile(new Vector3Int(24, 8, 0), null);
+                objWalls.SetTile(new Vector3Int(24, 9, 0), null);
+                objWalls.SetTile(new Vector3Int(24, 10, 0), null);
+            }
+            if (!keyTriggerTwo.activeInHierarchy)
+            {
+                objInfWalls.SetTile(new Vector3Int(25, 9, 0), null);
+                objInfWalls.SetTile(new Vector3Int(25, 10, 0), null);
+                objInfWalls.SetTile(new Vector3Int(25, 11, 0), null);
+                objWalls.SetTile(new Vector3Int(24, 8, 0), null);
+                objWalls.SetTile(new Vector3Int(24, 9, 0), null);
+                objWalls.SetTile(new Vector3Int(24, 10, 0), null);
             }
         }
     }

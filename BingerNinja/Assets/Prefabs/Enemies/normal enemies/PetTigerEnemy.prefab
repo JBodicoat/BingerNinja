@@ -210,7 +210,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c32d50fb846c662449889d803366ef5d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -351,10 +351,10 @@ MonoBehaviour:
   m_dosePatrole: 0
   m_attckRange: 0.6
   m_attckRangeDevider: 1
+  m_outOfSightDeley: 2
   m_hitSpeed: 2
   m_attackCollider: {fileID: 220513390732296407}
   attackDeactivationSpeed: 0.1
-  m_outOfSightDeley: 2
   m_hasChargeAttack: 0
   m_chargeAttackDeley: 0
   m_chargAttackPosibility: 0

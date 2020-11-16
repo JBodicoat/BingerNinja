@@ -8,6 +8,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 /// <summary>
 /// This script is for Buttons that open doors. Either if activated by the player or hit by a projectile
@@ -51,6 +52,7 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
     {
         if (m_playerControllerScript.m_interact.triggered && m_canPressButton)//Player interaction with button
         {
+
             m_doorCollider.GetComponent<Collider2D>().enabled = false;//Open door
         }
     }
