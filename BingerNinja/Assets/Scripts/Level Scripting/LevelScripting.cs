@@ -12,11 +12,11 @@ using UnityEngine.Tilemaps;
 public class LevelScripting : MonoBehaviour
 {
     #region VARIABLES
-    bool enemyDead = false, keyUsed = false, levelThreeBossIntro, bossDead = false;
+    bool enemyDead = false, keyUsed = false, levelBossIntro, bossDead = false;
     GameObject levelLiftTrigger, keyTrigger, keyTriggerTwo;
     BaseEnemy_SebastianMol boss, level2Enemy1, level2Enemy2;
     BossDialogue_MarioFernandes bossDialogue, level2End;
-    Tilemap objInfWalls, objWalls;
+    Tilemap objInfWalls, objWalls, objBehWalls;
     
     #endregion
 
@@ -58,6 +58,7 @@ public class LevelScripting : MonoBehaviour
             keyTriggerTwo = GameObject.Find("Key Trigger 2");
             objWalls = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
             objInfWalls = GameObject.Find("ObjectsInFrontOfWalls_map").GetComponent<Tilemap>();
+            objBehWalls = GameObject.Find("ObjectsBehindWalls_map").GetComponent<Tilemap>();
         }
     }
 
@@ -72,6 +73,10 @@ public class LevelScripting : MonoBehaviour
             levelLiftTrigger.SetActive(false);
         }
         if (SceneManager.GetActiveScene().buildIndex == 5)
+        {
+            levelLiftTrigger.SetActive(false);
+        }
+        if (SceneManager.GetActiveScene().buildIndex == 6)
         {
             levelLiftTrigger.SetActive(false);
         }
@@ -125,11 +130,16 @@ public class LevelScripting : MonoBehaviour
 
         if (SceneManager.GetActiveScene().buildIndex == 6 && !bossDead)
         {
+            if(!levelBossIntro)
+            {
+                bossDialogue.TriggerDialogue(0);
+                levelBossIntro = true;
+            }
             if (boss.m_health <= 0)
             {
                 //dramatic death SE
                 //freeze on enemy as he dies  
-                bossDialogue.TriggerDialogue(0);
+                bossDialogue.TriggerDialogue(1);
                 levelLiftTrigger.SetActive(true);
                 bossDead = true;
 
@@ -139,21 +149,20 @@ public class LevelScripting : MonoBehaviour
         {
             if (!keyTrigger.activeInHierarchy)
             {
-                objInfWalls.SetTile(new Vector3Int(25, 9, 0), null);
-                objInfWalls.SetTile(new Vector3Int(25, 10, 0), null);
-                objInfWalls.SetTile(new Vector3Int(25, 11, 0), null);
-                objWalls.SetTile(new Vector3Int(24, 8, 0), null);
-                objWalls.SetTile(new Vector3Int(24, 9, 0), null);
-                objWalls.SetTile(new Vector3Int(24, 10, 0), null);
+                objInfWalls.SetTile(new Vector3Int(22, 29, 0), null);
+                objInfWalls.SetTile(new Vector3Int(22, 28, 0), null);
+                
+                objWalls.SetTile(new Vector3Int(21, 27, 0), null);
+                objWalls.SetTile(new Vector3Int(21, 28, 0), null);
+                
             }
             if (!keyTriggerTwo.activeInHierarchy)
             {
-                objInfWalls.SetTile(new Vector3Int(25, 9, 0), null);
-                objInfWalls.SetTile(new Vector3Int(25, 10, 0), null);
-                objInfWalls.SetTile(new Vector3Int(25, 11, 0), null);
-                objWalls.SetTile(new Vector3Int(24, 8, 0), null);
-                objWalls.SetTile(new Vector3Int(24, 9, 0), null);
-                objWalls.SetTile(new Vector3Int(24, 10, 0), null);
+                objInfWalls.SetTile(new Vector3Int(29, 10, 0), null);
+                objInfWalls.SetTile(new Vector3Int(29, 11, 0), null);
+
+                objBehWalls.SetTile(new Vector3Int(28, 9, 0), null);
+                objBehWalls.SetTile(new Vector3Int(28, 10, 0), null);
             }
         }
     }

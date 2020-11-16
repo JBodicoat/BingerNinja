@@ -275,6 +275,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5157954882409207612, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157954882409207612, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 5157954882409207613, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
       propertyPath: m_SortingLayerID
       value: -2137332843
@@ -814,6 +822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f17b292d49b28b4b9a1faa06d6febb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_keysRequired: 1
   itemNeeded: 0
 --- !u!61 &615935643
 BoxCollider2D:
@@ -26581,6 +26590,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5157954882409207612, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157954882409207612, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 5157954882409207613, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
       propertyPath: m_SortingLayerID
       value: -2137332843
@@ -26999,5 +27016,9 @@ PrefabInstance:
       propertyPath: m_inventory
       value: 
       objectReference: {fileID: 1660088290}
+    - target: {fileID: 547836159825887529, guid: f21454a5048d98940bd63158bf79d43a, type: 3}
+      propertyPath: m_itemQuantity
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f21454a5048d98940bd63158bf79d43a, type: 3}
