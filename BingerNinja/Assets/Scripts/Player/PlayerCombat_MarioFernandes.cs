@@ -105,7 +105,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
                 if(CloseEnemy && distanceToClosestsEnemy <= m_meleeAttackRadius)
                 {
-                    CloseEnemy.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage((int)(m_currentWeapon[m_weaponsIndex].dmg * m_strenght));
+                   // CloseEnemy.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage((int)(m_currentWeapon[m_weaponsIndex].dmg * m_strenght));
                 }                
             }
 
