@@ -8,6 +8,20 @@ using UnityEngine;
 
 public class EnemyAttacks_SebastianMol : MonoBehaviour
 {
+    /// <summary>
+    /// holds logic for melee attacks
+    /// </summary>
+    /// <param name="m_attackTimer"></param>
+    /// <param name="m_hasChargeAttack"></param>
+    /// <param name="m_chargAttackPosibility"></param>
+    /// <param name="QuickAttack"></param>
+    /// <param name="ChargeAttack"></param>
+    /// <param name="StunIfTiger"></param>
+    /// <param name="m_petTigerDeley"></param>
+    /// <param name="m_currentEnemyType"></param>
+    /// <param name="m_hitSpeed"></param>
+    /// <param name="hasRangedAttack"></param>
+    /// <returns>weather the attack has been done</returns>
     public static bool MelleAttack(ref float m_attackTimer, bool m_hasChargeAttack, int m_chargAttackPosibility, Action QuickAttack, Action ChargeAttack, Action StunIfTiger, float m_petTigerDeley, m_enemyType m_currentEnemyType, float m_hitSpeed, bool hasRangedAttack = false)
     {
         if (m_attackTimer <= 0)
@@ -44,6 +58,16 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// holds logic for ranged attacks
+    /// </summary>
+    /// <param name="m_playerTransform"></param>
+    /// <param name="transform"></param>
+    /// <param name="m_aimer"></param>
+    /// <param name="m_attackTimer"></param>
+    /// <param name="m_projectile"></param>
+    /// <param name="m_shootDeley"></param>
+    /// <returns>weather the attack has been done</returns>
     public static bool RangedAttack(Transform m_playerTransform, Transform transform, GameObject m_aimer, ref float m_attackTimer, GameObject m_projectile, float m_shootDeley)
     {
         if (m_playerTransform != null)

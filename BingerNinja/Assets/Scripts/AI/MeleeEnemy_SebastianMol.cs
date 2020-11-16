@@ -73,6 +73,9 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
         StunEnemyWithDeleyFunc(m_petTigerDeley);
     }
 
+    /// <summary>
+    /// ovveride class that holds logic for what the enemy shoudl do when in the attack state
+    /// </summary>
     internal override void AttackBehaviour()
     {
         EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility, QuickAttack, 

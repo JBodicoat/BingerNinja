@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿//sebastian mol 14/11/2020 class created
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,18 +14,19 @@ using UnityEngine;
     public float m_shootDeley;
     [Tooltip("speed of the projectile")]
     public float m_projectileSpeed;
-
     [Tooltip("random chance of the enemy doing a ranged attack its is 1/ m_RangedAttackRandomChance")]
     public int m_RangedAttackRandomChance;
 
     private int m_randomChanceOfRangedAttack;
     private bool m_generateRandomNumberOnce = false;
-    private int rand;
+    private int m_rand;
 
-
+    /// <summary>
+    /// ovveride class that holds logic for what the enemy shoudl do when in the attack state
+    /// </summary>
     internal override void AttackBehaviour()
     {             
-        if(rand == m_RangedAttackRandomChance-1)
+        if(m_rand == m_RangedAttackRandomChance-1)
         {
             if(EnemyAttacks_SebastianMol.RangedAttack(m_playerTransform, transform, m_aimer, ref m_attackTimer, m_projectile, m_shootDeley))
             {
@@ -47,11 +50,11 @@ using UnityEngine;
     {
         if (!m_generateRandomNumberOnce)
         {
-            rand = Random.Range(0, m_RangedAttackRandomChance);
+            m_rand = Random.Range(0, m_RangedAttackRandomChance);
             m_generateRandomNumberOnce = true;
         }
 
-        if (rand == m_RangedAttackRandomChance - 1)
+        if (m_rand == m_RangedAttackRandomChance - 1)
         {
             m_attackRange = 3;
         }

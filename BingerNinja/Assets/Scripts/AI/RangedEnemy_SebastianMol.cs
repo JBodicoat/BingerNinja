@@ -27,6 +27,9 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
         Gizmos.DrawWireSphere(transform.position, m_attackRange);
     }
 
+    /// <summary>
+    /// ovveride class that holds logic for what the enemy shoudl do when in the attack state
+    /// </summary>
     internal override void AttackBehaviour()
     {
         EnemyAttacks_SebastianMol.RangedAttack(m_playerTransform, transform, m_aimer, ref m_attackTimer, m_projectile, m_shootDeley);
