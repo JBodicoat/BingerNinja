@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 2826013104151739926}
   - component: {fileID: -5461466053410985718}
   m_Layer: 2
-  m_Name: ChefEnemy
+  m_Name: InterEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -220,10 +220,10 @@ MonoBehaviour:
   m_detectionCollider: {fileID: 5157954882409207614}
   m_playerDetected: 0
   m_currentState: 0
-  m_currentEnemyType: 1
+  m_currentEnemyType: 3
   m_dropItem: {fileID: 0}
   m_health: 80
-  m_speed: 1
+  m_speed: 1.5
   showPath: 0
   floortilemap: {fileID: 0}
   m_patrolPoints: []
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_attckRange: 3
   m_attckRangeDevider: 1.5
   m_aimer: {fileID: 5751295711232786928}
-  m_projectile: {fileID: 1986204507551107328, guid: c719167a814eda848a315ea7dbef9a8a, type: 3}
+  m_projectile: {fileID: 1986204507551107328, guid: 4cffbeeab73b78d49afbe716680e88a1, type: 3}
   m_shootDeley: 2
   m_projectileSpeed: 2
   m_outOfSightDeley: 2

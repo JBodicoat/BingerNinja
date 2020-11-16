@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 4434442803191826815}
   - component: {fileID: 4434442803191826689}
   - component: {fileID: 4434442803191826690}
-  - component: {fileID: -3172112576534142868}
   m_Layer: 0
   m_Name: bussinesManBOSS
   m_TagString: Enemy
@@ -180,7 +179,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131872bffc30dbd4bb3013b65a7f2c34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraShake: {fileID: 0}
   m_rayCastStart: {fileID: 4434442803275330667}
   m_rayCastStartBackup: {fileID: 557739978283802439}
   m_detectionCollider: {fileID: 4434442803191826814}
@@ -197,30 +195,18 @@ MonoBehaviour:
   m_deleyBetweenPatrol: 0
   m_sneakDamageMultiplier: 0
   m_sneakDamageMultiplierStack: 0
-  m_meleeRange: 0.6
+  m_dosePatrole: 1
+  m_attckRange: 0.6
+  m_attckRangeDevider: 1
   m_hitSpeed: 2
   m_attackCollider: {fileID: 5282640114672852741}
   attackDeactivationSpeed: 0.1
   m_outOfSightDeley: 2
-  m_dosePatrole: 1
   m_hasChargeAttack: 1
   m_chargeAttackDeley: 0
   m_chargAttackPosibility: 2
---- !u!114 &-3172112576534142868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4434442803191826688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed50febb1b4ddb0458fccfa2239e59f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mSpriteRenderer: {fileID: 0}
-  mColorSwapTex: {fileID: 0}
-  mSpriteColors: []
+  m_chargeAttackMultiplier: 3
+  m_petTigerDeley: 0
 --- !u!1 &4434442803275330668
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,12 @@
 //sebastian mol 02/11/20 now path gets recalculated when player moves away from original position 
 //sebastian mol 02/11/20 improved player detection with second raycast
 //sebastian mol 06/11/20 new damage sysetm
-//sebastian mol 06/11/20 inplamented magic/logic of distraction projectile
+//sebastian mol 11/11/2020 enemy can now be stunned
+//sebastian mol 11/11/2020 tiger enemy cant see player in vent now
+//Joao Beijinho 12/11/2020  Added layerMask for crouchObjectLayer and reference to playerStealth()
+//                          Added layerMask to raycast in PlayerDetectionRaycasLogic() and IsPlayerInLineOfSight()
+//                          Added m_playerStealthScript.IsCrouched() to PlayerDetectionRaycasLogic() and two else if inside
+//                          Changed tags in PlayerDetectionRaycasLogic() to use the Tags_JoaoBeijinho() tags
 
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +19,7 @@ using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UIElements;
 using UnityEngine.Tilemaps;
-using UnityEngine.AI;
+
 
 /// <summary>
 ///base class for enemies to inherit from with logic for detection, patrole, movment, stats managment
@@ -25,12 +30,11 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public Transform m_rayCastStartBackup; //secondary rey cast for better detection neer walls
     public PolygonCollider2D m_detectionCollider; // the collder cone used for player detection
     public bool m_playerDetected = false; //has the player been detected
-    public enum state { WONDER, CHASE, ATTACK, RETREAT};
+    public enum state { WONDER, CHASE, ATTACK};
     public state m_currentState = state.WONDER;//current state of teh enemy
-
-    public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN};
+    public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN, PETTIGER};
     public m_enemyType m_currentEnemyType;
-    public enum m_damageType { MELEE, RANGE, SNAEK};
+    public enum m_damageType { MELEE, RANGE, SNEAK, STUN };
 
     [Header("designers Section")]
     [Tooltip("the item the enemy drops on death")]
@@ -53,12 +57,19 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public float m_sneakDamageMultiplier;
     [Tooltip("the multiply for how much damage to take on enemie sthat take more sneka damage then normal thsi stacks additivley with the sneakDamageMultiplier")]
     public float m_sneakDamageMultiplierStack;
+    [Tooltip("should the nemey patrole")]
+    public bool m_dosePatrole;
+    [Tooltip("the disteance between th enemy and the player befor he starts attack")]
+    public float m_attckRange;
+    [Tooltip("for ranged enemies only how much to devide the attack range by befor starts attack")]
+    [Range(1.0f, 1.5f)]
+    public float m_attckRangeDevider = 1f;
+    [Tooltip("deley between line of sight checks")]
+    public float m_outOfSightDeley;
 
     private Pathfinder_SebastianMol m_pathfinder;
     protected List<Vector2Int> m_currentPath = new List<Vector2Int>();
-
-    protected Transform m_targetTransform; //used to get player position can be null if undedteceted
-
+    protected Transform m_playerTransform; //used to get player position can be null if undedteceted
     protected float m_scale; //player scale at start
     private Vector3 m_lastPos; //the last position the enemy was at
     protected Vector3 m_startPos;//the starting position of the enemy
@@ -69,27 +80,110 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     private float m_patroleTimer; // timer for waiting at each patrole pos
     private Transform m_currentPatrolePos; //the current patrole pos were haeding to / are at 
     private Vector3 m_lastPathFinfToPos; //last given to the path finder to find a path e.g. player position
+    private bool m_isStuned = false; //used to stunn the enemy
 
-    #region behaviour tree
+    protected PlayerStealth_JoaoBeijinho m_playerStealthScript;
+    private int m_crouchObjectLayer = 1 << 8;
+
+    #region finite state machine
     /// <summary>
     /// abstract class used to provied the logic for the wonder state
     /// </summary>
-    abstract internal void WonderState();
+    private void WonderState()
+    {
+        if (m_dosePatrole)
+        {
+            if (m_playerDetected) m_currentState = state.CHASE;
+            Patrol();
+        }
+        else
+        {
+            m_detectionCollider.enabled = true;
+            if (transform.position != m_startPos)
+            {
+                PathfindTo(m_startPos);
+            }
+            if (transform.localScale.x != m_scale) transform.localScale
+                    = new Vector3(m_scale, transform.localScale.y, transform.localScale.z);
+        }
+
+    }
 
     /// <summary>
     /// abstract class used to provied the logic for the chase state
     /// </summary>
-    abstract internal void ChaseState();
+    private void ChaseState()
+    {
+        if (IsPlayerInLineOfSight()) // if you can see player
+        {
+            if (Vector2.Distance(transform.position, m_playerTransform.position) < m_attckRange / m_attckRangeDevider) //if the player is in range
+            {
+                ClearPath(false);
+                m_currentState = state.ATTACK;
+            }
+            else// if the [layer is out fo range
+            {
+                PathfindTo(m_playerTransform.position);
+            }
+        }
+        else
+        {
+            if (m_currentPath.Count == 0)
+            {
+                if (m_outOfSightTimer <= 0)
+                {
+                    m_currentState = state.WONDER;
+                    m_playerDetected = false;
+                }
+                else
+                {
+                    m_outOfSightTimer -= Time.deltaTime;
+                }
+            }
+        }
+    }
 
     /// <summary>
     /// abstract class used to provied the logic for the attack state
     /// </summary>
-    abstract internal void AttackState();
+    abstract internal void AttackBehaviour();
 
-    /// <summary>
-    /// abstract class used to provied the logic for the retreat state
-    /// </summary>
-    abstract internal void RetreatState();
+    private void AttackState()
+    {
+        if (IsPlayerInLineOfSight())
+        {
+            if (Vector2.Distance(transform.position, m_playerTransform.position) < m_attckRange)
+            {
+                AttackBehaviour();
+
+            }
+            else
+            {
+                m_currentState = state.CHASE;
+            }
+
+            m_outOfSightTimer = m_outOfSightDeley;
+            m_playerDetected = true;
+
+        }
+        else
+        {
+            m_playerDetected = false;
+            if (m_outOfSightTimer <= 0)
+            {
+                m_currentState = state.WONDER;
+            }
+            else
+            {
+                m_outOfSightTimer -= Time.deltaTime;
+            }
+        }
+    }
+
+    ///// <summary>
+    ///// abstract class used to provied the logic for the retreat state
+    ///// </summary>
+    //abstract internal void RetreatState();
 
     /// <summary>
     /// contaisn the switch that stores the dofferent behavoiurs the enemy dose in each state
@@ -107,9 +201,6 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             case state.ATTACK:
                 AttackState();
                 break;
-            case state.RETREAT:
-                RetreatState();
-                break;
         }
     }
     #endregion
@@ -122,123 +213,95 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <param name="collision"> the collion date from the onTrigger functions</param>
     protected void PlayerDetection(GameObject collision)
     {
-        if(collision.CompareTag("Player") ) // is it a the player 
+        if(collision.CompareTag("Player")) // is it a the player 
         {
-            if(collision.GetComponent<PlayerStealth_JoaoBeijinho>().IsStealthed() == false) //is the player in stealth/
+            PlayerStealth_JoaoBeijinho playerStealth = collision.GetComponent<PlayerStealth_JoaoBeijinho>();
+            if (m_currentEnemyType == m_enemyType.PETTIGER)
             {
-                //cast the ray
-                m_detectionCollider.enabled = false;
-                RaycastHit2D hit = Physics2D.Linecast(m_rayCastStart.position, collision.transform.position);
-                Debug.DrawLine(m_rayCastStart.position, collision.transform.position, Color.red);
-
-                if (hit.collider.gameObject.CompareTag("Player")) //did it hit the play first
+                if(!playerStealth.IsinVent())
                 {
-                    //TODO uncomment this
-                  //  m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Detection);
-                    m_playerDetected = true;
-                    m_targetTransform = hit.transform;
-                    m_currentState = state.ATTACK;
-                    ClearPath();
-                }
-                else
-                {
-                    m_detectionCollider.enabled = true;
-                }
+                    PlayerDetectionRaycasLogic(collision);
+                }          
             }
-        }
-        else if ( collision.CompareTag("DistractionProjectile"))
-        {
-            m_detectionCollider.enabled = false;
-            RaycastHit2D hit = Physics2D.Linecast(m_rayCastStart.position, collision.transform.position);
-            Debug.DrawLine(m_rayCastStart.position, collision.transform.position, Color.red);
-
-            if (hit.collider.gameObject.CompareTag("DistractionProjectile"))
+            else if(!playerStealth.IsStealthed()) //is the player in stealth/
             {
-                //TODO uncomment this
-                //  m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Detection);
-                m_playerDetected = true;
-                m_targetTransform = hit.transform;
-                m_currentState = state.ATTACK;
-                ClearPath();
-            }
-            else
-            {
-                m_detectionCollider.enabled = true;
+                PlayerDetectionRaycasLogic(collision);
             }
         }
     }
 
     /// <summary>
-    /// returns waether the player is in line of sight of the enemy
+    /// holds the logic for casting a ray when the player is first detected
     /// </summary>
-    /// <returns>weather the player is in line of sight</returns>
-    protected bool IsTargetInLineOfSight()
-    { 
-        GameObject distract = GameObject.FindGameObjectWithTag("DistractionProjectile"); // see if ther is a distraction
+    /// <param name="col"> a collsion that is checked to see if it is the player</param>
+    private void PlayerDetectionRaycasLogic(GameObject col)
+    {
+        m_detectionCollider.enabled = false;
+        RaycastHit2D hit = Physics2D.Linecast(m_rayCastStart.position, col.transform.position, m_crouchObjectLayer);
+        Debug.DrawLine(m_rayCastStart.position, col.transform.position, Color.red);
 
-        if(distract == null)
+        RaycastHit2D crouchedHit = Physics2D.Linecast(m_rayCastStart.position, col.transform.position);
+        Debug.DrawLine(m_rayCastStart.position, col.transform.position, Color.green);
+
+        if (!m_playerStealthScript.IsCrouched() && hit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag)) //did it hit the play first
         {
-            return RayCastToTag("Player", m_targetTransform);
+            //  m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Detection);
+            m_playerDetected = true;
+            m_playerTransform = hit.transform;
+            m_currentState = state.ATTACK;
+            ClearPath();
+        }
+        else if (m_playerStealthScript.IsCrouched() && crouchedHit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        {
+            //  m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Detection);
+            m_playerDetected = true;
+            m_playerTransform = hit.transform;
+            m_currentState = state.ATTACK;
+            ClearPath();
+        }
+        else if (m_playerStealthScript.IsCrouched() && !crouchedHit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        {
+            m_detectionCollider.enabled = true;
         }
         else
         {
-            if (RayCastToTag("Player", m_targetTransform) && distract.activeSelf)
-            {
-                return RayCastToTag("DistractionProjectile", m_targetTransform);
-            }
-            else if (RayCastToTag("Player", m_targetTransform) == false && distract.activeSelf)
-            {
-                return RayCastToTag("DistractionProjectile", m_targetTransform);
-            }
-            else if (RayCastToTag("Player", m_targetTransform) && distract.activeSelf == false)
-            {
-                return RayCastToTag("Player", m_targetTransform);
-            }
-            else
-            {
-                return false;
-            }
-        }        
+            m_detectionCollider.enabled = true;
+        }
     }
 
-    private bool RayCastToTag(string tag, Transform rayCastPos)
+    /// <summary>
+    /// returns waeether the player is in line of sight of the enemy
+    /// </summary>
+    /// <returns>weather the player is in line of sight</returns>
+    protected bool IsPlayerInLineOfSight()
     {
-        if(rayCastPos != null && rayCastPos.position != Vector3.zero)
+        m_detectionCollider.enabled = false;
+        RaycastHit2D hit = Physics2D.Linecast(m_rayCastStart.position, m_playerTransform.position, m_crouchObjectLayer);
+        Debug.DrawLine(m_rayCastStart.position, m_playerTransform.position, Color.red);
+
+        if (hit.collider.gameObject.CompareTag("Player"))
         {
             m_detectionCollider.enabled = false;
-            RaycastHit2D hit = Physics2D.Linecast(m_rayCastStart.position, rayCastPos.position);
-            Debug.DrawLine(m_rayCastStart.position, rayCastPos.position, Color.red);
-            if (hit.collider.gameObject.CompareTag(tag))
+            return true;
+        }
+        else
+        {
+
+            RaycastHit2D hitTwo = Physics2D.Linecast(m_rayCastStartBackup.position, m_playerTransform.position);
+            Debug.DrawLine(m_rayCastStartBackup.position, m_playerTransform.position, Color.red);
+
+            if (hitTwo.collider.gameObject.CompareTag("Player"))
             {
                 m_detectionCollider.enabled = false;
-                m_targetTransform = hit.transform;
                 return true;
             }
             else
             {
-
-                RaycastHit2D hitTwo = Physics2D.Linecast(m_rayCastStartBackup.position, rayCastPos.position);
-                Debug.DrawLine(m_rayCastStartBackup.position, rayCastPos.position, Color.red);
-
-                if (hitTwo.collider.gameObject.CompareTag(tag))
-                {
-                    m_detectionCollider.enabled = false;
-                    m_targetTransform = hit.transform;
-                    return true;
-                }
-                else
-                {
-                    m_detectionCollider.enabled = true;
-                    m_targetTransform = hit.transform;
-                    return false;
-                }
+                m_detectionCollider.enabled = true;
+                return false;
             }
         }
-        else
-        {
-            return false;
-        }
-       
+        
     }
 
     #endregion
@@ -347,8 +410,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 }
                 else// else go through the list 
                 {
-                    m_patrolIterator++;
-                    m_currentPatrolePos = m_patrolPoints[m_patrolIterator];
+                    m_currentPatrolePos = m_patrolPoints[++m_patrolIterator];
                 }
                 m_patroleTimer = m_deleyBetweenPatrol; //reset the timer
             }
@@ -392,15 +454,11 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     {
         if(m_health <= 0)
         {
-            if (m_dropItem != null)
+            if (m_dropItem)
             {
                 Instantiate(m_dropItem, transform.position, Quaternion.identity);
-                gameObject.SetActive(false);
             }
-            else
-            {
-                gameObject.SetActive(false);
-            }
+            gameObject.SetActive(false);
         }    
     }
 
@@ -411,7 +469,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     {
         if(m_playerDetected)
         {
-            if(m_targetTransform.position.x > transform.position.x)
+            if(m_playerTransform.position.x > transform.position.x)
             {
                 transform.localScale = new Vector3( -m_scale, transform.localScale.y, transform.localScale.z);
             }
@@ -435,12 +493,10 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// used to make the enemy take damage
-    /// </summary>
-    /// <param name="damage">amount of damage to take</param>
+
     public void TakeDamage(m_damageType damageType, float damage)
     {
+
         switch (m_currentEnemyType)
         {
             case m_enemyType.NORMAL:
@@ -459,13 +515,17 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 break;
 
             case m_enemyType.BARISTA:
-                if(m_targetTransform.position.x < transform.position.x) //player on the left
+                if(m_playerTransform.position.x < transform.position.x) //player on the left
                 {
                     if(transform.localScale.x < 0) NormalTakeDamage(damage); //looking left
                 }
-                else if(m_targetTransform.position.x > transform.position.x) //player on the right
+                else if(m_playerTransform.position.x > transform.position.x) //player on the right
                 {
                     if (transform.localScale.x > 0) NormalTakeDamage(damage); //looking right
+                }
+                else
+                {
+                    NormalTakeDamage(damage*0.25f);
                 }
                 break;
 
@@ -502,6 +562,28 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 break;
 
         }
+
+        OnDeath();//checks to see if enemy is dead 
+    }
+
+    /// <summary>
+    /// stop the enemys movment and attack, makes it look liek enemy ios tsunned but can stil be damaged
+    /// </summary>
+    private void StunEnemyToggle()
+    {
+        m_isStuned = !m_isStuned;
+    }
+
+    /// <summary>
+    /// stund the enemy for an amount of time in seconds
+    /// </summary>
+    /// <param name="amountOfTime"> the amaount of time the enemy is stunend for</param>
+    /// <returns></returns>
+    public IEnumerator StunEnemyWithDeley(float amountOfTime)
+    {
+        StunEnemyToggle();
+        yield return new WaitForSeconds(amountOfTime);
+        StunEnemyToggle();
     }
 
     private void NormalTakeDamage( float damage )
@@ -526,29 +608,36 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         m_patrolIteratorMax = m_patrolPoints.Length-1;
         m_patroleTimer = m_deleyBetweenPatrol;
         if (m_patrolPoints.Length > 0) m_currentPatrolePos = m_patrolPoints[0];
+
+        m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
+        m_crouchObjectLayer = ~m_crouchObjectLayer;
     }
 
     private void Update()
     {
-        AILogic(); // behaviour of the enemy what stste it is in and what it dose
-        FollowPath(); //walk the path that the enemy currently has
-        SwapDirections(); //chnge the scale of the player
-        OnDeath();//checks to see if enemy is dead 
+        if(!m_isStuned)
+        {
+            AILogic(); // behaviour of the enemy what stste it is in and what it dose
+            FollowPath(); //walk the path that the enemy currently has
+            SwapDirections(); //chnge the scale of the player
+        }    
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(m_playerDetected == false)
-        {
-            PlayerDetection(collision.gameObject);
-        }      
+        if(!m_isStuned)
+            if(!m_playerDetected)
+            {
+                PlayerDetection(collision.gameObject);
+            }      
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (m_playerDetected == false)
-        {
-            PlayerDetection(collision.gameObject);
-        }
+        if (!m_isStuned)
+            if (!m_playerDetected)
+            {
+                PlayerDetection(collision.gameObject);
+            }
     }
 }

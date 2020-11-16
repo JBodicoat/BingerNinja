@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7442044760093392687}
   - component: {fileID: 3623586587531974837}
   m_Layer: 0
-  m_Name: EnemyBullet
+  m_Name: InternProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,7 +114,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_speed: 2
-  m_damage: 2
+  m_damage: 1
+  m_damageDealt: 0
 --- !u!50 &3623586587531974837
 Rigidbody2D:
   serializedVersion: 4
