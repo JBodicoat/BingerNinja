@@ -195,15 +195,18 @@ MonoBehaviour:
   m_deleyBetweenPatrol: 0
   m_sneakDamageMultiplier: 0
   m_sneakDamageMultiplierStack: 0
-  m_meleeRange: 0.6
+  m_dosePatrole: 1
+  m_attckRange: 0.6
+  m_attckRangeDevider: 1
   m_hitSpeed: 2
   m_attackCollider: {fileID: 5282640114672852741}
   attackDeactivationSpeed: 0.1
   m_outOfSightDeley: 2
-  m_dosePatrole: 1
   m_hasChargeAttack: 1
   m_chargeAttackDeley: 0
   m_chargAttackPosibility: 2
+  m_chargeAttackMultiplier: 3
+  m_petTigerDeley: 0
 --- !u!1 &4434442803275330668
 GameObject:
   m_ObjectHideFlags: 0

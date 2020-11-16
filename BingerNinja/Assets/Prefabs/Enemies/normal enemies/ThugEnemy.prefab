@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3825102873797564499}
   - component: {fileID: 1386623927498531794}
   - component: {fileID: 8802191557362704687}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: enemyDamager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4073614791533693554}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: RayCastStartBackUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8631870843932011449}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: RayCastStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 8631870844753434285}
   - component: {fileID: 8631870844753434323}
   - component: {fileID: 8631870844753434320}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ThugEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -348,12 +348,15 @@ MonoBehaviour:
   m_deleyBetweenPatrol: 0
   m_sneakDamageMultiplier: 0
   m_sneakDamageMultiplierStack: 0
-  m_meleeRange: 0.6
+  m_dosePatrole: 0
+  m_attckRange: 0.6
+  m_attckRangeDevider: 1
   m_hitSpeed: 2
   m_attackCollider: {fileID: 220513390732296407}
   attackDeactivationSpeed: 0.1
   m_outOfSightDeley: 2
-  m_dosePatrole: 0
   m_hasChargeAttack: 0
   m_chargeAttackDeley: 0
   m_chargAttackPosibility: 0
+  m_chargeAttackMultiplier: 3
+  m_petTigerDeley: 0

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4202125626246644408}
   - component: {fileID: 3825102873797564499}
   - component: {fileID: 1386623927498531794}
+  - component: {fileID: 8802191557362704687}
   m_Layer: 2
   m_Name: enemyDamager
   m_TagString: Untagged
@@ -45,7 +46,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.28255796, y: -0.24377573}
+  m_Offset: {x: -0.061142266, y: -0.6357143}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -56,7 +57,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5651155, y: 2.1302354}
+  m_Size: {x: 2.2525158, y: 2.914113}
   m_EdgeRadius: 0
 --- !u!50 &1386623927498531794
 Rigidbody2D:
@@ -79,6 +80,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &8802191557362704687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220513390732296407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be6def35fff5c7d48811166bd65116d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_baseDamage: 1
 --- !u!1 &2962778701667265248
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,7 +168,7 @@ GameObject:
   - component: {fileID: 8631870844753434323}
   - component: {fileID: 8631870844753434320}
   m_Layer: 2
-  m_Name: SecurityGuardEnemy
+  m_Name: JanitorEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,7 +183,7 @@ Transform:
   m_GameObject: {fileID: 8631870844753434322}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 12.21, y: 8.67, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.25322, y: 0.25322, z: 0.50644}
   m_Children:
   - {fileID: 8631870843932011449}
   - {fileID: 4202125626246644408}
@@ -196,7 +210,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c32d50fb846c662449889d803366ef5d, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -332,17 +346,17 @@ MonoBehaviour:
   m_patrolPoints: []
   m_playerMoveAllowance: 2
   m_deleyBetweenPatrol: 0
-  m_sneakDamageMultiplier: 1.5
+  m_sneakDamageMultiplier: 0
   m_sneakDamageMultiplierStack: 0
-  m_dosePatrole: 1
-  m_attckRange: 0.6
+  m_dosePatrole: 0
+  m_attckRange: 1
   m_attckRangeDevider: 1
   m_hitSpeed: 2
   m_attackCollider: {fileID: 220513390732296407}
   attackDeactivationSpeed: 0.1
   m_outOfSightDeley: 2
   m_hasChargeAttack: 1
-  m_chargeAttackDeley: 2
-  m_chargAttackPosibility: 3
-  m_chargeAttackMultiplier: 3
+  m_chargeAttackDeley: 1
+  m_chargAttackPosibility: 100000
+  m_chargeAttackMultiplier: 1
   m_petTigerDeley: 0
