@@ -10,6 +10,9 @@ using UnityEngine.InputSystem.UI;
 using UnityEngine.Networking;
 using UnityEngine.Tilemaps;
 
+/// <summary>
+/// class that ranged enemys use
+/// </summary>
 class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
 {
     [Header("projectile prefabs")]

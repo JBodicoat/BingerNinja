@@ -5,7 +5,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/// <summary>
+/// used to decouple attack logic from enemie classes
+/// </summary>
 public class EnemyAttacks_SebastianMol : MonoBehaviour
 {
     /// <summary>
