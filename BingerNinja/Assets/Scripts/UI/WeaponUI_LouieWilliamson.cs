@@ -3,6 +3,7 @@
 
 //Louie 08/11/2020 - First created
 //Louie 09/11/2020 - Added animations
+//Louie 16/11/2020 - Added Weapon Sprite List
 
 using System.Collections;
 using System.Collections.Generic;
@@ -30,26 +31,32 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     public Animator pickupAnim;
     public Animator keyAnim;
 
-    private float timer;
-    void Start()
-    {
-        timer = 0;
+    public List<Sprite> WeaponSprites = new List<Sprite>();
 
-        weaponsAnim = GetComponent<Animator>();
-        weaponName = "";
-        rangedName = "";
-        rangedAmmo = "";
-    }
+    //---- LIST KEY ----   //
+    //  0     =   Fugu     //
+    //  1     =   Squid    //
+    //  2     =   Riceball //
+    //  3     =   Kobe     //
+    //  4     =   Sashimi  //
+    //  5     =   Tempura  //
+    //  6     =   Sake     //
+    //  7     =   Noodles   //
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void SetWeaponsUIAnimation(bool isShownIfTrue)
     {
         weaponsAnim.SetBool("isOnScreen", isShownIfTrue);
     }
+    public void setKey(bool hasKey)
+    {
+        keyAnim.SetBool("hasKey", hasKey);
+    }
+    
+    public void setPickupAnim(bool hasPickup)
+    {
+        pickupAnim.SetBool("isPickupShown", hasPickup);
+    }
+
     public void WeaponChange(FoodType newWeapon, bool isRanged, int ammo)
     {
         if (isRanged)
@@ -61,39 +68,46 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
         {
             case FoodType.FUGU:
                 setName("Fugu", isRanged);
-                //setImage(, isRanged);
+                setImage( 0, isRanged);
                 break;
             case FoodType.SQUID:
                 setName("Squid", isRanged);
-                //setImage(, isRanged);
+                setImage(1, isRanged);
                 break;
             case FoodType.RICEBALL:
                 setName("Riceball", isRanged);
-                //setImage(, isRanged);
+                setImage(2, isRanged);
                 break;
             case FoodType.KOBEBEEF:
                 setName("Kobe Beef", isRanged);
-                //setImage(, isRanged);
+                setImage(3, isRanged);
                 break;
             case FoodType.SASHIMI:
                 setName("Sashimi", isRanged);
-                //setImage(, isRanged);
+                setImage(4, isRanged);
                 break;
-            case FoodType.PIZZA:
+            case FoodType.PIZZA: // This needs to be changed to tempura
                 setName("Pizza", isRanged);
-                //setImage(, isRanged);
+                setImage(5, isRanged);
                 break;
             case FoodType.SAKE:
                 setName("Sake", isRanged);
-                //setImage(, isRanged);
+                setImage(6, isRanged);
                 break;
             case FoodType.NOODLES:
                 setName("Noodles", isRanged);
-                //setImage(, isRanged);
+                setImage(7, isRanged);
                 break;
             default:
                 break;
         }
+    }
+    void Start()
+    {
+        weaponsAnim = GetComponent<Animator>();
+        weaponName = "";
+        rangedName = "";
+        rangedAmmo = "";   
     }
     void setName(string name, bool isRanged)
     {
@@ -106,15 +120,15 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
             weaponText.text = name;
         }
     }
-    void setImage(FoodType weapon, bool isRanged)
+    void setImage(int weaponIndex, bool isRanged)
     {
         if (isRanged)
         {
-            //rangedImage = ;
+            rangedImage.sprite = WeaponSprites[weaponIndex];
         }
         else
         {
-            //weaponImage = ;
+            weaponImage.sprite = WeaponSprites[weaponIndex];
         }
     }
     void setAmmo(string ammo)
@@ -127,13 +141,4 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
         //pickupImage = ;
     }
 
-    public void setKey(bool hasKey)
-    {
-        keyAnim.SetBool("hasKey", hasKey);
-    }
-    
-    public void setPickupAnim(bool hasPickup)
-    {
-        pickupAnim.SetBool("isPickupShown", hasPickup);
-    }
 }
