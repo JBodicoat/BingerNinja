@@ -15,6 +15,7 @@
 // Mario 08/11/2020 - Update Effects
 // Mario 09/11/2020 - Update Names and Add strength
 // Mario 13/11/2020 - Add Distraction time to progectile
+// Louie 17/11/2020 - Added Weapon UI integration
 
 using System.Collections;
 using System.Collections.Generic;
