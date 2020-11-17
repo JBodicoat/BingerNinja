@@ -22,6 +22,7 @@ public class PlayerController_JamieG : MonoBehaviour
     public InputAction m_crouch;
     public InputAction m_eat;
     public InputAction m_attack;
+    public InputAction m_roll;
 
     public InputAction m_switchWeapons;
 
@@ -49,8 +50,14 @@ public class PlayerController_JamieG : MonoBehaviour
     }
 
     private void Update()
-    {
+    {   
+        if(m_roll.triggered&& m_playerMovementScript.isRolling==false)
+        {
+            m_playerMovementScript.isRolling = true;
+            m_playerMovementScript.RollMovement();
+        }
         if (m_crouch.triggered)
+
         {
             m_playerStealthScript.Crouch();
         }
@@ -65,6 +72,7 @@ public class PlayerController_JamieG : MonoBehaviour
         m_crouch.Enable();
         m_eat.Enable();
         m_attack.Enable();
+        m_roll.Enable();
         m_switchWeapons.Enable();
     }
 
@@ -75,7 +83,6 @@ public class PlayerController_JamieG : MonoBehaviour
         m_crouch.Disable();
         m_eat.Disable();
         m_attack.Disable();
-        m_switchWeapons.Disable();
     }
     #endregion
 
