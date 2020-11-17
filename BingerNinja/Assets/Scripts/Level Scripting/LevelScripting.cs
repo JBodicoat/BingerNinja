@@ -60,6 +60,12 @@ public class LevelScripting : MonoBehaviour
             objInfWalls = GameObject.Find("ObjectsInFrontOfWalls_map").GetComponent<Tilemap>();
             objBehWalls = GameObject.Find("ObjectsBehindWalls_map").GetComponent<Tilemap>();
         }
+        if (SceneManager.GetActiveScene().buildIndex == 9)
+        {
+            boss = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BaseEnemy_SebastianMol>();
+            bossDialogue = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BossDialogue_MarioFernandes>();
+            levelLiftTrigger = GameObject.Find("Level 9 Lift");
+        }
     }
 
     private void Start()
@@ -80,6 +86,10 @@ public class LevelScripting : MonoBehaviour
         {
             levelLiftTrigger.SetActive(false);
         }
+        if (SceneManager.GetActiveScene().buildIndex == 9)
+        {
+            levelLiftTrigger.SetActive(false);
+        }
     }
     private void Update()
     {
@@ -93,7 +103,6 @@ public class LevelScripting : MonoBehaviour
 
             }
         }
-
         if (SceneManager.GetActiveScene().buildIndex == 3 && !bossDead)
         {
             if (boss.m_health <= 0)
@@ -106,7 +115,6 @@ public class LevelScripting : MonoBehaviour
               
             }   
         }
-      
         if (SceneManager.GetActiveScene().buildIndex == 4 && !keyUsed)
         {
            if(!keyTrigger.activeInHierarchy)
@@ -119,7 +127,6 @@ public class LevelScripting : MonoBehaviour
                 objWalls.SetTile(new Vector3Int(24, 10, 0), null);
             }
         }
-
         if (SceneManager.GetActiveScene().buildIndex == 5 && !keyUsed)
         {
             if (!keyTrigger.activeInHierarchy)
@@ -127,7 +134,6 @@ public class LevelScripting : MonoBehaviour
                 levelLiftTrigger.SetActive(true);
             }
         }
-
         if (SceneManager.GetActiveScene().buildIndex == 6 && !bossDead)
         {
             if(!levelBossIntro)
@@ -163,6 +169,23 @@ public class LevelScripting : MonoBehaviour
 
                 objBehWalls.SetTile(new Vector3Int(28, 9, 0), null);
                 objBehWalls.SetTile(new Vector3Int(28, 10, 0), null);
+            }
+        }
+        if (SceneManager.GetActiveScene().buildIndex == 9 && !bossDead)
+        {
+            if (!levelBossIntro)
+            {
+                bossDialogue.TriggerDialogue(0);
+                levelBossIntro = true;
+            }
+            if (boss.m_health <= 0)
+            {
+                //dramatic death SE
+                //freeze on enemy as he dies  
+                bossDialogue.TriggerDialogue(1);
+                levelLiftTrigger.SetActive(true);
+                bossDead = true;
+
             }
         }
     }
