@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7442044760093392687}
   - component: {fileID: 3623586587531974837}
   m_Layer: 0
-  m_Name: chefProjectile
+  m_Name: TechBossProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -115,10 +115,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_speed: 2
   m_damage: 2
-  m_dosePoisonDamage: 0
-  m_poisonDamageChance: 0
-  m_poisionDamage: 0
-  m_posionDamageTime: 0
+  m_dosePoisonDamage: 1
+  m_poisonDamageChance: 2
+  m_poisionDamage: 5
+  m_posionDamageTime: 5
 --- !u!50 &3623586587531974837
 Rigidbody2D:
   serializedVersion: 4
