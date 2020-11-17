@@ -340,23 +340,23 @@ MonoBehaviour:
   m_currentEnemyType: 0
   m_dropItem: {fileID: 0}
   m_health: 100
-  m_speed: 2
+  m_speed: 1
   showPath: 0
   floortilemap: {fileID: 0}
   m_patrolPoints: []
   m_playerMoveAllowance: 2
   m_deleyBetweenPatrol: 0
-  m_sneakDamageMultiplier: 0
-  m_sneakDamageMultiplierStack: 0
   m_dosePatrole: 0
-  m_attckRange: 1
+  m_outOfSightDeley: 4
+  m_sneakDamageMultiplier: 1.5
+  m_sneakDamageMultiplierStack: 0
+  m_attackRange: 1
   m_attckRangeDevider: 1
   m_hitSpeed: 2
   m_attackCollider: {fileID: 220513390732296407}
   attackDeactivationSpeed: 0.1
-  m_outOfSightDeley: 2
   m_hasChargeAttack: 1
   m_chargeAttackDeley: 1
-  m_chargAttackPosibility: 100000
+  m_chargAttackPosibility: 0
   m_chargeAttackMultiplier: 1
   m_petTigerDeley: 0

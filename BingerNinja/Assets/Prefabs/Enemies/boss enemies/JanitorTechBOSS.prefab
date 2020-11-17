@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4202125626246644408}
   - component: {fileID: 3825102873797564499}
   - component: {fileID: 1386623927498531794}
+  - component: {fileID: 8802191557362704687}
   m_Layer: 2
   m_Name: enemyDamager
   m_TagString: Untagged
@@ -45,7 +46,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.28255796, y: -0.24377573}
+  m_Offset: {x: -0.061142266, y: -0.6357143}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -56,7 +57,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5651155, y: 2.1302354}
+  m_Size: {x: 2.2525158, y: 2.914113}
   m_EdgeRadius: 0
 --- !u!50 &1386623927498531794
 Rigidbody2D:
@@ -79,6 +80,49 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &8802191557362704687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220513390732296407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be6def35fff5c7d48811166bd65116d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_baseDamage: 1
+--- !u!1 &1488481114249787428
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1881472514458205555}
+  m_Layer: 2
+  m_Name: aimer (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1881472514458205555
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488481114249787428}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.64, y: 0.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8631870844753434286}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2962778701667265248
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,9 +196,9 @@ GameObject:
   - component: {fileID: 8631870844753434284}
   - component: {fileID: 8631870844753434285}
   - component: {fileID: 8631870844753434323}
-  - component: {fileID: 8631870844753434320}
+  - component: {fileID: 4230729524680630626}
   m_Layer: 2
-  m_Name: BussinessmanEnemy
+  m_Name: JanitorTechBOSS
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,11 +213,12 @@ Transform:
   m_GameObject: {fileID: 8631870844753434322}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 12.21, y: 8.67, z: 0}
-  m_LocalScale: {x: 0.25322, y: 0.25322, z: 0.50644}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 8631870843932011449}
   - {fileID: 4202125626246644408}
   - {fileID: 4073614791533693554}
+  - {fileID: 1881472514458205555}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -306,7 +351,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &8631870844753434320
+--- !u!114 &4230729524680630626
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -315,7 +360,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8631870844753434322}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 131872bffc30dbd4bb3013b65a7f2c34, type: 3}
+  m_Script: {fileID: 11500000, guid: c031e2360a0cf864fa5aefaf2f790995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_rayCastStart: {fileID: 8631870843932011449}
@@ -323,26 +368,31 @@ MonoBehaviour:
   m_detectionCollider: {fileID: 8631870844753434284}
   m_playerDetected: 0
   m_currentState: 0
-  m_currentEnemyType: 5
+  m_currentEnemyType: 0
   m_dropItem: {fileID: 0}
   m_health: 100
-  m_speed: 2
+  m_speed: 1
   showPath: 0
   floortilemap: {fileID: 0}
   m_patrolPoints: []
   m_playerMoveAllowance: 2
-  m_deleyBetweenPatrol: 1
+  m_deleyBetweenPatrol: 0
   m_dosePatrole: 0
-  m_outOfSightDeley: 4
+  m_outOfSightDeley: 2
   m_sneakDamageMultiplier: 1.5
   m_sneakDamageMultiplierStack: 0
-  m_attackRange: 0.6
+  m_attackRange: 1.2
   m_attckRangeDevider: 1
-  m_hitSpeed: 1
+  m_hitSpeed: 2
   m_attackCollider: {fileID: 220513390732296407}
   attackDeactivationSpeed: 0.1
   m_hasChargeAttack: 0
-  m_chargeAttackDeley: 0
-  m_chargAttackPosibility: 0
+  m_chargeAttackDeley: 1
+  m_chargAttackPosibility: 1
   m_chargeAttackMultiplier: 3
   m_petTigerDeley: 0
+  m_aimer: {fileID: 1488481114249787428}
+  m_projectile: {fileID: 1986204507551107328, guid: d27f3aeac9b841a4687df15667cd609c, type: 3}
+  m_shootDeley: 0
+  m_projectileSpeed: 5
+  m_RangedAttackRandomChance: 2
