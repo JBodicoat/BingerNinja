@@ -119,7 +119,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c32d50fb846c662449889d803366ef5d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -137,8 +137,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2137332843
+  m_SortingLayer: 3
   m_SortingOrder: 100
   m_Sprite: {fileID: -4807220339291291799, guid: e1e52b9cfa6de2b45b314569304ebc06, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -229,16 +229,16 @@ MonoBehaviour:
   m_patrolPoints: []
   m_playerMoveAllowance: 2
   m_deleyBetweenPatrol: 2
+  m_dosePatrole: 0
+  m_outOfSightDeley: 4
   m_sneakDamageMultiplier: 1.5
   m_sneakDamageMultiplierStack: 0
-  m_dosePatrole: 0
-  m_attckRange: 3
+  m_attackRange: 3
   m_attckRangeDevider: 1.5
   m_aimer: {fileID: 5751295711232786928}
   m_projectile: {fileID: 1986204507551107328, guid: c719167a814eda848a315ea7dbef9a8a, type: 3}
   m_shootDeley: 2
   m_projectileSpeed: 2
-  m_outOfSightDeley: 2
 --- !u!61 &5157954882409207617
 BoxCollider2D:
   m_ObjectHideFlags: 0

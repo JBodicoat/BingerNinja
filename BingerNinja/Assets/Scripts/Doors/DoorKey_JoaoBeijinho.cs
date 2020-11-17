@@ -22,9 +22,10 @@ public class DoorKey_JoaoBeijinho : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
         if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag) && m_inventory.HasItem(itemNeeded, m_keysRequired))//Collision with Player and key check in inventory
         {
-            gameObject.GetComponent<Collider2D>().enabled = false;
+            gameObject.SetActive(false);
             m_inventory.RemoveItem(ItemType.Key, m_keysRequired);
         }
     }
