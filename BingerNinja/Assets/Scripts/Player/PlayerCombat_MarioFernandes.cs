@@ -1,5 +1,5 @@
 ﻿// Mário Fernandes
-/// This class stores the current weapon on the player and make im abel to use it 
+
 
 // Mário 17/10/2020 - Create class and Attack, PickUpFood, IIsHoldingFood Funcions
 // Joao 25/10/2020 - Stop weapon usage while crouched in update
@@ -11,6 +11,9 @@
 //                   changed GetComponent in above to GetComponentInParent to support new EnemyCollider child on enemy prefabs
 //                   EnemyCollider child needed because otherwise projectiles collide with enemy view cone triggers
 // Louie 03/11/2020 - Added Player Sound Effects
+//sebastian mol 05/11/20 changed enemy take damage function call
+// Mario 08/11/2020 - Update Effects
+// Mario 09/11/2020 - Update Names and Add strength
 
 using System.Collections;
 using System.Collections.Generic;
@@ -27,24 +30,39 @@ public enum FoodType
     SAKE,
     NOODLES,
 } 
+
+public enum WeaponType
+{
+    Melee,
+    Ranged
+}
+
+///<summary>
+/// This class stores the current weapon on the player and make im abel to use it 
+///<summary>
 public class PlayerCombat_MarioFernandes : MonoBehaviour
 {
     private PlayerAnimation_LouieWilliamson m_animationScript;
     public GameObject m_projectile = null;
-
-    public float attackSpeed = 1;
-    public float currentatktime = 0;
-    //public Collider2D EnemyDetection = null;
-    
-    public float RangeAttribute = 3;
+    public float m_attackDelay = 1;
+    public float m_timeSinceLastAttack = 0;
+    //public Collider2D EnemyDetection = null;    
+    public float m_meleeAttackRadius = 3;
+    public float m_strenght = 1;
     protected PlayerStealth_JoaoBeijinho m_playerStealthScript;
 
+    //This weapons are represented by an array of weapons of size 2
+    // 0 - Melee weapon
+    // 1 - Ranged weapon
     [SerializeField]
-    protected WeaponsTemplate_MarioFernandes m_currentWeapon;
+    protected WeaponsTemplate_MarioFernandes[] m_currentWeapon;
 
+    public int m_weaponsIndex = 0; 
     PlayerHealthHunger_MarioFernandes m_playerHealthHungerScript;
 
     private AudioManager_LouieWilliamson m_audioManager;
+
+    private PlayerController_JamieG Controller;
 
   public  bool IsHoldingFood()
         {
@@ -53,24 +71,26 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         return false;
         }
 
-    void PickUpFood()
+    public void ResetStrength()
     {
-        
+        m_strenght = 1;
     }
 
     void Attack()
     {
         m_animationScript.TriggerAttackAnim();
 
-        if(m_currentWeapon.IsRanged())
+        if(m_currentWeapon[m_weaponsIndex].IsRanged())
         {
-             m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
+            //TODO undo this comment
+             //m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
              GameObject projectile = Instantiate(m_projectile, transform.position, transform.rotation);
-             projectile.GetComponent<Projectile_MarioFernandes>().m_dmg = m_currentWeapon.dmg;
+             projectile.GetComponent<Projectile_MarioFernandes>().m_dmg = (int)(m_currentWeapon[m_weaponsIndex].dmg * m_strenght);
         }
         else
         {
-            m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
+            //TODO uncomment this
+           // m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
 
             float distanceToClosestsEnemy = Mathf.Infinity;
                 GameObject CloseEnemy = null;
@@ -86,75 +106,38 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
                     }
                 }
 
-
-            // --------------
-
-
-            //print("Activate Detection");
-            ////EnemyDetection.enabled = true;
-            //print("Detect enemy");
-            //Collider2D[] results = new Collider2D[10];
-            //ContactFilter2D contact = new ContactFilter2D();   
-            //contact.NoFilter();
-//
-            //GetComponent<CircleCollider2D>().OverlapCollider(contact, results);
-            //
-            //
-            //print("Detected enemys: " + results.Length);            
-            // 
-            //if(results[0] )
-            //{
-            //    
-            //    GameObject CloseEnemy = null;
-            //    float distance = 100;
-//
-            //    foreach (var enemy in results)
-            //    {
-            //        if(enemy.tag == "Enemy")
-            //        {
-            //            if (distance > Vector3.Distance(transform.position, enemy.transform.position))
-            //            {
-            //            distance = Vector3.Distance(transform.position, enemy.transform.position);
-            //            CloseEnemy = enemy.gameObject;
-            //            }
-            //        }
-            //    }
-
-                if(CloseEnemy && distanceToClosestsEnemy <= RangeAttribute)
+                if(CloseEnemy && distanceToClosestsEnemy <= m_meleeAttackRadius)
                 {
-                    CloseEnemy.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage(m_currentWeapon.dmg);
+                    CloseEnemy.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage( BaseEnemy_SebastianMol.m_damageType.MELEE , (int)(m_currentWeapon[m_weaponsIndex].dmg * m_strenght));
                 }                
             }
 
-            //EnemyDetection.enabled = false;
-        
+            //EnemyDetection.enabled = false;        
     }
 
-    public void eat()
+    public void Eat()
     {
         m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Eating);
 
-        if (m_currentWeapon)
+        if (m_currentWeapon[m_weaponsIndex])
         {
-            switch (m_currentWeapon.m_foodType)
+            GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon[m_weaponsIndex].m_instaHeal);
+
+            switch (m_currentWeapon[m_weaponsIndex].m_foodType)
             {
-                case FoodType.FUGU:
-                    GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon.m_instaHeal);
+                case FoodType.FUGU:                   
                     if (Random.Range(0, 101) >= 50)
-                        gameObject.GetComponent<EffectManager_MarioFernandes>().AddEffect(new PoisionDefuff_MarioFernandes(m_currentWeapon.m_poisonDmg, 5));
+                        gameObject.GetComponent<EffectManager_MarioFernandes>().AddEffect(new PoisionDefuff_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_poisonDmg));                        
                     break;
-                case FoodType.SQUID:
-                    GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon.m_instaHeal);
+                case FoodType.SQUID:                    
                     break;
-                case FoodType.RICEBALL:
-                    GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon.m_instaHeal);
+                case FoodType.RICEBALL:                    
                     break;
-                case FoodType.KOBEBEEF:
-                    GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon.m_instaHeal);
-                    gameObject.GetComponent<EffectManager_MarioFernandes>().AddEffect(new PoisionDefuff_MarioFernandes(0, 5, m_currentWeapon.m_speedModifier));
+                case FoodType.KOBEBEEF:                   
+                    gameObject.GetComponent<EffectManager_MarioFernandes>().AddEffect(new SpeedEffect_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_speedModifier));
                     break;
-                case FoodType.SASHIMI:
-                    GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon.m_instaHeal);
+                case FoodType.SASHIMI:                    
+                    gameObject.GetComponent<EffectManager_MarioFernandes>().AddEffect(new StrengthEffect_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_strengthModifier));
                     break;
                 case FoodType.PIZZA:
                     break;
@@ -166,41 +149,53 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
                     break;
             }
 
-            m_playerHealthHungerScript.Eat(m_currentWeapon.m_hungerRestoreAmount);
+            m_playerHealthHungerScript.Eat(m_currentWeapon[m_weaponsIndex].m_hungerRestoreAmount);
 
-            m_currentWeapon.enabled = false;
-            m_currentWeapon = null;
+            m_currentWeapon[m_weaponsIndex].enabled = false;
+            m_currentWeapon[m_weaponsIndex] = null;
         }
     }
     // Start is called before the first frame update
     void Start()
     {
+        m_currentWeapon = new WeaponsTemplate_MarioFernandes[2];
         m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
         m_animationScript = GetComponent<PlayerAnimation_LouieWilliamson>();
         m_playerHealthHungerScript = FindObjectOfType<PlayerHealthHunger_MarioFernandes>();
         m_audioManager = FindObjectOfType<AudioManager_LouieWilliamson>();
+        Controller = GetComponent<PlayerController_JamieG>();
     }
 
     // Update is called once per frame
     void Update()
     {
-         
+        // 0 - Melee weapon
+        // 1 - Ranged weapon
+         if(Controller.m_switchWeapons.triggered)
+         {
+             if(m_weaponsIndex == 1)
+             m_weaponsIndex = 0;
+             else
+             m_weaponsIndex = 1;
 
-        if(currentatktime < 0)
+             print(m_currentWeapon[m_weaponsIndex]);
+         }
+
+        if(m_timeSinceLastAttack < 0)
         {
-              if (!m_playerStealthScript.m_crouched && m_currentWeapon &&  GetComponent<PlayerController_JamieG>().m_attack.triggered)
+              if (!m_playerStealthScript.m_crouched && m_currentWeapon[m_weaponsIndex] &&  Controller.m_attack.triggered)
             {                           
-                currentatktime = attackSpeed;
+                m_timeSinceLastAttack = m_attackDelay;
                 print("Attack");
                 Attack();        
             }          
         }
         else
-        currentatktime -= Time.deltaTime;
+        m_timeSinceLastAttack -= Time.deltaTime;
 
-        if(GetComponent<PlayerController_JamieG>().m_eat.triggered)
+        if(Controller.m_eat.triggered)
         {
-            eat();
+            Eat();
         }
 
 
@@ -208,9 +203,14 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if(!m_currentWeapon && collision.GetComponent<WeaponsTemplate_MarioFernandes>())
+		if(!m_currentWeapon[0] && collision.GetComponent<WeaponsTemplate_MarioFernandes>() && !collision.GetComponent<WeaponsTemplate_MarioFernandes>().IsRanged())
         {
-            m_currentWeapon = collision.GetComponent<WeaponsTemplate_MarioFernandes>();
+            m_currentWeapon[0] = collision.GetComponent<WeaponsTemplate_MarioFernandes>();
+            collision.gameObject.SetActive(false);
+		}
+        else if(!m_currentWeapon[1] && collision.GetComponent<WeaponsTemplate_MarioFernandes>() && collision.GetComponent<WeaponsTemplate_MarioFernandes>().IsRanged())
+        {
+            m_currentWeapon[1] = collision.GetComponent<WeaponsTemplate_MarioFernandes>();
             collision.gameObject.SetActive(false);
 		}
 	}
