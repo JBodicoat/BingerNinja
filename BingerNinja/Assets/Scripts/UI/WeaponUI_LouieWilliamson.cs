@@ -92,7 +92,7 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
                 setName("Sashimi", isRanged);
                 setImage(4, isRanged);
                 break;
-            case FoodType.TEMPURA: 
+            case FoodType.PIZZA: // This needs to be changed to tempura
                 setName("Pizza", isRanged);
                 setImage(5, isRanged);
                 break;
@@ -119,28 +119,28 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     }
     void Update()
     {
-        //timer += Time.deltaTime;
+        timer += Time.deltaTime;
 
-        //if (timer > 25)
-        //{
-        //    WeaponChange(FoodType.FUGU, false, 0);
-        //}
-        //else if (timer > 20)
-        //{
-        //    WeaponChange(FoodType.KOBEBEEF, false, 0);
-        //}
-        //else if (timer > 15)
-        //{
-        //    WeaponChange(FoodType.NOODLES, false, 0);
-        //}
-        //else if (timer > 10)
-        //{
-        //    WeaponChange(FoodType.RICEBALL, true, 10);
-        //}
-        //else if (timer > 5)
-        //{
-        //    WeaponChange(FoodType.SQUID, false, 0);
-        //}
+        if (timer > 25)
+        {
+            WeaponChange(FoodType.FUGU, false, 0);
+        }
+        else if (timer > 20)
+        {
+            WeaponChange(FoodType.KOBEBEEF, false, 0);
+        }
+        else if (timer > 15)
+        {
+            WeaponChange(FoodType.NOODLES, false, 0);
+        }
+        else if (timer > 10)
+        {
+            WeaponChange(FoodType.RICEBALL, true, 10);
+        }
+        else if (timer > 5)
+        {
+            WeaponChange(FoodType.SQUID, false, 0);
+        }
     }
     void setName(string name, bool isRanged)
     {
