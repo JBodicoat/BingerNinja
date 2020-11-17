@@ -6,13 +6,13 @@ using UnityEngine;
 
 public class Portal_Mechanic_AlannaPaxton : MonoBehaviour
 {
-    protected GameObject m_portal1;
-    protected GameObject m_portal2;
+    
+    protected GameObject m_player;
     // Start is called before the first frame update
     void Start()
     {
-        m_portal1 = GameObject.FindGameObjectWithTag("Portal1");
-        m_portal2 = GameObject.FindGameObjectWithTag("Portal2");
+        m_player= GameObject.FindGameObjectWithTag("Player");
+       
     }
 
     // Update is called once per frame
@@ -22,13 +22,14 @@ public class Portal_Mechanic_AlannaPaxton : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.collider.tag == "Portal1")
+        if (collision.transform.childCount>0)
         {
-            this.transform.position = m_portal2.transform.position;
+          //  this.transform.position = collision.transform.GetChild(0);
         }
-        if(collision.collider.tag == "Portal2")
+        if(collision.transform.parent != null)
         {
-            this.transform.position = m_portal1.transform.position;
+            this.transform.position = collision.transform.parent.position;
         }
+       
     }
 }
