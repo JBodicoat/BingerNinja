@@ -11,8 +11,9 @@ using UnityEngine;
 /// </summary>
 public class BulletMovment_SebastianMol : MonoBehaviour
 {
-    public float speed;
-    public Vector2 direction;
+    public float m_speed;
+    internal Vector2 m_direction;
+    public float m_damage;
 
     public float m_damageDealt;
     private AudioManager_LouieWilliamson m_audioManager;
@@ -24,15 +25,14 @@ public class BulletMovment_SebastianMol : MonoBehaviour
     }
     void Update()
     {
-        transform.position += (Vector3)direction * speed * Time.deltaTime ;
+        transform.position += (Vector3)m_direction * m_speed * Time.deltaTime ;
     }
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if(collision.tag == "Player")
         {
-            FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damageDealt);
-            m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerDamage);
+           FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damage);
             Destroy(gameObject);
 		}
 	}
