@@ -244,6 +244,7 @@ GameObject:
   - component: {fileID: 76610189}
   - component: {fileID: 76610188}
   - component: {fileID: 76610187}
+  - component: {fileID: 76610190}
   m_Layer: 0
   m_Name: FreezerTrigger
   m_TagString: Untagged
@@ -304,6 +305,19 @@ Transform:
   m_Father: {fileID: 347475556}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -31.44}
+--- !u!114 &76610190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76610186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5dedf2326603cf438be48b5f0d3a9d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_functionality: 3
 --- !u!1001 &94314011
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1296,7 +1310,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.25}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
@@ -20015,6 +20029,7 @@ GameObject:
   - component: {fileID: 582205681}
   - component: {fileID: 582205680}
   - component: {fileID: 582205678}
+  - component: {fileID: 582205679}
   m_Layer: 0
   m_Name: Freezer Button
   m_TagString: Untagged
@@ -20048,6 +20063,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.1653692}
   m_EdgeRadius: 0
+--- !u!114 &582205679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582205677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1070437727c69a347b83b1ed85217fc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_activateObjectScript: {fileID: 76610190}
+  m_canPressButton: 0
 --- !u!114 &582205680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21162,7 +21191,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.25}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
