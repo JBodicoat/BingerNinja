@@ -3,7 +3,6 @@
 //Joao 18/10/2020 - Added IsStealthed Function
 //Joao 23/10/2020 - Added IsCrouched Function
 //Joao 26/10/2020 - Simplified Crouch() function to only enable/disable crouching and stop/resume movement
-//Joao 11/10/2020 - Added IsInVent()
 
 using System.Collections;
 using System.Collections.Generic;
@@ -16,7 +15,6 @@ public class PlayerStealth_JoaoBeijinho : MonoBehaviour
 {
     public bool m_stealthed = false;
     public bool m_crouched = false;
-    public bool m_inVent = false;
 
     /// <summary>
     /// Call IsStealthed() to check if the player is in stealth, it will return true if it is
@@ -32,14 +30,6 @@ public class PlayerStealth_JoaoBeijinho : MonoBehaviour
     public bool IsCrouched()
     {
         return m_crouched;
-    }
-
-    /// <summary>
-    /// Call IsInVent() to check if the player is inside a vent, it will return true if it is
-    /// </summary>
-    public bool IsinVent()
-    {
-        return m_inVent;
     }
 
     /// <summary>

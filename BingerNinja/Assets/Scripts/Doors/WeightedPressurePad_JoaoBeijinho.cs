@@ -1,7 +1,6 @@
 ﻿//Joao Beijinho
 
 //Joao Beijinho 29/10/2020 - Created triggers for weighted pressure pads
-//Joao Beijinho 02/11/2020 - Replaced m_door GameObject with m_doorCollider Collider2D
 
 using System.Collections;
 using System.Collections.Generic;
@@ -12,8 +11,7 @@ using UnityEngine;
 /// </summary>
 public class WeightedPressurePad_JoaoBeijinho : MonoBehaviour
 {
-    //Reference the door collider to turn if on/off(closed/open)
-    public Collider2D m_doorCollider;
+    public GameObject m_door;
 
     private string m_playerTag = "Player";
     private string m_crateTag = "Crate";
@@ -23,7 +21,7 @@ public class WeightedPressurePad_JoaoBeijinho : MonoBehaviour
     {
         if (collision.tag == m_playerTag || collision.tag == m_crateTag || collision.tag == m_meleeWeaponTag)//collision with every array object except Projectile
         {
-            m_doorCollider.GetComponent<Collider2D>().enabled = false;//Open door
+            m_door.GetComponent<BoxCollider2D>().isTrigger = true;
         }
     }
         
@@ -31,7 +29,7 @@ public class WeightedPressurePad_JoaoBeijinho : MonoBehaviour
     {
         if (collision.tag == m_playerTag || collision.tag == m_crateTag || collision.tag == m_meleeWeaponTag)//if this scirpt is in a Pressure Pad
         {
-            m_doorCollider.GetComponent<Collider2D>().enabled = true;//Close door
+            m_door.GetComponent<BoxCollider2D>().isTrigger = false;
         }
     }
 }

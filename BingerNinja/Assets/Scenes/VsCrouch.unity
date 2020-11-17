@@ -167,7 +167,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.65, y: 0.127}
+  m_Offset: {x: 0.65, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -302,11 +302,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f5176dc6ef37084387c9238aebe69af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
   m_inventory: {fileID: 660171127}
   m_item: 0
-=======
->>>>>>> Stashed changes
 --- !u!1 &287775554
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,7 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5507c713ebdf164ea8da141cfe3e18d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_doorCollider: {fileID: 1788130691}
+  m_door: {fileID: 1788130690}
 --- !u!61 &333049480
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -600,7 +597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25102250ae35fef419ba8ec8a6f66c5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_doorCollider: {fileID: 975730611}
+  m_door: {fileID: 975730610}
 --- !u!61 &580788072
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1232,13 +1229,13 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 734133421}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.01}
+  m_Offset: {x: 0, y: 0.09}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1463,11 +1460,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 870520071}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-<<<<<<< Updated upstream
   m_LocalPosition: {x: 3.8, y: -4.29, z: 0}
-=======
-  m_LocalPosition: {x: 3.8, y: -4.37, z: 0}
->>>>>>> Stashed changes
   m_LocalScale: {x: 1, y: 3.9025, z: 1}
   m_Children:
   - {fileID: 1365165431}
@@ -2084,7 +2077,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a6ecfd0e4bad4844a14142d4121a2e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_doorCollider: {fileID: 287775555}
+  m_door: {fileID: 287775554}
   m_canPressButton: 0
 --- !u!61 &1167648103
 BoxCollider2D:
@@ -2099,11 +2092,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-<<<<<<< Updated upstream
   m_Offset: {x: 0, y: 0.5}
-=======
-  m_Offset: {x: 0, y: 0.39}
->>>>>>> Stashed changes
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -2321,7 +2310,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00000078976154, y: 0.5}
+  m_Offset: {x: 0.00000078976154, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -2443,7 +2432,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.65, y: 0.127}
+  m_Offset: {x: -0.65, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2494,13 +2483,13 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1401614916}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.267}
+  m_Offset: {x: 0, y: -0.14}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}

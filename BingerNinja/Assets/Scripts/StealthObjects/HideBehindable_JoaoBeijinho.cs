@@ -3,7 +3,6 @@
 //Joao Beijinho 23/10/2020 - Created class to work with crouching
 //Joao Beijinho 26/10/2020 - Removed Crouching. Created trigger that toggles stealth/unstealth in the player and disable/enable movement
 //Joao Beijinho 27/10/2020 - Changed order of if statemants in update. Created m_isCrouching so that the player can't hide while crouched and n_changeLayer
-//Joao Beijinho 09/11/2020 - Replaced tags with the tags in the Tags_JoaoBeijinho script
 
 using System.Collections;
 using System.Collections.Generic;
@@ -29,7 +28,7 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
     /// </summary>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        if (collision.tag == m_playerTag)
         {
             m_canHide = true;
         }
@@ -40,7 +39,7 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
     /// </summary>
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        if (collision.tag == m_playerTag)
         {
             m_canHide = false;
         }

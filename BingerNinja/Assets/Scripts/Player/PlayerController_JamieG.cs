@@ -23,8 +23,6 @@ public class PlayerController_JamieG : MonoBehaviour
     public InputAction m_eat;
     public InputAction m_attack;
 
-    public InputAction m_switchWeapons;
-
     //Reference to the other player scripts
     private PlayerMovement_MarioFernandes m_playerMovementScript;
     //private PlayerHealthHunger_MarioFernandes playerHHScript;
@@ -65,7 +63,6 @@ public class PlayerController_JamieG : MonoBehaviour
         m_crouch.Enable();
         m_eat.Enable();
         m_attack.Enable();
-        m_switchWeapons.Enable();
     }
 
     private void OnDisable()
@@ -75,7 +72,6 @@ public class PlayerController_JamieG : MonoBehaviour
         m_crouch.Disable();
         m_eat.Disable();
         m_attack.Disable();
-        m_switchWeapons.Disable();
     }
     #endregion
 
