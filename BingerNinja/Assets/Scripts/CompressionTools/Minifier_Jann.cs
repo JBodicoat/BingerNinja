@@ -1,11 +1,10 @@
 // Jann
 
 // Jann - 16/11/20 - First version that removes comments and put everything in one line
-using System;
-using System.Collections;
+// Jann - 18/11/20 - Removes region and added multiple edge case checks for comment removement
+
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor;
 using UnityEngine;
 
 /// <summary>
@@ -13,12 +12,8 @@ using UnityEngine;
 /// </summary>
 public class Minifier_Jann : M
 {
-    private bool IsSpaceOrTab(char ch) => ch == ' ' || ch == '\t';
-    private bool IsAsciiLetter(char ch) => (ch = (char) (ch & ~0x20)) >= 'A' && ch <= 'z';
-    private bool IsWordChar(char ch) => char.IsLetter(ch) || ch >= '0' && ch <= '9' || ch == '_';
-
     private const string MonoBehaviour = "MonoBehaviour";
-    
+
     private string m_AssetsPath;
     private string m_OutputDirectory;
 
@@ -30,6 +25,9 @@ public class Minifier_Jann : M
         m_OutputDirectory = m_AssetsPath + "/../Minified/";
 
         RetrieveAllScripts(m_AssetsPath);
+
+        // Remove compression tools from files
+        m_files.RemoveAll(path => path.Contains("Minifier_Jann.cs") || path.Contains("M.cs"));
 
         if (Directory.Exists(m_OutputDirectory))
         {
@@ -50,7 +48,7 @@ public class Minifier_Jann : M
             string minified = Minify(source);
 
             SaveFile(directory, filename, minified);
-            
+
             // if(--files <= 0)
             //     break;
         }
@@ -64,51 +62,53 @@ public class Minifier_Jann : M
 
         // Remove regions
         minifed = RemoveRegions(minifed);
-        
+
         // Change to derive from M class instead of MonoBehaviour
         minifed = ChangeMonoBehaviour(minifed);
-        
+
         string output = "";
 
         for (int i = 0; i < minifed.Length; i++)
         {
             string line = minifed[i];
 
-            output += line;
+            output += line.Trim() + " ";
         }
 
         return output;
     }
 
     #region Code manipulation methods
+
     private string[] ChangeMonoBehaviour(string[] code)
     {
         for (int i = 0; i < code.Length; i++)
         {
             if (code[i].Contains(MonoBehaviour))
             {
-                code[i] = code[i].Replace(MonoBehaviour, "M");;
+                code[i] = code[i].Replace(MonoBehaviour, "M");
+                ;
                 return code;
             }
         }
 
         return code;
     }
-    
+
     private string[] RemoveSinglelineComments(string[] source)
     {
         List<string> sourceWithoutComments = new List<string>();
-        
+
         for (int i = 0; i < source.Length; i++)
         {
             string line = source[i].Trim();
             if (line.Length == 0 || (line[0] == '/' && line[1] == '/'))
                 continue;
-            
+
             if (line.Contains("//"))
             {
                 // Add code from before the the start of the comment
-                sourceWithoutComments.Add(source[i].Substring(0, line.IndexOf("//") - 1));
+                sourceWithoutComments.Add(line.Substring(0, line.IndexOf("//")));
             }
             else
             {
@@ -118,26 +118,34 @@ public class Minifier_Jann : M
 
         return sourceWithoutComments.ToArray();
     }
-    
+
     private string[] RemoveMultilineComments(string[] source)
     {
         List<string> sourceWithoutComments = new List<string>();
         bool isInsideComment = false;
-        
+
         for (int i = 0; i < source.Length; i++)
         {
             if (source[i].Contains("/*"))
             {
-                // Add code from before the opening comment
                 if (source[i].IndexOf("/*") > 1)
                 {
-                    sourceWithoutComments.Add(source[i].Substring(0, source[i].IndexOf("/*") - 1));   
+                    // Check for multiline comment in a single line
+                    if (source[i].Contains("/*") && source[i].Contains("*/"))
+                    {
+                        sourceWithoutComments.Add(source[i].Substring(0, source[i].IndexOf("/*") - 1));
+                        sourceWithoutComments.Add(source[i].Substring(source[i].IndexOf("*/") + 2));
+                        continue;
+                    }
+
+                    // Add code from before the opening comment
+                    sourceWithoutComments.Add(source[i].Substring(0, source[i].IndexOf("/*") - 1));
                 }
 
                 isInsideComment = true;
                 continue;
             }
-            
+
             if (source[i].Contains("*/"))
             {
                 // Add code from after the closing comment
@@ -154,23 +162,24 @@ public class Minifier_Jann : M
 
         return sourceWithoutComments.ToArray();
     }
-    
+
     private string[] RemoveRegions(string[] source)
     {
         List<string> sourceWithoutRegions = new List<string>();
-        
+
         for (int i = 0; i < source.Length; i++)
         {
             if (source[i].Contains("#region") || source[i].Contains("#endregion"))
                 continue;
-            
+
             sourceWithoutRegions.Add(source[i]);
         }
 
         return sourceWithoutRegions.ToArray();
     }
+
     #endregion
-    
+
     #region FileHandling
 
     private void RetrieveAllScripts(string assetsDirectory)
