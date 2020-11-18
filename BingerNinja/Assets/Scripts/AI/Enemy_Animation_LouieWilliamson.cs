@@ -8,7 +8,6 @@ public class Enemy_Animation_LouieWilliamson : MonoBehaviour
     private Vector2 m_lastPosition;
     private float m_xMovement;
     private float m_yMovement;
-    private SpriteRenderer m_spriteRenderer;
     private bool isFacingLeft;
 
     public void AttackAnimation()
@@ -19,7 +18,6 @@ public class Enemy_Animation_LouieWilliamson : MonoBehaviour
     {
         m_animator = GetComponentInChildren<Animator>();
         m_lastPosition = transform.position;
-        m_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         isFacingLeft = true;
     }
 
@@ -32,12 +30,10 @@ public class Enemy_Animation_LouieWilliamson : MonoBehaviour
         if (m_yMovement > 0)
         {
             m_animator.SetBool("isFacing", true);
-            print("NOT FACING");
         }
         else if (m_yMovement < 0)
         {
             m_animator.SetBool("isFacing", false);
-            print("FACING");
         }
 
         //Is he moving to the left
@@ -63,12 +59,10 @@ public class Enemy_Animation_LouieWilliamson : MonoBehaviour
         if (m_xMovement == 0 && m_yMovement == 0)
         {
             m_animator.SetTrigger("isIdle");
-            print("IDLE");
         }
         else
         {
             m_animator.SetTrigger("isMoving");
-            print("MOVE");
         }
 
         
@@ -78,6 +72,5 @@ public class Enemy_Animation_LouieWilliamson : MonoBehaviour
     private void FlipSprite()
     {
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-        print("FLIP");
     }
 }
