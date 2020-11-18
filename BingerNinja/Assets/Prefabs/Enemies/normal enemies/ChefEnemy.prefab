@@ -75,7 +75,6 @@ GameObject:
   - component: {fileID: 5157954882409207611}
   - component: {fileID: 5157954882409207617}
   - component: {fileID: 2826013104151739926}
-  - component: {fileID: -5461466053410985718}
   m_Layer: 2
   m_Name: ChefEnemy
   m_TagString: Enemy
@@ -140,7 +139,7 @@ SpriteRenderer:
   m_SortingLayerID: -2137332843
   m_SortingLayer: 3
   m_SortingOrder: 100
-  m_Sprite: {fileID: -4807220339291291799, guid: e1e52b9cfa6de2b45b314569304ebc06, type: 3}
+  m_Sprite: {fileID: 1175274589483787978, guid: 7eec9656956eec34baf6f874b2f50d24, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -168,7 +167,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 0.5, y: 0.5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -256,7 +255,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 0.5, y: 0.5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -284,18 +283,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &-5461466053410985718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5157954882409207616}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fca5277414edd16449b9509211994980, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5751295711232786928
 GameObject:
   m_ObjectHideFlags: 0
