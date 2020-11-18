@@ -48,7 +48,7 @@ public class Minifier_Jann : M
             string[] source = File.ReadAllLines(file);
             string minified = Minify(source);
 
-            SaveFile(directory, filename, source);
+            SaveFile(directory, filename, minified);
             // break;
         }
     }
@@ -65,6 +65,16 @@ public class Minifier_Jann : M
             string line = codeLine.Trim();
             if (line.Length == 0)
                 continue;
+
+            if (m_inMultilineComment)
+            {
+                if (line.Contains("*/"))
+                {
+                    m_inMultilineComment = false;
+                    output += line.Substring(line.IndexOf("*/") + 1);
+                    continue;
+                }
+            }
             
             char firstChar = line[0];
 
@@ -72,10 +82,6 @@ public class Minifier_Jann : M
             {
                 case '/':
                     handleSlash(line);
-                    break;
-                case '*':
-                    if (line[1] == '/')
-                        m_inMultilineComment = false;
                     break;
                 default:
                     if (!m_inMultilineComment)
@@ -144,10 +150,10 @@ public class Minifier_Jann : M
         }
     }
 
-    private void SaveFile(string directory, string filename, string[] source)
+    private void SaveFile(string directory, string filename, string source)
     {
         Directory.CreateDirectory(m_OutputDirectory + directory);
-        File.WriteAllLines(string.Format("{0}/{1}/{2}", m_OutputDirectory, directory, filename), source);
+        File.WriteAllText(string.Format("{0}/{1}/{2}", m_OutputDirectory, directory, filename), source);
     }
 
     #endregion
