@@ -35,8 +35,7 @@ public class Minifier_Jann : M
         }
 
         Directory.CreateDirectory(m_OutputDirectory);
-
-        int files = 3;
+        
         foreach (string file in m_files)
         {
             string relativePath = file.Substring(m_AssetsPath.Length);
@@ -48,9 +47,6 @@ public class Minifier_Jann : M
             string minified = Minify(source);
 
             SaveFile(directory, filename, minified);
-
-            // if(--files <= 0)
-            //     break;
         }
     }
 
@@ -87,7 +83,6 @@ public class Minifier_Jann : M
             if (code[i].Contains(MonoBehaviour))
             {
                 code[i] = code[i].Replace(MonoBehaviour, "M");
-                ;
                 return code;
             }
         }
