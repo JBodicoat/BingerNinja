@@ -12,6 +12,7 @@
 //                          Added m_playerStealthScript.IsCrouched() to PlayerDetectionRaycasLogic() and two else if inside
 //                          Changed tags in PlayerDetectionRaycasLogic() to use the Tags_JoaoBeijinho() tags
 //sebastian mol 14/11/2020 moved logic out of child classes and moved into here
+//sebastian mol 18/11/2020 alien now dosent get stunned
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -129,7 +130,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 ClearPath(false);
                 m_currentState = state.ATTACK;
             }
-            else// if the [layer is out fo range
+            else// if the player is out fo range
             {
                 PathfindTo(m_playerTransform.position);
             }
