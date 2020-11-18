@@ -14,8 +14,10 @@ public class BulletMovment_SebastianMol : MonoBehaviour
     public float m_speed;
     internal Vector2 m_direction;
     public float m_damage;
-
-    public float m_damageDealt;
+    public bool m_dosePoisonDamage = false;
+    public int m_poisonDamageChance;
+    public float m_poisionDamage;
+    public float m_posionDamageTime;
     private AudioManager_LouieWilliamson m_audioManager;
 
     private void Start()
@@ -32,7 +34,13 @@ public class BulletMovment_SebastianMol : MonoBehaviour
 	{
 		if(collision.tag == "Player")
         {
-           FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damage);
+            if(m_dosePoisonDamage)
+            {
+                int rand = Random.Range(0, m_poisonDamageChance);
+                if(rand == m_poisonDamageChance) FindObjectOfType<EffectManager_MarioFernandes>().AddEffect(new PoisionDefuff_MarioFernandes(m_poisionDamage, m_posionDamageTime));
+            }
+           
+            FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damage);     
             Destroy(gameObject);
 		}
 	}

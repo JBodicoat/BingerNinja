@@ -40,7 +40,7 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
                 //make computer sound
                 break;
             case ObjectType.Freezer:
-                gameObject.GetComponent<Collider2D>().enabled = true;//Lock freezer door
+                //gameObject.GetComponent<Collider2D>().enabled = true;//Lock freezer door
                 StartCoroutine(FreezerLockAndDamage(5, 1.5f, 3f));
                 break;
         }
