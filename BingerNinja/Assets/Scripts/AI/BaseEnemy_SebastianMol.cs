@@ -153,12 +153,12 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             PlayerStealth_JoaoBeijinho playerStealth = collision.GetComponent<PlayerStealth_JoaoBeijinho>();
             if (m_currentEnemyType == m_enemyType.PETTIGER)
             {
-                if(!playerStealth.IsinVent())
+                if(!playerStealth.m_inVent)
                 {
                     PlayerDetectionRaycasLogic(collision);
-                }          
+                }
             }
-            else if(!playerStealth.IsStealthed()) //is the player in stealth/
+            else if(!playerStealth.m_stealthed) //is the player in stealth/
             {
                 PlayerDetectionRaycasLogic(collision);
             }
@@ -178,7 +178,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         RaycastHit2D crouchedHit = Physics2D.Linecast(m_rayCastStart.position, col.transform.position);
         Debug.DrawLine(m_rayCastStart.position, col.transform.position, Color.green);
 
-        if (!m_playerStealthScript.IsCrouched() && hit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag)) //did it hit the play first
+        if (!m_playerStealthScript.m_crouched && hit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag)) //did it hit the play first
         {
             //  m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Detection);
             m_playerDetected = true;
@@ -186,7 +186,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             m_currentState = state.ATTACK;
             ClearPath();
         }
-        else if (m_playerStealthScript.IsCrouched() && crouchedHit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        else if (m_playerStealthScript.m_crouched && crouchedHit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
         {
             //  m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Detection);
             m_playerDetected = true;
@@ -194,7 +194,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             m_currentState = state.ATTACK;
             ClearPath();
         }
-        else if (m_playerStealthScript.IsCrouched() && !crouchedHit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        else if (m_playerStealthScript.m_crouched && !crouchedHit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
         {
             m_detectionCollider.enabled = true;
         }
