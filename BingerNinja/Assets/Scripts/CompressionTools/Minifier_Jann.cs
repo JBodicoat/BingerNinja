@@ -17,10 +17,10 @@ public class Minifier_Jann : M
     private bool IsAsciiLetter(char ch) => (ch = (char) (ch & ~0x20)) >= 'A' && ch <= 'z';
     private bool IsWordChar(char ch) => char.IsLetter(ch) || ch >= '0' && ch <= '9' || ch == '_';
 
+    private const string MonoBehaviour = "MonoBehaviour";
+    
     private string m_AssetsPath;
     private string m_OutputDirectory;
-
-    private bool m_inMultilineComment;
 
     private List<string> m_files = new List<string>();
 
@@ -38,6 +38,7 @@ public class Minifier_Jann : M
 
         Directory.CreateDirectory(m_OutputDirectory);
 
+        int files = 3;
         foreach (string file in m_files)
         {
             string relativePath = file.Substring(m_AssetsPath.Length);
@@ -49,68 +50,127 @@ public class Minifier_Jann : M
             string minified = Minify(source);
 
             SaveFile(directory, filename, minified);
-            // break;
+            
+            // if(--files <= 0)
+            //     break;
         }
     }
 
     public string Minify(string[] code)
     {
+        // Remove comments
+        string[] minifed = RemoveSinglelineComments(code);
+        minifed = RemoveMultilineComments(minifed);
+
+        // Remove regions
+        minifed = RemoveRegions(minifed);
+        
+        // Change to derive from M class instead of MonoBehaviour
+        minifed = ChangeMonoBehaviour(minifed);
+        
         string output = "";
 
-        char lastCh = '\0';
-        int lastSingleLineCommentLine = 0;
-
-        foreach (string codeLine in code)
+        for (int i = 0; i < minifed.Length; i++)
         {
-            string line = codeLine.Trim();
-            if (line.Length == 0)
-                continue;
+            string line = minifed[i];
 
-            if (m_inMultilineComment)
-            {
-                if (line.Contains("*/"))
-                {
-                    m_inMultilineComment = false;
-                    output += line.Substring(line.IndexOf("*/") + 1);
-                    continue;
-                }
-            }
-            
-            char firstChar = line[0];
-
-            switch (firstChar)
-            {
-                case '/':
-                    handleSlash(line);
-                    break;
-                default:
-                    if (!m_inMultilineComment)
-                        output += line;
-                    break;
-            }
+            output += line;
         }
 
         return output;
     }
 
-    #region CharacterHandling
-
-    public void handleSlash(string line)
+    #region Code manipulation methods
+    private string[] ChangeMonoBehaviour(string[] code)
     {
-        char secondChar = line[1];
-
-        switch (secondChar)
+        for (int i = 0; i < code.Length; i++)
         {
-            case '/':
-                break;
-            case '*':
-                m_inMultilineComment = true;
-                break;
+            if (code[i].Contains(MonoBehaviour))
+            {
+                code[i] = code[i].Replace(MonoBehaviour, "M");;
+                return code;
+            }
         }
+
+        return code;
     }
+    
+    private string[] RemoveSinglelineComments(string[] source)
+    {
+        List<string> sourceWithoutComments = new List<string>();
+        
+        for (int i = 0; i < source.Length; i++)
+        {
+            string line = source[i].Trim();
+            if (line.Length == 0 || (line[0] == '/' && line[1] == '/'))
+                continue;
+            
+            if (line.Contains("//"))
+            {
+                // Add code from before the the start of the comment
+                sourceWithoutComments.Add(source[i].Substring(0, line.IndexOf("//") - 1));
+            }
+            else
+            {
+                sourceWithoutComments.Add(line);
+            }
+        }
 
+        return sourceWithoutComments.ToArray();
+    }
+    
+    private string[] RemoveMultilineComments(string[] source)
+    {
+        List<string> sourceWithoutComments = new List<string>();
+        bool isInsideComment = false;
+        
+        for (int i = 0; i < source.Length; i++)
+        {
+            if (source[i].Contains("/*"))
+            {
+                // Add code from before the opening comment
+                if (source[i].IndexOf("/*") > 1)
+                {
+                    sourceWithoutComments.Add(source[i].Substring(0, source[i].IndexOf("/*") - 1));   
+                }
+
+                isInsideComment = true;
+                continue;
+            }
+            
+            if (source[i].Contains("*/"))
+            {
+                // Add code from after the closing comment
+                sourceWithoutComments.Add(source[i].Substring(source[i].IndexOf("*/") + 2));
+                isInsideComment = false;
+                continue;
+            }
+
+            if (!isInsideComment)
+            {
+                sourceWithoutComments.Add(source[i]);
+            }
+        }
+
+        return sourceWithoutComments.ToArray();
+    }
+    
+    private string[] RemoveRegions(string[] source)
+    {
+        List<string> sourceWithoutRegions = new List<string>();
+        
+        for (int i = 0; i < source.Length; i++)
+        {
+            if (source[i].Contains("#region") || source[i].Contains("#endregion"))
+                continue;
+            
+            sourceWithoutRegions.Add(source[i]);
+        }
+
+        return sourceWithoutRegions.ToArray();
+    }
     #endregion
-
+    
     #region FileHandling
 
     private void RetrieveAllScripts(string assetsDirectory)
