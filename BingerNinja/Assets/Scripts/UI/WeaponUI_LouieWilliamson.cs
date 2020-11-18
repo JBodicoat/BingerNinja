@@ -14,10 +14,6 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    private string weaponName;
-    private string rangedName;
-    private string rangedAmmo;
-
     public Text weaponText;
     public Image weaponImage;
 
@@ -111,9 +107,6 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     void Start()
     {
         weaponsAnim = GetComponent<Animator>();
-        weaponName = "";
-        rangedName = "";
-        rangedAmmo = "";
 
         timer = 0;
     }
