@@ -136,7 +136,7 @@ Transform:
   m_GameObject: {fileID: 5548078476247111408}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4.5952215, y: 4.5952215, z: 4.5952215}
   m_Children: []
   m_Father: {fileID: 8631870844753434286}
   m_RootOrder: 3
@@ -202,7 +202,7 @@ Animator:
   m_GameObject: {fileID: 5548078476247111408}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: aad9a8ccd4e5f694bbbb839ea154b848, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6f9e19ef022d8244ebaf82594d4c16bd, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -271,7 +271,7 @@ Transform:
   m_GameObject: {fileID: 8631870844753434322}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 12.21, y: 8.67, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.25322, y: 0.25322, z: 0.50644}
   m_Children:
   - {fileID: 8631870843932011449}
   - {fileID: 4202125626246644408}
@@ -378,7 +378,7 @@ MonoBehaviour:
   m_currentEnemyType: 0
   m_dropItem: {fileID: 0}
   m_health: 100
-  m_speed: 2
+  m_speed: 1
   showPath: 0
   floortilemap: {fileID: 0}
   m_patrolPoints: []
