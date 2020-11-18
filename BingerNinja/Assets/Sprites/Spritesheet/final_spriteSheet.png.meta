@@ -28,7 +28,7 @@ TextureImporter:
     second: SecGuard_Idle
   - first:
       213: -145460402866830927
-    second: final_spriteSheet_8
+    second: janitor_idle
   - first:
       213: 8452160866309653340
     second: Businessman_Idle
@@ -40,7 +40,7 @@ TextureImporter:
     second: SecGuard_Walk1
   - first:
       213: -4648276173835894010
-    second: final_spriteSheet_12
+    second: janitor_walk1
   - first:
       213: -723079756006206957
     second: Businessman_Walk1
@@ -58,7 +58,7 @@ TextureImporter:
     second: SecGuard_Walk2
   - first:
       213: 9095320665929848445
-    second: final_spriteSheet_18
+    second: janitor_walk2
   - first:
       213: -2560872523564760568
     second: Riceball
@@ -73,7 +73,7 @@ TextureImporter:
     second: SecGuard_Walk3
   - first:
       213: 5294493925859196063
-    second: final_spriteSheet_23
+    second: janitor_walk3
   - first:
       213: -8476136803928467929
     second: Title
@@ -286,7 +286,7 @@ TextureImporter:
     second: SecGuard_Walk4
   - first:
       213: -7555118124246173958
-    second: final_spriteSheet_88
+    second: janitor_walk4
   - first:
       213: -5425122995608593576
     second: Businessman_Walk4
@@ -295,7 +295,7 @@ TextureImporter:
     second: Chef_Walk4
   - first:
       213: -958673938750246194
-    second: final_spriteSheet_91
+    second: janitor_walk_away1
   - first:
       213: -5879674675586737625
     second: Businessman_Walk_Away1
@@ -340,25 +340,25 @@ TextureImporter:
     second: SecGuard_Walk_Away4
   - first:
       213: -1171408152867343309
-    second: final_spriteSheet_106
+    second: janitor_walk_away2
   - first:
       213: 3185749035187198866
-    second: final_spriteSheet_107
+    second: janitor_walk_away3
   - first:
       213: -1993577640106994467
-    second: final_spriteSheet_108
+    second: janitor_walk_away4
   - first:
       213: -3961740979318538511
-    second: final_spriteSheet_109
+    second: janitor_attack1
   - first:
       213: -400839568187095252
-    second: final_spriteSheet_110
+    second: janitor_attack2
   - first:
       213: 8136608018788525876
-    second: final_spriteSheet_111
+    second: janitor_attack3
   - first:
       213: 4779364225668957344
-    second: final_spriteSheet_112
+    second: janitor_attack4
   - first:
       213: -6486808788985548118
     second: Businessman_Walk_Away2
@@ -2036,7 +2036,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_8
+      name: janitor_idle
       rect:
         serializedVersion: 2
         x: 32
@@ -2120,7 +2120,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_12
+      name: janitor_walk1
       rect:
         serializedVersion: 2
         x: 48
@@ -2204,7 +2204,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_18
+      name: janitor_walk2
       rect:
         serializedVersion: 2
         x: 64
@@ -2288,7 +2288,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_23
+      name: janitor_walk3
       rect:
         serializedVersion: 2
         x: 80
@@ -2372,7 +2372,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_88
+      name: janitor_walk4
       rect:
         serializedVersion: 2
         x: 96
@@ -2435,7 +2435,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_91
+      name: janitor_walk_away1
       rect:
         serializedVersion: 2
         x: 112
@@ -2750,7 +2750,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_106
+      name: janitor_walk_away2
       rect:
         serializedVersion: 2
         x: 128
@@ -2771,7 +2771,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_107
+      name: janitor_walk_away3
       rect:
         serializedVersion: 2
         x: 144
@@ -2792,7 +2792,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_108
+      name: janitor_walk_away4
       rect:
         serializedVersion: 2
         x: 160
@@ -2813,7 +2813,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_109
+      name: janitor_attack1
       rect:
         serializedVersion: 2
         x: 176
@@ -2834,7 +2834,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_110
+      name: janitor_attack2
       rect:
         serializedVersion: 2
         x: 192
@@ -2855,7 +2855,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_111
+      name: janitor_attack3
       rect:
         serializedVersion: 2
         x: 208
@@ -2876,7 +2876,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_112
+      name: janitor_attack4
       rect:
         serializedVersion: 2
         x: 224
