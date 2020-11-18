@@ -21,7 +21,7 @@ using UnityEngine.UIElements;
 using UnityEngine.Tilemaps;
 
 public enum state { WONDER, CHASE, ATTACK };
-public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN, PETTIGER };
+public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN, PETTIGER, ALIEN, TIGERBOSS };
 public enum m_damageType { MELEE, RANGE, SNEAK, STUN };
 /// <summary>
 ///base class for enemies to inherit from with logic for detection, patrole, movment, stats managment
@@ -616,7 +616,20 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         StunEnemyToggle();
     }
 
+    /// <summary>
+    /// for use with distraction projectile to stun enemies
+    /// </summary>
+    /// <param name="amaountOfTime">amaount of time to stun in seconds</param>
     public void StunEnemyWithDeleyFunc(float amaountOfTime)
+    {
+        if(m_currentEnemyType != m_enemyType.ALIEN) StartCoroutine(StunEnemyWithDeley(amaountOfTime));
+    }
+
+    /// <summary>
+    /// for use with ligths to stun enemies
+    /// </summary>
+    /// <param name="amaountOfTime">amaount of time to stun in seconds</param>
+    public void StunEnemyWithLightsDeleyFunc(float amaountOfTime)
     {
         StartCoroutine(StunEnemyWithDeley(amaountOfTime));
     }
