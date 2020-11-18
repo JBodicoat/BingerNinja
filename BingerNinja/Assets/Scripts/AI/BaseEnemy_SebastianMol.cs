@@ -74,6 +74,8 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     [Tooltip("for ranged enemies only how much to devide the attack range by befor starts attack")]
     [Range(1.0f, 1.5f)]
     public float m_attckRangeDevider = 1f;
+    [Tooltip("distance tiger bosss has to be away from player befor it dosen change direction to chase while charrging - ask seb if you ever need to change this")]
+    public float m_tiggerBossLooseTargetDistance = 2;
 
 
     private Pathfinder_SebastianMol m_pathfinder;
@@ -467,11 +469,47 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             m_lastPathFinfToPos = pos;
         }
 
-        if (Vector2.Distance(m_lastPathFinfToPos, pos) > m_playerMoveAllowance) //if players old pos is a distance away to his new pos go to new pos
+        if (m_currentEnemyType == m_enemyType.TIGERBOSS)
         {
-            ClearPath();
-            MoveToWorldPos(pos);
+            if (m_playerDetected) //there is a player
+            {
+                if (GameObject.FindObjectOfType<PlayerMovement_MarioFernandes>().isRolling) //hes rolling
+                {
+                    if (Vector2.Distance(m_playerTransform.position, transform.position) < m_tiggerBossLooseTargetDistance) //he rolled withing the distance of teh loose track
+                    {
+                        //look to see if theres a wall neer and stun
+                        Debug.Log("tiger hit wall");
+                    }
+                    else
+                    {
+                       
+                        ClearPath();
+                        MoveToWorldPos(pos);
+                    }
+                }
+                else //just track the player normally
+                {
+                    if (Vector2.Distance(m_lastPathFinfToPos, pos) > m_playerMoveAllowance) //if players old pos is a distance away to his new pos go to new pos
+                    {
+                        ClearPath();
+                        MoveToWorldPos(pos);
+                    }
+                }
+            }
         }
+        else
+        {
+            
+
+            if (Vector2.Distance(m_lastPathFinfToPos, pos) > m_playerMoveAllowance) //if players old pos is a distance away to his new pos go to new pos
+            {
+                ClearPath();
+                MoveToWorldPos(pos);
+            }
+        }
+      
+
+       
         
         FollowPath();
     }
