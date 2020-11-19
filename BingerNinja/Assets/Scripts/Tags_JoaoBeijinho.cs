@@ -1,6 +1,7 @@
 ﻿//Joao Beijinho
 
 //Joao Beijinho 09/11/2020 - Created and added tags
+//Joao Beijinho 14/11/2020 - Added stunLightTag
 
 using System.Collections;
 using System.Collections.Generic;
@@ -22,4 +23,5 @@ public static class Tags_JoaoBeijinho
     static public string m_projectileTag = "Projectile";
     static public string m_enemyTag = "Enemy";
     static public string m_meleeWeaponTag = "MeleeWeapon";
+    static public string m_stunLightTag = "Stun Light";
 }
