@@ -3,8 +3,14 @@
 // Jann - 16/11/20 - First version that removes comments and put everything in one line
 // Jann - 18/11/20 - Removes region and added multiple edge case checks for comment removement
 
+using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text.RegularExpressions;
+using Microsoft.CSharp;
 using UnityEngine;
 
 /// <summary>
@@ -12,15 +18,24 @@ using UnityEngine;
 /// </summary>
 public class Minifier_Jann : M
 {
-    private const string MonoBehaviour = "MonoBehaviour";
-
     private string m_AssetsPath;
     private string m_OutputDirectory;
 
     private List<string> m_files = new List<string>();
+    private Dictionary<string, string> m_codeReplacements;
 
     private void Start()
     {
+        m_codeReplacements = new Dictionary<string, string>();
+        m_codeReplacements.Add("MonoBehaviour", "M");
+        // m_codeReplacements.Add("GetComponent", "G");
+        m_codeReplacements.Add("GameObject.Find", "F");
+        m_codeReplacements.Add("GameObject.FindGameObjectWithTag", "FT");
+        m_codeReplacements.Add("FindObjectOfType", "F");
+        m_codeReplacements.Add("FindObjectsOfType", "Fs");
+        m_codeReplacements.Add("StartCoroutine", "SC");
+        m_codeReplacements.Add("Destroy", "D");
+
         m_AssetsPath = Application.dataPath;
         m_OutputDirectory = m_AssetsPath + "/../Minified/";
 
@@ -35,7 +50,8 @@ public class Minifier_Jann : M
         }
 
         Directory.CreateDirectory(m_OutputDirectory);
-        
+
+        List<string> codebase = new List<string>();
         foreach (string file in m_files)
         {
             string relativePath = file.Substring(m_AssetsPath.Length);
@@ -46,7 +62,12 @@ public class Minifier_Jann : M
             string[] source = File.ReadAllLines(file);
             string minified = Minify(source);
 
-            SaveFile(directory, filename, minified);
+            codebase.Add(SaveFile(directory, filename, minified));
+        }
+
+        if (CanCompile(codebase.ToArray()))
+        {
+            print("Minified code compiled successfully");
         }
     }
 
@@ -59,8 +80,8 @@ public class Minifier_Jann : M
         // Remove regions
         minifed = RemoveRegions(minifed);
 
-        // Change to derive from M class instead of MonoBehaviour
-        minifed = ChangeMonoBehaviour(minifed);
+        // Change methods to use M class
+        minifed = ApplyMethodShortener(minifed);
 
         string output = "";
 
@@ -76,18 +97,32 @@ public class Minifier_Jann : M
 
     #region Code manipulation methods
 
-    private string[] ChangeMonoBehaviour(string[] code)
+    private string[] ApplyMethodShortener(string[] code)
     {
         for (int i = 0; i < code.Length; i++)
         {
-            if (code[i].Contains(MonoBehaviour))
+            foreach (var pair in m_codeReplacements)
             {
-                code[i] = code[i].Replace(MonoBehaviour, "M");
-                return code;
+                switch (pair.Key)
+                {
+                    case "GetComponent":
+                        // if(!code[i].Contains("gameObject.GetComponent"))
+                        //     code[i] = ReplaceWithDefault(code[i], pair.Key, pair.Value);
+                        break;
+                    default:
+                        code[i] = ReplaceWithDefault(code[i], pair.Key, pair.Value);
+                        break;
+                }
             }
         }
 
         return code;
+    }
+
+    private string ReplaceWithDefault(string line, string from, string to)
+    {
+        string pattern = $@"\b{from}\b";
+        return Regex.Replace(line, pattern, to);
     }
 
     private string[] RemoveSinglelineComments(string[] source)
@@ -214,11 +249,111 @@ public class Minifier_Jann : M
         }
     }
 
-    private void SaveFile(string directory, string filename, string source)
+    private string SaveFile(string directory, string filename, string source)
     {
         Directory.CreateDirectory(m_OutputDirectory + directory);
-        File.WriteAllText(string.Format("{0}/{1}/{2}", m_OutputDirectory, directory, filename), source);
+
+        string path = $"{m_OutputDirectory}/{directory}/{filename}";
+        File.WriteAllText(path, source);
+
+        return path;
+    }
+
+    private string SaveFile(string directory, string filename, string[] source)
+    {
+        Directory.CreateDirectory(m_OutputDirectory + directory);
+
+        string path = $"{m_OutputDirectory}/{directory}/{filename}";
+        File.WriteAllLines(path, source);
+
+        return path;
     }
 
     #endregion
+
+    #region CompilationUtils
+
+    private bool CanCompile(string[] program)
+    {
+        var errors = Compile(program).Errors;
+        if (!errors.HasErrors)
+            return true;
+        else
+        {
+            foreach (CompilerError error in errors)
+            {
+                if (!error.IsWarning)
+                    print(error.ToString());
+            }
+
+            return false;
+        }
+    }
+
+    private CompilerResults Compile(string[] filenames)
+    {
+        CompilerResults compilerResults = null;
+        using (CSharpCodeProvider provider = new CSharpCodeProvider())
+        {
+            CompilerParameters compilerParameters = new CompilerParameters(new string[]
+            {
+                "System.dll",
+                // @"C:\Program Files\Unity\Hub\Editor\2020.1.6f1\Editor\Data\Managed\UnityEngine.dll",
+                // @"C:\Program Files\Unity\Hub\Editor\2020.1.6f1\Editor\Data\Managed\UnityEditor.dll",
+                // m_AssetsPath + @"\..\Library\ScriptAssemblies\UnityEngine.UI.dll",
+                // m_AssetsPath + @"\..\Library\ScriptAssemblies\Unity.InputSystem.dll",
+            });
+            compilerParameters.GenerateExecutable = false;
+
+            // compilerParameters.ReferencedAssemblies.Add(Assembly.GetExecutingAssembly().Location);
+            var assemblies = from asm in AppDomain.CurrentDomain.GetAssemblies()
+                where !asm.IsDynamic
+                select asm.Location;
+            compilerParameters.ReferencedAssemblies.AddRange(assemblies.ToArray());
+
+            compilerResults = provider.CompileAssemblyFromFile(compilerParameters, filenames);
+        }
+
+        return compilerResults;
+    }
+
+    #endregion
+
+    public static Assembly BuildFileIntoAssembly(String fileName)
+    {
+        if (!File.Exists(fileName))
+            throw new FileNotFoundException($"File '{fileName}' does not exist");
+
+        // Select the code provider based on the input file extension
+        FileInfo sourceFile = new FileInfo(fileName);
+        string providerName = sourceFile.Extension.ToUpper() == ".CS" ? "CSharp" :
+            sourceFile.Extension.ToUpper() == ".VB" ? "VisualBasic" : "";
+
+        if (providerName == "")
+            throw new ArgumentException("Source file must have a .cs or .vb extension");
+
+        CodeDomProvider provider = CodeDomProvider.CreateProvider(providerName);
+
+        CompilerParameters cp = new CompilerParameters();
+
+        // just add every currently loaded assembly:
+        // https://stackoverflow.com/a/1020547/1366033
+        var assemblies = from asm in AppDomain.CurrentDomain.GetAssemblies()
+            where !asm.IsDynamic
+            select asm.Location;
+        cp.ReferencedAssemblies.AddRange(assemblies.ToArray());
+
+        cp.GenerateExecutable = false; // Generate a class library
+        cp.GenerateInMemory = true; // Don't Save the assembly as a physical file.
+        cp.TreatWarningsAsErrors = false; // Set whether to treat all warnings as errors.
+
+        // Invoke compilation of the source file.
+        CompilerResults cr = provider.CompileAssemblyFromFile(cp, fileName);
+
+        if (cr.Errors.Count > 0)
+            throw new Exception("Errors compiling {0}. " +
+                                string.Join(";", cr.Errors.Cast<CompilerError>().Select(x => x.ToString())));
+
+        return cr.CompiledAssembly;
+    }
 }

@@ -15,11 +15,6 @@ public class M : MonoBehaviour
         return GetComponent<T>();
     }
 
-    public T G<T>(GameObject g) where T : Component
-    {
-        return g.GetComponent<T>();
-    }
-
     public GameObject F(string s)
     {
         return GameObject.Find(s);
@@ -40,12 +35,12 @@ public class M : MonoBehaviour
         return FindObjectsOfType<T>();
     }
 
-    public Transform C(Transform g, int i)
+    public Coroutine SC(IEnumerator c)
     {
-        return g.GetChild(i);
+        return StartCoroutine(c);
     }
 
-    public Coroutine SC(IEnumerator c)
+    public Coroutine SC(string c)
     {
         return StartCoroutine(c);
     }
@@ -53,5 +48,10 @@ public class M : MonoBehaviour
     public void D(GameObject g)
     {
         Destroy(g);
+    }
+
+    public void D(GameObject g, float t)
+    {
+        Destroy(g, t);
     }
 }
