@@ -2,7 +2,8 @@
 
 //Joao Beijinho 05/11/2020 - Created script, enum for the type of item, a switch to activate the objects functionality and the door functionality
 //Joao Beijinho 06/11/2020 - Created freezer functionality along with FreezerLockAndDamage IEnumerator
-//Joao Biejinho 14/11/2020 - Created StunLight functionality for yakuza boss fight along with OnTriggerEnter2D and "Stunning Lights" variables
+//Joao Beijinho 14/11/2020 - Created StunLight functionality for yakuza boss fight along with OnTriggerEnter2D and "Stunning Lights" variables
+//Joao Beijinho 19/11/2020 - Made m_stunLight variable public
 
 using System.Collections;
 using System.Collections.Generic;
@@ -26,8 +27,14 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
 
     private GameObject m_freezerBoss;//Reference enemy to do damage
     protected FreezerTrigger_JoaoBeijinho m_freezerArea;//Reference script that checks if enemy is in the freezer
-    
-    private bool m_stunLight = false; //stun effect on/off
+
+    [Header("Freezer Settings")]
+    public int m_maxTicks;
+    public float m_damageInterval;
+    public float m_damageAmount;
+
+    [Header("Stun Light(shouldn't be touched)")]
+    public bool m_stunLight = false; //stun effect on/off
 
     public void ActivateObject()//Call this function to activate object functionality
     {
@@ -49,23 +56,21 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
                 break;
             case ObjectType.Freezer:
                 //gameObject.GetComponent<Collider2D>().enabled = true;//Lock freezer door
-                StartCoroutine(FreezerLockAndDamage(maxTicks, damageInterval, damageAmount));
+                StartCoroutine(FreezerLockAndDamage());
                 break;
         }
     }
 
-    private IEnumerator FreezerLockAndDamage(int maxTicks, float damageInterval, float damageAmount)
+    private IEnumerator FreezerLockAndDamage()
     {
         if (m_freezerArea.m_enemyInFreezer == true)
         {
-            for (int i = 0; i < maxTicks; i++)
+            for (int i = 0; i < m_maxTicks; i++)
             {
-                print("Dealt " + damageAmount + " damage");
-                m_freezerBoss.GetComponent<BaseEnemy_SebastianMol>().m_health -= damageAmount;//Do damage, ThugEnemy for test
+                print("Dealt " + m_damageAmount + " damage");
+                m_freezerBoss.GetComponent<BaseEnemy_SebastianMol>().m_health -= m_damageAmount;//Do damage, ThugEnemy for test
                 print("Enemy HP: " + m_freezerBoss.GetComponent<BaseEnemy_SebastianMol>().m_health);
-                yield return new WaitForSeconds(damageInterval);//Delay before doing damage again
-
-                i++;
+                yield return new WaitForSeconds(m_damageInterval);//Delay before doing damage again
             }
 
         }

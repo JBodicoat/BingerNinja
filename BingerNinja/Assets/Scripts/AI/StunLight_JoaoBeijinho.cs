@@ -15,7 +15,7 @@ internal class StunLight_JoaoBeijinho : MonoBehaviour
     protected BaseEnemy_SebastianMol m_baseEnemyScript;
     protected ControlPanelActivateObject_JoaoBeijinho m_stunLightFunctionalityScript;
     private Collider2D m_enemyCollider;
-    public Collider2D m_collider;
+    private Collider2D m_collider;
 
     public float m_stunLightDuration;
 
