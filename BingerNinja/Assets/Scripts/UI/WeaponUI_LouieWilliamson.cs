@@ -92,7 +92,7 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
                 setName("Sashimi", isRanged);
                 setImage(4, isRanged);
                 break;
-            case FoodType.PIZZA: // This needs to be changed to tempura
+            case FoodType.TEMPURA: // This needs to be changed to tempura
                 setName("Pizza", isRanged);
                 setImage(5, isRanged);
                 break;
