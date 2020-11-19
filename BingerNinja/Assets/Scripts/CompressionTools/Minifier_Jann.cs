@@ -8,7 +8,6 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text.RegularExpressions;
 using Microsoft.CSharp;
 using UnityEngine;
@@ -295,17 +294,9 @@ public class Minifier_Jann : M
         CompilerResults compilerResults = null;
         using (CSharpCodeProvider provider = new CSharpCodeProvider())
         {
-            CompilerParameters compilerParameters = new CompilerParameters(new string[]
-            {
-                "System.dll",
-                // @"C:\Program Files\Unity\Hub\Editor\2020.1.6f1\Editor\Data\Managed\UnityEngine.dll",
-                // @"C:\Program Files\Unity\Hub\Editor\2020.1.6f1\Editor\Data\Managed\UnityEditor.dll",
-                // m_AssetsPath + @"\..\Library\ScriptAssemblies\UnityEngine.UI.dll",
-                // m_AssetsPath + @"\..\Library\ScriptAssemblies\Unity.InputSystem.dll",
-            });
+            CompilerParameters compilerParameters = new CompilerParameters();
             compilerParameters.GenerateExecutable = false;
 
-            // compilerParameters.ReferencedAssemblies.Add(Assembly.GetExecutingAssembly().Location);
             var assemblies = from asm in AppDomain.CurrentDomain.GetAssemblies()
                 where !asm.IsDynamic
                 select asm.Location;
@@ -318,42 +309,4 @@ public class Minifier_Jann : M
     }
 
     #endregion
-
-    public static Assembly BuildFileIntoAssembly(String fileName)
-    {
-        if (!File.Exists(fileName))
-            throw new FileNotFoundException($"File '{fileName}' does not exist");
-
-        // Select the code provider based on the input file extension
-        FileInfo sourceFile = new FileInfo(fileName);
-        string providerName = sourceFile.Extension.ToUpper() == ".CS" ? "CSharp" :
-            sourceFile.Extension.ToUpper() == ".VB" ? "VisualBasic" : "";
-
-        if (providerName == "")
-            throw new ArgumentException("Source file must have a .cs or .vb extension");
-
-        CodeDomProvider provider = CodeDomProvider.CreateProvider(providerName);
-
-        CompilerParameters cp = new CompilerParameters();
-
-        // just add every currently loaded assembly:
-        // https://stackoverflow.com/a/1020547/1366033
-        var assemblies = from asm in AppDomain.CurrentDomain.GetAssemblies()
-            where !asm.IsDynamic
-            select asm.Location;
-        cp.ReferencedAssemblies.AddRange(assemblies.ToArray());
-
-        cp.GenerateExecutable = false; // Generate a class library
-        cp.GenerateInMemory = true; // Don't Save the assembly as a physical file.
-        cp.TreatWarningsAsErrors = false; // Set whether to treat all warnings as errors.
-
-        // Invoke compilation of the source file.
-        CompilerResults cr = provider.CompileAssemblyFromFile(cp, fileName);
-
-        if (cr.Errors.Count > 0)
-            throw new Exception("Errors compiling {0}. " +
-                                string.Join(";", cr.Errors.Cast<CompilerError>().Select(x => x.ToString())));
-
-        return cr.CompiledAssembly;
-    }
 }
