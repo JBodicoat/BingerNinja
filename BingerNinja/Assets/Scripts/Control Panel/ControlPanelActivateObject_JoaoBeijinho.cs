@@ -4,6 +4,7 @@
 //Joao Beijinho 06/11/2020 - Created freezer functionality along with FreezerLockAndDamage IEnumerator
 //Joao Beijinho 14/11/2020 - Created StunLight functionality for yakuza boss fight along with OnTriggerEnter2D and "Stunning Lights" variables
 //Joao Beijinho 19/11/2020 - Made m_stunLight variable public
+//                           Changed FreezerLockAndDamage() to work individualy for each enemy, and lock freezer even if no enemy is inside
 
 using System.Collections;
 using System.Collections.Generic;
@@ -25,13 +26,15 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
 
     public ObjectType m_functionality;
 
-    private GameObject m_freezerBoss;//Reference enemy to do damage
     protected FreezerTrigger_JoaoBeijinho m_freezerArea;//Reference script that checks if enemy is in the freezer
+    private BaseEnemy_SebastianMol m_baseEnemyScript;
+    private GameObject m_freezerBoss;//Reference enemy to do damage
 
     [Header("Freezer Settings")]
     public int m_maxTicks;
     public float m_damageInterval;
     public float m_damageAmount;
+    private float m_doorTimer;
 
     [Header("Stun Light(shouldn't be touched)")]
     public bool m_stunLight = false; //stun effect on/off
@@ -55,7 +58,7 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
                 //make computer sound
                 break;
             case ObjectType.Freezer:
-                //gameObject.GetComponent<Collider2D>().enabled = true;//Lock freezer door
+                gameObject.GetComponent<Collider2D>().enabled = true;//Lock freezer door
                 StartCoroutine(FreezerLockAndDamage());
                 break;
         }
@@ -63,18 +66,21 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
 
     private IEnumerator FreezerLockAndDamage()
     {
-        if (m_freezerArea.m_enemyInFreezer == true)
+        for (int i = 0; i < m_maxTicks; i++)
         {
-            for (int i = 0; i < m_maxTicks; i++)
+            foreach (Collider2D enemy in m_freezerArea.m_enemyList)
             {
+                m_baseEnemyScript = enemy.GetComponent<BaseEnemy_SebastianMol>();
+
                 print("Dealt " + m_damageAmount + " damage");
-                m_freezerBoss.GetComponent<BaseEnemy_SebastianMol>().m_health -= m_damageAmount;//Do damage, ThugEnemy for test
-                print("Enemy HP: " + m_freezerBoss.GetComponent<BaseEnemy_SebastianMol>().m_health);
-                yield return new WaitForSeconds(m_damageInterval);//Delay before doing damage again
+                m_baseEnemyScript.m_health -= m_damageAmount;//Do damage, ThugEnemy for test
+                print("Enemy HP: " + m_baseEnemyScript.m_health);
             }
 
+            yield return new WaitForSeconds(m_damageInterval);//Delay before doing damage again
         }
 
+        print("bakda");
         gameObject.GetComponent<Collider2D>().enabled = false;//Unlock freezer door
     }
 
@@ -92,7 +98,7 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
 
     void Awake()
     {
-        m_freezerBoss = GameObject.Find("ThugEnemy (1)");//Instance of ThugEnemy for testing
+        //m_freezerBoss = GameObject.Find("ThugEnemy (1)");//Instance of ThugEnemy for testing
         m_freezerArea = FindObjectOfType<FreezerTrigger_JoaoBeijinho>();
     }
 }
