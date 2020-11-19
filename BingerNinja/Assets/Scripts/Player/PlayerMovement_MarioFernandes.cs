@@ -24,6 +24,7 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
     protected Vector2 m_old_direction = new Vector2(0, 0);
 
     public float m_speed = 5.0f;
+    private float m_roll_speed = 7.5f;
 
     public float m_baseSpeed = 5.0f;
     public bool isRolling= false;
@@ -37,28 +38,28 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
        
             if(m_old_direction.y < 0)
             {
-                m_speed = 7.5f;
+                m_speed = m_roll_speed;
                 //go down
                 m_direction.y -= m_speed;
                 StartCoroutine("RollTimer");
             }
             if(m_old_direction.y > 0)
             {
-                m_speed = 7.5f;
+                m_speed = m_roll_speed;
                 m_direction.y += m_speed;
                 StartCoroutine("RollTimer");
                 //roll up
             }
             if(m_old_direction.x < 0)
             {
-                m_speed = 7.5f;
+                m_speed = m_roll_speed;
                 m_direction.x -= m_speed;
                 StartCoroutine("RollTimer");
                 //goleft
             }
             if(m_old_direction.x > 0)
             {
-                m_speed = 7.5f;
+                m_speed = m_roll_speed;
                 m_direction.x += m_speed;
                 StartCoroutine("RollTimer");
             }
