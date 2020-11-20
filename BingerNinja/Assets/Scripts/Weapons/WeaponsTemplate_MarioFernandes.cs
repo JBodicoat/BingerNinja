@@ -4,6 +4,7 @@
 // Jack 02/11/2020 added m_hungerRestoreAmount
 // Mario 08/11/2020 - Add strength modifier 
 // Mario 13/11/2020 - Add Distraction time to progectile
+// Mario 20/11/2020 - Ammunition added
 
 using System.Collections;
 using System.Collections.Generic;
