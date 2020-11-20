@@ -22,7 +22,7 @@ using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UIElements;
 using UnityEngine.Tilemaps;
 
-public enum state { WONDER, CHASE, ATTACK };
+public enum state { WONDER, CHASE, ATTACK, CURIOUS };
 public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN, PETTIGER, ALIEN, TIGERBOSS, SPACENINJABOSS };
 public enum m_damageType { MELEE, RANGE, SNEAK, STUN };
 /// <summary>
@@ -89,6 +89,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     [Tooltip("multiplies how much the attack speed increases by in space ninja boss second fase")]
     public float m_attackSpeedIncrease = 1.5f;
 
+    public bool testCuriosity = false; //test bool delet after review
 
     private Pathfinder_SebastianMol m_pathfinder;
     protected List<Vector2Int> m_currentPath = new List<Vector2Int>();
@@ -107,6 +108,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     private bool m_isStuned = false; //used to stunn the enemy
     private float m_lookLeftAndRightTimerMax; //used to remeber m_lookLeftAndRightTimer varaibale at the start for later resents
     private bool m_isSerching = false; // if the enemy serching for player
+    private Vector3 m_curiousTarget;  //the point of curiosity for an enemy to cheak
 
     protected PlayerStealth_JoaoBeijinho m_playerStealthScript;
     private int m_crouchObjectLayer = 1 << 8;
@@ -230,8 +232,22 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         }
     }
 
+    private void CuriousState()
+    {
+        if (Vector3.Distance( transform.position, m_curiousTarget) < 1 ) 
+        if (m_outOfSightTimer <= 0)
+        {
+            m_currentState = state.WONDER;
+            m_outOfSightTimer = m_outOfSightDeley;
+        }
+        else
+        {
+            m_outOfSightTimer -= Time.deltaTime;
+        }
+    }
+
     /// <summary>
-    /// contaisn the switch that stores the dofferent behavoiurs the enemy dose in each state
+    /// contains the switch that stores the dofferent behavoiurs the enemy dose in each state
     /// </summary>
     private void AILogic()
     {
@@ -245,6 +261,9 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 break;
             case state.ATTACK:
                 AttackState();
+                break;
+            case state.CURIOUS:
+                CuriousState();
                 break;
         }
     }
@@ -729,6 +748,13 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         }
     }
 
+    public void ForceCuriosity(Vector3 pos)
+    {
+        m_currentState = state.CURIOUS;
+        m_curiousTarget = pos;
+        PathfindTo(m_curiousTarget);
+    }
+
 
     private void Start()
     {
@@ -741,6 +767,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         if (m_patrolPoints.Length > 0) m_currentPatrolePos = m_patrolPoints[0];
         m_lookLeftAndRightTimerMax = m_lookLeftAndRightTimer;
         m_maxHealth = m_health;
+        m_outOfSightTimer = m_outOfSightDeley;
 
         m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
         m_crouchObjectLayer = ~m_crouchObjectLayer;
@@ -748,12 +775,21 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
     private void Update()
     {
+
         if(!m_isStuned)
         {
             AILogic(); // behaviour of the enemy what stste it is in and what it dose
             FollowPath(); //walk the path that the enemy currently has  
             SwapDirections(); //chnge the scale of the player
         }
+
+        if (test)
+        {
+            test = false;
+
+            ForceCuriosity(GameObject.FindGameObjectWithTag(Tags_JoaoBeijinho.m_playerTag).transform.position);
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

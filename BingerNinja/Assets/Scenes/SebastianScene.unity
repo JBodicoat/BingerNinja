@@ -414,6 +414,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpaceNinjaBOSS (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434322, guid: 5d801ae616f9111409afde547c94b3d7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d801ae616f9111409afde547c94b3d7, type: 3}
 --- !u!1001 &699324533
@@ -2673,11 +2677,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8631870844753434286, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.32
+      value: 2.69
       objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434286, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.02
+      value: 12.53
       objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434286, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2737,7 +2741,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434322, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
@@ -14966,11 +14970,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8631870844753434286, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.0880468
+      value: 10.7
       objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434286, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.024883
+      value: 8.53
       objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434286, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -15026,7 +15030,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434322, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8802191557362704687, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
       propertyPath: m_baseDamage
@@ -15422,6 +15426,7 @@ MonoBehaviour:
   m_amountOfStunWhenPlayerStealthed: 3
   m_doseAffect: 1
   m_attackSpeedIncrease: 1.5
+  test: 0
   m_aimer: {fileID: 5751295711658063069}
   m_projectile: {fileID: 1986204507551107328, guid: c719167a814eda848a315ea7dbef9a8a, type: 3}
   m_shootDeley: 2
