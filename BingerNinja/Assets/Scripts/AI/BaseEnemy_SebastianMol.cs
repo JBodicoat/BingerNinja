@@ -21,7 +21,7 @@ using UnityEngine.UIElements;
 using UnityEngine.Tilemaps;
 
 public enum state { WONDER, CHASE, ATTACK };
-public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN, PETTIGER };
+public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN, PETTIGER, ALIEN, TIGERBOSS };
 public enum m_damageType { MELEE, RANGE, SNEAK, STUN };
 /// <summary>
 ///base class for enemies to inherit from with logic for detection, patrole, movment, stats managment
@@ -60,6 +60,8 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public bool m_dosePatrole;
     [Tooltip("deley between line of sight checks")]
     public float m_outOfSightDeley;
+    [Tooltip("how fast the enemy looks left and right when serching for player")]
+    private float m_lookLeftAndRightTimer = 0.5f;
 
     [Header("damage variables")]
     [Tooltip("the multiply for how much damage to take when enemy cant see player")]
@@ -71,6 +73,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     [Tooltip("for ranged enemies only how much to devide the attack range by befor starts attack")]
     [Range(1.0f, 1.5f)]
     public float m_attckRangeDevider = 1f;
+
 
     private Pathfinder_SebastianMol m_pathfinder;
     protected List<Vector2Int> m_currentPath = new List<Vector2Int>();
@@ -86,6 +89,8 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     private Transform m_currentPatrolePos; //the current patrole pos were haeding to / are at 
     private Vector3 m_lastPathFinfToPos; //last given to the path finder to find a path e.g. player position
     private bool m_isStuned = false; //used to stunn the enemy
+    private float m_lookLeftAndRightTimerMax; //used to remeber m_lookLeftAndRightTimer varaibale at the start for later resents
+    private bool m_isSerching = false; // if the enemy serching for player
 
     protected PlayerStealth_JoaoBeijinho m_playerStealthScript;
     private int m_crouchObjectLayer = 1 << 8;
@@ -108,8 +113,6 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             {
                 PathfindTo(m_startPos);
             }
-            if (transform.localScale.x != m_scale) transform.localScale
-                    = new Vector3(m_scale, transform.localScale.y, transform.localScale.z);
         }
 
     }
@@ -133,18 +136,44 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         }
         else
         {
+            m_isSerching = true;
             if (m_currentPath.Count == 0)
             {
                 if (m_outOfSightTimer <= 0)
                 {
+                    m_isSerching = false;
                     m_currentState = state.WONDER;
                     m_playerDetected = false;
                 }
                 else
                 {
+                    LookLeftAndRight();
                     m_outOfSightTimer -= Time.deltaTime;
                 }
             }
+        }
+    }
+
+    /// <summary>
+    /// contains logic for when the enemy is serching for the player it looks left and right every half second
+    /// </summary>
+    private void LookLeftAndRight()
+    {
+        if(m_lookLeftAndRightTimer <= 0)
+        {
+            if(transform.localScale.x > 0)
+            {
+                transform.localScale = new Vector3(-m_scale, transform.localScale.y, transform.localScale.z);
+            }
+            else
+            {
+                transform.localScale = new Vector3(m_scale, transform.localScale.y, transform.localScale.z);
+            }
+            m_lookLeftAndRightTimer = m_lookLeftAndRightTimerMax;
+        }
+        else
+        {
+            m_lookLeftAndRightTimer -= Time.deltaTime;
         }
     }
 
@@ -184,11 +213,6 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             }
         }
     }
-
-    ///// <summary>
-    ///// abstract class used to provied the logic for the retreat state
-    ///// </summary>
-    //abstract internal void RetreatState();
 
     /// <summary>
     /// contaisn the switch that stores the dofferent behavoiurs the enemy dose in each state
@@ -472,6 +496,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// </summary>
     protected void SwapDirections()
     {
+        if(!m_isSerching)
         if(m_playerDetected)
         {
             if(m_playerTransform.position.x > transform.position.x)
@@ -482,13 +507,13 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             {
                 transform.localScale = new Vector3(m_scale, transform.localScale.y, transform.localScale.z);
             }
+
         }
         else
         {
             if(m_lastPos.x > transform.position.x)
             {
                 transform.localScale = new Vector3(m_scale, transform.localScale.y, transform.localScale.z);
-             
             }
             else if(m_lastPos.x < transform.position.x)
             {
@@ -591,7 +616,20 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         StunEnemyToggle();
     }
 
+    /// <summary>
+    /// for use with distraction projectile to stun enemies
+    /// </summary>
+    /// <param name="amaountOfTime">amaount of time to stun in seconds</param>
     public void StunEnemyWithDeleyFunc(float amaountOfTime)
+    {
+        if(m_currentEnemyType != m_enemyType.ALIEN) StartCoroutine(StunEnemyWithDeley(amaountOfTime));
+    }
+
+    /// <summary>
+    /// for use with ligths to stun enemies
+    /// </summary>
+    /// <param name="amaountOfTime">amaount of time to stun in seconds</param>
+    public void StunEnemyWithLightsDeleyFunc(float amaountOfTime)
     {
         StartCoroutine(StunEnemyWithDeley(amaountOfTime));
     }
@@ -618,6 +656,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         m_patrolIteratorMax = m_patrolPoints.Length-1;
         m_patroleTimer = m_deleyBetweenPatrol;
         if (m_patrolPoints.Length > 0) m_currentPatrolePos = m_patrolPoints[0];
+        m_lookLeftAndRightTimerMax = m_lookLeftAndRightTimer;
 
         m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
         m_crouchObjectLayer = ~m_crouchObjectLayer;
@@ -628,7 +667,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         if(!m_isStuned)
         {
             AILogic(); // behaviour of the enemy what stste it is in and what it dose
-            FollowPath(); //walk the path that the enemy currently has
+            FollowPath(); //walk the path that the enemy currently has  
             SwapDirections(); //chnge the scale of the player
         }
     }

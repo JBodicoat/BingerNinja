@@ -15,6 +15,7 @@
 // Mario 08/11/2020 - Update Effects
 // Mario 09/11/2020 - Update Names and Add strength
 // Mario 13/11/2020 - Add Distraction time to progectile
+// Louie 17/11/2020 - Added Weapon UI integration
 
 using System.Collections;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ public enum FoodType
     RICEBALL,
     KOBEBEEF,
     SASHIMI,
-    PIZZA,
+    TEMPURA,
     SAKE,
     NOODLES,
 } 
@@ -43,6 +44,7 @@ public enum WeaponType
 ///<summary>
 public class PlayerCombat_MarioFernandes : MonoBehaviour
 {
+    private WeaponUI_LouieWilliamson m_WeaponUI;
     private PlayerAnimation_LouieWilliamson m_animationScript;
     public GameObject m_projectile = null;
     public float m_attackDelay = 1;
@@ -141,7 +143,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
                 case FoodType.SASHIMI:                    
                     gameObject.GetComponent<EffectManager_MarioFernandes>().AddEffect(new StrengthEffect_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_strengthModifier));
                     break;
-                case FoodType.PIZZA:
+                case FoodType.TEMPURA:
                     break;
                 case FoodType.SAKE:
                     break;
@@ -166,6 +168,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         m_playerHealthHungerScript = FindObjectOfType<PlayerHealthHunger_MarioFernandes>();
         m_audioManager = FindObjectOfType<AudioManager_LouieWilliamson>();
         Controller = GetComponent<PlayerController_JamieG>();
+        m_WeaponUI = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
     }
 
     // Update is called once per frame
@@ -209,13 +212,15 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         {
             m_currentWeapon[0] = collision.GetComponent<WeaponsTemplate_MarioFernandes>();
             collision.gameObject.SetActive(false);
+            m_WeaponUI.WeaponChange(m_currentWeapon[0].m_foodType, false, 0);
 		}
         else if(!m_currentWeapon[1] && collision.GetComponent<WeaponsTemplate_MarioFernandes>() && collision.GetComponent<WeaponsTemplate_MarioFernandes>().IsRanged())
         {
             m_currentWeapon[1] = collision.GetComponent<WeaponsTemplate_MarioFernandes>();
             collision.gameObject.SetActive(false);
-		}
-	}
+            m_WeaponUI.WeaponChange(m_currentWeapon[1].m_foodType, true, 5);
+        }
+    }
 }
 
 

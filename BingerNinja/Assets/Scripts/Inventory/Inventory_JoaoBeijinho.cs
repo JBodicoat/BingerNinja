@@ -17,6 +17,10 @@ public enum ItemType
     Key,
     NinjaPoints,
     LiftKey,
+    Pizza,
+    Cookie,
+    Sake,
+    Noodles
 }
 
 /// <summary>

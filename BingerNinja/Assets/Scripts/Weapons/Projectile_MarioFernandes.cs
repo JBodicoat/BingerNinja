@@ -68,6 +68,9 @@ public class Projectile_MarioFernandes : MonoBehaviour
             if(m_distractTime >0)
             {
                 other.GetComponentInParent<BaseEnemy_SebastianMol>().StunEnemyWithDeleyFunc(m_distractTime);
+            other.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage(m_damageType.RANGE ,m_dmg);
+           
+                StartCoroutine(other.GetComponentInParent<BaseEnemy_SebastianMol>().StunEnemyWithDeley(m_distractTime));
             }
 
             Destroy(gameObject);
