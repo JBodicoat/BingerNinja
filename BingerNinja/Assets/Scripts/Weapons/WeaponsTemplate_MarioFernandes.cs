@@ -25,6 +25,8 @@ public class WeaponsTemplate_MarioFernandes : MonoBehaviour
     public int m_strengthModifier = 0;
     public float m_speedModifier = 1;
     public float m_distractTime = 0;
+
+    public int m_ammunition = 0;
     public int dmg;
 
     public float m_hungerRestoreAmount;

@@ -75,5 +75,10 @@ public class Projectile_MarioFernandes : MonoBehaviour
 
             Destroy(gameObject);
         }
+        //else 
+        //if(!other.isTrigger && other.GetComponent<SpriteRenderer>()?.sortingLayerName == "Walls2")
+        //{
+        //    Destroy(gameObject);
+        //}
     }
 }
