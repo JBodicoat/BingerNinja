@@ -783,9 +783,9 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             SwapDirections(); //chnge the scale of the player
         }
 
-        if (test)
+        if (testCuriosity)
         {
-            test = false;
+            testCuriosity = false;
 
             ForceCuriosity(GameObject.FindGameObjectWithTag(Tags_JoaoBeijinho.m_playerTag).transform.position);
         }
