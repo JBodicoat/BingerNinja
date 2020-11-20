@@ -9,6 +9,7 @@ using UnityEngine;
 /// </summary>
  class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
  {
+    [Header("class based damage variables")]
     [Header("projectile prefabs")]
     public GameObject m_aimer;
     public GameObject m_projectile;

@@ -2,6 +2,7 @@
 //sebastian mol 30/10/20 melee enemy shoudl be completed
 //sebastian mol 02/11/20 removed player behaviour switch replaced it with abstract functions
 //sebastian mol 09/11/20 chrage attack fixed 
+//sebastian mol 20/11/2020 spce ninja enemy logic done
 
 using System;
 using System.Collections;
@@ -14,6 +15,7 @@ using UnityEngine;
 /// </summary>
 class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
 {
+    [Header("class based damage variables")]
     [Tooltip("speed of the enemies attack")]
     public float m_hitSpeed;
     [Tooltip("object used to damage the enemy coudl be called the enemy weapon")]
@@ -30,6 +32,10 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     public float m_chargeAttackMultiplier = 3;
     [Tooltip("the amount of time the pet tigre is frozen for after it dose its attack")]
     public float m_petTigerDeley;
+
+
+    private bool m_doStunOnce = false;
+
 
     /// <summary>
     /// activates the "enemy weapon" object that damages the player uses quick attack
@@ -80,6 +86,26 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     {
         EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility, QuickAttack, 
                                                 ChargeAttack, StunIfTiger, m_petTigerDeley, m_currentEnemyType, m_hitSpeed);
+    }
+
+    private void LateUpdate()
+    {
+        if(m_currentEnemyType == m_enemyType.SPACENINJABOSS)
+        {
+            if ((m_health / m_maxHealth) < m_secondPhaseStartPercentage)
+                if (GetComponent<PlayerStealth_JoaoBeijinho>().IsStealthed()) //confusuion when player stelths
+                {
+                    if (!m_doStunOnce)
+                    {
+                        StunEnemyWithDeleyFunc(m_amountOfStunWhenPlayerStealthed);
+                        m_doStunOnce = true;
+                    }
+                }
+                else
+                {
+                    m_doStunOnce = false;
+                }
+        }
     }
 
     void OnDrawGizmosSelected()

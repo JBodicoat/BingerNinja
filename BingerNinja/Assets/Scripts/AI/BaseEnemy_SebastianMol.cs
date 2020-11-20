@@ -13,6 +13,7 @@
 //                          Changed tags in PlayerDetectionRaycasLogic() to use the Tags_JoaoBeijinho() tags
 //sebastian mol 14/11/2020 moved logic out of child classes and moved into here
 //sebastian mol 18/11/2020 alien now dosent get stunned
+//sebastian mol 20/11/2020 spce ninja enemy logic done
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -22,7 +23,7 @@ using UnityEngine.UIElements;
 using UnityEngine.Tilemaps;
 
 public enum state { WONDER, CHASE, ATTACK };
-public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN, PETTIGER, ALIEN, TIGERBOSS };
+public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN, PETTIGER, ALIEN, TIGERBOSS, SPACENINJABOSS };
 public enum m_damageType { MELEE, RANGE, SNEAK, STUN };
 /// <summary>
 ///base class for enemies to inherit from with logic for detection, patrole, movment, stats managment
@@ -74,8 +75,19 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     [Tooltip("for ranged enemies only how much to devide the attack range by befor starts attack")]
     [Range(1.0f, 1.5f)]
     public float m_attckRangeDevider = 1f;
+    [Header("specific enemy variables")]
     [Tooltip("distance tiger bosss has to be away from player befor it dosen change direction to chase while charrging - ask seb if you ever need to change this")]
     public float m_tiggerBossLooseTargetDistance = 2;
+
+    [Tooltip("with how much health left in a percentage, dose the enemy start second phase ")]
+    [Range(0.0f, 1.0f)]
+    public float m_secondPhaseStartPercentage = 0.3f;
+    [Tooltip("amound of stun space ninja has when player gose stealth mode")]
+    public float m_amountOfStunWhenPlayerStealthed = 3;
+    [Tooltip("dose the enemy cuse affect on player hwen attacking")]
+    public bool m_doseAffect = true;
+    [Tooltip("multiplies how much the attack speed increases by in space ninja boss second fase")]
+    public float m_attackSpeedIncrease = 1.5f;
 
 
     private Pathfinder_SebastianMol m_pathfinder;
@@ -87,6 +99,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     protected float m_attackTimer; //timer for attack deley
     protected float m_outOfSightTimer; //timer for line of sight check
     protected int m_patrolIterator = 0; //iterated through patrole points
+    protected float m_maxHealth; //max amount of health an enemy has
     private int m_patrolIteratorMax; //the max for teh iterator so it dosent go out of range  
     private float m_patroleTimer; // timer for waiting at each patrole pos
     private Transform m_currentPatrolePos; //the current patrole pos were haeding to / are at 
@@ -469,44 +482,49 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             m_lastPathFinfToPos = pos;
         }
 
-        if (m_currentEnemyType == m_enemyType.TIGERBOSS)
+        if (Vector2.Distance(m_lastPathFinfToPos, pos) > m_playerMoveAllowance) //if players old pos is a distance away to his new pos go to new pos
         {
-            if (m_playerDetected) //there is a player
-            {
-                if (GameObject.FindObjectOfType<PlayerMovement_MarioFernandes>().isRolling) //hes rolling
-                {
-                    if (Vector2.Distance(m_playerTransform.position, transform.position) < m_tiggerBossLooseTargetDistance) //he rolled withing the distance of teh loose track
-                    {
-                        //look to see if theres a wall neer and stun
-                        Debug.Log("tiger hit wall");
-                    }
-                    else
-                    {
-                       
-                        ClearPath();
-                        MoveToWorldPos(pos);
-                    }
-                }
-                else //just track the player normally
-                {
-                    if (Vector2.Distance(m_lastPathFinfToPos, pos) > m_playerMoveAllowance) //if players old pos is a distance away to his new pos go to new pos
-                    {
-                        ClearPath();
-                        MoveToWorldPos(pos);
-                    }
-                }
-            }
+            ClearPath();
+            MoveToWorldPos(pos);
         }
-        else
-        {
-            
 
-            if (Vector2.Distance(m_lastPathFinfToPos, pos) > m_playerMoveAllowance) //if players old pos is a distance away to his new pos go to new pos
-            {
-                ClearPath();
-                MoveToWorldPos(pos);
-            }
-        }
+        //if (m_currentEnemyType == m_enemyType.TIGERBOSS)
+        //{
+        //    if (m_playerDetected) //there is a player
+        //    {
+        //        if (GameObject.FindObjectOfType<PlayerMovement_MarioFernandes>().isRolling) //hes rolling
+        //        {
+        //            if (Vector2.Distance(m_playerTransform.position, pos) < m_tiggerBossLooseTargetDistance) //he rolled withing the distance of teh loose track
+        //            {
+        //                //look to see if theres a wall neer and stun
+        //                Debug.Log("tiger hit wall");
+        //            }
+        //            else
+        //            {
+                       
+        //                ClearPath();
+        //                MoveToWorldPos(pos);
+        //            }
+        //        }
+        //        else //just track the player normally
+        //        {
+        //            if (Vector2.Distance(m_lastPathFinfToPos, pos) > m_playerMoveAllowance) //if players old pos is a distance away to his new pos go to new pos
+        //            {
+        //                ClearPath();
+        //                MoveToWorldPos(pos);
+        //            }
+        //        }
+        //    }
+        //}
+        //else
+        //{
+
+        //    if (Vector2.Distance(m_lastPathFinfToPos, pos) > m_playerMoveAllowance) //if players old pos is a distance away to his new pos go to new pos
+        //    {
+        //        ClearPath();
+        //        MoveToWorldPos(pos);
+        //    }
+        //}
       
 
        
@@ -630,6 +648,39 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 }
                 break;
 
+            case m_enemyType.SPACENINJABOSS:             
+                if ((m_health / m_maxHealth) >= m_secondPhaseStartPercentage) //second fase
+                {
+                    NormalTakeDamage(damage);
+                    m_attackTimer *= m_attackSpeedIncrease;
+                    m_doseAffect = false;
+                    m_sneakDamageMultiplierStack = 0;
+                }
+                else
+                {
+                    //half damage melle when not sneaked
+                    if (damageType == m_damageType.MELEE)
+                    {
+                        if (m_playerDetected == false) // in stealth
+                        {
+                            NormalTakeDamage(damage); // normal melle stealth attack
+                        }
+                        else // not stealth 
+                        {
+                            NormalTakeDamage(damage * 0.5f); //half damage stealth atatck
+                        }
+                    }
+                    else
+                    {
+                        NormalTakeDamage(damage); // normal
+                    }
+                }
+                break;
+
+            default:
+                NormalTakeDamage(damage);
+                break;
+
         }
 
         OnDeath();//checks to see if enemy is dead 
@@ -696,6 +747,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         m_patroleTimer = m_deleyBetweenPatrol;
         if (m_patrolPoints.Length > 0) m_currentPatrolePos = m_patrolPoints[0];
         m_lookLeftAndRightTimerMax = m_lookLeftAndRightTimer;
+        m_maxHealth = m_health;
 
         m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
         m_crouchObjectLayer = ~m_crouchObjectLayer;
