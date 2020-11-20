@@ -163,7 +163,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     void PauseGame()
     {
         playerControllerScript.m_movement.Disable();
-        playerControllerScript.m_attack.Disable();
+        playerControllerScript.m_attackTap.Disable();
         playerControllerScript.m_crouch.Disable();
         playerControllerScript.m_eat.Disable();
         playerControllerScript.m_interact.Disable();
@@ -175,7 +175,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     void ResumeGame()
     {
         playerControllerScript.m_movement.Enable();
-        playerControllerScript.m_attack.Enable();
+        playerControllerScript.m_attackTap.Enable();
         playerControllerScript.m_crouch.Enable();
         playerControllerScript.m_eat.Enable();
         playerControllerScript.m_interact.Enable();

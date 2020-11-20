@@ -5,6 +5,7 @@
 //Joao 23/10/20 - Added input for interactions.
 //Joao 25/10/20 - Added interaction in update.
 //Joao 26/10/20 - Added input for crouching, the input used for this was interact.
+//Mario 22/11/20 - Added tap Attack and slow tap attack
 
 using System.Collections;
 using System.Collections.Generic;
@@ -21,7 +22,8 @@ public class PlayerController_JamieG : MonoBehaviour
     public InputAction m_interact;
     public InputAction m_crouch;
     public InputAction m_eat;
-    public InputAction m_attack;
+    public InputAction m_attackTap;
+    public InputAction m_attackSlowTap;
     public InputAction m_roll;
 
     public InputAction m_switchWeapons;
@@ -71,7 +73,8 @@ public class PlayerController_JamieG : MonoBehaviour
         m_interact.Enable();
         m_crouch.Enable();
         m_eat.Enable();
-        m_attack.Enable();
+        m_attackTap.Enable();
+        m_attackSlowTap.Enable();
         m_roll.Enable();
         m_switchWeapons.Enable();
     }
@@ -82,7 +85,8 @@ public class PlayerController_JamieG : MonoBehaviour
         m_interact.Disable();
         m_crouch.Disable();
         m_eat.Disable();
-        m_attack.Disable();
+        m_attackTap.Disable();
+        m_attackSlowTap.Disable();
     }
     #endregion
 
