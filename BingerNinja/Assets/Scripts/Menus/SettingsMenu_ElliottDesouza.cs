@@ -58,6 +58,7 @@ public class SettingsMenu_ElliottDesouza : MonoBehaviour
     public void ExitSettingMenu()
     {
         SaveLoadSystem_JamieG.SaveSettings(this);
+        FindObjectOfType<LanguageResolver_Jann>().RefreshTranslation();
         gameObject.SetActive(false);
     }
 

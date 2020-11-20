@@ -690,6 +690,7 @@ GameObject:
   - component: {fileID: 5824345605072921173}
   - component: {fileID: 5824345605072921168}
   - component: {fileID: 5824345605072921175}
+  - component: {fileID: 4963553204240429286}
   m_Layer: 5
   m_Name: Music Text
   m_TagString: Untagged
@@ -760,6 +761,19 @@ MonoBehaviour:
   m_Text: 'Music
 
 '
+--- !u!114 &4963553204240429286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5824345605072921172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37af42116151a446ae97af29707674f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: music
 --- !u!1 &5824345605225799496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1355,6 +1369,7 @@ GameObject:
   - component: {fileID: 5824345605934615695}
   - component: {fileID: 5824345605934615690}
   - component: {fileID: 5824345605934615689}
+  - component: {fileID: 4397526442202500770}
   m_Layer: 5
   m_Name: Languages
   m_TagString: Untagged
@@ -1425,6 +1440,19 @@ MonoBehaviour:
   m_Text: 'Language
 
 '
+--- !u!114 &4397526442202500770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5824345605934615694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37af42116151a446ae97af29707674f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: language
 --- !u!1 &5824345606532110412
 GameObject:
   m_ObjectHideFlags: 0
@@ -1608,6 +1636,7 @@ GameObject:
   - component: {fileID: 5824345606649097136}
   - component: {fileID: 5824345606649097143}
   - component: {fileID: 5824345606649097142}
+  - component: {fileID: 1543710588056124822}
   m_Layer: 5
   m_Name: Back Button
   m_TagString: Untagged
@@ -1675,7 +1704,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Back
+  m_Text: Save
 --- !u!114 &5824345606649097142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1743,6 +1772,31 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5824345605457200374}
+        m_TargetAssemblyTypeName: SettingsMenu_ElliottDesouza, Assembly-CSharp
+        m_MethodName: ExitSettingMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1543710588056124822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5824345606649097140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37af42116151a446ae97af29707674f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: save
 --- !u!1 &5824345606697522160
 GameObject:
   m_ObjectHideFlags: 0
@@ -1754,6 +1808,7 @@ GameObject:
   - component: {fileID: 5824345606697522161}
   - component: {fileID: 5824345606697522172}
   - component: {fileID: 5824345606697522163}
+  - component: {fileID: 6874502068605356979}
   m_Layer: 5
   m_Name: SFX
   m_TagString: Untagged
@@ -1822,6 +1877,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: SFX
+--- !u!114 &6874502068605356979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5824345606697522160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37af42116151a446ae97af29707674f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: sfx
 --- !u!1 &5929097130023216235
 GameObject:
   m_ObjectHideFlags: 0
