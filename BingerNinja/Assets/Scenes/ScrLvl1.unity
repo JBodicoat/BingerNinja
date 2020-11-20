@@ -10273,11 +10273,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!198 &762907175 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5280071032788676598, guid: 126326fb385628f48915dd9419c89498, type: 3}
-  m_PrefabInstance: {fileID: 4362767423532714273}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &787168251
 GameObject:
   m_ObjectHideFlags: 0
@@ -10652,17 +10647,9 @@ PrefabInstance:
       propertyPath: m_canHide
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 682521576906220322, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
-      propertyPath: m_smoke
-      value: 
-      objectReference: {fileID: 762907175}
     - target: {fileID: 682521576906220325, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
       propertyPath: m_Name
       value: PottedPlant
-      objectReference: {fileID: 0}
-    - target: {fileID: 682521576906220325, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
@@ -13336,17 +13323,9 @@ PrefabInstance:
       propertyPath: m_canHide
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 682521576906220322, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
-      propertyPath: m_smoke
-      value: 
-      objectReference: {fileID: 762907175}
     - target: {fileID: 682521576906220325, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
       propertyPath: m_Name
       value: PottedPlant (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 682521576906220325, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
@@ -14115,17 +14094,9 @@ PrefabInstance:
       propertyPath: m_canHide
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 682521576906220322, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
-      propertyPath: m_smoke
-      value: 
-      objectReference: {fileID: 762907175}
     - target: {fileID: 682521576906220325, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
       propertyPath: m_Name
       value: PottedPlant (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 682521576906220325, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
@@ -14209,17 +14180,9 @@ PrefabInstance:
       propertyPath: m_canHide
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 682521576906220322, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
-      propertyPath: m_smoke
-      value: 
-      objectReference: {fileID: 762907175}
     - target: {fileID: 682521576906220325, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
       propertyPath: m_Name
       value: PottedPlant (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 682521576906220325, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
@@ -17919,25 +17882,9 @@ PrefabInstance:
       propertyPath: m_canHide
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 682521576906220322, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
-      propertyPath: m_smoke
-      value: 
-      objectReference: {fileID: 1406558352995564592, guid: ce2d2597f3950ab43b6dadbc647f12d6, type: 3}
     - target: {fileID: 682521576906220325, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
       propertyPath: m_Name
       value: PottedPlant
-      objectReference: {fileID: 0}
-    - target: {fileID: 4069402274269410916, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6885565909489448849, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6885565909489448850, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
-      propertyPath: looping
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
@@ -18286,30 +18233,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8145170164367872022, guid: 126326fb385628f48915dd9419c89498, type: 3}
-      propertyPath: stopAction
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8145170164367872022, guid: 126326fb385628f48915dd9419c89498, type: 3}
-      propertyPath: ColorModule.enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8145170164367872022, guid: 126326fb385628f48915dd9419c89498, type: 3}
-      propertyPath: lengthInSec
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8145170164367872022, guid: 126326fb385628f48915dd9419c89498, type: 3}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8145170164367872022, guid: 126326fb385628f48915dd9419c89498, type: 3}
-      propertyPath: moveWithTransform
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8145170164367872023, guid: 126326fb385628f48915dd9419c89498, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 126326fb385628f48915dd9419c89498, type: 3}
 --- !u!114 &4362767423532714276 stripped
