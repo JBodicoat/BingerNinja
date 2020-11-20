@@ -16,21 +16,20 @@ public class SettingsMenu_ElliottDesouza : MonoBehaviour
 
     public string m_selectedLanguage;
     private bool m_isEnglish;
-    
+
     private void Start()
     {
         SettingsData settings = SaveLoadSystem_JamieG.LoadSettings();
         m_musicSlider.value = settings.m_musicVolume;
         m_SFXSlider.value = settings.m_sfxVolume;
         m_selectedLanguage = settings.m_chosenLanguage;
-        print(m_selectedLanguage);
     }
 
     public void OnEnglishSelected()
     {
         m_selectedLanguage = "English";
     }
-    
+
     public void OnPortugueseSelected()
     {
         m_selectedLanguage = "Portuguese";
