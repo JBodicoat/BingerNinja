@@ -1,6 +1,6 @@
 ﻿//Elliott Desouza
 
-//Elliott 07/10/2020 - made it so it applys a texture to the object
+//Elliott 07/10/2020 - made it so it applys a texture to the object.
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
