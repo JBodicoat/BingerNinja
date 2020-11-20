@@ -8,9 +8,19 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD
   - component: {fileID: 2329554648909337008}
   - component: {fileID: 497400668278726415}
   - component: {fileID: 3125078477956616765}
+=======
+  - component: {fileID: 4434442803191826812}
+  - component: {fileID: 4434442803191826813}
+  - component: {fileID: 4434442803191826814}
+  - component: {fileID: 4434442803191826815}
+  - component: {fileID: 4434442803191826689}
+  - component: {fileID: 4434442803191826690}
+  - component: {fileID: -3172112576534142868}
+>>>>>>> Elliott/StealthAttackEffect
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -232,6 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131872bffc30dbd4bb3013b65a7f2c34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraShake: {fileID: 0}
   m_rayCastStart: {fileID: 4434442803275330667}
   m_rayCastStartBackup: {fileID: 557739978283802439}
   m_detectionCollider: {fileID: 4434442803191826814}
@@ -258,9 +269,13 @@ MonoBehaviour:
   m_hasChargeAttack: 1
   m_chargeAttackDeley: 0
   m_chargAttackPosibility: 2
+<<<<<<< HEAD
   m_chargeAttackMultiplier: 3
   m_petTigerDeley: 0
 --- !u!114 &2867095594728598704
+=======
+--- !u!114 &-3172112576534142868
+>>>>>>> Elliott/StealthAttackEffect
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -269,6 +284,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4434442803191826688}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< HEAD
   m_Script: {fileID: 11500000, guid: 500a7052496e455428e85868ebd594e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -285,6 +301,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_dialogue: []
+=======
+  m_Script: {fileID: 11500000, guid: ed50febb1b4ddb0458fccfa2239e59f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mSpriteRenderer: {fileID: 0}
+  mColorSwapTex: {fileID: 0}
+  mSpriteColors: []
+>>>>>>> Elliott/StealthAttackEffect
 --- !u!1 &4434442803275330668
 GameObject:
   m_ObjectHideFlags: 0

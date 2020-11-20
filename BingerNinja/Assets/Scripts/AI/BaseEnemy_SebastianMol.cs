@@ -5,6 +5,7 @@
 //sebastian mol 02/11/20 now path gets recalculated when player moves away from original position 
 //sebastian mol 02/11/20 improved player detection with second raycast
 //sebastian mol 06/11/20 new damage sysetm
+<<<<<<< HEAD
 //sebastian mol 11/11/2020 enemy can now be stunned
 //sebastian mol 11/11/2020 tiger enemy cant see player in vent now
 //Joao Beijinho 12/11/2020  Added layerMask for crouchObjectLayer and reference to playerStealth()
@@ -12,6 +13,10 @@
 //                          Added m_playerStealthScript.IsCrouched() to PlayerDetectionRaycasLogic() and two else if inside
 //                          Changed tags in PlayerDetectionRaycasLogic() to use the Tags_JoaoBeijinho() tags
 //sebastian mol 14/11/2020 moved logic out of child classes and moved into here
+=======
+//Elliott Desouza 08/11/2020 added hit effect and camera shake when taken damage
+
+>>>>>>> Elliott/StealthAttackEffect
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -28,6 +33,8 @@ public enum m_damageType { MELEE, RANGE, SNEAK, STUN };
 /// </summary>
 abstract class BaseEnemy_SebastianMol : MonoBehaviour
 {
+    private HitEffectElliott m_HitEffectElliott;
+    private CameraShakeElliott m_cameraShake; 
     public Transform m_rayCastStart; //start position of the ray cast
     public Transform m_rayCastStartBackup; //secondary rey cast for better detection neer walls
     public PolygonCollider2D m_detectionCollider; // the collder cone used for player detection
@@ -639,10 +646,13 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         if (m_playerDetected == false) //if sneak damage
         {
             m_health -= damage * m_sneakDamageMultiplier;
+            m_cameraShake.StartShake();
+            m_HitEffectElliott.StartHitEffect(true);
         }
         else
         {
             m_health -= damage;
+            m_HitEffectElliott.StartHitEffect(false);
         }
     }
 
@@ -656,10 +666,16 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         m_patrolIteratorMax = m_patrolPoints.Length-1;
         m_patroleTimer = m_deleyBetweenPatrol;
         if (m_patrolPoints.Length > 0) m_currentPatrolePos = m_patrolPoints[0];
+<<<<<<< HEAD
         m_lookLeftAndRightTimerMax = m_lookLeftAndRightTimer;
 
         m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
         m_crouchObjectLayer = ~m_crouchObjectLayer;
+=======
+        m_HitEffectElliott = GetComponent<HitEffectElliott>();
+        m_cameraShake = Camera.main.GetComponent<CameraShakeElliott>();
+        
+>>>>>>> Elliott/StealthAttackEffect
     }
 
     private void Update()
