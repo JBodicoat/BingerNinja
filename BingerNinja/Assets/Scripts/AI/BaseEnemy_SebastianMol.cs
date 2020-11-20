@@ -658,21 +658,14 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 }
                 else
                 {
-                    //half damage melle when not sneaked
-                    if (damageType == m_damageType.MELEE)
+                     //sneak multiplier
+                    if (m_playerDetected == false)
                     {
-                        if (m_playerDetected == false) // in stealth
-                        {
-                            NormalTakeDamage(damage); // normal melle stealth attack
-                        }
-                        else // not stealth 
-                        {
-                            NormalTakeDamage(damage * 0.5f); //half damage stealth atatck
-                        }
+                        m_health -= damage * (m_sneakDamageMultiplier + m_sneakDamageMultiplierStack);
                     }
                     else
                     {
-                        NormalTakeDamage(damage); // normal
+                        m_health -= damage;
                     }
                 }
                 break;
