@@ -83,12 +83,17 @@ public class Minifier_Jann : M
         minifed = ApplyMethodShortener(minifed);
 
         string output = "";
-
-        for (int i = 0; i < minifed.Length; i++)
+        
+        foreach (string line in minifed)
         {
-            string line = minifed[i];
-
-            output += line.Trim() + " ";
+            if (Regex.Match(line, @"(?<=^.*)\b\w+$").Value.Equals("else"))
+            {
+                output += line.Trim();
+            }
+            else
+            {
+                output += line.Trim();
+            }
         }
 
         return output;
