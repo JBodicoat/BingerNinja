@@ -42,8 +42,8 @@ public class HitEffectElliott : MonoBehaviour
     //    mStoreColor = ColorChanger_Jann.Instance.SpriteColors;
     //    InitColorSwapTex();
     //    mHitEffectTimer = cHitEffectTime;
-    //    SwapAllSpritesColorsTemporarily(mStoreColor[isCritical ? ColorChanger_Jann.Instance.ColorOutGrey174 :
-    //           ColorChanger_Jann.Instance.ColorOutGrey122]);
+    //    SwapAllSpritesColorsTemporarily(isCritical ? ColorChanger_Jann.Instance.ColorOutGrey174 :
+    //           ColorChanger_Jann.Instance.ColorOutGrey122);
     //}
     public void StartHitEffect(bool isCritical)
     {

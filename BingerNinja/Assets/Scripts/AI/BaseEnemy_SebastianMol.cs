@@ -587,13 +587,12 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 if (m_playerDetected == false)
                 {
                     m_health -= damage * (m_sneakDamageMultiplier + m_sneakDamageMultiplierStack);
-                    m_cameraShake.StartShake();
-                    m_HitEffectElliott.StartHitEffect(true);
+                   
                 }
                 else
                 {
                     m_health -= damage;
-                    m_HitEffectElliott.StartHitEffect(false);
+                    
                 }
                 break;
 
@@ -645,10 +644,13 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         if (m_playerDetected == false) //if sneak damage
         {
             m_health -= damage * m_sneakDamageMultiplier;
+            m_cameraShake.StartShake();
+          //  m_HitEffectElliott.StartHitEffect(true);
         }
         else
         {
             m_health -= damage;
+          //  m_HitEffectElliott.StartHitEffect(false);
         }
     }
 
@@ -666,7 +668,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
         m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
         m_crouchObjectLayer = ~m_crouchObjectLayer;
-        m_HitEffectElliott = GetComponent<HitEffectElliott>();
+       // m_HitEffectElliott = GetComponent<HitEffectElliott>();
         m_cameraShake = Camera.main.GetComponent<CameraShakeElliott>();
     }
 
