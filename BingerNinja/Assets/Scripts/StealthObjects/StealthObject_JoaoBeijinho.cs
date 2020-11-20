@@ -14,6 +14,7 @@ using UnityEngine;
 /// </summary>
 public abstract class StealthObject_JoaoBeijinho : MonoBehaviour
 {
+    
     protected PlayerController_JamieG m_playerControllerScript;
     protected PlayerStealth_JoaoBeijinho m_playerStealthScript;
 
