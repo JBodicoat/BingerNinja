@@ -12,6 +12,7 @@
 //                          Added m_playerStealthScript.IsCrouched() to PlayerDetectionRaycasLogic() and two else if inside
 //                          Changed tags in PlayerDetectionRaycasLogic() to use the Tags_JoaoBeijinho() tags
 //sebastian mol 14/11/2020 moved logic out of child classes and moved into here
+//Elliott Desouza 20/11/2020 added hit effect and camera shake when taken damage
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -91,6 +92,8 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     private bool m_isStuned = false; //used to stunn the enemy
     private float m_lookLeftAndRightTimerMax; //used to remeber m_lookLeftAndRightTimer varaibale at the start for later resents
     private bool m_isSerching = false; // if the enemy serching for player
+    private HitEffectElliott m_HitEffectElliott;
+    private CameraShakeElliott m_cameraShake;
 
     protected PlayerStealth_JoaoBeijinho m_playerStealthScript;
     private int m_crouchObjectLayer = 1 << 8;
@@ -584,10 +587,13 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 if (m_playerDetected == false)
                 {
                     m_health -= damage * (m_sneakDamageMultiplier + m_sneakDamageMultiplierStack);
+                    m_cameraShake.StartShake();
+                    m_HitEffectElliott.StartHitEffect(true);
                 }
                 else
                 {
                     m_health -= damage;
+                    m_HitEffectElliott.StartHitEffect(false);
                 }
                 break;
 
@@ -660,6 +666,8 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
         m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
         m_crouchObjectLayer = ~m_crouchObjectLayer;
+        m_HitEffectElliott = GetComponent<HitEffectElliott>();
+        m_cameraShake = Camera.main.GetComponent<CameraShakeElliott>();
     }
 
     private void Update()
