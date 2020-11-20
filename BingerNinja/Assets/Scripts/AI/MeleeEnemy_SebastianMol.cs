@@ -92,8 +92,8 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     {
         if(m_currentEnemyType == m_enemyType.SPACENINJABOSS)
         {
-            if ((m_health / m_maxHealth) < m_secondPhaseStartPercentage)
-                if (GetComponent<PlayerStealth_JoaoBeijinho>().IsStealthed()) //confusuion when player stelths
+            if ((m_health / m_maxHealth) > m_secondPhaseStartPercentage)
+                if (GameObject.FindObjectOfType<PlayerStealth_JoaoBeijinho>().IsStealthed()) //confusuion when player stelths
                 {
                     if (!m_doStunOnce)
                     {

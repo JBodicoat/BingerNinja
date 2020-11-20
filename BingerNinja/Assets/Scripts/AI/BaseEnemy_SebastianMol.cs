@@ -649,7 +649,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 break;
 
             case m_enemyType.SPACENINJABOSS:             
-                if ((m_health / m_maxHealth) >= m_secondPhaseStartPercentage) //second fase
+                if ((m_health / m_maxHealth) <= m_secondPhaseStartPercentage) //second fase
                 {
                     NormalTakeDamage(damage);
                     m_attackTimer *= m_attackSpeedIncrease;
