@@ -70,7 +70,6 @@ GameObject:
   - component: {fileID: 4362767422803623037}
   - component: {fileID: 4362767422803623039}
   - component: {fileID: 651991310}
-  - component: {fileID: 2888784909998871894}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -190,18 +189,6 @@ MonoBehaviour:
   redOffset: {x: 0, y: 0}
   blueOffset: {x: 0, y: 0}
   greenOffset: {x: 0, y: 0}
---- !u!114 &2888784909998871894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4362767422803623033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e221c3009ff7f64eb398883fb21b39f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4362767424123825799
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,7 +210,6 @@ GameObject:
   - component: {fileID: 4362767424123825798}
   - component: {fileID: 4272470005486940903}
   - component: {fileID: 1777221697}
-  - component: {fileID: 8048089486762057617}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -336,7 +322,7 @@ BoxCollider2D:
   m_Offset: {x: 0.0048828125, y: 0.020989567}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.12}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.625, y: 0.75}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
@@ -605,7 +591,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 139246ae6a1c4324f9ac2007a58a30fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
 --- !u!1001 &6540227213182784454
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -668,17 +653,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1406558352995564595, guid: ce2d2597f3950ab43b6dadbc647f12d6, type: 3}
   m_PrefabInstance: {fileID: 6540227213182784454}
   m_PrefabAsset: {fileID: 0}
-=======
---- !u!114 &8048089486762057617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4362767424123825799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed50febb1b4ddb0458fccfa2239e59f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
->>>>>>> Elliott/StealthAttackEffect

@@ -6,11 +6,7 @@
 // Jann 01/11/20 - Inspector UI, finalizing implementation
 // Jann 03/11/20 - Added TilemapRenderer and Image (UI) support
 // Jann 07/11/20 - Materials are now assigned in code and don't need to be set for everything in Unity
-<<<<<<< HEAD
 // Jann 08/11/20 - Turned it into a singleton (used by HitEffect_Elliot)
-=======
-// Elliott 07/11/2020 = made color arry public
->>>>>>> Elliott/StealthAttackEffect
 
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -33,7 +29,7 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
     private Image[] m_images;
 
     private Texture2D m_colorSwapTexture;
-    public Color[] m_spriteColors;
+    private Color[] m_spriteColors;
     
     private void Awake()
     {
