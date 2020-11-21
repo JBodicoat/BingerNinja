@@ -307,7 +307,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         RaycastHit2D crouchedHit = Physics2D.Linecast(m_rayCastStart.position, col.transform.position);
         Debug.DrawLine(m_rayCastStart.position, col.transform.position, Color.green);
 
-        if (!m_playerStealthScript.IsCrouched() && hit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag)) //did it hit the play first
+        if (!m_playerStealthScript.IsCrouched() && hit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag)) //player is not crouched and it hits him
         {
             //  m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Detection);
             m_playerDetected = true;
@@ -315,7 +315,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             m_currentState = state.ATTACK;
             ClearPath();
         }
-        else if (m_playerStealthScript.IsCrouched() && crouchedHit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        else if (m_playerStealthScript.IsCrouched() && crouchedHit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag)) //player is croucheed and it hits 
         {
             //  m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Detection);
             m_playerDetected = true;

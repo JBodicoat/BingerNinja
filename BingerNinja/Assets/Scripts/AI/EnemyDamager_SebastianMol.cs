@@ -28,16 +28,20 @@ public class EnemyDamager_SebastianMol : MonoBehaviour
             {
 				if(currentEnemyScript.m_doseAffect)
                 {
-					int rand = Random.Range(0, (int)(100/m_percentageChanceOfAffect));
-					if (rand == m_percentageChanceOfAffect)
+					float rand = Random.Range(0, 2);
+					Debug.Log(rand);
+
+					if (rand > m_percentageChanceOfAffect)
 					{
 						FindObjectOfType<EffectManager_MarioFernandes>().AddEffect
 							(new PoisionDefuff_MarioFernandes(m_poisionDamage, m_affectTime));
+						Debug.Log("poison");
 					}
 					else
 					{
 						FindObjectOfType<EffectManager_MarioFernandes>().AddEffect
 							(new SpeedEffect_MarioFernandes(m_affectTime, m_slowDebuff));
+						Debug.Log("slow");
 					}
 				}					
 			}
