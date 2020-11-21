@@ -1,6 +1,7 @@
 ﻿// Jack 02/11/2020 changed damage to be a public variable rather than magic number
 // Louie 03/11/2020 added player damage sfx
 // sebastian mol 20/11/2020 added randome chance of affect applied to player
+// Elliott 20/11/2020 added hit effect
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
