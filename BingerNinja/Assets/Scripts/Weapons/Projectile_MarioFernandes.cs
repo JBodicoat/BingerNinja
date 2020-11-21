@@ -8,6 +8,7 @@
 //sebastian mol 05/11/20 changed enemy take damage function call
 // Mario 13/11/2020 - Add Distraction time to progectile
 // Mario 14/11/2020 - Solve distraction bugs
+// Mario 21/11/2020 - Dettect Wall 2
 
 using System.Collections;
 using System.Collections.Generic;
@@ -60,9 +61,11 @@ public class Projectile_MarioFernandes : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        
+         print(other.gameObject.name);
+
         if(!other.isTrigger && other.tag == "Enemy")
         {
+           
             other.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage( m_damageType.RANGE ,m_dmg);
 
             if(m_distractTime >0)
@@ -74,11 +77,10 @@ public class Projectile_MarioFernandes : MonoBehaviour
             }
 
             Destroy(gameObject);
+        }else 
+        if(other.isTrigger && other.GetComponent<Renderer>() && other.GetComponent<Renderer>().sortingLayerName == "Walls2")
+        {
+            Destroy(gameObject);
         }
-        //else 
-        //if(!other.isTrigger && other.GetComponent<SpriteRenderer>()?.sortingLayerName == "Walls2")
-        //{
-        //    Destroy(gameObject);
-        //}
     }
 }
