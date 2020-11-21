@@ -12,6 +12,7 @@
 //                          Added m_playerStealthScript.IsCrouched() to PlayerDetectionRaycasLogic() and two else if inside
 //                          Changed tags in PlayerDetectionRaycasLogic() to use the Tags_JoaoBeijinho() tags
 //sebastian mol 14/11/2020 moved logic out of child classes and moved into here
+//Elliott Desouza 20/11/2020 added hit effect and camera shake when taken damage
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -21,7 +22,7 @@ using UnityEngine.UIElements;
 using UnityEngine.Tilemaps;
 
 public enum state { WONDER, CHASE, ATTACK };
-public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN, PETTIGER };
+public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN, PETTIGER, ALIEN, TIGERBOSS };
 public enum m_damageType { MELEE, RANGE, SNEAK, STUN };
 /// <summary>
 ///base class for enemies to inherit from with logic for detection, patrole, movment, stats managment
@@ -91,6 +92,8 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     private bool m_isStuned = false; //used to stunn the enemy
     private float m_lookLeftAndRightTimerMax; //used to remeber m_lookLeftAndRightTimer varaibale at the start for later resents
     private bool m_isSerching = false; // if the enemy serching for player
+    private HitEffectElliott m_HitEffectElliott;
+    private CameraShakeElliott m_cameraShake;
 
     protected PlayerStealth_JoaoBeijinho m_playerStealthScript;
     private int m_crouchObjectLayer = 1 << 8;
@@ -584,10 +587,12 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 if (m_playerDetected == false)
                 {
                     m_health -= damage * (m_sneakDamageMultiplier + m_sneakDamageMultiplierStack);
+                   
                 }
                 else
                 {
                     m_health -= damage;
+                    
                 }
                 break;
 
@@ -616,7 +621,20 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         StunEnemyToggle();
     }
 
+    /// <summary>
+    /// for use with distraction projectile to stun enemies
+    /// </summary>
+    /// <param name="amaountOfTime">amaount of time to stun in seconds</param>
     public void StunEnemyWithDeleyFunc(float amaountOfTime)
+    {
+        if(m_currentEnemyType != m_enemyType.ALIEN) StartCoroutine(StunEnemyWithDeley(amaountOfTime));
+    }
+
+    /// <summary>
+    /// for use with ligths to stun enemies
+    /// </summary>
+    /// <param name="amaountOfTime">amaount of time to stun in seconds</param>
+    public void StunEnemyWithLightsDeleyFunc(float amaountOfTime)
     {
         StartCoroutine(StunEnemyWithDeley(amaountOfTime));
     }
@@ -626,10 +644,13 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         if (m_playerDetected == false) //if sneak damage
         {
             m_health -= damage * m_sneakDamageMultiplier;
+            m_cameraShake.StartShake();
+          //  m_HitEffectElliott.StartHitEffect(true);
         }
         else
         {
             m_health -= damage;
+          //  m_HitEffectElliott.StartHitEffect(false);
         }
     }
 
@@ -647,6 +668,8 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
         m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
         m_crouchObjectLayer = ~m_crouchObjectLayer;
+       // m_HitEffectElliott = GetComponent<HitEffectElliott>();
+        m_cameraShake = Camera.main.GetComponent<CameraShakeElliott>();
     }
 
     private void Update()

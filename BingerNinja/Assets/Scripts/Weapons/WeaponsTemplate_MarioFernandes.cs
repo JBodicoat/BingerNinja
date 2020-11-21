@@ -3,6 +3,7 @@
 // Mario 02/11/2020 - Create the Class
 // Jack 02/11/2020 added m_hungerRestoreAmount
 // Mario 08/11/2020 - Add strength modifier 
+// Mario 13/11/2020 - Add Distraction time to progectile
 
 using System.Collections;
 using System.Collections.Generic;
@@ -21,10 +22,9 @@ public class WeaponsTemplate_MarioFernandes : MonoBehaviour
     public int m_healOverTime = 0;
     public int m_duration = 5;
     public int m_poisonDmg = 0;
-
     public int m_strengthModifier = 0;
-
     public float m_speedModifier = 1;
+    public float m_distractTime = 0;
     public int dmg;
 
     public float m_hungerRestoreAmount;

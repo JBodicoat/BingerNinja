@@ -28,19 +28,19 @@ TextureImporter:
     second: SecGuard_Idle
   - first:
       213: -145460402866830927
-    second: final_spriteSheet_8
+    second: janitor_idle
   - first:
       213: 8452160866309653340
     second: Businessman_Idle
   - first:
       213: 1175274589483787978
-    second: final_spriteSheet_10
+    second: Chef_Idle
   - first:
       213: 4369857114774464141
     second: SecGuard_Walk1
   - first:
       213: -4648276173835894010
-    second: final_spriteSheet_12
+    second: janitor_walk1
   - first:
       213: -723079756006206957
     second: Businessman_Walk1
@@ -52,13 +52,13 @@ TextureImporter:
     second: Dango
   - first:
       213: 1757997887436550201
-    second: final_spriteSheet_16
+    second: Chef_Walk1
   - first:
       213: 1414872453887043895
     second: SecGuard_Walk2
   - first:
       213: 9095320665929848445
-    second: final_spriteSheet_18
+    second: janitor_walk2
   - first:
       213: -2560872523564760568
     second: Riceball
@@ -67,13 +67,13 @@ TextureImporter:
     second: Businessman_Walk2
   - first:
       213: 6503851049015686320
-    second: final_spriteSheet_21
+    second: Chef_Walk2
   - first:
       213: 5220845518996093204
     second: SecGuard_Walk3
   - first:
       213: 5294493925859196063
-    second: final_spriteSheet_23
+    second: janitor_walk3
   - first:
       213: -8476136803928467929
     second: Title
@@ -166,7 +166,7 @@ TextureImporter:
     second: Businessman_Walk3
   - first:
       213: -7895705856698298354
-    second: final_spriteSheet_54
+    second: Chef_Walk3
   - first:
       213: -6291758445645827163
     second: Vent
@@ -277,7 +277,7 @@ TextureImporter:
     second: Binger_Walk_4
   - first:
       213: 6788207020086146317
-    second: final_spriteSheet_16
+    second: Chef_Walk1
   - first:
       213: 6210608791150374954
     second: Businessman_Walk2
@@ -286,22 +286,22 @@ TextureImporter:
     second: SecGuard_Walk4
   - first:
       213: -7555118124246173958
-    second: final_spriteSheet_88
+    second: janitor_walk4
   - first:
       213: -5425122995608593576
     second: Businessman_Walk4
   - first:
       213: 8835218836158636596
-    second: final_spriteSheet_90
+    second: Chef_Walk4
   - first:
       213: -958673938750246194
-    second: final_spriteSheet_91
+    second: janitor_walk_away1
   - first:
       213: -5879674675586737625
     second: Businessman_Walk_Away1
   - first:
       213: 2390806179251332092
-    second: final_spriteSheet_93
+    second: Chef_Walk_Away1
   - first:
       213: 2725076701273096590
     second: SecGuard_Walk_Away1
@@ -340,25 +340,25 @@ TextureImporter:
     second: SecGuard_Walk_Away4
   - first:
       213: -1171408152867343309
-    second: final_spriteSheet_106
+    second: janitor_walk_away2
   - first:
       213: 3185749035187198866
-    second: final_spriteSheet_107
+    second: janitor_walk_away3
   - first:
       213: -1993577640106994467
-    second: final_spriteSheet_108
+    second: janitor_walk_away4
   - first:
       213: -3961740979318538511
-    second: final_spriteSheet_109
+    second: janitor_attack1
   - first:
       213: -400839568187095252
-    second: final_spriteSheet_110
+    second: janitor_attack2
   - first:
       213: 8136608018788525876
-    second: final_spriteSheet_111
+    second: janitor_attack3
   - first:
       213: 4779364225668957344
-    second: final_spriteSheet_112
+    second: janitor_attack4
   - first:
       213: -6486808788985548118
     second: Businessman_Walk_Away2
@@ -382,25 +382,25 @@ TextureImporter:
     second: Businessman_Attack4
   - first:
       213: -8072276997792731182
-    second: final_spriteSheet_120
+    second: Chef_Walk_Away2
   - first:
       213: -1039124017508581077
-    second: final_spriteSheet_121
+    second: Chef_Walk_Away3
   - first:
       213: 7240678403790032720
-    second: final_spriteSheet_122
+    second: Chef_Walk_Away4
   - first:
       213: -767019840517628386
-    second: final_spriteSheet_123
+    second: Chef_Attack1
   - first:
       213: 1347274565993919293
-    second: final_spriteSheet_124
+    second: Chef_Attack2
   - first:
       213: -7744075992007614770
-    second: final_spriteSheet_125
+    second: Chef_Attack3
   - first:
       213: -4382516650332049295
-    second: final_spriteSheet_126
+    second: Chef_Attack4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -510,18 +510,6 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -2048,7 +2036,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_8
+      name: janitor_idle
       rect:
         serializedVersion: 2
         x: 32
@@ -2090,7 +2078,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_10
+      name: Chef_Idle
       rect:
         serializedVersion: 2
         x: 32
@@ -2132,7 +2120,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_12
+      name: janitor_walk1
       rect:
         serializedVersion: 2
         x: 48
@@ -2174,7 +2162,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_16
+      name: Chef_Walk1
       rect:
         serializedVersion: 2
         x: 48
@@ -2216,7 +2204,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_18
+      name: janitor_walk2
       rect:
         serializedVersion: 2
         x: 64
@@ -2258,7 +2246,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_21
+      name: Chef_Walk2
       rect:
         serializedVersion: 2
         x: 64
@@ -2300,7 +2288,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_23
+      name: janitor_walk3
       rect:
         serializedVersion: 2
         x: 80
@@ -2342,7 +2330,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_54
+      name: Chef_Walk3
       rect:
         serializedVersion: 2
         x: 80
@@ -2384,7 +2372,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_88
+      name: janitor_walk4
       rect:
         serializedVersion: 2
         x: 96
@@ -2426,7 +2414,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_90
+      name: Chef_Walk4
       rect:
         serializedVersion: 2
         x: 96
@@ -2447,7 +2435,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_91
+      name: janitor_walk_away1
       rect:
         serializedVersion: 2
         x: 112
@@ -2489,7 +2477,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_93
+      name: Chef_Walk_Away1
       rect:
         serializedVersion: 2
         x: 112
@@ -2762,7 +2750,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_106
+      name: janitor_walk_away2
       rect:
         serializedVersion: 2
         x: 128
@@ -2783,7 +2771,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_107
+      name: janitor_walk_away3
       rect:
         serializedVersion: 2
         x: 144
@@ -2804,7 +2792,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_108
+      name: janitor_walk_away4
       rect:
         serializedVersion: 2
         x: 160
@@ -2825,7 +2813,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_109
+      name: janitor_attack1
       rect:
         serializedVersion: 2
         x: 176
@@ -2846,7 +2834,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_110
+      name: janitor_attack2
       rect:
         serializedVersion: 2
         x: 192
@@ -2867,7 +2855,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_111
+      name: janitor_attack3
       rect:
         serializedVersion: 2
         x: 208
@@ -2888,7 +2876,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_112
+      name: janitor_attack4
       rect:
         serializedVersion: 2
         x: 224
@@ -3056,7 +3044,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_120
+      name: Chef_Walk_Away2
       rect:
         serializedVersion: 2
         x: 128
@@ -3077,7 +3065,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_121
+      name: Chef_Walk_Away3
       rect:
         serializedVersion: 2
         x: 144
@@ -3098,7 +3086,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_122
+      name: Chef_Walk_Away4
       rect:
         serializedVersion: 2
         x: 160
@@ -3119,7 +3107,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_123
+      name: Chef_Attack1
       rect:
         serializedVersion: 2
         x: 176
@@ -3140,7 +3128,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_124
+      name: Chef_Attack2
       rect:
         serializedVersion: 2
         x: 192
@@ -3161,7 +3149,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_125
+      name: Chef_Attack3
       rect:
         serializedVersion: 2
         x: 208
@@ -3182,7 +3170,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_126
+      name: Chef_Attack4
       rect:
         serializedVersion: 2
         x: 224

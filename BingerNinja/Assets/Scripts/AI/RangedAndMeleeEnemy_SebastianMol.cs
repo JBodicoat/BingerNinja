@@ -37,21 +37,12 @@ using UnityEngine;
     {             
         if(m_randAttackChance == m_RangedAttackRandomChance-1)
         {
-            if(EnemyAttacks_SebastianMol.RangedAttack(m_playerTransform, transform, m_aimer, ref m_attackTimer, m_projectile, m_shootDeley))
-            {
-                m_generateRandomNumberOnce = false;
-                Debug.Log("ranged");
-
-            }
+            if(EnemyAttacks_SebastianMol.RangedAttack(m_playerTransform, transform, m_aimer, ref m_attackTimer, m_projectile, m_shootDeley))  m_generateRandomNumberOnce = false;
 
         }
         else
         {
-           if( EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility, QuickAttack, ChargeAttack, StunIfTiger, m_petTigerDeley, m_currentEnemyType, m_hitSpeed))
-           {
-                m_generateRandomNumberOnce = false;
-                Debug.Log("melle");
-           }
+           if( EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility, QuickAttack, ChargeAttack, StunIfTiger, m_petTigerDeley, m_currentEnemyType, m_hitSpeed)) m_generateRandomNumberOnce = false;
         }
     }
 
