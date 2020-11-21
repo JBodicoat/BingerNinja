@@ -4,6 +4,7 @@
 // Mário 16/10/2020 - Abstract Health&Hunger code from old Character class
 // Mário 18/10/2020 - Add max health increase/decrease functions
 // Elliott 19/10/2020 - Added respawn on Death
+// Elliott 21/11/2020 - Added death effect and pause input
 
 using System.Collections;
 using System.Collections.Generic;
@@ -25,6 +26,8 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
     public Slider m_healthSlider;
     public Slider m_hungerSlider;
 
+    private PlayerDeathEffect_Elliott m_DeathEffect;
+    private PlayerController_JamieG m_PauseInput;
 
     // Increase players health by amount passed
     public void Eat(float amount)
@@ -46,9 +49,12 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
             m_currentHealth = 0;
 
         if(m_currentHealth == 0)
-        {
-            Die();
-		}
+        {            
+            m_DeathEffect.SpriteFlash();        
+            m_PauseInput.OnDisable();
+            Invoke("Die", 2f);
+            m_PauseInput.OnEnable();
+        }
         
         //print(m_currentHealth);
         m_healthSlider.value = m_currentHealth;
@@ -82,8 +88,7 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
 
         // Run death sequence
     private void Die()
-    {
-        // gameObject.SetActive(false);
+    {       
         gameObject.transform.position = GameObject.FindGameObjectWithTag("SaveCheckpoint").GetComponent<SaveSystem_ElliottDesouza>().m_currentCheckpoint.position;
         m_currentHealth = 100;
         m_currentHunger = 100;
@@ -98,6 +103,9 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
 
         m_hungerSlider.maxValue = m_maxHunger;
         m_hungerSlider.value = m_currentHunger;
+
+        m_DeathEffect = GetComponent<PlayerDeathEffect_Elliott>();
+        m_PauseInput = GetComponent<PlayerController_JamieG>();
 
     }
 
