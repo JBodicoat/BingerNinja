@@ -94,4 +94,38 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// hold logic for a charge attack.
+    /// </summary>
+    /// <param name="m_playerTransform"></param>
+    /// <param name="m_attackTimer"></param>
+    /// <param name="m_attackCollider"></param>
+    /// <param name="m_hitSpeed"></param>
+    /// <param name="m_thisEnemy"></param>
+    /// <param name="chargeForce"></param>
+    /// <returns></returns>
+    public static bool ChargeAttack(Transform m_playerTransform, ref float m_attackTimer, 
+        GameObject m_attackCollider, float m_hitSpeed, GameObject m_thisEnemy, float chargeForce)
+    {
+        if (m_attackTimer <= 0)
+        {
+            //shoot at enemy
+            m_attackCollider.SetActive(true);
+            Rigidbody2D rijy = m_thisEnemy.GetComponent<Rigidbody2D>();
+            rijy.bodyType = RigidbodyType2D.Dynamic;
+            rijy.gravityScale = 0;
+            rijy.freezeRotation = true;
+            rijy.AddForce((m_playerTransform.position - m_thisEnemy.transform.position).normalized * chargeForce );
+            EnemyDamager_SebastianMol enemyDamager = m_attackCollider.GetComponent<EnemyDamager_SebastianMol>();
+            enemyDamager.m_damage = enemyDamager.m_baseDamage;
+            m_attackTimer = m_hitSpeed;
+            return true;
+        }
+        else
+        {
+            m_attackTimer -= Time.deltaTime;
+            return false;
+        }
+    }
+
 }

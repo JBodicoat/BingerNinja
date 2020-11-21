@@ -32,6 +32,8 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     public float m_chargeAttackMultiplier = 3;
     [Tooltip("the amount of time the pet tigre is frozen for after it dose its attack")]
     public float m_petTigerDeley;
+    [Tooltip("speed of the enemies attack")]
+    public float m_maxChargTimeBeforDamege = 0.2f;
 
 
     private bool m_doStunOnce = false;
@@ -84,8 +86,17 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     /// </summary>
     internal override void AttackBehaviour()
     {
-        EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility, QuickAttack, 
-                                                ChargeAttack, StunIfTiger, m_petTigerDeley, m_currentEnemyType, m_hitSpeed);
+        if(m_currentEnemyType == m_enemyType.PETTIGER)
+        {
+            EnemyAttacks_SebastianMol.ChargeAttack(m_playerTransform, ref m_attackTimer, 
+                m_attackCollider, m_hitSpeed, gameObject, 500); //make this ibnto a public variable
+        }
+        else
+        {
+            EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility, QuickAttack,
+                                               ChargeAttack, StunIfTiger, m_petTigerDeley, m_currentEnemyType, m_hitSpeed);
+        }
+       
     }
 
     private void LateUpdate()
@@ -105,6 +116,33 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
                 {
                     m_doStunOnce = false;
                 }
+        }
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (m_currentEnemyType == m_enemyType.PETTIGER)
+        {
+
+            Rigidbody2D rijy = GetComponent<Rigidbody2D>();
+            if (rijy.bodyType == RigidbodyType2D.Dynamic)
+            {
+
+                rijy.bodyType = RigidbodyType2D.Kinematic;
+                rijy.velocity = Vector2.zero;
+                m_attackCollider.SetActive(false);
+                //if hit wall walk away one tile 
+                //if hit wall stunn
+                if (collision.gameObject.name == "Walls1_map")
+                {
+                    
+                    StunEnemyWithDeleyFunc(m_petTigerDeley);
+                    Debug.Log("stun tigers boom");
+                }
+            }
+
+            
         }
     }
 

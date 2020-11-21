@@ -11,7 +11,7 @@ using UnityEngine;
 public class EnemyDamager_SebastianMol : MonoBehaviour
 {
 	public float m_baseDamage;
-	public float m_damage;
+	internal float m_damage;
 	[Range(0.0f, 1.0f)]
 	public float m_percentageChanceOfAffect = 0.5f;
 
