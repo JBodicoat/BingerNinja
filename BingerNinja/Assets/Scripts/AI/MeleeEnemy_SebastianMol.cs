@@ -3,6 +3,7 @@
 //sebastian mol 02/11/20 removed player behaviour switch replaced it with abstract functions
 //sebastian mol 09/11/20 chrage attack fixed 
 //sebastian mol 20/11/2020 spce ninja enemy logic done
+//sebastian mol 22/11/2020 tiuger logic in place
 
 using System;
 using System.Collections;
@@ -34,6 +35,8 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     public float m_petTigerDeley;
     [Tooltip("speed of the enemies attack")]
     public float m_maxChargTimeBeforDamege = 0.2f;
+    [Tooltip("the amaount of time that the enemys attack range is very small so that he moves away from wall befor doiugn a chareg attack I RECCOMEND NOT TO CHANGE THIS")]
+    public float m_amountOfTimeToMoveAwayFromWall = 0.2f;
 
 
     private bool m_doStunOnce = false;
@@ -100,6 +103,17 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
        
     }
 
+    /// <summary>
+    /// make the attack range bigg again the reson it is small so that the enenmy walks toward the player befor attacking
+    /// </summary>
+    /// <param name="amaountOfTime"> amnount of time befor the attack is big again</param>
+    /// <returns></returns>
+    private IEnumerator MoveAwayFromeWall(float amaountOfTime) //this is a very not clean way to do things but it doseent look bad in teh game 
+    {
+        yield return new WaitForSeconds(amaountOfTime);
+        if (m_attackRange != m_maxAttackRange) m_attackRange = m_maxAttackRange; //change teh attack range back to normal 
+        m_doMoveAwayFromWallOnce = false;
+    }
     private void LateUpdate()
     {
         if(m_currentEnemyType == m_enemyType.SPACENINJABOSS)
@@ -122,9 +136,10 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
         if(!m_isStuned)
         if(m_doMoveAwayFromWallOnce)
         {
-            StartCoroutine(MoveAwayFromeWall());
+            StartCoroutine(MoveAwayFromeWall(m_amountOfTimeToMoveAwayFromWall));
         }
     }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -151,13 +166,6 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
 
             
         }
-    }
-
-    private IEnumerator MoveAwayFromeWall() //this is a very not clean way to do things but it doseent look bad in teh game 
-    {
-        yield return new WaitForSeconds(0.2f);
-        if (m_attackRange != m_maxAttackRange) m_attackRange = m_maxAttackRange; //change teh attack range back to normal 
-        m_doMoveAwayFromWallOnce = false;
     }
 
 

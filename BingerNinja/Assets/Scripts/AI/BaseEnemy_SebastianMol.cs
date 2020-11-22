@@ -513,31 +513,6 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         
         FollowPath();
     }
-
-    //protected void MoveAwayFromWall()
-    //{
-    //    // is the enemy neer the wall 
-    //    Vector2Int tileMapPos = (Vector2Int)m_pathfinder.m_tileMap.WorldToCell(transform.position);
-    //    Debug.Log(m_pathfinder.m_tileMap.GetTile((Vector3Int)tileMapPos + new Vector3Int(-1, 0, 0)));
-    //    if (m_pathfinder.m_tileMap.GetTile((Vector3Int)tileMapPos + new Vector3Int(1, 0, 0)) != null)
-    //    {
-    //       PathfindTo(transform.position + new Vector3(-1, 0, 0));
-    //    }
-    //    else if (m_pathfinder.m_tileMap.GetTile((Vector3Int)tileMapPos + new Vector3Int(-1, 0, 0)) != null)
-    //    {
-           
-    //        PathfindTo(transform.position + new Vector3(1, 0, 0));
-    //    }
-    //    else if (m_pathfinder.m_tileMap.GetTile((Vector3Int)tileMapPos + new Vector3Int(0, 1, 0)) != null)
-    //    {
-    //        PathfindTo(transform.position + new Vector3(0, -1, 0));
-    //    }
-    //    else if (m_pathfinder.m_tileMap.GetTile((Vector3Int)tileMapPos + new Vector3Int(0, -1, 0)) != null)
-    //    {
-    //       PathfindTo(transform.position + new Vector3(0, 1, 0));
-    //    }
-
-    //}
     #endregion
 
     /// <summary>

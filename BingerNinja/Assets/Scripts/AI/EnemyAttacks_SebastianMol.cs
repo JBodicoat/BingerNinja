@@ -1,4 +1,5 @@
 ﻿//sebastian mol 14/11/2020 script created
+//sebastian mol 22/11/2020 charge attack created
 
 using System;
 using System.Collections;
