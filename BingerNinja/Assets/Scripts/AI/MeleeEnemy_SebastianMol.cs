@@ -37,6 +37,7 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
 
 
     private bool m_doStunOnce = false;
+    private bool m_doMoveAwayFromWallOnce = false;
 
 
     /// <summary>
@@ -118,6 +119,11 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
                 }
         }
 
+        if(!m_isStuned)
+        if(m_doMoveAwayFromWallOnce)
+        {
+            StartCoroutine(MoveAwayFromeWall());
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -136,7 +142,8 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
                 //if hit wall stunn
                 if (collision.gameObject.name == "Walls1_map")
                 {
-                    
+                    m_attackRange = 0.01f;
+                    m_doMoveAwayFromWallOnce = true;
                     StunEnemyWithDeleyFunc(m_petTigerDeley);
                     Debug.Log("stun tigers boom");
                 }
@@ -145,6 +152,14 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
             
         }
     }
+
+    private IEnumerator MoveAwayFromeWall() //this is a very not clean way to do things but it doseent look bad in teh game 
+    {
+        yield return new WaitForSeconds(0.2f);
+        if (m_attackRange != m_maxAttackRange) m_attackRange = m_maxAttackRange; //change teh attack range back to normal 
+        m_doMoveAwayFromWallOnce = false;
+    }
+
 
     void OnDrawGizmosSelected()
     {

@@ -207,6 +207,22 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.9654229
       objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434284, guid: ebfa8304057df7b41bb9b382eac4061d, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].y
+      value: 14.907759
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434284, guid: ebfa8304057df7b41bb9b382eac4061d, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].x
+      value: -13.645822
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434284, guid: ebfa8304057df7b41bb9b382eac4061d, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].y
+      value: -12.201876
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434284, guid: ebfa8304057df7b41bb9b382eac4061d, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].x
+      value: -17.20649
+      objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434286, guid: ebfa8304057df7b41bb9b382eac4061d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.30789137
@@ -254,6 +270,10 @@ PrefabInstance:
     - target: {fileID: 8631870844753434320, guid: ebfa8304057df7b41bb9b382eac4061d, type: 3}
       propertyPath: m_attackRange
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: ebfa8304057df7b41bb9b382eac4061d, type: 3}
+      propertyPath: m_maxChargTimeBeforDamege
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434322, guid: ebfa8304057df7b41bb9b382eac4061d, type: 3}
       propertyPath: m_Name
@@ -396,7 +416,7 @@ GameObject:
   - component: {fileID: 942362250}
   - component: {fileID: 942362249}
   m_Layer: 0
-  m_Name: Wall Tiles
+  m_Name: Walls1_map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

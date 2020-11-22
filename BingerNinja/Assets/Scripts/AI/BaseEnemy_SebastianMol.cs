@@ -90,8 +90,6 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     [Tooltip("multiplies how much the attack speed increases by in space ninja boss second fase")]
     public float m_attackSpeedIncrease = 1.5f;
 
-    public bool testCuriosity = false; //test bool delet after review
-
     private Pathfinder_SebastianMol m_pathfinder;
     protected List<Vector2Int> m_currentPath = new List<Vector2Int>();
     protected Transform m_playerTransform; //used to get player position can be null if undedteceted
@@ -102,14 +100,17 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     protected float m_outOfSightTimer; //timer for line of sight check
     protected int m_patrolIterator = 0; //iterated through patrole points
     protected float m_maxHealth; //max amount of health an enemy has
+    protected float m_maxAttackRange;
     private int m_patrolIteratorMax; //the max for teh iterator so it dosent go out of range  
     private float m_patroleTimer; // timer for waiting at each patrole pos
     private Transform m_currentPatrolePos; //the current patrole pos were haeding to / are at 
     private Vector3 m_lastPathFinfToPos; //last given to the path finder to find a path e.g. player position
-    private bool m_isStuned = false; //used to stunn the enemy
+    protected bool m_isStuned = false; //used to stunn the enemy
     private float m_lookLeftAndRightTimerMax; //used to remeber m_lookLeftAndRightTimer varaibale at the start for later resents
     private bool m_isSerching = false; // if the enemy serching for player
     private Vector3 m_curiousTarget;  //the point of curiosity for an enemy to cheak
+
+
     private HitEffectElliott m_HitEffectElliott;
     private CameraShakeElliott m_cameraShake;
 
@@ -508,51 +509,35 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         {
             ClearPath();
             MoveToWorldPos(pos);
-        }
-
-        //if (m_currentEnemyType == m_enemyType.TIGERBOSS)
-        //{
-        //    if (m_playerDetected) //there is a player
-        //    {
-        //        if (GameObject.FindObjectOfType<PlayerMovement_MarioFernandes>().isRolling) //hes rolling
-        //        {
-        //            if (Vector2.Distance(m_playerTransform.position, pos) < m_tiggerBossLooseTargetDistance) //he rolled withing the distance of teh loose track
-        //            {
-        //                //look to see if theres a wall neer and stun
-        //                Debug.Log("tiger hit wall");
-        //            }
-        //            else
-        //            {
-                       
-        //                ClearPath();
-        //                MoveToWorldPos(pos);
-        //            }
-        //        }
-        //        else //just track the player normally
-        //        {
-        //            if (Vector2.Distance(m_lastPathFinfToPos, pos) > m_playerMoveAllowance) //if players old pos is a distance away to his new pos go to new pos
-        //            {
-        //                ClearPath();
-        //                MoveToWorldPos(pos);
-        //            }
-        //        }
-        //    }
-        //}
-        //else
-        //{
-
-        //    if (Vector2.Distance(m_lastPathFinfToPos, pos) > m_playerMoveAllowance) //if players old pos is a distance away to his new pos go to new pos
-        //    {
-        //        ClearPath();
-        //        MoveToWorldPos(pos);
-        //    }
-        //}
-      
-
-       
+        } 
         
         FollowPath();
     }
+
+    //protected void MoveAwayFromWall()
+    //{
+    //    // is the enemy neer the wall 
+    //    Vector2Int tileMapPos = (Vector2Int)m_pathfinder.m_tileMap.WorldToCell(transform.position);
+    //    Debug.Log(m_pathfinder.m_tileMap.GetTile((Vector3Int)tileMapPos + new Vector3Int(-1, 0, 0)));
+    //    if (m_pathfinder.m_tileMap.GetTile((Vector3Int)tileMapPos + new Vector3Int(1, 0, 0)) != null)
+    //    {
+    //       PathfindTo(transform.position + new Vector3(-1, 0, 0));
+    //    }
+    //    else if (m_pathfinder.m_tileMap.GetTile((Vector3Int)tileMapPos + new Vector3Int(-1, 0, 0)) != null)
+    //    {
+           
+    //        PathfindTo(transform.position + new Vector3(1, 0, 0));
+    //    }
+    //    else if (m_pathfinder.m_tileMap.GetTile((Vector3Int)tileMapPos + new Vector3Int(0, 1, 0)) != null)
+    //    {
+    //        PathfindTo(transform.position + new Vector3(0, -1, 0));
+    //    }
+    //    else if (m_pathfinder.m_tileMap.GetTile((Vector3Int)tileMapPos + new Vector3Int(0, -1, 0)) != null)
+    //    {
+    //       PathfindTo(transform.position + new Vector3(0, 1, 0));
+    //    }
+
+    //}
     #endregion
 
     /// <summary>
@@ -776,6 +761,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         m_lookLeftAndRightTimerMax = m_lookLeftAndRightTimer;
         m_maxHealth = m_health;
         m_outOfSightTimer = m_outOfSightDeley;
+        m_maxAttackRange = m_attackRange;
 
         m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
         m_crouchObjectLayer = ~m_crouchObjectLayer;
@@ -791,13 +777,6 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             AILogic(); // behaviour of the enemy what stste it is in and what it dose
             FollowPath(); //walk the path that the enemy currently has  
             SwapDirections(); //chnge the scale of the player
-        }
-
-        if (testCuriosity)
-        {
-            testCuriosity = false;
-
-            ForceCuriosity(GameObject.FindGameObjectWithTag(Tags_JoaoBeijinho.m_playerTag).transform.position);
         }
 
     }

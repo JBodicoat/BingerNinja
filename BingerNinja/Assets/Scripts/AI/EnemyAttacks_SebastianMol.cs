@@ -119,6 +119,7 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
             EnemyDamager_SebastianMol enemyDamager = m_attackCollider.GetComponent<EnemyDamager_SebastianMol>();
             enemyDamager.m_damage = enemyDamager.m_baseDamage;
             m_attackTimer = m_hitSpeed;
+
             return true;
         }
         else
