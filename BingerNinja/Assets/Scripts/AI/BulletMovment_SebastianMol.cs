@@ -1,6 +1,7 @@
 ﻿// Jack 20/10 changed to support new PlayerHealthAndHunger script
 // Jack 02/11/2020 added damage dealt as a variable replacing magic number
 // Louie 03/11/2020 added player damage sfx
+// Elliott 20/11/2020 added hit effect
 
 using System.Collections;
 using System.Collections.Generic;
@@ -40,7 +41,8 @@ public class BulletMovment_SebastianMol : MonoBehaviour
                 if(rand == m_poisonDamageChance) FindObjectOfType<EffectManager_MarioFernandes>().AddEffect(new PoisionDefuff_MarioFernandes(m_poisionDamage, m_posionDamageTime));
             }
            
-            FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damage);     
+            FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damage);
+            collision.GetComponent<HitEffectElliott>().StartHitEffect(false);
             Destroy(gameObject);
 		}
 	}
