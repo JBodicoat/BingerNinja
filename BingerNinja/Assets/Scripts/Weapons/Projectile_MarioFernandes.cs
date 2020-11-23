@@ -63,7 +63,7 @@ public class Projectile_MarioFernandes : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
          print(other.gameObject.name);
 
-        if(!other.isTrigger && other.tag == "Enemy")
+        if(!other.isTrigger && other.tag == Tags_JoaoBeijinho.m_enemyTag)
         {
            
             other.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage( m_damageType.RANGE ,m_dmg);
@@ -71,9 +71,9 @@ public class Projectile_MarioFernandes : MonoBehaviour
             if(m_distractTime >0)
             {
                 other.GetComponentInParent<BaseEnemy_SebastianMol>().StunEnemyWithDeleyFunc(m_distractTime);
-            other.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage(m_damageType.RANGE ,m_dmg);
+                //other.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage(m_damageType.RANGE ,m_dmg);
            
-                StartCoroutine(other.GetComponentInParent<BaseEnemy_SebastianMol>().StunEnemyWithDeley(m_distractTime));
+                //StartCoroutine(other.GetComponentInParent<BaseEnemy_SebastianMol>().StunEnemyWithDeley(m_distractTime));
             }
 
             Destroy(gameObject);
