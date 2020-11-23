@@ -5,6 +5,8 @@
 //                         "other.GetComponent<BaseEnemy_SebastianMol>().TakeDamage(m_dmg);" in OnTriggerEnter2d
 //                         changed GetComponent in above to GetComponentInParent to support new EnemyCollider child on enemy prefabs
 //                         EnemyCollider child needed because otherwise projectiles collide with enemy view cone triggers
+//sebastian mol 05/11/20 changed enemy take damage function call
+// Mario 13/11/2020 - Add Distraction time to progectile
 
 using System.Collections;
 using System.Collections.Generic;
@@ -18,6 +20,8 @@ public class Projectile_MarioFernandes : MonoBehaviour
 {
     public int m_dmg = 0;
     public float m_speed = 0;
+
+    public float m_distractTime =0;
 
     float m_timeAlive = 3;
 
@@ -58,7 +62,13 @@ public class Projectile_MarioFernandes : MonoBehaviour
         
         if(other.tag == "Enemy")
         {
-            other.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage(m_dmg);
+            other.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage(m_damageType.RANGE ,m_dmg);
+
+            if(m_distractTime >0)
+            {
+                StartCoroutine(other.GetComponentInParent<BaseEnemy_SebastianMol>().StunEnemyWithDeley(m_distractTime));
+            }
+
             Destroy(gameObject);
         }
     }

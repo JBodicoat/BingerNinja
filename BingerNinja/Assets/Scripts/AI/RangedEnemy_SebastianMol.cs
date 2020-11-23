@@ -1,5 +1,6 @@
 ﻿//sebastian mol
 //sebastian mol 30/10/20 removed patrol function
+//sebastian mol 02/11/20 removed player behaviour switch replaced it with abstract functions
 
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +10,9 @@ using UnityEngine.InputSystem.UI;
 using UnityEngine.Networking;
 using UnityEngine.Tilemaps;
 
+/// <summary>
+/// class that ranged enemys use
+/// </summary>
 class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
 {
     [Header("projectile prefabs")]
@@ -19,107 +23,19 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
     public float m_shootDeley;
     [Tooltip("speed of the projectile")]
     public float m_projectileSpeed;
-    [Tooltip("how far the player can be befor enemy shoots")]
-    public float m_shootingRange;
-    [Tooltip("how long the player has to be out of sight befor enemy losses intrest")]
-    public float m_outOfSightDeley;
-
-    internal override void EnemyBehaviour()
-    {
-        switch (m_currentState)
-        {
-            case state.WONDER:
-                //move form one postion to another
-                if (m_playerDetected) m_currentState = state.CHASE;
-                Patrol();
-                break;
-
-            case state.CHASE:
-                //move towards the player if he has been detected
-                if (IsPlayerInLineOfSight())
-                {
-                    if (Vector2.Distance(transform.position, m_playerTransform.position) < m_shootingRange / 1.5f)
-                    {
-                        ClearPath();
-                        m_currentState = state.ATTACK;
-                    }
-                    else
-                    {
-                        PathfindTo(m_playerTransform.position);
-                    }
-                }
-                else
-                {
-                    if (m_currentPath.Count == 0)
-                    {
-                        if (m_outOfSightTimer <= 0)
-                        {
-                            m_currentState = state.WONDER;
-                            m_playerDetected = false;
-                        }
-                        else
-                        {
-                            m_outOfSightTimer -= Time.deltaTime;
-                        }
-                    }
-                }
-                break;
-
-            case state.ATTACK:
-                //personalized attack
-                if (IsPlayerInLineOfSight())
-                {
-                    RangedAttack();
-                    m_outOfSightTimer = m_outOfSightDeley;
-                    m_playerDetected = true;
-                }
-                else
-                {
-                    m_playerDetected = false;
-                    if (m_outOfSightTimer <= 0)
-                    {
-                        m_currentState = state.WONDER;
-                    }
-                    else
-                    {
-                        m_outOfSightTimer -= Time.deltaTime;
-                    }
-                }
-                break;
-        }     
-    }
-   
-    private void RangedAttack()
-    {
-        if (Vector2.Distance(transform.position, m_playerTransform.position) < m_shootingRange)
-        {
-            if (m_playerTransform != null)
-            {
-                Vector3 dir = Vector3.Normalize(m_playerTransform.position - transform.position);
-                float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-                m_aimer.transform.eulerAngles = new Vector3(0, 0, angle);
-
-                if (m_attackTimer <= 0)
-                {
-                    GameObject projectile = Instantiate(m_projectile, transform.position, Quaternion.Euler(new Vector3(dir.x, dir.y, 0)));
-                    projectile.GetComponent<BulletMovment_SebastianMol>().direction = (m_playerTransform.position - transform.position).normalized;
-                    m_attackTimer = m_shootDeley;
-                }
-                else
-                {
-                    m_attackTimer -= Time.deltaTime;
-                }
-            }
-        }
-        else 
-        {
-            m_currentState = state.CHASE;
-        }
-    }
 
     void OnDrawGizmosSelected()
-   {
+    {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, m_shootingRange);
-   }
+        Gizmos.DrawWireSphere(transform.position, m_attackRange);
+    }
+
+    /// <summary>
+    /// ovveride class that holds logic for what the enemy shoudl do when in the attack state
+    /// </summary>
+    internal override void AttackBehaviour()
+    {
+        EnemyAttacks_SebastianMol.RangedAttack(m_playerTransform, transform, m_aimer, ref m_attackTimer, m_projectile, m_shootDeley);
+    }
+
 }

@@ -2,6 +2,7 @@
 
 //Jamie - 26/10/20 - First implemented
 //Jann  - 04/11/20 - Saving and loading implemented as far as possible with the current dependencies
+//Jann  - 08/11/20 - QA improvements
 
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,18 +16,22 @@ public static class SaveLoadSystem_JamieG
     private const string GameplayFile  = "/Gameplay.save";
 
     #region Saving
+    // Saves the configurations of the settings menu into the Settings.save file 
     public static void SaveSettings(SettingsMenu_ElliottDesouza settingsMenu)
     {
         SettingsData settingsData = new SettingsData(settingsMenu);
         SaveToFile(SettingsFile, settingsData);
     }
 
+    // Saves the current items in the inventory into the Inventory.save file
     public static void SaveInventory(Inventory_JoaoBeijinho inventory)
     {
         InventoryData inventoryData = new InventoryData(inventory);
         SaveToFile(InventoryFile, inventoryData);
     }
     
+    // Saves the current state of the game into the Gameplay.save file
+    // Only saves the last checkpoint position at the moment
     public static void SaveGameplay(Vector3 checkpointPosition)
     {
         GameplayData gameplayData = new GameplayData(checkpointPosition);
@@ -35,6 +40,7 @@ public static class SaveLoadSystem_JamieG
     #endregion
     
     #region Loading
+    // Returns information from the Settings.save file or an empty struct if the file can't be found
     public static SettingsData LoadSettings()
     {
         object data = LoadFromFile(SettingsFile);
@@ -43,10 +49,11 @@ public static class SaveLoadSystem_JamieG
             return settingsData;
         }
 
-        Debug.Log("Loading settings didn't return object of type SettingsData");
+        Debug.LogError("Loading settings didn't return object of type SettingsData");
         return default;
     }
 
+    // Returns the items from the Inventory.save file or an empty struct if the file can't be found
     public static InventoryData LoadInventory()
     {
         object data = LoadFromFile(InventoryFile);
@@ -55,10 +62,11 @@ public static class SaveLoadSystem_JamieG
             return inventoryData;
         }
         
-        Debug.Log("Loading inventory didn't return object of type InventoryData");
+        Debug.LogError("Loading inventory didn't return object of type InventoryData");
         return default;
     }
     
+    // Returns the gameplay data from the Gameplay.save file or an empty struct if the file can't be found
     public static GameplayData LoadGameplay()
     {
         object data = LoadFromFile(GameplayFile);
@@ -67,11 +75,16 @@ public static class SaveLoadSystem_JamieG
             return gameplayData;
         }
         
-        Debug.Log("Loading gameplayData didn't return object of type GameplayData");
+        Debug.LogError("Loading gameplayData didn't return object of type GameplayData");
         return default;
     }
     #endregion
     
+    /// <summary>
+    /// Saves data as file at C:\Users\{user}\AppData\LocalLow\DefaultCompany\BingerNinja
+    /// </summary>
+    /// <param name="fileName">Name of the file</param>
+    /// <param name="data">Data that should be saved (struct from the end of this file)</param>
     private static void SaveToFile(string fileName, object data)
     {
         //Setup formatter
@@ -84,6 +97,11 @@ public static class SaveLoadSystem_JamieG
         stream.Close();
     }
     
+    /// <summary>
+    /// Loads data from a file from C:\Users\{user}\AppData\LocalLow\DefaultCompany\BingerNinja
+    /// </summary>
+    /// <param name="filename">Name of the file that should be loaded</param>
+    /// <returns>A struct (defined at the end of this file)</returns>
     public static object LoadFromFile(string filename)
     {
         string path = Application.persistentDataPath + filename;
@@ -96,7 +114,7 @@ public static class SaveLoadSystem_JamieG
         }
         else
         {
-            Debug.Log("Save file not found in " + path);
+            Debug.LogError("Save file not found in " + path);
             return null;
         }
     }
@@ -119,13 +137,11 @@ public struct SettingsData
 {
     public float m_musicVolume;
     public float m_sfxVolume;
-    public string m_chosenLanguage;
 
     public SettingsData(SettingsMenu_ElliottDesouza settingsMenu)
     {
         m_musicVolume = settingsMenu.m_musicSlider.normalizedValue;
         m_sfxVolume = settingsMenu.m_SFXSlider.normalizedValue;
-        m_chosenLanguage = "English";  //TODO: Get value from settings menu when implemented settingsMenu.m_language.value;
     }
 };
 
@@ -159,42 +175,4 @@ public struct ItemData
         m_amount = amount;
     }
 }
-
-// Removed for now ///////////////////////////
-//
-// [System.Serializable]
-// public struct EffectsData
-// {
-//     public Effect[] m_effects;
-//
-//     public EffectsData(EffectManager_MarioFernandes effectManager)
-//     {
-//         m_effects = new Effect[effectManager.Effects.Count];
-//
-//         int index = 0;
-//         foreach (StatusEffect_MarioFernandes effect in effectManager.Effects)
-//         {
-//             m_effects[index] = new Effect(effect.GetType().Name, true);
-//             index++;
-//         }
-//     }
-// };
-
-// [System.Serializable]
-// public struct Effect
-// {
-//     public string m_effectType;
-//     public bool m_active;
-//     // public float m_duration;
-//     // public float m_speedMultiplier;
-//
-//
-//     public Effect(string effectType, bool isActive)//, float duration, float speedMultiplier)
-//     {
-//         m_effectType = effectType;
-//         m_active = isActive;
-//         // m_duration = duration;
-//         // m_speedMultiplier = speedMultiplier;
-//     }
-// };
 #endregion
