@@ -22,6 +22,12 @@ public class LevelScripting : MonoBehaviour
 
     private void Awake()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            keyTrigger = GameObject.Find("Key Trigger");
+            objWalls = GameObject.Find("Walls1_Map").GetComponent<Tilemap>();
+            objInfWalls = GameObject.Find("ObjectsInFrontOfWalls_Map").GetComponent<Tilemap>();
+        }
         if (SceneManager.GetActiveScene().buildIndex == 2)
         {
             level2End = GameObject.Find("EndLevelTwo").GetComponent<BossDialogue_MarioFernandes>();
@@ -93,6 +99,22 @@ public class LevelScripting : MonoBehaviour
     }
     private void Update()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 1 && !keyUsed)
+        {
+            if (!keyTrigger.activeInHierarchy)
+            {
+                Debug.Log("key worked");
+                objInfWalls.SetTile(new Vector3Int(7, 14, 0), null);
+                objInfWalls.SetTile(new Vector3Int(6, 14, 0), null);
+                objInfWalls.SetTile(new Vector3Int(5, 14, 0), null);
+
+                objWalls.SetTile(new Vector3Int(4, 13, 0), null);
+                objWalls.SetTile(new Vector3Int(5, 13, 0), null);
+                objWalls.SetTile(new Vector3Int(6, 13, 0), null);
+
+            }
+            
+        }
         if (SceneManager.GetActiveScene().buildIndex == 2 && !enemyDead)
         {
             if (level2Enemy1.m_health <= 0 || level2Enemy2.m_health <= 0)
