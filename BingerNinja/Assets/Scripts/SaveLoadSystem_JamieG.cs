@@ -137,11 +137,13 @@ public struct SettingsData
 {
     public float m_musicVolume;
     public float m_sfxVolume;
+    public string m_chosenLanguage;
 
     public SettingsData(SettingsMenu_ElliottDesouza settingsMenu)
     {
         m_musicVolume = settingsMenu.m_musicSlider.normalizedValue;
         m_sfxVolume = settingsMenu.m_SFXSlider.normalizedValue;
+        m_chosenLanguage = settingsMenu.m_selectedLanguage;
     }
 };
 

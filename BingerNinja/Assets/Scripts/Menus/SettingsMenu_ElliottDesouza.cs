@@ -3,17 +3,37 @@
 
 //Elliott 26/10/2020 -  the back function closes the settings menu
 //Elliott 27/10/2020 -  can now increse the music and sfx slider value via input
-using System.Collections;
-using System.Collections.Generic;
+//Jann    20/11/2020 -  Hooked up the save system
+
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class SettingsMenu_ElliottDesouza : MonoBehaviour
 {
-   
     public Slider m_SFXSlider;
     public Slider m_musicSlider;
+
+    public string m_selectedLanguage;
+    private bool m_isEnglish;
+
+    private void Start()
+    {
+        SettingsData settings = SaveLoadSystem_JamieG.LoadSettings();
+        m_musicSlider.value = settings.m_musicVolume;
+        m_SFXSlider.value = settings.m_sfxVolume;
+        m_selectedLanguage = settings.m_chosenLanguage;
+    }
+
+    public void OnEnglishSelected()
+    {
+        m_selectedLanguage = "English";
+    }
+
+    public void OnPortugueseSelected()
+    {
+        m_selectedLanguage = "Portuguese";
+    }
 
     public void IncreaseVolume()
     {
@@ -37,21 +57,16 @@ public class SettingsMenu_ElliottDesouza : MonoBehaviour
 
     public void ExitSettingMenu()
     {
-        ///close up settings
-        Debug.Log("back");
+        SaveLoadSystem_JamieG.SaveSettings(this);
+        FindObjectOfType<LanguageResolver_Jann>().RefreshTranslation();
         gameObject.SetActive(false);
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     void Update()
     {
         var gamepad = Keyboard.current;
         if (gamepad == null)
-            return; 
+            return;
 
         if (gamepad.rKey.wasPressedThisFrame)
         {

@@ -21,6 +21,12 @@ public class LanguageResolver_Jann : Singleton_Jann<LanguageResolver_Jann>
         ResolveTexts();
     }
 
+    public void RefreshTranslation()
+    {
+        ReadProperties();
+        ResolveTexts();
+    }
+
     private void ResolveTexts()
     {
         LanguageText_Jann[] allTexts = Resources.FindObjectsOfTypeAll<LanguageText_Jann>();
@@ -37,7 +43,7 @@ public class LanguageResolver_Jann : Singleton_Jann<LanguageResolver_Jann>
 
         if (m_language == null)
         {
-            m_language = "Portugese"; // Change to English for testing
+            m_language = "English"; // Change to English for testing
         }
         
         TextAsset languageFile = LoadLanguageFile(m_language);
