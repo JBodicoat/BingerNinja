@@ -93,10 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_baseDamage: 1
-  m_percentageChanceOfAffect: 0.5
-  m_poisionDamage: 1
-  m_slowDebuff: 0.5
-  m_affectTime: 5
+  m_damage: 0
 --- !u!1 &1488481114249787428
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,8 +163,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4879788684284566447}
+  - component: {fileID: 6101785897259584512}
   - component: {fileID: 7346174312734931055}
-  - component: {fileID: 8631870844753434287}
   m_Layer: 2
   m_Name: EnemySprite
   m_TagString: Untagged
@@ -189,25 +186,45 @@ Transform:
   m_Father: {fileID: 8631870844753434286}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &7346174312734931055
-Animator:
-  serializedVersion: 3
+--- !u!1 &8631870844753434322
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7750640980745714414}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 94634e152e342494d974df5cc16636f8, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8631870844753434286}
+  - component: {fileID: 8631870844753434287}
+  - component: {fileID: 8631870844753434284}
+  - component: {fileID: 8631870844753434285}
+  - component: {fileID: 8631870844753434323}
+  - component: {fileID: 4230729524680630626}
+  m_Layer: 2
+  m_Name: AlienEnemy
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8631870844753434286
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8631870844753434322}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12.21, y: 8.67, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
+  m_Children:
+  - {fileID: 8631870843932011449}
+  - {fileID: 4202125626246644408}
+  - {fileID: 4073614791533693554}
+  - {fileID: 1881472514458205555}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8631870844753434287
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -259,6 +276,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &7346174312734931055
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7750640980745714414}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 94634e152e342494d974df5cc16636f8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8631870843932011454
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,7 +460,7 @@ MonoBehaviour:
   m_detectionCollider: {fileID: 8631870844753434284}
   m_playerDetected: 0
   m_currentState: 0
-  m_currentEnemyType: 7
+  m_currentEnemyType: 0
   m_dropItem: {fileID: 0}
   m_health: 100
   m_speed: 1
@@ -439,11 +475,6 @@ MonoBehaviour:
   m_sneakDamageMultiplierStack: 0
   m_attackRange: 0.6
   m_attckRangeDevider: 1
-  m_tiggerBossLooseTargetDistance: 2
-  m_secondPhaseStartPercentage: 0.3
-  m_amountOfStunWhenPlayerStealthed: 3
-  m_doseAffect: 1
-  m_attackSpeedIncrease: 1.5
   m_hitSpeed: 2
   m_attackCollider: {fileID: 220513390732296407}
   attackDeactivationSpeed: 0.1
@@ -452,8 +483,6 @@ MonoBehaviour:
   m_chargAttackPosibility: 1
   m_chargeAttackMultiplier: 3
   m_petTigerDeley: 0
-  m_maxChargTimeBeforDamege: 0.2
-  m_amountOfTimeToMoveAwayFromWall: 0.2
   m_aimer: {fileID: 1488481114249787428}
   m_projectile: {fileID: 1986204507551107328, guid: c719167a814eda848a315ea7dbef9a8a, type: 3}
   m_shootDeley: 0

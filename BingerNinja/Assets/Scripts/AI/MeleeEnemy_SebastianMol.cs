@@ -31,16 +31,18 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     public int m_chargAttackPosibility;
     [Tooltip("the amaount the charge attack is multiplied by")]
     public float m_chargeAttackMultiplier = 3;
-    [Tooltip("the amount of time the pet tigre is frozen for after it dose its attack")]
-    public float m_petTigerDeley;
+    [Tooltip("the amount of time the enemy is frozen for after it dose its attack")]
+    public float m_afterAttackDeley;
     [Tooltip("speed of the enemies attack")]
     public float m_maxChargTimeBeforDamege = 0.2f;
     [Tooltip("the amaount of time that the enemys attack range is very small so that he moves away from wall befor doiugn a chareg attack I RECCOMEND NOT TO CHANGE THIS")]
     public float m_amountOfTimeToMoveAwayFromWall = 0.2f;
+    [Tooltip("speed of the enemies charge attack")]
+    public float m_chargeAttackSpeed = 500;
 
 
-    private bool m_doStunOnce = false;
-    private bool m_doMoveAwayFromWallOnce = false;
+    protected bool m_doStunOnce = false;
+    protected bool m_doMoveAwayFromWallOnce = false;
 
 
     /// <summary>
@@ -80,9 +82,9 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
         StartCoroutine(ChargeAttackCo());
     }
 
-    protected void StunIfTiger()
+    protected void StunAfterAttack()
     {
-        StunEnemyWithDeleyFunc(m_petTigerDeley);
+        StunEnemyWithDeleyFunc(m_afterAttackDeley);
     }
 
     /// <summary>
@@ -93,12 +95,12 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
         if(m_currentEnemyType == m_enemyType.PETTIGER)
         {
             EnemyAttacks_SebastianMol.ChargeAttack(m_playerTransform, ref m_attackTimer, 
-                m_attackCollider, m_hitSpeed, gameObject, 500); //make this ibnto a public variable
+                m_attackCollider, m_hitSpeed, gameObject, m_chargeAttackSpeed); //make this ibnto a public variable
         }
         else
         {
             EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility, QuickAttack,
-                                               ChargeAttack, StunIfTiger, m_petTigerDeley, m_currentEnemyType, m_hitSpeed);
+                                               ChargeAttack, StunAfterAttack, m_currentEnemyType, m_hitSpeed);
         }
        
     }
@@ -108,7 +110,7 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     /// </summary>
     /// <param name="amaountOfTime"> amnount of time befor the attack is big again</param>
     /// <returns></returns>
-    private IEnumerator MoveAwayFromeWall(float amaountOfTime) //this is a very not clean way to do things but it doseent look bad in teh game 
+    protected IEnumerator MoveAwayFromeWall(float amaountOfTime) //this is a very not clean way to do things but it doseent look bad in teh game 
     {
         yield return new WaitForSeconds(amaountOfTime);
         if (m_attackRange != m_maxAttackRange) m_attackRange = m_maxAttackRange; //change teh attack range back to normal 
@@ -141,9 +143,9 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected void OnCollisionEnter2D(Collision2D collision)
     {
-        if (m_currentEnemyType == m_enemyType.PETTIGER)
+        if (m_currentEnemyType == m_enemyType.PETTIGER || m_currentEnemyType == m_enemyType.TADASHI)
         {
 
             Rigidbody2D rijy = GetComponent<Rigidbody2D>();
@@ -159,8 +161,14 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
                 {
                     m_attackRange = 0.01f;
                     m_doMoveAwayFromWallOnce = true;
-                    StunEnemyWithDeleyFunc(m_petTigerDeley);
+                    StunEnemyWithDeleyFunc(m_afterAttackDeley);
                     Debug.Log("stun tigers boom");
+                }
+
+                if(collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+                {
+                    FindObjectOfType<EffectManager_MarioFernandes>().AddEffect
+							(new SpeedEffect_MarioFernandes(2, 0)); //change thesey to not be magic numbers
                 }
             }
 

@@ -24,7 +24,7 @@ using UnityEngine.UIElements;
 using UnityEngine.Tilemaps;
 
 public enum state { WONDER, CHASE, ATTACK, CURIOUS };
-public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN, PETTIGER, ALIEN, TIGERBOSS, SPACENINJABOSS };
+public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN, PETTIGER, ALIEN, TIGERBOSS, SPACENINJABOSS, TADASHI };
 public enum m_damageType { MELEE, RANGE, SNEAK, STUN };
 /// <summary>
 ///base class for enemies to inherit from with logic for detection, patrole, movment, stats managment
@@ -651,6 +651,22 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                     {
                         m_health -= damage;
                     }
+                }
+                break;
+
+            case m_enemyType.TADASHI:
+                float healthPercentage = m_health / m_maxHealth;
+                if (healthPercentage > 0.6f)
+                {
+
+                }
+                else if (healthPercentage > 0.3f)//health above 30
+                {
+
+                }
+                else//health below 30
+                {
+
                 }
                 break;
 
