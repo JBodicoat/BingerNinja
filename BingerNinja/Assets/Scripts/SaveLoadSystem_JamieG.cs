@@ -3,6 +3,8 @@
 //Jamie - 26/10/20 - First implemented
 //Jann  - 04/11/20 - Saving and loading implemented as far as possible with the current dependencies
 //Jann  - 08/11/20 - QA improvements
+//Jann  - 20/11/20 - Hooked up the settingsmenu
+//Jann  - 23/11/20 - QA improvements
 
 using System.Collections.Generic;
 using UnityEngine;
@@ -117,6 +119,20 @@ public static class SaveLoadSystem_JamieG
             Debug.LogError("Save file not found in " + path);
             return null;
         }
+    }
+    
+    public static bool IsFileLocked(string filePath)
+    {
+        try
+        {
+            using (File.Open(filePath, FileMode.Open)){}
+        }
+        catch (IOException e)
+        {
+            return true;
+        }
+
+        return false;
     }
 }
 
