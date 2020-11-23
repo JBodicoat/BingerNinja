@@ -8,12 +8,21 @@ public class LanguageResolver_Jann : Singleton_Jann<LanguageResolver_Jann>
 {
     private const string FilePath = "Assets/Scripts/Localisation/";
     private const char Separator = '=';
+    private Dictionary<string, TextAsset> m_languageFiles = new Dictionary<string, TextAsset>();
     private Dictionary<string, string> m_translations = new Dictionary<string, string>();
-    private string m_language;    
     
     private void Awake()
     {
-        ReadProperties();
+        base.Awake();
+        
+        string language = SaveLoadSystem_JamieG.LoadSettings().m_chosenLanguage;
+
+        if (language == null)
+        {
+            language = "English"; // Change to English for testing
+        }
+        
+        ReadProperties(language);
     }
 
     private void Start()
@@ -21,9 +30,9 @@ public class LanguageResolver_Jann : Singleton_Jann<LanguageResolver_Jann>
         ResolveTexts();
     }
 
-    public void RefreshTranslation()
+    public void RefreshTranslation(string language)
     {
-        ReadProperties();
+        ReadProperties(language);
         ResolveTexts();
     }
 
@@ -37,16 +46,9 @@ public class LanguageResolver_Jann : Singleton_Jann<LanguageResolver_Jann>
         }
     }
     
-    private void ReadProperties()
+    private void ReadProperties(string language)
     {
-        m_language = SaveLoadSystem_JamieG.LoadSettings().m_chosenLanguage;
-
-        if (m_language == null)
-        {
-            m_language = "English"; // Change to English for testing
-        }
-        
-        TextAsset languageFile = LoadLanguageFile(m_language);
+        TextAsset languageFile = LoadLanguageFile(language);
         foreach (string line in languageFile.text.Split('\n'))
         {
             var prop = line.Split(Separator);
@@ -56,15 +58,20 @@ public class LanguageResolver_Jann : Singleton_Jann<LanguageResolver_Jann>
 
     private TextAsset LoadLanguageFile(string language)
     {
-        TextAsset file = AssetDatabase.LoadAssetAtPath<TextAsset>(FilePath + m_language + ".txt");
+        if (m_languageFiles.ContainsKey(language))
+        {
+            return m_languageFiles[language];
+        }
+        
+        TextAsset file = AssetDatabase.LoadAssetAtPath<TextAsset>(FilePath + language + ".txt");
         
         if (file == null)
         {
-            Debug.LogWarning("File not found: " + FilePath + m_language + ".txt");
+            Debug.LogWarning("File not found: " + FilePath + language + ".txt");
             Debug.LogWarning("Loading default language...");
             file = AssetDatabase.LoadAssetAtPath<TextAsset>(FilePath + "English.txt");
         }
-        
+        m_languageFiles.Add(language, file);
         return file;
     }
 }

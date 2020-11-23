@@ -23,16 +23,24 @@ public class SettingsMenu_ElliottDesouza : MonoBehaviour
         m_musicSlider.value = settings.m_musicVolume;
         m_SFXSlider.value = settings.m_sfxVolume;
         m_selectedLanguage = settings.m_chosenLanguage;
+        
+        GameObject.Find("English Button").GetComponent<Button>().interactable =
+            !m_selectedLanguage.Equals("English");
+        
+        GameObject.Find("Portuguese Button").GetComponent<Button>().interactable =
+            m_selectedLanguage.Equals("English");
     }
 
     public void OnEnglishSelected()
     {
         m_selectedLanguage = "English";
+        LanguageResolver_Jann.Instance.RefreshTranslation(m_selectedLanguage);
     }
 
     public void OnPortugueseSelected()
     {
         m_selectedLanguage = "Portuguese";
+        LanguageResolver_Jann.Instance.RefreshTranslation(m_selectedLanguage);
     }
 
     public void IncreaseVolume()
@@ -58,7 +66,6 @@ public class SettingsMenu_ElliottDesouza : MonoBehaviour
     public void ExitSettingMenu()
     {
         SaveLoadSystem_JamieG.SaveSettings(this);
-        FindObjectOfType<LanguageResolver_Jann>().RefreshTranslation();
         gameObject.SetActive(false);
     }
 
