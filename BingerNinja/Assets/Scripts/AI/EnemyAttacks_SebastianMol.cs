@@ -132,5 +132,4 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
             return false;
         }
     }
-
 }

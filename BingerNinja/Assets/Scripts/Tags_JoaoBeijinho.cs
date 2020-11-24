@@ -22,4 +22,5 @@ public static class Tags_JoaoBeijinho
     static public string m_projectileTag = "Projectile";
     static public string m_enemyTag = "Enemy";
     static public string m_meleeWeaponTag = "MeleeWeapon";
+    static public string m_plant = "Plant";
 }

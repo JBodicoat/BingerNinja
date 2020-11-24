@@ -43,6 +43,7 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
 
     protected bool m_doStunOnce = false;
     protected bool m_doMoveAwayFromWallOnce = false;
+    protected int m_tadashiPhase = 1; //the phase tadashi is on
 
 
     /// <summary>
@@ -162,13 +163,13 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
                     m_attackRange = 0.01f;
                     m_doMoveAwayFromWallOnce = true;
                     StunEnemyWithDeleyFunc(m_afterAttackDeley);
-                    Debug.Log("stun tigers boom");
                 }
 
                 if(collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
                 {
-                    FindObjectOfType<EffectManager_MarioFernandes>().AddEffect
-							(new SpeedEffect_MarioFernandes(2, 0)); //change thesey to not be magic numbers
+                    if(m_currentEnemyType == m_enemyType.PETTIGER || m_tadashiPhase == 1)
+                        FindObjectOfType<EffectManager_MarioFernandes>().AddEffect
+							    (new SpeedEffect_MarioFernandes(1, 0)); //change thesey to not be magic numbers
                 }
             }
 

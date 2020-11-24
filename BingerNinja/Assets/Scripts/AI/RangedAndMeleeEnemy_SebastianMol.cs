@@ -40,8 +40,13 @@ using UnityEngine;
     [Tooltip("the attack distance on melee attack")]
     public float m_meleeAttackRangeTadashi = 1;
 
+    public GameObject m_normalAttackColider;
+    public GameObject m_chargeAttackColider;
+
+
     private int RandChanceAttackTadashiPhaseOne;
     private bool m_generateRandomNumberOnceTadashi = false;
+    private GameObject m_currentProjectile;
 
 
     /// <summary>
@@ -74,7 +79,7 @@ using UnityEngine;
             {
                 if(RandChanceAttackTadashiPhaseOne == 0)
                 {
-                    if(EnemyAttacks_SebastianMol.ChargeAttack(m_playerTransform, ref m_attackTimer,
+                       if(EnemyAttacks_SebastianMol.ChargeAttack(m_playerTransform, ref m_attackTimer,
                        m_attackCollider, m_hitSpeed, gameObject, m_chargeAttackSpeed)) m_generateRandomNumberOnceTadashi = false; //make this ibnto a public variable
                 }
                 else
@@ -86,14 +91,30 @@ using UnityEngine;
             }
             else if(healthPercentage > 0.3f)//health above 30
             {
+                m_tadashiPhase = 2;
                 //break all light here
+
+                //=========================================
+                if (!m_currentProjectile) m_currentProjectile = Instantiate(m_projectile, transform.position, Quaternion.identity, transform);
+
+                if (EnemyAttacks_SebastianMol.RangedAttack(m_playerTransform, transform, m_aimer,
+                    ref m_attackTimer, m_currentProjectile, m_shootDeley)) m_currentProjectile = null;
+
+               //=====================================================================
                 //implement the raneg mechinct SOME NEXT LVL SHIT
                 //tripple shot range mechanic
                 //70 30 split
             }
             else//health below 30
             {
+                m_tadashiPhase = 3;
                 //destroy all plants on this lvl
+                GameObject[] allPlants =  GameObject.FindGameObjectsWithTag(Tags_JoaoBeijinho.m_plant);
+                foreach (var plant in allPlants)
+                {
+                    plant.SetActive(false);
+                    //do an effect for plants to dissapoear
+                }
                 //crazy raneg attack from fase two
                 //quick hit no cooldown
                 //change attack no stun
@@ -105,12 +126,10 @@ using UnityEngine;
 
 
     }
-    private void LateUpdate()
+
+    private void UpdateTadashi()
     {
-        UpdateAttackAlien();
-
-       
-
+        //phase one ========================================
         if (!m_generateRandomNumberOnceTadashi)
         {
             RandChanceAttackTadashiPhaseOne = Random.Range(0, 2);
@@ -118,16 +137,30 @@ using UnityEngine;
             m_generateRandomNumberOnceTadashi = true;
         }
 
-
         if (RandChanceAttackTadashiPhaseOne == 0)
         {
             m_attackRange = m_chargeAttackRangeTadashi;
+            m_attackCollider = m_chargeAttackColider;
+            m_normalAttackColider.SetActive(false);
         }
         else
         {
             m_attackRange = m_meleeAttackRangeTadashi;
+            m_attackCollider = m_normalAttackColider;
+            m_chargeAttackColider.SetActive(false);
         }
+        //pahse two ===============================================
 
+
+    }
+
+    private void LateUpdate()
+    {
+        UpdateAttackAlien();
+        UpdateTadashi();
+       
+
+        
 
         if (!m_isStuned)
             if (m_doMoveAwayFromWallOnce)
@@ -152,10 +185,12 @@ using UnityEngine;
             if (m_randAttackChance == m_RangedAttackRandomChance - 1)
             {
                 m_attackRange = m_rangedAttackRange;
+                
             }
             else
             {
                 m_attackRange = m_meleeAttackRange;
+               
             }
         }
         
