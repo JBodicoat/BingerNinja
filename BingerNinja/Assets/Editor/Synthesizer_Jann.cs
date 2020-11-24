@@ -5,8 +5,10 @@
 // Jann 21/10/20 - GUI Layout implemented
 // Jann 25/10/20 - Added frequency generation
 // Jann 28/10/20 - QA improvements
+// Jann 11/11/20 - Added audio file loading and changed max bpm
 
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -43,6 +45,11 @@ class Synthesizer_Jann : EditorWindow
 
     void OnGUI () 
     {
+        if (m_noteCreator == null)
+        {
+            m_noteCreator = new NotesCreator_Jann();
+        }
+        
         m_settingsBounds = new Rect(0, 0, position.width, 120);
         m_notesBounds = new Rect(0, m_settingsBounds.height, position.width, position.height - m_settingsBounds.height);
 
@@ -70,8 +77,8 @@ class Synthesizer_Jann : EditorWindow
         m_title = EditorGUILayout.TextField ("Title", m_title);
 
         // Clamp values
-        m_bpm = Mathf.Clamp(EditorGUILayout.IntField("BPM", m_bpm), 50, 120);
-        m_length = Mathf.Clamp(EditorGUILayout.IntField("Length", m_length), 1, 100);
+        m_bpm = Mathf.Clamp(EditorGUILayout.IntField("BPM", m_bpm), 40, 4000);
+        m_length = Mathf.Clamp(EditorGUILayout.IntField("Length", m_length), 1, 200);
         m_channels = Mathf.Clamp(EditorGUILayout.IntField("Channels", m_channels), 1, 3);
 
         #region Generate and handle buttons
@@ -79,6 +86,17 @@ class Synthesizer_Jann : EditorWindow
         if(GUILayout.Button("Reset", GUILayout.Width(100), GUILayout.Height(20)))
         {
             ResetNotes();
+        }
+        
+        EditorGUILayout.Space(10);
+        
+        if(GUILayout.Button("Load Track", GUILayout.Width(100), GUILayout.Height(20)))
+        {
+            string path = EditorUtility.OpenFilePanel("Load audio file", "", "json");
+            if (path.Length != 0)
+            {
+                LoadTrack(path);
+            }
         }
         
         EditorGUILayout.Space(10);
@@ -164,6 +182,30 @@ class Synthesizer_Jann : EditorWindow
         
         string trackJson = JsonUtility.ToJson(track);
         System.IO.File.WriteAllText(Application.dataPath + "/Audio/" + track.name + ".json", trackJson);
+    }
+
+    private void LoadTrack(string path)
+    {
+        string json = File.ReadAllText(path);
+        
+        Track_Jann track = JsonUtility.FromJson<Track_Jann>(json);
+        m_title = track.name;
+        m_bpm = track.bpm;
+        m_length = track.channelLength;
+        m_channels = track.data.Length / m_length;
+
+        ResetNotes();
+        
+        // float[] data = new float[m_channels * m_length];
+        for (int y = 0; y < m_channels; y++)
+        {
+            for (int x = 0; x < m_length; x++)
+            {
+                float frequency = track.data[y * m_length + x];
+                m_channelsData[y][x].Frequence = frequency;
+                m_channelsData[y][x].MNoteName = m_noteCreator.GetNote(frequency);
+            }
+        }
     }
     
     // Resets all notes to None/0f in every channel

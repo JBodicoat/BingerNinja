@@ -64,25 +64,25 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
             {
                 Debug.Log("door opened");
                 m_doorIsOpen = true;
-                walls2.SetTile(new Vector3Int(23, 8, 0), null);
-                walls2.SetTile(new Vector3Int(23, 9, 0), null);
-                walls2.SetTile(new Vector3Int(23, 10, 0), null);
+                walls2.SetTile(new Vector3Int(24, 9, 0), null);
+                walls2.SetTile(new Vector3Int(24, 10, 0), null);
+                walls2.SetTile(new Vector3Int(24, 11, 0), null);
 
-                walls1.SetTile(new Vector3Int(22, 7, 0), null);
-                walls1.SetTile(new Vector3Int(22, 8, 0), null);
-                walls1.SetTile(new Vector3Int(22, 9, 0), null);
+                walls1.SetTile(new Vector3Int(23, 8, 0), null);
+                walls1.SetTile(new Vector3Int(23, 9, 0), null);
+                walls1.SetTile(new Vector3Int(23, 10, 0), null);
               //  m_doorCollider.GetComponent<Collider2D>().enabled = false;//Open door
             }
             else
             {
                 Debug.Log("door close");
-                walls2.SetTile(new Vector3Int(23, 8, 0), topDoor);
-                walls2.SetTile(new Vector3Int(23, 9, 0), topDoor);
-                walls2.SetTile(new Vector3Int(23, 10, 0), topDoor);
+                walls2.SetTile(new Vector3Int(24, 9, 0), topDoor);
+                walls2.SetTile(new Vector3Int(24, 10, 0), topDoor);
+                walls2.SetTile(new Vector3Int(24, 11, 0), topDoor);
 
-                walls1.SetTile(new Vector3Int(22, 7, 0), bottomDoor);
-                walls1.SetTile(new Vector3Int(22, 8, 0), bottomDoor);
-                walls1.SetTile(new Vector3Int(22, 9, 0), bottomDoor);
+                walls1.SetTile(new Vector3Int(23, 8, 0), bottomDoor);
+                walls1.SetTile(new Vector3Int(23, 9, 0), bottomDoor);
+                walls1.SetTile(new Vector3Int(23, 10, 0), bottomDoor);
                 m_doorIsOpen = false;
             }
           

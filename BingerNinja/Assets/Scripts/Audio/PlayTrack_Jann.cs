@@ -4,10 +4,11 @@
 
 // Jann 25/10/20 - Playing a track from a .json file implemented
 // Jann 28/10/20 - Singleton, play sound/music methods, QA improvements
+// Jann 11/11/20 - Bugfix and new Singleton applied
 
 using UnityEngine;
 
-public class PlayTrack_Jann : MonoBehaviour
+public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
 {
     private static PlayTrack_Jann m_instance;
     
@@ -105,7 +106,7 @@ public class PlayTrack_Jann : MonoBehaviour
     #endregion
 
     #region Generate audio from track file
-    private Track_Jann LoadTrack(string audioName)
+    public Track_Jann LoadTrack(string audioName)
     {
         TextAsset trackFile = AudioFiles.GetAudio(audioName);
         Track_Jann track = JsonUtility.FromJson<Track_Jann>(trackFile.text);
@@ -117,7 +118,7 @@ public class PlayTrack_Jann : MonoBehaviour
     // Creates an AudioClip from the notes in a channel
     private AudioClip CreateClip(string trackName, float bps, float[] frequencies)
     {
-        int lengthSamples = (int) (SamplingFrequency * bps);
+        int lengthSamples = (int) (SamplingFrequency / bps);
         float[] data = new float[lengthSamples * frequencies.Length];
         int clipLength = 0;
         
