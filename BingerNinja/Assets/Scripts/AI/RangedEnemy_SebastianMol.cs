@@ -15,6 +15,7 @@ using UnityEngine.Tilemaps;
 /// </summary>
 class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
 {
+    [Header("class based damage variables")]
     [Header("projectile prefabs")]
     public GameObject m_aimer;
     public GameObject m_projectile;

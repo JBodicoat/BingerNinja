@@ -83,6 +83,8 @@ public class PlayerController_JamieG : MonoBehaviour
         m_crouch.Disable();
         m_eat.Disable();
         m_attack.Disable();
+        m_roll.Disable();
+        m_switchWeapons.Disable();
     }
     #endregion
 
