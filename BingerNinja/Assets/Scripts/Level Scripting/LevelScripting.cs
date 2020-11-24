@@ -46,6 +46,7 @@ public class LevelScripting : MonoBehaviour
             keyTrigger = GameObject.Find("Key Trigger");
             objWalls = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
             objInfWalls = GameObject.Find("ObjectsInFrontOfWalls_map").GetComponent<Tilemap>();
+            walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
         }
         if (SceneManager.GetActiveScene().buildIndex == 5)
         {
