@@ -39,7 +39,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         SettingsData settingsData = SaveLoadSystem_JamieG.LoadSettings();
         
         // TODO: Remove this line, it's for testing only
-        settingsData.m_chosenLanguage = "Portuguese";
+        //settingsData.m_chosenLanguage = "Portuguese";
         
         if(settingsData.m_chosenLanguage != null && settingsData.m_chosenLanguage.Equals("Portuguese")) // TODO: Will probably be changed to an enum
         {
