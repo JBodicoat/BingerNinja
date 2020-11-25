@@ -758,9 +758,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Music
-
-'
+  m_Text: "M\xFAsica\r"
 --- !u!114 &4963553204240429286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -906,6 +904,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd672a6d561b71042b5d80667b194ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_englishButton: {fileID: 5824345606532110414}
+  m_portugueseButton: {fileID: 5824345605563955898}
   m_SFXSlider: {fileID: 5824345605522356110}
   m_musicSlider: {fileID: 822907163580893023}
   m_selectedLanguage: 
@@ -1125,6 +1125,30 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: SettingsMenu_ElliottDesouza, Assembly-CSharp
         m_MethodName: OnPortugueseSelected
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5824345606532110414}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 5824345605563955898}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1437,9 +1461,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Language
-
-'
+  m_Text: "Idioma\r"
 --- !u!114 &4397526442202500770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1452,7 +1474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b37af42116151a446ae97af29707674f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  identifier: language
+  identifier: lang
 --- !u!1 &5824345606532110412
 GameObject:
   m_ObjectHideFlags: 0
@@ -1588,6 +1610,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5824345605563955898}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 5824345606532110414}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5824345606570808111
 GameObject:
   m_ObjectHideFlags: 0
@@ -1704,7 +1750,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Save
+  m_Text: "Salvar\r"
 --- !u!114 &5824345606649097142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1748,18 +1794,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
       - m_Target: {fileID: 5824345605457200372}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -1876,7 +1910,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: SFX
+  m_Text: "SFX\r"
 --- !u!114 &6874502068605356979
 MonoBehaviour:
   m_ObjectHideFlags: 0
