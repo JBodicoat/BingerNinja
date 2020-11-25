@@ -45,6 +45,8 @@ using UnityEngine;
 
     public GameObject[] m_tadashiProjectiles;
 
+    public SpriteRenderer m_ProjectileDisplay;
+
 
     private int RandChanceAttackTadashi;
     private float RandChanceAttackTadashiFloat;
@@ -97,32 +99,35 @@ using UnityEngine;
             }
             else if(healthPercentage < 0.6f)//health above 30 change this later
             {
+                if (EnemyAttacks_SebastianMol.RangedAttack(m_playerTransform, transform, m_aimer,
+                        ref m_attackTimer, m_currentProjectile, m_shootDeley))
+                {
+                    m_currentProjectile = null;
+                    m_generateRandomNumberOnceTadashi = false;
+                    m_attackTimer = m_shootDeley;
+                    m_ProjectileDisplay.sprite = null;
+                }
+                Debug.Log("raneg attack");
+
                 //break all light here
-                if(RandChanceAttackTadashiFloat > 0.3f)
-                {
-                    if (EnemyAttacks_SebastianMol.RangedAttack(m_playerTransform, transform, m_aimer,
-                        ref m_attackTimer, m_currentProjectile, m_shootDeley, 4, 4))
-                    {
-                        m_currentProjectile = null;
-                        m_generateRandomNumberOnceTadashi = false;
-                        m_attackTimer = m_shootDeley;
-                    }
-                    Debug.Log("raneg attack");
+                //if(RandChanceAttackTadashiFloat > 0.3f)
+                //{
+                //    if (EnemyAttacks_SebastianMol.RangedAttack(m_playerTransform, transform, m_aimer,
+                //        ref m_attackTimer, m_currentProjectile, m_shootDeley, 4, 4))
+                //    {
+                //        m_currentProjectile = null;
+                //        m_generateRandomNumberOnceTadashi = false;
+                //        m_attackTimer = m_shootDeley;
+                //    }
+                //    Debug.Log("raneg attack");
 
 
-                }
-                else
-                {
-                    if (EnemyAttacks_SebastianMol.RangedAttack(m_playerTransform, transform, m_aimer,
-                        ref m_attackTimer, m_currentProjectile, m_shootDeley, 4, 4))
-                    {
-                        m_currentProjectile = null;
-                        m_generateRandomNumberOnceTadashi = false;
-                        m_attackTimer = m_shootDeley;
-                    }
-                    Debug.Log("range attack");
-                }
-                
+                //}
+                //else
+                //{
+                //   
+                //}
+
                 //implement the raneg mechinct SOME NEXT LVL SHIT
                 //tripple shot range mechanic
                 //70 30 split
@@ -182,7 +187,7 @@ using UnityEngine;
 
                 if (!m_generateRandomNumberOnceTadashi)
                 {
-                   RandChanceAttackTadashiFloat = Random.Range(0.0f, 1.1f);
+                    RandChanceAttackTadashiFloat = Random.Range(0.0f, 1.1f);
                     Debug.Log(RandChanceAttackTadashi);
                     m_generateRandomNumberOnceTadashi = true;
                     if (RandChanceAttackTadashiFloat <= 0.25f)
@@ -215,27 +220,29 @@ using UnityEngine;
                     {
                         case 0:
                             m_projectile = m_tadashiProjectiles[0];
-                            break; 
-                        
+                            break;
+
                         case 1:
                             m_projectile = m_tadashiProjectiles[1];
-                            break; 
-                        
+                            break;
+
                         case 2:
                             m_projectile = m_tadashiProjectiles[2];
-                            break; 
-                        
+                            break;
+
                         case 3:
                             m_projectile = m_tadashiProjectiles[3];
                             break;
                     }
 
-                    m_currentProjectile = Instantiate(m_projectile, 
-                        new Vector3(transform.position.x, transform.position.y-0.2f, transform.position.z), Quaternion.identity, transform.parent);
-                    m_currentProjectile.transform.parent = transform;
+                    m_ProjectileDisplay.sprite = m_projectile.GetComponent<SpriteRenderer>().sprite;
+                    m_ProjectileDisplay.color = m_projectile.GetComponent<SpriteRenderer>().color; //delete thsi line when yi get the art for projectiles
+
+                    m_currentProjectile = m_projectile;
 
                     //TODO make attack ranged differnet
                 }
+
                 break;
 
             case 3:

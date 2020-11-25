@@ -85,7 +85,7 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
             if (m_attackTimer <= 0)
             {
                 GameObject projectile = Instantiate(m_projectile, transform.position, Quaternion.Euler(new Vector3(dir.x, dir.y, 0)));
-                projectile.transform.localScale -= new Vector3(sizeIncreaseX, sizeIncreaseY, 0);
+                projectile.transform.localScale += new Vector3(sizeIncreaseX, sizeIncreaseY, 0);
                 projectile.GetComponent<BulletMovment_SebastianMol>().m_direction = (m_playerTransform.position - transform.position).normalized;
                 m_attackTimer = m_shootDeley;
                 return true;
