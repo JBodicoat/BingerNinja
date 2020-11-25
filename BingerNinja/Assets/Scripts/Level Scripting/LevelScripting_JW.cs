@@ -8,13 +8,14 @@ public class LevelScripting_JW : MonoBehaviour
     GameObject levelLiftTrigger;
     BossDialogue_MarioFernandes bossDialogue;
     BaseEnemy_SebastianMol boss;
-
+    bool levelBossIntro = false, bossDead = false;
+    
     private void Awake()
     {
 
         if (SceneManager.GetActiveScene().buildIndex == 12)
         {
-            boss = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BaseEnemy_SebastianMol>();
+            boss = GameObject.Find("Yakuza Boss").GetComponent<BaseEnemy_SebastianMol>();
             bossDialogue = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BossDialogue_MarioFernandes>();
             levelLiftTrigger = GameObject.Find("Level 12 Lift");
         }
@@ -28,7 +29,7 @@ public class LevelScripting_JW : MonoBehaviour
             levelLiftTrigger.SetActive(false);
         }
     }
-    /*1
+    
     private void Update()
     {
         if (SceneManager.GetActiveScene().buildIndex == 12 && !bossDead)
@@ -40,8 +41,7 @@ public class LevelScripting_JW : MonoBehaviour
             }
             if (boss.m_health <= 0)
             {
-                //dramatic death SE
-                //freeze on enemy as he dies  
+ 
                 bossDialogue.TriggerDialogue(1);
                 levelLiftTrigger.SetActive(true);
                 bossDead = true;
@@ -49,5 +49,5 @@ public class LevelScripting_JW : MonoBehaviour
             }
         }
     }
-    */
+    
 }
