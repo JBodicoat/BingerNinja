@@ -23,6 +23,7 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
         StunLight,
         Computer,
         Freezer,
+        SecurityCamera,
     }
 
     public ObjectType m_functionality;
@@ -65,6 +66,9 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
                     gameObject.GetComponent<Collider2D>().enabled = true;//Lock freezer door
                     StartCoroutine(FreezerLockAndDamage());
                 }
+                break;
+            case ObjectType.SecurityCamera:
+                gameObject.GetComponent<CircleCollider2D>().enabled = false;
                 break;
         }
     }
