@@ -13,6 +13,8 @@
 //                          Changed tags in PlayerDetectionRaycasLogic() to use the Tags_JoaoBeijinho() tags
 //sebastian mol 14/11/2020 moved logic out of child classes and moved into here
 //Elliott Desouza 20/11/2020 added hit effect and camera shake when taken damage
+//sebastian mol 18/11/2020 alien now dosent get stunned
+//sebastian mol 20/11/2020 spce ninja enemy logic done
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -21,8 +23,8 @@ using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UIElements;
 using UnityEngine.Tilemaps;
 
-public enum state { WONDER, CHASE, ATTACK };
-public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN, PETTIGER, ALIEN, TIGERBOSS };
+public enum state { WONDER, CHASE, ATTACK, CURIOUS };
+public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN, PETTIGER, ALIEN, TIGERBOSS, SPACENINJABOSS, TADASHI };
 public enum m_damageType { MELEE, RANGE, SNEAK, STUN };
 /// <summary>
 ///base class for enemies to inherit from with logic for detection, patrole, movment, stats managment
@@ -74,7 +76,19 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     [Tooltip("for ranged enemies only how much to devide the attack range by befor starts attack")]
     [Range(1.0f, 1.5f)]
     public float m_attckRangeDevider = 1f;
+    [Header("specific enemy variables")]
+    [Tooltip("distance tiger bosss has to be away from player befor it dosen change direction to chase while charrging - ask seb if you ever need to change this")]
+    public float m_tiggerBossLooseTargetDistance = 2;
 
+    [Tooltip("with how much health left in a percentage, dose the enemy start second phase ")]
+    [Range(0.0f, 1.0f)]
+    public float m_secondPhaseStartPercentage = 0.3f;
+    [Tooltip("amound of stun space ninja has when player gose stealth mode")]
+    public float m_amountOfStunWhenPlayerStealthed = 3;
+    [Tooltip("dose the enemy cuse affect on player hwen attacking")]
+    public bool m_doseAffect = true;
+    [Tooltip("multiplies how much the attack speed increases by in space ninja boss second fase")]
+    public float m_attackSpeedIncrease = 1.5f;
 
     private Pathfinder_SebastianMol m_pathfinder;
     protected List<Vector2Int> m_currentPath = new List<Vector2Int>();
@@ -85,13 +99,18 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     protected float m_attackTimer; //timer for attack deley
     protected float m_outOfSightTimer; //timer for line of sight check
     protected int m_patrolIterator = 0; //iterated through patrole points
+    protected float m_maxHealth; //max amount of health an enemy has
+    protected float m_maxAttackRange;
     private int m_patrolIteratorMax; //the max for teh iterator so it dosent go out of range  
     private float m_patroleTimer; // timer for waiting at each patrole pos
     private Transform m_currentPatrolePos; //the current patrole pos were haeding to / are at 
     private Vector3 m_lastPathFinfToPos; //last given to the path finder to find a path e.g. player position
-    private bool m_isStuned = false; //used to stunn the enemy
+    protected bool m_isStuned = false; //used to stunn the enemy
     private float m_lookLeftAndRightTimerMax; //used to remeber m_lookLeftAndRightTimer varaibale at the start for later resents
     private bool m_isSerching = false; // if the enemy serching for player
+    private Vector3 m_curiousTarget;  //the point of curiosity for an enemy to cheak
+
+
     private HitEffectElliott m_HitEffectElliott;
     private CameraShakeElliott m_cameraShake;
 
@@ -132,7 +151,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 ClearPath(false);
                 m_currentState = state.ATTACK;
             }
-            else// if the [layer is out fo range
+            else// if the player is out fo range
             {
                 PathfindTo(m_playerTransform.position);
             }
@@ -217,8 +236,22 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         }
     }
 
+    private void CuriousState()
+    {
+        if (Vector3.Distance( transform.position, m_curiousTarget) < 1 ) 
+        if (m_outOfSightTimer <= 0)
+        {
+            m_currentState = state.WONDER;
+            m_outOfSightTimer = m_outOfSightDeley;
+        }
+        else
+        {
+            m_outOfSightTimer -= Time.deltaTime;
+        }
+    }
+
     /// <summary>
-    /// contaisn the switch that stores the dofferent behavoiurs the enemy dose in each state
+    /// contains the switch that stores the dofferent behavoiurs the enemy dose in each state
     /// </summary>
     private void AILogic()
     {
@@ -232,6 +265,9 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 break;
             case state.ATTACK:
                 AttackState();
+                break;
+            case state.CURIOUS:
+                CuriousState();
                 break;
         }
     }
@@ -275,7 +311,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         RaycastHit2D crouchedHit = Physics2D.Linecast(m_rayCastStart.position, col.transform.position);
         Debug.DrawLine(m_rayCastStart.position, col.transform.position, Color.green);
 
-        if (!m_playerStealthScript.IsCrouched() && hit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag)) //did it hit the play first
+        if (!m_playerStealthScript.IsCrouched() && hit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag)) //player is not crouched and it hits him
         {
             //  m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Detection);
             m_playerDetected = true;
@@ -283,7 +319,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             m_currentState = state.ATTACK;
             ClearPath();
         }
-        else if (m_playerStealthScript.IsCrouched() && crouchedHit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        else if (m_playerStealthScript.IsCrouched() && crouchedHit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag)) //player is croucheed and it hits 
         {
             //  m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Detection);
             m_playerDetected = true;
@@ -473,7 +509,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         {
             ClearPath();
             MoveToWorldPos(pos);
-        }
+        } 
         
         FollowPath();
     }
@@ -596,6 +632,48 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 }
                 break;
 
+            case m_enemyType.SPACENINJABOSS:             
+                if ((m_health / m_maxHealth) <= m_secondPhaseStartPercentage) //second fase
+                {
+                    NormalTakeDamage(damage);
+                    m_attackTimer *= m_attackSpeedIncrease;
+                    m_doseAffect = false;
+                    m_sneakDamageMultiplierStack = 0;
+                }
+                else
+                {
+                     //sneak multiplier
+                    if (m_playerDetected == false)
+                    {
+                        m_health -= damage * (m_sneakDamageMultiplier + m_sneakDamageMultiplierStack);
+                    }
+                    else
+                    {
+                        m_health -= damage;
+                    }
+                }
+                break;
+
+            case m_enemyType.TADASHI:
+                float healthPercentage = m_health / m_maxHealth;
+                if (healthPercentage > 0.6f)
+                {
+
+                }
+                else if (healthPercentage > 0.3f)//health above 30
+                {
+
+                }
+                else//health below 30
+                {
+
+                }
+                break;
+
+            default:
+                NormalTakeDamage(damage);
+                break;
+
         }
 
         OnDeath();//checks to see if enemy is dead 
@@ -654,6 +732,13 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         }
     }
 
+    public void ForceCuriosity(Vector3 pos)
+    {
+        m_currentState = state.CURIOUS;
+        m_curiousTarget = pos;
+        PathfindTo(m_curiousTarget);
+    }
+
 
     private void Start()
     {
@@ -665,6 +750,9 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         m_patroleTimer = m_deleyBetweenPatrol;
         if (m_patrolPoints.Length > 0) m_currentPatrolePos = m_patrolPoints[0];
         m_lookLeftAndRightTimerMax = m_lookLeftAndRightTimer;
+        m_maxHealth = m_health;
+        m_outOfSightTimer = m_outOfSightDeley;
+        m_maxAttackRange = m_attackRange;
 
         m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
         m_crouchObjectLayer = ~m_crouchObjectLayer;
@@ -674,12 +762,14 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
     private void Update()
     {
+
         if(!m_isStuned)
         {
             AILogic(); // behaviour of the enemy what stste it is in and what it dose
             FollowPath(); //walk the path that the enemy currently has  
             SwapDirections(); //chnge the scale of the player
         }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
