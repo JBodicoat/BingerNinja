@@ -43,7 +43,6 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
 
     protected bool m_doStunOnce = false;
     protected bool m_doMoveAwayFromWallOnce = false;
-    protected int m_tadashiPhase = 1; //the phase tadashi is on
 
 
     /// <summary>
