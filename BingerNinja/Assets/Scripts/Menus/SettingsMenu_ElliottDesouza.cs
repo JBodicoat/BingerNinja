@@ -4,6 +4,7 @@
 //Elliott 26/10/2020 -  the back function closes the settings menu
 //Elliott 27/10/2020 -  can now increse the music and sfx slider value via input
 //Jann    20/11/2020 -  Hooked up the save system
+//Jann    25/11/2020 -  Saving now updates the DialogueManager
 
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,6 +12,9 @@ using UnityEngine.UI;
 
 public class SettingsMenu_ElliottDesouza : MonoBehaviour
 {
+    public Button m_englishButton;
+    public Button m_portugueseButton;
+    
     public Slider m_SFXSlider;
     public Slider m_musicSlider;
 
@@ -24,11 +28,8 @@ public class SettingsMenu_ElliottDesouza : MonoBehaviour
         m_SFXSlider.value = settings.m_sfxVolume;
         m_selectedLanguage = settings.m_chosenLanguage;
         
-        GameObject.Find("English Button").GetComponent<Button>().interactable =
-            !m_selectedLanguage.Equals("English");
-        
-        GameObject.Find("Portuguese Button").GetComponent<Button>().interactable =
-            m_selectedLanguage.Equals("English");
+        m_englishButton.interactable = !m_selectedLanguage.Equals("English");
+        m_portugueseButton.interactable = m_selectedLanguage.Equals("English");
     }
 
     public void OnEnglishSelected()
@@ -66,6 +67,14 @@ public class SettingsMenu_ElliottDesouza : MonoBehaviour
     public void ExitSettingMenu()
     {
         SaveLoadSystem_JamieG.SaveSettings(this);
+        
+        // Change language in DialogManager if it is present in scene
+        GameObject dialogManager = GameObject.Find("DialogManager");
+        if (dialogManager != null)
+        {
+            dialogManager.GetComponent<DialogueManager_MarioFernandes>().LoadLanguageFile();
+        }
+        
         gameObject.SetActive(false);
     }
 
