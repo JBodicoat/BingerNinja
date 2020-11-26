@@ -662,15 +662,17 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                     m_tadashiPhase = 1;
                     NormalTakeDamage(damage);
                 }
-                else if(healthPercentage < 0.6f && healthPercentage > 0.3f)
-                {
-                    m_tadashiPhase = 2;
-                }
-                else//health below 30
+                else if( healthPercentage > 0.3f)
                 {
                     m_tadashiPhase = 2;
                     m_health -= damage;
                 }
+                else//health below 30
+                {
+                    m_tadashiPhase = 3;
+                    m_health -= damage;
+                }
+
                 break;
 
             default:

@@ -110,10 +110,21 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     /// </summary>
     /// <param name="amaountOfTime"> amnount of time befor the attack is big again</param>
     /// <returns></returns>
-    protected IEnumerator MoveAwayFromeWall(float amaountOfTime) //this is a very not clean way to do things but it doseent look bad in teh game 
+    protected IEnumerator MoveAwayFromeWall(float amaountOfTime, float attackRange = 0) //this is a very not clean way to do things but it doseent look bad in teh game 
     {
         yield return new WaitForSeconds(amaountOfTime);
-        if (m_attackRange != m_maxAttackRange) m_attackRange = m_maxAttackRange; //change teh attack range back to normal 
+        if (m_attackRange != m_maxAttackRange )
+        {
+            if( attackRange == 0)
+            {
+                m_attackRange = m_maxAttackRange; //change teh attack range back to normal 
+            }
+            else
+            {
+                m_attackRange = attackRange;
+            }
+            
+        }
         m_doMoveAwayFromWallOnce = false;
     }
     private void LateUpdate()

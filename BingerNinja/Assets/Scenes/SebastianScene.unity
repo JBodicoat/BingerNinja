@@ -591,6 +591,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
+--- !u!212 &712061643 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 659501527198574792, guid: 99e922af71fab874aa2e2fef71077312, type: 3}
+  m_PrefabInstance: {fileID: 1219128076}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &810990295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2993,19 +2998,31 @@ PrefabInstance:
     - target: {fileID: 4230729524680630626, guid: 99e922af71fab874aa2e2fef71077312, type: 3}
       propertyPath: m_tadashiProjectiles.Array.data[0]
       value: 
-      objectReference: {fileID: 1986204507551107328, guid: c719167a814eda848a315ea7dbef9a8a, type: 3}
+      objectReference: {fileID: 1986204507551107328, guid: 946fdef54fe24dd49811d351c6451869, type: 3}
     - target: {fileID: 4230729524680630626, guid: 99e922af71fab874aa2e2fef71077312, type: 3}
       propertyPath: m_tadashiProjectiles.Array.data[1]
       value: 
-      objectReference: {fileID: 1986204507551107328, guid: c719167a814eda848a315ea7dbef9a8a, type: 3}
+      objectReference: {fileID: 1986204507551107328, guid: 3e7f018f2def7e54f874499d6101ebca, type: 3}
     - target: {fileID: 4230729524680630626, guid: 99e922af71fab874aa2e2fef71077312, type: 3}
       propertyPath: m_tadashiProjectiles.Array.data[2]
       value: 
-      objectReference: {fileID: 1986204507551107328, guid: d27f3aeac9b841a4687df15667cd609c, type: 3}
+      objectReference: {fileID: 1986204507551107328, guid: 3710730c6226b884eb69c418ce168aad, type: 3}
     - target: {fileID: 4230729524680630626, guid: 99e922af71fab874aa2e2fef71077312, type: 3}
       propertyPath: m_tadashiProjectiles.Array.data[3]
       value: 
-      objectReference: {fileID: 1986204507551107328, guid: 4cffbeeab73b78d49afbe716680e88a1, type: 3}
+      objectReference: {fileID: 1986204507551107328, guid: 5ba7c6b4f40e4a54daa916ae77df83dc, type: 3}
+    - target: {fileID: 4230729524680630626, guid: 99e922af71fab874aa2e2fef71077312, type: 3}
+      propertyPath: m_health
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 4230729524680630626, guid: 99e922af71fab874aa2e2fef71077312, type: 3}
+      propertyPath: m_tadashiNormalPorjectile
+      value: 
+      objectReference: {fileID: 1986204507551107328, guid: 3e7f018f2def7e54f874499d6101ebca, type: 3}
+    - target: {fileID: 4230729524680630626, guid: 99e922af71fab874aa2e2fef71077312, type: 3}
+      propertyPath: m_ProjectileDisplay
+      value: 
+      objectReference: {fileID: 712061643}
     - target: {fileID: 8631870844753434286, guid: 99e922af71fab874aa2e2fef71077312, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.88782406
