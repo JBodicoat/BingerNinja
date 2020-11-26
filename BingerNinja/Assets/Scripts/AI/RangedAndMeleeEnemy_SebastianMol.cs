@@ -40,8 +40,17 @@ using UnityEngine;
     [Tooltip("the attack distance on melee attack")]
     public float m_meleeAttackRangeTadashi = 1;
 
-    private int RandChanceAttackTadashiPhaseOne;
+    public GameObject m_normalAttackColider;
+    public GameObject m_chargeAttackColider;
+
+    public GameObject[] m_tadashiProjectiles;
+
+
+    private int RandChanceAttackTadashi;
+    private float RandChanceAttackTadashiFloat;
+
     private bool m_generateRandomNumberOnceTadashi = false;
+    private GameObject m_currentProjectile = null;
 
 
     /// <summary>
@@ -72,21 +81,48 @@ using UnityEngine;
             float healthPercentage = m_health / m_maxHealth;
             if(healthPercentage > 0.6f)
             {
-                if(RandChanceAttackTadashiPhaseOne == 0)
+                if (RandChanceAttackTadashi == 0)
                 {
-                    if(EnemyAttacks_SebastianMol.ChargeAttack(m_playerTransform, ref m_attackTimer,
-                       m_attackCollider, m_hitSpeed, gameObject, m_chargeAttackSpeed)) m_generateRandomNumberOnceTadashi = false; //make this ibnto a public variable
+                    if (EnemyAttacks_SebastianMol.ChargeAttack(m_playerTransform, ref m_attackTimer,
+                    m_attackCollider, m_hitSpeed, gameObject, m_chargeAttackSpeed)) m_generateRandomNumberOnceTadashi = false; //make this ibnto a public variable
+                    Debug.Log("charge attack");
                 }
                 else
                 {
-                    if(EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility,
+                    if (EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility,
                     QuickAttack, ChargeAttack, StunAfterAttack,
                     m_currentEnemyType, m_hitSpeed)) m_generateRandomNumberOnceTadashi = false;
-                }
+                    Debug.Log("melee attack");
+                }  
             }
-            else if(healthPercentage > 0.3f)//health above 30
+            else if(healthPercentage < 0.6f)//health above 30 change this later
             {
                 //break all light here
+                if(RandChanceAttackTadashiFloat > 0.3f)
+                {
+                    if (EnemyAttacks_SebastianMol.RangedAttack(m_playerTransform, transform, m_aimer,
+                        ref m_attackTimer, m_currentProjectile, m_shootDeley, 4, 4))
+                    {
+                        m_currentProjectile = null;
+                        m_generateRandomNumberOnceTadashi = false;
+                        m_attackTimer = m_shootDeley;
+                    }
+                    Debug.Log("raneg attack");
+
+
+                }
+                else
+                {
+                    if (EnemyAttacks_SebastianMol.RangedAttack(m_playerTransform, transform, m_aimer,
+                        ref m_attackTimer, m_currentProjectile, m_shootDeley, 4, 4))
+                    {
+                        m_currentProjectile = null;
+                        m_generateRandomNumberOnceTadashi = false;
+                        m_attackTimer = m_shootDeley;
+                    }
+                    Debug.Log("range attack");
+                }
+                
                 //implement the raneg mechinct SOME NEXT LVL SHIT
                 //tripple shot range mechanic
                 //70 30 split
@@ -94,6 +130,12 @@ using UnityEngine;
             else//health below 30
             {
                 //destroy all plants on this lvl
+                GameObject[] allPlants =  GameObject.FindGameObjectsWithTag(Tags_JoaoBeijinho.m_plant);
+                foreach (var plant in allPlants)
+                {
+                    plant.SetActive(false);
+                    //do an effect for plants to dissapoear
+                }
                 //crazy raneg attack from fase two
                 //quick hit no cooldown
                 //change attack no stun
@@ -105,28 +147,110 @@ using UnityEngine;
 
 
     }
+
+    private void UpdateTadashi()
+    {
+        //phase one ========================================
+
+        switch (m_tadashiPhase)
+        {
+            case 1:
+                if (!m_generateRandomNumberOnceTadashi)
+                {
+                    RandChanceAttackTadashi = Random.Range(0, 2);
+                    Debug.Log(RandChanceAttackTadashi);
+                    m_generateRandomNumberOnceTadashi = true;
+                }
+
+                if (RandChanceAttackTadashi == 0)
+                {
+                    m_attackRange = m_chargeAttackRangeTadashi;
+                    m_attackCollider = m_chargeAttackColider;
+                    m_normalAttackColider.SetActive(false);
+                }
+                else
+                {
+                    m_attackRange = m_meleeAttackRangeTadashi;
+                    m_attackCollider = m_normalAttackColider;
+                    m_chargeAttackColider.SetActive(false);
+                }
+                break;
+
+            case 2:
+                m_attackRange = m_rangedAttackRange;
+                m_attackCollider = m_normalAttackColider;
+
+                if (!m_generateRandomNumberOnceTadashi)
+                {
+                   RandChanceAttackTadashiFloat = Random.Range(0.0f, 1.1f);
+                    Debug.Log(RandChanceAttackTadashi);
+                    m_generateRandomNumberOnceTadashi = true;
+                    if (RandChanceAttackTadashiFloat <= 0.25f)
+                    {
+                        m_projectile = m_tadashiProjectiles[0];
+                        Debug.Log("first");
+                    }
+                    else if (RandChanceAttackTadashiFloat > 0.25f)
+                    {
+                        m_projectile = m_tadashiProjectiles[1];
+                        Debug.Log("second");
+                    }
+                    else if (RandChanceAttackTadashiFloat > 0.5f)
+                    {
+                        m_projectile = m_tadashiProjectiles[2];
+                        Debug.Log("third");
+                    }
+                    else if (RandChanceAttackTadashiFloat > 0.75f)
+                    {
+                        m_projectile = m_tadashiProjectiles[3];
+                        Debug.Log("fourth");
+                    }
+                }
+
+                if (!m_currentProjectile)
+                {
+                    int rand = Random.Range(0, 4);
+
+                    switch (rand)
+                    {
+                        case 0:
+                            m_projectile = m_tadashiProjectiles[0];
+                            break; 
+                        
+                        case 1:
+                            m_projectile = m_tadashiProjectiles[1];
+                            break; 
+                        
+                        case 2:
+                            m_projectile = m_tadashiProjectiles[2];
+                            break; 
+                        
+                        case 3:
+                            m_projectile = m_tadashiProjectiles[3];
+                            break;
+                    }
+
+                    m_currentProjectile = Instantiate(m_projectile, 
+                        new Vector3(transform.position.x, transform.position.y-0.2f, transform.position.z), Quaternion.identity, transform.parent);
+                    m_currentProjectile.transform.parent = transform;
+
+                    //TODO make attack ranged differnet
+                }
+                break;
+
+            case 3:
+                break;
+        }
+        
+        //pahse two ===============================================
+
+
+    }
+
     private void LateUpdate()
     {
         UpdateAttackAlien();
-
-       
-
-        if (!m_generateRandomNumberOnceTadashi)
-        {
-            RandChanceAttackTadashiPhaseOne = Random.Range(0, 2);
-            Debug.Log(RandChanceAttackTadashiPhaseOne);
-            m_generateRandomNumberOnceTadashi = true;
-        }
-
-
-        if (RandChanceAttackTadashiPhaseOne == 0)
-        {
-            m_attackRange = m_chargeAttackRangeTadashi;
-        }
-        else
-        {
-            m_attackRange = m_meleeAttackRangeTadashi;
-        }
+        UpdateTadashi();
 
 
         if (!m_isStuned)
@@ -152,10 +276,12 @@ using UnityEngine;
             if (m_randAttackChance == m_RangedAttackRandomChance - 1)
             {
                 m_attackRange = m_rangedAttackRange;
+                
             }
             else
             {
                 m_attackRange = m_meleeAttackRange;
+               
             }
         }
         

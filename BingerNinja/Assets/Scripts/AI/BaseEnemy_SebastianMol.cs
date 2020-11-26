@@ -109,6 +109,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     private float m_lookLeftAndRightTimerMax; //used to remeber m_lookLeftAndRightTimer varaibale at the start for later resents
     private bool m_isSerching = false; // if the enemy serching for player
     private Vector3 m_curiousTarget;  //the point of curiosity for an enemy to cheak
+    protected int m_tadashiPhase = 1; //the phase tadashi is on
 
 
     private HitEffectElliott m_HitEffectElliott;
@@ -238,7 +239,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
     private void CuriousState()
     {
-        if (Vector3.Distance( transform.position, m_curiousTarget) < 1 ) 
+        if (Vector2.Distance( transform.position, m_curiousTarget) < 1 ) 
         if (m_outOfSightTimer <= 0)
         {
             m_currentState = state.WONDER;
@@ -658,15 +659,17 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 float healthPercentage = m_health / m_maxHealth;
                 if (healthPercentage > 0.6f)
                 {
-
+                    m_tadashiPhase = 1;
+                    NormalTakeDamage(damage);
                 }
-                else if (healthPercentage > 0.3f)//health above 30
+                else if(healthPercentage < 0.6f && healthPercentage > 0.3f)
                 {
-
+                    m_tadashiPhase = 2;
                 }
                 else//health below 30
                 {
-
+                    m_tadashiPhase = 2;
+                    m_health -= damage;
                 }
                 break;
 
