@@ -16,22 +16,22 @@ public class Track_Jann
     public string n;
     public int b;
     public int c;
-    public string[] d;
-    public float[][] f;
+    public int[] d;
+    public int[][] f;
 
     // This is used because JsonUtility doesn't support two-dimensional arrays
     public void GenerateFrequencies()
     {
         int channels = d.Length / c;
-        f = new float[channels][];
+        f = new int[channels][];
         
         for (int i = 0; i < channels; i++)
         {
-            f[i] = new float[c];
+            f[i] = new int[c];
             
             for (int j = 0; j < c; j++)
             {
-                f[i][j] = float.Parse(d[i * c + j], CultureInfo.InvariantCulture);
+                f[i][j] = d[i * c + j];
             }
         }
     }

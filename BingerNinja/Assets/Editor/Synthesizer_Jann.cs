@@ -151,7 +151,7 @@ class Synthesizer_Jann : EditorWindow
                 {
                     temp[y].Add(
                         new Note_Jann(NotesCreator_Jann.Note.None, 
-                        0f)
+                        0)
                         );
                 }
                 else
@@ -171,12 +171,12 @@ class Synthesizer_Jann : EditorWindow
         track.b = m_bpm;
         track.c = m_length;
 
-        string[] data = new string[m_channels * m_length];
+        int[] data = new int[m_channels * m_length];
         for (int y = 0; y < m_channels; y++)
         {
             for (int x = 0; x < m_length; x++)
             {
-                data[y * m_length + x] = string.Format(CultureInfo.InvariantCulture, "{0:0.##}", m_channelsData[y][x].Frequence);
+                data[y * m_length + x] = m_channelsData[y][x].Frequence;
             }
         }
 
@@ -203,7 +203,7 @@ class Synthesizer_Jann : EditorWindow
         {
             for (int x = 0; x < m_length; x++)
             {
-                float frequency = float.Parse(track.d[y * m_length + x], CultureInfo.InvariantCulture);
+                int frequency = track.d[y * m_length + x];
                 m_channelsData[y][x].Frequence = frequency;
                 m_channelsData[y][x].MNoteName = m_noteCreator.GetNote(frequency);
             }
@@ -221,7 +221,7 @@ class Synthesizer_Jann : EditorWindow
             
             for (int x = 0; x < m_length; x++)
             {
-                m_channelsData[y].Add(new Note_Jann(NotesCreator_Jann.Note.None, 0f));
+                m_channelsData[y].Add(new Note_Jann(NotesCreator_Jann.Note.None, 0));
             }
         }
     }

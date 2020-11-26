@@ -117,7 +117,7 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
     }
     
     // Creates an AudioClip from the notes in a channel
-    private AudioClip CreateClip(string trackName, float bps, float[] frequencies)
+    private AudioClip CreateClip(string trackName, float bps, int[] frequencies)
     {
         int lengthSamples = (int) (SamplingFrequency / bps);
         float[] data = new float[lengthSamples * frequencies.Length];

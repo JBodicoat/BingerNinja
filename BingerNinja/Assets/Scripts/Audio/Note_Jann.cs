@@ -7,9 +7,9 @@
 public class Note_Jann
 {
     private NotesCreator_Jann.Note m_noteName;
-    private float m_frequence;
+    private int m_frequence;
 
-    public Note_Jann(NotesCreator_Jann.Note noteName, float frequence)
+    public Note_Jann(NotesCreator_Jann.Note noteName, int frequence)
     {
         m_noteName = noteName;
         m_frequence = frequence;
@@ -21,7 +21,7 @@ public class Note_Jann
         set => m_noteName = value;
     }
 
-    public float Frequence
+    public int Frequence
     {
         get => m_frequence;
         set => m_frequence = value;
