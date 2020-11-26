@@ -5,14 +5,16 @@
 // Mário 26/10/2020 - Ajust Dialogue to the boss Dialogue script
 // Mário 28/10/2020 - Optimisation and Stop player whene in dialogs
 // Mário 06/11/2020 - Dialog Title update, Pause Systems, Use "|" to saperate Dialogues
+// Jann  07/11/2020 - Added a quick check to swap the dialogue file based on the settings
+// Jann  25/11/2020 - Added in-game language change
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 using System.Linq;
+using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 /// <summary>
 /// My class takes care of Displaying the Dialog on the screen
@@ -27,9 +29,22 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     private Queue<string> m_sentences;
 
     public TextAsset m_csvFile;
+    public TextAsset m_csvFilePortuguese;
 
     string m_TrigerDialoguePrefab = "DialogTrigger";
     PlayerController_JamieG playerControllerScript;
+
+    public void LoadLanguageFile()
+    {
+        SettingsData settingsData = SaveLoadSystem_JamieG.LoadSettings();
+
+        if(settingsData.m_chosenLanguage != null && settingsData.m_chosenLanguage.Equals("Portuguese"))
+        {
+            m_csvFile = m_csvFilePortuguese;
+        };
+        
+        LoadDialog(SceneManager.GetActiveScene().buildIndex);
+    }
 
     public void StartDialogue(Dialogue dialogue)
     {
@@ -190,11 +205,11 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
 
         m_sentences = new Queue<string>();
 
-        LoadDialog(SceneManager.GetActiveScene().buildIndex);
+        LoadLanguageFile();
     }
 }
 
-[System.Serializable]
+[Serializable]
 public struct Dialogue
 {
 

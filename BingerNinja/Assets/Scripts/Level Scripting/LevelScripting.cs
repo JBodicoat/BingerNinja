@@ -16,12 +16,18 @@ public class LevelScripting : MonoBehaviour
     GameObject levelLiftTrigger, keyTrigger, keyTriggerTwo;
     BaseEnemy_SebastianMol boss, level2Enemy1, level2Enemy2;
     BossDialogue_MarioFernandes bossDialogue, level2End;
-    Tilemap objInfWalls, objWalls, objBehWalls;
+    Tilemap objInfWalls, objWalls, objBehWalls, walls2;
     
     #endregion
 
     private void Awake()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            keyTrigger = GameObject.Find("Key Trigger");
+            objWalls = GameObject.Find("Walls1_Map").GetComponent<Tilemap>();
+            objInfWalls = GameObject.Find("ObjectsInFrontOfWalls_Map").GetComponent<Tilemap>();
+        }
         if (SceneManager.GetActiveScene().buildIndex == 2)
         {
             level2End = GameObject.Find("EndLevelTwo").GetComponent<BossDialogue_MarioFernandes>();
@@ -40,6 +46,7 @@ public class LevelScripting : MonoBehaviour
             keyTrigger = GameObject.Find("Key Trigger");
             objWalls = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
             objInfWalls = GameObject.Find("ObjectsInFrontOfWalls_map").GetComponent<Tilemap>();
+            walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
         }
         if (SceneManager.GetActiveScene().buildIndex == 5)
         {
@@ -59,6 +66,7 @@ public class LevelScripting : MonoBehaviour
             objWalls = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
             objInfWalls = GameObject.Find("ObjectsInFrontOfWalls_map").GetComponent<Tilemap>();
             objBehWalls = GameObject.Find("ObjectsBehindWalls_map").GetComponent<Tilemap>();
+            walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
         }
         if (SceneManager.GetActiveScene().buildIndex == 9)
         {
@@ -93,6 +101,22 @@ public class LevelScripting : MonoBehaviour
     }
     private void Update()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 1 && !keyUsed)
+        {
+            if (!keyTrigger.activeInHierarchy)
+            {
+                Debug.Log("key worked");
+                objInfWalls.SetTile(new Vector3Int(7, 14, 0), null);
+                objInfWalls.SetTile(new Vector3Int(6, 14, 0), null);
+                objInfWalls.SetTile(new Vector3Int(5, 14, 0), null);
+
+                objWalls.SetTile(new Vector3Int(4, 13, 0), null);
+                objWalls.SetTile(new Vector3Int(5, 13, 0), null);
+                objWalls.SetTile(new Vector3Int(6, 13, 0), null);
+
+            }
+            
+        }
         if (SceneManager.GetActiveScene().buildIndex == 2 && !enemyDead)
         {
             if (level2Enemy1.m_health <= 0 || level2Enemy2.m_health <= 0)
@@ -119,12 +143,12 @@ public class LevelScripting : MonoBehaviour
         {
            if(!keyTrigger.activeInHierarchy)
             {
-                objInfWalls.SetTile(new Vector3Int(25, 9, 0), null);
-                objInfWalls.SetTile(new Vector3Int(25, 10, 0), null);
-                objInfWalls.SetTile(new Vector3Int(25, 11, 0), null);
-                objWalls.SetTile(new Vector3Int(24, 8, 0), null);
-                objWalls.SetTile(new Vector3Int(24, 9, 0), null);
-                objWalls.SetTile(new Vector3Int(24, 10, 0), null);
+                walls2.SetTile(new Vector3Int(26, 10, 0), null);
+                walls2.SetTile(new Vector3Int(26, 11, 0), null);
+                walls2.SetTile(new Vector3Int(26, 12, 0), null);
+                objWalls.SetTile(new Vector3Int(25, 9, 0), null);
+                objWalls.SetTile(new Vector3Int(25, 10, 0), null);
+                objWalls.SetTile(new Vector3Int(25, 11, 0), null);
             }
         }
         if (SceneManager.GetActiveScene().buildIndex == 5 && !keyUsed)
@@ -155,20 +179,24 @@ public class LevelScripting : MonoBehaviour
         {
             if (!keyTrigger.activeInHierarchy)
             {
-                objInfWalls.SetTile(new Vector3Int(22, 29, 0), null);
-                objInfWalls.SetTile(new Vector3Int(22, 28, 0), null);
-                
-                objWalls.SetTile(new Vector3Int(21, 27, 0), null);
-                objWalls.SetTile(new Vector3Int(21, 28, 0), null);
-                
+                walls2.SetTile(new Vector3Int(23, 28, 0), null);
+                walls2.SetTile(new Vector3Int(23, 29, 0), null);
+                walls2.SetTile(new Vector3Int(23, 30, 0), null);
+
+                objWalls.SetTile(new Vector3Int(22, 27, 0), null);
+                objWalls.SetTile(new Vector3Int(22, 28, 0), null);
+                objWalls.SetTile(new Vector3Int(22, 29, 0), null);
+
             }
             if (!keyTriggerTwo.activeInHierarchy)
             {
-                objInfWalls.SetTile(new Vector3Int(29, 10, 0), null);
-                objInfWalls.SetTile(new Vector3Int(29, 11, 0), null);
+                walls2.SetTile(new Vector3Int(30, 10, 0), null);
+                walls2.SetTile(new Vector3Int(30, 11, 0), null);
+                walls2.SetTile(new Vector3Int(30, 12, 0), null);
 
-                objBehWalls.SetTile(new Vector3Int(28, 9, 0), null);
-                objBehWalls.SetTile(new Vector3Int(28, 10, 0), null);
+                objWalls.SetTile(new Vector3Int(29, 9, 0), null);
+                objWalls.SetTile(new Vector3Int(29, 10, 0), null);
+                objWalls.SetTile(new Vector3Int(29, 11, 0), null);
             }
         }
         if (SceneManager.GetActiveScene().buildIndex == 9 && !bossDead)
@@ -188,6 +216,5 @@ public class LevelScripting : MonoBehaviour
 
             }
         }
-    }
-   
+    } 
 }

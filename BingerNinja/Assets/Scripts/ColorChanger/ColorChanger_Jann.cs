@@ -8,6 +8,7 @@
 // Jann 07/11/20 - Materials are now assigned in code and don't need to be set for everything in Unity
 // Jann 08/11/20 - Turned it into a singleton (used by HitEffect_Elliot)
 // Elliott 20/11/2020 = made color arry public
+// Jann 22/11/20 - Refactor and added particle system support
 
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -15,19 +16,23 @@ using UnityEngine.UI;
 
 public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
 {
-    private const int Grey60 = 60;
-    private const int Grey122 = 122;
-    private const int Grey174 = 174;
-
     public Material m_swapMaterial;
     
-    [SerializeField] private Color m_colorOutGrey60 = new Color(0, 0, 0, 1);
-    [SerializeField] private Color m_colorOutGrey122 = new Color(0, 0, 0, 1);
-    [SerializeField] private Color m_colorOutGrey174 = new Color(0, 0, 0, 1);
+    public Color m_colorOutGrey60 = new Color(0, 0, 0, 1);
+    public Color m_colorOutGrey122 = new Color(0, 0, 0, 1);
+    public Color m_colorOutGrey174 = new Color(0, 0, 0, 1);
+
+    public OriginalColor m_particleColor = OriginalColor.Grey60;
+    
+    public enum OriginalColor
+    { 
+        Grey60 = 60, Grey122 = 122, Grey174 = 174
+    } 
 
     private SpriteRenderer[] m_spriteRenderers;
     private TilemapRenderer[] m_tilemapRenderers;
     private Image[] m_images;
+    private ParticleSystem[] m_particleSystems;
 
     private Texture2D m_colorSwapTexture;
     public Color[] m_spriteColors;
@@ -37,16 +42,19 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
         m_spriteRenderers = FindObjectsOfType<SpriteRenderer>();
         m_tilemapRenderers = FindObjectsOfType<TilemapRenderer>();
         m_images = FindObjectsOfType<Image>();
+        m_particleSystems = FindObjectsOfType<ParticleSystem>();
     }
 
     private void Start()
     {
         InitializeColorChanger();
 
-        SwapColor(Grey60, m_colorOutGrey60);
-        SwapColor(Grey122, m_colorOutGrey122);
-        SwapColor(Grey174, m_colorOutGrey174);
+        SwapColor((int) OriginalColor.Grey60, m_colorOutGrey60);
+        SwapColor((int) OriginalColor.Grey122, m_colorOutGrey122);
+        SwapColor((int) OriginalColor.Grey174, m_colorOutGrey174);
         m_colorSwapTexture.Apply();
+
+        ApplyColorsToSceneObjects();
     }
 
     private void InitializeColorChanger()
@@ -61,6 +69,12 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
 
         m_swapMaterial.SetTexture("_SwapTex", colorSwapTex);
         
+        m_spriteColors = new Color[colorSwapTex.width];
+        m_colorSwapTexture = colorSwapTex;
+    }
+
+    private void ApplyColorsToSceneObjects()
+    {
         foreach (SpriteRenderer spriteRenderer in m_spriteRenderers)
         {
             spriteRenderer.material = m_swapMaterial;
@@ -76,8 +90,11 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
             image.material = m_swapMaterial;
         }
         
-        m_spriteColors = new Color[colorSwapTex.width];
-        m_colorSwapTexture = colorSwapTex;
+        foreach (ParticleSystem particleSystem in m_particleSystems)
+        {
+            var main = particleSystem.main;
+            main.startColor = m_spriteColors[(int) m_particleColor];
+        }
     }
 
     private void SwapColor(int index, Color color)
@@ -85,12 +102,4 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
         m_spriteColors[index] = color;
         m_colorSwapTexture.SetPixel(index, 0, color);
     }
-
-    public Color ColorOutGrey60 => m_colorOutGrey60;
-
-    public Color ColorOutGrey122 => m_colorOutGrey122;
-
-    public Color ColorOutGrey174 => m_colorOutGrey174;
-
-    public Color[] SpriteColors => m_spriteColors;
 }

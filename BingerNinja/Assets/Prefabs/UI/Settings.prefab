@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1713688022963785812}
   - component: {fileID: 8852422032077043970}
   - component: {fileID: 5306442678771119952}
+  - component: {fileID: 4163009277081133160}
   m_Layer: 5
   m_Name: English Image
   m_TagString: Untagged
@@ -76,6 +77,49 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4163009277081133160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198724060754189562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 5306442678771119952}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1009075415955294206
 GameObject:
   m_ObjectHideFlags: 0
@@ -646,6 +690,7 @@ GameObject:
   - component: {fileID: 5824345605072921173}
   - component: {fileID: 5824345605072921168}
   - component: {fileID: 5824345605072921175}
+  - component: {fileID: 4963553204240429286}
   m_Layer: 5
   m_Name: Music Text
   m_TagString: Untagged
@@ -713,9 +758,20 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Music
-
-'
+  m_Text: "M\xFAsica\r"
+--- !u!114 &4963553204240429286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5824345605072921172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37af42116151a446ae97af29707674f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: music
 --- !u!1 &5824345605225799496
 GameObject:
   m_ObjectHideFlags: 0
@@ -848,8 +904,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd672a6d561b71042b5d80667b194ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_englishButton: {fileID: 5824345606532110414}
+  m_portugueseButton: {fileID: 5824345605563955898}
   m_SFXSlider: {fileID: 5824345605522356110}
   m_musicSlider: {fileID: 822907163580893023}
+  m_selectedLanguage: 
 --- !u!1 &5824345605522356108
 GameObject:
   m_ObjectHideFlags: 0
@@ -1061,7 +1120,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5824345605563955899}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5824345605457200374}
+        m_TargetAssemblyTypeName: SettingsMenu_ElliottDesouza, Assembly-CSharp
+        m_MethodName: OnPortugueseSelected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5824345606532110414}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 5824345605563955898}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5824345605723937430
 GameObject:
   m_ObjectHideFlags: 0
@@ -1298,6 +1393,7 @@ GameObject:
   - component: {fileID: 5824345605934615695}
   - component: {fileID: 5824345605934615690}
   - component: {fileID: 5824345605934615689}
+  - component: {fileID: 4397526442202500770}
   m_Layer: 5
   m_Name: Languages
   m_TagString: Untagged
@@ -1365,9 +1461,20 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Language
-
-'
+  m_Text: "Idioma\r"
+--- !u!114 &4397526442202500770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5824345605934615694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37af42116151a446ae97af29707674f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: lang
 --- !u!1 &5824345606532110412
 GameObject:
   m_ObjectHideFlags: 0
@@ -1490,7 +1597,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5824345606532110415}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5824345605457200374}
+        m_TargetAssemblyTypeName: SettingsMenu_ElliottDesouza, Assembly-CSharp
+        m_MethodName: OnEnglishSelected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5824345605563955898}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 5824345606532110414}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5824345606570808111
 GameObject:
   m_ObjectHideFlags: 0
@@ -1539,6 +1682,7 @@ GameObject:
   - component: {fileID: 5824345606649097136}
   - component: {fileID: 5824345606649097143}
   - component: {fileID: 5824345606649097142}
+  - component: {fileID: 1543710588056124822}
   m_Layer: 5
   m_Name: Back Button
   m_TagString: Untagged
@@ -1606,7 +1750,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Back
+  m_Text: "Salvar\r"
 --- !u!114 &5824345606649097142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1650,18 +1794,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
       - m_Target: {fileID: 5824345605457200372}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -1674,6 +1806,31 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5824345605457200374}
+        m_TargetAssemblyTypeName: SettingsMenu_ElliottDesouza, Assembly-CSharp
+        m_MethodName: ExitSettingMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1543710588056124822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5824345606649097140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37af42116151a446ae97af29707674f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: save
 --- !u!1 &5824345606697522160
 GameObject:
   m_ObjectHideFlags: 0
@@ -1685,6 +1842,7 @@ GameObject:
   - component: {fileID: 5824345606697522161}
   - component: {fileID: 5824345606697522172}
   - component: {fileID: 5824345606697522163}
+  - component: {fileID: 6874502068605356979}
   m_Layer: 5
   m_Name: SFX
   m_TagString: Untagged
@@ -1752,7 +1910,20 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: SFX
+  m_Text: "SFX\r"
+--- !u!114 &6874502068605356979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5824345606697522160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37af42116151a446ae97af29707674f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: sfx
 --- !u!1 &5929097130023216235
 GameObject:
   m_ObjectHideFlags: 0
@@ -1951,6 +2122,7 @@ GameObject:
   - component: {fileID: 5174581298223307901}
   - component: {fileID: 8253058451359297592}
   - component: {fileID: 7947227688426019321}
+  - component: {fileID: 1116042315068456845}
   m_Layer: 5
   m_Name: Portuguese Image
   m_TagString: Untagged
@@ -2016,6 +2188,49 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1116042315068456845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7803173505386485195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 7947227688426019321}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8486425609455287203
 GameObject:
   m_ObjectHideFlags: 0
