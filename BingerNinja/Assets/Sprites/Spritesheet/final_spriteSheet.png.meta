@@ -418,7 +418,7 @@ TextureImporter:
     second: Binger_Walk_2
   - first:
       213: -2198078600720776341
-    second: final_spriteSheet_5
+    second: Tent(BlackMarket)
   - first:
       213: 673244407021750049
     second: Binger_Walk_3
@@ -784,7 +784,7 @@ TextureImporter:
     second: final_spriteSheet_126
   - first:
       213: -8755496432351049888
-    second: final_spriteSheet_127
+    second: AirLock
   - first:
       213: -4820359991969548900
     second: final_spriteSheet_128
@@ -1099,7 +1099,7 @@ TextureImporter:
     second: final_spriteSheet_231
   - first:
       213: 8713169540381468547
-    second: final_spriteSheet_232
+    second: Switch Board
   - first:
       213: 2861296258362423160
     second: final_spriteSheet_233
@@ -1162,7 +1162,7 @@ TextureImporter:
     second: final_spriteSheet_252
   - first:
       213: 9190225694550558397
-    second: final_spriteSheet_253
+    second: FloorWal(Space)
   - first:
       213: 7029529781666449494
     second: final_spriteSheet_254
@@ -1186,19 +1186,19 @@ TextureImporter:
     second: final_spriteSheet_260
   - first:
       213: -8696355641057057695
-    second: final_spriteSheet_261
+    second: FloorWal(BlackMarket)2
   - first:
       213: 454860656505815360
     second: final_spriteSheet_262
   - first:
       213: -2847457234908056235
-    second: final_spriteSheet_263
+    second: FloorWal(BlackMarket)
   - first:
       213: -6405008784773538830
     second: final_spriteSheet_264
   - first:
       213: 8715220341230681099
-    second: final_spriteSheet_265
+    second: Window(Space)
   - first:
       213: -5593399016768735231
     second: final_spriteSheet_266
@@ -2801,7 +2801,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_5
+      name: Tent(BlackMarket)
       rect:
         serializedVersion: 2
         x: 448
@@ -3956,7 +3956,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_127
+      name: AirLock
       rect:
         serializedVersion: 2
         x: 512
@@ -5363,15 +5363,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_232
+      name: Switch Board
       rect:
         serializedVersion: 2
         x: 480
         y: 112
         width: 32
         height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -5678,15 +5678,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_253
+      name: FloorWal(Space)
       rect:
         serializedVersion: 2
         x: 480
         y: 80
         width: 32
         height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -5720,15 +5720,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_261
+      name: FloorWal(BlackMarket)2
       rect:
         serializedVersion: 2
         x: 416
         y: 48
         width: 32
         height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -5741,15 +5741,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_263
+      name: FloorWal(BlackMarket)
       rect:
         serializedVersion: 2
         x: 448
         y: 48
         width: 32
         height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -5762,15 +5762,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_265
+      name: Window(Space)
       rect:
         serializedVersion: 2
         x: 480
         y: 48
         width: 32
         height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
