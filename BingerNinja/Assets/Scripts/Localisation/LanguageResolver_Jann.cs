@@ -1,9 +1,17 @@
-﻿using System.Collections.Generic;
+﻿//Jann
+
+//Jann  - 18/11/20 - Implementation
+//Jann  - 25/11/20 - Caching implemented
+
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// This class applies the correct localisation to all UI Text elements
+/// </summary>
 public class LanguageResolver_Jann : Singleton_Jann<LanguageResolver_Jann>
 {
     private const string FilePath = "Assets/Scripts/Localisation/";
@@ -41,8 +49,16 @@ public class LanguageResolver_Jann : Singleton_Jann<LanguageResolver_Jann>
         LanguageText_Jann[] allTexts = Resources.FindObjectsOfTypeAll<LanguageText_Jann>();
         foreach (LanguageText_Jann languageText in allTexts)
         {
-            Text text = languageText.GetComponent<Text>();
-            text.text = Regex.Unescape(m_translations[languageText.identifier]);
+            try
+            {
+                Text text = languageText.GetComponent<Text>();
+                text.text = Regex.Unescape(m_translations[languageText.identifier]);
+            }
+            catch (KeyNotFoundException e)
+            {
+                print("No translation for key found: " + languageText.identifier);
+                throw;
+            }
         }
     }
     
