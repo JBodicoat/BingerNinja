@@ -65,8 +65,7 @@ using UnityEngine;
     /// ovveride class that holds logic for what the enemy shoudl do when in the attack state
     /// </summary>
     internal override void AttackBehaviour()
-    {             
-        
+    {                    
         if(m_currentEnemyType == m_enemyType.ALIEN)
         {
             if (m_randAttackChance == m_RangedAttackRandomChance - 1)
@@ -100,7 +99,12 @@ using UnityEngine;
             }
             else if(m_tadashiPhase == 2)//health above 30 change this later
             {
-                // break all light here TODO
+                GameObject[] allLights = GameObject.FindGameObjectsWithTag(Tags_JoaoBeijinho.m_lightTag);
+                foreach (var light in allLights)
+                {
+                    light.SetActive(false);
+                    //add effect for light goign off or on or whatever
+                }
 
                 if (RandChanceAttackTadashiFloat > 0.3f)
                 {
@@ -108,37 +112,19 @@ using UnityEngine;
                 }
                 else
                 {
-                    if (tadashiMultiShotCounter < tadashiMultiShotCounterMax)
-                    {
-                        m_ProjectileDisplay.sprite = null;
-                        m_currentProjectile = m_tadashiNormalPorjectile;
-                        if (EnemyAttacks_SebastianMol.RangedAttack(m_playerTransform, transform, m_aimer,
-                            ref m_attackTimer, m_currentProjectile, 0.3f))
-                        {
-                            tadashiMultiShotCounter++;
-                            m_attackTimer = 0.1f;
-                        }
-
-                    }
-                    else
-                    {
-                        tadashiMultiShotCounter = 0;
-                        m_attackTimer = m_shootDeley;
-                        m_generateRandomNumberOnceTadashi = false;
-                        m_currentProjectile = null;
-                    }
+                    TadashiTripleShot();
                 }
             }
             else if (m_tadashiPhase == 3)//health below 30
             {
                 //destroy all plants on this lvl
-                //GameObject[] allPlants =  GameObject.FindGameObjectsWithTag(Tags_JoaoBeijinho.m_plant);
-                //foreach (var plant in allPlants)
-                //{
-                //    plant.SetActive(false);
-                //    //do an effect for plants to dissapoear
-                //}
-   
+                GameObject[] allPlants = GameObject.FindGameObjectsWithTag(Tags_JoaoBeijinho.m_plant);
+                foreach (var plant in allPlants)
+                {
+                    plant.SetActive(false);
+                    //do an effect for plants to dissapoear
+                }
+
                 if (tadashiLastFaseAttackRand < 0.33f)
                 {
                    TadashiQuickAttack();
@@ -155,8 +141,29 @@ using UnityEngine;
             
             
         }
+    }
 
+    private void TadashiTripleShot()
+    {
+        if (tadashiMultiShotCounter < tadashiMultiShotCounterMax)
+        {
+            m_ProjectileDisplay.sprite = null;
+            m_currentProjectile = m_tadashiNormalPorjectile;
+            if (EnemyAttacks_SebastianMol.RangedAttack(m_playerTransform, transform, m_aimer,
+                ref m_attackTimer, m_currentProjectile, 0.3f))
+            {
+                tadashiMultiShotCounter++;
+                m_attackTimer = 0.1f;
+            }
 
+        }
+        else
+        {
+            tadashiMultiShotCounter = 0;
+            m_attackTimer = m_shootDeley;
+            m_generateRandomNumberOnceTadashi = false;
+            m_currentProjectile = null;
+        }
     }
 
     private void TadashiQuickAttack()
@@ -322,14 +329,6 @@ using UnityEngine;
                 StartCoroutine(MoveAwayFromeWall(m_amountOfTimeToMoveAwayFromWall, range));
     }
 
-    private void LateUpdate()
-    {
-        UpdateAttackAlien();
-        UpdateTadashi();
-
-
-       
-    }
 
     /// <summary>
     /// updates teh attack ranged based on what attack is coming up e.g. more range for ranged attacks
@@ -364,6 +363,11 @@ using UnityEngine;
         
     }
 
+    private void LateUpdate()
+    {
+        UpdateAttackAlien();
+        UpdateTadashi();      
+    }
 
     void OnDrawGizmosSelected()
     {
