@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelScripting_JW : MonoBehaviour
 {
-    GameObject levelLiftTrigger;
+    GameObject levelLiftTrigger, keyTrigger;
     BossDialogue_MarioFernandes bossDialogue;
     BaseEnemy_SebastianMol boss;
     bool levelBossIntro = false, bossDead = false;
@@ -19,12 +19,21 @@ public class LevelScripting_JW : MonoBehaviour
             bossDialogue = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BossDialogue_MarioFernandes>();
             levelLiftTrigger = GameObject.Find("Level 12 Lift");
         }
+        if(SceneManager.GetActiveScene().buildIndex == 14)
+        {
+            levelLiftTrigger = GameObject.Find("Level 14 Lift");
+            keyTrigger = GameObject.Find("Key");
+        }
 
     }
 
     private void Start()
     {
         if (SceneManager.GetActiveScene().buildIndex == 12)
+        {
+            levelLiftTrigger.SetActive(false);
+        }
+        if (SceneManager.GetActiveScene().buildIndex == 14)
         {
             levelLiftTrigger.SetActive(false);
         }
@@ -46,6 +55,13 @@ public class LevelScripting_JW : MonoBehaviour
                 levelLiftTrigger.SetActive(true);
                 bossDead = true;
 
+            }
+        }
+        if (SceneManager.GetActiveScene().buildIndex == 14)
+        {
+            if(!keyTrigger.activeInHierarchy)
+            {
+                levelLiftTrigger.SetActive(true);
             }
         }
     }
