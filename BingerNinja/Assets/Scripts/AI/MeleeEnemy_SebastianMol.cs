@@ -110,10 +110,21 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     /// </summary>
     /// <param name="amaountOfTime"> amnount of time befor the attack is big again</param>
     /// <returns></returns>
-    protected IEnumerator MoveAwayFromeWall(float amaountOfTime) //this is a very not clean way to do things but it doseent look bad in teh game 
+    protected IEnumerator MoveAwayFromeWall(float amaountOfTime, float attackRange = 0) //this is a very not clean way to do things but it doseent look bad in teh game 
     {
         yield return new WaitForSeconds(amaountOfTime);
-        if (m_attackRange != m_maxAttackRange) m_attackRange = m_maxAttackRange; //change teh attack range back to normal 
+        if (m_attackRange != m_maxAttackRange )
+        {
+            if( attackRange == 0)
+            {
+                m_attackRange = m_maxAttackRange; //change teh attack range back to normal 
+            }
+            else
+            {
+                m_attackRange = attackRange;
+            }
+            
+        }
         m_doMoveAwayFromWallOnce = false;
     }
     private void LateUpdate()
@@ -162,13 +173,13 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
                     m_attackRange = 0.01f;
                     m_doMoveAwayFromWallOnce = true;
                     StunEnemyWithDeleyFunc(m_afterAttackDeley);
-                    Debug.Log("stun tigers boom");
                 }
 
                 if(collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
                 {
-                    FindObjectOfType<EffectManager_MarioFernandes>().AddEffect
-							(new SpeedEffect_MarioFernandes(2, 0)); //change thesey to not be magic numbers
+                    if(m_currentEnemyType == m_enemyType.PETTIGER || m_tadashiPhase == 1)
+                        FindObjectOfType<EffectManager_MarioFernandes>().AddEffect
+							    (new SpeedEffect_MarioFernandes(1, 0)); //change thesey to not be magic numbers
                 }
             }
 
