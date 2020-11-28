@@ -6,6 +6,7 @@
 //Jann  - 20/11/20 - Hooked up the settingsmenu
 //Jann  - 23/11/20 - QA improvements
 //Jann  - 25/11/20 - Caching implemented
+//Jann  - 28/11/20 - Added new gameplay data saving
 
 using System;
 using System.Collections.Generic;
@@ -37,11 +38,21 @@ public static class SaveLoadSystem_JamieG
         SaveToFile(InventoryFile, inventoryData);
     }
 
+    public static void SaveCheckpoint(Vector3 checkpointPosition)
+    {
+        GameplayData oldData = LoadGameplay();
+        GameplayData gameplayData = new GameplayData(checkpointPosition, oldData.m_currentLevel, oldData.m_enemyIds, oldData.m_doorIds);
+        SaveToFile(GameplayFile, gameplayData);
+    }
+
     // Saves the current state of the game into the Gameplay.save file
     // Only saves the last checkpoint position at the moment
-    public static void SaveGameplay(Vector3 checkpointPosition)
+    public static void SaveGameplay(int currentLevel, GameObject[] enemies, GameObject[] doors)
     {
-        GameplayData gameplayData = new GameplayData(checkpointPosition);
+        GameplayData oldData = LoadGameplay();
+        Vector3 pos = new Vector3(oldData.m_checkpointPosition[0], oldData.m_checkpointPosition[1],
+            oldData.m_checkpointPosition[2]);
+        GameplayData gameplayData = new GameplayData(pos, currentLevel, enemies, doors);
         SaveToFile(GameplayFile, gameplayData);
     }
 
@@ -202,10 +213,34 @@ public class SaveSystemCache
 public struct GameplayData
 {
     public float[] m_checkpointPosition;
-
-    public GameplayData(Vector3 checkpointPosition)
+    public int m_currentLevel;
+    public string[] m_enemyIds;
+    public string[] m_doorIds;
+    
+    public GameplayData(Vector3 checkpointPosition, int currentLevel, string[] enemyIds, string[] doorIds)
     {
         m_checkpointPosition = new[] {checkpointPosition.x, checkpointPosition.y, checkpointPosition.z};
+        m_currentLevel = currentLevel;
+        m_enemyIds = enemyIds;
+        m_doorIds = doorIds;
+    }
+    
+    public GameplayData(Vector3 checkpointPosition, int currentLevel, GameObject[] enemies, GameObject[] doors)
+    {
+        m_checkpointPosition = new[] {checkpointPosition.x, checkpointPosition.y, checkpointPosition.z};
+        m_currentLevel = currentLevel;
+
+        m_enemyIds = new string[enemies.Length];
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            m_enemyIds[i] = enemies[i].name;
+        }
+        
+        m_doorIds = new string[doors.Length];
+        for (int i = 0; i < doors.Length; i++)
+        {
+            m_doorIds[i] = doors[i].name;
+        }
     }
 };
 

@@ -5,9 +5,11 @@
 //Elliott 27/10/2020 -  can now increse the music and sfx slider value via input
 //Jann    20/11/2020 -  Hooked up the save system
 //Jann    25/11/2020 -  Saving now updates the DialogueManager
+//Jann    28/11/2020 -  Added GameState saving
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SettingsMenu_ElliottDesouza : MonoBehaviour
@@ -76,6 +78,23 @@ public class SettingsMenu_ElliottDesouza : MonoBehaviour
         }
         
         gameObject.SetActive(false);
+    }
+
+    private void SaveGameState()
+    {
+        GameObject player = GameObject.Find("Player");
+        if (player != null)
+        {
+            Inventory_JoaoBeijinho inventory = player.GetComponent<Inventory_JoaoBeijinho>();
+            SaveLoadSystem_JamieG.SaveInventory(inventory);
+            
+            //TODO: Add current level, doors, enemies etc.
+            SaveLoadSystem_JamieG.SaveGameplay(
+                 SceneManager.GetActiveScene().buildIndex,
+                 GameObject.FindGameObjectsWithTag("Enemy"),
+                 GameObject.FindGameObjectsWithTag("Door")
+                );
+        }
     }
 
     void Update()

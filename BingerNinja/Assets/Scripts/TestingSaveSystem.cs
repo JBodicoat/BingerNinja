@@ -37,7 +37,7 @@ public class TestingSaveSystem : MonoBehaviour
         if(saveGameplay)
         {
             saveGameplay = false;
-            SaveLoadSystem_JamieG.SaveGameplay(checkPoint.position);
+            SaveLoadSystem_JamieG.SaveGameplay(0, null, null);
             Debug.Log("Gameplay saved to " + Application.persistentDataPath);
 		}
         else if(saveInventory)
