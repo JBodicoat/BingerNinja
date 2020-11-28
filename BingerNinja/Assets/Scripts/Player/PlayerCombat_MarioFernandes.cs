@@ -17,6 +17,7 @@
 // Mario 13/11/2020 - Add Distraction time to progectile
 // Louie 17/11/2020 - Added Weapon UI integration
 // Mario 20/11/2020 - Subtration of ammunition and added chargedattack modifier
+// Mario 28/11/2020 - item drop using "Q", now it stores the prefabs with him and childs
 
 using System.Collections;
 using System.Collections.Generic;
@@ -53,7 +54,6 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
     //public Collider2D EnemyDetection = null;    
     public float m_meleeAttackRadius = 3;
     public float m_strenght = 1;
-
     public float m_chargedModifier = 1.3f;
     protected PlayerStealth_JoaoBeijinho m_playerStealthScript;
 
@@ -70,6 +70,22 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
     private PlayerController_JamieG Controller;
 
+
+    public void DropWeapon(WeaponType index)
+    {
+        if(m_currentWeapon[(int) index])
+        {
+        
+        Transform dropW = transform.Find(m_currentWeapon[(int) index].name);
+
+        dropW.gameObject.SetActive(true);
+        dropW.position = transform.position + Vector3.down*0.75f;
+        dropW.parent = null;
+
+        m_currentWeapon[(int)index].enabled = false;
+        m_currentWeapon[(int)index] = null;
+        }
+    }
   public  bool IsHoldingFood()
         {
        
@@ -93,12 +109,12 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             GameObject projectile = Instantiate(m_projectile, transform.position, transform.rotation);
             projectile.GetComponent<Projectile_MarioFernandes>().m_dmg = (int)(m_currentWeapon[m_weaponsIndex].dmg * m_strenght * chargedModifier);
             projectile.GetComponent<Projectile_MarioFernandes>().m_distractTime = m_currentWeapon[m_weaponsIndex].m_distractTime;
-            
+            projectile.GetComponent<SpriteRenderer>().sprite = m_currentWeapon[m_weaponsIndex].m_mySprite;
             --m_currentWeapon[m_weaponsIndex].m_ammunition;
             
             if(m_currentWeapon[m_weaponsIndex].m_ammunition <= 0)
             {
-                m_currentWeapon[m_weaponsIndex].enabled = false;
+                Destroy(m_currentWeapon[m_weaponsIndex].gameObject);
                 m_currentWeapon[m_weaponsIndex] = null;
             }
         }
@@ -166,7 +182,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
             m_playerHealthHungerScript.Eat(m_currentWeapon[m_weaponsIndex].m_hungerRestoreAmount);
 
-            m_currentWeapon[m_weaponsIndex].enabled = false;
+            Destroy(m_currentWeapon[m_weaponsIndex].gameObject);
             m_currentWeapon[m_weaponsIndex] = null;
         }
     }
@@ -185,6 +201,11 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Controller.m_dropWeapons.triggered)
+        {
+        DropWeapon((WeaponType) m_weaponsIndex); 
+        }
+
         // 0 - Melee weapon
         // 1 - Ranged weapon
          if(Controller.m_switchWeapons.triggered)
@@ -234,12 +255,14 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         {
             m_currentWeapon[0] = collision.GetComponent<WeaponsTemplate_MarioFernandes>();
             collision.gameObject.SetActive(false);
+            collision.transform.parent = transform;
             m_WeaponUI.WeaponChange(m_currentWeapon[0].m_foodType, false, 0);
 		}
         else if(!m_currentWeapon[1] && collision.GetComponent<WeaponsTemplate_MarioFernandes>() && collision.GetComponent<WeaponsTemplate_MarioFernandes>().IsRanged())
         {
             m_currentWeapon[1] = collision.GetComponent<WeaponsTemplate_MarioFernandes>();
             collision.gameObject.SetActive(false);
+            collision.transform.parent = transform;
             m_WeaponUI.WeaponChange(m_currentWeapon[1].m_foodType, true, 5);
         }
     }

@@ -525,6 +525,22 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Switch Weapons
       m_Flags: 0
+  m_dropWeapons:
+    m_Name: Drop Weapons
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 07255a9d-faae-4ef3-a9f8-9752cbb1bb8a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: b91b7307-40e0-4996-b464-58ade661f245
+      m_Path: <Keyboard>/q
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Drop Weapons
+      m_Flags: 0
 --- !u!114 &4362767424123825800
 MonoBehaviour:
   m_ObjectHideFlags: 0
