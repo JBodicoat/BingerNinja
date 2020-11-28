@@ -87,6 +87,8 @@ public class PlayerController_JamieG : MonoBehaviour
         m_eat.Disable();
         m_attackTap.Disable();
         m_attackSlowTap.Disable();
+        m_roll.Disable();
+        m_switchWeapons.Disable();
     }
     #endregion
 

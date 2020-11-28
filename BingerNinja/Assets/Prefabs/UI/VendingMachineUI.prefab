@@ -281,6 +281,7 @@ GameObject:
   - component: {fileID: 1416206463}
   - component: {fileID: 1416206465}
   - component: {fileID: 1416206464}
+  - component: {fileID: 382039389426428304}
   m_Layer: 5
   m_Name: 'Ninja points: text'
   m_TagString: Untagged
@@ -349,6 +350,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Ninja points:'
+--- !u!114 &382039389426428304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416206462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37af42116151a446ae97af29707674f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: ninjapoints
 --- !u!1 &1875792401
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,6 +374,7 @@ GameObject:
   - component: {fileID: 1875792402}
   - component: {fileID: 1875792404}
   - component: {fileID: 1875792403}
+  - component: {fileID: 339751448506299432}
   m_Layer: 5
   m_Name: Current pick up text
   m_TagString: Untagged
@@ -428,6 +443,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Current pick up:'
+--- !u!114 &339751448506299432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875792401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37af42116151a446ae97af29707674f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: currpickup
 --- !u!1 &2144372813
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,6 +467,7 @@ GameObject:
   - component: {fileID: 2144372814}
   - component: {fileID: 2144372816}
   - component: {fileID: 2144372815}
+  - component: {fileID: 6143814687446984149}
   m_Layer: 5
   m_Name: Item information text
   m_TagString: Untagged
@@ -507,6 +536,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Item information
+--- !u!114 &6143814687446984149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144372813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37af42116151a446ae97af29707674f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: iteminfo
 --- !u!1 &40115681815556708
 GameObject:
   m_ObjectHideFlags: 0
@@ -1461,6 +1503,7 @@ GameObject:
   - component: {fileID: 5010286234885670561}
   - component: {fileID: 5010286234885670566}
   - component: {fileID: 5010286234885670567}
+  - component: {fileID: 2151569283458737566}
   m_Layer: 5
   m_Name: Upgrade Button
   m_TagString: Untagged
@@ -1584,6 +1627,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2151569283458737566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5010286234885670565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37af42116151a446ae97af29707674f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: upgrade
 --- !u!1 &5010286235027138125
 GameObject:
   m_ObjectHideFlags: 0
@@ -1600,7 +1656,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5010286235027138124
 RectTransform:
   m_ObjectHideFlags: 0
