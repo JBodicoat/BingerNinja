@@ -22,7 +22,7 @@ public class WeaponsTemplate_MarioFernandes : MonoBehaviour
     public int m_healOverTime = 0;
     public int m_duration = 5;
     public int m_poisonDmg = 0;
-    public int m_strengthModifier = 0;
+    public float m_strengthModifier = 0;
     public float m_speedModifier = 1;
     public float m_distractTime = 0;
     public int dmg;

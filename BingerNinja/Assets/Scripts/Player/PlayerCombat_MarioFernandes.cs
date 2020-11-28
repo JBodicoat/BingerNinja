@@ -29,6 +29,7 @@ public enum FoodType
     KOBEBEEF,
     SASHIMI,
     TEMPURA,
+    DANGO,
     SAKE,
     NOODLES,
 } 
@@ -67,6 +68,8 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
     private PlayerController_JamieG Controller;
 
+    private EffectManager_MarioFernandes m_effectManager;
+
   public  bool IsHoldingFood()
         {
        
@@ -86,10 +89,18 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         if(m_currentWeapon[m_weaponsIndex].IsRanged())
         {
             //TODO undo this comment
-             //m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
-             GameObject projectile = Instantiate(m_projectile, transform.position, transform.rotation);
-             projectile.GetComponent<Projectile_MarioFernandes>().m_dmg = (int)(m_currentWeapon[m_weaponsIndex].dmg * m_strenght);
-             projectile.GetComponent<Projectile_MarioFernandes>().m_distractTime = m_currentWeapon[m_weaponsIndex].m_distractTime;
+            //m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
+            GameObject projectile = Instantiate(m_projectile, transform.position, transform.rotation);
+            projectile.GetComponent<Projectile_MarioFernandes>().m_dmg = (int)(m_currentWeapon[m_weaponsIndex].dmg * m_strenght);
+            projectile.GetComponent<Projectile_MarioFernandes>().m_distractTime = m_currentWeapon[m_weaponsIndex].m_distractTime;
+
+            if(m_currentWeapon[m_weaponsIndex].m_foodType == FoodType.DANGO)
+            {
+            GameObject projectile2 = Instantiate(m_projectile, transform.position, transform.rotation);
+            projectile2.GetComponent<Projectile_MarioFernandes>().m_dmg = (int)(m_currentWeapon[m_weaponsIndex].dmg * m_strenght);
+            projectile2.GetComponent<Projectile_MarioFernandes>().m_distractTime = m_currentWeapon[m_weaponsIndex].m_distractTime;
+            projectile2.GetComponent<Projectile_MarioFernandes>().m_speed /= 2;
+            }
         }
         else
         {
@@ -131,23 +142,29 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             {
                 case FoodType.FUGU:                   
                     if (Random.Range(0, 101) >= 50)
-                        gameObject.GetComponent<EffectManager_MarioFernandes>().AddEffect(new PoisionDefuff_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_poisonDmg));                        
+                        m_effectManager.AddEffect(new PoisionDefuff_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_poisonDmg));                        
                     break;
                 case FoodType.SQUID:                    
                     break;
                 case FoodType.RICEBALL:                    
                     break;
                 case FoodType.KOBEBEEF:                   
-                    gameObject.GetComponent<EffectManager_MarioFernandes>().AddEffect(new SpeedEffect_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_speedModifier));
+                    m_effectManager.AddEffect(new SpeedEffect_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_speedModifier));
                     break;
                 case FoodType.SASHIMI:                    
-                    gameObject.GetComponent<EffectManager_MarioFernandes>().AddEffect(new StrengthEffect_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_strengthModifier));
+                    m_effectManager.AddEffect(new StrengthEffect_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_strengthModifier));
                     break;
                 case FoodType.TEMPURA:
+                    m_effectManager.AddEffect(new StrengthEffect_MarioFernandes(30, m_currentWeapon[m_weaponsIndex].m_strengthModifier));
+                    m_effectManager.AddEffect(new SpeedEffect_MarioFernandes(30, m_currentWeapon[m_weaponsIndex].m_speedModifier));
+                    break;
+                case FoodType.DANGO:
                     break;
                 case FoodType.SAKE:
+                    m_effectManager.AddEffect(new StrengthEffect_MarioFernandes(30, m_currentWeapon[m_weaponsIndex].m_strengthModifier));
                     break;
                 case FoodType.NOODLES:
+                    m_effectManager.AddEffect(new StrengthEffect_MarioFernandes(30, m_currentWeapon[m_weaponsIndex].m_strengthModifier));
                     break;
                 default:
                     break;
@@ -169,6 +186,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         m_audioManager = FindObjectOfType<AudioManager_LouieWilliamson>();
         Controller = GetComponent<PlayerController_JamieG>();
         m_WeaponUI = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
+        m_effectManager = gameObject.GetComponent<EffectManager_MarioFernandes>();
     }
 
     // Update is called once per frame
