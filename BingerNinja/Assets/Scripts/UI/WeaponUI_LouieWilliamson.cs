@@ -26,9 +26,6 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     private Animator weaponsAnim;
     public Animator pickupAnim;
     public Animator keyAnim;
-
-    private float timer;
-
     public List<Sprite> WeaponSprites = new List<Sprite>();
 
     //---- LIST KEY ----   //
@@ -54,9 +51,9 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     {
         pickupAnim.SetBool("isPickupShown", hasPickup);
     }
-    public void setPickupImage()
+    public void setPickupImage(FoodType newPickup)
     {
-        //pickupImage.sprite = ;
+        pickupImage.sprite = WeaponSprites[(int)newPickup];
     }
 
     public void WeaponChange(FoodType newWeapon, bool isRanged, int ammo)
@@ -65,75 +62,12 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
         {
             setAmmo("" + ammo);
         }
-
-        switch (newWeapon)
-        {
-            case FoodType.FUGU:
-                setName("Fugu", isRanged);
-                setImage( 0, isRanged);
-                break;
-            case FoodType.SQUID:
-                setName("Squid", isRanged);
-                setImage(1, isRanged);
-                break;
-            case FoodType.RICEBALL:
-                setName("Riceball", isRanged);
-                setImage(2, isRanged);
-                break;
-            case FoodType.KOBEBEEF:
-                setName("Kobe Beef", isRanged);
-                setImage(3, isRanged);
-                break;
-            case FoodType.SASHIMI:
-                setName("Sashimi", isRanged);
-                setImage(4, isRanged);
-                break;
-            case FoodType.TEMPURA:
-                setName("Pizza", isRanged);
-                setImage(5, isRanged);
-                break;
-            case FoodType.SAKE:
-                setName("Sake", isRanged);
-                setImage(6, isRanged);
-                break;
-            case FoodType.NOODLES:
-                setName("Noodles", isRanged);
-                setImage(7, isRanged);
-                break;
-            default:
-                break;
-        }
+        setName(newWeapon.ToString(), isRanged);
+        setImage((int)newWeapon, isRanged);
     }
     void Start()
     {
         weaponsAnim = GetComponent<Animator>();
-
-        timer = 0;
-    }
-    void Update()
-    {
-        timer += Time.deltaTime;
-
-        if (timer > 25)
-        {
-            WeaponChange(FoodType.FUGU, false, 0);
-        }
-        else if (timer > 20)
-        {
-            WeaponChange(FoodType.KOBEBEEF, false, 0);
-        }
-        else if (timer > 15)
-        {
-            WeaponChange(FoodType.NOODLES, false, 0);
-        }
-        else if (timer > 10)
-        {
-            WeaponChange(FoodType.RICEBALL, true, 10);
-        }
-        else if (timer > 5)
-        {
-            WeaponChange(FoodType.SQUID, false, 0);
-        }
     }
     void setName(string name, bool isRanged)
     {
@@ -161,6 +95,4 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     {
         ammoText.text = ammo;
     }
-
-
 }

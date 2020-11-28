@@ -93,7 +93,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_baseDamage: 1
-  m_damage: 0
+  m_percentageChanceOfAffect: 0.5
+  m_poisionDamage: 1
+  m_slowDebuff: 0.5
+  m_affectTime: 5
 --- !u!1 &1886465507647099100
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,7 +169,7 @@ SpriteRenderer:
   m_SortingLayerID: -2137332843
   m_SortingLayer: 3
   m_SortingOrder: 100
-  m_Sprite: {fileID: 8452160866309653340, guid: 7eec9656956eec34baf6f874b2f50d24, type: 3}
+  m_Sprite: {fileID: -4628504154540175126, guid: 7eec9656956eec34baf6f874b2f50d24, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -405,6 +408,11 @@ MonoBehaviour:
   m_sneakDamageMultiplierStack: 0
   m_attackRange: 0.6
   m_attckRangeDevider: 1
+  m_tiggerBossLooseTargetDistance: 2
+  m_secondPhaseStartPercentage: 0.3
+  m_amountOfStunWhenPlayerStealthed: 3
+  m_doseAffect: 1
+  m_attackSpeedIncrease: 1.5
   m_hitSpeed: 2
   m_attackCollider: {fileID: 220513390732296407}
   attackDeactivationSpeed: 0.1
@@ -412,7 +420,10 @@ MonoBehaviour:
   m_chargeAttackDeley: 0
   m_chargAttackPosibility: 0
   m_chargeAttackMultiplier: 3
-  m_petTigerDeley: 0
+  m_afterAttackDeley: 0
+  m_maxChargTimeBeforDamege: 0.2
+  m_amountOfTimeToMoveAwayFromWall: 0.2
+  m_chargeAttackSpeed: 500
 --- !u!114 &142416290521486900
 MonoBehaviour:
   m_ObjectHideFlags: 0

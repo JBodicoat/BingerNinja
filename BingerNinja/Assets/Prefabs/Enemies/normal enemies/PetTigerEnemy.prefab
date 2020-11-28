@@ -93,7 +93,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_baseDamage: 1
-  m_damage: 0
+  m_percentageChanceOfAffect: 0.5
+  m_poisionDamage: 1
+  m_slowDebuff: 0.5
+  m_affectTime: 5
 --- !u!1 &2962778701667265248
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,8 +136,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1832853375835162763}
-  - component: {fileID: 3170035243887679203}
   - component: {fileID: 6394425110915733454}
+  - component: {fileID: 8631870844753434287}
   m_Layer: 2
   m_Name: EnemySprite
   m_TagString: Untagged
@@ -156,44 +159,25 @@ Transform:
   m_Father: {fileID: 8631870844753434286}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8631870844753434322
-GameObject:
+--- !u!95 &6394425110915733454
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8631870844753434286}
-  - component: {fileID: 8631870844753434287}
-  - component: {fileID: 8631870844753434284}
-  - component: {fileID: 8631870844753434285}
-  - component: {fileID: 8631870844753434323}
-  - component: {fileID: 8631870844753434320}
-  m_Layer: 2
-  m_Name: PetTigerEnemy
-  m_TagString: Enemy
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8631870844753434286
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8631870844753434322}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.21, y: 8.67, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
-  m_Children:
-  - {fileID: 8631870843932011449}
-  - {fileID: 4202125626246644408}
-  - {fileID: 4073614791533693554}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 3932961708718538171}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a7666b1cf717b004689c971945512115, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &8631870844753434287
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -234,7 +218,7 @@ SpriteRenderer:
   m_SortingLayerID: -2137332843
   m_SortingLayer: 3
   m_SortingOrder: 100
-  m_Sprite: {fileID: 8452160866309653340, guid: 7eec9656956eec34baf6f874b2f50d24, type: 3}
+  m_Sprite: {fileID: 7158517829127015882, guid: 7eec9656956eec34baf6f874b2f50d24, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -245,25 +229,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &6394425110915733454
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3932961708718538171}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a7666b1cf717b004689c971945512115, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8631870843932011454
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,6 +409,10 @@ MonoBehaviour:
   m_attackRange: 0.6
   m_attckRangeDevider: 1
   m_tiggerBossLooseTargetDistance: 2
+  m_secondPhaseStartPercentage: 0.3
+  m_amountOfStunWhenPlayerStealthed: 3
+  m_doseAffect: 1
+  m_attackSpeedIncrease: 1.5
   m_hitSpeed: 2
   m_attackCollider: {fileID: 220513390732296407}
   attackDeactivationSpeed: 0.1
@@ -451,7 +420,10 @@ MonoBehaviour:
   m_chargeAttackDeley: 0
   m_chargAttackPosibility: 0
   m_chargeAttackMultiplier: 3
-  m_petTigerDeley: 2
+  m_afterAttackDeley: 0
+  m_maxChargTimeBeforDamege: 0.2
+  m_amountOfTimeToMoveAwayFromWall: 0.2
+  m_chargeAttackSpeed: 500
 --- !u!114 &958166161453048155
 MonoBehaviour:
   m_ObjectHideFlags: 0
