@@ -27,6 +27,7 @@ public class PlayerController_JamieG : MonoBehaviour
     public InputAction m_roll;
 
     public InputAction m_switchWeapons;
+    public InputAction m_dropWeapons;
 
     //Reference to the other player scripts
     private PlayerMovement_MarioFernandes m_playerMovementScript;
@@ -77,6 +78,7 @@ public class PlayerController_JamieG : MonoBehaviour
         m_attackSlowTap.Enable();
         m_roll.Enable();
         m_switchWeapons.Enable();
+        m_dropWeapons.Enable();
     }
 
     private void OnDisable()
@@ -89,6 +91,7 @@ public class PlayerController_JamieG : MonoBehaviour
         m_attackSlowTap.Disable();
         m_roll.Disable();
         m_switchWeapons.Disable();
+        m_dropWeapons.Disable();
     }
     #endregion
 
