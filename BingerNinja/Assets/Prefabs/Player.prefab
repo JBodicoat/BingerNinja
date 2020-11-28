@@ -432,7 +432,7 @@ MonoBehaviour:
       m_Flags: 0
     - m_Name: 
       m_Id: 376de27c-5b27-4731-8ec1-f502662a214b
-      m_Path: 
+      m_Path: <Gamepad>/buttonEast
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -480,7 +480,7 @@ MonoBehaviour:
       m_Flags: 0
     - m_Name: 
       m_Id: 675a5276-34b9-405b-bda0-0744a2e460de
-      m_Path: <Gamepad>/buttonEast
+      m_Path: <Gamepad>/rightShoulder
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -506,12 +506,20 @@ MonoBehaviour:
     m_Name: Roll
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: aa4a4c48-a011-434a-bca7-80f6947c71c0
+    m_Id: 93a90cd6-7b3f-4aa5-a2fa-27728b9cede6
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: 61f71e26-e0f4-4dbd-92dd-8d6482efb236
+      m_Id: c334bedc-68bf-4c2c-b921-2392d043bd82
+      m_Path: <Keyboard>/q
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Roll
+      m_Flags: 0
+    - m_Name: 
+      m_Id: a6339f35-0545-4927-b23b-81e8aa4e2e85
       m_Path: <Gamepad>/buttonSouth
       m_Interactions: 
       m_Processors: 
@@ -625,7 +633,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8116294513426094757}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.114, z: 0}
+  m_LocalPosition: {x: 0.005, y: 0.114, z: 0}
   m_LocalScale: {x: 1.9673841, y: 1.9673841, z: 1.9673841}
   m_Children: []
   m_Father: {fileID: 4362767424123825809}
