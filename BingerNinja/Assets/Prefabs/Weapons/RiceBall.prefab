@@ -97,9 +97,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.16, y: 0.16}
+  m_Offset: {x: -0.07246101, y: -0.0009340048}
   serializedVersion: 2
-  m_Radius: 0.16
+  m_Radius: 0.5533949
 --- !u!114 &3149396069716883728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,5 +120,7 @@ MonoBehaviour:
   m_poisonDmg: 0
   m_strengthModifier: 0
   m_speedModifier: 1
+  m_distractTime: 3
+  m_ammunition: 3
   dmg: 20
   m_hungerRestoreAmount: 33

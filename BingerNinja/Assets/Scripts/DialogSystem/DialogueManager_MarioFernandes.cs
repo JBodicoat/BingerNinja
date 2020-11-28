@@ -5,14 +5,17 @@
 // Mário 26/10/2020 - Ajust Dialogue to the boss Dialogue script
 // Mário 28/10/2020 - Optimisation and Stop player whene in dialogs
 // Mário 06/11/2020 - Dialog Title update, Pause Systems, Use "|" to saperate Dialogues
+// Mário 13/11/2020 - Solve "," bug and stop AI when in dialog
+// Jann  07/11/2020 - Added a quick check to swap the dialogue file based on the settings
+// Jann  25/11/2020 - Added in-game language change
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 using System.Linq;
+using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 /// <summary>
 /// My class takes care of Displaying the Dialog on the screen
@@ -27,9 +30,23 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     private Queue<string> m_sentences;
 
     public TextAsset m_csvFile;
+    public TextAsset m_csvFilePortuguese;
 
     string m_TrigerDialoguePrefab = "DialogTrigger";
     PlayerController_JamieG playerControllerScript;
+
+    private GameObject[] EnemysAI;
+    public void LoadLanguageFile()
+    {
+        SettingsData settingsData = SaveLoadSystem_JamieG.LoadSettings();
+
+        if(settingsData.m_chosenLanguage != null && settingsData.m_chosenLanguage.Equals("Portuguese"))
+        {
+            m_csvFile = m_csvFilePortuguese;
+        };
+        
+        LoadDialog(SceneManager.GetActiveScene().buildIndex);
+    }
 
     public void StartDialogue(Dialogue dialogue)
     {
@@ -107,7 +124,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         for (int i = 0; i < lines.Length; i++)
         {
 			//Split sentence using "," as reference
-            List<string> parts = lines[i].Split(","[0]).ToList();
+            List<string> parts = lines[i].Split((char)9).ToList();
 
 			//Delete empty spaces
             if (parts[0] == level.ToString())
@@ -163,24 +180,33 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     void PauseGame()
     {
         playerControllerScript.m_movement.Disable();
-        playerControllerScript.m_attack.Disable();
+        playerControllerScript.m_attackTap.Disable();
         playerControllerScript.m_crouch.Disable();
         playerControllerScript.m_eat.Disable();
         playerControllerScript.m_interact.Disable();
         playerControllerScript.GetComponentInParent<PlayerHealthHunger_MarioFernandes>().m_paused = true;
         playerControllerScript.GetComponentInParent<EffectManager_MarioFernandes>().m_paused = true;
         
+        foreach (GameObject Enemy in EnemysAI)
+        {
+            Enemy.GetComponentInParent<BaseEnemy_SebastianMol>().enabled = false;
+        }
     }
 
     void ResumeGame()
     {
         playerControllerScript.m_movement.Enable();
-        playerControllerScript.m_attack.Enable();
+        playerControllerScript.m_attackTap.Enable();
         playerControllerScript.m_crouch.Enable();
         playerControllerScript.m_eat.Enable();
         playerControllerScript.m_interact.Enable();
         playerControllerScript.GetComponentInParent<PlayerHealthHunger_MarioFernandes>().m_paused = false;
         playerControllerScript.GetComponentInParent<EffectManager_MarioFernandes>().m_paused = false;
+
+        foreach (GameObject Enemy in EnemysAI)
+        {
+            Enemy.GetComponentInParent<BaseEnemy_SebastianMol>().enabled = true;
+        }
         
     }
     // Use this for initialization
@@ -191,10 +217,13 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         m_sentences = new Queue<string>();
 
         LoadDialog(SceneManager.GetActiveScene().buildIndex);
+
+        EnemysAI = GameObject.FindGameObjectsWithTag("Enemy");
+        LoadLanguageFile();
     }
 }
 
-[System.Serializable]
+[Serializable]
 public struct Dialogue
 {
 

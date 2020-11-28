@@ -24,7 +24,14 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
 
     private GameObject m_freezerBoss;//Reference enemy to do damage
     private FreezerTrigger_JoaoBeijinho m_freezerArea;//Reference script that checks if enemy is in the freezer
+    private MeleeEnemy_SebastianMol enemyOne, enemyTwo, enemyThree;
 
+    private void Start()
+    {
+        enemyOne = GameObject.Find("EnemyOne").GetComponent<MeleeEnemy_SebastianMol>();
+        enemyTwo = GameObject.Find("EnemyTwo").GetComponent<MeleeEnemy_SebastianMol>();
+        enemyThree = GameObject.Find("EnemyThree").GetComponent<MeleeEnemy_SebastianMol>();
+    }
     public void ActivateObject()//Call this function to activate object functionality
     {
         switch (m_functionality)//Define object functionality
@@ -37,6 +44,9 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
                 break;
             case ObjectType.Computer:
                 print("This a computer");
+                enemyOne.StunEnemyWithDeleyFunc(3.0f);
+                enemyTwo.StunEnemyWithDeleyFunc(3.0f);
+                enemyThree.StunEnemyWithDeleyFunc(3.0f);
                 //make computer sound
                 break;
             case ObjectType.Freezer:
