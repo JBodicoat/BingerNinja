@@ -16,6 +16,7 @@
 // Mario 09/11/2020 - Update Names and Add strength
 // Mario 13/11/2020 - Add Distraction time to progectile
 // Louie 17/11/2020 - Added Weapon UI integration
+// Mario 20/11/2020 - Subtration of ammunition and added chargedattack modifier
 
 using System.Collections;
 using System.Collections.Generic;
@@ -52,6 +53,8 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
     //public Collider2D EnemyDetection = null;    
     public float m_meleeAttackRadius = 3;
     public float m_strenght = 1;
+
+    public float m_chargedModifier = 1.3f;
     protected PlayerStealth_JoaoBeijinho m_playerStealthScript;
 
     //This weapons are represented by an array of weapons of size 2
@@ -79,17 +82,25 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         m_strenght = 1;
     }
 
-    void Attack()
+    void Attack(float chargedModifier = 1)
     {
         m_animationScript.TriggerAttackAnim();
 
         if(m_currentWeapon[m_weaponsIndex].IsRanged())
         {
             //TODO undo this comment
-             //m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
-             GameObject projectile = Instantiate(m_projectile, transform.position, transform.rotation);
-             projectile.GetComponent<Projectile_MarioFernandes>().m_dmg = (int)(m_currentWeapon[m_weaponsIndex].dmg * m_strenght);
-             projectile.GetComponent<Projectile_MarioFernandes>().m_distractTime = m_currentWeapon[m_weaponsIndex].m_distractTime;
+            //m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
+            GameObject projectile = Instantiate(m_projectile, transform.position, transform.rotation);
+            projectile.GetComponent<Projectile_MarioFernandes>().m_dmg = (int)(m_currentWeapon[m_weaponsIndex].dmg * m_strenght * chargedModifier);
+            projectile.GetComponent<Projectile_MarioFernandes>().m_distractTime = m_currentWeapon[m_weaponsIndex].m_distractTime;
+            
+            --m_currentWeapon[m_weaponsIndex].m_ammunition;
+            
+            if(m_currentWeapon[m_weaponsIndex].m_ammunition <= 0)
+            {
+                m_currentWeapon[m_weaponsIndex].enabled = false;
+                m_currentWeapon[m_weaponsIndex] = null;
+            }
         }
         else
         {
@@ -112,7 +123,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
                 if(CloseEnemy && distanceToClosestsEnemy <= m_meleeAttackRadius)
                 {
-                    CloseEnemy.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage( m_damageType.MELEE , (int)(m_currentWeapon[m_weaponsIndex].dmg * m_strenght));
+                    CloseEnemy.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage( m_damageType.MELEE , (int)(m_currentWeapon[m_weaponsIndex].dmg * m_strenght * chargedModifier));
                 }                
             }
 
@@ -188,11 +199,22 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
         if(m_timeSinceLastAttack < 0)
         {
-              if (!m_playerStealthScript.m_crouched && m_currentWeapon[m_weaponsIndex] &&  Controller.m_attack.triggered)
-            {                           
+
+
+              if (!m_playerStealthScript.m_crouched && m_currentWeapon[m_weaponsIndex])
+            {         
+                if( Controller.m_attackTap.triggered)              
+                {    
                 m_timeSinceLastAttack = m_attackDelay;
-                print("Attack");
-                Attack();        
+                
+                Attack();   
+                } else
+                if( Controller.m_attackSlowTap.triggered)              
+                {    
+                m_timeSinceLastAttack = m_attackDelay;
+                
+                Attack(m_chargedModifier);   
+               } 
             }          
         }
         else

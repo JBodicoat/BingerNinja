@@ -70,7 +70,6 @@ GameObject:
   - component: {fileID: 4362767422803623037}
   - component: {fileID: 4362767422803623039}
   - component: {fileID: 651991310}
-  - component: {fileID: 4343650747781663221}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -190,20 +189,6 @@ MonoBehaviour:
   redOffset: {x: 0, y: 0}
   blueOffset: {x: 0, y: 0}
   greenOffset: {x: 0, y: 0}
---- !u!114 &4343650747781663221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4362767422803623033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e221c3009ff7f64eb398883fb21b39f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_duration: 0.15
-  m_magnitude: 0.4
 --- !u!1 &4362767424123825799
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +210,6 @@ GameObject:
   - component: {fileID: 4362767424123825798}
   - component: {fileID: 4272470005486940903}
   - component: {fileID: 1777221697}
-  - component: {fileID: 7527370122809757815}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -383,6 +367,7 @@ MonoBehaviour:
   m_timeSinceLastAttack: 0
   m_meleeAttackRadius: 3
   m_strenght: 1
+  m_chargedModifier: 1.3
   m_currentWeapon:
   - {fileID: 0}
   m_weaponsIndex: 0
@@ -509,27 +494,43 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Eat
       m_Flags: 0
-  m_attack:
-    m_Name: Attack
+  m_attackTap:
+    m_Name: Attack Tap
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 571c0546-8ebe-47b4-81de-eb8a7da5bae5
+    m_Id: bb30378e-9679-4fe4-952d-ab41b1b8a2c1
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: 2890d4c9-cdd0-4947-87c1-49fd9cf174c3
+      m_Id: a29192a3-6299-4ee8-a2b7-97a84c93c454
       m_Path: <Mouse>/leftButton
-      m_Interactions: 
+      m_Interactions: Tap
       m_Processors: 
       m_Groups: 
-      m_Action: Attack
+      m_Action: Attack Tap
+      m_Flags: 0
+  m_attackSlowTap:
+    m_Name: Attack Slow Tap
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: fc4278ed-274b-4e0f-81f1-667f480d08f0
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: c0cc112f-6879-4967-a02a-1b6a2473e4fe
+      m_Path: <Mouse>/leftButton
+      m_Interactions: Hold(duration=1)
+      m_Processors: 
+      m_Groups: 
+      m_Action: Attack Slow Tap
       m_Flags: 0
   m_roll:
     m_Name: Roll
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: f668dad6-9372-4829-a39d-086a0d84712d
+    m_Id: aa4a4c48-a011-434a-bca7-80f6947c71c0
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -561,8 +562,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3623eaab13c2da64b936376c5cca8580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_speed: 3
-  m_baseSpeed: 3
+  m_speed: 5
+  m_baseSpeed: 5
   isRolling: 0
 --- !u!114 &4362767424123825801
 MonoBehaviour:
@@ -617,17 +618,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 139246ae6a1c4324f9ac2007a58a30fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7527370122809757815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4362767424123825799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d31f9a7fe448ac4393bf8ec13e9bef9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_critical: 174
-  m_nonCritical: 122
