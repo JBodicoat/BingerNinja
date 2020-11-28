@@ -248,7 +248,7 @@ SpriteRenderer:
   m_SortingLayerID: -2137332843
   m_SortingLayer: 3
   m_SortingOrder: 100
-  m_Sprite: {fileID: 8452160866309653340, guid: 7eec9656956eec34baf6f874b2f50d24, type: 3}
+  m_Sprite: {fileID: 4826986454623800727, guid: 7eec9656956eec34baf6f874b2f50d24, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -451,9 +451,10 @@ MonoBehaviour:
   m_chargeAttackDeley: 1
   m_chargAttackPosibility: 1
   m_chargeAttackMultiplier: 3
-  m_petTigerDeley: 0
+  m_afterAttackDeley: 0
   m_maxChargTimeBeforDamege: 0.2
   m_amountOfTimeToMoveAwayFromWall: 0.2
+  m_chargeAttackSpeed: 500
   m_aimer: {fileID: 1488481114249787428}
   m_projectile: {fileID: 1986204507551107328, guid: c719167a814eda848a315ea7dbef9a8a, type: 3}
   m_shootDeley: 0
@@ -461,6 +462,9 @@ MonoBehaviour:
   m_RangedAttackRandomChance: 2
   m_rangedAttackRange: 3
   m_meleeAttackRange: 0.6
+  m_chargeAttackRangeTadashi: 10
+  m_rangedAttackRangeTadashi: 3
+  m_meleeAttackRangeTadashi: 1
 --- !u!114 &482129027589876793
 MonoBehaviour:
   m_ObjectHideFlags: 0
