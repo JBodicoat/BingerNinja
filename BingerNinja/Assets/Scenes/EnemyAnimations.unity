@@ -9338,8 +9338,120 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1589919368}
     - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_movement.m_SingletonActionBindings.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_roll.m_Id
       value: 03ccaebe-1461-4aea-8c11-309499b195f6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_roll.m_Name
+      value: Roll
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_movement.m_SingletonActionBindings.Array.data[5].m_Name
+      value: 2D Vector
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_movement.m_SingletonActionBindings.Array.data[5].m_Id
+      value: 78f52809-9540-4b28-bee1-9ebe69c717c8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_movement.m_SingletonActionBindings.Array.data[5].m_Path
+      value: 2DVector
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_movement.m_SingletonActionBindings.Array.data[5].m_Action
+      value: Movement
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_movement.m_SingletonActionBindings.Array.data[5].m_Flags
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_movement.m_SingletonActionBindings.Array.data[6].m_Name
+      value: up
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_movement.m_SingletonActionBindings.Array.data[6].m_Id
+      value: ea5f7956-1745-4bed-b21a-2a5121dbda7c
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_movement.m_SingletonActionBindings.Array.data[6].m_Action
+      value: Movement
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_movement.m_SingletonActionBindings.Array.data[6].m_Flags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_movement.m_SingletonActionBindings.Array.data[7].m_Name
+      value: down
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_movement.m_SingletonActionBindings.Array.data[7].m_Id
+      value: 1a7ce60d-cf2c-4c75-b765-eb4a3a00e18f
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_movement.m_SingletonActionBindings.Array.data[7].m_Action
+      value: Movement
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_movement.m_SingletonActionBindings.Array.data[7].m_Flags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_movement.m_SingletonActionBindings.Array.data[8].m_Name
+      value: left
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_movement.m_SingletonActionBindings.Array.data[8].m_Id
+      value: 28e761a0-2f04-4883-a0bd-d6f9dabe708e
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_movement.m_SingletonActionBindings.Array.data[8].m_Action
+      value: Movement
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_movement.m_SingletonActionBindings.Array.data[8].m_Flags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_movement.m_SingletonActionBindings.Array.data[9].m_Name
+      value: right
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_movement.m_SingletonActionBindings.Array.data[9].m_Id
+      value: bf4619bc-ba32-4d40-893a-ac1fc1961baf
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_movement.m_SingletonActionBindings.Array.data[9].m_Action
+      value: Movement
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_movement.m_SingletonActionBindings.Array.data[9].m_Flags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_movement.m_SingletonActionBindings.Array.data[6].m_Path
+      value: <Gamepad>/leftStick/up
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_attackTap.m_Id
+      value: 4b152a50-356d-4c7c-9b0a-cd281df5c33b
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_attackSlowTap.m_Id
+      value: a1ec3686-f8c6-4e1e-bbb7-3c02342da836
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_attackTap.m_Name
+      value: Attack Tap
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_attackSlowTap.m_Name
+      value: Attack Slow Tap
       objectReference: {fileID: 0}
     - target: {fileID: 4362767424123825809, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9483,7 +9595,7 @@ Transform:
   - {fileID: 1854684508}
   - {fileID: 805070140}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &778053628
 PrefabInstance:
@@ -10117,7 +10229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8245644744696087316, guid: 44a6dcc353756cc43a71c95766293321, type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8245644744696087316, guid: 44a6dcc353756cc43a71c95766293321, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -12521,7 +12633,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8245644744696087316, guid: 44a6dcc353756cc43a71c95766293321, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 8245644744696087316, guid: 44a6dcc353756cc43a71c95766293321, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -13463,7 +13575,7 @@ Transform:
   - {fileID: 740827632}
   - {fileID: 1196060537}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &343649846328760942
 PrefabInstance:
@@ -13531,11 +13643,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8631870844753434286, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.3388968
+      value: 1.42
       objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434286, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.119343
+      value: 9.16
       objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434286, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
       propertyPath: m_LocalPosition.z

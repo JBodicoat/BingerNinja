@@ -25,6 +25,7 @@ public class VendingMachine_Alanna_P : MonoBehaviour
 
     private void Image_Click()
     {
+
         if (m_LeftClick.m_attackTap.enabled)
         {
             RaycastHit hit;

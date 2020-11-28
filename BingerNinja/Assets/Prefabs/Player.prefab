@@ -367,7 +367,6 @@ MonoBehaviour:
   m_timeSinceLastAttack: 0
   m_meleeAttackRadius: 3
   m_strenght: 1
-  m_chargedModifier: 1.3
   m_currentWeapon:
   - {fileID: 0}
   m_weaponsIndex: 0
@@ -494,38 +493,14 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Eat
       m_Flags: 0
-  m_attackTap:
-    m_Name: Attack Tap
+  m_attack:
+    m_Name: 
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: bb30378e-9679-4fe4-952d-ab41b1b8a2c1
+    m_Id: 835605c7-f787-4957-b783-f842cee5fdf2
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: a29192a3-6299-4ee8-a2b7-97a84c93c454
-      m_Path: <Mouse>/leftButton
-      m_Interactions: Tap
-      m_Processors: 
-      m_Groups: 
-      m_Action: Attack Tap
-      m_Flags: 0
-  m_attackSlowTap:
-    m_Name: Attack Slow Tap
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: fc4278ed-274b-4e0f-81f1-667f480d08f0
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: c0cc112f-6879-4967-a02a-1b6a2473e4fe
-      m_Path: <Mouse>/leftButton
-      m_Interactions: Hold(duration=1)
-      m_Processors: 
-      m_Groups: 
-      m_Action: Attack Slow Tap
-      m_Flags: 0
+    m_SingletonActionBindings: []
   m_roll:
     m_Name: Roll
     m_Type: 0
