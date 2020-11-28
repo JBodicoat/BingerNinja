@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07fabf56df0d21242acb771bafbb7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_enemyInFreezer: 0
+  m_enemyList: []
 --- !u!61 &76610188
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -318,6 +318,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_functionality: 3
+  m_maxTicks: 0
+  m_damageInterval: 0
+  m_damageAmount: 0
+  m_freezerCooldown: 0
+  m_stunLight: 0
 --- !u!1001 &94314011
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -635,6 +640,14 @@ PrefabInstance:
       propertyPath: m_patrolPoints.Array.data[4]
       value: 
       objectReference: {fileID: 466584987}
+    - target: {fileID: 5157954882409207611, guid: 8cc369ca1c3eadd44941276d47788caa, type: 3}
+      propertyPath: m_dosePatrole
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157954882409207611, guid: 8cc369ca1c3eadd44941276d47788caa, type: 3}
+      propertyPath: m_health
+      value: 400
+      objectReference: {fileID: 0}
     - target: {fileID: 5157954882409207612, guid: 8cc369ca1c3eadd44941276d47788caa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.47

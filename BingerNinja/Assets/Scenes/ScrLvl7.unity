@@ -485,9 +485,21 @@ PrefabInstance:
       propertyPath: m_patrolPoints.Array.data[1]
       value: 
       objectReference: {fileID: 1798796431}
+    - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
+      propertyPath: m_dosePatrole
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
+      propertyPath: m_deleyBetweenPatrol
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434322, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
       propertyPath: m_Name
       value: EnemyOne
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802191557362704687, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
+      propertyPath: m_baseDamage
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
@@ -31865,9 +31877,21 @@ PrefabInstance:
       propertyPath: m_patrolPoints.Array.data[1]
       value: 
       objectReference: {fileID: 119539333}
+    - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
+      propertyPath: m_dosePatrole
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
+      propertyPath: m_deleyBetweenPatrol
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434322, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
       propertyPath: m_Name
       value: EnemyTwo
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802191557362704687, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
+      propertyPath: m_baseDamage
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
@@ -32354,9 +32378,21 @@ PrefabInstance:
       propertyPath: m_patrolPoints.Array.data[1]
       value: 
       objectReference: {fileID: 296268110}
+    - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
+      propertyPath: m_dosePatrole
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
+      propertyPath: m_deleyBetweenPatrol
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434322, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
       propertyPath: m_Name
       value: EnemyThree
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802191557362704687, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
+      propertyPath: m_baseDamage
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
@@ -34000,6 +34036,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_functionality: 2
+  m_maxTicks: 0
+  m_damageInterval: 0
+  m_damageAmount: 0
+  m_freezerCooldown: 0
+  m_stunLight: 0
 --- !u!4 &1781641337
 Transform:
   m_ObjectHideFlags: 0
