@@ -154,14 +154,11 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
                 case FoodType.SASHIMI:                    
                     m_effectManager.AddEffect(new StrengthEffect_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_strengthModifier));
                     break;
-                case FoodType.TEMPURA:
-                    m_effectManager.AddEffect(new StrengthEffect_MarioFernandes(30, m_currentWeapon[m_weaponsIndex].m_strengthModifier));
-                    m_effectManager.AddEffect(new SpeedEffect_MarioFernandes(30, m_currentWeapon[m_weaponsIndex].m_speedModifier));
+                case FoodType.TEMPURA:                   
                     break;
                 case FoodType.DANGO:
                     break;
-                case FoodType.SAKE:
-                    m_effectManager.AddEffect(new StrengthEffect_MarioFernandes(30, m_currentWeapon[m_weaponsIndex].m_strengthModifier));
+                case FoodType.SAKE:                    
                     break;
                 case FoodType.NOODLES:
                     m_effectManager.AddEffect(new StrengthEffect_MarioFernandes(30, m_currentWeapon[m_weaponsIndex].m_strengthModifier));

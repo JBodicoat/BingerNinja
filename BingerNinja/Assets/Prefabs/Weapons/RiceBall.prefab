@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3149396069716883728}
   m_Layer: 0
   m_Name: RiceBall
-  m_TagString: Untagged
+  m_TagString: PlayerWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,5 +120,6 @@ MonoBehaviour:
   m_poisonDmg: 0
   m_strengthModifier: 0
   m_speedModifier: 1
+  m_distractTime: 0
   dmg: 20
   m_hungerRestoreAmount: 33

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4912318615395261050}
   m_Layer: 0
   m_Name: Sashimi
-  m_TagString: Untagged
+  m_TagString: PlayerWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,6 +118,8 @@ MonoBehaviour:
   m_healOverTime: 0
   m_duration: 0
   m_poisonDmg: 0
+  m_strengthModifier: 0
   m_speedModifier: 1.5
+  m_distractTime: 0
   dmg: 20
   m_hungerRestoreAmount: 33
