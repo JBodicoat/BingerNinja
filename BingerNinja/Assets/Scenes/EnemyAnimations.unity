@@ -9437,6 +9437,22 @@ PrefabInstance:
       propertyPath: m_movement.m_SingletonActionBindings.Array.data[6].m_Path
       value: <Gamepad>/leftStick/up
       objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_attackTap.m_Id
+      value: 4b152a50-356d-4c7c-9b0a-cd281df5c33b
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_attackSlowTap.m_Id
+      value: a1ec3686-f8c6-4e1e-bbb7-3c02342da836
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_attackTap.m_Name
+      value: Attack Tap
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_attackSlowTap.m_Name
+      value: Attack Slow Tap
+      objectReference: {fileID: 0}
     - target: {fileID: 4362767424123825809, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.33
