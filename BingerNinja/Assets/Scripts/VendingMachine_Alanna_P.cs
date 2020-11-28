@@ -25,7 +25,7 @@ public class VendingMachine_Alanna_P : MonoBehaviour
 
     private void Image_Click()
     {
-        if (true)//m_LeftClick.m_attack.enabled)
+        if (m_LeftClick.m_attack.enabled)
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
