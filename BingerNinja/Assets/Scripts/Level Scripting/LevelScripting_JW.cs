@@ -11,7 +11,7 @@ public class LevelScripting_JW : MonoBehaviour
     BaseEnemy_SebastianMol boss;
     bool levelBossIntro = false, bossDead = false, doorsClosed = false;
     Tilemap walls1, walls2;
-    public Tile bottomDoorTile, topDoorTile;
+    Tile bottomDoorTile, topDoorTile;
 
     
     private void Awake()
@@ -30,6 +30,11 @@ public class LevelScripting_JW : MonoBehaviour
             levelLiftTrigger = GameObject.Find("Level 14 Lift");
             keyTrigger = GameObject.Find("Key");
             doorCloseTrigger = GameObject.Find("Pressure pad intro").transform.Find("DialogTrigger").gameObject;
+            bottomDoorTile = walls1.GetTile<Tile>(new Vector3Int(12,26,0));
+            walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
+            walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
+            bottomDoorTile = walls1.GetTile<Tile>(new Vector3Int(12, 26, 0));
+            topDoorTile = walls1.GetTile<Tile>(new Vector3Int(13, 27, 0));
         }
 
     }
@@ -43,6 +48,12 @@ public class LevelScripting_JW : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 14)
         {
             levelLiftTrigger.SetActive(false);
+            walls1.SetTile(new Vector3Int(12, 26, 0), null);
+            walls1.SetTile(new Vector3Int(12, 25, 0), null);
+            walls1.SetTile(new Vector3Int(12, 24, 0), null);
+            walls2.SetTile(new Vector3Int(13, 27, 0), null);
+            walls2.SetTile(new Vector3Int(13, 26, 0), null);
+            walls2.SetTile(new Vector3Int(13, 25, 0), null);
         }
     }
     
@@ -76,12 +87,18 @@ public class LevelScripting_JW : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(SceneManager.GetActiveScene().buildIndex == 14)
+        if(SceneManager.GetActiveScene().buildIndex == 16)
         {
             //Mechanic for closing the doors behind the player on lvl 14
             if (other.gameObject == doorCloseTrigger && !doorsClosed)
             {
-                
+                walls1.SetTile(new Vector3Int(12, 26, 0), bottomDoorTile);
+                walls1.SetTile(new Vector3Int(12, 25, 0), bottomDoorTile);
+                walls1.SetTile(new Vector3Int(12, 24, 0), bottomDoorTile);
+                walls2.SetTile(new Vector3Int(13, 27, 0), topDoorTile);
+                walls2.SetTile(new Vector3Int(13, 26, 0), topDoorTile);
+                walls2.SetTile(new Vector3Int(13, 25, 0), topDoorTile);
+
                 doorsClosed = true;
             }
         }
