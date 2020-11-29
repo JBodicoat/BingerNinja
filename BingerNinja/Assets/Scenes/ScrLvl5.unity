@@ -1101,7 +1101,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.35063958, y: -0.04293537}
+  m_Offset: {x: 0.26385772, y: -0.04293537}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1112,7 +1112,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.7012792, y: 1.0858707}
+  m_Size: {x: 2.506056, y: 1.0858707}
   m_EdgeRadius: 0
 --- !u!114 &765167924
 MonoBehaviour:
@@ -1135,13 +1135,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 765167922}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.870294, y: 4.301857, z: 5.3705044}
+  m_LocalRotation: {x: -0, y: -0, z: 0.26747456, w: 0.96356493}
+  m_LocalPosition: {x: 16.52, y: 3.96, z: 5.3705044}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2765014}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 31.028}
 --- !u!1 &832698233
 GameObject:
   m_ObjectHideFlags: 0
@@ -31348,13 +31348,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1010320062}
-  m_LocalRotation: {x: -0, y: -0, z: -0.27400228, w: 0.9617291}
-  m_LocalPosition: {x: 16.690294, y: 3.5318565, z: -8.009378}
+  m_LocalRotation: {x: -0, y: -0, z: -0.5193386, w: 0.8545686}
+  m_LocalPosition: {x: 16.84, y: 3.25, z: -8.009378}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2765014}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -31.805}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -62.576}
 --- !u!4 &1069965245 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4912318615395261051, guid: 0ad80d53ab6c4d6489654c970d9c6b98, type: 3}
@@ -32107,7 +32107,7 @@ GameObject:
   - component: {fileID: 1341404625}
   - component: {fileID: 1341404624}
   - component: {fileID: 1341404623}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32216,7 +32216,7 @@ GameObject:
   - component: {fileID: 1355311736}
   - component: {fileID: 1355311735}
   - component: {fileID: 1355311734}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32491,7 +32491,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1523393315}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall Tiles
   m_TagString: Untagged
   m_Icon: {fileID: 0}

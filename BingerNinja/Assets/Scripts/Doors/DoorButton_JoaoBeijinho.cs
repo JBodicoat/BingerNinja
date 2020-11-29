@@ -31,7 +31,6 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("collision");
         if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))//Collision with Player
         {
             m_canPressButton = true;//Allow player to open the door

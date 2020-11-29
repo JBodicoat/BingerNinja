@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5719243598124092201}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.9, y: -3.33, z: -11.121444}
+  m_LocalPosition: {x: -5.9, y: -3.33, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -118,6 +118,10 @@ MonoBehaviour:
   m_healOverTime: 0
   m_duration: 5
   m_poisonDmg: 10
+  m_strengthModifier: 0
   m_speedModifier: 1
+  m_distractTime: 0
+  m_ammunition: 0
   dmg: 40
   m_hungerRestoreAmount: 33
+  m_mySprite: {fileID: 0}
