@@ -102,7 +102,15 @@ public class LevelScripting_JW : MonoBehaviour
             }
         }
         //If pressure pad activated then reopen the above doors
-
+        /*
+         * Below to go into the if function
+        walls1.SetTile(new Vector3Int(12, 26, 0), null);
+        walls1.SetTile(new Vector3Int(12, 25, 0), null);
+        walls1.SetTile(new Vector3Int(12, 24, 0), null);
+        walls2.SetTile(new Vector3Int(13, 27, 0), null);
+        walls2.SetTile(new Vector3Int(13, 26, 0), null);
+        walls2.SetTile(new Vector3Int(13, 25, 0), null);
+        */
     }
     
 }
