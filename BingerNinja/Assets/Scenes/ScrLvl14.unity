@@ -142,6 +142,14 @@ PrefabInstance:
       propertyPath: m_hungerSlider
       value: 
       objectReference: {fileID: 1842141743}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_dropWeapons.m_Id
+      value: 6bf3f5aa-3b5a-443d-a6e9-850dc6ef3109
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_dropWeapons.m_Name
+      value: Drop Weapons
+      objectReference: {fileID: 0}
     - target: {fileID: 4362767424123825809, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4
@@ -188,6 +196,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 126326fb385628f48915dd9419c89498, type: 3}
+--- !u!1 &32747834 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4362767424123825799, guid: 126326fb385628f48915dd9419c89498, type: 3}
+  m_PrefabInstance: {fileID: 32747833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &32747835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32747834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3e7b29d3bb90f24ba1b9f88cb80d8d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bottomDoorTile: {fileID: 0}
+  topDoorTile: {fileID: 0}
 --- !u!4 &49598353 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8631870844753434286, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
@@ -34477,7 +34504,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 504614811}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.96, y: 105.17, z: 0}
+  m_LocalPosition: {x: -4.73, y: 105.12, z: 0}
   m_LocalScale: {x: 2.5, y: 1.3157896, z: 1}
   m_Children:
   - {fileID: 1628554561}

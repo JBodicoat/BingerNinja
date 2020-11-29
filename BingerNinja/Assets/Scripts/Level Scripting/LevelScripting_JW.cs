@@ -2,16 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 
 public class LevelScripting_JW : MonoBehaviour
 {
-    GameObject levelLiftTrigger, keyTrigger;
+    GameObject levelLiftTrigger, keyTrigger, doorCloseTrigger;
     BossDialogue_MarioFernandes bossDialogue;
     BaseEnemy_SebastianMol boss;
-    bool levelBossIntro = false, bossDead = false;
+    bool levelBossIntro = false, bossDead = false, doorsClosed = false;
+    Tilemap walls1, walls2;
+    public Tile bottomDoorTile, topDoorTile;
+
     
     private void Awake()
     {
+        walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
+        walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
 
         if (SceneManager.GetActiveScene().buildIndex == 12)
         {
@@ -23,6 +29,7 @@ public class LevelScripting_JW : MonoBehaviour
         {
             levelLiftTrigger = GameObject.Find("Level 14 Lift");
             keyTrigger = GameObject.Find("Key");
+            doorCloseTrigger = GameObject.Find("Pressure pad intro").transform.Find("DialogTrigger").gameObject;
         }
 
     }
@@ -63,7 +70,22 @@ public class LevelScripting_JW : MonoBehaviour
             {
                 levelLiftTrigger.SetActive(true);
             }
+            
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(SceneManager.GetActiveScene().buildIndex == 14)
+        {
+            //Mechanic for closing the doors behind the player on lvl 14
+            if (other.gameObject == doorCloseTrigger && !doorsClosed)
+            {
+                
+                doorsClosed = true;
+            }
+        }
+        
     }
     
 }
