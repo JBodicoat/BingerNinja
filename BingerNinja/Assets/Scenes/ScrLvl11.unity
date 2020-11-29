@@ -39277,7 +39277,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8337731497924358376, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
 --- !u!1839735485 &168276058 stripped
 Tilemap:
@@ -40719,6 +40720,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6674240104814263016, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
   m_PrefabInstance: {fileID: 168276057}
   m_PrefabAsset: {fileID: 0}
+--- !u!19719996 &1016122754
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016122753}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!114 &1016122757
 MonoBehaviour:
   m_ObjectHideFlags: 0
