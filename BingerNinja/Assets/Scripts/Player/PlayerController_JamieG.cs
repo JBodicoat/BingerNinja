@@ -24,10 +24,11 @@ public class PlayerController_JamieG : MonoBehaviour
     public InputAction m_eat;
     public InputAction m_attackTap;
     public InputAction m_attackSlowTap;
+    public InputAction m_aim;
     public InputAction m_roll;
-
     public InputAction m_switchWeapons;
     public InputAction m_dropWeapons;
+    public InputAction m_passDialogue;
 
     //Reference to the other player scripts
     private PlayerMovement_MarioFernandes m_playerMovementScript;
@@ -79,6 +80,8 @@ public class PlayerController_JamieG : MonoBehaviour
         m_roll.Enable();
         m_switchWeapons.Enable();
         m_dropWeapons.Enable();
+        m_aim.Enable();
+        m_passDialogue.Enable();
     }
 
     private void OnDisable()
@@ -92,6 +95,8 @@ public class PlayerController_JamieG : MonoBehaviour
         m_roll.Disable();
         m_switchWeapons.Disable();
         m_dropWeapons.Disable();
+        m_aim.Disable();
+        m_passDialogue.Disable();
     }
     #endregion
 

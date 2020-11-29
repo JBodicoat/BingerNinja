@@ -18,6 +18,7 @@
 // Louie 17/11/2020 - Added Weapon UI integration
 // Mario 20/11/2020 - Subtration of ammunition and added chargedattack modifier
 // Mario 28/11/2020 - item drop using "Q", now it stores the prefabs with him and childs
+// Mario 29/11/2020 - contorller implementation
 
 using System.Collections;
 using System.Collections.Generic;
@@ -100,16 +101,34 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
     void Attack(float chargedModifier = 1)
     {
-        m_animationScript.TriggerAttackAnim();
+        //m_animationScript.TriggerAttackAnim();        
 
         if(m_currentWeapon[m_weaponsIndex].IsRanged())
         {
+            Vector3 m_direction;
+
+            if(Controller.m_aim.ReadValue<Vector2>() != Vector2.zero)
+            {
+                m_direction = Controller.m_aim.ReadValue<Vector2>();
+            }else
+            {
+            
+            m_direction = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        
+            m_direction = m_direction - transform.position;
+
+            m_direction.z = 0; 
+
+            m_direction.Normalize();
+            }
+
             //TODO undo this comment
             //m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
             GameObject projectile = Instantiate(m_projectile, transform.position, transform.rotation);
             projectile.GetComponent<Projectile_MarioFernandes>().m_dmg = (int)(m_currentWeapon[m_weaponsIndex].dmg * m_strenght * chargedModifier);
             projectile.GetComponent<Projectile_MarioFernandes>().m_distractTime = m_currentWeapon[m_weaponsIndex].m_distractTime;
             projectile.GetComponent<SpriteRenderer>().sprite = m_currentWeapon[m_weaponsIndex].m_mySprite;
+            projectile.GetComponent<Projectile_MarioFernandes>().m_direction = m_direction;
             --m_currentWeapon[m_weaponsIndex].m_ammunition;
             
             if(m_currentWeapon[m_weaponsIndex].m_ammunition <= 0)

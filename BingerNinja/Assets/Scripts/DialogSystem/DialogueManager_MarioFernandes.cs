@@ -9,6 +9,7 @@
 // Jann  07/11/2020 - Added a quick check to swap the dialogue file based on the settings
 // Jann  25/11/2020 - Added in-game language change
 // Louie 28/11/2020 - Added weapon ui animation code
+// Mário 29/11/2020 - PassDialogue using controller
 
 using System;
 using System.Collections;
@@ -218,6 +219,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
         wpnUI = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
         playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
 
@@ -227,6 +229,13 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
 
         EnemysAI = GameObject.FindGameObjectsWithTag("Enemy");
         LoadLanguageFile();
+    }
+
+    private void Update() {
+        if(m_nameText.transform.parent.gameObject.active && playerControllerScript.m_passDialogue.triggered)
+        {
+            DisplayNextSentence();
+        }
     }
 }
 
