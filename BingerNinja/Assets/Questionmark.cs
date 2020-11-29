@@ -9,28 +9,11 @@ public class Questionmark : MonoBehaviour
 
     public void Alert()
     {
-
+        Instantiate(questionmark, gameObject.transform.position, Quaternion.identity);
     }
 
     public void LostSight()
     {
-        //for (int i = 5; i < 6; i++)
-        {
-            Instantiate(questionmark, new Vector3(0, 0, 0), Quaternion.identity);
-           // i = 1;
-        }
-       
-        //intastioat  on this player
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        LostSight();
+        Instantiate(excalmationmark, gameObject.transform.position, Quaternion.identity);
     }
 }
