@@ -32,9 +32,9 @@ public class levelScriptingMorgan : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().buildIndex == 15)
         {
-            keyTrigger = GameObject.Find("Key Trigger");
-            objWalls = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
-            objInfWalls = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
+            boss = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BaseEnemy_SebastianMol>();
+            bossDialogue = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BossDialogue_MarioFernandes>();
+            levelLiftTrigger = GameObject.Find("Level 15 Lift");
         }
     }
 
@@ -97,6 +97,23 @@ public class levelScriptingMorgan : MonoBehaviour
                 objWalls.SetTile(new Vector3Int(34, 16, 0), null);
                 objWalls.SetTile(new Vector3Int(33, 16, 0), null);
                 objWalls.SetTile(new Vector3Int(32, 16, 0), null);
+            }
+        }
+
+        if (SceneManager.GetActiveScene().buildIndex == 15 && !bossDead)
+        {
+            if (!levelBossIntro)
+            {
+                bossDialogue.TriggerDialogue(0);
+                levelBossIntro = true;
+            }
+            if (boss.m_health <= 0)
+            {
+                //dramatic death SE
+                //freeze on enemy as he dies  
+                bossDialogue.TriggerDialogue(1);
+                levelLiftTrigger.SetActive(true);
+                bossDead = true;
             }
         }
     }
