@@ -15,21 +15,10 @@ public class BulletMovment_SebastianMol : MonoBehaviour
     public float m_speed;
     internal Vector2 m_direction;
     public float m_damage;
-
     public bool m_dosePoisonDamage = false;
     public int m_poisonDamageChance;
     public float m_poisionDamage;
-    public float m_posionDamageTime;  
-    
-    public bool m_doseStunDamage = false;
-    public float m_stunAmount = 0;
-    public float m_stunDamageTime; 
-    
-    public bool m_doseHeal = false;
-    public float m_healDuration;
-    public float m_HealAmount = 0;
-
-
+    public float m_posionDamageTime;
     private AudioManager_LouieWilliamson m_audioManager;
 
     private void Start()
@@ -51,20 +40,10 @@ public class BulletMovment_SebastianMol : MonoBehaviour
                 int rand = Random.Range(0, m_poisonDamageChance);
                 if(rand == m_poisonDamageChance) FindObjectOfType<EffectManager_MarioFernandes>().AddEffect(new PoisionDefuff_MarioFernandes(m_poisionDamage, m_posionDamageTime));
             }
-            
-            if(m_doseStunDamage)
-            {
-                FindObjectOfType<EffectManager_MarioFernandes>().AddEffect(new SpeedEffect_MarioFernandes(m_stunDamageTime, 0));
-            } 
-            
-            if(m_doseHeal)
-            {
-                FindObjectOfType<EffectManager_MarioFernandes>().AddEffect(new HealBuff_MarioFernandes(m_healDuration,m_HealAmount));
-            }
-
+           
             FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damage);
             collision.GetComponent<HitEffectElliott>().StartHitEffect(false);
             Destroy(gameObject);
-        }
+		}
 	}
 }

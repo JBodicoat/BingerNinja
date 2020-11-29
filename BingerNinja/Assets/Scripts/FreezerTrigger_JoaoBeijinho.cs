@@ -2,7 +2,6 @@
 
 //Joao Beijinho 06/11/2020 - Created this script and trigger events
 //Joao Beijinho 09/11/2020 - Replaced tags with the tags in the Tags_JoaoBeijinho script
-//Joao Beijinho 19/11/2020 - Changed triggers to add each enemy to a list on enter, and discard them on exit
 
 using System.Collections;
 using System.Collections.Generic;
@@ -13,27 +12,21 @@ using UnityEngine;
 /// </summary>
 public class FreezerTrigger_JoaoBeijinho : MonoBehaviour
 {
-    public List<Collider2D> m_enemyList = new List<Collider2D>();
+    public bool m_enemyInFreezer = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision is BoxCollider2D && collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_enemyTag))
+        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_enemyTag) && collision is BoxCollider2D)//Player for testing
         {
-            if (!m_enemyList.Contains(collision))
-            {
-                m_enemyList.Add(collision);
-            }
+            m_enemyInFreezer = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision is BoxCollider2D && collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_enemyTag))
+        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_enemyTag) && collision is BoxCollider2D)//Player for testing
         {
-            if (m_enemyList.Contains(collision))
-            {
-                m_enemyList.Remove(collision);
-            }
+            m_enemyInFreezer = false;
         }
     }
 }
