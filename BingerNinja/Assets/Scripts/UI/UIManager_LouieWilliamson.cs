@@ -10,13 +10,7 @@ public class UIManager_LouieWilliamson : MonoBehaviour
     public GameObject mobileWpnUI;
     public GameObject mobileBtnUI;
     public GameObject normalUI;
-
-    public void SetMobileUI(bool ShownIfTrue)
-    {
-        mobileWpnUI.SetActive(ShownIfTrue);
-        mobileBtnUI.SetActive(ShownIfTrue);
-        normalUI.SetActive(!ShownIfTrue);
-    }
+    public GameObject mobileJoystickUI;
     void Start()
     {
         SetMobileUI(false);
@@ -25,5 +19,12 @@ public class UIManager_LouieWilliamson : MonoBehaviour
         {
             SetMobileUI(true);
         }
+    }
+    private void SetMobileUI(bool ShownIfTrue)
+    {
+        mobileWpnUI.SetActive(ShownIfTrue);
+        mobileBtnUI.SetActive(ShownIfTrue);
+        mobileJoystickUI.SetActive(ShownIfTrue);
+        normalUI.SetActive(!ShownIfTrue);
     }
 }
