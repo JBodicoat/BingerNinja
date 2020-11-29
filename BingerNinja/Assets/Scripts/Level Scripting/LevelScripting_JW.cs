@@ -98,11 +98,11 @@ public class LevelScripting_JW : MonoBehaviour
                 walls2.SetTile(new Vector3Int(13, 27, 0), topDoorTile);
                 walls2.SetTile(new Vector3Int(13, 26, 0), topDoorTile);
                 walls2.SetTile(new Vector3Int(13, 25, 0), topDoorTile);
-
                 doorsClosed = true;
             }
         }
-        
+        //If pressure pad activated then reopen the above doors
+
     }
     
 }
