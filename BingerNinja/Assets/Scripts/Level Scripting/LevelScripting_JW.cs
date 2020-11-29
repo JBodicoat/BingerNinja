@@ -6,12 +6,13 @@ using UnityEngine.Tilemaps;
 
 public class LevelScripting_JW : MonoBehaviour
 {
-    GameObject levelLiftTrigger, keyTrigger, doorCloseTrigger;
+    GameObject levelLiftTrigger, keyTrigger, doorCloseTrigger, dialogBox;
     BossDialogue_MarioFernandes bossDialogue;
     BaseEnemy_SebastianMol boss;
     bool levelBossIntro = false, bossDead = false, doorsClosed = false;
     Tilemap walls1, walls2;
     Tile bottomDoorTile, topDoorTile;
+    int bossDialogIndex = 0;
 
     
     private void Awake()
@@ -22,7 +23,7 @@ public class LevelScripting_JW : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 12)
         {
             boss = GameObject.Find("Yakuza Boss").GetComponent<BaseEnemy_SebastianMol>();
-            bossDialogue = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BossDialogue_MarioFernandes>();
+            bossDialogue = GameObject.Find("Yakuza Boss").GetComponent<BossDialogue_MarioFernandes>();
             levelLiftTrigger = GameObject.Find("Level 12 Lift");
         }
         if(SceneManager.GetActiveScene().buildIndex == 14)
@@ -35,6 +36,13 @@ public class LevelScripting_JW : MonoBehaviour
             walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
             bottomDoorTile = walls1.GetTile<Tile>(new Vector3Int(12, 26, 0));
             topDoorTile = walls1.GetTile<Tile>(new Vector3Int(13, 27, 0));
+        }
+        if(SceneManager.GetActiveScene().buildIndex == 18)
+        {
+            boss = GameObject.Find("SpaceNinjaBOSS").GetComponent<BaseEnemy_SebastianMol>();
+            bossDialogue = GameObject.Find("SpaceNinjaBOSS").GetComponent<BossDialogue_MarioFernandes>();
+            levelLiftTrigger = GameObject.Find("Level 18 Lift");
+            dialogBox = GameObject.Find("DialogBox");
         }
 
     }
@@ -55,8 +63,12 @@ public class LevelScripting_JW : MonoBehaviour
             walls2.SetTile(new Vector3Int(13, 26, 0), null);
             walls2.SetTile(new Vector3Int(13, 25, 0), null);
         }
+        if (SceneManager.GetActiveScene().buildIndex == 18)
+        {
+            levelLiftTrigger.SetActive(false);
+        }
     }
-    
+
     private void Update()
     {
         if (SceneManager.GetActiveScene().buildIndex == 12 && !bossDead)
@@ -68,7 +80,7 @@ public class LevelScripting_JW : MonoBehaviour
             }
             if (boss.m_health <= 0)
             {
- 
+
                 bossDialogue.TriggerDialogue(1);
                 levelLiftTrigger.SetActive(true);
                 bossDead = true;
@@ -77,11 +89,44 @@ public class LevelScripting_JW : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().buildIndex == 14)
         {
-            if(!keyTrigger.activeInHierarchy)
+            if (!keyTrigger.activeInHierarchy)
             {
                 levelLiftTrigger.SetActive(true);
             }
-            
+
+        }
+        if (SceneManager.GetActiveScene().buildIndex == 16)
+        {
+            //If pressure pad activated then reopen the above doors (awaiting pressure pad prefab)
+            /*
+             * Below to go into the if function
+            walls1.SetTile(new Vector3Int(12, 26, 0), null);
+            walls1.SetTile(new Vector3Int(12, 25, 0), null);
+            walls1.SetTile(new Vector3Int(12, 24, 0), null);
+            walls2.SetTile(new Vector3Int(13, 27, 0), null);
+            walls2.SetTile(new Vector3Int(13, 26, 0), null);
+            walls2.SetTile(new Vector3Int(13, 25, 0), null);
+            */
+        }
+        if (SceneManager.GetActiveScene().buildIndex == 18 && !bossDead)
+        {
+            if (!levelBossIntro && !dialogBox.activeInHierarchy)
+            {
+                bossDialogue.TriggerDialogue(bossDialogIndex);
+                bossDialogIndex++;
+                if(bossDialogIndex == 8)
+                {
+                    levelBossIntro = true;
+                }
+            }
+            if (boss.m_health <= 0)
+            {
+
+                bossDialogue.TriggerDialogue(9);
+                levelLiftTrigger.SetActive(true);
+                bossDead = true;
+
+            }
         }
     }
 
@@ -101,16 +146,7 @@ public class LevelScripting_JW : MonoBehaviour
                 doorsClosed = true;
             }
         }
-        //If pressure pad activated then reopen the above doors
-        /*
-         * Below to go into the if function
-        walls1.SetTile(new Vector3Int(12, 26, 0), null);
-        walls1.SetTile(new Vector3Int(12, 25, 0), null);
-        walls1.SetTile(new Vector3Int(12, 24, 0), null);
-        walls2.SetTile(new Vector3Int(13, 27, 0), null);
-        walls2.SetTile(new Vector3Int(13, 26, 0), null);
-        walls2.SetTile(new Vector3Int(13, 25, 0), null);
-        */
+        
     }
     
 }
