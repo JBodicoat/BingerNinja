@@ -80,7 +80,7 @@ class Synthesizer_Jann : EditorWindow
 
         // Clamp values
         m_bpm = Mathf.Clamp(EditorGUILayout.IntField("BPM", m_bpm), 40, 4000);
-        m_length = Mathf.Clamp(EditorGUILayout.IntField("Length", m_length), 1, 200);
+        m_length = Mathf.Clamp(EditorGUILayout.IntField("Length", m_length), 1, 500);
         m_channels = Mathf.Clamp(EditorGUILayout.IntField("Channels", m_channels), 1, 3);
 
         #region Generate and handle buttons
