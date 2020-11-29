@@ -26,6 +26,9 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     private Animator weaponsAnim;
     public Animator pickupAnim;
     public Animator keyAnim;
+
+    private float timer;
+
     public List<Sprite> WeaponSprites = new List<Sprite>();
 
     //---- LIST KEY ----   //
@@ -62,12 +65,40 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
         {
             setAmmo("" + ammo);
         }
+
         setName(newWeapon.ToString(), isRanged);
         setImage((int)newWeapon, isRanged);
     }
     void Start()
     {
         weaponsAnim = GetComponent<Animator>();
+
+        timer = 0;
+    }
+    void Update()
+    {
+        timer += Time.deltaTime;
+
+        if (timer > 25)
+        {
+            WeaponChange(FoodType.FUGU, false, 0);
+        }
+        else if (timer > 20)
+        {
+            WeaponChange(FoodType.KOBEBEEF, false, 0);
+        }
+        else if (timer > 15)
+        {
+            WeaponChange(FoodType.NOODLES, false, 0);
+        }
+        else if (timer > 10)
+        {
+            WeaponChange(FoodType.RICEBALL, true, 10);
+        }
+        else if (timer > 5)
+        {
+            WeaponChange(FoodType.SQUID, false, 0);
+        }
     }
     void setName(string name, bool isRanged)
     {
@@ -95,4 +126,6 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     {
         ammoText.text = ammo;
     }
+
+
 }

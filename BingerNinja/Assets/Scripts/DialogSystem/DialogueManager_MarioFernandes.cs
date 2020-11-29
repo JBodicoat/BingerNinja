@@ -26,7 +26,6 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
 {
     public Text m_nameText;
     public Text m_dialogueText;
-
     public float m_TextAnimationSpeed = 0;
 
     private Queue<string> m_sentences;
@@ -38,8 +37,6 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     PlayerController_JamieG playerControllerScript;
 
     private GameObject[] EnemysAI;
-
-    private WeaponUI_LouieWilliamson wpnUI;
     public void LoadLanguageFile()
     {
         SettingsData settingsData = SaveLoadSystem_JamieG.LoadSettings();
@@ -58,8 +55,6 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         ///////////////////
         //Insert Start Animation here if needed
         ///////////////////
-
-        wpnUI.SetWeaponsUIAnimation(false);
 
         PauseGame();        
 
@@ -116,10 +111,9 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
 
 
         ResumeGame();
-        wpnUI.SetWeaponsUIAnimation(true);
     }
 
-    ///<summary>Load the Level dialog from CSV doc</summary>
+	///<summary>Load the Level dialog from CSV doc</summary>
     void LoadDialog(int level = 0)
     {
         GameObject Target;
@@ -220,7 +214,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     void Start()
     {
 
-        wpnUI = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
+        
         playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
 
         m_sentences = new Queue<string>();
