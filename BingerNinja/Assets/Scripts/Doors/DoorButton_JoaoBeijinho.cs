@@ -27,6 +27,8 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
     public bool m_canPressButton = false;
     public bool m_doorIsOpen = false;
 
+    public string buttonName = "";
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("collision");
@@ -58,7 +60,7 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_playerControllerScript.m_interact.triggered && m_canPressButton)//Player interaction with button
+        if (m_playerControllerScript.m_interact.triggered && m_canPressButton && buttonName == "")//Player interaction with button
         {
             if(!m_doorIsOpen)
             {
@@ -85,7 +87,91 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
                 walls1.SetTile(new Vector3Int(23, 10, 0), bottomDoor);
                 m_doorIsOpen = false;
             }
-          
+        }
+
+        if (m_playerControllerScript.m_interact.triggered && m_canPressButton && buttonName == "S11.B1")//Player interaction with button
+        {
+            if (!m_doorIsOpen)
+            {
+                Debug.Log("door opened");
+                m_doorIsOpen = true;
+                walls2.SetTile(new Vector3Int(12, 20, 0), null);
+                walls2.SetTile(new Vector3Int(13, 20, 0), null);
+                walls2.SetTile(new Vector3Int(14, 20, 0), null);
+
+                walls1.SetTile(new Vector3Int(13, 19, 0), null);
+                walls1.SetTile(new Vector3Int(12, 19, 0), null);
+                walls1.SetTile(new Vector3Int(11, 19, 0), null);
+            }
+            else
+            {
+                Debug.Log("door close");
+                walls2.SetTile(new Vector3Int(12, 20, 0), topDoor);
+                walls2.SetTile(new Vector3Int(13, 20, 0), topDoor);
+                walls2.SetTile(new Vector3Int(14, 20, 0), topDoor);
+
+                walls1.SetTile(new Vector3Int(13, 19, 0), bottomDoor);
+                walls1.SetTile(new Vector3Int(12, 19, 0), bottomDoor);
+                walls1.SetTile(new Vector3Int(11, 19, 0), bottomDoor);
+                m_doorIsOpen = false;
+            }
+
+        }
+        if (m_playerControllerScript.m_interact.triggered && m_canPressButton && buttonName == "S11.B2")//Player interaction with button
+        {
+            if (!m_doorIsOpen)
+            {
+                Debug.Log("door opened");
+                m_doorIsOpen = true;
+                walls2.SetTile(new Vector3Int(20, 20, 0), null);
+                walls2.SetTile(new Vector3Int(19, 20, 0), null);
+                walls2.SetTile(new Vector3Int(18, 20, 0), null);
+
+                walls1.SetTile(new Vector3Int(19, 19, 0), null);
+                walls1.SetTile(new Vector3Int(18, 19, 0), null);
+                walls1.SetTile(new Vector3Int(17, 19, 0), null);
+            }
+            else
+            {
+                Debug.Log("door close");
+                walls2.SetTile(new Vector3Int(20, 20, 0), topDoor);
+                walls2.SetTile(new Vector3Int(19, 20, 0), topDoor);
+                walls2.SetTile(new Vector3Int(18, 20, 0), topDoor);
+
+                walls1.SetTile(new Vector3Int(19, 19, 0), bottomDoor);
+                walls1.SetTile(new Vector3Int(18, 19, 0), bottomDoor);
+                walls1.SetTile(new Vector3Int(17, 19, 0), bottomDoor);
+                m_doorIsOpen = false;
+            }
+
+        }
+        if (m_playerControllerScript.m_interact.triggered && m_canPressButton && buttonName == "S11.B3")//Player interaction with button
+        {
+            if (!m_doorIsOpen)
+            {
+                Debug.Log("door opened");
+                m_doorIsOpen = true;
+                walls2.SetTile(new Vector3Int(26, 20, 0), null);
+                walls2.SetTile(new Vector3Int(25, 20, 0), null);
+                walls2.SetTile(new Vector3Int(24, 20, 0), null);
+
+                walls1.SetTile(new Vector3Int(25, 19, 0), null);
+                walls1.SetTile(new Vector3Int(24, 19, 0), null);
+                walls1.SetTile(new Vector3Int(23, 19, 0), null);
+            }
+            else
+            {
+                Debug.Log("door close");
+                walls2.SetTile(new Vector3Int(26, 20, 0), topDoor);
+                walls2.SetTile(new Vector3Int(25, 20, 0), topDoor);
+                walls2.SetTile(new Vector3Int(24, 20, 0), topDoor);
+
+                walls1.SetTile(new Vector3Int(25, 19, 0), bottomDoor);
+                walls1.SetTile(new Vector3Int(24, 19, 0), bottomDoor);
+                walls1.SetTile(new Vector3Int(23, 19, 0), bottomDoor);
+                m_doorIsOpen = false;
+            }
+
         }
     }
 }

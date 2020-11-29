@@ -83,5 +83,21 @@ public class levelScriptingMorgan : MonoBehaviour
                 objWalls.SetTile(new Vector3Int(12, 25, 0), null);
             }
         }
+
+        if (SceneManager.GetActiveScene().buildIndex == 13 && !keyUsed)
+        {
+            if (!keyTrigger.activeInHierarchy)
+            {
+                Debug.Log("key worked");
+                //door top
+                objInfWalls.SetTile(new Vector3Int(36, 32, 0), null);
+                objInfWalls.SetTile(new Vector3Int(37, 32, 0), null);
+                objInfWalls.SetTile(new Vector3Int(38, 32, 0), null);
+
+                objWalls.SetTile(new Vector3Int(35, 31, 0), null);
+                objWalls.SetTile(new Vector3Int(36, 31, 0), null);
+                objWalls.SetTile(new Vector3Int(37, 31, 0), null);
+            }
+        }
     }
 }
