@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7442044760093392687}
   - component: {fileID: 3623586587531974837}
   m_Layer: 0
-  m_Name: chefProjectile
+  m_Name: tadashiPrtojectileNormal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,11 +114,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_speed: 2
-  m_damage: 2
+  m_damage: 10
   m_dosePoisonDamage: 0
   m_poisonDamageChance: 0
   m_poisionDamage: 0
   m_posionDamageTime: 0
+  m_doseStunDamage: 0
+  m_stunAmount: 0
+  m_stunDamageTime: 0
+  m_doseHeal: 0
+  m_HealDamageChance: 0
+  m_healDuration: 0
+  m_HealAmount: 0
 --- !u!50 &3623586587531974837
 Rigidbody2D:
   serializedVersion: 4
