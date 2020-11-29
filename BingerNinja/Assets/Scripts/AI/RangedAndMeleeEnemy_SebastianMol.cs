@@ -1,4 +1,5 @@
 ﻿//sebastian mol 14/11/2020 class created
+//sebastian mol 29/11/2020 finished and commeneted all logic for final boss
 
 using System.Collections;
 using System.Collections.Generic;
@@ -41,24 +42,18 @@ using UnityEngine;
 
     public GameObject m_normalAttackColider;
     public GameObject m_chargeAttackColider;
-
     public GameObject[] m_tadashiProjectiles;
-
     public SpriteRenderer m_ProjectileDisplay;
+    public GameObject m_tadashiNormalPorjectile;
 
-
-    private int RandChanceAttackTadashi;
-    private float RandChanceAttackTadashiFloat;
-
+    private int m_RandChanceAttackTadashi;
+    private float m_RandChanceAttackTadashiFloat;
     private bool m_generateRandomNumberOnceTadashi = false;
     private GameObject m_currentProjectile = null;
-
-    private int tadashiMultiShotCounter = 0;
-    private int tadashiMultiShotCounterMax = 3;
-
-    private float tadashiLastFaseAttackRand;
-    public GameObject m_tadashiNormalPorjectile;
-    private float attackRangeeAfterCharge;
+    private int m_tadashiMultiShotCounter = 0;
+    private int m_tadashiMultiShotCounterMax = 3;
+    private float m_tadashiLastFaseAttackRand;
+    private float m_attackRangeeAfterCharge;
 
 
     /// <summary>
@@ -87,7 +82,7 @@ using UnityEngine;
             //health above 60
             if(m_tadashiPhase == 1)
             {
-                if (RandChanceAttackTadashi == 0)
+                if (m_RandChanceAttackTadashi == 0)
                 {
                     TadashiChargeAttack();
                 }
@@ -106,7 +101,7 @@ using UnityEngine;
                     //add effect for light goign off or on or whatever
                 }
 
-                if (RandChanceAttackTadashiFloat > 0.3f)
+                if (m_RandChanceAttackTadashiFloat > 0.3f)
                 {
                     TadashiCrazyRangeAttack();
                 }
@@ -125,15 +120,15 @@ using UnityEngine;
                     //do an effect for plants to dissapoear
                 }
 
-                if (tadashiLastFaseAttackRand < 0.33f)
+                if (m_tadashiLastFaseAttackRand < 0.33f)
                 {
                    TadashiQuickAttack();
                 }
-                else if (tadashiLastFaseAttackRand < 0.66f)
+                else if (m_tadashiLastFaseAttackRand < 0.66f)
                 {
                     TadashiChargeAttack();
                 }
-                else if (tadashiLastFaseAttackRand >= 0.66f)
+                else if (m_tadashiLastFaseAttackRand >= 0.66f)
                 {
                     TadashiCrazyRangeAttack();
                 }
@@ -143,29 +138,34 @@ using UnityEngine;
         }
     }
 
+    /// <summary>
+    /// logic for tadashi tripple shot attack
+    /// </summary>
     private void TadashiTripleShot()
     {
-        if (tadashiMultiShotCounter < tadashiMultiShotCounterMax)
+        if (m_tadashiMultiShotCounter < m_tadashiMultiShotCounterMax)
         {
             m_ProjectileDisplay.sprite = null;
             m_currentProjectile = m_tadashiNormalPorjectile;
             if (EnemyAttacks_SebastianMol.RangedAttack(m_playerTransform, transform, m_aimer,
                 ref m_attackTimer, m_currentProjectile, 0.3f))
             {
-                tadashiMultiShotCounter++;
+                m_tadashiMultiShotCounter++;
                 m_attackTimer = 0.1f;
             }
 
         }
         else
         {
-            tadashiMultiShotCounter = 0;
+            m_tadashiMultiShotCounter = 0;
             m_attackTimer = m_shootDeley;
             m_generateRandomNumberOnceTadashi = false;
             m_currentProjectile = null;
         }
     }
-
+    /// <summary>
+    /// logic for tadashi normal attack
+    /// </summary>
     private void TadashiQuickAttack()
     {
         if (EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility,
@@ -175,13 +175,18 @@ using UnityEngine;
             m_generateRandomNumberOnceTadashi = false;
         }
     }
-            
+    /// <summary>
+    /// logic for tadashi charg attack
+    /// </summary>       
     private void TadashiChargeAttack()
     {
         if (EnemyAttacks_SebastianMol.ChargeAttack(m_playerTransform, ref m_attackTimer,
                    m_attackCollider, m_hitSpeed, gameObject, m_chargeAttackSpeed))
             m_generateRandomNumberOnceTadashi = false; //make this ibnto a public variable
     }
+    /// <summary>
+    /// logic for tadashi ranged attack that uses multiple projectiles
+    /// </summary>
     private void TadashiCrazyRangeAttack()
     {
         if (m_currentProjectile)
@@ -195,6 +200,10 @@ using UnityEngine;
         }
         
     }
+
+    /// <summary>
+    /// set up for tadashi quick attack
+    /// </summary>
     private void TadashiQuickAttackSetUp()
     {    
         m_attackRange = m_meleeAttackRangeTadashi;
@@ -203,8 +212,11 @@ using UnityEngine;
         m_ProjectileDisplay.sprite = null;
         m_generateRandomNumberOnceTadashi = true;
         m_attackTimer = m_hitSpeed;
-        attackRangeeAfterCharge = m_meleeAttackRangeTadashi;
+        m_attackRangeeAfterCharge = m_meleeAttackRangeTadashi;
     }
+    /// <summary>
+    /// set up for tadashi charged attack
+    /// </summary>
     private void TadashiChargeAttackSetUp()
     {
         m_attackRange = m_chargeAttackRangeTadashi;
@@ -213,20 +225,19 @@ using UnityEngine;
         m_ProjectileDisplay.sprite = null;
         m_generateRandomNumberOnceTadashi = true;
         m_attackTimer = m_chargeAttackDeley;
-        attackRangeeAfterCharge = m_chargeAttackRangeTadashi;
+        m_attackRangeeAfterCharge = m_chargeAttackRangeTadashi;
     }
+    /// <summary>
+    /// set up for tadashi ranged attack with multiple projectiles
+    /// </summary>
     private void TadashiCrazyRangeAttackSetUp()
     {
         m_attackRange = m_rangedAttackRange;
         m_attackCollider = m_normalAttackColider;
-        RandChanceAttackTadashiFloat = Random.Range(0.0f, 1.0f);
+        m_RandChanceAttackTadashiFloat = Random.Range(0.0f, 1.0f);
         m_generateRandomNumberOnceTadashi = true;
         m_attackTimer = m_shootDeley;
-        attackRangeeAfterCharge = m_rangedAttackRange;
-
-
-
-
+        m_attackRangeeAfterCharge = m_rangedAttackRange;
 
         if (!m_currentProjectile)
         {
@@ -260,6 +271,9 @@ using UnityEngine;
         
     }
 
+    /// <summary>
+    /// handles the set up for each fase of tadashi boss fight
+    /// </summary>
     private void UpdateTadashi()
     {    
         switch (m_tadashiPhase)
@@ -267,9 +281,9 @@ using UnityEngine;
             case 1:
                 if (!m_generateRandomNumberOnceTadashi)
                 {
-                    RandChanceAttackTadashi = Random.Range(0, 2);
+                    m_RandChanceAttackTadashi = Random.Range(0, 2);
                     m_generateRandomNumberOnceTadashi = true;
-                    if (RandChanceAttackTadashi == 0)
+                    if (m_RandChanceAttackTadashi == 0)
                     {
                         TadashiChargeAttackSetUp();
                         Debug.Log("C");
@@ -294,20 +308,20 @@ using UnityEngine;
               {
                     m_currentProjectile = null;
                     m_ProjectileDisplay.sprite = null;
-                    tadashiLastFaseAttackRand = Random.Range(0.0f, 1.0f);
+                    m_tadashiLastFaseAttackRand = Random.Range(0.0f, 1.0f);
 
-                    if (tadashiLastFaseAttackRand < 0.33f)
+                    if (m_tadashiLastFaseAttackRand < 0.33f)
                     {
                         TadashiQuickAttackSetUp();
                         Debug.Log("Q");
 
                     }
-                    else if (tadashiLastFaseAttackRand < 0.66f)
+                    else if (m_tadashiLastFaseAttackRand < 0.66f)
                     {
                         TadashiChargeAttackSetUp();
                         Debug.Log("C");
                     }
-                    else if (tadashiLastFaseAttackRand > 0.66f)
+                    else if (m_tadashiLastFaseAttackRand > 0.66f)
                     {
                         TadashiCrazyRangeAttackSetUp();
                         Debug.Log("R");
@@ -318,10 +332,14 @@ using UnityEngine;
         }
 
 
-        WalkAwayFromWallBasedOnRange(attackRangeeAfterCharge);
+        WalkAwayFromWallBasedOnRange(m_attackRangeeAfterCharge);
 
     }
 
+    /// <summary>
+    /// used to walk away from all after charge attack so tadashi dosent get stuck
+    /// </summary>
+    /// <param name="range"></param>
     private void WalkAwayFromWallBasedOnRange(float range)
     {
         if (!m_isStuned)

@@ -15,6 +15,7 @@
 //Elliott Desouza 20/11/2020 added hit effect and camera shake when taken damage
 //sebastian mol 18/11/2020 alien now dosent get stunned
 //sebastian mol 20/11/2020 spce ninja enemy logic done
+//sebastian mol 29/11/2020 creaeted spece for exlemation mark adn completed damage take for last boss
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -126,7 +127,6 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     {
         if (m_dosePatrole)
         {
-            if (m_playerDetected) m_currentState = state.CHASE;
             Patrol();
         }
         else
@@ -237,6 +237,9 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// a state that occurs when enemy is forced to look at a specific location
+    /// </summary>
     private void CuriousState()
     {
         if (Vector2.Distance( transform.position, m_curiousTarget) < 1 ) 
@@ -318,6 +321,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             m_playerDetected = true;
             m_playerTransform = hit.transform;
             m_currentState = state.ATTACK;
+            NoticePlayerEffect();
             ClearPath();
         }
         else if (m_playerStealthScript.IsCrouched() && crouchedHit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag)) //player is croucheed and it hits 
@@ -326,6 +330,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             m_playerDetected = true;
             m_playerTransform = hit.transform;
             m_currentState = state.ATTACK;
+            NoticePlayerEffect();
             ClearPath();
         }
         else if (m_playerStealthScript.IsCrouched() && !crouchedHit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
@@ -563,7 +568,11 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// used to apply correct damage amaount and type based on enemy type
+    /// </summary>
+    /// <param name="damageType">what type of damage e.g. melee</param>
+    /// <param name="damage">amount of damage</param>
     public void TakeDamage(m_damageType damageType, float damage)
     {
 
@@ -722,6 +731,10 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         StartCoroutine(StunEnemyWithDeley(amaountOfTime));
     }
 
+    /// <summary>
+    /// normal way of enemy takign damage
+    /// </summary>
+    /// <param name="damage">amount of damage</param>
     private void NormalTakeDamage( float damage )
     {
         if (m_playerDetected == false) //if sneak damage
@@ -737,11 +750,23 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// forse enemy to look at a certain position and serch for the player
+    /// </summary>
+    /// <param name="pos">the postion that you want the enemy to search</param>
     public void ForceCuriosity(Vector3 pos)
     {
         m_currentState = state.CURIOUS;
         m_curiousTarget = pos;
         PathfindTo(m_curiousTarget);
+    }
+
+    /// <summary>
+    /// effect tthat happens when enemy noticese the player
+    /// </summary>
+    protected void NoticePlayerEffect()
+    {
+        Debug.Log("!");
     }
 
 
