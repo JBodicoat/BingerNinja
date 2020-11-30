@@ -13,12 +13,13 @@ public class UIManager_LouieWilliamson : MonoBehaviour
     public GameObject mobileJoystickUI;
     void Start()
     {
-        SetMobileUI(false);
-
-        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
-        {
-            SetMobileUI(true);
-        }
+        //SetMobileUI(false);
+        
+        //if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+        //{
+        //    SetMobileUI(true);
+        //}
+        SetMobileUI(true);
     }
     private void SetMobileUI(bool ShownIfTrue)
     {
