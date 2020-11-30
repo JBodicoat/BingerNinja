@@ -30,17 +30,17 @@ public class LevelScripting_JW : MonoBehaviour
         {
             levelLiftTrigger = GameObject.Find("Level 14 Lift");
             keyTrigger = GameObject.Find("Key");
-            doorCloseTrigger = GameObject.Find("Pressure pad intro").transform.Find("DialogTrigger").gameObject;
+            doorCloseTrigger = GameObject.Find("DialogTrigger");
             bottomDoorTile = walls1.GetTile<Tile>(new Vector3Int(12,26,0));
             walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
             walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
             bottomDoorTile = walls1.GetTile<Tile>(new Vector3Int(12, 26, 0));
-            topDoorTile = walls1.GetTile<Tile>(new Vector3Int(13, 27, 0));
+            topDoorTile = walls2.GetTile<Tile>(new Vector3Int(13, 27, 0));
         }
         if(SceneManager.GetActiveScene().buildIndex == 18)
         {
-            boss = GameObject.Find("SpaceNinjaBOSS").GetComponent<BaseEnemy_SebastianMol>();
-            bossDialogue = GameObject.Find("SpaceNinjaBOSS").GetComponent<BossDialogue_MarioFernandes>();
+            boss = GameObject.Find("Space Ninja").GetComponent<BaseEnemy_SebastianMol>();
+            bossDialogue = GameObject.Find("Space Ninja").GetComponent<BossDialogue_MarioFernandes>();
             levelLiftTrigger = GameObject.Find("Level 18 Lift");
             dialogBox = GameObject.Find("DialogBox");
         }
@@ -130,9 +130,9 @@ public class LevelScripting_JW : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(SceneManager.GetActiveScene().buildIndex == 16)
+        if(SceneManager.GetActiveScene().buildIndex == 14)
         {
             //Mechanic for closing the doors behind the player on lvl 14
             if (other.gameObject == doorCloseTrigger && !doorsClosed)
