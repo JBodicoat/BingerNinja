@@ -10,7 +10,7 @@ public class AudioTester_Jann : MonoBehaviour
 {
     public void OnMeeleAttack()
     {
-        PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_MeeleAttack);
+        PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_PlayerAttack);
     }
     
     public void OnMainMenu()
