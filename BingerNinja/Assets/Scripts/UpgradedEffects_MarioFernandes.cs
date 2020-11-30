@@ -25,6 +25,7 @@ public class UpgradedEffects_MarioFernandes : MonoBehaviour
         if(GetComponent<Inventory_JoaoBeijinho>().HasItem(ItemType.Sake, 1))
         {
             GetComponent<EffectManager_MarioFernandes>().AddEffect(new StrengthEffect_MarioFernandes(30, m_sakeStrengthModifier));
+            GetComponent<Inventory_JoaoBeijinho>().RemoveItem(ItemType.Sake, 1);   
         }
     }
 
@@ -34,7 +35,8 @@ public class UpgradedEffects_MarioFernandes : MonoBehaviour
         if(GetComponent<Inventory_JoaoBeijinho>().HasItem(ItemType.Tempura, 1))
         {
             GetComponent<EffectManager_MarioFernandes>().AddEffect(new StrengthEffect_MarioFernandes(30, m_TempuraStrengthModifier));
-            GetComponent<EffectManager_MarioFernandes>().AddEffect(new SpeedEffect_MarioFernandes(30, m_TempuraSpeedhModifier));            
+            GetComponent<EffectManager_MarioFernandes>().AddEffect(new SpeedEffect_MarioFernandes(30, m_TempuraSpeedhModifier));  
+            GetComponent<Inventory_JoaoBeijinho>().RemoveItem(ItemType.Tempura, 1);   
         }
     }
 
@@ -49,6 +51,7 @@ public class UpgradedEffects_MarioFernandes : MonoBehaviour
                if(item.GetComponent<WeaponsTemplate_MarioFernandes>().m_foodType == FoodType.RICEBALL)
                {
                    Instantiate(m_Dango,item.transform.position, item.transform.rotation);
+                   item.SetActive(false);
                }
            }
         }
@@ -65,6 +68,7 @@ public class UpgradedEffects_MarioFernandes : MonoBehaviour
                if(item.GetComponent<WeaponsTemplate_MarioFernandes>().m_foodType == FoodType.SQUID)
                {
                    Instantiate(m_Noodle,item.transform.position, item.transform.rotation);
+                   item.SetActive(false);
                }
            }
         }
