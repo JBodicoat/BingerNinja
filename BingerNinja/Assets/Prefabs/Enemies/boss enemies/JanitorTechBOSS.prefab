@@ -93,7 +93,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_baseDamage: 1
-  m_damage: 0
+  m_percentageChanceOfAffect: 0.5
+  m_poisionDamage: 1
+  m_slowDebuff: 0.5
+  m_affectTime: 5
 --- !u!1 &1488481114249787428
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,6 +439,11 @@ MonoBehaviour:
   m_sneakDamageMultiplierStack: 0
   m_attackRange: 1.2
   m_attckRangeDevider: 1
+  m_tiggerBossLooseTargetDistance: 2
+  m_secondPhaseStartPercentage: 0.3
+  m_amountOfStunWhenPlayerStealthed: 3
+  m_doseAffect: 1
+  m_attackSpeedIncrease: 1.5
   m_hitSpeed: 2
   m_attackCollider: {fileID: 220513390732296407}
   attackDeactivationSpeed: 0.1
@@ -443,7 +451,10 @@ MonoBehaviour:
   m_chargeAttackDeley: 1
   m_chargAttackPosibility: 1
   m_chargeAttackMultiplier: 3
-  m_petTigerDeley: 0
+  m_afterAttackDeley: 0
+  m_maxChargTimeBeforDamege: 0.2
+  m_amountOfTimeToMoveAwayFromWall: 0.2
+  m_chargeAttackSpeed: 500
   m_aimer: {fileID: 1488481114249787428}
   m_projectile: {fileID: 1986204507551107328, guid: d27f3aeac9b841a4687df15667cd609c, type: 3}
   m_shootDeley: 0
@@ -451,6 +462,9 @@ MonoBehaviour:
   m_RangedAttackRandomChance: 2
   m_rangedAttackRange: 3
   m_meleeAttackRange: 1
+  m_chargeAttackRangeTadashi: 10
+  m_rangedAttackRangeTadashi: 3
+  m_meleeAttackRangeTadashi: 1
 --- !u!114 &1810649366890884935
 MonoBehaviour:
   m_ObjectHideFlags: 0
