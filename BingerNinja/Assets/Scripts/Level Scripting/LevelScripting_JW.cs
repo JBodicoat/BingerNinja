@@ -130,9 +130,9 @@ public class LevelScripting_JW : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(SceneManager.GetActiveScene().buildIndex == 16)
+        if(SceneManager.GetActiveScene().buildIndex == 14)
         {
             //Mechanic for closing the doors behind the player on lvl 14
             if (other.gameObject == doorCloseTrigger && !doorsClosed)
