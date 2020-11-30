@@ -26434,6 +26434,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2932502618572735700, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: levelLift
+      value: 
+      objectReference: {fileID: 1844434582}
     - target: {fileID: 7882151871028722937, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -26562,6 +26566,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1750193357 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 427053018686297868, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+  m_PrefabInstance: {fileID: 1750193354}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1783212631
 GameObject:
   m_ObjectHideFlags: 0
@@ -26671,6 +26680,68 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &1792336742
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4003713460872805705, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
+      propertyPath: m_Name
+      value: Gong
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003713460872805708, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.8113937
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003713460872805708, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 56.79454
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003713460872805708, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003713460872805708, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003713460872805708, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003713460872805708, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003713460872805708, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003713460872805708, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
+      propertyPath: m_RootOrder
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003713460872805708, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003713460872805708, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003713460872805708, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
+--- !u!4 &1792336743 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4003713460872805708, guid: b29339cc09a11674ca37e2a93b8b1709, type: 3}
+  m_PrefabInstance: {fileID: 1792336742}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1797752103
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26726,6 +26797,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2580828963433508819, guid: 573a58894f2f33849946d8071ed0bd61, type: 3}
+      propertyPath: m_currentCheckpoint
+      value: 
+      objectReference: {fileID: 1792336743}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 573a58894f2f33849946d8071ed0bd61, type: 3}
 --- !u!1839735485 &1842978639 stripped
@@ -26777,6 +26852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f711031bc62374db0c1aeae95a0041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vendingMachine: {fileID: 1750193357}
 --- !u!61 &1844434583
 BoxCollider2D:
   m_ObjectHideFlags: 0

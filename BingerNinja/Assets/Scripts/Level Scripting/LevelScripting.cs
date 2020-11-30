@@ -24,6 +24,7 @@ public class LevelScripting : MonoBehaviour
 
     private void Awake()
     {
+           // int currentBuildIndex = SceneManager.GetActiveScene().buildIndex;
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             keyTrigger = GameObject.Find("Key Trigger");
@@ -93,12 +94,24 @@ public class LevelScripting : MonoBehaviour
             bottomDoorTile = objWalls.GetTile<Tile>(new Vector3Int(12, 26, 0));
             topDoorTile = objWalls.GetTile<Tile>(new Vector3Int(13, 27, 0));
         }
+        if (SceneManager.GetActiveScene().buildIndex == 17)
+        {
+            levelLiftTrigger = GameObject.Find("Level 17 Lift");
+            keyTrigger = GameObject.Find("Key");
+            objWalls = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
+            walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
+        }
         if (SceneManager.GetActiveScene().buildIndex == 18)
         {
-            boss = GameObject.Find("SpaceNinjaBOSS").GetComponent<BaseEnemy_SebastianMol>();
-            bossDialogue = GameObject.Find("SpaceNinjaBOSS").GetComponent<BossDialogue_MarioFernandes>();
+            boss = GameObject.Find("Space Ninja").GetComponent<BaseEnemy_SebastianMol>();
+            bossDialogue = GameObject.Find("Space Ninja").GetComponent<BossDialogue_MarioFernandes>();
             levelLiftTrigger = GameObject.Find("Level 18 Lift");
             dialogBox = GameObject.Find("DialogBox");
+        }
+        if (SceneManager.GetActiveScene().buildIndex == 19)
+        {
+            levelLiftTrigger = GameObject.Find("Level 19 Lift");
+            keyTrigger = GameObject.Find("Key");
         }
     }
 
@@ -150,15 +163,26 @@ public class LevelScripting : MonoBehaviour
             walls2.SetTile(new Vector3Int(13, 26, 0), null);
             walls2.SetTile(new Vector3Int(13, 25, 0), null);
         }
+
         if (SceneManager.GetActiveScene().buildIndex == 15)
         {
             boss = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BaseEnemy_SebastianMol>();
             bossDialogue = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BossDialogue_MarioFernandes>();
             levelLiftTrigger = GameObject.Find("Level 15 Lift");
         }
+        if (SceneManager.GetActiveScene().buildIndex == 17)
+        {
+            levelLiftTrigger.SetActive(false);
+
+        }
         if (SceneManager.GetActiveScene().buildIndex == 18)
         {
             levelLiftTrigger.SetActive(false);
+        }
+
+        if (SceneManager.GetActiveScene().buildIndex == 20)
+        {
+            
         }
     }
     private void Update()
@@ -388,6 +412,13 @@ public class LevelScripting : MonoBehaviour
             walls2.SetTile(new Vector3Int(13, 25, 0), null);
             */
         }
+        if (SceneManager.GetActiveScene().buildIndex == 16)
+        {
+            if (!keyTrigger.activeInHierarchy)
+            {
+                levelLiftTrigger.SetActive(true);
+            }
+        }
         if (SceneManager.GetActiveScene().buildIndex == 18 && !bossDead)
         {
             if (!levelBossIntro && !dialogBox.activeInHierarchy)
@@ -408,9 +439,38 @@ public class LevelScripting : MonoBehaviour
 
             }
         }
+        if (SceneManager.GetActiveScene().buildIndex == 20 && !bossDead)
+        {
+            if (!levelBossIntro)
+            {
+                //cinematic
+                levelBossIntro = true;
+            }
+            if (boss.m_health <= 0)
+            {
+                //dramatic death SE
+                //freeze on enemy as he dies  
+                //end cinematic
+                levelLiftTrigger.SetActive(true);
+                bossDead = true;
+
+            }
+        }
+        if (SceneManager.GetActiveScene().buildIndex == 19)
+        {
+            if (!keyTrigger.activeInHierarchy)
+            {
+                objWalls.SetTile(new Vector3Int(24, 10, 0), null);
+                objWalls.SetTile(new Vector3Int(25, 10, 0), null);
+                objWalls.SetTile(new Vector3Int(26, 10, 0), null);
+                objWalls.SetTile(new Vector3Int(25, 10, 0), null);
+                objWalls.SetTile(new Vector3Int(26, 10, 0), null);
+                objWalls.SetTile(new Vector3Int(27, 10, 0), null);
+            }
+        }
 
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (SceneManager.GetActiveScene().buildIndex == 16)
         {
