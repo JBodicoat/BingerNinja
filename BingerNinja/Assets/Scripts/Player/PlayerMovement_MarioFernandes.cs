@@ -9,6 +9,8 @@
 // Joao 23/10/2020 - Added reference to playerStealth script and stop movement while crouched in update
 // Joao 26/10/2020 - *OUTDATED*Updated crouch restriction in update to check if player is not crouched*OUTDATED* Moved movement restriction to playerStealth Script
 // Alanna 08/11/2020 - Added roll movement, changed the speed to 7.5 for one second. unable to get previous movement as a variable because of the way input is set up.
+// Louie 30/11/2020 - Roll animation
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,6 +30,7 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
 
     public float m_baseSpeed = 5.0f;
     public bool isRolling= false;
+    private PlayerAnimation_LouieWilliamson m_pAnimation;
 
     public void ResetSpeed()
     {
@@ -35,37 +38,38 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
     }
     public void RollMovement()
     {
-       
-            if(m_old_direction.y < 0)
-            {
-                m_speed = m_roll_speed;
-                //go down
-                m_direction.y -= m_speed;
-                StartCoroutine("RollTimer");
-            }
-            if(m_old_direction.y > 0)
-            {
-                m_speed = m_roll_speed;
-                m_direction.y += m_speed;
-                StartCoroutine("RollTimer");
-                //roll up
-            }
-            if(m_old_direction.x < 0)
-            {
-                m_speed = m_roll_speed;
-                m_direction.x -= m_speed;
-                StartCoroutine("RollTimer");
-                //goleft
-            }
-            if(m_old_direction.x > 0)
-            {
-                m_speed = m_roll_speed;
-                m_direction.x += m_speed;
-                StartCoroutine("RollTimer");
-            }
+        m_pAnimation.RollAnimation(true);
 
-          
-      }
+        if (m_old_direction.y < 0)
+        {
+            m_speed = m_roll_speed;
+            //go down
+            m_direction.y -= m_speed;
+            StartCoroutine("RollTimer");
+        }
+        if (m_old_direction.y > 0)
+        {
+            m_speed = m_roll_speed;
+            m_direction.y += m_speed;
+            StartCoroutine("RollTimer");
+            //roll up
+        }
+        if (m_old_direction.x < 0)
+        {
+            m_speed = m_roll_speed;
+            m_direction.x -= m_speed;
+            StartCoroutine("RollTimer");
+            //goleft
+        }
+        if (m_old_direction.x > 0)
+        {
+            m_speed = m_roll_speed;
+            m_direction.x += m_speed;
+            StartCoroutine("RollTimer");
+        }
+
+
+    }
         //m_direction = m_speed * m_old_direction;
         //m_direction.Normalize();
 
@@ -92,11 +96,11 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
         ResetSpeed();
         Physics2D.gravity = Vector2.zero;
         m_rb = GetComponent<Rigidbody2D>();
+        m_pAnimation = GetComponentInChildren<PlayerAnimation_LouieWilliamson>();
     }
 
     void Update()
     {
-       
         m_direction.Normalize();
         m_direction *= m_speed;
 
@@ -106,6 +110,7 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f);
         isRolling = false;
+        m_pAnimation.RollAnimation(false);
         m_speed = 5.0f;
     }
 }
