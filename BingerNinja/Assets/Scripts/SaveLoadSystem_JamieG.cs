@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
@@ -63,7 +64,7 @@ public static class SaveLoadSystem_JamieG
     // Returns information from the Settings.save file or an empty struct if the file can't be found
     public static SettingsData LoadSettings()
     {
-        if (m_Cache.isCached(SettingsFile))
+        if (m_Cache.IsCached(SettingsFile))
         {
             return (SettingsData) m_Cache.GetData(SettingsFile);
         }
@@ -86,9 +87,9 @@ public static class SaveLoadSystem_JamieG
     // Returns the items from the Inventory.save file or an empty struct if the file can't be found
     public static InventoryData LoadInventory()
     {
-        if (m_Cache.isCached(InventoryFile))
+        if (m_Cache.IsCached(InventoryFile))
         {
-            return (InventoryData) m_Cache.GetData(SettingsFile);
+            return (InventoryData) m_Cache.GetData(InventoryFile);
         }
         
         object data = LoadFromFile(InventoryFile);
@@ -104,9 +105,9 @@ public static class SaveLoadSystem_JamieG
     // Returns the gameplay data from the Gameplay.save file or an empty struct if the file can't be found
     public static GameplayData LoadGameplay()
     {
-        if (m_Cache.isCached(GameplayFile))
+        if (m_Cache.IsCached(GameplayFile))
         {
-            return (GameplayData) m_Cache.GetData(SettingsFile);
+            return (GameplayData) m_Cache.GetData(GameplayFile);
         }
         
         object data = LoadFromFile(GameplayFile);
@@ -172,7 +173,7 @@ public class SaveSystemCache
 
     public void Cache(string type, object data)
     {
-        if (isCached(type))
+        if (IsCached(type))
         {
             int index = m_cacheData.IndexOf(m_cacheData.Find(c => c.type.Equals(type)));
             m_cacheData[index] = new CacheData(type, data);
@@ -188,7 +189,7 @@ public class SaveSystemCache
         return m_cacheData.Find(data => data.type.Equals(type)).data;
     }
 
-    public bool isCached(string type)
+    public bool IsCached(string type)
     {
         return m_cacheData.Find(data => data.type.Equals(type)).data != null;
     }
@@ -230,10 +231,14 @@ public struct GameplayData
         m_checkpointPosition = new[] {checkpointPosition.x, checkpointPosition.y, checkpointPosition.z};
         m_currentLevel = currentLevel;
 
-        m_enemyIds = new string[enemies.Length];
+        int count = enemies.Count(e => e.activeInHierarchy);
+        m_enemyIds = new string[count];
         for (int i = 0; i < enemies.Length; i++)
         {
-            m_enemyIds[i] = enemies[i].name;
+            if (enemies[i].activeInHierarchy)
+            {
+                m_enemyIds[i] = enemies[i].name;   
+            }
         }
         
         m_doorIds = new string[doors.Length];

@@ -80,23 +80,6 @@ public class SettingsMenu_ElliottDesouza : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void SaveGameState()
-    {
-        GameObject player = GameObject.Find("Player");
-        if (player != null)
-        {
-            Inventory_JoaoBeijinho inventory = player.GetComponent<Inventory_JoaoBeijinho>();
-            SaveLoadSystem_JamieG.SaveInventory(inventory);
-            
-            //TODO: Add current level, doors, enemies etc.
-            SaveLoadSystem_JamieG.SaveGameplay(
-                 SceneManager.GetActiveScene().buildIndex,
-                 GameObject.FindGameObjectsWithTag("Enemy"),
-                 GameObject.FindGameObjectsWithTag("Door")
-                );
-        }
-    }
-
     void Update()
     {
         var gamepad = Keyboard.current;
