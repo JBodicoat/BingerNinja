@@ -44,7 +44,11 @@ public class LevelScripting_JW : MonoBehaviour
             levelLiftTrigger = GameObject.Find("Level 18 Lift");
             dialogBox = GameObject.Find("DialogBox");
         }
-
+        if (SceneManager.GetActiveScene().buildIndex == 19)
+        {
+            levelLiftTrigger = GameObject.Find("Level 19 Lift");
+            keyTrigger = GameObject.Find("Key");
+        }
     }
 
     private void Start()
@@ -126,6 +130,18 @@ public class LevelScripting_JW : MonoBehaviour
                 levelLiftTrigger.SetActive(true);
                 bossDead = true;
 
+            }
+        }
+        if(SceneManager.GetActiveScene().buildIndex == 19)
+        {
+            if(!keyTrigger.activeInHierarchy)
+            {
+                walls1.SetTile(new Vector3Int(24,10,0), null);
+                walls1.SetTile(new Vector3Int(25, 10, 0), null);
+                walls1.SetTile(new Vector3Int(26, 10, 0), null);
+                walls2.SetTile(new Vector3Int(25, 10, 0), null);
+                walls2.SetTile(new Vector3Int(26, 10, 0), null);
+                walls2.SetTile(new Vector3Int(27, 10, 0), null);
             }
         }
     }
