@@ -14,7 +14,7 @@ public class WeightedPressurePad_JoaoBeijinho : MonoBehaviour
 {
     //Reference the door collider to turn if on/off(closed/open)
     public Collider2D m_doorCollider;
-
+    public Sprite activatedPressurePad;
     private string m_playerTag = "Player";
     private string m_crateTag = "Crate";
     private string m_meleeWeaponTag = "MeleeWeapon";
