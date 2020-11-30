@@ -5,6 +5,7 @@
 // Jann 25/10/20 - Playing a track from a .json file implemented
 // Jann 28/10/20 - Singleton, play sound/music methods, QA improvements
 // Jann 11/11/20 - Bugfix and new Singleton applied
+// Jann 25/11/20 - Adapt to smaller .json files
 
 using UnityEngine;
 
@@ -65,12 +66,12 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
         {
             if (!soundSource.isPlaying)
             {
-                AudioClip clip = CreateClip(track.name, (float) track.bpm / 60, track.frequencies[0]);
+                AudioClip clip = CreateClip(track.n, (float) track.b / 60, track.f[0]);
                 soundSource.clip = clip;
                 soundSource.Play();
                 break;
             }
-            else if(soundSource.clip.name == track.name)
+            else if(soundSource.clip.name == track.n)
             {
                 soundSource.Stop();
                 soundSource.Play();
@@ -83,9 +84,9 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
     {
         Track_Jann track = LoadTrack(audioName);
 
-        for (int i = 0; i < track.frequencies.Length; i++)
+        for (int i = 0; i < track.f.Length; i++)
         {
-            AudioClip clip = CreateClip(track.name, (float) track.bpm / 60, track.frequencies[i]);
+            AudioClip clip = CreateClip(track.n, (float) track.b / 60, track.f[i]);
             m_musicAudioSources[i].clip = clip;
             m_musicAudioSources[i].Play();
         }
@@ -96,9 +97,9 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
         Track_Jann track = JsonUtility.FromJson<Track_Jann>(trackFile.text);
         track.GenerateFrequencies();
             
-        for (int i = 0; i < track.frequencies.Length; i++)
+        for (int i = 0; i < track.f.Length; i++)
         {
-            AudioClip clip = CreateClip(track.name, (float) track.bpm / 60, track.frequencies[i]);
+            AudioClip clip = CreateClip(track.n, (float) track.b / 60, track.f[i]);
             m_musicAudioSources[i].clip = clip;
             m_musicAudioSources[i].Play();
         }
@@ -116,7 +117,7 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
     }
     
     // Creates an AudioClip from the notes in a channel
-    private AudioClip CreateClip(string trackName, float bps, float[] frequencies)
+    private AudioClip CreateClip(string trackName, float bps, int[] frequencies)
     {
         int lengthSamples = (int) (SamplingFrequency / bps);
         float[] data = new float[lengthSamples * frequencies.Length];
