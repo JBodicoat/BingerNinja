@@ -4,7 +4,7 @@
 //Joao 23/10/2020 - Added IsCrouched Function
 //Joao 26/10/2020 - Simplified Crouch() function to only enable/disable crouching and stop/resume movement
 //Joao 11/10/2020 - Added IsInVent()
-//Louie 30/11/2020 - Crouch animation
+//Louie 30/11/2020 - Crouch animation and crouch speed float
 
 using System.Collections;
 using System.Collections.Generic;
@@ -20,6 +20,7 @@ public class PlayerStealth_JoaoBeijinho : MonoBehaviour
     public bool m_inVent = false;
 
     private PlayerAnimation_LouieWilliamson m_pAnimation;
+    public float crouchSpeed;
     /// <summary>
     /// Call IsStealthed() to check if the player is in stealth, it will return true if it is
     /// </summary>
@@ -53,7 +54,7 @@ public class PlayerStealth_JoaoBeijinho : MonoBehaviour
 
         if (m_crouched == true)
         {
-            gameObject.GetComponent<PlayerMovement_MarioFernandes>().m_speed = 0f;
+            gameObject.GetComponent<PlayerMovement_MarioFernandes>().m_speed = crouchSpeed;
             m_pAnimation.Crouching(true);
         }
         else
