@@ -7,48 +7,45 @@ using UnityEngine;
 
 public class Portal_Mechanic_AlannaPaxton : MonoBehaviour
 {
-    bool canTeleport = false;
+    bool canTeleport = true;
     protected int trigger = 0;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (canTeleport)
+        if (collision.gameObject.tag == "Portal")
         {
-            // Portal();
-            if (collision.transform.childCount > 0)
+            if (canTeleport)
             {
-                GameObject ChildGameObject1 = collision.transform.GetChild(0).gameObject;
-                Vector2 child_pos = ChildGameObject1.transform.position;
-                this.transform.position = child_pos;
-                canTeleport = false;
+                // Portal();
+                if (collision.transform.childCount > 0)
+                {
+                    GameObject ChildGameObject1 = collision.transform.GetChild(0).gameObject;
+                    Vector2 child_pos = ChildGameObject1.transform.position;
+                    this.transform.position = child_pos;
+                    canTeleport = false;
+                } else if (collision.transform.parent != null)
+                {
+                    Vector2 parent_pos = collision.transform.parent.position;
+                    this.transform.position = parent_pos;
+                    canTeleport = false;
+                }
             }
-            if (collision.transform.parent != null)
-            {
-                Vector2 parent_pos = collision.transform.parent.position;
-                this.transform.position = parent_pos;
-                canTeleport = false;
-            }
-        }
-
-    }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (trigger++ >= 1)
-        {
-            canTeleport = true;
-            trigger = 0;
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerExit2D(Collider2D collision)
     {
-
+        if(collision.gameObject.tag == "Portal")
+        {
+            if (trigger++ >= 2)
+            {
+                Debug.Log(trigger);
+                canTeleport = true;
+                trigger = 0;
+            }
+        }
+        
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
 }
