@@ -61,15 +61,15 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
     {
         if (SelectPizza.activeInHierarchy /*&& ninja point >= 15*/)
         {
-            Debug.Log("pizza");
+            Debug.Log("Tempura");
             //take away ninja points      
-            Inventory.GiveItem(ItemType.Pizza, 1);
+            Inventory.GiveItem(ItemType.Tempura, 1);
         }
         else if (SelectCookie.activeInHierarchy && !PurchasedCookie /*&& ninja point >= 50*/)
         {
-            Debug.Log("cookies");
+            Debug.Log("Dango");
             //take away ninja points
-            Inventory.GiveItem(ItemType.Cookie, 1);
+            Inventory.GiveItem(ItemType.Dango, 1);
             CookieColor.color = Color.red;
             PurchasedCookie = true;
             
