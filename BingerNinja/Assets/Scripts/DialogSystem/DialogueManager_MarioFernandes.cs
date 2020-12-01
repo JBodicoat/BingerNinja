@@ -193,7 +193,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         playerControllerScript.m_interact.Disable();
         playerControllerScript.GetComponentInParent<PlayerHealthHunger_MarioFernandes>().m_paused = true;
         playerControllerScript.GetComponentInParent<EffectManager_MarioFernandes>().m_paused = true;
-        
+        EnemysAI = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject Enemy in EnemysAI)
         {
             Enemy.GetComponentInParent<BaseEnemy_SebastianMol>().enabled = false;
@@ -209,7 +209,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         playerControllerScript.m_interact.Enable();
         playerControllerScript.GetComponentInParent<PlayerHealthHunger_MarioFernandes>().m_paused = false;
         playerControllerScript.GetComponentInParent<EffectManager_MarioFernandes>().m_paused = false;
-
+        EnemysAI = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject Enemy in EnemysAI)
         {
             Enemy.GetComponentInParent<BaseEnemy_SebastianMol>().enabled = true;
@@ -223,7 +223,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
 
         m_sentences = new Queue<string>();
-        EnemysAI = GameObject.FindGameObjectsWithTag("Enemy");
+        
         LoadDialog(SceneManager.GetActiveScene().buildIndex);
 
 
