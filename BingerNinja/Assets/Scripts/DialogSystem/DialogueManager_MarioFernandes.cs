@@ -8,6 +8,7 @@
 // Mário 13/11/2020 - Solve "," bug and stop AI when in dialog
 // Jann  07/11/2020 - Added a quick check to swap the dialogue file based on the settings
 // Jann  25/11/2020 - Added in-game language change
+// Louie 01/12/2020 - Weapon UI animations
 
 using System;
 using System.Collections;
@@ -36,6 +37,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     PlayerController_JamieG playerControllerScript;
 
     private GameObject[] EnemysAI;
+    private WeaponUI_LouieWilliamson m_wpnUI;
     public void LoadLanguageFile()
     {
         SettingsData settingsData = SaveLoadSystem_JamieG.LoadSettings();
@@ -54,7 +56,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         ///////////////////
         //Insert Start Animation here if needed
         ///////////////////
-
+        m_wpnUI.SetWeaponsUIAnimation(false);
         PauseGame();        
 
         m_nameText.transform.parent.gameObject.SetActive(true);
@@ -109,7 +111,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
 
         m_nameText.transform.parent.gameObject.SetActive(false);
 
-
+        m_wpnUI.SetWeaponsUIAnimation(true);
         ResumeGame();
     }
 
@@ -214,7 +216,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     void Start()
     {
         playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
-
+        m_wpnUI = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
         m_sentences = new Queue<string>();
         
         LoadDialog(SceneManager.GetActiveScene().buildIndex);

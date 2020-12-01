@@ -27,8 +27,6 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     public Animator pickupAnim;
     public Animator keyAnim;
 
-    private float timer;
-
     public List<Sprite> WeaponSprites = new List<Sprite>();
 
     //---- LIST KEY ----   //
@@ -39,8 +37,8 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     //  4     =   Sashimi  //
     //  5     =   Tempura  //
     //  6     =   Sake     //
-    //  7     =   Noodles   //
-
+    //  7     =   Noodles  //
+    //  8     =   None     //
     public void SetWeaponsUIAnimation(bool isShownIfTrue)
     {
         weaponsAnim.SetBool("isOnScreen", isShownIfTrue);
@@ -58,6 +56,19 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     {
         pickupImage.sprite = WeaponSprites[(int)newPickup];
     }
+    public void removeWeapon(bool isRanged)
+    {
+        if (isRanged)
+        {
+            rangedImage.sprite = WeaponSprites[8];
+            setAmmo("0");
+        }
+        else
+        {
+            weaponImage.sprite = WeaponSprites[8];
+        }
+        setName("None", isRanged);
+    }
 
     public void WeaponChange(FoodType newWeapon, bool isRanged, int ammo)
     {
@@ -72,34 +83,10 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     void Start()
     {
         weaponsAnim = GetComponent<Animator>();
-
-        timer = 0;
+        removeWeapon(true);
+        removeWeapon(false);
     }
-    void Update()
-    {
-        timer += Time.deltaTime;
 
-        if (timer > 25)
-        {
-            WeaponChange(FoodType.FUGU, false, 0);
-        }
-        else if (timer > 20)
-        {
-            WeaponChange(FoodType.KOBEBEEF, false, 0);
-        }
-        else if (timer > 15)
-        {
-            WeaponChange(FoodType.NOODLES, false, 0);
-        }
-        else if (timer > 10)
-        {
-            WeaponChange(FoodType.RICEBALL, true, 10);
-        }
-        else if (timer > 5)
-        {
-            WeaponChange(FoodType.SQUID, false, 0);
-        }
-    }
     void setName(string name, bool isRanged)
     {
         if (isRanged)

@@ -196,10 +196,13 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
                     break;
             }
 
+            m_WeaponUI.removeWeapon(m_currentWeapon[m_weaponsIndex].IsRanged());
+ 
             m_playerHealthHungerScript.Eat(m_currentWeapon[m_weaponsIndex].m_hungerRestoreAmount);
 
             Destroy(m_currentWeapon[m_weaponsIndex].gameObject);
             m_currentWeapon[m_weaponsIndex] = null;
+
         }
     }
     // Start is called before the first frame update
@@ -274,6 +277,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             collision.gameObject.SetActive(false);
             collision.transform.parent = transform;
             m_WeaponUI.WeaponChange(m_currentWeapon[0].m_foodType, false, 0);
+            m_WeaponUI.SetWeaponsUIAnimation(true);
 		}
         else if(!m_currentWeapon[1] && collision.GetComponent<WeaponsTemplate_MarioFernandes>() && collision.GetComponent<WeaponsTemplate_MarioFernandes>().IsRanged())
         {
@@ -281,6 +285,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             collision.gameObject.SetActive(false);
             collision.transform.parent = transform;
             m_WeaponUI.WeaponChange(m_currentWeapon[1].m_foodType, true, 5);
+            m_WeaponUI.SetWeaponsUIAnimation(true);
         }
     }
 }
