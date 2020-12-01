@@ -16,6 +16,8 @@
 //sebastian mol 18/11/2020 alien now dosent get stunned
 //sebastian mol 20/11/2020 spce ninja enemy logic done
 //sebastian mol 29/11/2020 creaeted spece for exlemation mark adn completed damage take for last boss
+//Elliott Desouza 30/11/2020 added a funtion (OnceLostContactEffect) which instanshates the Question mark prefab.
+
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -38,7 +40,9 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public bool m_playerDetected = false; //has the player been detected   
     public state m_currentState = state.WONDER;//current state of teh enemy   
     public m_enemyType m_currentEnemyType;
-   
+    public GameObject m_questionmark;
+    public GameObject m_excalmationmark;
+
 
     [Header("designers Section")]
     [Header("stats variables")]
@@ -90,6 +94,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public bool m_doseAffect = true;
     [Tooltip("multiplies how much the attack speed increases by in space ninja boss second fase")]
     public float m_attackSpeedIncrease = 1.5f;
+    
 
     private Pathfinder_SebastianMol m_pathfinder;
     protected List<Vector2Int> m_currentPath = new List<Vector2Int>();
@@ -115,6 +120,8 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
     private HitEffectElliott m_HitEffectElliott;
     private CameraShakeElliott m_cameraShake;
+    protected bool m_showquestionMarkonce = false;
+    private PlayerSpoted_Elliott playerSpoted_Elliott;
 
     protected PlayerStealth_JoaoBeijinho m_playerStealthScript;
     private int m_crouchObjectLayer = 1 << 8;
@@ -137,7 +144,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 PathfindTo(m_startPos);
             }
         }
-
+        m_showquestionMarkonce = false;
     }
 
     /// <summary>
@@ -159,6 +166,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         }
         else
         {
+            OnceLostContactEffect();
             m_isSerching = true;
             if (m_currentPath.Count == 0)
             {
@@ -251,6 +259,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         else
         {
             m_outOfSightTimer -= Time.deltaTime;
+            OnceLostContactEffect();
         }
     }
 
@@ -741,12 +750,12 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         {
             m_health -= damage * m_sneakDamageMultiplier;
             m_cameraShake.StartShake();
-          //  m_HitEffectElliott.StartHitEffect(true);
+            m_HitEffectElliott.StartHitEffect(true);
         }
         else
         {
             m_health -= damage;
-          //  m_HitEffectElliott.StartHitEffect(false);
+            m_HitEffectElliott.StartHitEffect(false);
         }
     }
 
@@ -762,11 +771,24 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     }
 
     /// <summary>
-    /// effect tthat happens when enemy noticese the player
+    /// effect that happens when enemy noticese the player
     /// </summary>
-    protected void NoticePlayerEffect()
+    public void NoticePlayerEffect()
     {
-        Debug.Log("!");
+       Debug.Log("!");
+        Instantiate(m_excalmationmark, gameObject.transform.position, Quaternion.identity,transform);
+        
+    }
+
+    public void OnceLostContactEffect()
+    {
+        if (!m_showquestionMarkonce)
+        {
+            Debug.Log("?");
+            Instantiate(m_questionmark, gameObject.transform.position, Quaternion.identity,transform);
+            m_showquestionMarkonce = true;
+           
+        }
     }
 
 
@@ -786,7 +808,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
         m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
         m_crouchObjectLayer = ~m_crouchObjectLayer;
-       // m_HitEffectElliott = GetComponent<HitEffectElliott>();
+        m_HitEffectElliott = GetComponent<HitEffectElliott>();
         m_cameraShake = Camera.main.GetComponent<CameraShakeElliott>();
     }
 

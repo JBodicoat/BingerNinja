@@ -221,6 +221,8 @@ MonoBehaviour:
   m_playerDetected: 0
   m_currentState: 0
   m_currentEnemyType: 1
+  m_questionmark: {fileID: 3783213463638213574, guid: 40acaa4f65aeeaf44aad51d83f2decd0, type: 3}
+  m_excalmationmark: {fileID: 6264025296151744314, guid: a776e246d259fa04188f7ffb2c9d5113, type: 3}
   m_dropItem: {fileID: 0}
   m_health: 80
   m_speed: 1
@@ -235,6 +237,11 @@ MonoBehaviour:
   m_sneakDamageMultiplierStack: 0
   m_attackRange: 3
   m_attckRangeDevider: 1.5
+  m_tiggerBossLooseTargetDistance: 2
+  m_secondPhaseStartPercentage: 0.3
+  m_amountOfStunWhenPlayerStealthed: 3
+  m_doseAffect: 1
+  m_attackSpeedIncrease: 1.5
   m_aimer: {fileID: 5751295711232786928}
   m_projectile: {fileID: 1986204507551107328, guid: c719167a814eda848a315ea7dbef9a8a, type: 3}
   m_shootDeley: 2

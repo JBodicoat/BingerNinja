@@ -58,4 +58,6 @@ public class PlayerStealth_JoaoBeijinho : MonoBehaviour
             gameObject.GetComponent<PlayerMovement_MarioFernandes>().ResetSpeed();
         }
     }
+
+    
 }
