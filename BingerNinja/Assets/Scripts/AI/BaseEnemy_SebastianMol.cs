@@ -15,6 +15,9 @@
 //Elliott Desouza 20/11/2020 added hit effect and camera shake when taken damage
 //sebastian mol 18/11/2020 alien now dosent get stunned
 //sebastian mol 20/11/2020 spce ninja enemy logic done
+//sebastian mol 29/11/2020 creaeted spece for exlemation mark adn completed damage take for last boss
+//Elliott Desouza 30/11/2020 added a funtion (OnceLostContactEffect) which instanshates the Question mark prefab.
+
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -37,7 +40,9 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public bool m_playerDetected = false; //has the player been detected   
     public state m_currentState = state.WONDER;//current state of teh enemy   
     public m_enemyType m_currentEnemyType;
-   
+    public GameObject m_questionmark;
+    public GameObject m_excalmationmark;
+
 
     [Header("designers Section")]
     [Header("stats variables")]
@@ -89,6 +94,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public bool m_doseAffect = true;
     [Tooltip("multiplies how much the attack speed increases by in space ninja boss second fase")]
     public float m_attackSpeedIncrease = 1.5f;
+    
 
     private Pathfinder_SebastianMol m_pathfinder;
     protected List<Vector2Int> m_currentPath = new List<Vector2Int>();
@@ -109,10 +115,13 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     private float m_lookLeftAndRightTimerMax; //used to remeber m_lookLeftAndRightTimer varaibale at the start for later resents
     private bool m_isSerching = false; // if the enemy serching for player
     private Vector3 m_curiousTarget;  //the point of curiosity for an enemy to cheak
+    protected int m_tadashiPhase = 1; //the phase tadashi is on
 
 
     private HitEffectElliott m_HitEffectElliott;
     private CameraShakeElliott m_cameraShake;
+    protected bool m_showquestionMarkonce = false;
+    private PlayerSpoted_Elliott playerSpoted_Elliott;
 
     protected PlayerStealth_JoaoBeijinho m_playerStealthScript;
     private int m_crouchObjectLayer = 1 << 8;
@@ -125,7 +134,6 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     {
         if (m_dosePatrole)
         {
-            if (m_playerDetected) m_currentState = state.CHASE;
             Patrol();
         }
         else
@@ -136,7 +144,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 PathfindTo(m_startPos);
             }
         }
-
+        m_showquestionMarkonce = false;
     }
 
     /// <summary>
@@ -158,6 +166,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         }
         else
         {
+            OnceLostContactEffect();
             m_isSerching = true;
             if (m_currentPath.Count == 0)
             {
@@ -236,9 +245,12 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// a state that occurs when enemy is forced to look at a specific location
+    /// </summary>
     private void CuriousState()
     {
-        if (Vector3.Distance( transform.position, m_curiousTarget) < 1 ) 
+        if (Vector2.Distance( transform.position, m_curiousTarget) < 1 ) 
         if (m_outOfSightTimer <= 0)
         {
             m_currentState = state.WONDER;
@@ -247,6 +259,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         else
         {
             m_outOfSightTimer -= Time.deltaTime;
+            OnceLostContactEffect();
         }
     }
 
@@ -317,6 +330,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             m_playerDetected = true;
             m_playerTransform = hit.transform;
             m_currentState = state.ATTACK;
+            NoticePlayerEffect();
             ClearPath();
         }
         else if (m_playerStealthScript.IsCrouched() && crouchedHit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag)) //player is croucheed and it hits 
@@ -325,6 +339,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             m_playerDetected = true;
             m_playerTransform = hit.transform;
             m_currentState = state.ATTACK;
+            NoticePlayerEffect();
             ClearPath();
         }
         else if (m_playerStealthScript.IsCrouched() && !crouchedHit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
@@ -562,7 +577,11 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// used to apply correct damage amaount and type based on enemy type
+    /// </summary>
+    /// <param name="damageType">what type of damage e.g. melee</param>
+    /// <param name="damage">amount of damage</param>
     public void TakeDamage(m_damageType damageType, float damage)
     {
 
@@ -658,16 +677,20 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 float healthPercentage = m_health / m_maxHealth;
                 if (healthPercentage > 0.6f)
                 {
-
+                    m_tadashiPhase = 1;
+                    NormalTakeDamage(damage);
                 }
-                else if (healthPercentage > 0.3f)//health above 30
+                else if( healthPercentage > 0.3f)
                 {
-
+                    m_tadashiPhase = 2;
+                    m_health -= damage;
                 }
                 else//health below 30
                 {
-
+                    m_tadashiPhase = 3;
+                    m_health -= damage;
                 }
+
                 break;
 
             default:
@@ -717,26 +740,57 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         StartCoroutine(StunEnemyWithDeley(amaountOfTime));
     }
 
+    /// <summary>
+    /// normal way of enemy takign damage
+    /// </summary>
+    /// <param name="damage">amount of damage</param>
     private void NormalTakeDamage( float damage )
     {
         if (m_playerDetected == false) //if sneak damage
         {
             m_health -= damage * m_sneakDamageMultiplier;
             m_cameraShake.StartShake();
-          //  m_HitEffectElliott.StartHitEffect(true);
+            m_HitEffectElliott.StartHitEffect(true);
         }
         else
         {
             m_health -= damage;
-          //  m_HitEffectElliott.StartHitEffect(false);
+            m_HitEffectElliott.StartHitEffect(false);
         }
     }
 
+    /// <summary>
+    /// forse enemy to look at a certain position and serch for the player
+    /// </summary>
+    /// <param name="pos">the postion that you want the enemy to search</param>
     public void ForceCuriosity(Vector3 pos)
     {
         m_currentState = state.CURIOUS;
         m_curiousTarget = pos;
         PathfindTo(m_curiousTarget);
+    }
+
+    /// <summary>
+    /// effect that happens when enemy noticese the player
+    /// </summary>
+    public void NoticePlayerEffect()
+    {
+       Debug.Log("!");
+       GameObject excalm = Instantiate(m_excalmationmark, gameObject.transform.position, Quaternion.identity);
+        excalm.transform.parent = transform;
+        
+    }
+
+    public void OnceLostContactEffect()
+    {
+        if (!m_showquestionMarkonce)
+        {
+            Debug.Log("?");
+            GameObject A = Instantiate(m_questionmark, gameObject.transform.position, Quaternion.identity);
+            A.transform.parent = transform;
+            m_showquestionMarkonce = true;
+           
+        }
     }
 
 
@@ -756,7 +810,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
         m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
         m_crouchObjectLayer = ~m_crouchObjectLayer;
-       // m_HitEffectElliott = GetComponent<HitEffectElliott>();
+        m_HitEffectElliott = GetComponent<HitEffectElliott>();
         m_cameraShake = Camera.main.GetComponent<CameraShakeElliott>();
     }
 

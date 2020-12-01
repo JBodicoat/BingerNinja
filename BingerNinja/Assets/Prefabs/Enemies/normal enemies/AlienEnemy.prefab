@@ -425,6 +425,8 @@ MonoBehaviour:
   m_playerDetected: 0
   m_currentState: 0
   m_currentEnemyType: 7
+  m_questionmark: {fileID: 3783213463638213574, guid: 40acaa4f65aeeaf44aad51d83f2decd0, type: 3}
+  m_excalmationmark: {fileID: 6264025296151744314, guid: a776e246d259fa04188f7ffb2c9d5113, type: 3}
   m_dropItem: {fileID: 0}
   m_health: 100
   m_speed: 1
@@ -465,6 +467,11 @@ MonoBehaviour:
   m_chargeAttackRangeTadashi: 10
   m_rangedAttackRangeTadashi: 3
   m_meleeAttackRangeTadashi: 1
+  m_normalAttackColider: {fileID: 0}
+  m_chargeAttackColider: {fileID: 0}
+  m_tadashiProjectiles: []
+  m_ProjectileDisplay: {fileID: 0}
+  m_tadashiNormalPorjectile: {fileID: 0}
 --- !u!114 &482129027589876793
 MonoBehaviour:
   m_ObjectHideFlags: 0

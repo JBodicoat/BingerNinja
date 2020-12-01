@@ -5,6 +5,7 @@
 //Joao 23/10/20 - Added input for interactions.
 //Joao 25/10/20 - Added interaction in update.
 //Joao 26/10/20 - Added input for crouching, the input used for this was interact.
+// Elliott 21/11/2020 - changed the function onEnable and ondisable to public
 //Mario 22/11/20 - Added tap Attack and slow tap attack
 //Louie 30/11/20 - Roll and crouch animations
 
@@ -28,6 +29,7 @@ public class PlayerController_JamieG : MonoBehaviour
     public InputAction m_roll;
 
     public InputAction m_switchWeapons;
+    public InputAction m_dropWeapons;
 
     //Reference to the other player scripts
     private PlayerMovement_MarioFernandes m_playerMovementScript;
@@ -67,7 +69,7 @@ public class PlayerController_JamieG : MonoBehaviour
 
     #region InputAction Functions
     //These functions are required for the InputAction component to work
-    private void OnEnable()
+    public void OnEnable()
     {
         m_movement.Enable();
         m_interact.Enable();
@@ -77,9 +79,10 @@ public class PlayerController_JamieG : MonoBehaviour
         m_attackSlowTap.Enable();
         m_roll.Enable();
         m_switchWeapons.Enable();
+        m_dropWeapons.Enable();
     }
 
-    private void OnDisable()
+    public void OnDisable()
     {
         m_movement.Disable();
         m_interact.Disable();
@@ -89,6 +92,7 @@ public class PlayerController_JamieG : MonoBehaviour
         m_attackSlowTap.Disable();
         m_roll.Disable();
         m_switchWeapons.Disable();
+        m_dropWeapons.Disable();
     }
     #endregion
 

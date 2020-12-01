@@ -291,6 +291,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 2932502618572735700, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: levelLift
+      value: 
+      objectReference: {fileID: 716922375}
     - target: {fileID: 6499968375723911184, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -405,6 +409,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+--- !u!1 &142358469 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 427053018686297868, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+  m_PrefabInstance: {fileID: 142358468}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &163676634 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 682521576906220321, guid: 8dbefaf122480d9458240fdf75a617cd, type: 3}
@@ -32005,6 +32014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f711031bc62374db0c1aeae95a0041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vendingMachine: {fileID: 142358469}
 --- !u!61 &716922376
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -33293,7 +33303,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1070437727c69a347b83b1ed85217fc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_activateObjectScript: {fileID: 1781641336}
+  m_activateObjectScript:
+  - {fileID: 0}
   m_canPressButton: 0
 --- !u!4 &1341968718
 Transform:
@@ -34000,6 +34011,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_functionality: 2
+  m_maxTicks: 0
+  m_damageInterval: 0
+  m_damageAmount: 0
+  m_freezerCooldown: 0
+  m_pickColor: 000000
+  m_stunLight: 0
 --- !u!4 &1781641337
 Transform:
   m_ObjectHideFlags: 0

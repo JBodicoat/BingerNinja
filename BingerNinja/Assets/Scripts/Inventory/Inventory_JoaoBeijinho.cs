@@ -4,6 +4,7 @@
 //Joao Beijinho 29/10/2020 - Started using struct and enum
 //Joao Beijinho 30/10/2020 - Removed Struct and added dictionary
 //Joao Beijinho 02/10/2020 - Updated HasItem to get the quantity too, created RemoveItem function
+//Mario Fernandes 28/10/2020 - Update Pizza and cookies to Dango and Tempura
 
 using System.Collections;
 using System.Collections.Generic;
@@ -17,8 +18,8 @@ public enum ItemType
     Key,
     NinjaPoints,
     LiftKey,
-    Pizza,
-    Cookie,
+    Tempura,
+    Dango,
     Sake,
     Noodles
 }

@@ -73,6 +73,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
 
     public void DisplayNextSentence()
     {
+        Debug.Log("help");
         if (m_sentences.Count == 0)
         {
             EndDialogue();
@@ -215,10 +216,10 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
 
         m_sentences = new Queue<string>();
-
+        EnemysAI = GameObject.FindGameObjectsWithTag("Enemy");
         LoadDialog(SceneManager.GetActiveScene().buildIndex);
 
-        EnemysAI = GameObject.FindGameObjectsWithTag("Enemy");
+
         LoadLanguageFile();
     }
 }
