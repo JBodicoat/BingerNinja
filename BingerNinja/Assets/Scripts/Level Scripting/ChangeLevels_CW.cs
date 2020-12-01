@@ -8,14 +8,16 @@ public class ChangeLevels_CW : MonoBehaviour
     public GameObject vendingMachine;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-        if(collision.tag == "Player" && SceneManager.GetActiveScene().buildIndex > 4)
+        if(collision.tag == "Player")
         {
-            vendingMachine.SetActive(true);
-        }
-        else
-        {
-            ProgressToNextLevel();
+            if (SceneManager.GetActiveScene().buildIndex > 4)
+            {
+                vendingMachine.SetActive(true);
+            }
+            else
+            {
+                ProgressToNextLevel();
+            }
         }
     }
 
