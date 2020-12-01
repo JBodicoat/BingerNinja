@@ -13,8 +13,8 @@ public class EnemyAnimationController_Jonathan : MonoBehaviour
 
     private void Start()
     {
-        m_animator = GetComponent<Animator>();
-        m_spriteRenderer = GetComponent<SpriteRenderer>();
+        m_animator = GetComponentInChildren<Animator>();
+        m_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Update()

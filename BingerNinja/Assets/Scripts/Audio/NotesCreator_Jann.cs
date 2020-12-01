@@ -27,7 +27,7 @@ public class NotesCreator_Jann
     private float m_phase;
     private int m_currentNoteIndex;
 
-    private Dictionary<Note, float> notesFrequencies = new Dictionary<Note, float>();
+    private Dictionary<Note, int> notesFrequencies = new Dictionary<Note, int>();
 
     public enum Note
     {
@@ -44,25 +44,25 @@ public class NotesCreator_Jann
         GenerateNotes();
     }
 
-    public float GetFrequency(Note note)
+    public int GetFrequency(Note note)
     {
         return notesFrequencies[note];
     }
 
-    public Note GetNote(float frequency)
+    public Note GetNote(int frequency)
     {
         return notesFrequencies.FirstOrDefault(pair => Math.Abs(pair.Value - frequency) < 0.1f).Key;
     }
     
     private void GenerateNotes()
     {
-        notesFrequencies.Add(Note.None, 0f);
+        notesFrequencies.Add(Note.None, 0);
 
         int index = 0;
         for (int frequency = From; frequency < To + 1; frequency++)
         {
             index++;
-            notesFrequencies.Add((Note) index, BaseFrequency * Mathf.Pow(FrequencyRation, frequency));
+            notesFrequencies.Add((Note) index, (int) (BaseFrequency * Mathf.Pow(FrequencyRation, frequency)));
         }
     }
 }

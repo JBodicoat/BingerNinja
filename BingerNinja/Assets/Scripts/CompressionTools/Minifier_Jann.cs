@@ -64,10 +64,10 @@ public class Minifier_Jann : M
             codebase.Add(SaveFile(directory, filename, minified));
         }
 
-        if (CanCompile(codebase.ToArray()))
-        {
-            print("Minified code compiled successfully");
-        }
+        //if (CanCompile(codebase.ToArray()))
+        //{
+        //    print("Minified code compiled successfully");
+        //}
     }
 
     public string Minify(string[] code)
@@ -277,41 +277,41 @@ public class Minifier_Jann : M
 
     #region CompilationUtils
 
-    private bool CanCompile(string[] program)
-    {
-        var errors = Compile(program).Errors;
-        if (!errors.HasErrors)
-            return true;
-        else
-        {
-            foreach (CompilerError error in errors)
-            {
-                if (!error.IsWarning)
-                    print(error.ToString());
-            }
+    //private bool CanCompile(string[] program)
+    //{
+    //    var errors = Compile(program).Errors;
+    //    if (!errors.HasErrors)
+    //        return true;
+    //    else
+    //    {
+    //        foreach (CompilerError error in errors)
+    //        {
+    //            if (!error.IsWarning)
+    //                print(error.ToString());
+    //        }
 
-            return false;
-        }
-    }
+    //        return false;
+    //    }
+    //}
 
-    private CompilerResults Compile(string[] filenames)
-    {
-        CompilerResults compilerResults = null;
-        using (CSharpCodeProvider provider = new CSharpCodeProvider())
-        {
-            CompilerParameters compilerParameters = new CompilerParameters();
-            compilerParameters.GenerateExecutable = false;
+    //private CompilerResults Compile(string[] filenames)
+    //{
+    //    CompilerResults compilerResults = null;
+    //    using (CSharpCodeProvider provider = new CSharpCodeProvider())
+    //    {
+    //        CompilerParameters compilerParameters = new CompilerParameters();
+    //        compilerParameters.GenerateExecutable = false;
 
-            var assemblies = from asm in AppDomain.CurrentDomain.GetAssemblies()
-                where !asm.IsDynamic
-                select asm.Location;
-            compilerParameters.ReferencedAssemblies.AddRange(assemblies.ToArray());
+    //        var assemblies = from asm in AppDomain.CurrentDomain.GetAssemblies()
+    //            where !asm.IsDynamic
+    //            select asm.Location;
+    //        compilerParameters.ReferencedAssemblies.AddRange(assemblies.ToArray());
 
-            compilerResults = provider.CompileAssemblyFromFile(compilerParameters, filenames);
-        }
+    //        compilerResults = provider.CompileAssemblyFromFile(compilerParameters, filenames);
+    //    }
 
-        return compilerResults;
-    }
+    //    return compilerResults;
+    //}
 
     #endregion
 }
