@@ -273,6 +273,7 @@ GameObject:
   - component: {fileID: 8631870844753434323}
   - component: {fileID: 8631870844753434320}
   - component: {fileID: 963278913598660527}
+  - component: {fileID: -6563184247075566347}
   m_Layer: 2
   m_Name: JanitorEnemy
   m_TagString: Enemy
@@ -438,3 +439,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 500a7052496e455428e85868ebd594e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-6563184247075566347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8631870844753434322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d31f9a7fe448ac4393bf8ec13e9bef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_critical: 174
+  m_nonCritical: 122
