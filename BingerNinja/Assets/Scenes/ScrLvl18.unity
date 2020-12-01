@@ -467,6 +467,14 @@ PrefabInstance:
       propertyPath: floortilemap
       value: 
       objectReference: {fileID: 2056565906}
+    - target: {fileID: 8631870844753434320, guid: 5d801ae616f9111409afde547c94b3d7, type: 3}
+      propertyPath: m_questionmark
+      value: 
+      objectReference: {fileID: 3783213463638213574, guid: 40acaa4f65aeeaf44aad51d83f2decd0, type: 3}
+    - target: {fileID: 8631870844753434320, guid: 5d801ae616f9111409afde547c94b3d7, type: 3}
+      propertyPath: m_excalmationmark
+      value: 
+      objectReference: {fileID: 6264025296151744314, guid: a776e246d259fa04188f7ffb2c9d5113, type: 3}
     - target: {fileID: 8631870844753434322, guid: 5d801ae616f9111409afde547c94b3d7, type: 3}
       propertyPath: m_Name
       value: Space Ninja
@@ -1152,7 +1160,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1144678947}
   m_LocalRotation: {x: -0, y: -0, z: -0.22336291, w: 0.9747353}
-  m_LocalPosition: {x: 16.11, y: 132.06, z: 0}
+  m_LocalPosition: {x: 16, y: 131.83, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 389877142}
@@ -2026,6 +2034,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_dialogue: []
+--- !u!114 &1699246935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699246927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d31f9a7fe448ac4393bf8ec13e9bef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_critical: 174
+  m_nonCritical: 122
 --- !u!1001 &2014679416
 PrefabInstance:
   m_ObjectHideFlags: 0

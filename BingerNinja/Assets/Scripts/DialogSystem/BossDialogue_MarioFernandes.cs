@@ -16,10 +16,11 @@ public class BossDialogue_MarioFernandes : MonoBehaviour
     ///<summary>Call the dialog you want, giving it the number on the index</summary>
 	public void TriggerDialogue (int index)
 	{
-		if(index < m_dialogue.Capacity - 1 && index >= 0)
-a
-		else
-		print("Invalid dialog index");
+        if (index < m_dialogue.Capacity - 1 && index >= 0)
+            FindObjectOfType<DialogueManager_MarioFernandes>().StartDialogue(m_dialogue[index]);
+
+        else
+            print("Invalid dialog index");
 	}
 
 }

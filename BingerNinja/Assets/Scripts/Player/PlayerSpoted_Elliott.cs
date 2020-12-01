@@ -79,5 +79,9 @@ public class PlayerSpoted_Elliott : MonoBehaviour
         {
             if (!m_doLostOnce) EnemyLostSight();
         }
+        if(m_allEnemies.Length == 0)
+        {
+            if (!m_doLostOnce) EnemyLostSight();
+        }
     }
 }
