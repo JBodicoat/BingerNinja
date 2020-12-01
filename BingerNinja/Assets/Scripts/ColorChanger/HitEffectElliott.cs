@@ -1,6 +1,7 @@
 ﻿//Elliott Desouza
 
 //Elliott 07/10/2020 - made it so it applys a texture to the object.
+//Elliott 30/12/2020  added  = transform.Find("EnemySprite") to the code in the start function.
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -77,7 +78,7 @@ public class HitEffectElliott : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mSpriteRenderer =transform.Find("EnemySprite").GetComponent<SpriteRenderer>();
+        mSpriteRenderer = transform.Find("EnemySprite").GetComponent<SpriteRenderer>();
         InitColorSwapTex();
 
     }

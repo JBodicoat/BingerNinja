@@ -776,7 +776,8 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public void NoticePlayerEffect()
     {
        Debug.Log("!");
-        Instantiate(m_excalmationmark, gameObject.transform.position, Quaternion.identity,transform);
+       GameObject excalm = Instantiate(m_excalmationmark, gameObject.transform.position, Quaternion.identity);
+        excalm.transform.parent = transform;
         
     }
 
@@ -785,7 +786,8 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         if (!m_showquestionMarkonce)
         {
             Debug.Log("?");
-            Instantiate(m_questionmark, gameObject.transform.position, Quaternion.identity,transform);
+            GameObject A = Instantiate(m_questionmark, gameObject.transform.position, Quaternion.identity);
+            A.transform.parent = transform;
             m_showquestionMarkonce = true;
            
         }
