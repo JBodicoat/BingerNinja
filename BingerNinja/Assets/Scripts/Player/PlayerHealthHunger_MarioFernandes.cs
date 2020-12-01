@@ -50,10 +50,9 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
 
         if(m_currentHealth == 0)
         {            
-            m_DeathEffect.SpriteFlash();        
-            m_PauseInput.OnDisable();
-            Invoke("Die", 2f);
-            m_PauseInput.OnEnable();
+            m_DeathEffect.SpriteFlash();
+            //Invoke("Die", 2f);
+            Die();
         }
         
         //print(m_currentHealth);
@@ -90,10 +89,10 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
     private void Die()
     {       
         gameObject.transform.position = GameObject.FindGameObjectWithTag("SaveCheckpoint").GetComponent<SaveSystem_ElliottDesouza>().m_currentCheckpoint.position;
-        m_currentHealth = 100;
+        m_currentHealth = m_maxHealth;
         m_currentHunger = 100;
         print("GAME OVER");
-	}
+    }
 
     // Start is called before the first frame update
     void Start()
