@@ -70,7 +70,7 @@ public class LevelScripting_JW : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 18)
         {
             levelBossIntro = false;
-            levelLiftTrigger.SetActive(false);
+            //levelLiftTrigger.SetActive(false);
         }
     }
 
