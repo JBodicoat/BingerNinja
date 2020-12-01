@@ -29,7 +29,7 @@ public class LevelScripting_JW : MonoBehaviour
         if(SceneManager.GetActiveScene().buildIndex == 14)
         {
             levelLiftTrigger = GameObject.Find("Level 14 Lift");
-            keyTrigger = GameObject.Find("Key");
+            keyTrigger = GameObject.Find("Help");
             doorCloseTrigger = GameObject.Find("DialogTrigger");
             bottomDoorTile = walls1.GetTile<Tile>(new Vector3Int(12,26,0));
             walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
@@ -47,7 +47,7 @@ public class LevelScripting_JW : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 19)
         {
             levelLiftTrigger = GameObject.Find("Level 19 Lift");
-            keyTrigger = GameObject.Find("Key");
+            keyTrigger = GameObject.Find("My Key");
         }
     }
 
