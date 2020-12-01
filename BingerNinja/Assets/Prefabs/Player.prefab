@@ -497,7 +497,15 @@ MonoBehaviour:
     m_Id: c27d5188-cbec-4ed3-9431-06b8d77335aa
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 4af18060-c229-467b-bea9-8e9d79bba93a
+      m_Path: <Mouse>/leftButton
+      m_Interactions: Tap
+      m_Processors: 
+      m_Groups: 
+      m_Action: Attack Tap
+      m_Flags: 0
   m_attackSlowTap:
     m_Name: Attack Slow Tap
     m_Type: 0
@@ -505,7 +513,15 @@ MonoBehaviour:
     m_Id: 2c8e5bff-b30e-4e8b-ac52-4b746c832236
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 7f371b48-fdd9-419b-88a0-76adea15c1a1
+      m_Path: <Mouse>/leftButton
+      m_Interactions: Hold(duration=1)
+      m_Processors: 
+      m_Groups: 
+      m_Action: Attack Slow Tap
+      m_Flags: 0
   m_roll:
     m_Name: Roll
     m_Type: 0
