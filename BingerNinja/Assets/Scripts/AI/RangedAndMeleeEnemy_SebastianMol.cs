@@ -208,7 +208,7 @@ using UnityEngine;
     {    
         m_attackRange = m_meleeAttackRangeTadashi;
         m_attackCollider = m_normalAttackColider;
-        m_chargeAttackColider.SetActive(false);
+        if(m_chargeAttackColider) m_chargeAttackColider.SetActive(false);
         m_ProjectileDisplay.sprite = null;
         m_generateRandomNumberOnceTadashi = true;
         m_attackTimer = m_hitSpeed;
@@ -221,7 +221,7 @@ using UnityEngine;
     {
         m_attackRange = m_chargeAttackRangeTadashi;
         m_attackCollider = m_chargeAttackColider;
-        m_normalAttackColider.SetActive(false);
+        if (m_normalAttackColider) m_normalAttackColider.SetActive(false);
         m_ProjectileDisplay.sprite = null;
         m_generateRandomNumberOnceTadashi = true;
         m_attackTimer = m_chargeAttackDeley;
@@ -275,7 +275,7 @@ using UnityEngine;
     /// handles the set up for each fase of tadashi boss fight
     /// </summary>
     private void UpdateTadashi()
-    {    
+    {    if(m_currentEnemyType == m_enemyType.TADASHI)
         switch (m_tadashiPhase)
         {
             case 1:

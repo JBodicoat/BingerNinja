@@ -14,6 +14,7 @@ public class AudioManager_LouieWilliamson : MonoBehaviour
     public List<AudioClip> SFXList = new List<AudioClip>();
     private Dictionary<SFX, AudioClip> SFXDictionary = new Dictionary<SFX, AudioClip>();
     public GameObject SFXPrefab;
+   // private PlayTrack_Jann music;
 
     //Music enum and Dictionary setup
     public enum Music { MainMenu, Level1 };
@@ -81,15 +82,70 @@ public class AudioManager_LouieWilliamson : MonoBehaviour
         switch (currentScene)
         {
             case 0:
-                SetMusicSource(Music.MainMenu);
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_MainMenu);
+                // SetMusicSource(Music.MainMenu);
                 break;
             case 1:
-                SetMusicSource(Music.Level1);
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level1);
+              //  SetMusicSource(Music.Level1);
                 break;
             case 2:
-                SetMusicSource(Music.Level1);
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level1);
+                //SetMusicSource(Music.Level1);
                 break;
             case 3:
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level1);
+                break;
+            case 4:
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level2);
+                break;
+            case 5:
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level2);
+                break;
+            case 6:
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level2);
+                break;
+            case 7:
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level3);
+                break;
+            case 8:
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level3);
+                break;
+            case 9:
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level3);
+                break;
+            case 10:
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level4);
+                break;
+            case 11:
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level4);
+                break;
+            case 12:
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level4);
+                break;
+            case 13:
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level5);
+                break;
+            case 14:
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level5);
+                break;
+            case 15:
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level5);
+                break;
+            case 16:
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level6);
+                break;
+            case 17:
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level6);
+                break;
+            case 18:
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level6);
+                break;
+            case 19:
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level7);
+                break;
+            case 20:
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level7);
                 break;
             default:
                 break;
