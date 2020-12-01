@@ -22,7 +22,7 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
     private Color newcolor;
     private bool PurchasedCookie = false;
     private bool PurchasedNoodle = false;
-
+    public ChangeLevels_CW levelLift;
     /// <summary>
     /// shuts all decriptions and opens up the one selected
     /// </summary>
@@ -125,6 +125,10 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
         if (gamepad.digit5Key.wasPressedThisFrame)
         {
             PurchaseUpgrade();
+        }
+        if (gamepad.digit6Key.wasPressedThisFrame)
+        {
+            levelLift.ProgressToNextLevel();
         }
     }
 }

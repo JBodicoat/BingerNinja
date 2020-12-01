@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07fabf56df0d21242acb771bafbb7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_enemyInFreezer: 0
+  m_enemyList: []
 --- !u!61 &76610188
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -318,6 +318,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_functionality: 3
+  m_maxTicks: 0
+  m_damageInterval: 0
+  m_damageAmount: 0
+  m_freezerCooldown: 0
+  m_pickColor: 000000
+  m_stunLight: 0
 --- !u!1001 &94314011
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1008,6 +1014,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 2932502618572735700, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: levelLift
+      value: 
+      objectReference: {fileID: 1296627587}
     - target: {fileID: 6499968375723911184, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1126,6 +1136,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+--- !u!1 &265595992 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 427053018686297868, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+  m_PrefabInstance: {fileID: 265595991}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &313842212
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23221,7 +23236,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1070437727c69a347b83b1ed85217fc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_activateObjectScript: {fileID: 76610190}
+  m_activateObjectScript:
+  - {fileID: 0}
   m_canPressButton: 0
 --- !u!114 &582205680
 MonoBehaviour:
@@ -23240,6 +23256,7 @@ MonoBehaviour:
   topDoor: {fileID: 11400000, guid: 38a8cfb202824c949a929055f9cb2920, type: 2}
   m_canPressButton: 0
   m_doorIsOpen: 0
+  buttonName: 
 --- !u!4 &582205681
 Transform:
   m_ObjectHideFlags: 0
@@ -24085,6 +24102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f711031bc62374db0c1aeae95a0041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vendingMachine: {fileID: 265595992}
 --- !u!61 &1296627588
 BoxCollider2D:
   m_ObjectHideFlags: 0

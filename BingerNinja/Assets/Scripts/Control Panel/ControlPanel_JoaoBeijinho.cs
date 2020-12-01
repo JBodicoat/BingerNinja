@@ -2,6 +2,7 @@
 
 //Joao Beijinho 05/11/2020 - Created the script, triggers to check if player can interact, and calling interaction in update
 //Joao Beijinho 09/11/2020 - Replaced tags with the tags in the Tags_JoaoBeijinho script
+//Joao Beijinho 27/11/2020 - Made an array for ControlPanelActivateObject to allow the control panel to activate multiple objects
 
 using System.Collections;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ using UnityEngine;
 public class ControlPanel_JoaoBeijinho : MonoBehaviour
 {
     protected PlayerController_JamieG m_playerControllerScript;
-    public ControlPanelActivateObject_JoaoBeijinho m_activateObjectScript;
+    public ControlPanelActivateObject_JoaoBeijinho[] m_activateObjectScript;
 
     private string m_playerTag = "Player";
 
@@ -46,7 +47,10 @@ public class ControlPanel_JoaoBeijinho : MonoBehaviour
     {
         if (m_playerControllerScript.m_interact.triggered && m_canPressButton == true)//Player interaction with button
         {
-            m_activateObjectScript.ActivateObject();
+            for (int i = 0; i < m_activateObjectScript.Length; i++)
+            {
+                m_activateObjectScript[i].ActivateObject();
+            }
         }
     }
 }

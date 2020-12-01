@@ -5,8 +5,10 @@
 // Mário 26/10/2020 - Ajust Dialogue to the boss Dialogue script
 // Mário 28/10/2020 - Optimisation and Stop player whene in dialogs
 // Mário 06/11/2020 - Dialog Title update, Pause Systems, Use "|" to saperate Dialogues
+// Mário 13/11/2020 - Solve "," bug and stop AI when in dialog
 // Jann  07/11/2020 - Added a quick check to swap the dialogue file based on the settings
 // Jann  25/11/2020 - Added in-game language change
+// Louie 28/11/2020 - Added weapon ui animation code
 
 using System;
 using System.Collections;
@@ -34,6 +36,9 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     string m_TrigerDialoguePrefab = "DialogTrigger";
     PlayerController_JamieG playerControllerScript;
 
+    private GameObject[] EnemysAI;
+
+    private WeaponUI_LouieWilliamson wpnUI;
     public void LoadLanguageFile()
     {
         SettingsData settingsData = SaveLoadSystem_JamieG.LoadSettings();
@@ -53,6 +58,8 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         //Insert Start Animation here if needed
         ///////////////////
 
+        wpnUI.SetWeaponsUIAnimation(false);
+
         PauseGame();        
 
         m_nameText.transform.parent.gameObject.SetActive(true);
@@ -71,6 +78,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
 
     public void DisplayNextSentence()
     {
+        Debug.Log("help");
         if (m_sentences.Count == 0)
         {
             EndDialogue();
@@ -108,9 +116,10 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
 
 
         ResumeGame();
+        wpnUI.SetWeaponsUIAnimation(true);
     }
 
-	///<summary>Load the Level dialog from CSV doc</summary>
+    ///<summary>Load the Level dialog from CSV doc</summary>
     void LoadDialog(int level = 0)
     {
         GameObject Target;
@@ -122,7 +131,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         for (int i = 0; i < lines.Length; i++)
         {
 			//Split sentence using "," as reference
-            List<string> parts = lines[i].Split(","[0]).ToList();
+            List<string> parts = lines[i].Split((char)9).ToList();
 
 			//Delete empty spaces
             if (parts[0] == level.ToString())
@@ -178,32 +187,45 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     void PauseGame()
     {
         playerControllerScript.m_movement.Disable();
-        playerControllerScript.m_attack.Disable();
+        playerControllerScript.m_attackTap.Disable();
         playerControllerScript.m_crouch.Disable();
         playerControllerScript.m_eat.Disable();
         playerControllerScript.m_interact.Disable();
         playerControllerScript.GetComponentInParent<PlayerHealthHunger_MarioFernandes>().m_paused = true;
         playerControllerScript.GetComponentInParent<EffectManager_MarioFernandes>().m_paused = true;
         
+        foreach (GameObject Enemy in EnemysAI)
+        {
+            Enemy.GetComponentInParent<BaseEnemy_SebastianMol>().enabled = false;
+        }
     }
 
     void ResumeGame()
     {
         playerControllerScript.m_movement.Enable();
-        playerControllerScript.m_attack.Enable();
+        playerControllerScript.m_attackTap.Enable();
         playerControllerScript.m_crouch.Enable();
         playerControllerScript.m_eat.Enable();
         playerControllerScript.m_interact.Enable();
         playerControllerScript.GetComponentInParent<PlayerHealthHunger_MarioFernandes>().m_paused = false;
         playerControllerScript.GetComponentInParent<EffectManager_MarioFernandes>().m_paused = false;
+
+        foreach (GameObject Enemy in EnemysAI)
+        {
+            Enemy.GetComponentInParent<BaseEnemy_SebastianMol>().enabled = true;
+        }
         
     }
     // Use this for initialization
     void Start()
     {
+        wpnUI = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
         playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
 
         m_sentences = new Queue<string>();
+        EnemysAI = GameObject.FindGameObjectsWithTag("Enemy");
+        LoadDialog(SceneManager.GetActiveScene().buildIndex);
+
 
         LoadLanguageFile();
     }
