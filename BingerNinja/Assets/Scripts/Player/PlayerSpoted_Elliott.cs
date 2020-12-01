@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿//Elliott 
+
+// this class is for the player to signal if he has been seen or not
+
+//Elliott 30/12/2020 made it so when the player is seen and eye will apper on top of his head and when enemy loses sight, an closed eye appers 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +18,6 @@ public class PlayerSpoted_Elliott : MonoBehaviour
 
     private GameObject[] m_allEnemies;
 
-   
     public void EyeNowOpened()
     {
         m_eyeOpen.SetActive(true);
