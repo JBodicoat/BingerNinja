@@ -33,6 +33,7 @@ public class PlayerAnimation_LouieWilliamson : MonoBehaviour
     public void Crouching(bool isCrouching)
     {
         m_playerAnim.SetBool("isCrouching", isCrouching);
+        print("Crouch");
     }
     void Start()
     {
@@ -49,10 +50,12 @@ public class PlayerAnimation_LouieWilliamson : MonoBehaviour
         if (m_rb.velocity.x != 0 || m_rb.velocity.y != 0)
         {
             m_playerAnim.SetTrigger("isMoving");
+            print("MOVE");
         }
         else
         {
             m_playerAnim.SetTrigger("isIdle");
+            print("IDLE");
         }
 
         //Is he moving to the left
@@ -83,7 +86,6 @@ public class PlayerAnimation_LouieWilliamson : MonoBehaviour
         {
             m_playerAnim.SetBool("isFacing", false);
         }
-        
     }
     private void FlipSprite()
     {
