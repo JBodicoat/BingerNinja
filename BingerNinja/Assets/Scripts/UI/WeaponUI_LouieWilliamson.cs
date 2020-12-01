@@ -26,6 +26,7 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     private Animator weaponsAnim;
     public Animator pickupAnim;
     public Animator keyAnim;
+
     public List<Sprite> WeaponSprites = new List<Sprite>();
 
     //---- LIST KEY ----   //
@@ -36,8 +37,8 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     //  4     =   Sashimi  //
     //  5     =   Tempura  //
     //  6     =   Sake     //
-    //  7     =   Noodles   //
-
+    //  7     =   Noodles  //
+    //  8     =   None     //
     public void SetWeaponsUIAnimation(bool isShownIfTrue)
     {
         weaponsAnim.SetBool("isOnScreen", isShownIfTrue);
@@ -55,6 +56,19 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     {
         pickupImage.sprite = WeaponSprites[(int)newPickup];
     }
+    public void removeWeapon(bool isRanged)
+    {
+        if (isRanged)
+        {
+            rangedImage.sprite = WeaponSprites[8];
+            setAmmo("0");
+        }
+        else
+        {
+            weaponImage.sprite = WeaponSprites[8];
+        }
+        setName("None", isRanged);
+    }
 
     public void WeaponChange(FoodType newWeapon, bool isRanged, int ammo)
     {
@@ -62,13 +76,17 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
         {
             setAmmo("" + ammo);
         }
+
         setName(newWeapon.ToString(), isRanged);
         setImage((int)newWeapon, isRanged);
     }
     void Start()
     {
         weaponsAnim = GetComponent<Animator>();
+        removeWeapon(true);
+        removeWeapon(false);
     }
+
     void setName(string name, bool isRanged)
     {
         if (isRanged)
@@ -95,4 +113,6 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     {
         ammoText.text = ammo;
     }
+
+
 }

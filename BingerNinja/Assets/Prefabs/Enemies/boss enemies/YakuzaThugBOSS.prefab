@@ -93,7 +93,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_baseDamage: 1
-  m_damage: 0
+  m_percentageChanceOfAffect: 0.5
+  m_poisionDamage: 1
+  m_slowDebuff: 0.5
+  m_affectTime: 5
 --- !u!1 &337392180150647828
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,7 +169,7 @@ SpriteRenderer:
   m_SortingLayerID: -2137332843
   m_SortingLayer: 3
   m_SortingOrder: 100
-  m_Sprite: {fileID: 8452160866309653340, guid: 7eec9656956eec34baf6f874b2f50d24, type: 3}
+  m_Sprite: {fileID: 6659669000147771829, guid: 7eec9656956eec34baf6f874b2f50d24, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -270,6 +273,7 @@ GameObject:
   - component: {fileID: 8631870844753434323}
   - component: {fileID: 8631870844753434320}
   - component: {fileID: 6890218618640264603}
+  - component: {fileID: -2917308268515665934}
   m_Layer: 2
   m_Name: YakuzaThugBOSS
   m_TagString: Enemy
@@ -360,7 +364,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.5}
+  m_Offset: {x: 0.09297657, y: 0.007789612}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -371,7 +375,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.0441875, y: 2.9310303}
   m_EdgeRadius: 0
 --- !u!114 &8631870844753434320
 MonoBehaviour:
@@ -391,6 +395,8 @@ MonoBehaviour:
   m_playerDetected: 0
   m_currentState: 0
   m_currentEnemyType: 0
+  m_questionmark: {fileID: 3783213463638213574, guid: 40acaa4f65aeeaf44aad51d83f2decd0, type: 3}
+  m_excalmationmark: {fileID: 6264025296151744314, guid: a776e246d259fa04188f7ffb2c9d5113, type: 3}
   m_dropItem: {fileID: 0}
   m_health: 100
   m_speed: 1
@@ -405,6 +411,11 @@ MonoBehaviour:
   m_sneakDamageMultiplierStack: 0
   m_attackRange: 0.6
   m_attckRangeDevider: 1
+  m_tiggerBossLooseTargetDistance: 2
+  m_secondPhaseStartPercentage: 0.3
+  m_amountOfStunWhenPlayerStealthed: 3
+  m_doseAffect: 1
+  m_attackSpeedIncrease: 1.5
   m_hitSpeed: 2
   m_attackCollider: {fileID: 220513390732296407}
   attackDeactivationSpeed: 0.1
@@ -412,7 +423,10 @@ MonoBehaviour:
   m_chargeAttackDeley: 0
   m_chargAttackPosibility: 0
   m_chargeAttackMultiplier: 3
-  m_petTigerDeley: 0
+  m_afterAttackDeley: 0
+  m_maxChargTimeBeforDamege: 0.2
+  m_amountOfTimeToMoveAwayFromWall: 0.2
+  m_chargeAttackSpeed: 500
 --- !u!114 &6890218618640264603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,3 +439,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 500a7052496e455428e85868ebd594e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-2917308268515665934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8631870844753434322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d31f9a7fe448ac4393bf8ec13e9bef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_critical: 174
+  m_nonCritical: 122

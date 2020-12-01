@@ -303,6 +303,7 @@ GameObject:
   - component: {fileID: 8631870844753434323}
   - component: {fileID: 4230729524680630626}
   - component: {fileID: 482129027589876793}
+  - component: {fileID: 5716377483596225419}
   m_Layer: 2
   m_Name: AlienEnemy
   m_TagString: Enemy
@@ -394,7 +395,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.5}
+  m_Offset: {x: -0.008592963, y: 0.007166326}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -405,7 +406,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.8424046, y: 3.0114636}
   m_EdgeRadius: 0
 --- !u!114 &4230729524680630626
 MonoBehaviour:
@@ -425,6 +426,8 @@ MonoBehaviour:
   m_playerDetected: 0
   m_currentState: 0
   m_currentEnemyType: 7
+  m_questionmark: {fileID: 3783213463638213574, guid: 40acaa4f65aeeaf44aad51d83f2decd0, type: 3}
+  m_excalmationmark: {fileID: 6264025296151744314, guid: a776e246d259fa04188f7ffb2c9d5113, type: 3}
   m_dropItem: {fileID: 0}
   m_health: 100
   m_speed: 1
@@ -465,6 +468,11 @@ MonoBehaviour:
   m_chargeAttackRangeTadashi: 10
   m_rangedAttackRangeTadashi: 3
   m_meleeAttackRangeTadashi: 1
+  m_normalAttackColider: {fileID: 0}
+  m_chargeAttackColider: {fileID: 0}
+  m_tadashiProjectiles: []
+  m_ProjectileDisplay: {fileID: 0}
+  m_tadashiNormalPorjectile: {fileID: 0}
 --- !u!114 &482129027589876793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,3 +485,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 500a7052496e455428e85868ebd594e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5716377483596225419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8631870844753434322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d31f9a7fe448ac4393bf8ec13e9bef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_critical: 174
+  m_nonCritical: 122

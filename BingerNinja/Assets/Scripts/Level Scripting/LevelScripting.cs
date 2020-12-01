@@ -113,6 +113,12 @@ public class LevelScripting : MonoBehaviour
             levelLiftTrigger = GameObject.Find("Level 19 Lift");
             keyTrigger = GameObject.Find("Key");
         }
+        if (SceneManager.GetActiveScene().buildIndex == 20)
+        {
+            boss = GameObject.Find("Ninjaroth").GetComponent<BaseEnemy_SebastianMol>();
+            bossDialogue = GameObject.Find("Ninjaroth").GetComponent<BossDialogue_MarioFernandes>();
+            dialogBox = GameObject.Find("DialogBox");
+        }
     }
 
     private void Start()
@@ -466,6 +472,26 @@ public class LevelScripting : MonoBehaviour
                 objWalls.SetTile(new Vector3Int(25, 10, 0), null);
                 objWalls.SetTile(new Vector3Int(26, 10, 0), null);
                 objWalls.SetTile(new Vector3Int(27, 10, 0), null);
+            }
+        }
+        if (SceneManager.GetActiveScene().buildIndex == 20 && !bossDead)
+        {
+            if (!levelBossIntro && !dialogBox.activeInHierarchy)
+            {
+                bossDialogue.TriggerDialogue(bossDialogIndex);
+                bossDialogIndex++;
+                if (bossDialogIndex == 14)
+                    //cinematic
+                    levelBossIntro = true;
+            }
+            if (boss.m_health <= 0)
+            {
+                //dramatic death SE
+                //freeze on enemy as he dies  
+                //end cinematic
+                levelLiftTrigger.SetActive(true);
+                bossDead = true;
+
             }
         }
 

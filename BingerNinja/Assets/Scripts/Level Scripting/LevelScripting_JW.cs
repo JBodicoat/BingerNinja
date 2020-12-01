@@ -29,7 +29,7 @@ public class LevelScripting_JW : MonoBehaviour
         if(SceneManager.GetActiveScene().buildIndex == 14)
         {
             levelLiftTrigger = GameObject.Find("Level 14 Lift");
-            keyTrigger = GameObject.Find("Key");
+            keyTrigger = GameObject.Find("Help");
             doorCloseTrigger = GameObject.Find("DialogTrigger");
             bottomDoorTile = walls1.GetTile<Tile>(new Vector3Int(12,26,0));
             walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
@@ -47,7 +47,7 @@ public class LevelScripting_JW : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 19)
         {
             levelLiftTrigger = GameObject.Find("Level 19 Lift");
-            keyTrigger = GameObject.Find("Key");
+            keyTrigger = GameObject.Find("My Key");
         }
     }
 
@@ -98,10 +98,6 @@ public class LevelScripting_JW : MonoBehaviour
             {
                 levelLiftTrigger.SetActive(true);
             }
-
-        }
-        if (SceneManager.GetActiveScene().buildIndex == 16)
-        {
             //If pressure pad activated then reopen the above doors (awaiting pressure pad prefab)
             /*
              * Below to go into the if function
@@ -112,7 +108,9 @@ public class LevelScripting_JW : MonoBehaviour
             walls2.SetTile(new Vector3Int(13, 26, 0), null);
             walls2.SetTile(new Vector3Int(13, 25, 0), null);
             */
+
         }
+
         if (SceneManager.GetActiveScene().buildIndex == 18 && !bossDead)
         {
             if (!levelBossIntro && !dialogBox.activeInHierarchy)
