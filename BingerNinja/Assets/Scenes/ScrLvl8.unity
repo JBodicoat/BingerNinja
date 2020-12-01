@@ -229,6 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f711031bc62374db0c1aeae95a0041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vendingMachine: {fileID: 650063401}
 --- !u!61 &126607795
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1348,6 +1349,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 2932502618572735700, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: levelLift
+      value: 
+      objectReference: {fileID: 126607794}
     - target: {fileID: 6499968375723911184, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1462,6 +1467,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+--- !u!1 &650063401 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 427053018686297868, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+  m_PrefabInstance: {fileID: 650063400}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &693679799
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -6,8 +6,10 @@
 // Jann 25/10/20 - Added frequency generation
 // Jann 28/10/20 - QA improvements
 // Jann 11/11/20 - Added audio file loading and changed max bpm
+// Jann 25/11/20 - Adapt to smaller .json files
 
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -78,7 +80,7 @@ class Synthesizer_Jann : EditorWindow
 
         // Clamp values
         m_bpm = Mathf.Clamp(EditorGUILayout.IntField("BPM", m_bpm), 40, 4000);
-        m_length = Mathf.Clamp(EditorGUILayout.IntField("Length", m_length), 1, 200);
+        m_length = Mathf.Clamp(EditorGUILayout.IntField("Length", m_length), 1, 500);
         m_channels = Mathf.Clamp(EditorGUILayout.IntField("Channels", m_channels), 1, 3);
 
         #region Generate and handle buttons
@@ -149,7 +151,7 @@ class Synthesizer_Jann : EditorWindow
                 {
                     temp[y].Add(
                         new Note_Jann(NotesCreator_Jann.Note.None, 
-                        0f)
+                        0)
                         );
                 }
                 else
@@ -165,11 +167,11 @@ class Synthesizer_Jann : EditorWindow
     private void SaveTrack()
     {
         Track_Jann track = new Track_Jann();
-        track.name = m_title;
-        track.bpm = m_bpm;
-        track.channelLength = m_length;
+        track.n = m_title;
+        track.b = m_bpm;
+        track.c = m_length;
 
-        float[] data = new float[m_channels * m_length];
+        int[] data = new int[m_channels * m_length];
         for (int y = 0; y < m_channels; y++)
         {
             for (int x = 0; x < m_length; x++)
@@ -178,10 +180,10 @@ class Synthesizer_Jann : EditorWindow
             }
         }
 
-        track.data = data;
+        track.d = data;
         
         string trackJson = JsonUtility.ToJson(track);
-        System.IO.File.WriteAllText(Application.dataPath + "/Audio/" + track.name + ".json", trackJson);
+        File.WriteAllText(Application.dataPath + "/Audio/" + track.n + ".json", trackJson);
     }
 
     private void LoadTrack(string path)
@@ -189,10 +191,10 @@ class Synthesizer_Jann : EditorWindow
         string json = File.ReadAllText(path);
         
         Track_Jann track = JsonUtility.FromJson<Track_Jann>(json);
-        m_title = track.name;
-        m_bpm = track.bpm;
-        m_length = track.channelLength;
-        m_channels = track.data.Length / m_length;
+        m_title = track.n;
+        m_bpm = track.b;
+        m_length = track.c;
+        m_channels = track.d.Length / m_length;
 
         ResetNotes();
         
@@ -201,7 +203,7 @@ class Synthesizer_Jann : EditorWindow
         {
             for (int x = 0; x < m_length; x++)
             {
-                float frequency = track.data[y * m_length + x];
+                int frequency = track.d[y * m_length + x];
                 m_channelsData[y][x].Frequence = frequency;
                 m_channelsData[y][x].MNoteName = m_noteCreator.GetNote(frequency);
             }
@@ -219,7 +221,7 @@ class Synthesizer_Jann : EditorWindow
             
             for (int x = 0; x < m_length; x++)
             {
-                m_channelsData[y].Add(new Note_Jann(NotesCreator_Jann.Note.None, 0f));
+                m_channelsData[y].Add(new Note_Jann(NotesCreator_Jann.Note.None, 0));
             }
         }
     }
