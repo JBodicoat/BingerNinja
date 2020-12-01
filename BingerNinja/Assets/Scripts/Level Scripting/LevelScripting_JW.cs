@@ -98,10 +98,6 @@ public class LevelScripting_JW : MonoBehaviour
             {
                 levelLiftTrigger.SetActive(true);
             }
-
-        }
-        if (SceneManager.GetActiveScene().buildIndex == 16)
-        {
             //If pressure pad activated then reopen the above doors (awaiting pressure pad prefab)
             /*
              * Below to go into the if function
@@ -112,7 +108,9 @@ public class LevelScripting_JW : MonoBehaviour
             walls2.SetTile(new Vector3Int(13, 26, 0), null);
             walls2.SetTile(new Vector3Int(13, 25, 0), null);
             */
+
         }
+
         if (SceneManager.GetActiveScene().buildIndex == 18 && !bossDead)
         {
             if (!levelBossIntro && !dialogBox.activeInHierarchy)
