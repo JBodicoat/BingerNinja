@@ -28,6 +28,7 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     public Animator keyAnim;
 
     public List<Sprite> WeaponSprites = new List<Sprite>();
+    private int rangedAmmo;
 
     //---- LIST KEY ----   //
     //  0     =   Fugu     //
@@ -61,7 +62,7 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
         if (isRanged)
         {
             rangedImage.sprite = WeaponSprites[8];
-            setAmmo("0");
+            setAmmo(-50);
         }
         else
         {
@@ -74,11 +75,17 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     {
         if (isRanged)
         {
-            setAmmo("" + ammo);
+            setAmmo(ammo);
         }
 
         setName(newWeapon.ToString(), isRanged);
         setImage((int)newWeapon, isRanged);
+    }
+    public void setAmmo(int addToAmmo)
+    {
+        rangedAmmo += addToAmmo;
+        if (rangedAmmo < 0) rangedAmmo = 0;
+        ammoText.text = rangedAmmo.ToString();
     }
     void Start()
     {
@@ -108,10 +115,6 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
         {
             weaponImage.sprite = WeaponSprites[weaponIndex];
         }
-    }
-    void setAmmo(string ammo)
-    {
-        ammoText.text = ammo;
     }
 
 

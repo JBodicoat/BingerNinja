@@ -114,7 +114,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             projectile.GetComponent<Projectile_MarioFernandes>().m_distractTime = m_currentWeapon[m_weaponsIndex].m_distractTime;
             projectile.GetComponent<SpriteRenderer>().sprite = m_currentWeapon[m_weaponsIndex].m_mySprite;
             --m_currentWeapon[m_weaponsIndex].m_ammunition;
-            
+            m_WeaponUI.setAmmo(-1);
 
             if(m_currentWeapon[m_weaponsIndex].m_foodType == FoodType.DANGO)
             {
@@ -284,7 +284,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             m_currentWeapon[1] = collision.GetComponent<WeaponsTemplate_MarioFernandes>();
             collision.gameObject.SetActive(false);
             collision.transform.parent = transform;
-            m_WeaponUI.WeaponChange(m_currentWeapon[1].m_foodType, true, 5);
+            m_WeaponUI.WeaponChange(m_currentWeapon[1].m_foodType, true, m_currentWeapon[1].m_ammunition);
             m_WeaponUI.SetWeaponsUIAnimation(true);
         }
     }
