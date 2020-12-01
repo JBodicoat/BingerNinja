@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Portal_Mechanic_AlannaPaxton : MonoBehaviour
 {
-    bool canTeleport = false;
+    bool canTeleport = true;
     protected int trigger = 0;
 
     private void OnTriggerEnter2D(Collider2D collision)
