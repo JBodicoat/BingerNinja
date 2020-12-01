@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 5157954882409207611}
   - component: {fileID: 5157954882409207617}
   - component: {fileID: 5021812878275087859}
+  - component: {fileID: 4751049139757561420}
   m_Layer: 0
   m_Name: HeadChefBOSS
   m_TagString: Enemy
@@ -271,8 +272,8 @@ MonoBehaviour:
   m_playerDetected: 0
   m_currentState: 0
   m_currentEnemyType: 1
-  m_questionmark: {fileID: 0}
-  m_excalmationmark: {fileID: 0}
+  m_questionmark: {fileID: 3783213463638213574, guid: 40acaa4f65aeeaf44aad51d83f2decd0, type: 3}
+  m_excalmationmark: {fileID: 6264025296151744314, guid: a776e246d259fa04188f7ffb2c9d5113, type: 3}
   m_dropItem: {fileID: 0}
   m_health: 80
   m_speed: 1
@@ -334,6 +335,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 500a7052496e455428e85868ebd594e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4751049139757561420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5157954882409207616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d31f9a7fe448ac4393bf8ec13e9bef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_critical: 174
+  m_nonCritical: 122
 --- !u!1 &5751295711232786928
 GameObject:
   m_ObjectHideFlags: 0
