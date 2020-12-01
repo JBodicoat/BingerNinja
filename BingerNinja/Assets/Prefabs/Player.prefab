@@ -209,6 +209,7 @@ GameObject:
   - component: {fileID: 4272470005486940903}
   - component: {fileID: 1215843291532474296}
   - component: {fileID: 7741539041222968558}
+  - component: {fileID: 4693705281802690140}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -497,7 +498,15 @@ MonoBehaviour:
     m_Id: c27d5188-cbec-4ed3-9431-06b8d77335aa
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 4af18060-c229-467b-bea9-8e9d79bba93a
+      m_Path: <Mouse>/leftButton
+      m_Interactions: Tap
+      m_Processors: 
+      m_Groups: 
+      m_Action: Attack Tap
+      m_Flags: 0
   m_attackSlowTap:
     m_Name: Attack Slow Tap
     m_Type: 0
@@ -505,7 +514,15 @@ MonoBehaviour:
     m_Id: 2c8e5bff-b30e-4e8b-ac52-4b746c832236
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 7f371b48-fdd9-419b-88a0-76adea15c1a1
+      m_Path: <Mouse>/leftButton
+      m_Interactions: Hold(duration=1)
+      m_Processors: 
+      m_Groups: 
+      m_Action: Attack Slow Tap
+      m_Flags: 0
   m_roll:
     m_Name: Roll
     m_Type: 0
@@ -606,6 +623,7 @@ MonoBehaviour:
   m_stealthed: 0
   m_crouched: 0
   m_inVent: 0
+  crouchSpeed: 2.5
 --- !u!114 &4272470005486940903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -646,6 +664,23 @@ MonoBehaviour:
   m_eyeOpen: {fileID: 5397789630891483220}
   m_eyeCosed: {fileID: 6725162674073404415}
   m_timer: 1
+--- !u!114 &4693705281802690140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4362767424123825799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa23393631646a0439bc0f328e1bed16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_sakeStrengthModifier: 2
+  m_TempuraStrengthModifier: 1.5
+  m_TempuraSpeedhModifier: 0.5
+  m_Dango: {fileID: 4763809459861947651, guid: 0b1b6a5dc6dbd814bbac923bf41b774c, type: 3}
+  m_Noodle: {fileID: 1099025504645599283, guid: 91cf97e8b0876e042836b023e33b257a, type: 3}
 --- !u!1 &8116294513426094757
 GameObject:
   m_ObjectHideFlags: 0

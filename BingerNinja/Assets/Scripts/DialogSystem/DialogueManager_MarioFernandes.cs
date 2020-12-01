@@ -8,7 +8,6 @@
 // Mário 13/11/2020 - Solve "," bug and stop AI when in dialog
 // Jann  07/11/2020 - Added a quick check to swap the dialogue file based on the settings
 // Jann  25/11/2020 - Added in-game language change
-// Louie 28/11/2020 - Added weapon ui animation code
 
 using System;
 using System.Collections;
@@ -37,8 +36,6 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     PlayerController_JamieG playerControllerScript;
 
     private GameObject[] EnemysAI;
-
-    private WeaponUI_LouieWilliamson wpnUI;
     public void LoadLanguageFile()
     {
         SettingsData settingsData = SaveLoadSystem_JamieG.LoadSettings();
@@ -57,8 +54,6 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         ///////////////////
         //Insert Start Animation here if needed
         ///////////////////
-
-        wpnUI.SetWeaponsUIAnimation(false);
 
         PauseGame();        
 
@@ -116,10 +111,9 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
 
 
         ResumeGame();
-        wpnUI.SetWeaponsUIAnimation(true);
     }
 
-    ///<summary>Load the Level dialog from CSV doc</summary>
+	///<summary>Load the Level dialog from CSV doc</summary>
     void LoadDialog(int level = 0)
     {
         GameObject Target;
@@ -193,7 +187,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         playerControllerScript.m_interact.Disable();
         playerControllerScript.GetComponentInParent<PlayerHealthHunger_MarioFernandes>().m_paused = true;
         playerControllerScript.GetComponentInParent<EffectManager_MarioFernandes>().m_paused = true;
-        
+        EnemysAI = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject Enemy in EnemysAI)
         {
             Enemy.GetComponentInParent<BaseEnemy_SebastianMol>().enabled = false;
@@ -209,7 +203,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         playerControllerScript.m_interact.Enable();
         playerControllerScript.GetComponentInParent<PlayerHealthHunger_MarioFernandes>().m_paused = false;
         playerControllerScript.GetComponentInParent<EffectManager_MarioFernandes>().m_paused = false;
-
+        EnemysAI = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject Enemy in EnemysAI)
         {
             Enemy.GetComponentInParent<BaseEnemy_SebastianMol>().enabled = true;
@@ -219,11 +213,10 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        wpnUI = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
         playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
 
         m_sentences = new Queue<string>();
-        EnemysAI = GameObject.FindGameObjectsWithTag("Enemy");
+        
         LoadDialog(SceneManager.GetActiveScene().buildIndex);
 
 

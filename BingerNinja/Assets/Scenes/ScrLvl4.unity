@@ -1411,39 +1411,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3370610988660356902, guid: de9a44f8c7667ca408413c25f0f1ee5c, type: 3}
       propertyPath: m_colorOutGrey60.r
-      value: 0.4085274
+      value: 0.46226418
       objectReference: {fileID: 0}
     - target: {fileID: 3370610988660356902, guid: de9a44f8c7667ca408413c25f0f1ee5c, type: 3}
       propertyPath: m_colorOutGrey60.g
-      value: 0.009789959
+      value: 0.26776433
       objectReference: {fileID: 0}
     - target: {fileID: 3370610988660356902, guid: de9a44f8c7667ca408413c25f0f1ee5c, type: 3}
       propertyPath: m_colorOutGrey60.b
-      value: 0.41509432
+      value: 0.2912385
       objectReference: {fileID: 0}
     - target: {fileID: 3370610988660356902, guid: de9a44f8c7667ca408413c25f0f1ee5c, type: 3}
       propertyPath: m_colorOutGrey122.r
-      value: 0.8018868
+      value: 0.8584906
       objectReference: {fileID: 0}
     - target: {fileID: 3370610988660356902, guid: de9a44f8c7667ca408413c25f0f1ee5c, type: 3}
       propertyPath: m_colorOutGrey122.g
-      value: 0.49284402
+      value: 0.38389105
       objectReference: {fileID: 0}
     - target: {fileID: 3370610988660356902, guid: de9a44f8c7667ca408413c25f0f1ee5c, type: 3}
       propertyPath: m_colorOutGrey122.b
-      value: 0.03404235
+      value: 0.4000706
       objectReference: {fileID: 0}
     - target: {fileID: 3370610988660356902, guid: de9a44f8c7667ca408413c25f0f1ee5c, type: 3}
       propertyPath: m_colorOutGrey174.r
-      value: 0.87186533
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3370610988660356902, guid: de9a44f8c7667ca408413c25f0f1ee5c, type: 3}
       propertyPath: m_colorOutGrey174.g
-      value: 0.4764151
+      value: 0.8038634
       objectReference: {fileID: 0}
     - target: {fileID: 3370610988660356902, guid: de9a44f8c7667ca408413c25f0f1ee5c, type: 3}
       propertyPath: m_colorOutGrey174.b
-      value: 1
+      value: 0.7773585
       objectReference: {fileID: 0}
     - target: {fileID: 3370610988660356903, guid: de9a44f8c7667ca408413c25f0f1ee5c, type: 3}
       propertyPath: m_Name
@@ -28874,6 +28874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f711031bc62374db0c1aeae95a0041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vendingMachine: {fileID: 0}
 --- !u!61 &2012859547
 BoxCollider2D:
   m_ObjectHideFlags: 0

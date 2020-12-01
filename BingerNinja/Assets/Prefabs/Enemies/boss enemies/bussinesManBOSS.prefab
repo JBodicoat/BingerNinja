@@ -207,7 +207,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.5}
+  m_Offset: {x: -0.0072345734, y: -0.008022308}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -218,7 +218,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.2588806, y: 2.996849}
   m_EdgeRadius: 0
 --- !u!114 &4434442803191826690
 MonoBehaviour:
@@ -238,6 +238,8 @@ MonoBehaviour:
   m_playerDetected: 0
   m_currentState: 0
   m_currentEnemyType: 5
+  m_questionmark: {fileID: 0}
+  m_excalmationmark: {fileID: 0}
   m_dropItem: {fileID: 0}
   m_health: 10
   m_speed: 2
@@ -252,6 +254,11 @@ MonoBehaviour:
   m_sneakDamageMultiplierStack: 0
   m_attackRange: 0.6
   m_attckRangeDevider: 1
+  m_tiggerBossLooseTargetDistance: 2
+  m_secondPhaseStartPercentage: 0.3
+  m_amountOfStunWhenPlayerStealthed: 3
+  m_doseAffect: 1
+  m_attackSpeedIncrease: 1.5
   m_hitSpeed: 2
   m_attackCollider: {fileID: 5282640114672852741}
   attackDeactivationSpeed: 0.1
@@ -259,7 +266,10 @@ MonoBehaviour:
   m_chargeAttackDeley: 0
   m_chargAttackPosibility: 2
   m_chargeAttackMultiplier: 3
-  m_petTigerDeley: 0
+  m_afterAttackDeley: 0
+  m_maxChargTimeBeforDamege: 0.2
+  m_amountOfTimeToMoveAwayFromWall: 0.2
+  m_chargeAttackSpeed: 500
 --- !u!114 &2867095594728598704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,7 +418,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_baseDamage: 0
-  m_damage: 0
+  m_percentageChanceOfAffect: 0.5
+  m_poisionDamage: 1
+  m_slowDebuff: 0.5
+  m_affectTime: 5
 --- !u!1 &6372534244096833983
 GameObject:
   m_ObjectHideFlags: 0
