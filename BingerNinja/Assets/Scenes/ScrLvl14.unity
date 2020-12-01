@@ -152,11 +152,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4362767424123825809, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.88
+      value: 0.44
       objectReference: {fileID: 0}
     - target: {fileID: 4362767424123825809, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 106.15
+      value: 107.55
       objectReference: {fileID: 0}
     - target: {fileID: 4362767424123825809, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_LocalPosition.z
@@ -854,7 +854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4150556224136095741, guid: bc9c4cae62ccda04ea3865fd40c48087, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4315324986003615319, guid: bc9c4cae62ccda04ea3865fd40c48087, type: 3}
       propertyPath: m_SortingLayerID
@@ -866,11 +866,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8079642856620081468, guid: bc9c4cae62ccda04ea3865fd40c48087, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.83
+      value: -1.9
       objectReference: {fileID: 0}
     - target: {fileID: 8079642856620081468, guid: bc9c4cae62ccda04ea3865fd40c48087, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 109.69
+      value: 105.04
       objectReference: {fileID: 0}
     - target: {fileID: 8079642856620081468, guid: bc9c4cae62ccda04ea3865fd40c48087, type: 3}
       propertyPath: m_LocalPosition.z
@@ -34943,7 +34943,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 547836159825887444, guid: f21454a5048d98940bd63158bf79d43a, type: 3}
       propertyPath: m_Name
-      value: Key
+      value: Help
       objectReference: {fileID: 0}
     - target: {fileID: 547836159825887446, guid: f21454a5048d98940bd63158bf79d43a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -34988,6 +34988,10 @@ PrefabInstance:
     - target: {fileID: 547836159825887446, guid: f21454a5048d98940bd63158bf79d43a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 547836159825887447, guid: f21454a5048d98940bd63158bf79d43a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 547836159825887529, guid: f21454a5048d98940bd63158bf79d43a, type: 3}
       propertyPath: m_inventory
@@ -37071,8 +37075,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1760437151}
-  - component: {fileID: 1760437153}
   - component: {fileID: 1760437152}
+  - component: {fileID: 1760437153}
   m_Layer: 0
   m_Name: Level 14 Lift
   m_TagString: Untagged
@@ -37087,13 +37091,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1760437150}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.559, y: 113.96, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0.2578283, w: 0.96619076}
+  m_LocalPosition: {x: 10.12, y: 113.74, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1371743992}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -29.883}
 --- !u!114 &1760437152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37107,8 +37111,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vendingMachine: {fileID: 1842141745}
---- !u!58 &1760437153
-CircleCollider2D:
+--- !u!61 &1760437153
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -37120,9 +37124,19 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.3272972, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 1.24
+  m_Size: {x: 1.6545944, y: 1}
+  m_EdgeRadius: 0
 --- !u!4 &1773700107 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8245644744696087316, guid: 44a6dcc353756cc43a71c95766293321, type: 3}
