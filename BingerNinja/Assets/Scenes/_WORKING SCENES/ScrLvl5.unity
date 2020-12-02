@@ -830,6 +830,10 @@ PrefabInstance:
       propertyPath: floortilemap
       value: 
       objectReference: {fileID: 868462304}
+    - target: {fileID: 5157954882409207611, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+      propertyPath: m_attackRange
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5157954882409207612, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.98
@@ -32744,6 +32748,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barista (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6104423681624085089, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -2137332843
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104423681624085089, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104423681624085089, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
 --- !u!1 &1691349332
@@ -32981,13 +32997,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1799900213, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+    - target: {fileID: 1035174119, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1120569084, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_RootOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799900213, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013042080, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 427053018686297869, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_RootOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3074607439574447819, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6499968375723911184, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_RootOrder

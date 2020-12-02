@@ -143,6 +143,9 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             {
                 PathfindTo(m_startPos);
             }
+
+            if(Vector2.Distance(transform.position, m_startPos) < 0.5f) transform.localScale = new Vector3(m_scale, transform.localScale.y, transform.localScale.z);
+
         }
         m_showquestionMarkonce = false;
     }
