@@ -2,6 +2,7 @@
 ///This script handles the animation states of the player and communicated with the player animation controller to do so.
 
 //Louie 02/11/2020 - First created
+//Louie 30/11/2020 - Roll and crouch animations
 
 using System.Collections;
 using System.Collections.Generic;
@@ -25,12 +26,20 @@ public class PlayerAnimation_LouieWilliamson : MonoBehaviour
         }
         m_playerAnim.SetTrigger("isAttacking");
     }
+    public void RollAnimation(bool isRolling)
+    {
+        m_playerAnim.SetBool("isRolling", isRolling);
+    }
+    public void Crouching(bool isCrouching)
+    {
+        m_playerAnim.SetBool("isCrouching", isCrouching);
+    }
     void Start()
     {
         isFacingLeft = true;
 
-        m_playerAnim = GetComponent<Animator>();
-        m_rb = GetComponent<Rigidbody2D>();
+        m_playerAnim = GetComponent<Animator>(); 
+        m_rb = GetComponentInParent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -74,7 +83,6 @@ public class PlayerAnimation_LouieWilliamson : MonoBehaviour
         {
             m_playerAnim.SetBool("isFacing", false);
         }
-        
     }
     private void FlipSprite()
     {

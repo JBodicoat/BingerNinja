@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 4434442803191826690}
   - component: {fileID: 2867095594728598704}
   - component: {fileID: 1675840269}
+  - component: {fileID: -2112788403329868129}
   m_Layer: 0
   m_Name: bussinesManBOSS
   m_TagString: Enemy
@@ -207,7 +208,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.5}
+  m_Offset: {x: -0.0072345734, y: -0.008022308}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -218,7 +219,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.2588806, y: 2.996849}
   m_EdgeRadius: 0
 --- !u!114 &4434442803191826690
 MonoBehaviour:
@@ -238,6 +239,8 @@ MonoBehaviour:
   m_playerDetected: 0
   m_currentState: 0
   m_currentEnemyType: 5
+  m_questionmark: {fileID: 3783213463638213574, guid: 40acaa4f65aeeaf44aad51d83f2decd0, type: 3}
+  m_excalmationmark: {fileID: 6264025296151744314, guid: a776e246d259fa04188f7ffb2c9d5113, type: 3}
   m_dropItem: {fileID: 0}
   m_health: 10
   m_speed: 2
@@ -252,6 +255,11 @@ MonoBehaviour:
   m_sneakDamageMultiplierStack: 0
   m_attackRange: 0.6
   m_attckRangeDevider: 1
+  m_tiggerBossLooseTargetDistance: 2
+  m_secondPhaseStartPercentage: 0.3
+  m_amountOfStunWhenPlayerStealthed: 3
+  m_doseAffect: 1
+  m_attackSpeedIncrease: 1.5
   m_hitSpeed: 2
   m_attackCollider: {fileID: 5282640114672852741}
   attackDeactivationSpeed: 0.1
@@ -259,7 +267,10 @@ MonoBehaviour:
   m_chargeAttackDeley: 0
   m_chargAttackPosibility: 2
   m_chargeAttackMultiplier: 3
-  m_petTigerDeley: 0
+  m_afterAttackDeley: 0
+  m_maxChargTimeBeforDamege: 0.2
+  m_amountOfTimeToMoveAwayFromWall: 0.2
+  m_chargeAttackSpeed: 500
 --- !u!114 &2867095594728598704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,6 +296,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_dialogue: []
+--- !u!114 &-2112788403329868129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4434442803191826688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d31f9a7fe448ac4393bf8ec13e9bef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_critical: 174
+  m_nonCritical: 122
 --- !u!1 &4434442803275330668
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,7 +334,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4434442803275330668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.63, y: 0.53, z: 0}
+  m_LocalPosition: {x: -1.72, y: 0.43, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4434442803191826812}
@@ -408,7 +433,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_baseDamage: 0
-  m_damage: 0
+  m_percentageChanceOfAffect: 0.5
+  m_poisionDamage: 1
+  m_slowDebuff: 0.5
+  m_affectTime: 5
 --- !u!1 &6372534244096833983
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +461,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6372534244096833983}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.1, y: -0.2, z: 0}
+  m_LocalPosition: {x: -0.1, y: -1.87, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4434442803191826812}
