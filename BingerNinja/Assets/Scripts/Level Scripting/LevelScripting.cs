@@ -113,6 +113,12 @@ public class LevelScripting : MonoBehaviour
             levelLiftTrigger = GameObject.Find("Level 19 Lift");
             keyTrigger = GameObject.Find("Key");
         }
+        if (SceneManager.GetActiveScene().buildIndex == 20)
+        {
+            boss = GameObject.Find("Ninjaroth").GetComponent<BaseEnemy_SebastianMol>();
+            bossDialogue = GameObject.Find("Ninjaroth").GetComponent<BossDialogue_MarioFernandes>();
+            dialogBox = GameObject.Find("DialogBox");
+        }
     }
 
     private void Start()
@@ -441,8 +447,11 @@ public class LevelScripting : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().buildIndex == 20 && !bossDead)
         {
-            if (!levelBossIntro)
+            if (!levelBossIntro && !dialogBox.activeInHierarchy)
             {
+                bossDialogue.TriggerDialogue(bossDialogIndex);
+                bossDialogIndex++;
+                if (bossDialogIndex == 14)
                 //cinematic
                 levelBossIntro = true;
             }
