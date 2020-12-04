@@ -10,6 +10,7 @@
 // Elliott 20/11/2020 = made color arry public
 // Jann 22/11/20 - Refactor and added particle system support
 
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
@@ -17,17 +18,25 @@ using UnityEngine.UI;
 public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
 {
     public Material m_swapMaterial;
-    
+
     public Color m_colorOutGrey60 = new Color(0, 0, 0, 1);
     public Color m_colorOutGrey122 = new Color(0, 0, 0, 1);
     public Color m_colorOutGrey174 = new Color(0, 0, 0, 1);
 
     public OriginalColor m_particleColor = OriginalColor.Grey60;
-    
+
+    private List<Image> m_sliderBackgrounds = new List<Image>();
+    private List<Image> m_sliderFills = new List<Image>();
+
+    public OriginalColor m_sliderBackgroundColor = OriginalColor.Grey60;
+    public OriginalColor m_sliderFillColor = OriginalColor.Grey60;
+
     public enum OriginalColor
-    { 
-        Grey60 = 60, Grey122 = 122, Grey174 = 174
-    } 
+    {
+        Grey60 = 60,
+        Grey122 = 122,
+        Grey174 = 174
+    }
 
     private SpriteRenderer[] m_spriteRenderers;
     private TilemapRenderer[] m_tilemapRenderers;
@@ -36,13 +45,17 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
 
     private Texture2D m_colorSwapTexture;
     public Color[] m_spriteColors;
-    
+
     private void Awake()
     {
         m_spriteRenderers = FindObjectsOfType<SpriteRenderer>();
         m_tilemapRenderers = FindObjectsOfType<TilemapRenderer>();
         m_images = FindObjectsOfType<Image>();
         m_particleSystems = FindObjectsOfType<ParticleSystem>();
+
+        // Get slider reference
+        GetSliderImages("HealthSlider");
+        GetSliderImages("HungerSlider");
     }
 
     private void Start()
@@ -68,7 +81,7 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
         colorSwapTex.Apply();
 
         m_swapMaterial.SetTexture("_SwapTex", colorSwapTex);
-        
+
         m_spriteColors = new Color[colorSwapTex.width];
         m_colorSwapTexture = colorSwapTex;
     }
@@ -79,7 +92,7 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
         {
             spriteRenderer.material = m_swapMaterial;
         }
-        
+
         foreach (TilemapRenderer tilemapRenderer in m_tilemapRenderers)
         {
             tilemapRenderer.material = m_swapMaterial;
@@ -89,7 +102,22 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
         {
             image.material = m_swapMaterial;
         }
-        
+
+        foreach (Image image in m_sliderBackgrounds)
+        {
+            image.color = m_spriteColors[(int) m_sliderBackgroundColor];
+        }
+
+        foreach (Image image in m_sliderFills)
+        {
+            image.color = m_spriteColors[(int) m_sliderFillColor];
+        }
+
+        foreach (Image image in m_images)
+        {
+            image.material = m_swapMaterial;
+        }
+
         foreach (ParticleSystem particleSystem in m_particleSystems)
         {
             var main = particleSystem.main;
@@ -101,5 +129,15 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
     {
         m_spriteColors[index] = color;
         m_colorSwapTexture.SetPixel(index, 0, color);
+    }
+
+    private void GetSliderImages(string gameObjectName)
+    {
+        GameObject slider = GameObject.Find(gameObjectName);
+        if (slider != null)
+        {
+            m_sliderBackgrounds.Add(slider.transform.Find("Background").GetComponent<Image>());
+            m_sliderFills.Add(slider.transform.Find("Fill Area").transform.Find("Fill").GetComponent<Image>());
+        }
     }
 }
