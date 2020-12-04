@@ -14,7 +14,7 @@ using UnityEngine.UI;
 /// </summary>
 public class LanguageResolver_Jann : Singleton_Jann<LanguageResolver_Jann>
 {
-    private const string FilePath = "";
+    private const string FilePath = "Assets/Scripts/Localisation/";
     private const char Separator = '=';
     private Dictionary<string, TextAsset> m_languageFiles = new Dictionary<string, TextAsset>();
     private Dictionary<string, string> m_translations = new Dictionary<string, string>();
@@ -79,13 +79,13 @@ public class LanguageResolver_Jann : Singleton_Jann<LanguageResolver_Jann>
             return m_languageFiles[language];
         }
         
-        TextAsset file = Resources.Load<TextAsset>(FilePath + language + ".txt");
+        TextAsset file = AssetDatabase.LoadAssetAtPath<TextAsset>(FilePath + language + ".txt");
         
         if (file == null)
         {
             Debug.LogWarning("File not found: " + FilePath + language + ".txt");
             Debug.LogWarning("Loading default language...");
-            file = Resources.Load<TextAsset>(FilePath + "English.txt");
+            file = AssetDatabase.LoadAssetAtPath<TextAsset>(FilePath + "English.txt");
         }
         m_languageFiles.Add(language, file);
         return file;
