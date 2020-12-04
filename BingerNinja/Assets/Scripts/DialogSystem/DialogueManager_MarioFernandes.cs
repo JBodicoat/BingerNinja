@@ -30,8 +30,8 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
 
     private Queue<string> m_sentences;
 
-    public TextAsset m_csvFile;
-    public TextAsset m_csvFilePortuguese;
+    public TextAsset m_txtFile;
+    public TextAsset m_txtFilePortuguese;
 
     string m_TrigerDialoguePrefab = "DialogTrigger";
     PlayerController_JamieG playerControllerScript;
@@ -44,7 +44,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
 
         if(settingsData.m_chosenLanguage != null && settingsData.m_chosenLanguage.Equals("Portuguese"))
         {
-            m_csvFile = m_csvFilePortuguese;
+            m_txtFile = m_txtFilePortuguese;
         };
         
         LoadDialog(SceneManager.GetActiveScene().buildIndex);
@@ -122,7 +122,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         GameObject dialogtrig;
 
 		//Split Colunes using "\n" as reference
-        string[] lines = m_csvFile.text.Split("\n"[0]);
+        string[] lines = m_txtFile.text.Split("\n"[0]);
 
         for (int i = 0; i < lines.Length; i++)
         {

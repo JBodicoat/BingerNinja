@@ -3568,6 +3568,10 @@ PrefabInstance:
       propertyPath: m_Type
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1539137859, guid: fd23ae6302e4cf0478064a5dbb9da468, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: c1053204808f5a34882376a3ed22c766, type: 3}
     - target: {fileID: 1931842134, guid: fd23ae6302e4cf0478064a5dbb9da468, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -89.74
@@ -3584,6 +3588,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: -80.57214
       objectReference: {fileID: 0}
+    - target: {fileID: 1931842135, guid: fd23ae6302e4cf0478064a5dbb9da468, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: c1053204808f5a34882376a3ed22c766, type: 3}
     - target: {fileID: 1949195268, guid: fd23ae6302e4cf0478064a5dbb9da468, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -3604,6 +3612,18 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 130.57378
       objectReference: {fileID: 0}
+    - target: {fileID: 1949195270, guid: fd23ae6302e4cf0478064a5dbb9da468, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -8789949178559433020, guid: 08982bb74fe0e75418166a68a39bf025, type: 3}
+    - target: {fileID: 1949195270, guid: fd23ae6302e4cf0478064a5dbb9da468, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2002146316, guid: fd23ae6302e4cf0478064a5dbb9da468, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: c1053204808f5a34882376a3ed22c766, type: 3}
     - target: {fileID: 2002146318, guid: fd23ae6302e4cf0478064a5dbb9da468, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 4.8605
@@ -3678,7 +3698,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8234888287957984757, guid: fd23ae6302e4cf0478064a5dbb9da468, type: 3}
       propertyPath: m_TextAnimationSpeed
-      value: 0.1
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 8234888287957984757, guid: fd23ae6302e4cf0478064a5dbb9da468, type: 3}
       propertyPath: m_csvFilePortuguese
