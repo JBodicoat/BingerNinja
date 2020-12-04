@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿///Louie Williamson
+///This script handles all of the enemy animation states by changing the parameters in their animators.
+
+//Louie 18/11/2020 - First created
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

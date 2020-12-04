@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3149396069716883743}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.9, y: -3.33, z: -11.121444}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -5.9, y: -3.33, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 446125921
   m_SortingLayer: 6
   m_SortingOrder: 1
-  m_Sprite: {fileID: -9075936618163766259, guid: fb38f55d6d714d8419d881fd4bac7a92, type: 3}
+  m_Sprite: {fileID: -2560872523564760568, guid: 7eec9656956eec34baf6f874b2f50d24, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,9 +97,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.16, y: 0.16}
+  m_Offset: {x: -0.07246101, y: -0.0009340048}
   serializedVersion: 2
-  m_Radius: 0.16
+  m_Radius: 0.5533949
 --- !u!114 &3149396069716883728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,5 +120,8 @@ MonoBehaviour:
   m_poisonDmg: 0
   m_strengthModifier: 0
   m_speedModifier: 1
+  m_distractTime: 3
+  m_ammunition: 3
   dmg: 20
   m_hungerRestoreAmount: 33
+  m_mySprite: {fileID: 0}

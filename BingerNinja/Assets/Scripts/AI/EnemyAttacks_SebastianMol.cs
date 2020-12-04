@@ -74,7 +74,7 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
     /// <param name="m_shootDeley"></param>
     /// <returns>weather the attack has been done</returns>
     public static bool RangedAttack(Transform m_playerTransform, Transform transform, GameObject m_aimer, 
-        ref float m_attackTimer, GameObject m_projectile, float m_shootDeley)
+        ref float m_attackTimer, GameObject m_projectile, float m_shootDeley,float sizeIncreaseX = 0, float sizeIncreaseY = 0)
     {
         if (m_playerTransform != null)
         {
@@ -85,6 +85,7 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
             if (m_attackTimer <= 0)
             {
                 GameObject projectile = Instantiate(m_projectile, transform.position, Quaternion.Euler(new Vector3(dir.x, dir.y, 0)));
+                projectile.transform.localScale += new Vector3(sizeIncreaseX, sizeIncreaseY, 0);
                 projectile.GetComponent<BulletMovment_SebastianMol>().m_direction = (m_playerTransform.position - transform.position).normalized;
                 m_attackTimer = m_shootDeley;
                 return true;
@@ -132,5 +133,4 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
             return false;
         }
     }
-
 }
