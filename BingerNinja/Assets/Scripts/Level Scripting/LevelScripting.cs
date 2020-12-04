@@ -447,8 +447,11 @@ public class LevelScripting : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().buildIndex == 20 && !bossDead)
         {
-            if (!levelBossIntro)
+            if (!levelBossIntro && !dialogBox.activeInHierarchy)
             {
+                bossDialogue.TriggerDialogue(bossDialogIndex);
+                bossDialogIndex++;
+                if (bossDialogIndex == 14)
                 //cinematic
                 levelBossIntro = true;
             }
