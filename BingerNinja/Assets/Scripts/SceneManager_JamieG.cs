@@ -24,17 +24,18 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
 
     public void ResetToCheckpoint()
     {
-        GameplayData gameplayData = SaveLoadSystem_JamieG.LoadGameplay();
-        m_checkpointOnReset = new Vector3(
-            gameplayData.m_checkpointPosition[0],
-            gameplayData.m_checkpointPosition[1],
-            gameplayData.m_checkpointPosition[2]);
-
-        m_loadLastCheckpoint = true;
-        
-        LoadCurrentLevel();
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        Debug.Log("ResetToCheckpoint() method removed");
+        // GameplayData gameplayData = SaveLoadSystem_JamieG.LoadGameplay();
+        // m_checkpointOnReset = new Vector3(
+        //     gameplayData.m_checkpointPosition[0],
+        //     gameplayData.m_checkpointPosition[1],
+        //     gameplayData.m_checkpointPosition[2]);
+        //
+        // m_loadLastCheckpoint = true;
+        //
+        // LoadCurrentLevel();
+        //
+        // SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     //This will assume that the MainMenu scene is build index 0
@@ -47,6 +48,13 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
     public void LoadNextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    
+    public void LoadLevel(int level)
+    {
+        SceneManager.LoadScene(level);
         
         SceneManager.sceneLoaded += OnSceneLoaded;
     }

@@ -20,6 +20,7 @@ public static class SaveLoadSystem_JamieG
     private const string SettingsFile = "/Settings.save";
     private const string InventoryFile = "/Inventory.save";
     private const string GameplayFile = "/Gameplay.save";
+    private const string CheckpointFile = "/Checkpoint.save";
 
     private static SaveSystemCache m_Cache = new SaveSystemCache();
 
@@ -39,22 +40,18 @@ public static class SaveLoadSystem_JamieG
         SaveToFile(InventoryFile, inventoryData);
     }
 
-    public static void SaveCheckpoint(Vector3 checkpointPosition)
-    {
-        GameplayData oldData = LoadGameplay();
-        GameplayData gameplayData = new GameplayData(checkpointPosition, oldData.m_currentLevel, oldData.m_enemyIds, oldData.m_doorIds);
-        SaveToFile(GameplayFile, gameplayData);
-    }
-
     // Saves the current state of the game into the Gameplay.save file
-    // Only saves the last checkpoint position at the moment
     public static void SaveGameplay(int currentLevel, GameObject[] enemies, GameObject[] doors)
     {
-        GameplayData oldData = LoadGameplay();
-        Vector3 pos = new Vector3(oldData.m_checkpointPosition[0], oldData.m_checkpointPosition[1],
-            oldData.m_checkpointPosition[2]);
-        GameplayData gameplayData = new GameplayData(pos, currentLevel, enemies, doors);
+        GameplayData gameplayData = new GameplayData(currentLevel, enemies, doors);
         SaveToFile(GameplayFile, gameplayData);
+    }
+    
+    // Saves the current checkpoint (after a boss level)
+    public static void SaveCheckpoint(int lastCheckpointLevel)
+    {
+        CheckpointData checkpointData = new CheckpointData(lastCheckpointLevel);
+        SaveToFile(CheckpointFile, checkpointData);
     }
 
     #endregion
@@ -119,6 +116,24 @@ public static class SaveLoadSystem_JamieG
         Debug.Log("Loading gameplayData didn't return object of type GameplayData");
         return default;
     }
+    
+    // Returns the gameplay data from the Gameplay.save file or an empty struct if the file can't be found
+    public static CheckpointData LoadCheckpoint()
+    {
+        if (m_Cache.IsCached(CheckpointFile))
+        {
+            return (CheckpointData) m_Cache.GetData(CheckpointFile);
+        }
+        
+        object data = LoadFromFile(CheckpointFile);
+        if (data is CheckpointData checkpointData)
+        {
+            return checkpointData;
+        }
+
+        Debug.Log("Loading checkpointData didn't return object of type CheckpointData");
+        return default;
+    }
 
     #endregion
 
@@ -167,7 +182,7 @@ public static class SaveLoadSystem_JamieG
     }
 }
 
-public class SaveSystemCache
+internal class SaveSystemCache
 {
     private List<CacheData> m_cacheData = new List<CacheData>();
 
@@ -213,22 +228,12 @@ public class SaveSystemCache
 [Serializable]
 public struct GameplayData
 {
-    public float[] m_checkpointPosition;
     public int m_currentLevel;
     public string[] m_enemyIds;
     public string[] m_doorIds;
-    
-    public GameplayData(Vector3 checkpointPosition, int currentLevel, string[] enemyIds, string[] doorIds)
+
+    public GameplayData(int currentLevel, GameObject[] enemies, GameObject[] doors)
     {
-        m_checkpointPosition = new[] {checkpointPosition.x, checkpointPosition.y, checkpointPosition.z};
-        m_currentLevel = currentLevel;
-        m_enemyIds = enemyIds;
-        m_doorIds = doorIds;
-    }
-    
-    public GameplayData(Vector3 checkpointPosition, int currentLevel, GameObject[] enemies, GameObject[] doors)
-    {
-        m_checkpointPosition = new[] {checkpointPosition.x, checkpointPosition.y, checkpointPosition.z};
         m_currentLevel = currentLevel;
 
         int count = enemies.Count(e => e.activeInHierarchy);
@@ -246,6 +251,17 @@ public struct GameplayData
         {
             m_doorIds[i] = doors[i].name;
         }
+    }
+};
+
+[Serializable]
+public struct CheckpointData
+{
+    public int m_lastCheckpointLevel;
+
+    public CheckpointData(int lastCheckpointLevel)
+    {
+        m_lastCheckpointLevel = lastCheckpointLevel;
     }
 };
 
