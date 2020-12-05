@@ -93,7 +93,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_baseDamage: 1
-  m_damage: 0
+  m_percentageChanceOfAffect: 0.5
+  m_poisionDamage: 1
+  m_slowDebuff: 0.5
+  m_affectTime: 5
 --- !u!1 &2962778701667265248
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,7 +121,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2962778701667265248}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.04, y: -0.23, z: 0}
+  m_LocalPosition: {x: 0.03, y: -1.82, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8631870844753434286}
@@ -133,10 +136,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4186372124111603126}
-  - component: {fileID: 5969910530529380573}
   - component: {fileID: 5495091406805917493}
+  - component: {fileID: 8631870844753434287}
   m_Layer: 2
-  m_Name: Sprite
+  m_Name: EnemySprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -156,44 +159,25 @@ Transform:
   m_Father: {fileID: 8631870844753434286}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8631870844753434322
-GameObject:
+--- !u!95 &5495091406805917493
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8631870844753434286}
-  - component: {fileID: 8631870844753434287}
-  - component: {fileID: 8631870844753434284}
-  - component: {fileID: 8631870844753434285}
-  - component: {fileID: 8631870844753434323}
-  - component: {fileID: 8631870844753434320}
-  m_Layer: 2
-  m_Name: JanitorEnemy
-  m_TagString: Enemy
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8631870844753434286
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8631870844753434322}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.21, y: 8.67, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
-  m_Children:
-  - {fileID: 8631870843932011449}
-  - {fileID: 4202125626246644408}
-  - {fileID: 4073614791533693554}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 5019019507612891714}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 317774905b86ff04bac84e5928089636, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &8631870844753434287
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -245,25 +229,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &5495091406805917493
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5019019507612891714}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 317774905b86ff04bac84e5928089636, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8631870843932011454
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,7 +253,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8631870843932011454}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.63, y: 0.56, z: 0}
+  m_LocalPosition: {x: -1.59, y: 0.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8631870844753434286}
@@ -308,6 +273,7 @@ GameObject:
   - component: {fileID: 8631870844753434323}
   - component: {fileID: 8631870844753434320}
   - component: {fileID: 963278913598660527}
+  - component: {fileID: -6563184247075566347}
   m_Layer: 2
   m_Name: JanitorEnemy
   m_TagString: Enemy
@@ -398,7 +364,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.5}
+  m_Offset: {x: 0.039284706, y: -0.10062003}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -409,7 +375,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.7594693, y: 2.8201146}
   m_EdgeRadius: 0
 --- !u!114 &8631870844753434320
 MonoBehaviour:
@@ -429,6 +395,8 @@ MonoBehaviour:
   m_playerDetected: 0
   m_currentState: 0
   m_currentEnemyType: 0
+  m_questionmark: {fileID: 3783213463638213574, guid: 40acaa4f65aeeaf44aad51d83f2decd0, type: 3}
+  m_excalmationmark: {fileID: 6264025296151744314, guid: a776e246d259fa04188f7ffb2c9d5113, type: 3}
   m_dropItem: {fileID: 0}
   m_health: 100
   m_speed: 1
@@ -443,6 +411,11 @@ MonoBehaviour:
   m_sneakDamageMultiplierStack: 0
   m_attackRange: 1
   m_attckRangeDevider: 1
+  m_tiggerBossLooseTargetDistance: 2
+  m_secondPhaseStartPercentage: 0.3
+  m_amountOfStunWhenPlayerStealthed: 3
+  m_doseAffect: 1
+  m_attackSpeedIncrease: 1.5
   m_hitSpeed: 2
   m_attackCollider: {fileID: 220513390732296407}
   attackDeactivationSpeed: 0.1
@@ -450,7 +423,10 @@ MonoBehaviour:
   m_chargeAttackDeley: 1
   m_chargAttackPosibility: 0
   m_chargeAttackMultiplier: 1
-  m_petTigerDeley: 0
+  m_afterAttackDeley: 0
+  m_maxChargTimeBeforDamege: 0.2
+  m_amountOfTimeToMoveAwayFromWall: 0.2
+  m_chargeAttackSpeed: 500
 --- !u!114 &963278913598660527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,3 +439,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 500a7052496e455428e85868ebd594e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-6563184247075566347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8631870844753434322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d31f9a7fe448ac4393bf8ec13e9bef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_critical: 174
+  m_nonCritical: 122

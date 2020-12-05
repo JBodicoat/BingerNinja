@@ -5,7 +5,9 @@
 //Joao 23/10/20 - Added input for interactions.
 //Joao 25/10/20 - Added interaction in update.
 //Joao 26/10/20 - Added input for crouching, the input used for this was interact.
+// Elliott 21/11/2020 - changed the function onEnable and ondisable to public
 //Mario 22/11/20 - Added tap Attack and slow tap attack
+//Louie 30/11/20 - Roll and crouch animations
 
 using System.Collections;
 using System.Collections.Generic;
@@ -35,7 +37,7 @@ public class PlayerController_JamieG : MonoBehaviour
     //private PlayerHealthHunger_MarioFernandes playerHHScript;
     //PlayerCombat script here
     private PlayerStealth_JoaoBeijinho m_playerStealthScript;
-    
+
     void Awake()
     {
         m_player = GameObject.FindGameObjectWithTag("Player");
@@ -61,7 +63,6 @@ public class PlayerController_JamieG : MonoBehaviour
             m_playerMovementScript.RollMovement();
         }
         if (m_crouch.triggered)
-
         {
             m_playerStealthScript.Crouch();
         }
@@ -69,7 +70,7 @@ public class PlayerController_JamieG : MonoBehaviour
 
     #region InputAction Functions
     //These functions are required for the InputAction component to work
-    private void OnEnable()
+    public void OnEnable()
     {
         m_movement.Enable();
         m_interact.Enable();
@@ -84,7 +85,7 @@ public class PlayerController_JamieG : MonoBehaviour
         m_passDialogue.Enable();
     }
 
-    private void OnDisable()
+    public void OnDisable()
     {
         m_movement.Disable();
         m_interact.Disable();
