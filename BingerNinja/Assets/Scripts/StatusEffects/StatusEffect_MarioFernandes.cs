@@ -50,10 +50,12 @@ public abstract class StatusEffect_MarioFernandes
 
     public void Update()
     {
+        
         if(m_duration-- > 0)
             Effect();
         else
-            DeactivateEffect();                
+            DeactivateEffect();          
+
     }
 
 }
