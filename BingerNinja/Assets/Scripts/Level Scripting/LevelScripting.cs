@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using UnityEngine.InputSystem;
 
 public class LevelScripting : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class LevelScripting : MonoBehaviour
     Tilemap objInfWalls, objWalls, objBehWalls, walls2;
     Tile bottomDoorTile, topDoorTile;
     int bossDialogIndex = 0;
+    private PlayerController_JamieG controller;
 
     #endregion
 
@@ -86,9 +88,8 @@ public class LevelScripting : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 14)
         {
             levelLiftTrigger = GameObject.Find("Level 14 Lift");
-            keyTrigger = GameObject.Find("Key");
-            doorCloseTrigger = GameObject.Find("Pressure pad intro").transform.Find("DialogTrigger").gameObject;
-            bottomDoorTile = objWalls.GetTile<Tile>(new Vector3Int(12, 26, 0));
+            keyTrigger = GameObject.Find("Help");
+            doorCloseTrigger = GameObject.Find("DialogTrigger");
             objWalls = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
             walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
             bottomDoorTile = objWalls.GetTile<Tile>(new Vector3Int(12, 26, 0));
@@ -111,7 +112,7 @@ public class LevelScripting : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 19)
         {
             levelLiftTrigger = GameObject.Find("Level 19 Lift");
-            keyTrigger = GameObject.Find("Key");
+            keyTrigger = GameObject.Find("Key Trigger");
         }
         if (SceneManager.GetActiveScene().buildIndex == 20)
         {
@@ -119,6 +120,7 @@ public class LevelScripting : MonoBehaviour
             bossDialogue = GameObject.Find("Ninjaroth").GetComponent<BossDialogue_MarioFernandes>();
             dialogBox = GameObject.Find("DialogBox");
         }
+        controller = GameObject.Find("Player").GetComponent<PlayerController_JamieG>();
     }
 
     private void Start()
@@ -169,11 +171,10 @@ public class LevelScripting : MonoBehaviour
             walls2.SetTile(new Vector3Int(13, 26, 0), null);
             walls2.SetTile(new Vector3Int(13, 25, 0), null);
         }
-
         if (SceneManager.GetActiveScene().buildIndex == 15)
         {
-            boss = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BaseEnemy_SebastianMol>();
-            bossDialogue = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BossDialogue_MarioFernandes>();
+            boss = GameObject.Find("Toby the Tiger").GetComponent<BaseEnemy_SebastianMol>();
+            bossDialogue = GameObject.Find("Toby the Tiger").GetComponent<BossDialogue_MarioFernandes>();
             levelLiftTrigger = GameObject.Find("Level 15 Lift");
         }
         if (SceneManager.GetActiveScene().buildIndex == 17)
@@ -183,9 +184,9 @@ public class LevelScripting : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().buildIndex == 18)
         {
+            levelBossIntro = false;
             levelLiftTrigger.SetActive(false);
         }
-
         if (SceneManager.GetActiveScene().buildIndex == 20)
         {
             
@@ -312,7 +313,6 @@ public class LevelScripting : MonoBehaviour
         {
             if (!keyTrigger.activeInHierarchy)
             {
-                Debug.Log("key worked");
                 //door top
                 objInfWalls.SetTile(new Vector3Int(36, 32, 0), null);
                 objInfWalls.SetTile(new Vector3Int(37, 32, 0), null);
@@ -370,7 +370,6 @@ public class LevelScripting : MonoBehaviour
         {
             if (!keyTrigger.activeInHierarchy)
             {
-                Debug.Log("key worked");
                 //door top
                 objInfWalls.SetTile(new Vector3Int(33, 17, 0), null);
                 objInfWalls.SetTile(new Vector3Int(34, 17, 0), null);
@@ -445,26 +444,6 @@ public class LevelScripting : MonoBehaviour
 
             }
         }
-        if (SceneManager.GetActiveScene().buildIndex == 20 && !bossDead)
-        {
-            if (!levelBossIntro && !dialogBox.activeInHierarchy)
-            {
-                bossDialogue.TriggerDialogue(bossDialogIndex);
-                bossDialogIndex++;
-                if (bossDialogIndex == 14)
-                //cinematic
-                levelBossIntro = true;
-            }
-            if (boss.m_health <= 0)
-            {
-                //dramatic death SE
-                //freeze on enemy as he dies  
-                //end cinematic
-                levelLiftTrigger.SetActive(true);
-                bossDead = true;
-
-            }
-        }
         if (SceneManager.GetActiveScene().buildIndex == 19)
         {
             if (!keyTrigger.activeInHierarchy)
@@ -472,9 +451,9 @@ public class LevelScripting : MonoBehaviour
                 objWalls.SetTile(new Vector3Int(24, 10, 0), null);
                 objWalls.SetTile(new Vector3Int(25, 10, 0), null);
                 objWalls.SetTile(new Vector3Int(26, 10, 0), null);
-                objWalls.SetTile(new Vector3Int(25, 10, 0), null);
-                objWalls.SetTile(new Vector3Int(26, 10, 0), null);
-                objWalls.SetTile(new Vector3Int(27, 10, 0), null);
+                walls2.SetTile(new Vector3Int(25, 11, 0), null);
+                walls2.SetTile(new Vector3Int(26, 11, 0), null);
+                walls2.SetTile(new Vector3Int(27, 11, 0), null);
             }
         }
         if (SceneManager.GetActiveScene().buildIndex == 20 && !bossDead)
@@ -497,11 +476,14 @@ public class LevelScripting : MonoBehaviour
 
             }
         }
-
+        if (controller.m_changeLevel.triggered)
+        {
+            SceneManager_JamieG.Instance.LoadNextLevel();
+        }
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (SceneManager.GetActiveScene().buildIndex == 16)
+        if (SceneManager.GetActiveScene().buildIndex == 14)
         {
             //Mechanic for closing the doors behind the player on lvl 14
             if (other.gameObject == doorCloseTrigger && !doorsClosed)

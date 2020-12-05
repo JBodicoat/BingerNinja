@@ -290,7 +290,7 @@ BoxCollider2D:
   m_Offset: {x: 0.00067564845, y: 0.1377368}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.1}
+    pivot: {x: 0.5, y: 0.15}
     oldSize: {x: 0.5, y: 0.5}
     newSize: {x: 0.5, y: 0.5}
     adaptiveTilingThreshold: 0.5
@@ -563,6 +563,22 @@ MonoBehaviour:
       m_Processors: 
       m_Groups: 
       m_Action: Roll
+      m_Flags: 0
+  m_changeLevel:
+    m_Name: Change Level
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 7851a5b0-a12c-41bf-b7df-9a952c620d59
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 60d8aa1c-43c9-4eba-ab65-4eb8693b2882
+      m_Path: <Keyboard>/n
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Change Level
       m_Flags: 0
   m_switchWeapons:
     m_Name: Switch Weapons

@@ -27,6 +27,7 @@ public class PlayerController_JamieG : MonoBehaviour
     public InputAction m_attackTap;
     public InputAction m_attackSlowTap;
     public InputAction m_roll;
+    public InputAction m_changeLevel;
 
     public InputAction m_switchWeapons;
     public InputAction m_dropWeapons;
@@ -80,6 +81,7 @@ public class PlayerController_JamieG : MonoBehaviour
         m_roll.Enable();
         m_switchWeapons.Enable();
         m_dropWeapons.Enable();
+        m_changeLevel.Enable();
     }
 
     public void OnDisable()
@@ -93,6 +95,7 @@ public class PlayerController_JamieG : MonoBehaviour
         m_roll.Disable();
         m_switchWeapons.Disable();
         m_dropWeapons.Disable();
+        m_changeLevel.Disable();
     }
     #endregion
 
