@@ -500,7 +500,7 @@ MonoBehaviour:
       m_Flags: 0
     - m_Name: 
       m_Id: 675a5276-34b9-405b-bda0-0744a2e460de
-      m_Path: <Gamepad>/rightShoulder
+      m_Path: <Gamepad>/buttonWest
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -522,6 +522,14 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Attack Tap
       m_Flags: 0
+    - m_Name: 
+      m_Id: 12046942-895a-4271-9e7b-26484b0d5ff0
+      m_Path: <Gamepad>/rightShoulder
+      m_Interactions: Tap
+      m_Processors: 
+      m_Groups: 
+      m_Action: Attack Tap
+      m_Flags: 0
   m_attackSlowTap:
     m_Name: Attack Slow Tap
     m_Type: 0
@@ -538,6 +546,30 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Attack Slow Tap
       m_Flags: 0
+    - m_Name: 
+      m_Id: 1dfc24c9-403c-4d81-8088-650c0b1933d7
+      m_Path: <Gamepad>/rightShoulder
+      m_Interactions: Hold(duration=1)
+      m_Processors: 
+      m_Groups: 
+      m_Action: Attack Slow Tap
+      m_Flags: 0
+  m_aim:
+    m_Name: Aim
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e75550ea-7b06-4cdd-9fad-78d2299c7574
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 3d2f4f05-aa56-470d-9b6e-1e89cba35500
+      m_Path: <Gamepad>/rightStick
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Aim
+      m_Flags: 0
   m_roll:
     m_Name: Roll
     m_Type: 0
@@ -549,14 +581,6 @@ MonoBehaviour:
     - m_Name: 
       m_Id: c334bedc-68bf-4c2c-b921-2392d043bd82
       m_Path: <Keyboard>/q
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Roll
-      m_Flags: 0
-    - m_Name: 
-      m_Id: a6339f35-0545-4927-b23b-81e8aa4e2e85
-      m_Path: <Gamepad>/buttonSouth
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -591,6 +615,14 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 3ef26744-0088-497d-92c7-f478d232aa5c
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+  m_passDialogue:
+    m_Name: Pass Dialogue
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 5f59052d-3194-464a-af46-580777032899
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []

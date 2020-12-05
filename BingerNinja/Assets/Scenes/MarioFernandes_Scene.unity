@@ -174,6 +174,8 @@ MonoBehaviour:
   m_playerDetected: 0
   m_currentState: 0
   m_currentEnemyType: 0
+  m_questionmark: {fileID: 0}
+  m_excalmationmark: {fileID: 0}
   m_dropItem: {fileID: 0}
   m_health: 0
   m_speed: 0
@@ -11989,6 +11991,7 @@ MonoBehaviour:
   m_stealthed: 0
   m_crouched: 0
   m_inVent: 0
+  crouchSpeed: 0
 --- !u!114 &1963334539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12166,6 +12169,14 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Drop Weapons
       m_Flags: 0
+  m_passDialogue:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
 --- !u!114 &1963334542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12476,6 +12487,46 @@ PrefabInstance:
     - target: {fileID: 4362767424123825802, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_attackTap.m_SingletonActionBindings.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_attackSlowTap.m_SingletonActionBindings.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_attackTap.m_SingletonActionBindings.Array.data[1].m_Id
+      value: 12046942-895a-4271-9e7b-26484b0d5ff0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_attackTap.m_SingletonActionBindings.Array.data[1].m_Action
+      value: Attack Tap
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_attackTap.m_SingletonActionBindings.Array.data[1].m_Path
+      value: <Gamepad>/rightShoulder
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_attackTap.m_SingletonActionBindings.Array.data[1].m_Interactions
+      value: Tap
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_attackSlowTap.m_SingletonActionBindings.Array.data[1].m_Id
+      value: 1dfc24c9-403c-4d81-8088-650c0b1933d7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_attackSlowTap.m_SingletonActionBindings.Array.data[1].m_Action
+      value: Attack Slow Tap
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_attackSlowTap.m_SingletonActionBindings.Array.data[1].m_Path
+      value: <Gamepad>/rightShoulder
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_attackSlowTap.m_SingletonActionBindings.Array.data[1].m_Interactions
+      value: Hold(duration=1)
       objectReference: {fileID: 0}
     - target: {fileID: 4362767424123825805, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_weaponTemplate

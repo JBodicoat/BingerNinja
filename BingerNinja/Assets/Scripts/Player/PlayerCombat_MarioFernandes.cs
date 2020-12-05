@@ -19,6 +19,7 @@
 // Mario 20/11/2020 - Subtration of ammunition and added chargedattack modifier
 // Mario 28/11/2020 - item drop using "Q", now it stores the prefabs with him and childs
 // Mario 29/11/2020 - contorller implementation
+// Mario 05/12/2020 - full contorller detection and range suport
 
 using System.Collections;
 using System.Collections.Generic;
@@ -102,7 +103,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         m_strenght = 1;
     }
 
-    void Attack(float chargedModifier = 1)
+    void Attack(InputAction cx, float chargedModifier = 1)
     {
         //m_animationScript.TriggerAttackAnim();        
 
@@ -110,9 +111,15 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         {
             Vector3 m_direction;
 
+            
+            if(Gamepad.current != null)
+            {
             if(Controller.m_aim.ReadValue<Vector2>() != Vector2.zero)
             {
                 m_direction = Controller.m_aim.ReadValue<Vector2>();
+            }else
+            return;
+
             }else
             {
             
@@ -267,13 +274,13 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
                 {    
                 m_timeSinceLastAttack = m_attackDelay;
                 
-                Attack();   
+                Attack( Controller.m_attackTap);   
                 } else
                 if( Controller.m_attackSlowTap.triggered)              
                 {    
                 m_timeSinceLastAttack = m_attackDelay;
                 
-                Attack(m_chargedModifier);   
+                Attack(Controller.m_attackSlowTap, m_chargedModifier);   
                } 
             }          
         }
