@@ -126,7 +126,7 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
         {
             PurchaseUpgrade();
         }
-        if (gamepad.digit6Key.wasPressedThisFrame)
+        if (gamepad.escapeKey.wasPressedThisFrame)
         {
             levelLift.ProgressToNextLevel();
         }
