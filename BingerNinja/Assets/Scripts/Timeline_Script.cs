@@ -5,11 +5,13 @@ using UnityEngine.Playables;
 public class Timeline_Script : MonoBehaviour
 {
     public PlayableDirector playableDirector;
+    public GameObject nextButton;
     public float seconds;
     
     public void PlayTimeline()
     {
         playableDirector.Play();
+        nextButton.SetActive(false);
         StartCoroutine(pause());
     }
     public void PauseTimeline()
@@ -20,5 +22,6 @@ public class Timeline_Script : MonoBehaviour
     {
         yield return new WaitForSeconds(seconds);
         PauseTimeline();
+        nextButton.SetActive(true);
     }
 }
