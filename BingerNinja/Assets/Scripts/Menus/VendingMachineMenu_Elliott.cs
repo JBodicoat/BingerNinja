@@ -2,8 +2,8 @@
 /// class holds values for the Vendingmachine menu
 
 //Elliott 31/10/2020 - can now select an item which brings up a discription about said item, also adds item to inventory when item is brought
-//Elliott 06/10/2020 - added a check for the one time buy items, made a DeselectAll fuction.
-//Elliott 09/10/2020 - changed the color of the text when item is brought changes, give item now uses enum.
+//Elliott 06/11/2020 - added a check for the one time buy items, made a DeselectAll fuction.
+//Elliott 09/11/2020 - changed the color of the text when item is brought changes, give item now uses enum.
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +23,7 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
     private bool PurchasedCookie = false;
     private bool PurchasedNoodle = false;
     public ChangeLevels_CW levelLift;
+    public static bool m_gameIsPaused = false;
     /// <summary>
     /// shuts all decriptions and opens up the one selected
     /// </summary>
