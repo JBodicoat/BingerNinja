@@ -259,6 +259,10 @@ PrefabInstance:
       propertyPath: m_downDoorPart
       value: 
       objectReference: {fileID: 11400000, guid: 728079e7b25f38a40bd3a77b971d267b, type: 2}
+    - target: {fileID: 4059488010150096622, guid: bc9c4cae62ccda04ea3865fd40c48087, type: 3}
+      propertyPath: m_crateOnly
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4150556224136095741, guid: bc9c4cae62ccda04ea3865fd40c48087, type: 3}
       propertyPath: m_Name
       value: Pressure Pad
@@ -878,6 +882,10 @@ PrefabInstance:
     - target: {fileID: 2076348194425506850, guid: 78dfd7b3bd6f28b469372a3990cbcf9e, type: 3}
       propertyPath: m_Name
       value: PushableCrate (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076348194425506850, guid: 78dfd7b3bd6f28b469372a3990cbcf9e, type: 3}
+      propertyPath: m_TagString
+      value: Crate
       objectReference: {fileID: 0}
     - target: {fileID: 2076348194425506860, guid: 78dfd7b3bd6f28b469372a3990cbcf9e, type: 3}
       propertyPath: m_SortingOrder
@@ -40954,6 +40962,10 @@ PrefabInstance:
       propertyPath: inactivePressurePad
       value: 
       objectReference: {fileID: 6767059610593359031, guid: 7eec9656956eec34baf6f874b2f50d24, type: 3}
+    - target: {fileID: 4059488010150096622, guid: bc9c4cae62ccda04ea3865fd40c48087, type: 3}
+      propertyPath: m_crateOnly
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4150556224136095741, guid: bc9c4cae62ccda04ea3865fd40c48087, type: 3}
       propertyPath: m_Name
       value: Pressure Pad (1)
@@ -41039,6 +41051,10 @@ PrefabInstance:
     - target: {fileID: 2076348194425506850, guid: 78dfd7b3bd6f28b469372a3990cbcf9e, type: 3}
       propertyPath: m_Name
       value: PushableCrate
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076348194425506850, guid: 78dfd7b3bd6f28b469372a3990cbcf9e, type: 3}
+      propertyPath: m_TagString
+      value: Crate
       objectReference: {fileID: 0}
     - target: {fileID: 2076348194425506860, guid: 78dfd7b3bd6f28b469372a3990cbcf9e, type: 3}
       propertyPath: m_SortingOrder
