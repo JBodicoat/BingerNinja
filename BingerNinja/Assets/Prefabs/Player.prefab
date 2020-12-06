@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 1215843291532474296}
   - component: {fileID: 7741539041222968558}
   - component: {fileID: 4693705281802690140}
+  - component: {fileID: 2545763964400565161}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -696,6 +697,20 @@ MonoBehaviour:
   m_TempuraSpeedhModifier: 0.5
   m_Dango: {fileID: 4763809459861947651, guid: 0b1b6a5dc6dbd814bbac923bf41b774c, type: 3}
   m_Noodle: {fileID: 1099025504645599283, guid: 91cf97e8b0876e042836b023e33b257a, type: 3}
+--- !u!114 &2545763964400565161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4362767424123825799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d31f9a7fe448ac4393bf8ec13e9bef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_critical: 174
+  m_nonCritical: 122
 --- !u!1 &8116294513426094757
 GameObject:
   m_ObjectHideFlags: 0
