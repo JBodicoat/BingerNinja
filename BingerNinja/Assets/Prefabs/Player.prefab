@@ -530,6 +530,14 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Attack Tap
       m_Flags: 0
+    - m_Name: 
+      m_Id: bd0f3106-5db4-4010-8055-9e3899fab692
+      m_Path: <Touchscreen>/press
+      m_Interactions: Tap
+      m_Processors: 
+      m_Groups: 
+      m_Action: Attack Tap
+      m_Flags: 0
   m_attackSlowTap:
     m_Name: Attack Slow Tap
     m_Type: 0
@@ -554,6 +562,14 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Attack Slow Tap
       m_Flags: 0
+    - m_Name: 
+      m_Id: 23e814b4-b3dd-4458-8361-359e2b5e4063
+      m_Path: <Touchscreen>/press
+      m_Interactions: Hold(duration=1)
+      m_Processors: 
+      m_Groups: 
+      m_Action: Attack Slow Tap
+      m_Flags: 0
   m_aim:
     m_Name: Aim
     m_Type: 0
@@ -565,6 +581,14 @@ MonoBehaviour:
     - m_Name: 
       m_Id: 3d2f4f05-aa56-470d-9b6e-1e89cba35500
       m_Path: <Gamepad>/rightStick
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Aim
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 3ec73e68-9744-4253-a674-9861024c0fed
+      m_Path: <Touchscreen>/position
       m_Interactions: 
       m_Processors: 
       m_Groups: 

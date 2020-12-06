@@ -20,10 +20,12 @@
 // Mario 28/11/2020 - item drop using "Q", now it stores the prefabs with him and childs
 // Mario 29/11/2020 - contorller implementation
 // Mario 05/12/2020 - full contorller detection and range suport
+// Mario 06/12/2020 - Touchscreen suport
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 public enum FoodType
 {
@@ -106,12 +108,22 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
     void Attack(InputAction cx, float chargedModifier = 1)
     {
         //m_animationScript.TriggerAttackAnim();        
-
+            
+        if (EventSystem.current.currentSelectedGameObject != null && Application.isMobilePlatform)
+        {
+        return;
+        }else
         if(m_currentWeapon[m_weaponsIndex].IsRanged())
         {
             Vector3 m_direction;
 
-            
+            if(Application.isMobilePlatform)
+            {
+                m_direction = Camera.main.ScreenToWorldPoint(Controller.m_aim.ReadValue<Vector2>());
+                
+                m_direction = m_direction - transform.position;
+
+            }else          
             if(Gamepad.current != null)
             {
             if(Controller.m_aim.ReadValue<Vector2>() != Vector2.zero)
@@ -127,11 +139,11 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         
             m_direction = m_direction - transform.position;
 
+            
+            }
             m_direction.z = 0; 
 
             m_direction.Normalize();
-            }
-
             //TODO undo this comment
             //m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
             GameObject projectile = Instantiate(m_projectile, transform.position, transform.rotation);
@@ -183,6 +195,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             }
 
             //EnemyDetection.enabled = false;        
+        
     }
 
     public void Eat()
@@ -231,6 +244,14 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
         }
     }
+
+    public void ChangeWeapon() {
+        if(m_weaponsIndex == 1)
+             m_weaponsIndex = 0;
+             else
+             m_weaponsIndex = 1;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -256,10 +277,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         // 1 - Ranged weapon
          if(Controller.m_switchWeapons.triggered)
          {
-             if(m_weaponsIndex == 1)
-             m_weaponsIndex = 0;
-             else
-             m_weaponsIndex = 1;
+             ChangeWeapon();             
 
              print(m_currentWeapon[m_weaponsIndex]);
          }
