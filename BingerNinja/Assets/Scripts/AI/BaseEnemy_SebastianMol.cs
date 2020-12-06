@@ -42,6 +42,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public m_enemyType m_currentEnemyType;
     public GameObject m_questionmark;
     public GameObject m_excalmationmark;
+    public float m_notifcaionOffset;
 
 
     [Header("designers Section")]
@@ -122,6 +123,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     private CameraShakeElliott m_cameraShake;
     protected bool m_showquestionMarkonce = false;
     private PlayerSpoted_Elliott playerSpoted_Elliott;
+    
 
     protected PlayerStealth_JoaoBeijinho m_playerStealthScript;
     private int m_crouchObjectLayer = 1 << 8;
@@ -776,7 +778,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public void NoticePlayerEffect()
     {
        Debug.Log("!");
-       GameObject excalm = Instantiate(m_excalmationmark, gameObject.transform.position, Quaternion.identity);
+       GameObject excalm = Instantiate(m_excalmationmark, new Vector3(transform.position.x,transform.position.y + m_notifcaionOffset,transform.position.z), Quaternion.identity);
         excalm.transform.parent = transform;
         
     }
@@ -786,7 +788,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         if (!m_showquestionMarkonce)
         {
             Debug.Log("?");
-            GameObject A = Instantiate(m_questionmark, gameObject.transform.position, Quaternion.identity);
+            GameObject A = Instantiate(m_questionmark, new Vector3(transform.position.x, transform.position.y + m_notifcaionOffset, transform.position.z), Quaternion.identity);
             A.transform.parent = transform;
             m_showquestionMarkonce = true;
            

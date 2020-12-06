@@ -97,6 +97,7 @@ MonoBehaviour:
   m_poisionDamage: 1
   m_slowDebuff: 0.5
   m_affectTime: 5
+  m_HitEffectElliott: {fileID: 0}
 --- !u!1 &1488481114249787428
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,6 +429,7 @@ MonoBehaviour:
   m_currentEnemyType: 7
   m_questionmark: {fileID: 3783213463638213574, guid: 40acaa4f65aeeaf44aad51d83f2decd0, type: 3}
   m_excalmationmark: {fileID: 6264025296151744314, guid: a776e246d259fa04188f7ffb2c9d5113, type: 3}
+  m_notifcaionOffset: 0.1
   m_dropItem: {fileID: 0}
   m_health: 100
   m_speed: 1
