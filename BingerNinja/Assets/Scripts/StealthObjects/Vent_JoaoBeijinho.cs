@@ -6,6 +6,7 @@
 //Joao Beijinho 09/11/2020 - Replaced tag with the tag in the Tags_JoaoBeijinho script
 //Joao Beijinho 10/11/2020 - Replaced IgnoreCollision with IgnoreLayerCollision
 //Joao Beijinho 11/10/2020 - Call ToggleVent() in VentEnter() and VentExit()
+//Joao Beijinho 06/12/2020 - Player SpriteRenderer enable/disable on VentEnter()/VentExit()
 
 using System.Collections;
 using System.Collections.Generic;
@@ -60,6 +61,7 @@ public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
         Hide();
         ToggleVent();
 
+        m_player.GetComponentInChildren<SpriteRenderer>().enabled = false;
         m_playerPos.position = new Vector2(m_ventPos.position.x, m_ventPos.position.y);
 
         foreach (Collider2D ventWall in m_ventWallsCollider)
@@ -78,6 +80,7 @@ public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
         Hide();
         ToggleVent();
 
+        m_player.GetComponentInChildren<SpriteRenderer>().enabled = true;
         m_playerPos.position = new Vector2(m_ventPos.position.x, m_ventPos.position.y);
 
         foreach (Collider2D ventWall in m_ventWallsCollider)
