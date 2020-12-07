@@ -5,6 +5,7 @@
 //Joao Beijinho 30/10/2020 - Removed Struct and added dictionary
 //Joao Beijinho 02/10/2020 - Updated HasItem to get the quantity too, created RemoveItem function
 //Mario Fernandes 28/10/2020 - Update Pizza and cookies to Dango and Tempura
+// Alanna & Elliott 07/12/20 - making a list for enemies to keep track of what enemies are left for ninja points CheckDeadEnemies()
 
 using System.Collections;
 using System.Collections.Generic;
@@ -29,7 +30,8 @@ public enum ItemType
 /// </summary>
 public class Inventory_JoaoBeijinho : MonoBehaviour
 {
-    public Dictionary<ItemType, int> m_inventoryItems = new Dictionary<ItemType, int>();
+   List<GameObject> m_EnemyList;
+   public Dictionary<ItemType, int> m_inventoryItems = new Dictionary<ItemType, int>();
 
     /// <summary>
     /// Use this function to add a type of item and its quantity to the inventory
@@ -64,6 +66,36 @@ public class Inventory_JoaoBeijinho : MonoBehaviour
         if (HasItem(itemToRemove, quantityToRemove))
         {
             m_inventoryItems[itemToRemove] -= quantityToRemove;
+        }
+    }
+
+    public int ItemValue(ItemType item)
+    {
+        int itemval;
+        m_inventoryItems.TryGetValue(item, out itemval);
+        return itemval;
+    }
+
+    private void Start()
+    {
+         m_EnemyList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));    
+    }
+    public void CheckDeadEnemies()
+    {
+        int count = 0;
+        for (int i = 0; i < m_EnemyList.Count; i++)
+        {
+            if (!m_EnemyList[i].activeSelf)
+            {
+                count++;
+            }
+            else break;
+        }
+        if(count == m_EnemyList.Count)
+        {
+            Debug.Log(ItemValue(ItemType.NinjaPoints));
+            GiveItem(ItemType.NinjaPoints, 5);
+            Debug.Log(ItemValue(ItemType.NinjaPoints));
         }
     }
 }
