@@ -17,7 +17,7 @@ public class LevelScripting : MonoBehaviour
     GameObject levelLiftTrigger, keyTrigger, keyTriggerTwo, doorCloseTrigger, dialogBox;
     BaseEnemy_SebastianMol boss, level2Enemy1, level2Enemy2;
     BossDialogue_MarioFernandes bossDialogue, level2End;
-    Tilemap objInfWalls, objWalls, objBehWalls, walls2;
+    Tilemap objInfWalls, walls1, objBehWalls, walls2;
     Tile bottomDoorTile, topDoorTile;
     int bossDialogIndex = 0;
     private PlayerController_JamieG controller;
@@ -30,7 +30,7 @@ public class LevelScripting : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             keyTrigger = GameObject.Find("Key Trigger");
-            objWalls = GameObject.Find("Walls1_Map").GetComponent<Tilemap>();
+            walls1 = GameObject.Find("Walls1_Map").GetComponent<Tilemap>();
             objInfWalls = GameObject.Find("ObjectsInFrontOfWalls_Map").GetComponent<Tilemap>();
         }
         if (SceneManager.GetActiveScene().buildIndex == 2)
@@ -49,7 +49,7 @@ public class LevelScripting : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 4)
         {
             keyTrigger = GameObject.Find("Key Trigger");
-            objWalls = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
+            walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
             objInfWalls = GameObject.Find("ObjectsInFrontOfWalls_map").GetComponent<Tilemap>();
             walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
         }
@@ -68,7 +68,7 @@ public class LevelScripting : MonoBehaviour
         {
             keyTrigger = GameObject.Find("Key Trigger");
             keyTriggerTwo = GameObject.Find("Key Trigger 2");
-            objWalls = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
+            walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
             objInfWalls = GameObject.Find("ObjectsInFrontOfWalls_map").GetComponent<Tilemap>();
             objBehWalls = GameObject.Find("ObjectsBehindWalls_map").GetComponent<Tilemap>();
             walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
@@ -90,16 +90,16 @@ public class LevelScripting : MonoBehaviour
             levelLiftTrigger = GameObject.Find("Level 14 Lift");
             keyTrigger = GameObject.Find("Help");
             doorCloseTrigger = GameObject.Find("DialogTrigger");
-            objWalls = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
+            walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
             walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
-            bottomDoorTile = objWalls.GetTile<Tile>(new Vector3Int(12, 26, 0));
-            topDoorTile = objWalls.GetTile<Tile>(new Vector3Int(13, 27, 0));
+            bottomDoorTile = walls1.GetTile<Tile>(new Vector3Int(12, 26, 0));
+            topDoorTile = walls1.GetTile<Tile>(new Vector3Int(13, 27, 0));
         }
         if (SceneManager.GetActiveScene().buildIndex == 17)
         {
             levelLiftTrigger = GameObject.Find("Level 17 Lift");
             keyTrigger = GameObject.Find("Key");
-            objWalls = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
+            walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
             walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
         }
         if (SceneManager.GetActiveScene().buildIndex == 18)
@@ -113,6 +113,9 @@ public class LevelScripting : MonoBehaviour
         {
             levelLiftTrigger = GameObject.Find("Level 19 Lift");
             keyTrigger = GameObject.Find("Key Trigger");
+            // keyTrigger = GameObject.Find("My Key");
+            walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
+            walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
         }
         if (SceneManager.GetActiveScene().buildIndex == 20)
         {
@@ -148,7 +151,7 @@ public class LevelScripting : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 11)
         {
             keyTrigger = GameObject.Find("Key Trigger");
-            objWalls = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
+            walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
             objInfWalls = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
         }
         if (SceneManager.GetActiveScene().buildIndex == 12)
@@ -158,15 +161,15 @@ public class LevelScripting : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 13)
         {
             keyTrigger = GameObject.Find("Key Trigger");
-            objWalls = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
+            walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
             objInfWalls = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
         }
         if (SceneManager.GetActiveScene().buildIndex == 14)
         {
             levelLiftTrigger.SetActive(false);
-            objWalls.SetTile(new Vector3Int(12, 26, 0), null);
-            objWalls.SetTile(new Vector3Int(12, 25, 0), null);
-            objWalls.SetTile(new Vector3Int(12, 24, 0), null);
+            walls1.SetTile(new Vector3Int(12, 26, 0), null);
+            walls1.SetTile(new Vector3Int(12, 25, 0), null);
+            walls1.SetTile(new Vector3Int(12, 24, 0), null);
             walls2.SetTile(new Vector3Int(13, 27, 0), null);
             walls2.SetTile(new Vector3Int(13, 26, 0), null);
             walls2.SetTile(new Vector3Int(13, 25, 0), null);
@@ -186,6 +189,8 @@ public class LevelScripting : MonoBehaviour
         {
             levelBossIntro = false;
             levelLiftTrigger.SetActive(false);
+            walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
+            walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
         }
         if (SceneManager.GetActiveScene().buildIndex == 20)
         {
@@ -203,9 +208,9 @@ public class LevelScripting : MonoBehaviour
                 objInfWalls.SetTile(new Vector3Int(6, 14, 0), null);
                 objInfWalls.SetTile(new Vector3Int(5, 14, 0), null);
 
-                objWalls.SetTile(new Vector3Int(4, 13, 0), null);
-                objWalls.SetTile(new Vector3Int(5, 13, 0), null);
-                objWalls.SetTile(new Vector3Int(6, 13, 0), null);
+                walls1.SetTile(new Vector3Int(4, 13, 0), null);
+                walls1.SetTile(new Vector3Int(5, 13, 0), null);
+                walls1.SetTile(new Vector3Int(6, 13, 0), null);
 
             }
             
@@ -239,9 +244,9 @@ public class LevelScripting : MonoBehaviour
                 walls2.SetTile(new Vector3Int(26, 10, 0), null);
                 walls2.SetTile(new Vector3Int(26, 11, 0), null);
                 walls2.SetTile(new Vector3Int(26, 12, 0), null);
-                objWalls.SetTile(new Vector3Int(25, 9, 0), null);
-                objWalls.SetTile(new Vector3Int(25, 10, 0), null);
-                objWalls.SetTile(new Vector3Int(25, 11, 0), null);
+                walls1.SetTile(new Vector3Int(25, 9, 0), null);
+                walls1.SetTile(new Vector3Int(25, 10, 0), null);
+                walls1.SetTile(new Vector3Int(25, 11, 0), null);
             }
         }
         if (SceneManager.GetActiveScene().buildIndex == 5 && !keyUsed)
@@ -276,9 +281,9 @@ public class LevelScripting : MonoBehaviour
                 walls2.SetTile(new Vector3Int(23, 29, 0), null);
                 walls2.SetTile(new Vector3Int(23, 30, 0), null);
 
-                objWalls.SetTile(new Vector3Int(22, 27, 0), null);
-                objWalls.SetTile(new Vector3Int(22, 28, 0), null);
-                objWalls.SetTile(new Vector3Int(22, 29, 0), null);
+                walls1.SetTile(new Vector3Int(22, 27, 0), null);
+                walls1.SetTile(new Vector3Int(22, 28, 0), null);
+                walls1.SetTile(new Vector3Int(22, 29, 0), null);
 
             }
             if (!keyTriggerTwo.activeInHierarchy)
@@ -287,9 +292,9 @@ public class LevelScripting : MonoBehaviour
                 walls2.SetTile(new Vector3Int(30, 11, 0), null);
                 walls2.SetTile(new Vector3Int(30, 12, 0), null);
 
-                objWalls.SetTile(new Vector3Int(29, 9, 0), null);
-                objWalls.SetTile(new Vector3Int(29, 10, 0), null);
-                objWalls.SetTile(new Vector3Int(29, 11, 0), null);
+                walls1.SetTile(new Vector3Int(29, 9, 0), null);
+                walls1.SetTile(new Vector3Int(29, 10, 0), null);
+                walls1.SetTile(new Vector3Int(29, 11, 0), null);
             }
         }
         if (SceneManager.GetActiveScene().buildIndex == 9 && !bossDead)
@@ -318,36 +323,36 @@ public class LevelScripting : MonoBehaviour
                 objInfWalls.SetTile(new Vector3Int(37, 32, 0), null);
                 objInfWalls.SetTile(new Vector3Int(38, 32, 0), null);
 
-                objWalls.SetTile(new Vector3Int(35, 31, 0), null);
-                objWalls.SetTile(new Vector3Int(36, 31, 0), null);
-                objWalls.SetTile(new Vector3Int(37, 31, 0), null);
+                walls1.SetTile(new Vector3Int(35, 31, 0), null);
+                walls1.SetTile(new Vector3Int(36, 31, 0), null);
+                walls1.SetTile(new Vector3Int(37, 31, 0), null);
 
                 //door mid-right
                 objInfWalls.SetTile(new Vector3Int(33, 19, 0), null);
                 objInfWalls.SetTile(new Vector3Int(33, 18, 0), null);
                 objInfWalls.SetTile(new Vector3Int(33, 17, 0), null);
 
-                objWalls.SetTile(new Vector3Int(32, 18, 0), null);
-                objWalls.SetTile(new Vector3Int(32, 17, 0), null);
-                objWalls.SetTile(new Vector3Int(32, 16, 0), null);
+                walls1.SetTile(new Vector3Int(32, 18, 0), null);
+                walls1.SetTile(new Vector3Int(32, 17, 0), null);
+                walls1.SetTile(new Vector3Int(32, 16, 0), null);
 
                 //door right
                 objInfWalls.SetTile(new Vector3Int(35, 31, 0), null);
                 objInfWalls.SetTile(new Vector3Int(36, 31, 0), null);
                 objInfWalls.SetTile(new Vector3Int(37, 31, 0), null);
 
-                objWalls.SetTile(new Vector3Int(38, 10, 0), null);
-                objWalls.SetTile(new Vector3Int(37, 10, 0), null);
-                objWalls.SetTile(new Vector3Int(36, 10, 0), null);
+                walls1.SetTile(new Vector3Int(38, 10, 0), null);
+                walls1.SetTile(new Vector3Int(37, 10, 0), null);
+                walls1.SetTile(new Vector3Int(36, 10, 0), null);
 
                 //door left
                 objInfWalls.SetTile(new Vector3Int(11, 26, 0), null);
                 objInfWalls.SetTile(new Vector3Int(12, 26, 0), null);
                 objInfWalls.SetTile(new Vector3Int(13, 26, 0), null);
 
-                objWalls.SetTile(new Vector3Int(10, 25, 0), null);
-                objWalls.SetTile(new Vector3Int(11, 25, 0), null);
-                objWalls.SetTile(new Vector3Int(12, 25, 0), null);
+                walls1.SetTile(new Vector3Int(10, 25, 0), null);
+                walls1.SetTile(new Vector3Int(11, 25, 0), null);
+                walls1.SetTile(new Vector3Int(12, 25, 0), null);
             }
         }
         if (SceneManager.GetActiveScene().buildIndex == 12 && !bossDead)
@@ -375,9 +380,9 @@ public class LevelScripting : MonoBehaviour
                 objInfWalls.SetTile(new Vector3Int(34, 17, 0), null);
                 objInfWalls.SetTile(new Vector3Int(35, 17, 0), null);
 
-                objWalls.SetTile(new Vector3Int(34, 16, 0), null);
-                objWalls.SetTile(new Vector3Int(33, 16, 0), null);
-                objWalls.SetTile(new Vector3Int(32, 16, 0), null);
+                walls1.SetTile(new Vector3Int(34, 16, 0), null);
+                walls1.SetTile(new Vector3Int(33, 16, 0), null);
+                walls1.SetTile(new Vector3Int(32, 16, 0), null);
             }
         }
         if (SceneManager.GetActiveScene().buildIndex == 14)
@@ -448,9 +453,9 @@ public class LevelScripting : MonoBehaviour
         {
             if (!keyTrigger.activeInHierarchy)
             {
-                objWalls.SetTile(new Vector3Int(24, 10, 0), null);
-                objWalls.SetTile(new Vector3Int(25, 10, 0), null);
-                objWalls.SetTile(new Vector3Int(26, 10, 0), null);
+                walls1.SetTile(new Vector3Int(24, 10, 0), null);
+                walls1.SetTile(new Vector3Int(25, 10, 0), null);
+                walls1.SetTile(new Vector3Int(26, 10, 0), null);
                 walls2.SetTile(new Vector3Int(25, 11, 0), null);
                 walls2.SetTile(new Vector3Int(26, 11, 0), null);
                 walls2.SetTile(new Vector3Int(27, 11, 0), null);
@@ -488,9 +493,9 @@ public class LevelScripting : MonoBehaviour
             //Mechanic for closing the doors behind the player on lvl 14
             if (other.gameObject == doorCloseTrigger && !doorsClosed)
             {
-                objWalls.SetTile(new Vector3Int(12, 26, 0), bottomDoorTile);
-                objWalls.SetTile(new Vector3Int(12, 25, 0), bottomDoorTile);
-                objWalls.SetTile(new Vector3Int(12, 24, 0), bottomDoorTile);
+                walls1.SetTile(new Vector3Int(12, 26, 0), bottomDoorTile);
+                walls1.SetTile(new Vector3Int(12, 25, 0), bottomDoorTile);
+                walls1.SetTile(new Vector3Int(12, 24, 0), bottomDoorTile);
                 walls2.SetTile(new Vector3Int(13, 27, 0), topDoorTile);
                 walls2.SetTile(new Vector3Int(13, 26, 0), topDoorTile);
                 walls2.SetTile(new Vector3Int(13, 25, 0), topDoorTile);

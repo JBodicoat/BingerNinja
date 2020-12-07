@@ -47997,6 +47997,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PetTigerEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434322, guid: 3e0ee63d73999dd43a0e0964d6e22963, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e0ee63d73999dd43a0e0964d6e22963, type: 3}
 --- !u!4 &965031078 stripped
@@ -48284,18 +48288,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4362767424123825799, guid: 126326fb385628f48915dd9419c89498, type: 3}
   m_PrefabInstance: {fileID: 1062453978}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1062453981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1062453980}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3e7b29d3bb90f24ba1b9f88cb80d8d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1062453982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49718,7 +49710,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1568231574}
   m_Layer: 0
-  m_Name: ENEMIES (1)
+  m_Name: ENEMIES
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
