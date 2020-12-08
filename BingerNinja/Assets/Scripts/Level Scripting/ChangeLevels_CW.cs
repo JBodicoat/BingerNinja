@@ -4,14 +4,18 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
+//07/12/20 alanna & elliot, added Ninja points when you finished level
+
 public class ChangeLevels_CW : MonoBehaviour
 {
     public GameObject vendingMachine;
-
+    protected Inventory_JoaoBeijinho m_Inventory;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player")
         {
+            m_Inventory.GiveItem(ItemType.NinjaPoints, 15);
+
             int currentLevel = SceneManager.GetActiveScene().buildIndex;
             
             // Assuming the boss is on every third level
@@ -34,10 +38,5 @@ public class ChangeLevels_CW : MonoBehaviour
     public void ProgressToNextLevel()
     {
         SceneManager_JamieG.Instance.LoadNextLevel();
-    }
-
-    public void ReturnToMenu()
-    {
-        SceneManager.LoadScene("ElliottDesouza_MainMenu");
     }
 }
