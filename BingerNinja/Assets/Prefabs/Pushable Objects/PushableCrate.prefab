@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2076348194425506861}
   - component: {fileID: 2076348194425506860}
   - component: {fileID: 2076348194425506851}
-  - component: {fileID: 2076348194425506862}
+  - component: {fileID: 475150728547706663}
   - component: {fileID: 2076348194425506863}
   m_Layer: 0
   m_Name: PushableCrate
@@ -123,8 +123,8 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!61 &2076348194425506862
-BoxCollider2D:
+--- !u!60 &475150728547706663
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -146,9 +146,14 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.75, y: 0.75}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.4058423, y: 0.120155334}
+      - {x: 0.013413906, y: 0.23480225}
+      - {x: -0.39473057, y: 0.10923004}
+      - {x: -0.39939308, y: -0.19632721}
+      - {x: -0.004421711, y: -0.4127884}
+      - {x: 0.40610027, y: -0.21646118}
 --- !u!114 &2076348194425506863
 MonoBehaviour:
   m_ObjectHideFlags: 0
