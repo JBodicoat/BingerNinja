@@ -35,4 +35,9 @@ public class ChangeLevels_CW : MonoBehaviour
     {
         SceneManager_JamieG.Instance.LoadNextLevel();
     }
+
+    public void ReturnToMenu()
+    {
+        SceneManager.LoadScene("ElliottDesouza_MainMenu");
+    }
 }
