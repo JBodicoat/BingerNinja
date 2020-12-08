@@ -62,8 +62,8 @@ public class BulletMovment_SebastianMol : MonoBehaviour
                 FindObjectOfType<EffectManager_MarioFernandes>().AddEffect(new HealBuff_MarioFernandes(m_healDuration,m_HealAmount));
             }
 
-            FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damage);
-            collision.GetComponent<HitEffectElliott>().StartHitEffect(false);
+            FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damage);            
+            //TODO collision.GetComponent<HitEffectElliott>().StartHitEffect(false);
             Destroy(gameObject);
         }
 	}

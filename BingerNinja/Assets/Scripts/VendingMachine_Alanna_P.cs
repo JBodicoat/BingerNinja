@@ -52,11 +52,7 @@ public class VendingMachine_Alanna_P : MonoBehaviour
                 }
                 if (hit.collider.gameObject.transform.position == Tempura.transform.position)
                 {
-                    if (m_InvScript.HasItem(ItemType.NinjaPoints, 15))
-                    {
-                        //call tempura action
-                        m_InvScript.RemoveItem(ItemType.NinjaPoints, 15);
-                    }
+                  
                 }
                 if (hit.collider.gameObject.transform.position == Dango.transform.position)
                 {
