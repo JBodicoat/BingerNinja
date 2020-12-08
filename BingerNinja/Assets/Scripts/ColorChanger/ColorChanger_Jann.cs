@@ -9,6 +9,7 @@
 // Jann 08/11/20 - Turned it into a singleton (used by HitEffect_Elliot)
 // Elliott 20/11/2020 = made color arry public
 // Jann 22/11/20 - Refactor and added particle system support
+// Jann 08/12/20 - Single SpriteRenderers can now be updated
 
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +52,8 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
 
     private void Awake()
     {
+        base.Awake();
+        
         m_images = FindObjectsOfTypeAll<Image>();
         m_particleSystems = FindObjectsOfTypeAll<ParticleSystem>();
         m_renderers = FindObjectsOfTypeAll<Renderer>();
@@ -95,6 +98,11 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
         m_colorSwapTexture = colorSwapTex;
     }
 
+    public void UpdateColor(SpriteRenderer spriteRenderer)
+    {
+        spriteRenderer.material = m_swapMaterial;
+    }
+    
     private void ApplyColorsToSceneObjects()
     {
         foreach (Renderer renderer in m_renderers)
