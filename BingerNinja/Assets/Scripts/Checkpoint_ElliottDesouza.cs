@@ -13,7 +13,7 @@ public class Checkpoint_ElliottDesouza : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             GameObject.FindGameObjectWithTag("SaveCheckpoint").GetComponent<SaveSystem_ElliottDesouza>().m_currentCheckpoint = gameObject.transform;
-            // SaveLoadSystem_JamieG.SaveCheckpoint(gameObject.transform.position);
+            SaveLoadSystem_JamieG.SaveGameplay(gameObject.transform.position);
         }
     }
 }

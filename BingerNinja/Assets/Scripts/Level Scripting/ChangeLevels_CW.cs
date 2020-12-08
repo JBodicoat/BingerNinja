@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;
-
-//07/12/20 alanna & elliot, added Ninja points when you finished level
 
 public class ChangeLevels_CW : MonoBehaviour
 {
@@ -19,17 +16,7 @@ public class ChangeLevels_CW : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            m_Inventory.GiveItem(ItemType.NinjaPoints, 15);
-
-            int currentLevel = SceneManager.GetActiveScene().buildIndex;
-            
-            // Assuming the boss is on every third level
-            if (currentLevel % 3 == 0 || currentLevel == 20)
-            {
-                SaveLoadSystem_JamieG.SaveCheckpoint(currentLevel + 1);
-            }
-
-            if (currentLevel > 4)
+            if (SceneManager.GetActiveScene().buildIndex > 4)
             {
                 vendingMachine.SetActive(true);
             }

@@ -61,7 +61,7 @@ using UnityEngine;
     /// </summary>
     internal override void AttackBehaviour()
     {                    
-        if(m_currentEnemyType == m_enemyType.ALIEN || m_currentEnemyType == m_enemyType.NORMAL)
+        if(m_currentEnemyType == m_enemyType.ALIEN)
         {
             if (m_randAttackChance == m_RangedAttackRandomChance - 1)
             {

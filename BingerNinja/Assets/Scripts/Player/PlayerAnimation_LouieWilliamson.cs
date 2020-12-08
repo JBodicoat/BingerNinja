@@ -39,7 +39,7 @@ public class PlayerAnimation_LouieWilliamson : MonoBehaviour
         isFacingLeft = true;
 
         m_playerAnim = GetComponent<Animator>(); 
-        m_rb = GetComponent<Rigidbody2D>();
+        m_rb = GetComponentInParent<Rigidbody2D>();
     }
 
     // Update is called once per frame
