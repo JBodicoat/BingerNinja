@@ -13,7 +13,7 @@ using UnityEngine.InputSystem;
 public class LevelScripting : MonoBehaviour
 {
     #region VARIABLES
-    private bool enemyDead = false, keyUsed = false, levelBossIntro, bossDead = false, doorsClosed = false;
+    private bool enemyDead = false, keyUsed = false, levelBossIntro, bossDead = false, doorsClosed = false, cinematicDone = true;
     private GameObject levelLiftTrigger, keyTrigger, keyTriggerTwo, doorCloseTrigger, dialogBox;
     private BaseEnemy_SebastianMol boss, level2Enemy1, level2Enemy2;
     private BossDialogue_MarioFernandes bossDialogue, level2End;
@@ -22,6 +22,9 @@ public class LevelScripting : MonoBehaviour
     private int bossDialogIndex = 0;
     public int currentLevel;
     private PlayerController_JamieG controller;
+    private BossIntroCineScript_AdamG cinematics;
+    private float cinematicsTimer;
+
 
     #endregion
 
@@ -103,6 +106,7 @@ public class LevelScripting : MonoBehaviour
                     boss = GameObject.Find("Yakuza Leader").GetComponent<BaseEnemy_SebastianMol>();
                     bossDialogue = GameObject.Find("Yakuza Leader").GetComponent<BossDialogue_MarioFernandes>();
                     levelLiftTrigger = GameObject.Find("Level 12 Lift");
+                    cinematics = GameObject.Find("BossIntroCinematic").GetComponent<BossIntroCineScript_AdamG>();
                 }
                 break;
             case 13:
@@ -607,12 +611,22 @@ public class LevelScripting : MonoBehaviour
                     {
                         if (!levelBossIntro)
                         {
+                            cinematicDone = false;
+                            cinematics.PlayZoomIn();
                             bossDialogue.TriggerDialogue(0);
-                            levelBossIntro = true;
+                            
+                            cinematicsTimer++;
+                            if(cinematicsTimer >= 2.0f)
+                            {
+                                cinematics.PlayZoomOut();
+                                levelBossIntro = true;
+                                cinematicDone = true;
+                            }
+                            
                         }
                         if (boss.m_health <= 0)
                         {
-
+                            cinematics.PlayZoomIn();
                             bossDialogue.TriggerDialogue(1);
                             levelLiftTrigger.SetActive(true);
                             bossDead = true;
@@ -669,10 +683,10 @@ public class LevelScripting : MonoBehaviour
                 break;
             case 16:
                 {
-                    if (!keyTrigger.activeInHierarchy)
-                    {
-                        levelLiftTrigger.SetActive(true);
-                    }
+                    //if (!keyTrigger.activeInHierarchy)
+                    //{
+                    //    levelLiftTrigger.SetActive(true);
+                    //}
                 }
                 break;
             case 18:
