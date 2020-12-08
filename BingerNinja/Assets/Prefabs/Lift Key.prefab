@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 547836159825887446}
   m_Layer: 0
-  m_Name: Key
+  m_Name: Lift Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 7523036892860126234}
   - component: {fileID: 668287990760896392}
   m_Layer: 0
-  m_Name: Real Key
+  m_Name: Real Lift Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_inventory: {fileID: 0}
-  m_item: 0
+  m_item: 2
   m_itemQuantity: 1
 --- !u!61 &7523036892860126234
 BoxCollider2D:

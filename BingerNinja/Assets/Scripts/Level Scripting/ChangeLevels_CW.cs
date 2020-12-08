@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+// Elliott 05/12/2020 - made it so the game pauses when veningmachine is up 
 
 public class ChangeLevels_CW : MonoBehaviour
 {
@@ -18,10 +19,18 @@ public class ChangeLevels_CW : MonoBehaviour
         {
             if (SceneManager.GetActiveScene().buildIndex > 4)
             {
+                SaveLoadSystem_JamieG.SaveCheckpoint(currentLevel + 1);                
+            }
+
+            if (currentLevel > 4)
+            {
                 vendingMachine.SetActive(true);
+                Time.timeScale = 0f;
+                VendingMachineMenu_Elliott.m_gameIsPaused = true;
+
             }
             else
-            {
+            {                
                 ProgressToNextLevel();
             }
         }
@@ -29,6 +38,8 @@ public class ChangeLevels_CW : MonoBehaviour
 
     public void ProgressToNextLevel()
     {
+        Time.timeScale = 1f;
+        VendingMachineMenu_Elliott.m_gameIsPaused = false;
         SceneManager_JamieG.Instance.LoadNextLevel();
     }
 
