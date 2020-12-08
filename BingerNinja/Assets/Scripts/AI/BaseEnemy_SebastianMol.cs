@@ -17,6 +17,7 @@
 //sebastian mol 20/11/2020 spce ninja enemy logic done
 //sebastian mol 29/11/2020 creaeted spece for exlemation mark adn completed damage take for last boss
 //Elliott Desouza 30/11/2020 added a funtion (OnceLostContactEffect) which instanshates the Question mark prefab.
+// Alanna & Elliott 07/12/20 Added Ninja points when getting a critical hit (sneak attack on enemy) 
 
 using System.Collections;
 using System.Collections.Generic;
@@ -42,6 +43,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public m_enemyType m_currentEnemyType;
     public GameObject m_questionmark;
     public GameObject m_excalmationmark;
+    public Inventory_JoaoBeijinho m_inventory; 
     public float m_notifcaionOffset;
 
 
@@ -145,6 +147,9 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             {
                 PathfindTo(m_startPos);
             }
+
+            if(Vector2.Distance(transform.position, m_startPos) < 0.5f) transform.localScale = new Vector3(m_scale, transform.localScale.y, transform.localScale.z);
+
         }
         m_showquestionMarkonce = false;
     }
@@ -544,6 +549,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 Instantiate(m_dropItem, transform.position, Quaternion.identity);
             }
             gameObject.SetActive(false);
+            m_inventory.CheckDeadEnemies();
         }    
     }
 
@@ -753,6 +759,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             m_health -= damage * m_sneakDamageMultiplier;
             m_cameraShake.StartShake();
             m_HitEffectElliott.StartHitEffect(true);
+            m_inventory.GiveItem(ItemType.NinjaPoints, 1);
         }
         else
         {
@@ -810,6 +817,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         m_outOfSightTimer = m_outOfSightDeley;
         m_maxAttackRange = m_attackRange;
 
+        m_inventory = GameObject.Find("Player").GetComponent<Inventory_JoaoBeijinho>();
         m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
         m_crouchObjectLayer = ~m_crouchObjectLayer;
         m_HitEffectElliott = GetComponent<HitEffectElliott>();
