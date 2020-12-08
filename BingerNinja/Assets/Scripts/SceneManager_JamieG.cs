@@ -3,6 +3,8 @@
 //Jamie - 26/10/20 - First implemented
 //Jann  - 06/11/20 - Hooked up the savesystem and the checkpoints
 
+using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,17 +24,18 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
 
     public void ResetToCheckpoint()
     {
-        GameplayData gameplayData = SaveLoadSystem_JamieG.LoadGameplay();
-        m_checkpointOnReset = new Vector3(
-            gameplayData.m_checkpointPosition[0],
-            gameplayData.m_checkpointPosition[1],
-            gameplayData.m_checkpointPosition[2]);
-
-        m_loadLastCheckpoint = true;
-        
-        LoadCurrentLevel();
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        Debug.Log("ResetToCheckpoint() method removed");
+        // GameplayData gameplayData = SaveLoadSystem_JamieG.LoadGameplay();
+        // m_checkpointOnReset = new Vector3(
+        //     gameplayData.m_checkpointPosition[0],
+        //     gameplayData.m_checkpointPosition[1],
+        //     gameplayData.m_checkpointPosition[2]);
+        //
+        // m_loadLastCheckpoint = true;
+        //
+        // LoadCurrentLevel();
+        //
+        // SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     //This will assume that the MainMenu scene is build index 0
@@ -45,6 +48,15 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
     public void LoadNextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    
+    public void LoadLevel(int level)
+    {
+        SceneManager.LoadScene(level);
+        
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     //Reloads the current scene using its buildIndex
@@ -57,6 +69,8 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
     //It moves the player to the last checkpoint if m_loadLastCheckpoint is true
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        LoadGameState();
+        
         if (!m_loadLastCheckpoint)
         {
             return;
@@ -70,5 +84,41 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
         m_player.transform.position = m_checkpointOnReset;
 
         m_loadLastCheckpoint = false;
+    }
+
+    public void SaveGameState()
+    {
+        GameObject player = GameObject.Find("Player");
+        if (player != null)
+        {
+            Inventory_JoaoBeijinho inventory = player.GetComponent<Inventory_JoaoBeijinho>();
+            SaveLoadSystem_JamieG.SaveInventory(inventory);
+            
+            SaveLoadSystem_JamieG.SaveGameplay(
+                SceneManager.GetActiveScene().buildIndex,
+                GameObject.FindGameObjectsWithTag("Enemy"),
+                new GameObject[0]//GameObject.FindGameObjectsWithTag("Door")
+            );
+        }
+    }
+    
+    public void LoadGameState()
+    {
+        GameplayData gameplayData = SaveLoadSystem_JamieG.LoadGameplay();
+        
+        // Load enemies
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (var enemy in enemies)
+        {
+            if (!gameplayData.m_enemyIds.Contains(enemy.name))
+            {
+                enemy.SetActive(false);
+            }
+        }
+    }
+    
+    private void OnApplicationQuit()
+    {
+        Instance.SaveGameState();
     }
 }
