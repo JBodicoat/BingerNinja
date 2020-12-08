@@ -158,7 +158,7 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     {
         if (m_currentEnemyType == m_enemyType.PETTIGER || m_currentEnemyType == m_enemyType.TADASHI)
         {
-            Debug.Log(collision.gameObject.tag);
+
             Rigidbody2D rijy = GetComponent<Rigidbody2D>();
             if (rijy.bodyType == RigidbodyType2D.Dynamic)
             {
@@ -175,13 +175,15 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
                     StunEnemyWithDeleyFunc(m_afterAttackDeley);
                 }
 
-                if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+                if(collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
                 {
-                    if (m_currentEnemyType == m_enemyType.PETTIGER || m_tadashiPhase == 1)
+                    if(m_currentEnemyType == m_enemyType.PETTIGER || m_tadashiPhase == 1)
                         FindObjectOfType<EffectManager_MarioFernandes>().AddEffect
-                                (new SpeedEffect_MarioFernandes(1, 0)); //change thesey to not be magic numbers
+							    (new SpeedEffect_MarioFernandes(1, 0)); //change thesey to not be magic numbers
                 }
             }
+
+            
         }
     }
 

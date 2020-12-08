@@ -4,10 +4,11 @@
 //Elliott 31/10/2020 - can now select an item which brings up a discription about said item, also adds item to inventory when item is brought
 //Elliott 06/10/2020 - added a check for the one time buy items, made a DeselectAll fuction.
 //Elliott 09/10/2020 - changed the color of the text when item is brought changes, give item now uses enum.
-// Alanna & Elliott 07/12/20- Merged Alanna and Elliotts vending machine code, made the UI work with buttons and formatting, setting ninja points to yen.
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class VendingMachineMenu_Elliott : MonoBehaviour
 {
@@ -22,7 +23,6 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
     private bool PurchasedCookie = false;
     private bool PurchasedNoodle = false;
     public ChangeLevels_CW levelLift;
-    public Text Yen;
     /// <summary>
     /// shuts all decriptions and opens up the one selected
     /// </summary>
@@ -59,42 +59,42 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
 
     public void PurchaseUpgrade()
     {
-        if (SelectPizza.activeInHierarchy && Inventory.HasItem(ItemType.NinjaPoints, 15))
+        if (SelectPizza.activeInHierarchy /*&& ninja point >= 15*/)
         {
-            Debug.Log("Tempura");  
-            Inventory.RemoveItem(ItemType.NinjaPoints, 15);
-            Inventory.GiveItem(ItemType.Tempura, 1); 
+            Debug.Log("Tempura");
+            //take away ninja points      
+            Inventory.GiveItem(ItemType.Tempura, 1);
         }
-        else if (SelectCookie.activeInHierarchy && !PurchasedCookie && Inventory.HasItem(ItemType.NinjaPoints, 50)) 
+        else if (SelectCookie.activeInHierarchy && !PurchasedCookie /*&& ninja point >= 50*/)
         {
             Debug.Log("Dango");
-            Inventory.RemoveItem(ItemType.NinjaPoints, 50);
+            //take away ninja points
             Inventory.GiveItem(ItemType.Dango, 1);
             CookieColor.color = Color.red;
             PurchasedCookie = true;
- 
+            
         }
-        else if (SelectSake.activeInHierarchy && Inventory.HasItem(ItemType.NinjaPoints,25))
+        else if (SelectSake.activeInHierarchy /*&& ninja point >= 25*/)
         {
             Debug.Log("sake");
-            Inventory.RemoveItem(ItemType.NinjaPoints, 25);
-            Inventory.GiveItem(ItemType.Sake, 1);
+            //take away ninja points
+            Inventory.GiveItem(ItemType.Sake,1);
         }
-        else if (SelectNoodle.activeInHierarchy && !PurchasedNoodle && Inventory.HasItem(ItemType.NinjaPoints, 50)) /*&& ninja point >= 50*/
+        else if (SelectNoodle.activeInHierarchy && !PurchasedNoodle /*&& ninja point >= 50*/)
         {
             Debug.Log("noodles");
-            Inventory.RemoveItem(ItemType.NinjaPoints, 50);
-            Inventory.GiveItem(ItemType.Noodles, 1);
+            //take away ninja points
+            Inventory.GiveItem(ItemType.Noodles,1);
             NoodleColor.color = Color.red;
             PurchasedNoodle = true;
-
         }
     }
 
     void Start()
     {
         Inventory = GameObject.FindObjectOfType<Inventory_JoaoBeijinho>();
-        Inventory.GiveItem(ItemType.NinjaPoints, 40);
+        //Color newcolor = Color.red;
+        //CookieColor.color = Color.red;
     }
 
     /// <summary>
@@ -102,12 +102,10 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
     /// </summary>
     void Update()
     {
-        Yen.text = "Yen: " + Inventory.ItemValue(ItemType.NinjaPoints).ToString();
-
         var gamepad = Keyboard.current;
-
         if (gamepad == null)
             return;
+
         if (gamepad.digit1Key.wasPressedThisFrame)
         {
             Pizza();

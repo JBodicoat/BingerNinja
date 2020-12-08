@@ -22,7 +22,6 @@ public class Node
     public float m_g = 0, m_h = 0, m_f = 0;
     public bool m_traversable;
     public Vector2Int m_pos;
-   
     public Node(bool trav, Vector2Int newPos) { m_traversable = trav; m_pos = newPos; }
     public void ResetData()
     {
@@ -43,7 +42,6 @@ public class Pathfinder_SebastianMol : MonoBehaviour
     Node[,] m_allTiles;
     public Tile[] m_wallTiles;
     public Tilemap m_tileMap;
-    int count = 0;
 
     [Header("testing variables")]
     [Tooltip("press this button to start path finding")]
@@ -183,18 +181,9 @@ public class Pathfinder_SebastianMol : MonoBehaviour
     /// <returns></returns>
     private List<Node> AddNodeToPath(Node n, List<Node> path)
     {
-        if (count<60)
-        {
-            count++;
-            path.Add(n);
-            if (n.m_parentNode != null) AddNodeToPath(n.m_parentNode, path);
-            return path;
-        }
-        else
-        {
-            count = 0;
-            return path;
-        }
+        path.Add(n);
+        if (n.m_parentNode != null) AddNodeToPath(n.m_parentNode, path);
+        return path;
     }
 
     /// <summary>

@@ -1,6 +1,5 @@
 ﻿//sebastian mol 14/11/2020 script created
 //sebastian mol 22/11/2020 charge attack created
-//Jann          08/12/2020 Added projectile colour change
 
 using System;
 using System.Collections;
@@ -88,7 +87,6 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
                 GameObject projectile = Instantiate(m_projectile, transform.position, Quaternion.Euler(new Vector3(dir.x, dir.y, 0)));
                 projectile.transform.localScale += new Vector3(sizeIncreaseX, sizeIncreaseY, 0);
                 projectile.GetComponent<BulletMovment_SebastianMol>().m_direction = (m_playerTransform.position - transform.position).normalized;
-                ColorChanger_Jann.Instance.UpdateColor(projectile.GetComponent<SpriteRenderer>());
                 m_attackTimer = m_shootDeley;
                 return true;
             }

@@ -18,7 +18,6 @@
 // Louie 17/11/2020 - Added Weapon UI integration
 // Mario 20/11/2020 - Subtration of ammunition and added chargedattack modifier
 // Mario 28/11/2020 - item drop using "Q", now it stores the prefabs with him and childs
-// Jann  08/12/2020 - Added projectile colour change
 
 using System.Collections;
 using System.Collections.Generic;
@@ -131,8 +130,6 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
                 Destroy(m_currentWeapon[m_weaponsIndex].gameObject);
                 m_currentWeapon[m_weaponsIndex] = null;
             }
-            
-            ColorChanger_Jann.Instance.UpdateColor(projectile.GetComponent<SpriteRenderer>());
         }
         else
         {

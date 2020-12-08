@@ -6,12 +6,10 @@
 //Jann  - 20/11/20 - Hooked up the settingsmenu
 //Jann  - 23/11/20 - QA improvements
 //Jann  - 25/11/20 - Caching implemented
-//Jann  - 28/11/20 - Added new gameplay data saving
 
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
@@ -20,7 +18,6 @@ public static class SaveLoadSystem_JamieG
     private const string SettingsFile = "/Settings.save";
     private const string InventoryFile = "/Inventory.save";
     private const string GameplayFile = "/Gameplay.save";
-    private const string CheckpointFile = "/Checkpoint.save";
 
     private static SaveSystemCache m_Cache = new SaveSystemCache();
 
@@ -41,17 +38,11 @@ public static class SaveLoadSystem_JamieG
     }
 
     // Saves the current state of the game into the Gameplay.save file
-    public static void SaveGameplay(int currentLevel, GameObject[] enemies, GameObject[] doors)
+    // Only saves the last checkpoint position at the moment
+    public static void SaveGameplay(Vector3 checkpointPosition)
     {
-        GameplayData gameplayData = new GameplayData(currentLevel, enemies, doors);
+        GameplayData gameplayData = new GameplayData(checkpointPosition);
         SaveToFile(GameplayFile, gameplayData);
-    }
-    
-    // Saves the current checkpoint (after a boss level)
-    public static void SaveCheckpoint(int lastCheckpointLevel)
-    {
-        CheckpointData checkpointData = new CheckpointData(lastCheckpointLevel);
-        SaveToFile(CheckpointFile, checkpointData);
     }
 
     #endregion
@@ -61,7 +52,7 @@ public static class SaveLoadSystem_JamieG
     // Returns information from the Settings.save file or an empty struct if the file can't be found
     public static SettingsData LoadSettings()
     {
-        if (m_Cache.IsCached(SettingsFile))
+        if (m_Cache.isCached(SettingsFile))
         {
             return (SettingsData) m_Cache.GetData(SettingsFile);
         }
@@ -84,9 +75,9 @@ public static class SaveLoadSystem_JamieG
     // Returns the items from the Inventory.save file or an empty struct if the file can't be found
     public static InventoryData LoadInventory()
     {
-        if (m_Cache.IsCached(InventoryFile))
+        if (m_Cache.isCached(InventoryFile))
         {
-            return (InventoryData) m_Cache.GetData(InventoryFile);
+            return (InventoryData) m_Cache.GetData(SettingsFile);
         }
         
         object data = LoadFromFile(InventoryFile);
@@ -102,9 +93,9 @@ public static class SaveLoadSystem_JamieG
     // Returns the gameplay data from the Gameplay.save file or an empty struct if the file can't be found
     public static GameplayData LoadGameplay()
     {
-        if (m_Cache.IsCached(GameplayFile))
+        if (m_Cache.isCached(GameplayFile))
         {
-            return (GameplayData) m_Cache.GetData(GameplayFile);
+            return (GameplayData) m_Cache.GetData(SettingsFile);
         }
         
         object data = LoadFromFile(GameplayFile);
@@ -114,24 +105,6 @@ public static class SaveLoadSystem_JamieG
         }
 
         Debug.Log("Loading gameplayData didn't return object of type GameplayData");
-        return default;
-    }
-    
-    // Returns the gameplay data from the Gameplay.save file or an empty struct if the file can't be found
-    public static CheckpointData LoadCheckpoint()
-    {
-        if (m_Cache.IsCached(CheckpointFile))
-        {
-            return (CheckpointData) m_Cache.GetData(CheckpointFile);
-        }
-        
-        object data = LoadFromFile(CheckpointFile);
-        if (data is CheckpointData checkpointData)
-        {
-            return checkpointData;
-        }
-
-        Debug.Log("Loading checkpointData didn't return object of type CheckpointData");
         return default;
     }
 
@@ -182,13 +155,13 @@ public static class SaveLoadSystem_JamieG
     }
 }
 
-internal class SaveSystemCache
+public class SaveSystemCache
 {
     private List<CacheData> m_cacheData = new List<CacheData>();
 
     public void Cache(string type, object data)
     {
-        if (IsCached(type))
+        if (isCached(type))
         {
             int index = m_cacheData.IndexOf(m_cacheData.Find(c => c.type.Equals(type)));
             m_cacheData[index] = new CacheData(type, data);
@@ -204,7 +177,7 @@ internal class SaveSystemCache
         return m_cacheData.Find(data => data.type.Equals(type)).data;
     }
 
-    public bool IsCached(string type)
+    public bool isCached(string type)
     {
         return m_cacheData.Find(data => data.type.Equals(type)).data != null;
     }
@@ -228,40 +201,11 @@ internal class SaveSystemCache
 [Serializable]
 public struct GameplayData
 {
-    public int m_currentLevel;
-    public string[] m_enemyIds;
-    public string[] m_doorIds;
+    public float[] m_checkpointPosition;
 
-    public GameplayData(int currentLevel, GameObject[] enemies, GameObject[] doors)
+    public GameplayData(Vector3 checkpointPosition)
     {
-        m_currentLevel = currentLevel;
-
-        int count = enemies.Count(e => e.activeInHierarchy);
-        m_enemyIds = new string[count];
-        for (int i = 0; i < enemies.Length; i++)
-        {
-            if (enemies[i].activeInHierarchy)
-            {
-                m_enemyIds[i] = enemies[i].name;   
-            }
-        }
-        
-        m_doorIds = new string[doors.Length];
-        for (int i = 0; i < doors.Length; i++)
-        {
-            m_doorIds[i] = doors[i].name;
-        }
-    }
-};
-
-[Serializable]
-public struct CheckpointData
-{
-    public int m_lastCheckpointLevel;
-
-    public CheckpointData(int lastCheckpointLevel)
-    {
-        m_lastCheckpointLevel = lastCheckpointLevel;
+        m_checkpointPosition = new[] {checkpointPosition.x, checkpointPosition.y, checkpointPosition.z};
     }
 };
 

@@ -43,11 +43,9 @@ public class PauseMenuManager_ElliottDesouza : MonoBehaviour
 
     public void ExitToMainMenu()
     {
-        SceneManager_JamieG.Instance.SaveGameState();
-        
         SceneManager_JamieG.Instance.LoadMainMenu();
     }
-
+   
     void Start()
     {
         m_openSettings = false;
