@@ -8,6 +8,8 @@
 // Mário 13/11/2020 - Solve "," bug and stop AI when in dialog
 // Jann  07/11/2020 - Added a quick check to swap the dialogue file based on the settings
 // Jann  25/11/2020 - Added in-game language change
+// Louie 28/11/2020 - Added weapon ui animation code
+// Mário 29/11/2020 - PassDialogue using controller
 // Louie 01/12/2020 - Weapon UI animations
 
 using System;
@@ -25,7 +27,6 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
 {
     public Text m_nameText;
     public Text m_dialogueText;
-
     public float m_TextAnimationSpeed = 0;
 
     private Queue<string> m_sentences;
@@ -215,6 +216,8 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
+        
         playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
         m_wpnUI = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
         m_sentences = new Queue<string>();
@@ -223,6 +226,13 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
 
 
         LoadLanguageFile();
+    }
+
+    private void Update() {
+        if(m_nameText.transform.parent.gameObject.active && playerControllerScript.m_passDialogue.triggered)
+        {
+            DisplayNextSentence();
+        }
     }
 }
 

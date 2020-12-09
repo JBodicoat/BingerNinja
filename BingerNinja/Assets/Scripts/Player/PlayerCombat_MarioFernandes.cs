@@ -18,11 +18,15 @@
 // Louie 17/11/2020 - Added Weapon UI integration
 // Mario 20/11/2020 - Subtration of ammunition and added chargedattack modifier
 // Mario 28/11/2020 - item drop using "Q", now it stores the prefabs with him and childs
+// Mario 29/11/2020 - contorller implementation
+// Mario 05/12/2020 - full contorller detection and range suport
+// Mario 06/12/2020 - Touchscreen suport
 // Jann  08/12/2020 - Added projectile colour change
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 public enum FoodType
 {
@@ -102,18 +106,52 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         m_strenght = 1;
     }
 
-    void Attack(float chargedModifier = 1)
+    void Attack(InputAction cx, float chargedModifier = 1)
     {
-        m_animationScript.TriggerAttackAnim();
-
+        //m_animationScript.TriggerAttackAnim();        
+            
+        if (EventSystem.current.currentSelectedGameObject != null && Application.isMobilePlatform)
+        {
+        return;
+        }else
         if(m_currentWeapon[m_weaponsIndex].IsRanged())
         {
+            Vector3 m_direction;
+
+            if(Application.isMobilePlatform)
+            {
+                m_direction = Camera.main.ScreenToWorldPoint(Controller.m_aim.ReadValue<Vector2>());
+                
+                m_direction = m_direction - transform.position;
+
+            }else          
+            if(Gamepad.current != null)
+            {
+            if(Controller.m_aim.ReadValue<Vector2>() != Vector2.zero)
+            {
+                m_direction = Controller.m_aim.ReadValue<Vector2>();
+            }else
+            return;
+
+            }else
+            {
+            
+            m_direction = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        
+            m_direction = m_direction - transform.position;
+
+            
+            }
+            m_direction.z = 0; 
+
+            m_direction.Normalize();
             //TODO undo this comment
             //m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
             GameObject projectile = Instantiate(m_projectile, transform.position, transform.rotation);
             projectile.GetComponent<Projectile_MarioFernandes>().m_dmg = (int)(m_currentWeapon[m_weaponsIndex].dmg * m_strenght * chargedModifier);
             projectile.GetComponent<Projectile_MarioFernandes>().m_distractTime = m_currentWeapon[m_weaponsIndex].m_distractTime;
             projectile.GetComponent<SpriteRenderer>().sprite = m_currentWeapon[m_weaponsIndex].m_mySprite;
+            projectile.GetComponent<Projectile_MarioFernandes>().m_direction = m_direction;
             --m_currentWeapon[m_weaponsIndex].m_ammunition;
             m_WeaponUI.setAmmo(-1);
 
@@ -160,6 +198,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             }
 
             //EnemyDetection.enabled = false;        
+        
     }
 
     public void Eat()
@@ -208,6 +247,14 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
         }
     }
+
+    public void ChangeWeapon() {
+        if(m_weaponsIndex == 1)
+             m_weaponsIndex = 0;
+             else
+             m_weaponsIndex = 1;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -233,10 +280,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         // 1 - Ranged weapon
          if(Controller.m_switchWeapons.triggered)
          {
-             if(m_weaponsIndex == 1)
-             m_weaponsIndex = 0;
-             else
-             m_weaponsIndex = 1;
+             ChangeWeapon();             
 
              print(m_currentWeapon[m_weaponsIndex]);
          }
@@ -251,13 +295,13 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
                 {    
                 m_timeSinceLastAttack = m_attackDelay;
                 
-                Attack();   
+                Attack( Controller.m_attackTap);   
                 } else
                 if( Controller.m_attackSlowTap.triggered)              
                 {    
                 m_timeSinceLastAttack = m_attackDelay;
                 
-                Attack(m_chargedModifier);   
+                Attack(Controller.m_attackSlowTap, m_chargedModifier);   
                } 
             }          
         }

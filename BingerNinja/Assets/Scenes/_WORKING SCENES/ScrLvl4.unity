@@ -289,6 +289,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 126326fb385628f48915dd9419c89498, type: 3}
+--- !u!114 &182338325 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4362767424123825805, guid: 126326fb385628f48915dd9419c89498, type: 3}
+  m_PrefabInstance: {fileID: 182338324}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820718971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3fdf7d1a1c091541ab04a515efb546b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &248658484
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,9 +1008,65 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1021836104, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1021836104, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1021836104, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1021836104, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 182338325}
+    - target: {fileID: 1021836104, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerCombat_MarioFernandes, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1021836104, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeWeapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 1021836104, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1035174119, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_RootOrder
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1628195394, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1628195394, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1628195394, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1628195394, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 182338325}
+    - target: {fileID: 1628195394, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerCombat_MarioFernandes, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1628195394, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Eat
+      objectReference: {fileID: 0}
+    - target: {fileID: 1628195394, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1799900213, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_RootOrder
@@ -23479,7 +23546,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6674240104884466795, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
       propertyPath: m_Tiles.Array.data[2].second.m_TileSpriteIndex
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6674240104884466795, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
       propertyPath: m_Tiles.Array.data[4].second.m_TileIndex
@@ -24299,12 +24366,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6674240104884466795, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[14].m_RefCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6674240104884466795, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[14].m_Data
       value: 
-      objectReference: {fileID: 1863452873606109398, guid: 7eec9656956eec34baf6f874b2f50d24, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 6674240104884466795, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
       propertyPath: m_Tiles.Array.data[45].first.x
       value: 23
@@ -24339,12 +24406,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6674240104884466795, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[15].m_RefCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6674240104884466795, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[15].m_Data
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1863452873606109398, guid: 7eec9656956eec34baf6f874b2f50d24, type: 3}
     - target: {fileID: 6674240104884466795, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[16].m_RefCount
       value: 2
