@@ -748,8 +748,8 @@ Canvas:
   m_GameObject: {fileID: 1978063022}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 1627522622}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -848,6 +848,14 @@ PrefabInstance:
       propertyPath: m_Text
       value: Continue
       objectReference: {fileID: 0}
+    - target: {fileID: 959321696, guid: 14cb30499ff202a4b9d2b516a51ad2f2, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: c1053204808f5a34882376a3ed22c766, type: 3}
+    - target: {fileID: 5707122397924234152, guid: 14cb30499ff202a4b9d2b516a51ad2f2, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: c1053204808f5a34882376a3ed22c766, type: 3}
     - target: {fileID: 5707122398059885782, guid: 14cb30499ff202a4b9d2b516a51ad2f2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -936,6 +944,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 5707122398255895861, guid: 14cb30499ff202a4b9d2b516a51ad2f2, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: c1053204808f5a34882376a3ed22c766, type: 3}
+    - target: {fileID: 5707122398549936005, guid: 14cb30499ff202a4b9d2b516a51ad2f2, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: c1053204808f5a34882376a3ed22c766, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cb30499ff202a4b9d2b516a51ad2f2, type: 3}
 --- !u!1001 &5824345605721969732
@@ -949,6 +965,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5824345605072921175, guid: 7e26e30cdc3cbb44d8ff0bd2c12e43c5, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: c1053204808f5a34882376a3ed22c766, type: 3}
     - target: {fileID: 5824345605457200372, guid: 7e26e30cdc3cbb44d8ff0bd2c12e43c5, type: 3}
       propertyPath: m_Name
       value: Settings
@@ -1041,6 +1061,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5824345605563955899, guid: 7e26e30cdc3cbb44d8ff0bd2c12e43c5, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: c1053204808f5a34882376a3ed22c766, type: 3}
     - target: {fileID: 5824345605723937431, guid: 7e26e30cdc3cbb44d8ff0bd2c12e43c5, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0.215
@@ -1061,10 +1085,26 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5824345605934615689, guid: 7e26e30cdc3cbb44d8ff0bd2c12e43c5, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: c1053204808f5a34882376a3ed22c766, type: 3}
+    - target: {fileID: 5824345606532110415, guid: 7e26e30cdc3cbb44d8ff0bd2c12e43c5, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: c1053204808f5a34882376a3ed22c766, type: 3}
     - target: {fileID: 5824345606649097142, guid: 7e26e30cdc3cbb44d8ff0bd2c12e43c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1247778952}
+    - target: {fileID: 5824345606649097143, guid: 7e26e30cdc3cbb44d8ff0bd2c12e43c5, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: c1053204808f5a34882376a3ed22c766, type: 3}
+    - target: {fileID: 5824345606697522163, guid: 7e26e30cdc3cbb44d8ff0bd2c12e43c5, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: c1053204808f5a34882376a3ed22c766, type: 3}
     - target: {fileID: 8431430982605069870, guid: 7e26e30cdc3cbb44d8ff0bd2c12e43c5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
