@@ -147,6 +147,9 @@ public class AudioManager_LouieWilliamson : MonoBehaviour
             case 20:
                 PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level7);
                 break;
+            case 21:
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_MainMenu);
+                break;
             default:
                 break;
         }

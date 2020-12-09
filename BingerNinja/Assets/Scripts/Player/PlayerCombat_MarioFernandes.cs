@@ -21,6 +21,7 @@
 // Mario 29/11/2020 - contorller implementation
 // Mario 05/12/2020 - full contorller detection and range suport
 // Mario 06/12/2020 - Touchscreen suport
+// Jann  08/12/2020 - Added projectile colour change
 
 using System.Collections;
 using System.Collections.Generic;
@@ -152,7 +153,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             projectile.GetComponent<SpriteRenderer>().sprite = m_currentWeapon[m_weaponsIndex].m_mySprite;
             projectile.GetComponent<Projectile_MarioFernandes>().m_direction = m_direction;
             --m_currentWeapon[m_weaponsIndex].m_ammunition;
-            
+            m_WeaponUI.setAmmo(-1);
 
             if(m_currentWeapon[m_weaponsIndex].m_foodType == FoodType.DANGO)
             {
@@ -168,6 +169,8 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
                 Destroy(m_currentWeapon[m_weaponsIndex].gameObject);
                 m_currentWeapon[m_weaponsIndex] = null;
             }
+            
+            ColorChanger_Jann.Instance.UpdateColor(projectile.GetComponent<SpriteRenderer>());
         }
         else
         {
@@ -328,7 +331,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             m_currentWeapon[1] = collision.GetComponent<WeaponsTemplate_MarioFernandes>();
             collision.gameObject.SetActive(false);
             collision.transform.parent = transform;
-            m_WeaponUI.WeaponChange(m_currentWeapon[1].m_foodType, true, 5);
+            m_WeaponUI.WeaponChange(m_currentWeapon[1].m_foodType, true, m_currentWeapon[1].m_ammunition);
             m_WeaponUI.SetWeaponsUIAnimation(true);
         }
     }

@@ -247,13 +247,13 @@ AnimatorStateMachine:
     m_Position: {x: 1090, y: 60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5977469123435858100}
-    m_Position: {x: 330, y: -190, z: 0}
+    m_Position: {x: 440, y: -140, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6045856008881382368}
     m_Position: {x: 50, y: -30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7522754260834935999}
-    m_Position: {x: 330, y: -110, z: 0}
+    m_Position: {x: 240, y: -100, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -9037671745670904988}
@@ -543,6 +543,31 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &1206809374305406486
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: isCrouching
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -2068894950383018085}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0.03311276
+  m_ExitTime: 0.9958609
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &1402127327064576200
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -759,7 +784,8 @@ AnimatorState:
   m_Name: Binger_Crawl
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions: []
+  m_Transitions:
+  - {fileID: 1206809374305406486}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0

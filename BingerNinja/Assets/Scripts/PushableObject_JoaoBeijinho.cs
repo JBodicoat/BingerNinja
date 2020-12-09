@@ -4,6 +4,7 @@
 //Joao Beijinho 30/10/2020 - Created m_isClose bool so that the player can only grab when its colliding
 //Joao Beijinho 02/10/2020 - Replaced m_isClose with m_isGrabbed, removed collider.trigger and put collider.enable
 //Joao Beijinho 09/11/2020 - Replaced tags with the tags in the Tags_JoaoBeijinho script
+//Joao Beijinho 06/12/2020 - Changed m_collider type to Collider2D
 
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ public class PushableObject_JoaoBeijinho : MonoBehaviour
     protected PlayerController_JamieG m_playerControllerScript;
 
     private Transform m_playerTransform;
-    private BoxCollider2D m_collider; 
+    private Collider2D m_collider; 
     
     public bool m_canGrab = false;
     public bool m_isGrabbed = false;
@@ -26,7 +27,7 @@ public class PushableObject_JoaoBeijinho : MonoBehaviour
     {
         m_playerTransform = GameObject.Find("Player").transform;
         m_playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
-        m_collider = GetComponent<BoxCollider2D>();
+        m_collider = GetComponent<Collider2D>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

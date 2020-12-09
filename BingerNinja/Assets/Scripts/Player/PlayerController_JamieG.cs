@@ -28,6 +28,8 @@ public class PlayerController_JamieG : MonoBehaviour
     public InputAction m_attackSlowTap;
     public InputAction m_aim;
     public InputAction m_roll;
+    public InputAction m_changeLevel;
+
     public InputAction m_switchWeapons;
     public InputAction m_dropWeapons;
     public InputAction m_passDialogue;
@@ -83,6 +85,7 @@ public class PlayerController_JamieG : MonoBehaviour
         m_dropWeapons.Enable();
         m_aim.Enable();
         m_passDialogue.Enable();
+        m_changeLevel.Enable();
     }
 
     public void OnDisable()
@@ -98,6 +101,7 @@ public class PlayerController_JamieG : MonoBehaviour
         m_dropWeapons.Disable();
         m_aim.Disable();
         m_passDialogue.Disable();
+        m_changeLevel.Disable();
     }
     #endregion
 

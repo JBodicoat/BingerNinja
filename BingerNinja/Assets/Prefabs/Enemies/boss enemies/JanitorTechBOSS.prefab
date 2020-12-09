@@ -92,11 +92,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be6def35fff5c7d48811166bd65116d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_baseDamage: 1
+  m_baseDamage: 20
   m_percentageChanceOfAffect: 0.5
   m_poisionDamage: 1
   m_slowDebuff: 0.5
   m_affectTime: 5
+  m_HitEffectElliott: {fileID: 0}
 --- !u!1 &1488481114249787428
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,8 +427,9 @@ MonoBehaviour:
   m_playerDetected: 0
   m_currentState: 0
   m_currentEnemyType: 0
-  m_questionmark: {fileID: 3783213463638213574, guid: 40acaa4f65aeeaf44aad51d83f2decd0, type: 3}
-  m_excalmationmark: {fileID: 6264025296151744314, guid: a776e246d259fa04188f7ffb2c9d5113, type: 3}
+  m_questionmark: {fileID: 3783213463638213574, guid: 049ec75e55b7e8f4da5d740b5243440f, type: 3}
+  m_excalmationmark: {fileID: 6264025296151744314, guid: d36af638ed0d3714ba36621302ee691a, type: 3}
+  m_notifcaionOffset: 0.2
   m_dropItem: {fileID: 0}
   m_health: 100
   m_speed: 1

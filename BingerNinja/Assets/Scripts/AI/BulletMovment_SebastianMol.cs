@@ -46,7 +46,8 @@ public class BulletMovment_SebastianMol : MonoBehaviour
 	{
 		if(collision.tag == "Player")
         {
-            if(m_dosePoisonDamage)
+            collision.GetComponent<HitEffectElliott>().StartHitEffect(false);
+            if (m_dosePoisonDamage)
             {
                 int rand = Random.Range(0, m_poisonDamageChance);
                 if(rand == m_poisonDamageChance) FindObjectOfType<EffectManager_MarioFernandes>().AddEffect(new PoisionDefuff_MarioFernandes(m_poisionDamage, m_posionDamageTime));
@@ -62,8 +63,8 @@ public class BulletMovment_SebastianMol : MonoBehaviour
                 FindObjectOfType<EffectManager_MarioFernandes>().AddEffect(new HealBuff_MarioFernandes(m_healDuration,m_HealAmount));
             }
 
-            FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damage);
-            collision.GetComponent<HitEffectElliott>().StartHitEffect(false);
+            FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damage);            
+            //TODO collision.GetComponent<HitEffectElliott>().StartHitEffect(false);
             Destroy(gameObject);
         }
 	}
