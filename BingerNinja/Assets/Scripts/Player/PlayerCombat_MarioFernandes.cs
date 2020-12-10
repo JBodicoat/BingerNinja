@@ -22,6 +22,7 @@
 // Mario 05/12/2020 - full contorller detection and range suport
 // Mario 06/12/2020 - Touchscreen suport
 // Jann  08/12/2020 - Added projectile colour change
+// Alanna 10/12/20 added sound effects for Melee hit, ranged hit and eating
 
 using System.Collections;
 using System.Collections.Generic;
@@ -51,7 +52,7 @@ public enum WeaponType
 /// This class stores the current weapon on the player and make im abel to use it 
 ///<summary>
 public class PlayerCombat_MarioFernandes : MonoBehaviour
-{
+{ 
     private WeaponUI_LouieWilliamson m_WeaponUI;
     private PlayerAnimation_LouieWilliamson m_animationScript;
     public GameObject m_projectile = null;
@@ -145,6 +146,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             m_direction.z = 0; 
 
             m_direction.Normalize();
+            PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_PlayerThrow); //added by alanna 10/12/20
             //TODO undo this comment
             //m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
             GameObject projectile = Instantiate(m_projectile, transform.position, transform.rotation);
@@ -175,7 +177,8 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         else
         {
             //TODO uncomment this
-           // m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
+            // m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
+            PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_PlayerAttack); //added by alanna 10/12/20
 
             float distanceToClosestsEnemy = Mathf.Infinity;
                 GameObject CloseEnemy = null;
@@ -203,7 +206,8 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
     public void Eat()
     {
-        m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Eating);
+        PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_Eating); //aaded by alanna 10/12/20
+       // m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Eating); old SFX?
 
         if (m_currentWeapon[m_weaponsIndex])
         {

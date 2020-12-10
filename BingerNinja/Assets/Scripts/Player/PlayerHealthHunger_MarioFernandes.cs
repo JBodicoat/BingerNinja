@@ -5,6 +5,7 @@
 // Mário 18/10/2020 - Add max health increase/decrease functions
 // Elliott 19/10/2020 - Added respawn on Death
 // Elliott 21/11/2020 - Added death effect and pause input
+//Alanna 10/12/2020 added sound effects for player death and damage to player
 
 using System.Collections;
 using System.Collections.Generic;
@@ -45,11 +46,13 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
     public void Hit(float amount)
     {
         m_currentHealth -= amount;
+       
         if (m_currentHealth < 0)
             m_currentHealth = 0;
 
         if(m_currentHealth == 0)
-        {            
+        {
+            PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_Death);
             m_DeathEffect.SpriteFlash();
             //Invoke("Die", 2f);
             Die();
