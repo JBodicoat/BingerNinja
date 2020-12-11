@@ -1,6 +1,7 @@
 ﻿//sebastian mol 14/11/2020 script created
 //sebastian mol 22/11/2020 charge attack created
 //Jann          08/12/2020 Added projectile colour change
+//Louie         11/12/2020 Added enemy attack animation function call
 
 using System;
 using System.Collections;
@@ -28,7 +29,7 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
     /// <returns>weather the attack has been done</returns>
     public static bool MelleAttack(ref float m_attackTimer, bool m_hasChargeAttack, int m_chargAttackPosibility, 
         Action QuickAttack, Action ChargeAttack, Action StunAfterAttack,
-        m_enemyType m_currentEnemyType, float m_hitSpeed, bool hasRangedAttack = false)
+        m_enemyType m_currentEnemyType, float m_hitSpeed, Enemy_Animation_LouieWilliamson enemyAnim, bool hasRangedAttack = false)
     {
         if (m_attackTimer <= 0)
         {
@@ -60,6 +61,7 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
         else
         {
             m_attackTimer -= Time.deltaTime;
+            enemyAnim.AttackAnimation();
             return false;
         }
     }
@@ -74,7 +76,7 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
     /// <param name="m_projectile"></param>
     /// <param name="m_shootDeley"></param>
     /// <returns>weather the attack has been done</returns>
-    public static bool RangedAttack(Transform m_playerTransform, Transform transform, GameObject m_aimer, 
+    public static bool RangedAttack(Enemy_Animation_LouieWilliamson enemyAnim, Transform m_playerTransform, Transform transform, GameObject m_aimer, 
         ref float m_attackTimer, GameObject m_projectile, float m_shootDeley,float sizeIncreaseX = 0, float sizeIncreaseY = 0)
     {
         if (m_playerTransform != null)
@@ -90,6 +92,7 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
                 projectile.GetComponent<BulletMovment_SebastianMol>().m_direction = (m_playerTransform.position - transform.position).normalized;
                 ColorChanger_Jann.Instance.UpdateColor(projectile.GetComponent<SpriteRenderer>());
                 m_attackTimer = m_shootDeley;
+                enemyAnim.AttackAnimation();
                 return true;
             }
             else
