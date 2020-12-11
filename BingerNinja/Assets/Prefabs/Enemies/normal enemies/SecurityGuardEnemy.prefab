@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4202125626246644408}
   - component: {fileID: 3825102873797564499}
   - component: {fileID: 1386623927498531794}
-  - component: {fileID: 4789131732922704147}
+  - component: {fileID: 3325146541957708147}
   m_Layer: 2
   m_Name: enemyDamager
   m_TagString: Untagged
@@ -80,7 +80,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4789131732922704147
+--- !u!114 &3325146541957708147
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -187,7 +187,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2137332843
   m_SortingLayer: 3
-  m_SortingOrder: 100
+  m_SortingOrder: 10
   m_Sprite: {fileID: 1926362340453760304, guid: 7eec9656956eec34baf6f874b2f50d24, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -397,6 +397,7 @@ MonoBehaviour:
   m_currentEnemyType: 0
   m_questionmark: {fileID: 3783213463638213574, guid: 40acaa4f65aeeaf44aad51d83f2decd0, type: 3}
   m_excalmationmark: {fileID: 6264025296151744314, guid: a776e246d259fa04188f7ffb2c9d5113, type: 3}
+  m_notifcaionOffset: 0.1
   m_dropItem: {fileID: 0}
   m_health: 100
   m_speed: 2

@@ -78,7 +78,7 @@ public class HitEffectElliott : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mSpriteRenderer = transform.Find("EnemySprite").GetComponent<SpriteRenderer>();
+        mSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         InitColorSwapTex();
 
     }
