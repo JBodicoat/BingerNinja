@@ -26,6 +26,8 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     private Animator weaponsAnim;
     public Animator pickupAnim;
     public Animator keyAnim;
+    public GameObject MeleeHighlight;
+    public GameObject RangedHighlight;
 
     public List<Sprite> WeaponSprites = new List<Sprite>();
     private int rangedAmmo;
@@ -40,6 +42,11 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     //  6     =   Sake     //
     //  7     =   Noodles  //
     //  8     =   None     //
+    public void SetActiveWeapon(bool isMelee)
+    {
+        MeleeHighlight.SetActive(isMelee);
+        RangedHighlight.SetActive(!isMelee);
+    }
     public void SetWeaponsUIAnimation(bool isShownIfTrue)
     {
         weaponsAnim.SetBool("isOnScreen", isShownIfTrue);

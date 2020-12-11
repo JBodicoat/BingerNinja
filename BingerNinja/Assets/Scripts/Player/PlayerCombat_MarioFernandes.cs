@@ -248,11 +248,18 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         }
     }
 
-    public void ChangeWeapon() {
-        if(m_weaponsIndex == 1)
-             m_weaponsIndex = 0;
-             else
-             m_weaponsIndex = 1;
+    public void ChangeWeapon()
+    {
+        if (m_weaponsIndex == 1)
+        {
+            m_weaponsIndex = 0;
+            m_WeaponUI.SetActiveWeapon(true);
+        }
+        else
+        {
+            m_weaponsIndex = 1;
+            m_WeaponUI.SetActiveWeapon(false);
+        }
     }
 
     // Start is called before the first frame update
