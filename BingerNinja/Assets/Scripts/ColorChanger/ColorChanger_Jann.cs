@@ -10,6 +10,7 @@
 // Elliott 20/11/2020 = made color arry public
 // Jann 22/11/20 - Refactor and added particle system support
 // Jann 08/12/20 - Single SpriteRenderers can now be updated
+// Jann 11/12/20 - Fixed bug where the HitEffect would collide with the colour changer
 
 using System.Collections.Generic;
 using System.Linq;
@@ -68,17 +69,9 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
         // Get slider reference
         GetSliderImages("HealthSlider");
         GetSliderImages("HungerSlider");
-    }
-
-    private void Start()
-    {
+        
         InitializeColorChanger();
-
-        SwapColor((int) OriginalColor.Grey60, m_colorOutGrey60);
-        SwapColor((int) OriginalColor.Grey122, m_colorOutGrey122);
-        SwapColor((int) OriginalColor.Grey174, m_colorOutGrey174);
-        m_colorSwapTexture.Apply();
-
+        
         ApplyColorsToSceneObjects();
     }
 
@@ -96,11 +89,22 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
 
         m_spriteColors = new Color[colorSwapTex.width];
         m_colorSwapTexture = colorSwapTex;
+        
+        SwapColor((int) OriginalColor.Grey60, m_colorOutGrey60);
+        SwapColor((int) OriginalColor.Grey122, m_colorOutGrey122);
+        SwapColor((int) OriginalColor.Grey174, m_colorOutGrey174);
+        m_colorSwapTexture.Apply();
     }
 
     public void UpdateColor(SpriteRenderer spriteRenderer)
     {
         spriteRenderer.material = m_swapMaterial;
+    }
+
+    private void SwapColor(int index, Color color)
+    {
+        m_spriteColors[index] = color;
+        m_colorSwapTexture.SetPixel(index, 0, color);
     }
     
     private void ApplyColorsToSceneObjects()
@@ -108,11 +112,6 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
         foreach (Renderer renderer in m_renderers)
         {
             renderer.material = m_swapMaterial;
-        }
-        
-        foreach (Image image in m_images)
-        { 
-            image.material = m_swapMaterial;
         }
 
         foreach (Image image in m_sliderBackgrounds)
@@ -139,12 +138,6 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
         {
             text.color = m_spriteColors[(int) m_dialogueTextColor];
         }
-    }
-
-    private void SwapColor(int index, Color color)
-    {
-        m_spriteColors[index] = color;
-        m_colorSwapTexture.SetPixel(index, 0, color);
     }
 
     private void GetSliderImages(string gameObjectName)
