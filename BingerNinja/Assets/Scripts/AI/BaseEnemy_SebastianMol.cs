@@ -94,7 +94,8 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public bool m_doseAffect = true;
     [Tooltip("multiplies how much the attack speed increases by in space ninja boss second fase")]
     public float m_attackSpeedIncrease = 1.5f;
-    
+
+    internal float m_maxHealth; //max amount of health an enemy has
 
     private Pathfinder_SebastianMol m_pathfinder;
     protected List<Vector2Int> m_currentPath = new List<Vector2Int>();
@@ -105,7 +106,6 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     protected float m_attackTimer; //timer for attack deley
     protected float m_outOfSightTimer; //timer for line of sight check
     protected int m_patrolIterator = 0; //iterated through patrole points
-    protected float m_maxHealth; //max amount of health an enemy has
     protected float m_maxAttackRange;
     private int m_patrolIteratorMax; //the max for teh iterator so it dosent go out of range  
     private float m_patroleTimer; // timer for waiting at each patrole pos
@@ -299,7 +299,9 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     {
         if(collision.CompareTag("Player")) // is it a the player 
         {
+
             PlayerStealth_JoaoBeijinho playerStealth = collision.GetComponent<PlayerStealth_JoaoBeijinho>();
+
             if (m_currentEnemyType == m_enemyType.PETTIGER)
             {
                 if(!playerStealth.IsinVent())
@@ -324,8 +326,8 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         RaycastHit2D hit = Physics2D.Linecast(m_rayCastStart.position, col.transform.position, m_crouchObjectLayer);
         Debug.DrawLine(m_rayCastStart.position, col.transform.position, Color.red);
 
-        RaycastHit2D crouchedHit = Physics2D.Linecast(m_rayCastStart.position, col.transform.position);
-        Debug.DrawLine(m_rayCastStart.position, col.transform.position, Color.green);
+        //RaycastHit2D crouchedHit = Physics2D.Linecast(m_rayCastStart.position, col.transform.position);
+        //Debug.DrawLine(m_rayCastStart.position, col.transform.position, Color.green);
 
         if (!m_playerStealthScript.IsCrouched() && hit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag)) //player is not crouched and it hits him
         {
@@ -336,23 +338,24 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             NoticePlayerEffect();
             ClearPath();
         }
-        else if (m_playerStealthScript.IsCrouched() && crouchedHit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag)) //player is croucheed and it hits 
-        {
-            //  m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Detection);
-            m_playerDetected = true;
-            m_playerTransform = hit.transform;
-            m_currentState = state.ATTACK;
-            NoticePlayerEffect();
-            ClearPath();
-        }
-        else if (m_playerStealthScript.IsCrouched() && !crouchedHit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
-        {
-            m_detectionCollider.enabled = true;
-        }
         else
         {
             m_detectionCollider.enabled = true;
         }
+        //else if (m_playerStealthScript.IsCrouched() && crouchedHit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag)) //player is croucheed and it hits 
+        //{
+        //    //  m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Detection);
+        //    m_playerDetected = true;
+        //    m_playerTransform = hit.transform;
+        //    m_currentState = state.ATTACK;
+        //    NoticePlayerEffect();
+        //    ClearPath();
+        //}
+        //else if (m_playerStealthScript.IsCrouched() && !crouchedHit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        //{
+        //    m_detectionCollider.enabled = true;
+        //}
+
     }
 
     /// <summary>
