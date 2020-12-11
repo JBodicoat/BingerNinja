@@ -46,7 +46,7 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
     private List<Renderer> m_renderers;
     private List<Image> m_images;
     private List<ParticleSystem> m_particleSystems;
-    private Text[] m_dialogueTexts;
+    private List<Text> m_dialogueTexts;
 
     private Texture2D m_colorSwapTexture;
     public Color[] m_spriteColors;
@@ -62,10 +62,14 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
         GameObject dialogueManager = GameObject.Find("DialogManager");
         if (dialogueManager != null)
         {
-            m_dialogueTexts = dialogueManager.GetComponentsInChildren<Text>(true);
+            m_dialogueTexts = dialogueManager.GetComponentsInChildren<Text>(true).ToList();
             m_images.AddRange(dialogueManager.GetComponentsInChildren<Image>(true));
         }
-
+        else
+        {
+            m_dialogueTexts = new List<Text>();
+        }
+        
         // Get slider reference
         GetSliderImages("HealthSlider");
         GetSliderImages("HungerSlider");
