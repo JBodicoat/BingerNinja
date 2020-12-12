@@ -534,14 +534,6 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Attack Tap
       m_Flags: 0
-    - m_Name: 
-      m_Id: bd0f3106-5db4-4010-8055-9e3899fab692
-      m_Path: <Touchscreen>/press
-      m_Interactions: Tap
-      m_Processors: 
-      m_Groups: 
-      m_Action: Attack Tap
-      m_Flags: 0
   m_attackSlowTap:
     m_Name: Attack Slow Tap
     m_Type: 0
@@ -561,14 +553,6 @@ MonoBehaviour:
     - m_Name: 
       m_Id: 1dfc24c9-403c-4d81-8088-650c0b1933d7
       m_Path: <Gamepad>/rightShoulder
-      m_Interactions: Hold(duration=1)
-      m_Processors: 
-      m_Groups: 
-      m_Action: Attack Slow Tap
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 23e814b4-b3dd-4458-8361-359e2b5e4063
-      m_Path: <Touchscreen>/press
       m_Interactions: Hold(duration=1)
       m_Processors: 
       m_Groups: 
@@ -669,7 +653,15 @@ MonoBehaviour:
     m_Id: 5f59052d-3194-464a-af46-580777032899
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: e877a35d-9ffc-4251-babb-245681141cec
+      m_Path: <Keyboard>/enter
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Pass Dialogue
+      m_Flags: 0
 --- !u!114 &4362767424123825800
 MonoBehaviour:
   m_ObjectHideFlags: 0
