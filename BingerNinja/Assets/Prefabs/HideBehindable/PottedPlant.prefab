@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 682521576906220323}
   - component: {fileID: 682521576906220322}
   - component: {fileID: -824072958077492641}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PottedPlant
   m_TagString: Plant
   m_Icon: {fileID: 0}
@@ -133,6 +133,10 @@ PrefabInstance:
     - target: {fileID: 1211534274823431787, guid: eefc3600125f40a43b6a3b1ae27c6da2, type: 3}
       propertyPath: m_Name
       value: SmokeParticleSystem(V2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1211534274823431787, guid: eefc3600125f40a43b6a3b1ae27c6da2, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1211534274823431788, guid: eefc3600125f40a43b6a3b1ae27c6da2, type: 3}
       propertyPath: m_SortingLayerID

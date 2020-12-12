@@ -139,12 +139,12 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         else
         {
             m_detectionCollider.enabled = true;
-            if (transform.position != m_startPos)
+            if (Vector2.Distance(transform.position, m_startPos) > 0.5f)
             {
                 PathfindTo(m_startPos);
             }
 
-            if(Vector2.Distance(transform.position, m_startPos) < 0.5f) transform.localScale = new Vector3(m_scale, transform.localScale.y, transform.localScale.z);
+            if(Vector2.Distance(transform.position, m_startPos) <= 0.5f) transform.localScale = new Vector3(m_scale, transform.localScale.y, transform.localScale.z);
 
         }
         m_showquestionMarkonce = false;
@@ -771,6 +771,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <param name="pos">the postion that you want the enemy to search</param>
     public void ForceCuriosity(Vector3 pos)
     {
+        ClearPath(false);
         m_currentState = state.CURIOUS;
         m_curiousTarget = pos;
         PathfindTo(m_curiousTarget);
@@ -797,6 +798,16 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             m_showquestionMarkonce = true;
            
         }
+    }
+
+    public void ForceLooseIntrest()
+    {
+        transform.position = m_startPos;
+        m_isSerching = false;
+        m_currentState = state.WONDER;
+        m_playerDetected = false;
+        m_outOfSightTimer = m_outOfSightDeley;
+        OnceLostContactEffect();
     }
 
 

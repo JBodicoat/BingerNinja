@@ -27,7 +27,7 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
     /// <returns>weather the attack has been done</returns>
     public static bool MelleAttack(ref float m_attackTimer, bool m_hasChargeAttack, int m_chargAttackPosibility, 
         Action QuickAttack, Action ChargeAttack, Action StunAfterAttack,
-        m_enemyType m_currentEnemyType, float m_hitSpeed, bool hasRangedAttack = false)
+        m_enemyType m_currentEnemyType, float m_hitSpeed,  bool hasRangedAttack = false)
     {
         if (m_attackTimer <= 0)
         {
