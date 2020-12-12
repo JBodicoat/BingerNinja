@@ -64,7 +64,6 @@ public class BulletMovment_SebastianMol : MonoBehaviour
             }
 
             FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damage);            
-            //TODO collision.GetComponent<HitEffectElliott>().StartHitEffect(false);
             Destroy(gameObject);
         }
 	}

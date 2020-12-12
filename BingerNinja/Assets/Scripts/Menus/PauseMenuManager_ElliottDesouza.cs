@@ -15,7 +15,7 @@ public class PauseMenuManager_ElliottDesouza : MonoBehaviour
     public GameObject m_player;
     public GameObject m_settingMenu;
     protected bool m_openSettings;
-    
+
     public void Resume()
     {
         //set active to false
@@ -71,5 +71,6 @@ public class PauseMenuManager_ElliottDesouza : MonoBehaviour
         {
             OpenSettingsMenu();
         }
+        
     }
 }
