@@ -1,6 +1,7 @@
 ﻿//Joao Beijinho 11/12/2020 - Created script
 //                           Created reference to ventPath GameObject
 //                           Created OnTriggerEnter2D which toggles ventPath ON/OFF
+//                           Changed reference on start to reference on awake
 
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ public class VentTrigger_JoaoBeijinho : MonoBehaviour
     private GameObject m_ventPath;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         m_ventPath = GameObject.Find("VentPath");
     }

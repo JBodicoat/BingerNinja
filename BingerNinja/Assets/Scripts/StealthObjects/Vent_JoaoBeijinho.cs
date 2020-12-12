@@ -10,6 +10,7 @@
 //Joao Beijinho 11/12/2020 - Cleaned unused variables
 //                           Put VentExit() on OnTriggerExit2D for use in VentPath instead of vent enter and exit
 //                           Erased m_playerPos from VentEnter() and VentExit() to stop player from snapping to vent position
+//                           Removed ForEach from VentEnter() and VentExit(), no need to enable/disable the walls
 
 using System.Collections;
 using System.Collections.Generic;
@@ -21,8 +22,6 @@ using UnityEngine;
 public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
 {
     private GameObject m_player;
-    
-    private Collider2D[] m_ventWallsCollider;
 
     #region Enter and Exit triggers
     private void OnTriggerEnter2D(Collider2D collision)//Enter and Exit vent
@@ -58,11 +57,6 @@ public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
         
         m_player.GetComponentInChildren<SpriteRenderer>().enabled = false;
         
-        foreach (Collider2D ventWall in m_ventWallsCollider)
-        {
-            ventWall.enabled = true;
-        }
-        
         Physics2D.IgnoreLayerCollision(0, 10, true);
     }
     
@@ -76,11 +70,6 @@ public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
         
         m_player.GetComponentInChildren<SpriteRenderer>().enabled = true;
         
-        foreach (Collider2D ventWall in m_ventWallsCollider)
-        {
-            ventWall.enabled = false;
-        }
-        
         Physics2D.IgnoreLayerCollision(0, 10, false);
     } 
 
@@ -89,9 +78,6 @@ public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
     {
         //Get the player GameObject for sprite changing
         m_player = GameObject.Find("Player");
-
-        //Get the vent walls collider
-        m_ventWallsCollider = gameObject.GetComponentsInChildren<BoxCollider2D>();
 
         //Turn VentPath GameObject OFF at the start, it will only be enabled after the player passes a trigger
         gameObject.SetActive(false);
