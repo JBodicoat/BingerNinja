@@ -10885,6 +10885,62 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1021836104, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1021836104, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1021836104, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1021836104, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4362767423532714274}
+    - target: {fileID: 1021836104, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerCombat_MarioFernandes, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1021836104, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeWeapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 1021836104, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1628195394, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1628195394, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1628195394, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1628195394, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4362767423532714274}
+    - target: {fileID: 1628195394, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerCombat_MarioFernandes, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1628195394, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Eat
+      objectReference: {fileID: 0}
+    - target: {fileID: 1628195394, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3074607439574447818, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -10985,6 +11041,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7882151872513162703, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 7882151872513162703, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0.22254276
+      objectReference: {fileID: 0}
     - target: {fileID: 7882151872676787412, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -10992,6 +11056,14 @@ PrefabInstance:
     - target: {fileID: 7882151872676787412, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7882151872899985349, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.11000013
+      objectReference: {fileID: 0}
+    - target: {fileID: 7882151872899985349, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0.21067142
       objectReference: {fileID: 0}
     - target: {fileID: 8234888290092531690, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_csvFilePortuguese
@@ -18847,6 +18919,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 126326fb385628f48915dd9419c89498, type: 3}
+--- !u!114 &4362767423532714274 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4362767424123825805, guid: 126326fb385628f48915dd9419c89498, type: 3}
+  m_PrefabInstance: {fileID: 4362767423532714273}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1068120902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3fdf7d1a1c091541ab04a515efb546b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4362767423532714276 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4272470005486940903, guid: 126326fb385628f48915dd9419c89498, type: 3}
