@@ -13,8 +13,9 @@ using UnityEngine.InputSystem;
 public class LevelScripting : MonoBehaviour
 {
     #region VARIABLES
-    private bool enemyDead = false, keyUsed = false, levelBossIntro, bossDead = false, doorsClosed = false, cinematicDone = true;
-    private GameObject levelLiftTrigger, keyTrigger, keyTriggerTwo, doorCloseTrigger, dialogBox;
+    private bool enemyDead = false, keyUsed = false, levelBossIntro, bossDead = false, doorsClosed = false, cinematicDone = true, ventDialogueDisabled = false, endVentDialogueCanPlay = false;
+    private GameObject levelLiftTrigger, keyTrigger, keyTriggerTwo, doorCloseTrigger, dialogBox, ventsDialogue, endVentDialogue;
+    public GameObject vents;
     private BaseEnemy_SebastianMol boss, level2Enemy1, level2Enemy2;
     private BossDialogue_MarioFernandes bossDialogue, level2End;
     private Tilemap objInfWalls, walls1, objBehWalls, walls2;
@@ -70,6 +71,8 @@ public class LevelScripting : MonoBehaviour
                 {
                     keyTrigger = GameObject.Find("Key Trigger");
                     levelLiftTrigger = GameObject.Find("Level 5 Lift");
+                    ventsDialogue = GameObject.Find("Vents");
+                    endVentDialogue = GameObject.Find("Exit Vent");
                 }
                 break;
             case 6:
@@ -77,6 +80,12 @@ public class LevelScripting : MonoBehaviour
                     boss = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BaseEnemy_SebastianMol>();
                     bossDialogue = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BossDialogue_MarioFernandes>();
                     levelLiftTrigger = GameObject.Find("Level 6 Lift");
+                }
+                break;
+            case 7:
+                {
+                    keyTrigger = GameObject.Find("Key Trigger");
+                    levelLiftTrigger = GameObject.Find("Level 7 Lift");
                 }
                 break;
             case 8:
@@ -293,9 +302,15 @@ public class LevelScripting : MonoBehaviour
             case 5:
                 {
                     levelLiftTrigger.SetActive(false);
+                    endVentDialogue.SetActive(false);
                 }
                 break;
             case 6:
+                {
+                    levelLiftTrigger.SetActive(false);
+                }
+                break;
+            case 7:
                 {
                     levelLiftTrigger.SetActive(false);
                 }
@@ -453,11 +468,16 @@ public class LevelScripting : MonoBehaviour
                 {
                     if(!bossDead)
                     {
+                        if (!levelBossIntro)
+                        {
+                            bossDialogue.TriggerDialogue(0);
+                            levelBossIntro = true;
+                        }
                         if (boss.m_health <= 0)
                         {
                             //dramatic death SE
                             //freeze on enemy as he dies  
-                            bossDialogue.TriggerDialogue(0);
+                            bossDialogue.TriggerDialogue(1);
                             levelLiftTrigger.SetActive(true);
                             bossDead = true;
 
@@ -480,6 +500,7 @@ public class LevelScripting : MonoBehaviour
                         }
                     }
 
+
                 }
                 break;
             case 5:
@@ -491,6 +512,15 @@ public class LevelScripting : MonoBehaviour
                             levelLiftTrigger.SetActive(true);
                         }
                     }
+                    if(!vents.activeInHierarchy && !endVentDialogue.activeInHierarchy)
+                    {
+                        endVentDialogue.SetActive(true);
+                    }
+                    //if(endVentDialogueCanPlay)
+                    //{
+                    //    endVentDialogue.SetActive(true);
+                    //    endVentDialogueCanPlay = false;
+                    //}
                    
                 }
                 break;
@@ -513,6 +543,16 @@ public class LevelScripting : MonoBehaviour
 
                         }
                    }
+                }
+                break;
+
+            case 7:
+                {
+                    if (!keyTrigger.activeInHierarchy && !keyUsed)
+                    {
+                        levelLiftTrigger.SetActive(true);
+                        keyUsed = true;
+                    }
                 }
                 break;
             case 8:

@@ -484,6 +484,14 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Attack Slow Tap
       m_Flags: 0
+  m_aim:
+    m_Name: Aim
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 0d51381d-6ffd-44eb-af3a-bfdd66b731de
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
   m_roll:
     m_Name: Roll
     m_Type: 0
@@ -507,6 +515,22 @@ MonoBehaviour:
       m_Processors: 
       m_Groups: 
       m_Action: Roll
+      m_Flags: 0
+  m_changeLevel:
+    m_Name: Change Level
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: de8034f6-f2f1-4c2f-99fc-faf3a6e2ef25
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 2a85c287-e2ab-4717-8719-d7ceea36bfaf
+      m_Path: <Keyboard>/n
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Change Level
       m_Flags: 0
   m_switchWeapons:
     m_Name: Switch Weapons
@@ -540,6 +564,14 @@ MonoBehaviour:
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
+  m_passDialogue:
+    m_Name: Pass Dialogue
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 2a37b83e-acad-427b-8f9c-47336059b5ac
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
 --- !u!114 &4362767424123825800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,8 +584,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3623eaab13c2da64b936376c5cca8580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_speed: 5
-  m_baseSpeed: 5
+  m_speed: 3
+  m_baseSpeed: 3
   isRolling: 0
 --- !u!114 &4362767424123825801
 MonoBehaviour:
