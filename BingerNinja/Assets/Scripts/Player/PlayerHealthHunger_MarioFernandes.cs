@@ -5,6 +5,9 @@
 // Mário 18/10/2020 - Add max health increase/decrease functions
 // Elliott 19/10/2020 - Added respawn on Death
 // Elliott 21/11/2020 - Added death effect and pause input
+//Sebastian Mol 10/12/2020 - made enemy health back to full after player death
+//Sebastian Mol 12/12/2020 - made enemy loose intrest on player death
+
 
 using System.Collections;
 using System.Collections.Generic;
@@ -91,7 +94,34 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
         gameObject.transform.position = GameObject.FindGameObjectWithTag("SaveCheckpoint").GetComponent<SaveSystem_ElliottDesouza>().m_currentCheckpoint.position;
         m_currentHealth = m_maxHealth;
         m_currentHunger = 100;
+        HealAllEnemies();
+        AllEnemiesLooseIntrest();
         print("GAME OVER");
+    }
+
+    private void HealAllEnemies()
+    {
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag(Tags_JoaoBeijinho.m_enemyTag);
+        foreach (GameObject enemy in allEnemies)
+        {
+            if(enemy.activeSelf)
+            {
+                BaseEnemy_SebastianMol baseScript = enemy.GetComponent<BaseEnemy_SebastianMol>();
+                baseScript.m_health = baseScript.m_maxHealth;
+            }          
+        }
+    }
+
+    private void AllEnemiesLooseIntrest()
+    {
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag(Tags_JoaoBeijinho.m_enemyTag);
+        foreach (GameObject enemy in allEnemies)
+        {
+            if (enemy.activeSelf)
+            {
+                enemy.GetComponent<BaseEnemy_SebastianMol>().ForceLooseIntrest();
+            }
+        }
     }
 
     // Start is called before the first frame update

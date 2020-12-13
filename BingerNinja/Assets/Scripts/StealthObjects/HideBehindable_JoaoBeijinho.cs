@@ -9,6 +9,7 @@
 //                   Added comments within Update
 //                   Moved particle system onto the prefab rather than on the player
 //Joao Beijinho 09/11/2020 - Replaced tags with the tags in the Tags_JoaoBeijinho script
+//sebastian mol 11/12/2020 - chnaged the layer of plants based on stealth
 
 using System.Collections;
 using System.Collections.Generic;
@@ -73,6 +74,7 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
             Hide();
             m_playerControllerScript.m_movement.Enable();
             m_playerControllerScript.m_crouch.Enable();
+            gameObject.layer = 0; //defult layer
         }
         else if (m_playerControllerScript.m_interact.triggered && m_canHide == true && !m_playerStealthScript.m_crouched)
         {
@@ -84,6 +86,7 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
             m_playerControllerScript.m_movement.Disable();
             m_playerControllerScript.m_crouch.Disable();
             m_smokeParticleSystem.Play();
+            gameObject.layer = 2; //ignore raycast layer
         }
     }
 }

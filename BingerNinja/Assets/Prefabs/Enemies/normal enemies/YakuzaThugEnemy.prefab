@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 220513390732296407}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.54, y: 0.91, z: 0}
+  m_LocalPosition: {x: -2.46, y: 0.91, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 8631870844753434286}
@@ -46,7 +46,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.28255796, y: -0.24377573}
+  m_Offset: {x: 0.5870962, y: -0.44432557}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -57,7 +57,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5651155, y: 2.1302354}
+  m_Size: {x: 2.1741917, y: 2.5313356}
   m_EdgeRadius: 0
 --- !u!50 &1386623927498531794
 Rigidbody2D:
@@ -411,7 +411,7 @@ MonoBehaviour:
   m_outOfSightDeley: 4
   m_sneakDamageMultiplier: 1.5
   m_sneakDamageMultiplierStack: 0
-  m_attackRange: 0.6
+  m_attackRange: 0.88
   m_attckRangeDevider: 1
   m_tiggerBossLooseTargetDistance: 2
   m_secondPhaseStartPercentage: 0.3
