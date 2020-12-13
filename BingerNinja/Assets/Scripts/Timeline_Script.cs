@@ -4,21 +4,37 @@ using UnityEngine;
 using UnityEngine.Playables;
 public class Timeline_Script : MonoBehaviour
 {
+    public PlayableDirector[] timeline;
     public PlayableDirector playableDirector;
-    public float seconds;
-    
+    public GameObject nextButton;
+    void Awake()
+    {
+        playableDirector = timeline[0];
+        playableDirector.playableGraph.GetRootPlayable(0).SetSpeed(1);
+    }  
     public void PlayTimeline()
     {
-        playableDirector.Play();
-        StartCoroutine(pause());
+        playableDirector.playableGraph.GetRootPlayable(0).SetSpeed(1);
+        nextButton.SetActive(false);
     }
     public void PauseTimeline()
     {
-        playableDirector.Pause();
+        playableDirector.playableGraph.GetRootPlayable(0).SetSpeed(0);
+        nextButton.SetActive(true);
     }
-    IEnumerator pause()
+    public void ChangeDirector(string directorName = "Good Ending / Bad Ending")
     {
-        yield return new WaitForSeconds(seconds);
-        PauseTimeline();
+        if (directorName == "Good Ending")
+        {
+            playableDirector = timeline[1];
+            playableDirector.Play();
+        }
+        if (directorName == "Bad Ending")
+        {
+            playableDirector = timeline[2];
+            playableDirector.Play();
+        }
     }
+        
+    
 }

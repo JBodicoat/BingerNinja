@@ -53,7 +53,8 @@ public class BulletMovment_SebastianMol : MonoBehaviour
 
         if (collision.tag == "Player")
         {
-            if(m_dosePoisonDamage)
+            collision.GetComponent<HitEffectElliott>().StartHitEffect(false);
+            if (m_dosePoisonDamage)
             {
                 int rand = Random.Range(0, m_poisonDamageChance);
                 if(rand == m_poisonDamageChance) FindObjectOfType<EffectManager_MarioFernandes>().AddEffect(new PoisionDefuff_MarioFernandes(m_poisionDamage, m_posionDamageTime));

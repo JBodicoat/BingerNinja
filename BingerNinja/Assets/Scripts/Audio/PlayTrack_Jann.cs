@@ -29,6 +29,8 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
 
     private void Awake()
     {
+
+        Cursor.lockState = CursorLockMode.Confined;
         // Singleton setup
         if (m_instance != null && m_instance != this)
         {

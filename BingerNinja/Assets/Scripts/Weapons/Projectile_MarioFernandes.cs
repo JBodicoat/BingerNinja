@@ -27,30 +27,29 @@ public class Projectile_MarioFernandes : MonoBehaviour
 
     float m_timeAlive = 3;
 
-    Vector3 m_mousePos;
-    Vector3 m_direction;
+    public Vector3 m_direction;
+
+    private PlayerController_JamieG Controller;
  
 
     // Start is called before the first frame update
     void Start()
     {
-        m_mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         
-        m_mousePos = m_mousePos- transform.position;
-
-        m_mousePos.z = 0; 
-
-        m_mousePos.Normalize();       
+        
+        
+              
         
 
-        transform.rotation = Quaternion.Euler(new Vector3(m_mousePos.x, m_mousePos.y, 0));        
+        transform.rotation = Quaternion.Euler(new Vector3(m_direction.x, m_direction.y, 0));      
+        
         
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.position += m_mousePos * m_speed * Time.deltaTime ;
+        transform.position += m_direction * m_speed * Time.deltaTime ;
     }
 
      void Update() {

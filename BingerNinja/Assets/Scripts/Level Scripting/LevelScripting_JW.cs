@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class LevelScripting_JW : MonoBehaviour
 {
-    GameObject levelLiftTrigger, keyTrigger, doorCloseTrigger, dialogBox;
+    GameObject levelLiftTrigger, keyTrigger, doorCloseTrigger, dialogBox, enemyToKill;
     BossDialogue_MarioFernandes bossDialogue;
     BaseEnemy_SebastianMol boss;
     bool levelBossIntro = false, bossDead = false, doorsClosed = false;
@@ -37,7 +37,12 @@ public class LevelScripting_JW : MonoBehaviour
             bottomDoorTile = walls1.GetTile<Tile>(new Vector3Int(12, 26, 0));
             topDoorTile = walls2.GetTile<Tile>(new Vector3Int(13, 27, 0));
         }
-        if(SceneManager.GetActiveScene().buildIndex == 18)
+        if (SceneManager.GetActiveScene().buildIndex == 16)
+        {
+            levelLiftTrigger = GameObject.Find("Level 14 Lift");
+            enemyToKill = GameObject.Find("AlienEnemy");
+        }
+        if (SceneManager.GetActiveScene().buildIndex == 18)
         {
             boss = GameObject.Find("Space Ninja").GetComponent<BaseEnemy_SebastianMol>();
             bossDialogue = GameObject.Find("Space Ninja").GetComponent<BossDialogue_MarioFernandes>();
@@ -47,7 +52,8 @@ public class LevelScripting_JW : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 19)
         {
             levelLiftTrigger = GameObject.Find("Level 19 Lift");
-            keyTrigger = GameObject.Find("My Key");
+            keyTrigger = GameObject.Find("Key Trigger");
+           // keyTrigger = GameObject.Find("My Key");
         }
     }
 
@@ -66,6 +72,10 @@ public class LevelScripting_JW : MonoBehaviour
             walls2.SetTile(new Vector3Int(13, 27, 0), null);
             walls2.SetTile(new Vector3Int(13, 26, 0), null);
             walls2.SetTile(new Vector3Int(13, 25, 0), null);
+        }
+        if (SceneManager.GetActiveScene().buildIndex == 16)
+        {
+            levelLiftTrigger.SetActive(false);
         }
         if (SceneManager.GetActiveScene().buildIndex == 18)
         {
@@ -110,7 +120,13 @@ public class LevelScripting_JW : MonoBehaviour
             */
 
         }
-
+        if (SceneManager.GetActiveScene().buildIndex == 16)
+        {
+            if(!enemyToKill.activeInHierarchy)
+            {
+                levelLiftTrigger.SetActive(true);
+            }
+        }
         if (SceneManager.GetActiveScene().buildIndex == 18 && !bossDead)
         {
             if (!levelBossIntro && !dialogBox.activeInHierarchy)
@@ -124,7 +140,7 @@ public class LevelScripting_JW : MonoBehaviour
             }
             if (boss.m_health <= 0)
             {
-
+                Debug.Log("DEAD");
                 bossDialogue.TriggerDialogue(9);
                 levelLiftTrigger.SetActive(true);
                 bossDead = true;
@@ -138,9 +154,9 @@ public class LevelScripting_JW : MonoBehaviour
                 walls1.SetTile(new Vector3Int(24,10,0), null);
                 walls1.SetTile(new Vector3Int(25, 10, 0), null);
                 walls1.SetTile(new Vector3Int(26, 10, 0), null);
-                walls2.SetTile(new Vector3Int(25, 10, 0), null);
-                walls2.SetTile(new Vector3Int(26, 10, 0), null);
-                walls2.SetTile(new Vector3Int(27, 10, 0), null);
+                walls2.SetTile(new Vector3Int(25, 11, 0), null);
+                walls2.SetTile(new Vector3Int(26, 11, 0), null);
+                walls2.SetTile(new Vector3Int(27, 11, 0), null);
             }
         }
     }

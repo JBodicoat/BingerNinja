@@ -22,7 +22,7 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
     protected float m_maxHunger = 100.0f;
     protected float m_currentHunger = 100.0f;
 
-    protected float m_fullnessDrainRate = 5.0f;
+    protected float m_fullnessDrainRate = 2.5f;
     protected float m_healthDrainRate = 7.5f;
 
     public bool m_paused = false;
