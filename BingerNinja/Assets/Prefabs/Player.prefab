@@ -592,7 +592,7 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: c334bedc-68bf-4c2c-b921-2392d043bd82
-      m_Path: <Keyboard>/q
+      m_Path: <Keyboard>/shift
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -645,7 +645,15 @@ MonoBehaviour:
     m_Id: 3ef26744-0088-497d-92c7-f478d232aa5c
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 4dcd0d0e-0e09-4802-a54f-8b82447871f7
+      m_Path: <Keyboard>/q
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Drop Weapons
+      m_Flags: 0
   m_passDialogue:
     m_Name: Pass Dialogue
     m_Type: 0

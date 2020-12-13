@@ -6,6 +6,7 @@
 // Mario 13/11/2020 - Add Distraction time to progectile
 // Mario 20/11/2020 - Ammunition added
 // Mario 28/11/2020 - sprite added
+// Mario 13/12/2020 - Define Normal Foodtype as null
 
 using System.Collections;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ public class WeaponsTemplate_MarioFernandes : MonoBehaviour
 {
     [SerializeField]
     protected  bool m_ranged;
-    public FoodType m_foodType;
+    public FoodType m_foodType = FoodType.NULL;
     public int m_instaHeal = 0;
     public int m_healOverTime = 0;
     public int m_duration = 5;

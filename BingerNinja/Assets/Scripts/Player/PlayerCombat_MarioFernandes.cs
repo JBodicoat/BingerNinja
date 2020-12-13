@@ -22,6 +22,7 @@
 // Mario 05/12/2020 - full contorller detection and range suport
 // Mario 06/12/2020 - Touchscreen suport
 // Jann  08/12/2020 - Added projectile colour change
+// Mário 16/12/2020 - playing the sound after the food check, 
 
 using System.Collections;
 using System.Collections.Generic;
@@ -39,6 +40,7 @@ public enum FoodType
     DANGO,
     SAKE,
     NOODLES,
+    NULL
 } 
 
 public enum WeaponType
@@ -166,6 +168,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             
             if(m_currentWeapon[m_weaponsIndex].m_ammunition <= 0)
             {
+                print("Destroy usege");
                 Destroy(m_currentWeapon[m_weaponsIndex].gameObject);
                 m_currentWeapon[m_weaponsIndex] = null;
             }
@@ -202,11 +205,12 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
     }
 
     public void Eat()
-    {
-        m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Eating);
+    {       
 
         if (m_currentWeapon[m_weaponsIndex])
         {
+            m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Eating);
+
             GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon[m_weaponsIndex].m_instaHeal);
 
             switch (m_currentWeapon[m_weaponsIndex].m_foodType)
@@ -242,6 +246,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
  
             m_playerHealthHungerScript.Eat(m_currentWeapon[m_weaponsIndex].m_hungerRestoreAmount);
 
+            print("Destroy Eating");
             Destroy(m_currentWeapon[m_weaponsIndex].gameObject);
             m_currentWeapon[m_weaponsIndex] = null;
 
@@ -326,13 +331,25 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             m_WeaponUI.WeaponChange(m_currentWeapon[0].m_foodType, false, 0);
             m_WeaponUI.SetWeaponsUIAnimation(true);
 		}
-        else if(!m_currentWeapon[1] && collision.GetComponent<WeaponsTemplate_MarioFernandes>() && collision.GetComponent<WeaponsTemplate_MarioFernandes>().IsRanged())
+        else if(collision.GetComponent<WeaponsTemplate_MarioFernandes>() && collision.GetComponent<WeaponsTemplate_MarioFernandes>().IsRanged())
         {
+            if(!m_currentWeapon[1])
+            { 
             m_currentWeapon[1] = collision.GetComponent<WeaponsTemplate_MarioFernandes>();
             collision.gameObject.SetActive(false);
             collision.transform.parent = transform;
             m_WeaponUI.WeaponChange(m_currentWeapon[1].m_foodType, true, m_currentWeapon[1].m_ammunition);
             m_WeaponUI.SetWeaponsUIAnimation(true);
+            }else{
+                if(m_currentWeapon[1].m_foodType == collision.GetComponent<WeaponsTemplate_MarioFernandes>().m_foodType)
+                {
+                m_currentWeapon[1].m_ammunition += collision.GetComponent<WeaponsTemplate_MarioFernandes>().m_ammunition;
+                //Destroy(collision.gameObject);
+                print("Destroy ammunition");
+                m_WeaponUI.WeaponChange(m_currentWeapon[1].m_foodType, true, m_currentWeapon[1].m_ammunition);
+                m_WeaponUI.SetWeaponsUIAnimation(true);
+                }
+            }
         }
     }
 }
