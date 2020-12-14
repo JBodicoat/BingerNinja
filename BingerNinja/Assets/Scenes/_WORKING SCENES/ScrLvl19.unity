@@ -274,6 +274,10 @@ PrefabInstance:
       propertyPath: m_inventory
       value: 
       objectReference: {fileID: 1062453979}
+    - target: {fileID: 7986591668801194014, guid: f21454a5048d98940bd63158bf79d43a, type: 3}
+      propertyPath: m_inventory
+      value: 
+      objectReference: {fileID: 1062453979}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f21454a5048d98940bd63158bf79d43a, type: 3}
 --- !u!4 &91831755 stripped
@@ -48311,6 +48315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac23b8902ad07454dbab100c921e85d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vents: {fileID: 0}
   bottomDoorTile: {fileID: 0}
   topDoorTile: {fileID: 0}
   currentLevel: 0

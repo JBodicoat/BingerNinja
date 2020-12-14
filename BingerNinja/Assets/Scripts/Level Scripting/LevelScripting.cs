@@ -41,7 +41,7 @@ public class LevelScripting : MonoBehaviour
                 {
                     keyTrigger = GameObject.Find("Key Trigger");
                     walls1 = GameObject.Find("Walls1_Map").GetComponent<Tilemap>();
-                    objInfWalls = GameObject.Find("ObjectsInFrontOfWalls_Map").GetComponent<Tilemap>();
+                    walls2 = GameObject.Find("Walls2_Map").GetComponent<Tilemap>();
                 }
                 break;
             case 2:
@@ -438,14 +438,13 @@ public class LevelScripting : MonoBehaviour
                         if (!keyTrigger.activeInHierarchy)
                         {
                             Debug.Log("key worked");
-                            objInfWalls.SetTile(new Vector3Int(7, 14, 0), null);
-                            objInfWalls.SetTile(new Vector3Int(6, 14, 0), null);
-                            objInfWalls.SetTile(new Vector3Int(5, 14, 0), null);
+                            walls2.SetTile(new Vector3Int(6, 13, 0), null);
+                            walls2.SetTile(new Vector3Int(5, 13, 0), null);
+                            walls2.SetTile(new Vector3Int(4, 13, 0), null);
 
-                            walls1.SetTile(new Vector3Int(4, 13, 0), null);
-                            walls1.SetTile(new Vector3Int(5, 13, 0), null);
-                            walls1.SetTile(new Vector3Int(6, 13, 0), null);
-
+                            walls1.SetTile(new Vector3Int(3, 12, 0), null);
+                            walls1.SetTile(new Vector3Int(4, 12, 0), null);
+                            walls1.SetTile(new Vector3Int(5, 12, 0), null);
                         }
                     }
                 }
@@ -470,6 +469,7 @@ public class LevelScripting : MonoBehaviour
                     {
                         if (!levelBossIntro)
                         {
+                           // cinematics.PlayZoomIn();
                             bossDialogue.TriggerDialogue(0);
                             levelBossIntro = true;
                         }
