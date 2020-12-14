@@ -4,9 +4,10 @@
 //Elliott 31/10/2020 - can now select an item which brings up a discription about said item, also adds item to inventory when item is brought
 //Elliott 06/11/2020 - added a check for the one time buy items, made a DeselectAll fuction.
 //Elliott 09/11/2020 - changed the color of the text when item is brought changes, give item now uses enum.
+// Alanna & Elliott 07/12/20- Merged Alanna and Elliotts vending machine code, made the UI work with buttons and formatting, setting ninja points to yen.
+
 using System.Collections;
 using System.Collections.Generic;
-// Alanna & Elliott 07/12/20- Merged Alanna and Elliotts vending machine code, made the UI work with buttons and formatting, setting ninja points to yen.
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -26,6 +27,11 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
     public ChangeLevels_CW levelLift;
     public Text Yen;
     public static bool m_gameIsPaused = false;
+
+   
+
+
+
     /// <summary>
     /// shuts all decriptions and opens up the one selected
     /// </summary>
@@ -59,7 +65,10 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
         DeSelectAll();
         SelectNoodle.SetActive(true);
     }
-
+    public void AdvanceLevel()
+    {
+        levelLift.ProgressToNextLevel();
+    }
     public void PurchaseUpgrade()
     {
         if (SelectPizza.activeInHierarchy && Inventory.HasItem(ItemType.NinjaPoints, 15))
@@ -93,11 +102,35 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
 
         }
     }
+    void UIDisable()
+    {
+        GameObject[] m_UI = GameObject.FindGameObjectsWithTag(Tags_JoaoBeijinho.m_UI);
+        if (gameObject.activeInHierarchy)
+        {
+            foreach (var UI_object in m_UI)
+            {
+                UI_object.SetActive(false);
+                
+            }
+        }
+    }
+    //void UIEnable()
+    //{
+    //    if (!gameObject.activeInHierarchy)
+    //    {
+    //        foreach (var UI_object in m_UI)
+    //        {
+    //            UI_object.SetActive(true);
+
+    //        }
+    //    }
+    //}
 
     void Start()
     {
         Inventory = GameObject.FindObjectOfType<Inventory_JoaoBeijinho>();
         Inventory.GiveItem(ItemType.NinjaPoints, 40);
+       
     }
 
     /// <summary>
@@ -105,6 +138,7 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
     /// </summary>
     void Update()
     {
+        UIDisable();
         Yen.text = "Yen: " + Inventory.ItemValue(ItemType.NinjaPoints).ToString();
 
         var gamepad = Keyboard.current;
@@ -133,7 +167,9 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
         }
         if (gamepad.escapeKey.wasPressedThisFrame)
         {
-            levelLift.ProgressToNextLevel();
+            //UIEnable();
+            AdvanceLevel();
+            
         }
     }
 }
