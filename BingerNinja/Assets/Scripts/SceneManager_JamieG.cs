@@ -69,12 +69,12 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
     //It moves the player to the last checkpoint if m_loadLastCheckpoint is true
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        LoadGameState();
-        
         if (!m_loadLastCheckpoint)
         {
             return;
         }
+        
+        LoadGameState();
         
         if (m_player == null)
         {
@@ -115,10 +115,5 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
                 enemy.SetActive(false);
             }
         }
-    }
-    
-    private void OnApplicationQuit()
-    {
-        Instance.SaveGameState();
     }
 }
