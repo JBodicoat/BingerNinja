@@ -70,7 +70,14 @@ public class HitEffectElliott : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        if (gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        {
+            mSpriteRenderer = GetComponent<SpriteRenderer>();
+        }
+        else
+        {
+            mSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        }
         mStoreColor = ColorChanger_Jann.Instance.m_spriteColors;
         
         InitColorSwapTex();
