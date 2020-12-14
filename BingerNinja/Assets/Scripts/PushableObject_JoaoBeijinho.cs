@@ -8,6 +8,9 @@
 //Joao Beijinho 14/12/2020 - Created two functions for the two statements in the Update()
 //                           Reference PlayerHealthHunger Script
 //                           In update, if HealthSlider(Using this since the Die() function is private) is bellow 1, UnGrab
+//                           Unassign this GameObject Tag while getting the reference of all the other
+//                           gameObject with the same tag, then reassign the tag back to this GameObject
+//                           In the Grab() function, check if any other crate is grabbed, if it is then can't grab
 
 using System.Collections;
 using System.Collections.Generic;
@@ -23,7 +26,11 @@ public class PushableObject_JoaoBeijinho : MonoBehaviour
 
     private Transform m_playerTransform;
     private Collider2D m_collider;
-    
+
+    private string m_normalTag;
+    private GameObject[] m_crates;
+    private PushableObject_JoaoBeijinho m_pushableObjectScript;
+
     public bool m_canGrab = false;
     public bool m_isGrabbed = false;
 
@@ -33,6 +40,11 @@ public class PushableObject_JoaoBeijinho : MonoBehaviour
         m_playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
         m_playerHealthScript = FindObjectOfType<PlayerHealthHunger_MarioFernandes>();
         m_collider = GetComponent<Collider2D>();
+
+        this.transform.gameObject.tag = "Untagged";//Remove tag from this GameObject
+        m_normalTag = Tags_JoaoBeijinho.m_crateTag;
+        m_crates = GameObject.FindGameObjectsWithTag(m_normalTag);//Object with the crate tag
+        this.gameObject.tag = m_normalTag;//Reassign tag back to this GameObject
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -57,6 +69,16 @@ public class PushableObject_JoaoBeijinho : MonoBehaviour
         m_isGrabbed = true;
         transform.parent = m_playerTransform;
         Physics2D.IgnoreCollision(gameObject.transform.parent.GetComponent<Collider2D>(), m_collider);
+
+        foreach (GameObject crate in m_crates)
+        {
+            m_pushableObjectScript = crate.GetComponent<PushableObject_JoaoBeijinho>();
+        
+            if (m_pushableObjectScript.m_isGrabbed == true)
+            {
+                UnGrab(true, false);
+            }
+        }
     }
 
     private void UnGrab(bool canGrab, bool isGrabbed)
