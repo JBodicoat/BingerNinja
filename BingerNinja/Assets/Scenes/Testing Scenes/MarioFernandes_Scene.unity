@@ -176,6 +176,8 @@ MonoBehaviour:
   m_currentEnemyType: 0
   m_questionmark: {fileID: 0}
   m_excalmationmark: {fileID: 0}
+  m_inventory: {fileID: 0}
+  m_notifcaionOffset: 0
   m_dropItem: {fileID: 0}
   m_health: 0
   m_speed: 0
@@ -12145,6 +12147,14 @@ MonoBehaviour:
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
+  m_changeLevel:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
   m_switchWeapons:
     m_Name: Switch Weapons
     m_Type: 0
@@ -12487,46 +12497,6 @@ PrefabInstance:
     - target: {fileID: 4362767424123825802, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_Enabled
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
-      propertyPath: m_attackTap.m_SingletonActionBindings.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
-      propertyPath: m_attackSlowTap.m_SingletonActionBindings.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
-      propertyPath: m_attackTap.m_SingletonActionBindings.Array.data[1].m_Id
-      value: 12046942-895a-4271-9e7b-26484b0d5ff0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
-      propertyPath: m_attackTap.m_SingletonActionBindings.Array.data[1].m_Action
-      value: Attack Tap
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
-      propertyPath: m_attackTap.m_SingletonActionBindings.Array.data[1].m_Path
-      value: <Gamepad>/rightShoulder
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
-      propertyPath: m_attackTap.m_SingletonActionBindings.Array.data[1].m_Interactions
-      value: Tap
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
-      propertyPath: m_attackSlowTap.m_SingletonActionBindings.Array.data[1].m_Id
-      value: 1dfc24c9-403c-4d81-8088-650c0b1933d7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
-      propertyPath: m_attackSlowTap.m_SingletonActionBindings.Array.data[1].m_Action
-      value: Attack Slow Tap
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
-      propertyPath: m_attackSlowTap.m_SingletonActionBindings.Array.data[1].m_Path
-      value: <Gamepad>/rightShoulder
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
-      propertyPath: m_attackSlowTap.m_SingletonActionBindings.Array.data[1].m_Interactions
-      value: Hold(duration=1)
       objectReference: {fileID: 0}
     - target: {fileID: 4362767424123825805, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_weaponTemplate

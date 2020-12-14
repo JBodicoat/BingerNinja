@@ -308,6 +308,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de9a44f8c7667ca408413c25f0f1ee5c, type: 3}
+--- !u!1 &907276242 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5824345605457200372, guid: 7e26e30cdc3cbb44d8ff0bd2c12e43c5, type: 3}
+  m_PrefabInstance: {fileID: 5824345605721969732}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1047053519
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -449,6 +454,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5707122398059885782, guid: 14cb30499ff202a4b9d2b516a51ad2f2, type: 3}
   m_PrefabInstance: {fileID: 5707122396823514207}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1372992188 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 932207672, guid: 14cb30499ff202a4b9d2b516a51ad2f2, type: 3}
+  m_PrefabInstance: {fileID: 5707122396823514207}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1627522620
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,6 +872,14 @@ PrefabInstance:
       propertyPath: m_FontData.m_Font
       value: 
       objectReference: {fileID: 12800000, guid: c1053204808f5a34882376a3ed22c766, type: 3}
+    - target: {fileID: 5707122398059885781, guid: 14cb30499ff202a4b9d2b516a51ad2f2, type: 3}
+      propertyPath: m_settingMenu
+      value: 
+      objectReference: {fileID: 907276242}
+    - target: {fileID: 5707122398059885781, guid: 14cb30499ff202a4b9d2b516a51ad2f2, type: 3}
+      propertyPath: m_continueButton
+      value: 
+      objectReference: {fileID: 1372992188}
     - target: {fileID: 5707122398059885782, guid: 14cb30499ff202a4b9d2b516a51ad2f2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1097,6 +1121,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1247778952}
+    - target: {fileID: 5824345606649097142, guid: 7e26e30cdc3cbb44d8ff0bd2c12e43c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5824345606649097143, guid: 7e26e30cdc3cbb44d8ff0bd2c12e43c5, type: 3}
       propertyPath: m_FontData.m_Font
       value: 

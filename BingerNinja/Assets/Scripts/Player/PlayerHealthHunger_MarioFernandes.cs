@@ -5,9 +5,11 @@
 // Mário 18/10/2020 - Add max health increase/decrease functions
 // Elliott 19/10/2020 - Added respawn on Death
 // Elliott 21/11/2020 - Added death effect and pause input
+//Sebastian Mol 10/12/2020 - made enemy health back to full after player death
+//Sebastian Mol 12/12/2020 - made enemy loose intrest on player death
+//Alanna 10/12/2020 added sound effects for player death and damage to player
+// Jann  14/12/2020 - Dying restarts from the last checkpoint
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,7 +21,7 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
     protected float m_maxHunger = 100.0f;
     protected float m_currentHunger = 100.0f;
 
-    protected float m_fullnessDrainRate = 5.0f;
+    protected float m_fullnessDrainRate = 2.5f;
     protected float m_healthDrainRate = 7.5f;
 
     public bool m_paused = false;
@@ -45,11 +47,13 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
     public void Hit(float amount)
     {
         m_currentHealth -= amount;
+       
         if (m_currentHealth < 0)
             m_currentHealth = 0;
 
         if(m_currentHealth == 0)
-        {            
+        {
+            PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_Death);
             m_DeathEffect.SpriteFlash();
             //Invoke("Die", 2f);
             Die();
@@ -87,11 +91,39 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
 
         // Run death sequence
     private void Die()
-    {       
-        gameObject.transform.position = GameObject.FindGameObjectWithTag("SaveCheckpoint").GetComponent<SaveSystem_ElliottDesouza>().m_currentCheckpoint.position;
+    {
         m_currentHealth = m_maxHealth;
         m_currentHunger = 100;
+        HealAllEnemies();
+        AllEnemiesLooseIntrest();
         print("GAME OVER");
+        
+        SceneManager_JamieG.Instance.ResetToCheckpoint();
+    }
+
+    private void HealAllEnemies()
+    {
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag(Tags_JoaoBeijinho.m_enemyTag);
+        foreach (GameObject enemy in allEnemies)
+        {
+            if(enemy.activeSelf)
+            {
+                BaseEnemy_SebastianMol baseScript = enemy.GetComponent<BaseEnemy_SebastianMol>();
+                baseScript.m_health = baseScript.m_maxHealth;
+            }          
+        }
+    }
+
+    private void AllEnemiesLooseIntrest()
+    {
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag(Tags_JoaoBeijinho.m_enemyTag);
+        foreach (GameObject enemy in allEnemies)
+        {
+            if (enemy.activeSelf)
+            {
+                enemy.GetComponent<BaseEnemy_SebastianMol>().ForceLooseIntrest();
+            }
+        }
     }
 
     // Start is called before the first frame update

@@ -44,7 +44,14 @@ public class BulletMovment_SebastianMol : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if(collision.tag == "Player")
+        Debug.Log(collision.gameObject.name);
+
+        if (collision.gameObject.name == "Walls1_map")
+        {
+           Destroy(gameObject);
+        }
+
+        if (collision.tag == "Player")
         {
             collision.GetComponent<HitEffectElliott>().StartHitEffect(false);
             if (m_dosePoisonDamage)
@@ -63,8 +70,18 @@ public class BulletMovment_SebastianMol : MonoBehaviour
                 FindObjectOfType<EffectManager_MarioFernandes>().AddEffect(new HealBuff_MarioFernandes(m_healDuration,m_HealAmount));
             }
 
-            FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damage);            
+            FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damage);
+            //TODO collision.GetComponent<HitEffectElliott>().StartHitEffect(false);
+           
+
             Destroy(gameObject);
-        }
-	}
+        }  
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+      
+        Destroy(gameObject);
+    }
 }

@@ -227,7 +227,7 @@ public class Pathfinder_SebastianMol : MonoBehaviour
             {
                 for (int i = 0; i < m_wallTiles.Length; i++)
                 {
-                    if (m_tileMap.GetTile(new Vector3Int(x, y, 0)) == m_wallTiles[i])
+                    if (m_tileMap.GetTile(new Vector3Int(x, y, 0)))
                     {
                         m_allTiles[x, y].m_traversable = false;
                     }

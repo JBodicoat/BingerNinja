@@ -7,6 +7,7 @@
 //                           Changed FreezerLockAndDamage() to work individualy for each enemy, and lock freezer even if no enemy is inside
 //                           Added cooldown to the freezer usage and one usage(not spammable)
 //Joao Beijinho 27/11/2020 - Created LightColor() to change the color of the light to a color of the ColorChanger()
+//Joao Beijinho 07/12/2020 - Replaced activation of sprite on stun light to activate/deactivate gameObject
 
 using System.Collections;
 using System.Collections.Generic;
@@ -58,8 +59,15 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
                 gameObject.GetComponent<SpriteRenderer>().enabled = !gameObject.GetComponent<SpriteRenderer>().enabled;//Light On
                 break;
             case ObjectType.StunLight:
-                gameObject.GetComponent<SpriteRenderer>().enabled = !gameObject.GetComponent<SpriteRenderer>().enabled;//Light On
-                StunLight();
+                if (gameObject.activeSelf == false)
+                {
+                    gameObject.SetActive(true);//Light On
+                    StunLight();
+                }
+                else
+                {
+                    gameObject.SetActive(false);
+                }
                 break;
             case ObjectType.Computer:
                 print("This a computer");
@@ -121,7 +129,7 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
 
     private void StunLight()
     {
-        if (gameObject.GetComponent<SpriteRenderer>().enabled == true)
+        if (gameObject.activeSelf)
         {
             m_stunLight = true;
         }

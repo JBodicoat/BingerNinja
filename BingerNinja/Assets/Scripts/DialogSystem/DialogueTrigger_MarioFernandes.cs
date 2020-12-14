@@ -2,6 +2,7 @@
 
 // Mário 24/10/2020 - Creation of the class
 // Mário 28/10/2020 - Check if triger is the player and one time only dialog
+//sebastian mol 10/12/2020 - made trigger dissapear after activated
 
 using System.Collections;
 using System.Collections.Generic;
@@ -25,8 +26,9 @@ public class DialogueTrigger_MarioFernandes : MonoBehaviour
 	private void OnTriggerEnter2D(Collider2D other) {
 		if(other.tag == "Player" && m_state)
 		{
-		TriggerDialogue();
-		m_state = false;
+			TriggerDialogue();
+			m_state = false;
+			gameObject.SetActive(false);
 		}
 	}	
 }

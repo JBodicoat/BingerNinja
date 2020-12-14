@@ -5,7 +5,7 @@
 
 //Chase Wilding 02/11/2020 - Added itemNeeded & disabled door when key used
 //Joao Beijinho 09/11/2020 - Replaced tags with the tags in the Tags_JoaoBeijinho script
-
+// louie        11/12/2020 - Key animation
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +20,8 @@ public class DoorKey_JoaoBeijinho : MonoBehaviour
     public int m_keysRequired;
     public ItemType itemNeeded;
 
+    private WeaponUI_LouieWilliamson weaponUI;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
@@ -27,11 +29,13 @@ public class DoorKey_JoaoBeijinho : MonoBehaviour
         {
             gameObject.SetActive(false);
             m_inventory.RemoveItem(ItemType.Key, m_keysRequired);
+            weaponUI.setKey(true);
         }
     }
 
     void Start()
     {
-        m_inventory = FindObjectOfType<Inventory_JoaoBeijinho>();    
+        m_inventory = FindObjectOfType<Inventory_JoaoBeijinho>();
+        weaponUI = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
     }
 }

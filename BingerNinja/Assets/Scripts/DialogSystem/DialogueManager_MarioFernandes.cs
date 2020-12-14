@@ -11,6 +11,7 @@
 // Louie 28/11/2020 - Added weapon ui animation code
 // Mário 29/11/2020 - PassDialogue using controller
 // Louie 01/12/2020 - Weapon UI animations
+// Mário 12/12/2020 - apply hotkey to pass dialog, show all txt if button pressed mid sentence, addapt to big senetences, play sounds on dialog
 
 using System;
 using System.Collections;
@@ -25,10 +26,11 @@ using UnityEngine.UI;
 /// </summary>
 public class DialogueManager_MarioFernandes : MonoBehaviour
 {
+    public GameObject m_dialogBox;
     public Text m_nameText;
     public Text m_dialogueText;
     public float m_TextAnimationSpeed = 0;
-
+   
     private Queue<string> m_sentences;
 
     public TextAsset m_csvFile;
@@ -39,6 +41,8 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
 
     private GameObject[] EnemysAI;
     private WeaponUI_LouieWilliamson m_wpnUI;
+
+    private bool isTyping = false;
     public void LoadLanguageFile()
     {
         SettingsData settingsData = SaveLoadSystem_JamieG.LoadSettings();
@@ -60,7 +64,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         m_wpnUI.SetWeaponsUIAnimation(false);
         PauseGame();        
 
-        m_nameText.transform.parent.gameObject.SetActive(true);
+        m_dialogBox.SetActive(true);
 
         m_nameText.text = dialogue.m_name;
 
@@ -76,41 +80,70 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
 
     public void DisplayNextSentence()
     {
-        Debug.Log("help");
-        if (m_sentences.Count == 0)
+        if(isTyping)
         {
-            EndDialogue();
-            return;
+        isTyping = !isTyping;
+        }
+        else{
+           
+            if (m_sentences.Count == 0)
+            {
+                EndDialogue();
+                return;
+            }            
+
+            string sentence =  m_sentences.Dequeue();
+
+            string remains = "";
+
+
+            //Detect if the sentence is biger that the dialog box and cut extra in a new sentence
+            if(sentence.Length > 181)
+            {
+                for (int i = 181; i < sentence.Length; i++)
+                {
+                    remains += sentence.ToCharArray()[i];                    
+                }
+                m_sentences.Enqueue(remains);
+            }
+
+            //Letter by letter animation effects
+            ////////////////
+            StopAllCoroutines();
+            StartCoroutine(TypeSentence(sentence));
+            ////////////////
         }
 
-        string sentence = m_sentences.Dequeue();
-
-        //Letter by letter animation effects
-        ////////////////
-        StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
-        ////////////////
-
-        //Show all sentence
-        //m_dialogueText.text = sentence;
-        
     }
 
     IEnumerator TypeSentence(string sentence)
     {
+        PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_DialogSFX);
+        isTyping = true;
         m_dialogueText.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
+            if(letter == ' ')
+            PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_DialogSFX);
+
             m_dialogueText.text += letter;
             yield return new WaitForSeconds(m_TextAnimationSpeed);
+
+            if(!isTyping)
+            {
+                m_dialogueText.text = sentence;
+                break;
+            }
+            
         }
+        isTyping = false;
     }
 
     void EndDialogue()
     {
         //End Effect
 
-        m_nameText.transform.parent.gameObject.SetActive(false);
+        m_dialogBox.SetActive(false);
 
         m_wpnUI.SetWeaponsUIAnimation(true);
         ResumeGame();
@@ -181,13 +214,9 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         }
     }
 
-    void PauseGame()
+    public void PauseGame()
     {
-        playerControllerScript.m_movement.Disable();
-        playerControllerScript.m_attackTap.Disable();
-        playerControllerScript.m_crouch.Disable();
-        playerControllerScript.m_eat.Disable();
-        playerControllerScript.m_interact.Disable();
+        playerControllerScript.OnDisable();
         playerControllerScript.GetComponentInParent<PlayerHealthHunger_MarioFernandes>().m_paused = true;
         playerControllerScript.GetComponentInParent<EffectManager_MarioFernandes>().m_paused = true;
         EnemysAI = GameObject.FindGameObjectsWithTag("Enemy");
@@ -197,13 +226,9 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         }
     }
 
-    void ResumeGame()
+    public void ResumeGame()
     {
-        playerControllerScript.m_movement.Enable();
-        playerControllerScript.m_attackTap.Enable();
-        playerControllerScript.m_crouch.Enable();
-        playerControllerScript.m_eat.Enable();
-        playerControllerScript.m_interact.Enable();
+        playerControllerScript.OnEnable();
         playerControllerScript.GetComponentInParent<PlayerHealthHunger_MarioFernandes>().m_paused = false;
         playerControllerScript.GetComponentInParent<EffectManager_MarioFernandes>().m_paused = false;
         EnemysAI = GameObject.FindGameObjectsWithTag("Enemy");
@@ -216,8 +241,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
-        
+        m_dialogBox = m_nameText.transform.parent.gameObject;
         playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
         m_wpnUI = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
         m_sentences = new Queue<string>();
@@ -229,7 +253,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     }
 
     private void Update() {
-        if(m_nameText.transform.parent.gameObject.active && playerControllerScript.m_passDialogue.triggered)
+        if(m_dialogBox.active && playerControllerScript.m_passDialogue.triggered)
         {
             DisplayNextSentence();
         }

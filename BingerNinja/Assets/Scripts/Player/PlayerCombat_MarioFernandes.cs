@@ -22,6 +22,9 @@
 // Mario 05/12/2020 - full contorller detection and range suport
 // Mario 06/12/2020 - Touchscreen suport
 // Jann  08/12/2020 - Added projectile colour change
+// Mário 16/12/2020 - playing the sound after the food check, 
+// Alanna 10/12/20 added sound effects for Melee hit, ranged hit and eating
+
 
 using System.Collections;
 using System.Collections.Generic;
@@ -39,6 +42,7 @@ public enum FoodType
     DANGO,
     SAKE,
     NOODLES,
+    NULL
 } 
 
 public enum WeaponType
@@ -51,7 +55,7 @@ public enum WeaponType
 /// This class stores the current weapon on the player and make im abel to use it 
 ///<summary>
 public class PlayerCombat_MarioFernandes : MonoBehaviour
-{
+{ 
     private WeaponUI_LouieWilliamson m_WeaponUI;
     private PlayerAnimation_LouieWilliamson m_animationScript;
     public GameObject m_projectile = null;
@@ -108,7 +112,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
     void Attack(InputAction cx, float chargedModifier = 1)
     {
-        //m_animationScript.TriggerAttackAnim();        
+        m_animationScript.TriggerAttackAnim();        
             
         if (EventSystem.current.currentSelectedGameObject != null && Application.isMobilePlatform)
         {
@@ -145,6 +149,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             m_direction.z = 0; 
 
             m_direction.Normalize();
+            PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_PlayerThrow); //added by alanna 10/12/20
             //TODO undo this comment
             //m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
             GameObject projectile = Instantiate(m_projectile, transform.position, transform.rotation);
@@ -166,6 +171,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             
             if(m_currentWeapon[m_weaponsIndex].m_ammunition <= 0)
             {
+                print("Destroy usege");
                 Destroy(m_currentWeapon[m_weaponsIndex].gameObject);
                 m_currentWeapon[m_weaponsIndex] = null;
             }
@@ -175,7 +181,8 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         else
         {
             //TODO uncomment this
-           // m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
+            // m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
+            PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_PlayerAttack); //added by alanna 10/12/20
 
             float distanceToClosestsEnemy = Mathf.Infinity;
                 GameObject CloseEnemy = null;
@@ -201,12 +208,14 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         
     }
 
-    public void Eat()
+    public void Eat()       
     {
-        m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Eating);
 
+     
         if (m_currentWeapon[m_weaponsIndex])
         {
+            PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_Eating); //aaded by alanna 10/12/20
+
             GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon[m_weaponsIndex].m_instaHeal);
 
             switch (m_currentWeapon[m_weaponsIndex].m_foodType)
@@ -242,17 +251,25 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
  
             m_playerHealthHungerScript.Eat(m_currentWeapon[m_weaponsIndex].m_hungerRestoreAmount);
 
+            print("Destroy Eating");
             Destroy(m_currentWeapon[m_weaponsIndex].gameObject);
             m_currentWeapon[m_weaponsIndex] = null;
 
         }
     }
 
-    public void ChangeWeapon() {
-        if(m_weaponsIndex == 1)
-             m_weaponsIndex = 0;
-             else
-             m_weaponsIndex = 1;
+    public void ChangeWeapon()
+    {
+        if (m_weaponsIndex == 1)
+        {
+            m_weaponsIndex = 0;
+            m_WeaponUI.SetActiveWeapon(true);
+        }
+        else
+        {
+            m_weaponsIndex = 1;
+            m_WeaponUI.SetActiveWeapon(false);
+        }
     }
 
     // Start is called before the first frame update
@@ -260,7 +277,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
     {
         m_currentWeapon = new WeaponsTemplate_MarioFernandes[2];
         m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
-        m_animationScript = GetComponentInChildren<PlayerAnimation_LouieWilliamson>();
+        m_animationScript = GetComponent<PlayerAnimation_LouieWilliamson>();
         m_playerHealthHungerScript = FindObjectOfType<PlayerHealthHunger_MarioFernandes>();
         m_audioManager = FindObjectOfType<AudioManager_LouieWilliamson>();
         Controller = GetComponent<PlayerController_JamieG>();
@@ -326,13 +343,25 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             m_WeaponUI.WeaponChange(m_currentWeapon[0].m_foodType, false, 0);
             m_WeaponUI.SetWeaponsUIAnimation(true);
 		}
-        else if(!m_currentWeapon[1] && collision.GetComponent<WeaponsTemplate_MarioFernandes>() && collision.GetComponent<WeaponsTemplate_MarioFernandes>().IsRanged())
+        else if(collision.GetComponent<WeaponsTemplate_MarioFernandes>() && collision.GetComponent<WeaponsTemplate_MarioFernandes>().IsRanged())
         {
+            if(!m_currentWeapon[1])
+            { 
             m_currentWeapon[1] = collision.GetComponent<WeaponsTemplate_MarioFernandes>();
             collision.gameObject.SetActive(false);
             collision.transform.parent = transform;
             m_WeaponUI.WeaponChange(m_currentWeapon[1].m_foodType, true, m_currentWeapon[1].m_ammunition);
             m_WeaponUI.SetWeaponsUIAnimation(true);
+            }else{
+                if(m_currentWeapon[1].m_foodType == collision.GetComponent<WeaponsTemplate_MarioFernandes>().m_foodType)
+                {
+                m_currentWeapon[1].m_ammunition += collision.GetComponent<WeaponsTemplate_MarioFernandes>().m_ammunition;
+                //Destroy(collision.gameObject);
+                print("Destroy ammunition");
+                m_WeaponUI.WeaponChange(m_currentWeapon[1].m_foodType, true, m_currentWeapon[1].m_ammunition);
+                m_WeaponUI.SetWeaponsUIAnimation(true);
+                }
+            }
         }
     }
 }

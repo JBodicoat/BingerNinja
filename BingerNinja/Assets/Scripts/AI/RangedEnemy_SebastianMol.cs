@@ -1,6 +1,7 @@
 ﻿//sebastian mol
 //sebastian mol 30/10/20 removed patrol function
 //sebastian mol 02/11/20 removed player behaviour switch replaced it with abstract functions
+// louie        11/12/2020 Attack animation
 
 using System.Collections;
 using System.Collections.Generic;
@@ -25,6 +26,9 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
     [Tooltip("speed of the projectile")]
     public float m_projectileSpeed;
 
+
+    private Enemy_Animation_LouieWilliamson enemyAnim;
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -36,7 +40,6 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
     /// </summary>
     internal override void AttackBehaviour()
     {
-        EnemyAttacks_SebastianMol.RangedAttack(m_playerTransform, transform, m_aimer, ref m_attackTimer, m_projectile, m_shootDeley);
+        EnemyAttacks_SebastianMol.RangedAttack(GetComponent<Enemy_Animation_LouieWilliamson>(), m_playerTransform, transform, m_aimer, ref m_attackTimer, m_projectile, m_shootDeley);
     }
-
 }
