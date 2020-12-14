@@ -109,7 +109,7 @@ public class LevelScripting : MonoBehaviour
                 {
                     keyTrigger = GameObject.Find("Key Trigger");
                     walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
-                    objInfWalls = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
+                    walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
                 }
                 break;
             case 12:
@@ -122,7 +122,7 @@ public class LevelScripting : MonoBehaviour
                 break;
             case 13:
                 {
-                    keyTrigger = GameObject.Find("Key Trigger");
+                    keyTrigger = GameObject.Find("Real Key");
                     walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
                     objInfWalls = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
                 }
@@ -130,7 +130,7 @@ public class LevelScripting : MonoBehaviour
             case 14:
                 {
                     levelLiftTrigger = GameObject.Find("Level 14 Lift");
-                    keyTrigger = GameObject.Find("Help");
+                    keyTrigger = GameObject.Find("Real Key");
                     doorCloseTrigger = GameObject.Find("DialogTrigger");
                     walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
                     walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
@@ -334,11 +334,6 @@ public class LevelScripting : MonoBehaviour
                     walls2.SetTile(new Vector3Int(13, 27, 0), null);
                     walls2.SetTile(new Vector3Int(13, 26, 0), null);
                     walls2.SetTile(new Vector3Int(13, 25, 0), null);
-                }
-                break;
-            case 17:
-                {
-                    levelLiftTrigger.SetActive(false);
                 }
                 break;
             case 18:
