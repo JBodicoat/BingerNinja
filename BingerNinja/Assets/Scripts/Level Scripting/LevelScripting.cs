@@ -28,7 +28,7 @@ public class LevelScripting : MonoBehaviour
     private Timeline_Script timeline;
     private float cinematicsTimer;
 
-
+    private WeaponUI_LouieWilliamson wpnUI;
     #endregion
 
     private void Awake()
@@ -354,6 +354,8 @@ public class LevelScripting : MonoBehaviour
             default:
                 break;
         }
+        wpnUI = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
+
         //if (SceneManager.GetActiveScene().buildIndex == 2)
         //{
         //    levelLiftTrigger.SetActive(false);
@@ -437,7 +439,9 @@ public class LevelScripting : MonoBehaviour
                     {
                         if (!keyTrigger.activeInHierarchy)
                         {
+                            wpnUI.setKey(false);
                             Debug.Log("key worked");
+
                             walls2.SetTile(new Vector3Int(6, 13, 0), null);
                             walls2.SetTile(new Vector3Int(5, 13, 0), null);
                             walls2.SetTile(new Vector3Int(4, 13, 0), null);
@@ -445,6 +449,11 @@ public class LevelScripting : MonoBehaviour
                             walls1.SetTile(new Vector3Int(3, 12, 0), null);
                             walls1.SetTile(new Vector3Int(4, 12, 0), null);
                             walls1.SetTile(new Vector3Int(5, 12, 0), null);
+
+
+                            keyUsed = true;
+                            
+
                         }
                     }
                 }
@@ -491,6 +500,8 @@ public class LevelScripting : MonoBehaviour
                     {
                         if (!keyTrigger.activeInHierarchy)
                         {
+                            wpnUI.setKey(false);
+                            keyUsed = true;
                             walls2.SetTile(new Vector3Int(26, 10, 0), null);
                             walls2.SetTile(new Vector3Int(26, 11, 0), null);
                             walls2.SetTile(new Vector3Int(26, 12, 0), null);
@@ -509,6 +520,8 @@ public class LevelScripting : MonoBehaviour
                     {
                         if (!keyTrigger.activeInHierarchy)
                         {
+                            wpnUI.setKey(false);
+                            keyUsed = true;
                             levelLiftTrigger.SetActive(true);
                         }
                     }
@@ -610,6 +623,8 @@ public class LevelScripting : MonoBehaviour
                     {
                         if (!keyTrigger.activeInHierarchy)
                         {
+                            wpnUI.setKey(false);
+                            keyUsed = true;
                             //door top
                             objInfWalls.SetTile(new Vector3Int(36, 32, 0), null);
                             objInfWalls.SetTile(new Vector3Int(37, 32, 0), null);
@@ -685,6 +700,8 @@ public class LevelScripting : MonoBehaviour
                     {
                         if (!keyTrigger.activeInHierarchy)
                         {
+                            wpnUI.setKey(false);
+                            keyUsed = true;
                             //door top
                             objInfWalls.SetTile(new Vector3Int(33, 17, 0), null);
                             objInfWalls.SetTile(new Vector3Int(34, 17, 0), null);
@@ -702,6 +719,7 @@ public class LevelScripting : MonoBehaviour
                     if (!keyTrigger.activeInHierarchy)
                     {
                         levelLiftTrigger.SetActive(true);
+                        wpnUI.setKey(false);
                     }
                 }
                 break;
@@ -759,15 +777,20 @@ public class LevelScripting : MonoBehaviour
                 break;
             case 19:
                 {
-                    if (!keyTrigger.activeInHierarchy)
+                    if (!keyUsed)
                     {
-                        walls1.SetTile(new Vector3Int(24, 10, 0), null);
-                        walls1.SetTile(new Vector3Int(25, 10, 0), null);
-                        walls1.SetTile(new Vector3Int(26, 10, 0), null);
-                        walls2.SetTile(new Vector3Int(25, 11, 0), null);
-                        walls2.SetTile(new Vector3Int(26, 11, 0), null);
-                        walls2.SetTile(new Vector3Int(27, 11, 0), null);
-                    }
+                        if (!keyTrigger.activeInHierarchy)
+                        {
+                            walls1.SetTile(new Vector3Int(24, 10, 0), null);
+                            walls1.SetTile(new Vector3Int(25, 10, 0), null);
+                            walls1.SetTile(new Vector3Int(26, 10, 0), null);
+                            walls2.SetTile(new Vector3Int(25, 11, 0), null);
+                            walls2.SetTile(new Vector3Int(26, 11, 0), null);
+                            walls2.SetTile(new Vector3Int(27, 11, 0), null);
+                            wpnUI.setKey(false);
+                            keyUsed = true;
+                        }
+                    }   
                 }
                 break;
             case 20:

@@ -1,6 +1,8 @@
 ﻿// Mário Fernandes
 
 // Mário 28/10/2020 - Add useble effects and substitute of the weapons to the upgraded ones
+//Louie  11/12/2020 - Added pickup ui
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +19,9 @@ public class UpgradedEffects_MarioFernandes : MonoBehaviour
     public float m_TempuraStrengthModifier = 1.5f;
     public float m_TempuraSpeedhModifier = 0.5f;
     public GameObject m_Dango = null; 
-    public GameObject m_Noodle = null; 
+    public GameObject m_Noodle = null;
+
+    private WeaponUI_LouieWilliamson wpnUI;
 
     //Would hapen whene you press the button to apply the sake effect
     public void SakeEffect()
@@ -25,7 +29,9 @@ public class UpgradedEffects_MarioFernandes : MonoBehaviour
         if(GetComponent<Inventory_JoaoBeijinho>().HasItem(ItemType.Sake, 1))
         {
             GetComponent<EffectManager_MarioFernandes>().AddEffect(new StrengthEffect_MarioFernandes(30, m_sakeStrengthModifier));
-            GetComponent<Inventory_JoaoBeijinho>().RemoveItem(ItemType.Sake, 1);   
+            GetComponent<Inventory_JoaoBeijinho>().RemoveItem(ItemType.Sake, 1);
+            wpnUI.setPickupImage(FoodType.SAKE);
+            wpnUI.setPickupAnim(false);
         }
     }
 
@@ -36,7 +42,9 @@ public class UpgradedEffects_MarioFernandes : MonoBehaviour
         {
             GetComponent<EffectManager_MarioFernandes>().AddEffect(new StrengthEffect_MarioFernandes(30, m_TempuraStrengthModifier));
             GetComponent<EffectManager_MarioFernandes>().AddEffect(new SpeedEffect_MarioFernandes(30, m_TempuraSpeedhModifier));  
-            GetComponent<Inventory_JoaoBeijinho>().RemoveItem(ItemType.Tempura, 1);   
+            GetComponent<Inventory_JoaoBeijinho>().RemoveItem(ItemType.Tempura, 1);
+            wpnUI.setPickupImage(FoodType.TEMPURA);
+            wpnUI.setPickupAnim(false);
         }
     }
 
@@ -77,7 +85,7 @@ public class UpgradedEffects_MarioFernandes : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        wpnUI = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
     }
 
     // Update is called once per frame

@@ -13,6 +13,7 @@ public class VendingMachine_Alanna_P : MonoBehaviour
 
     Inventory_JoaoBeijinho m_InvScript;
     PlayerController_JamieG m_LeftClick;
+    private WeaponUI_LouieWilliamson wpnUI;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,7 @@ public class VendingMachine_Alanna_P : MonoBehaviour
         NinjaP.text = "Ninja Points: ";
         m_InvScript = FindObjectOfType<Inventory_JoaoBeijinho>();
         m_LeftClick = FindObjectOfType<PlayerController_JamieG>();
+        wpnUI = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
     }
 
     private void Image_Click()
@@ -47,12 +49,15 @@ public class VendingMachine_Alanna_P : MonoBehaviour
                     {
                         // call sake action
                         m_InvScript.RemoveItem(ItemType.NinjaPoints, 25);
+                        wpnUI.setPickupImage(FoodType.SAKE);
+                        wpnUI.setPickupAnim(true);
                     }
 
                 }
                 if (hit.collider.gameObject.transform.position == Tempura.transform.position)
                 {
-                  
+                    wpnUI.setPickupImage(FoodType.TEMPURA);
+                    wpnUI.setPickupAnim(true);
                 }
                 if (hit.collider.gameObject.transform.position == Dango.transform.position)
                 {
