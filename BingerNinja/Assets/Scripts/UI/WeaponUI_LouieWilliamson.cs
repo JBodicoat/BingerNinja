@@ -32,6 +32,11 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     public List<Sprite> WeaponSprites = new List<Sprite>();
     private int rangedAmmo;
 
+    public Texture2D rangedCursor;
+    public Texture2D normalCursor;
+    private Vector2 normalOffset;
+    private Vector2 rangedOffset;
+
     //---- LIST KEY ----   //
     //  0     =   Fugu     //
     //  1     =   Squid    //
@@ -46,6 +51,7 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     {
         MeleeHighlight.SetActive(isMelee);
         RangedHighlight.SetActive(!isMelee);
+        SetCursor(!isMelee);
     }
     public void SetWeaponsUIAnimation(bool isShownIfTrue)
     {
@@ -99,6 +105,8 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
         weaponsAnim = GetComponent<Animator>();
         removeWeapon(true);
         removeWeapon(false);
+        normalOffset = new Vector2(4, 0);
+        rangedOffset = new Vector2( 8, 8);
     }
 
     void setName(string name, bool isRanged)
@@ -124,5 +132,16 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
         }
     }
 
+    void SetCursor(bool isRanged)
+    {
+        if (isRanged)
+        {
+            Cursor.SetCursor(rangedCursor, rangedOffset, CursorMode.Auto);
+        }
+        else
+        {
+            Cursor.SetCursor(normalCursor, normalOffset, CursorMode.Auto);
+        }
+    }
 
 }
