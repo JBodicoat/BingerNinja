@@ -13,6 +13,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController_JamieG : MonoBehaviour
 {
@@ -34,6 +35,8 @@ public class PlayerController_JamieG : MonoBehaviour
     public InputAction m_dropWeapons;
     public InputAction m_passDialogue;
 
+    protected int CurrentLevel;
+
     //Reference to the other player scripts
     private PlayerMovement_MarioFernandes m_playerMovementScript;
     //private PlayerHealthHunger_MarioFernandes playerHHScript;
@@ -43,7 +46,7 @@ public class PlayerController_JamieG : MonoBehaviour
     void Awake()
     {
         m_player = GameObject.FindGameObjectWithTag("Player");
-
+        CurrentLevel = SceneManager.GetActiveScene().buildIndex;
         m_playerMovementScript = m_player.GetComponent<PlayerMovement_MarioFernandes>();
         m_playerStealthScript = gameObject.GetComponent<PlayerStealth_JoaoBeijinho>();
     }
@@ -58,12 +61,17 @@ public class PlayerController_JamieG : MonoBehaviour
     }
 
     private void Update()
-    {   
-        if(m_roll.triggered&& m_playerMovementScript.isRolling==false)
+    {
+        
+        if (CurrentLevel >= 13)
         {
-            m_playerMovementScript.isRolling = true;
-            m_playerMovementScript.RollMovement();
+            if (m_roll.triggered && m_playerMovementScript.isRolling == false)
+            {
+                m_playerMovementScript.isRolling = true;
+                m_playerMovementScript.RollMovement();
+            }
         }
+
         if (m_crouch.triggered)
         {
             m_playerStealthScript.Crouch();
