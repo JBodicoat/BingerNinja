@@ -1,7 +1,8 @@
 ﻿//Jamie - Functions used to load different scenes
 
 //Jamie - 26/10/20 - First implemented
-//Jann  - 06/11/20 - Hooked up the savesystem and the checkpoints
+// Jann - 06/11/20 - Hooked up the savesystem and the checkpoints
+// Jann - 14/12/20 - New ResetToCheckpoint implementation
 
 using System;
 using System.Linq;
@@ -24,18 +25,8 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
 
     public void ResetToCheckpoint()
     {
-        Debug.Log("ResetToCheckpoint() method removed");
-        // GameplayData gameplayData = SaveLoadSystem_JamieG.LoadGameplay();
-        // m_checkpointOnReset = new Vector3(
-        //     gameplayData.m_checkpointPosition[0],
-        //     gameplayData.m_checkpointPosition[1],
-        //     gameplayData.m_checkpointPosition[2]);
-        //
-        // m_loadLastCheckpoint = true;
-        //
-        // LoadCurrentLevel();
-        //
-        // SceneManager.sceneLoaded += OnSceneLoaded;
+        int checkpointLevel = SaveLoadSystem_JamieG.LoadCheckpoint().m_lastCheckpointLevel;
+        LoadLevel(checkpointLevel > 0 ? checkpointLevel : 1);
     }
 
     //This will assume that the MainMenu scene is build index 0

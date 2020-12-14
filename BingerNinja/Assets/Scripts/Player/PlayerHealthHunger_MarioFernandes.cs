@@ -5,9 +5,8 @@
 // Mário 18/10/2020 - Add max health increase/decrease functions
 // Elliott 19/10/2020 - Added respawn on Death
 // Elliott 21/11/2020 - Added death effect and pause input
+// Jann  14/12/2020 - Dying restarts from the last checkpoint
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -87,11 +86,12 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
 
         // Run death sequence
     private void Die()
-    {       
-        gameObject.transform.position = GameObject.FindGameObjectWithTag("SaveCheckpoint").GetComponent<SaveSystem_ElliottDesouza>().m_currentCheckpoint.position;
+    {
         m_currentHealth = m_maxHealth;
         m_currentHunger = 100;
         print("GAME OVER");
+        
+        SceneManager_JamieG.Instance.ResetToCheckpoint();
     }
 
     // Start is called before the first frame update
