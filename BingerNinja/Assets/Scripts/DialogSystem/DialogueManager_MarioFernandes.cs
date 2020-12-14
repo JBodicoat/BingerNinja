@@ -29,7 +29,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     public Text m_nameText;
     public Text m_dialogueText;
     public float m_TextAnimationSpeed = 0;
-
+   
     private Queue<string> m_sentences;
 
     public TextAsset m_csvFile;
@@ -216,7 +216,8 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     void PauseGame()
     {
         playerControllerScript.OnDisable();
-
+        playerControllerScript.GetComponentInParent<PlayerHealthHunger_MarioFernandes>().m_paused = true;
+        playerControllerScript.GetComponentInParent<EffectManager_MarioFernandes>().m_paused = true;
         EnemysAI = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject Enemy in EnemysAI)
         {
@@ -227,7 +228,8 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     void ResumeGame()
     {
         playerControllerScript.OnEnable();
-
+        playerControllerScript.GetComponentInParent<PlayerHealthHunger_MarioFernandes>().m_paused = false;
+        playerControllerScript.GetComponentInParent<EffectManager_MarioFernandes>().m_paused = false;
         EnemysAI = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject Enemy in EnemysAI)
         {
