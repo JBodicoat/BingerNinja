@@ -28,8 +28,8 @@ public static class AudioFiles
     public static string Music_Level4 = "Music_Level4";
     public static string Music_Level5 = "Music_Level5";
     public static string Music_Level6 = "Music_Level6";
-    public static string Music_Level7 = "Music_Level7";
-
+    public static string Music_Level7 = "Music_Level7";    
+    public static string Sound_DialogSFX = "Sound_DialogSFX";
     public static TextAsset GetAudio(string filename)
     {
         TextAsset file = Resources.Load<TextAsset>("Audio/" + filename);

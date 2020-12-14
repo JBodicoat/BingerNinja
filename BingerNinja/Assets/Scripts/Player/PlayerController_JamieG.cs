@@ -46,6 +46,7 @@ public class PlayerController_JamieG : MonoBehaviour
 
         m_playerMovementScript = m_player.GetComponent<PlayerMovement_MarioFernandes>();
         m_playerStealthScript = gameObject.GetComponent<PlayerStealth_JoaoBeijinho>();
+        m_passDialogue.Enable();
     }
     
     void FixedUpdate()
@@ -84,7 +85,6 @@ public class PlayerController_JamieG : MonoBehaviour
         m_switchWeapons.Enable();
         m_dropWeapons.Enable();
         m_aim.Enable();
-        m_passDialogue.Enable();
         m_changeLevel.Enable();
     }
 
@@ -100,7 +100,6 @@ public class PlayerController_JamieG : MonoBehaviour
         m_switchWeapons.Disable();
         m_dropWeapons.Disable();
         m_aim.Disable();
-        m_passDialogue.Disable();
         m_changeLevel.Disable();
     }
     #endregion
