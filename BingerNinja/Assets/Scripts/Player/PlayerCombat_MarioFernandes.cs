@@ -112,7 +112,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
     void Attack(InputAction cx, float chargedModifier = 1)
     {
-        //m_animationScript.TriggerAttackAnim();        
+        m_animationScript.TriggerAttackAnim();        
             
         if (EventSystem.current.currentSelectedGameObject != null && Application.isMobilePlatform)
         {
@@ -277,7 +277,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
     {
         m_currentWeapon = new WeaponsTemplate_MarioFernandes[2];
         m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
-        m_animationScript = GetComponentInChildren<PlayerAnimation_LouieWilliamson>();
+        m_animationScript = GetComponent<PlayerAnimation_LouieWilliamson>();
         m_playerHealthHungerScript = FindObjectOfType<PlayerHealthHunger_MarioFernandes>();
         m_audioManager = FindObjectOfType<AudioManager_LouieWilliamson>();
         Controller = GetComponent<PlayerController_JamieG>();

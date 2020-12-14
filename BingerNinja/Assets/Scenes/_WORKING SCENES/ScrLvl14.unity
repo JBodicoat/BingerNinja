@@ -152,11 +152,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4362767424123825809, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.17
+      value: -0.63
       objectReference: {fileID: 0}
     - target: {fileID: 4362767424123825809, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 106.44
+      value: 108.4
       objectReference: {fileID: 0}
     - target: {fileID: 4362767424123825809, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_LocalPosition.z
@@ -237,8 +237,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vents: {fileID: 0}
-  bottomDoorTile: {fileID: 0}
-  topDoorTile: {fileID: 0}
+  bottomDoorTile: {fileID: 11400000, guid: 8433d98a48b6b5042936dda88ace5ed5, type: 2}
+  topDoorTile: {fileID: 11400000, guid: 91cee290f550c6d48addc9afa492bfcd, type: 2}
   currentLevel: 0
 --- !u!114 &32747838 stripped
 MonoBehaviour:
@@ -35236,7 +35236,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 504614811}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.98, y: 105.2, z: 0}
+  m_LocalPosition: {x: -3.18, y: 105.12, z: 0}
   m_LocalScale: {x: 2.5, y: 1.3157896, z: 1}
   m_Children:
   - {fileID: 1628554561}
@@ -35388,6 +35388,10 @@ PrefabInstance:
       propertyPath: m_itemQuantity
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7986591668801194014, guid: f21454a5048d98940bd63158bf79d43a, type: 3}
+      propertyPath: m_inventory
+      value: 
+      objectReference: {fileID: 32747836}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f21454a5048d98940bd63158bf79d43a, type: 3}
 --- !u!1 &586888391
@@ -37825,6 +37829,10 @@ PrefabInstance:
     - target: {fileID: 7882151871028722941, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_Name
       value: UICanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7882151871028722941, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7882151872350534479, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_AnchorMax.x

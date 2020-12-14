@@ -135,7 +135,7 @@ public class LevelScripting : MonoBehaviour
                     walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
                     walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
                     bottomDoorTile = walls1.GetTile<Tile>(new Vector3Int(12, 26, 0));
-                    topDoorTile = walls1.GetTile<Tile>(new Vector3Int(13, 27, 0));
+                    topDoorTile = walls2.GetTile<Tile>(new Vector3Int(13, 27, 0));
                 }
                 break;
             case 15:
@@ -502,12 +502,12 @@ public class LevelScripting : MonoBehaviour
                         {
                             wpnUI.setKey(false);
                             keyUsed = true;
-                            walls2.SetTile(new Vector3Int(26, 10, 0), null);
-                            walls2.SetTile(new Vector3Int(26, 11, 0), null);
-                            walls2.SetTile(new Vector3Int(26, 12, 0), null);
-                            walls1.SetTile(new Vector3Int(25, 9, 0), null);
-                            walls1.SetTile(new Vector3Int(25, 10, 0), null);
-                            walls1.SetTile(new Vector3Int(25, 11, 0), null);
+                            walls2.SetTile(new Vector3Int(25, 11, 0), null);
+                            walls2.SetTile(new Vector3Int(25, 10, 0), null);
+                            walls2.SetTile(new Vector3Int(25, 9, 0), null);
+                            walls1.SetTile(new Vector3Int(24, 9, 0), null);
+                            walls1.SetTile(new Vector3Int(24, 10, 0), null);
+                            walls1.SetTile(new Vector3Int(24, 8, 0), null);
                         }
                     }
 
@@ -574,24 +574,24 @@ public class LevelScripting : MonoBehaviour
                     {
                         if (!keyTrigger.activeInHierarchy)
                         {
-                            walls2.SetTile(new Vector3Int(23, 28, 0), null);
+                            walls2.SetTile(new Vector3Int(22, 28, 0), null);
                             walls2.SetTile(new Vector3Int(23, 29, 0), null);
-                            walls2.SetTile(new Vector3Int(23, 30, 0), null);
+                            walls2.SetTile(new Vector3Int(22, 27, 0), null);
 
-                            walls1.SetTile(new Vector3Int(22, 27, 0), null);
-                            walls1.SetTile(new Vector3Int(22, 28, 0), null);
-                            walls1.SetTile(new Vector3Int(22, 29, 0), null);
+                            walls1.SetTile(new Vector3Int(21, 27, 0), null);
+                            walls1.SetTile(new Vector3Int(21, 28, 0), null);
+                            walls1.SetTile(new Vector3Int(21, 26, 0), null);
 
                         }
                         if (!keyTriggerTwo.activeInHierarchy)
                         {
-                            walls2.SetTile(new Vector3Int(30, 10, 0), null);
-                            walls2.SetTile(new Vector3Int(30, 11, 0), null);
-                            walls2.SetTile(new Vector3Int(30, 12, 0), null);
+                            walls2.SetTile(new Vector3Int(29, 10, 0), null);
+                            walls2.SetTile(new Vector3Int(29, 11, 0), null);
+                            walls2.SetTile(new Vector3Int(29, 9, 0), null);
 
-                            walls1.SetTile(new Vector3Int(29, 9, 0), null);
-                            walls1.SetTile(new Vector3Int(29, 10, 0), null);
-                            walls1.SetTile(new Vector3Int(29, 11, 0), null);
+                            walls1.SetTile(new Vector3Int(28, 9, 0), null);
+                            walls1.SetTile(new Vector3Int(28, 10, 0), null);
+                            walls1.SetTile(new Vector3Int(28, 8, 0), null);
                         }
                     }
                 }
@@ -626,36 +626,36 @@ public class LevelScripting : MonoBehaviour
                             wpnUI.setKey(false);
                             keyUsed = true;
                             //door top
-                            objInfWalls.SetTile(new Vector3Int(36, 32, 0), null);
-                            objInfWalls.SetTile(new Vector3Int(37, 32, 0), null);
-                            objInfWalls.SetTile(new Vector3Int(38, 32, 0), null);
+                            walls2.SetTile(new Vector3Int(36, 32, 0), null);
+                            walls2.SetTile(new Vector3Int(37, 32, 0), null);
+                            walls2.SetTile(new Vector3Int(38, 32, 0), null);
 
                             walls1.SetTile(new Vector3Int(35, 31, 0), null);
                             walls1.SetTile(new Vector3Int(36, 31, 0), null);
                             walls1.SetTile(new Vector3Int(37, 31, 0), null);
 
                             //door mid-right
-                            objInfWalls.SetTile(new Vector3Int(33, 19, 0), null);
-                            objInfWalls.SetTile(new Vector3Int(33, 18, 0), null);
-                            objInfWalls.SetTile(new Vector3Int(33, 17, 0), null);
+                            walls2.SetTile(new Vector3Int(33, 19, 0), null);
+                            walls2.SetTile(new Vector3Int(33, 18, 0), null);
+                            walls2.SetTile(new Vector3Int(33, 17, 0), null);
 
                             walls1.SetTile(new Vector3Int(32, 18, 0), null);
                             walls1.SetTile(new Vector3Int(32, 17, 0), null);
                             walls1.SetTile(new Vector3Int(32, 16, 0), null);
 
                             //door right
-                            objInfWalls.SetTile(new Vector3Int(35, 31, 0), null);
-                            objInfWalls.SetTile(new Vector3Int(36, 31, 0), null);
-                            objInfWalls.SetTile(new Vector3Int(37, 31, 0), null);
+                            walls2.SetTile(new Vector3Int(35, 31, 0), null);
+                            walls2.SetTile(new Vector3Int(36, 31, 0), null);
+                            walls2.SetTile(new Vector3Int(37, 31, 0), null);
 
                             walls1.SetTile(new Vector3Int(38, 10, 0), null);
                             walls1.SetTile(new Vector3Int(37, 10, 0), null);
                             walls1.SetTile(new Vector3Int(36, 10, 0), null);
 
                             //door left
-                            objInfWalls.SetTile(new Vector3Int(11, 26, 0), null);
-                            objInfWalls.SetTile(new Vector3Int(12, 26, 0), null);
-                            objInfWalls.SetTile(new Vector3Int(13, 26, 0), null);
+                            walls2.SetTile(new Vector3Int(11, 26, 0), null);
+                            walls2.SetTile(new Vector3Int(12, 26, 0), null);
+                            walls2.SetTile(new Vector3Int(13, 26, 0), null);
 
                             walls1.SetTile(new Vector3Int(10, 25, 0), null);
                             walls1.SetTile(new Vector3Int(11, 25, 0), null);
@@ -703,9 +703,9 @@ public class LevelScripting : MonoBehaviour
                             wpnUI.setKey(false);
                             keyUsed = true;
                             //door top
-                            objInfWalls.SetTile(new Vector3Int(33, 17, 0), null);
-                            objInfWalls.SetTile(new Vector3Int(34, 17, 0), null);
-                            objInfWalls.SetTile(new Vector3Int(35, 17, 0), null);
+                            walls2.SetTile(new Vector3Int(33, 17, 0), null);
+                            walls2.SetTile(new Vector3Int(34, 17, 0), null);
+                            walls2.SetTile(new Vector3Int(35, 17, 0), null);
 
                             walls1.SetTile(new Vector3Int(34, 16, 0), null);
                             walls1.SetTile(new Vector3Int(33, 16, 0), null);
@@ -781,12 +781,12 @@ public class LevelScripting : MonoBehaviour
                     {
                         if (!keyTrigger.activeInHierarchy)
                         {
-                            walls1.SetTile(new Vector3Int(24, 10, 0), null);
-                            walls1.SetTile(new Vector3Int(25, 10, 0), null);
-                            walls1.SetTile(new Vector3Int(26, 10, 0), null);
-                            walls2.SetTile(new Vector3Int(25, 11, 0), null);
-                            walls2.SetTile(new Vector3Int(26, 11, 0), null);
-                            walls2.SetTile(new Vector3Int(27, 11, 0), null);
+                            walls1.SetTile(new Vector3Int(24, 9, 0), null);
+                            walls1.SetTile(new Vector3Int(25, 9, 0), null);
+                            walls1.SetTile(new Vector3Int(23, 9, 0), null);
+                            walls2.SetTile(new Vector3Int(25, 10, 0), null);
+                            walls2.SetTile(new Vector3Int(26, 10, 0), null);
+                            walls2.SetTile(new Vector3Int(24, 10, 0), null);
                             wpnUI.setKey(false);
                             keyUsed = true;
                         }
@@ -1125,12 +1125,13 @@ public class LevelScripting : MonoBehaviour
             //Mechanic for closing the doors behind the player on lvl 14
             if (other.gameObject == doorCloseTrigger && !doorsClosed)
             {
-                walls1.SetTile(new Vector3Int(12, 26, 0), bottomDoorTile);
-                walls1.SetTile(new Vector3Int(12, 25, 0), bottomDoorTile);
-                walls1.SetTile(new Vector3Int(12, 24, 0), bottomDoorTile);
+               
                 walls2.SetTile(new Vector3Int(13, 27, 0), topDoorTile);
                 walls2.SetTile(new Vector3Int(13, 26, 0), topDoorTile);
                 walls2.SetTile(new Vector3Int(13, 25, 0), topDoorTile);
+                walls1.SetTile(new Vector3Int(12, 26, 0), bottomDoorTile);
+                walls1.SetTile(new Vector3Int(12, 25, 0), bottomDoorTile);
+                walls1.SetTile(new Vector3Int(12, 24, 0), bottomDoorTile);
                 doorsClosed = true;
             }
         }
