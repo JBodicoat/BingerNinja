@@ -8,9 +8,8 @@
 //Sebastian Mol 10/12/2020 - made enemy health back to full after player death
 //Sebastian Mol 12/12/2020 - made enemy loose intrest on player death
 //Alanna 10/12/2020 added sound effects for player death and damage to player
+// Jann  14/12/2020 - Dying restarts from the last checkpoint
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -92,13 +91,14 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
 
         // Run death sequence
     private void Die()
-    {       
-        gameObject.transform.position = GameObject.FindGameObjectWithTag("SaveCheckpoint").GetComponent<SaveSystem_ElliottDesouza>().m_currentCheckpoint.position;
+    {
         m_currentHealth = m_maxHealth;
         m_currentHunger = 100;
         HealAllEnemies();
         AllEnemiesLooseIntrest();
         print("GAME OVER");
+        
+        SceneManager_JamieG.Instance.ResetToCheckpoint();
     }
 
     private void HealAllEnemies()
