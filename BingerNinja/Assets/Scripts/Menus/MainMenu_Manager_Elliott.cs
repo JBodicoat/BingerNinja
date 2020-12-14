@@ -23,7 +23,7 @@ public class MainMenu_Manager_Elliott : MonoBehaviour
     public GameObject m_settingMenu;
     protected bool m_openSettings;
     private int m_lastCheckpointLevel;
-    
+
     public void Resume()
     {
         if (m_lastCheckpointLevel > 0)
