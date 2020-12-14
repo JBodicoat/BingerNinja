@@ -25,6 +25,7 @@ using UnityEngine.UI;
 /// </summary>
 public class DialogueManager_MarioFernandes : MonoBehaviour
 {
+    public GameObject m_dialogBox;
     public Text m_nameText;
     public Text m_dialogueText;
     public float m_TextAnimationSpeed = 0;
@@ -60,7 +61,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         m_wpnUI.SetWeaponsUIAnimation(false);
         PauseGame();        
 
-        m_nameText.transform.parent.gameObject.SetActive(true);
+        m_dialogBox.SetActive(true);
 
         m_nameText.text = dialogue.m_name;
 
@@ -110,7 +111,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     {
         //End Effect
 
-        m_nameText.transform.parent.gameObject.SetActive(false);
+        m_dialogBox.SetActive(false);
 
         m_wpnUI.SetWeaponsUIAnimation(true);
         ResumeGame();
@@ -181,7 +182,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         }
     }
 
-    void PauseGame()
+    public void PauseGame()
     {
         playerControllerScript.m_movement.Disable();
         playerControllerScript.m_attackTap.Disable();
@@ -197,7 +198,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         }
     }
 
-    void ResumeGame()
+    public void ResumeGame()
     {
         playerControllerScript.m_movement.Enable();
         playerControllerScript.m_attackTap.Enable();
@@ -216,8 +217,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
-        
+        m_dialogBox = m_nameText.transform.parent.gameObject;
         playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
         m_wpnUI = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
         m_sentences = new Queue<string>();
@@ -229,7 +229,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     }
 
     private void Update() {
-        if(m_nameText.transform.parent.gameObject.active && playerControllerScript.m_passDialogue.triggered)
+        if(m_dialogBox.active && playerControllerScript.m_passDialogue.triggered)
         {
             DisplayNextSentence();
         }

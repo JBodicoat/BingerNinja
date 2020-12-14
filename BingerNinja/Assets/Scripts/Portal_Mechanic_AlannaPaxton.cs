@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // alanna 09/11/20, needs to be added onto player object, then create portals and tag them appropriately. Also add animation if wanted.
 //alanna 19/11/20 this code just needs to be added onto player. when making portals in hierarchy pair the portals up so they have 1 parent and one child, then this code should work for all of them.
@@ -19,6 +20,8 @@ public class Portal_Mechanic_AlannaPaxton : MonoBehaviour
                 // Portal();
                 if (collision.transform.childCount > 0)
                 {
+                    SceneManager_JamieG.Instance.FadeBoth();
+                    
                     GameObject ChildGameObject1 = collision.transform.GetChild(0).gameObject;
                     Vector2 child_pos = ChildGameObject1.transform.position;
                     this.transform.position = child_pos;
@@ -46,6 +49,4 @@ public class Portal_Mechanic_AlannaPaxton : MonoBehaviour
         }
         
     }
-
-
 }
