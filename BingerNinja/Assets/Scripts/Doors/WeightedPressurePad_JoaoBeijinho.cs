@@ -115,12 +115,12 @@ public class WeightedPressurePad_JoaoBeijinho : MonoBehaviour
         {
             if (collision.tag == m_playerTag || collision.tag == m_crateTag || collision.tag == m_meleeWeaponTag)//collision with every array object except Projectile
             {
-                walls1.SetTile(new Vector3Int(12, 26, 0), m_downDoorPart);
-                walls1.SetTile(new Vector3Int(12, 25, 0), m_downDoorPart);
-                walls1.SetTile(new Vector3Int(12, 24, 0), m_downDoorPart);
-                walls2.SetTile(new Vector3Int(13, 27, 0), m_upDoorPart);
-                walls2.SetTile(new Vector3Int(13, 26, 0), m_upDoorPart);
-                walls2.SetTile(new Vector3Int(13, 25, 0), m_upDoorPart);
+                //walls1.SetTile(new Vector3Int(12, 26, 0), m_downDoorPart);
+                //walls1.SetTile(new Vector3Int(12, 25, 0), m_downDoorPart);
+                //walls1.SetTile(new Vector3Int(12, 24, 0), m_downDoorPart);
+                //walls2.SetTile(new Vector3Int(13, 27, 0), m_upDoorPart);
+                //walls2.SetTile(new Vector3Int(13, 26, 0), m_upDoorPart);
+                //walls2.SetTile(new Vector3Int(13, 25, 0), m_upDoorPart);
             }
             // m_doorCollider.GetComponent<Collider2D>().enabled = true;//Close door
         }
