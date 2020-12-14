@@ -18,6 +18,7 @@
 //sebastian mol 29/11/2020 creaeted spece for exlemation mark adn completed damage take for last boss
 //Elliott Desouza 30/11/2020 added a funtion (OnceLostContactEffect) which instanshates the Question mark prefab.
 // Alanna & Elliott 07/12/20 Added Ninja points when getting a critical hit (sneak attack on enemy) 
+// Alanna 10/12/20 added death sound effect for enemies 
 
 using System.Collections;
 using System.Collections.Generic;
@@ -547,6 +548,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     {
         if(m_health <= 0)
         {
+            PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_Death);
             if (m_dropItem)
             {
                 Instantiate(m_dropItem, transform.position, Quaternion.identity);
