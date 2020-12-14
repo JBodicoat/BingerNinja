@@ -15,11 +15,12 @@ public class PauseMenuManager_ElliottDesouza : MonoBehaviour
     public GameObject m_player;
     public GameObject m_settingMenu;
     protected bool m_openSettings;
-    
+
     public void Resume()
     {
         //set active to false
         gameObject.SetActive(false);
+        Time.timeScale = 1f;
     }
     
     public void ReturnToCheckpoint()
@@ -27,12 +28,14 @@ public class PauseMenuManager_ElliottDesouza : MonoBehaviour
         // m_player.transform.position = GameObject.FindGameObjectWithTag("SaveCheckpoint").GetComponent<SaveSystem_ElliottDesouza>().m_currentCheckpoint.position;
         /// note might be better to call the function die(); in the player script as he will not respawn with full health. the function is private
         SceneManager_JamieG.Instance.ResetToCheckpoint();
+        Time.timeScale = 1f;
     }
 
     public void ResetScene()
     {
         // SceneManager.LoadScene("currnet seane");
         SceneManager_JamieG.Instance.ResetLevel();
+        Time.timeScale = 1f;
     }
 
     public void OpenSettingsMenu()
@@ -46,6 +49,7 @@ public class PauseMenuManager_ElliottDesouza : MonoBehaviour
         SceneManager_JamieG.Instance.SaveGameState();
         
         SceneManager_JamieG.Instance.LoadMainMenu();
+        Time.timeScale = 1f;
     }
 
     void Start()
@@ -71,5 +75,6 @@ public class PauseMenuManager_ElliottDesouza : MonoBehaviour
         {
             OpenSettingsMenu();
         }
+        
     }
 }
