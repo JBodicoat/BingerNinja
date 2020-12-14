@@ -2,8 +2,8 @@
 
 //Elliott 07/10/2020 - made it so it applys a texture to the object.
 //Elliott 30/12/2020  added  = transform.Find("EnemySprite") to the code in the start function.
-using System.Collections;
-using System.Collections.Generic;
+// Jann   11/12/2020 - This class now uses its own colour changer which fixes two bugs 
+
 using UnityEngine;
 
 /// this script changes the color to an object that has been hit
@@ -38,25 +38,12 @@ public class HitEffectElliott : MonoBehaviour
         }
     }
 
-    //public void StartHitEffect(bool isCritical)
-    //{
-    //    mStoreColor = ColorChanger_Jann.Instance.SpriteColors;
-    //    InitColorSwapTex();
-    //    mHitEffectTimer = cHitEffectTime;
-    //    SwapAllSpritesColorsTemporarily(isCritical ? ColorChanger_Jann.Instance.ColorOutGrey174 :
-    //           ColorChanger_Jann.Instance.ColorOutGrey122);
-    //}
     public void StartHitEffect(bool isCritical)
     {
-        //mStoreColor = GameObject.Find("ColorChanger").GetComponent<ColorChanger_Jann>().m_spriteColors;
-        mStoreColor = FindObjectOfType<ColorChanger_Jann>().m_spriteColors;
-        InitColorSwapTex();
         mHitEffectTimer = cHitEffectTime;
         SwapAllSpritesColorsTemporarily(mStoreColor[isCritical ? m_critical : m_nonCritical]);
-
     }
-
-
+    
     public void InitColorSwapTex()
     {
         Texture2D colorSwapTex = new Texture2D(256, 1, TextureFormat.RGBA32, false, false);
@@ -72,15 +59,26 @@ public class HitEffectElliott : MonoBehaviour
 
         mSpriteColors = new Color[colorSwapTex.width];
         mColorSwapTex = colorSwapTex;
-
+    }
+    
+    private void SwapColor(int index, Color color)
+    {
+        mSpriteColors[index] = color;
+        mColorSwapTex.SetPixel(index, 0, color);
     }
 
     // Start is called before the first frame update
     void Start()
     {
         mSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        mStoreColor = ColorChanger_Jann.Instance.m_spriteColors;
+        
         InitColorSwapTex();
-
+        
+        SwapColor(60, mStoreColor[60]);
+        SwapColor(122, mStoreColor[122]);
+        SwapColor(174, mStoreColor[174]);
+        mColorSwapTex.Apply();
     }
 
     // Update is called once per frame
