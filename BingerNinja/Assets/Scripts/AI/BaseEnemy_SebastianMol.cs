@@ -131,6 +131,8 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     protected PlayerStealth_JoaoBeijinho m_playerStealthScript;
     private int m_crouchObjectLayer = 1 << 8;
 
+    private EnemyHealthBar healthBar;
+
     #region finite state machine
     /// <summary>
     /// abstract class used to provied the logic for the wonder state
@@ -713,6 +715,8 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         }
 
         OnDeath();//checks to see if enemy is dead 
+
+        healthBar.UpdateHealth(m_health);
     }
 
     /// <summary>
@@ -838,6 +842,8 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         m_crouchObjectLayer = ~m_crouchObjectLayer;
         m_HitEffectElliott = GetComponent<HitEffectElliott>();
         m_cameraShake = Camera.main.GetComponent<CameraShakeElliott>();
+
+        healthBar = GetComponentInChildren<EnemyHealthBar>();
     }
 
     private void Update()
