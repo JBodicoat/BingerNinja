@@ -832,10 +832,14 @@ public class LevelScripting : MonoBehaviour
                         {
                             //if boss is ninjaroth change to Good Ending
                             if(timeline.playableDirector != timeline.timeline[1])
-                                timeline.ChangeDirector("Good Ending");
+                                timeline.ChangeDirector("Bad Ending");
                             bossDialogue.TriggerDialogue(bossDialogIndex);
                             bossDialogIndex++;
                             levelLiftTrigger.SetActive(true);
+                            if(bossDialogIndex == 19)
+                            {
+                                bossDead = true;
+                            }
                             //if (bossDialogIndex == 19)
                             //{
                             //    // just for timeline QA
