@@ -22,8 +22,8 @@ public class LevelScripting_JW : MonoBehaviour
 
         if (SceneManager.GetActiveScene().buildIndex == 12)
         {
-            boss = GameObject.Find("Yakuza Boss").GetComponent<BaseEnemy_SebastianMol>();
-            bossDialogue = GameObject.Find("Yakuza Boss").GetComponent<BossDialogue_MarioFernandes>();
+            boss = GameObject.Find("Yakuza Leader").GetComponent<BaseEnemy_SebastianMol>();
+            bossDialogue = GameObject.Find("Yakuza Leader").GetComponent<BossDialogue_MarioFernandes>();
             levelLiftTrigger = GameObject.Find("Level 12 Lift");
         }
         if(SceneManager.GetActiveScene().buildIndex == 14)
