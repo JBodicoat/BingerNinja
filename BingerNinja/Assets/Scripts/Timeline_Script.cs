@@ -15,12 +15,12 @@ public class Timeline_Script : MonoBehaviour
     public void PlayTimeline()
     {
         playableDirector.playableGraph.GetRootPlayable(0).SetSpeed(1);
-        nextButton.SetActive(false);
+        //nextButton.SetActive(false);
     }
     public void PauseTimeline()
     {
         playableDirector.playableGraph.GetRootPlayable(0).SetSpeed(0);
-        nextButton.SetActive(true);
+       // nextButton.SetActive(true);
     }
     public void ChangeDirector(string directorName = "Good Ending / Bad Ending")
     {

@@ -179,6 +179,7 @@ public class LevelScripting : MonoBehaviour
                     boss = GameObject.Find("Ninjaroth").GetComponent<BaseEnemy_SebastianMol>();
                     bossDialogue = GameObject.Find("Ninjaroth").GetComponent<BossDialogue_MarioFernandes>();
                     dialogBox = GameObject.Find("DialogBox");
+                    levelLiftTrigger = GameObject.Find("Level 20 Lift");
                     // find game object with timeline script to change playable director
                     timeline = GameObject.Find("Cinematics").GetComponent<Timeline_Script>();
                 }
@@ -347,6 +348,10 @@ public class LevelScripting : MonoBehaviour
                     levelBossIntro = false;
                     levelLiftTrigger.SetActive(false);
                 }
+                break;
+
+            case 20:
+                levelLiftTrigger.SetActive(false);
                 break;
             default:
                 break;
@@ -827,22 +832,23 @@ public class LevelScripting : MonoBehaviour
                         {
                             //if boss is ninjaroth change to Good Ending
                             if(timeline.playableDirector != timeline.timeline[1])
-                                timeline.ChangeDirector("Bad Ending");
+                                timeline.ChangeDirector("Good Ending");
                             bossDialogue.TriggerDialogue(bossDialogIndex);
                             bossDialogIndex++;
-                            if (bossDialogIndex == 19)
-                            {
-                                // just for timeline QA
-                                timeline.ChangeDirector("Good Ending");
-                                bossDialogue.TriggerDialogue(bossDialogIndex);
-                                bossDialogIndex++;
-                                if (bossDialogIndex == 27)
-                                bossDead = true;
-                                //dramatic death SE
-                                //freeze on enemy as he dies  
-                                //end cinematic
-                                levelLiftTrigger.SetActive(true);
-                            }
+                            levelLiftTrigger.SetActive(true);
+                            //if (bossDialogIndex == 19)
+                            //{
+                            //    // just for timeline QA
+                            //    timeline.ChangeDirector("Good Ending");
+                            //    bossDialogue.TriggerDialogue(bossDialogIndex);
+                            //    bossDialogIndex++;
+                            //    if (bossDialogIndex == 27)
+                            //    bossDead = true;
+                            //    //dramatic death SE
+                            //    //freeze on enemy as he dies  
+                            //    //end cinematic
+                            //    levelLiftTrigger.SetActive(true);
+                            //}
 
                         }
                     }
