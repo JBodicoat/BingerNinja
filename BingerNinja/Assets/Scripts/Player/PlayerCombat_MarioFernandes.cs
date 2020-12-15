@@ -356,7 +356,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
                 if(m_currentWeapon[1].m_foodType == collision.GetComponent<WeaponsTemplate_MarioFernandes>().m_foodType)
                 {
                 m_currentWeapon[1].m_ammunition += collision.GetComponent<WeaponsTemplate_MarioFernandes>().m_ammunition;
-                //Destroy(collision.gameObject);
+                Destroy(collision.gameObject);
                 print("Destroy ammunition");
                 m_WeaponUI.WeaponChange(m_currentWeapon[1].m_foodType, true, m_currentWeapon[1].m_ammunition);
                 m_WeaponUI.SetWeaponsUIAnimation(true);
