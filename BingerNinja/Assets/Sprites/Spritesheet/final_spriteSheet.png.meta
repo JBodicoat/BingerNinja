@@ -121,7 +121,7 @@ TextureImporter:
     second: final_spriteSheet_38
   - first:
       213: 406288442662635678
-    second: final_spriteSheet_39
+    second: button_panel_large
   - first:
       213: -7338801587467474657
     second: final_spriteSheet_40
@@ -520,7 +520,7 @@ TextureImporter:
     second: final_spriteSheet_38
   - first:
       213: -249497005168389393
-    second: final_spriteSheet_39
+    second: button_panel_large
   - first:
       213: 9013687293760902962
     second: final_spriteSheet_40
@@ -832,7 +832,7 @@ TextureImporter:
     second: Portal2
   - first:
       213: -5378558562916051623
-    second: final_spriteSheet_143
+    second: Projectile
   - first:
       213: -6972949491924580636
     second: final_spriteSheet_144
@@ -853,13 +853,13 @@ TextureImporter:
     second: Portal3
   - first:
       213: -7963252811018408492
-    second: final_spriteSheet_150
+    second: Cursor
   - first:
       213: 495612740403554975
-    second: final_spriteSheet_151
+    second: Shuriken
   - first:
       213: -1507713481849634344
-    second: final_spriteSheet_152
+    second: Knife
   - first:
       213: -1422236157599775428
     second: Princess
@@ -868,10 +868,10 @@ TextureImporter:
     second: Portal4
   - first:
       213: 495181254013664378
-    second: final_spriteSheet_155
+    second: Cage_top
   - first:
       213: -5595431056854527115
-    second: final_spriteSheet_156
+    second: Cage_bottom
   - first:
       213: -4675137417111580688
     second: final_spriteSheet_157
@@ -2570,7 +2570,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_39
+      name: button_panel_large
       rect:
         serializedVersion: 2
         x: 0
@@ -6182,11 +6182,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_143
+      name: Projectile
       rect:
         serializedVersion: 2
-        x: 622
-        y: 105
+        x: 551
+        y: 143
         width: 16
         height: 16
       alignment: 0
@@ -6329,11 +6329,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_150
+      name: Cursor
       rect:
         serializedVersion: 2
-        x: 601
-        y: 106
+        x: 535
+        y: 159
         width: 16
         height: 16
       alignment: 0
@@ -6350,11 +6350,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_151
+      name: Shuriken
       rect:
         serializedVersion: 2
-        x: 560
-        y: 81
+        x: 535
+        y: 143
         width: 16
         height: 16
       alignment: 0
@@ -6371,11 +6371,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_152
+      name: Knife
       rect:
         serializedVersion: 2
-        x: 602
-        y: 75
+        x: 551
+        y: 159
         width: 16
         height: 16
       alignment: 0
@@ -6434,11 +6434,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_155
+      name: Cage_top
       rect:
         serializedVersion: 2
-        x: 636
-        y: 78
+        x: 551
+        y: 175
         width: 16
         height: 16
       alignment: 0
@@ -6455,11 +6455,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: final_spriteSheet_156
+      name: Cage_bottom
       rect:
         serializedVersion: 2
-        x: 563
-        y: 43
+        x: 535
+        y: 175
         width: 16
         height: 16
       alignment: 0
