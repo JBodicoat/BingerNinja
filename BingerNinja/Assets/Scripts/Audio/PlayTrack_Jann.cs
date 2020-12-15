@@ -63,18 +63,18 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
     public void PlaySound(string audioName)
     {
         Track_Jann track = LoadTrack(audioName);
+        AudioClip clip = CreateClip(track.n, (float)track.b / 60, track.f[0]);
 
         foreach (AudioSource soundSource in m_soundAudioSources)
         {
+            soundSource.clip = clip;
             if (!soundSource.isPlaying)
             {
-                AudioClip clip = CreateClip(track.n, (float) track.b / 60, track.f[0]);
-                soundSource.clip = clip;
                 soundSource.Play();
                 break;
             }
             else if(soundSource.clip.name == track.n)
-            {
+            { 
                 soundSource.Stop();
                 soundSource.Play();
                 break;

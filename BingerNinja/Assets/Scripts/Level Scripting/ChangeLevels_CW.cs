@@ -29,7 +29,7 @@ public class ChangeLevels_CW : MonoBehaviour
                 SaveLoadSystem_JamieG.SaveCheckpoint(currentLevel + 1);                
             }
 
-            if (currentLevel > 4 || currentLevel == 20)
+            if (currentLevel > 4 && currentLevel != 20)
             {
                 vendingMachine.SetActive(true);
                 Time.timeScale = 0f;
@@ -52,6 +52,7 @@ public class ChangeLevels_CW : MonoBehaviour
 
     public void ReturnToMenu()
     {
+        SaveLoadSystem_JamieG.DeleteSaves();
         SceneManager.LoadScene("ElliottDesouza_MainMenu");
     }
 }
