@@ -35,15 +35,7 @@ public class Projectile_MarioFernandes : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-        
-        
-              
-        
-
-        transform.rotation = Quaternion.Euler(new Vector3(m_direction.x, m_direction.y, 0));      
-        
-        
+        transform.rotation = Quaternion.Euler(new Vector3(m_direction.x, m_direction.y, 0));         
     }
 
     // Update is called once per frame
