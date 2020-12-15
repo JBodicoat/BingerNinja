@@ -82,6 +82,8 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
     private EffectManager_MarioFernandes m_effectManager;
 
+    private int m_eatAmmount = 0;
+
 
     public void DropWeapon(WeaponType index)
     {
@@ -142,9 +144,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             
             m_direction = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         
-            m_direction = m_direction - transform.position;
-
-            
+            m_direction = m_direction - transform.position;            
             }
             m_direction.z = 0; 
 
@@ -158,7 +158,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             projectile.GetComponent<SpriteRenderer>().sprite = m_currentWeapon[m_weaponsIndex].m_mySprite;
             projectile.GetComponent<Projectile_MarioFernandes>().m_direction = m_direction;
             --m_currentWeapon[m_weaponsIndex].m_ammunition;
-            m_WeaponUI.setAmmo(-1);
+            m_WeaponUI.setAmmo(m_currentWeapon[m_weaponsIndex].m_ammunition);
 
             if(m_currentWeapon[m_weaponsIndex].m_foodType == FoodType.DANGO)
             {
@@ -212,9 +212,11 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
     {
 
      
-        if (m_currentWeapon[m_weaponsIndex])
-        {
+        if (m_currentWeapon[m_weaponsIndex] && (!m_currentWeapon[m_weaponsIndex].IsRanged() || m_currentWeapon[m_weaponsIndex].IsRanged() && m_currentWeapon[m_weaponsIndex].m_ammunition >= m_eatAmmount))
+        {            
             PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_Eating); //aaded by alanna 10/12/20
+
+            
 
             GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon[m_weaponsIndex].m_instaHeal);
 
@@ -247,13 +249,23 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
                     break;
             }
 
-            m_WeaponUI.removeWeapon(m_currentWeapon[m_weaponsIndex].IsRanged());
+            
  
             m_playerHealthHungerScript.Eat(m_currentWeapon[m_weaponsIndex].m_hungerRestoreAmount);
 
+            if(m_currentWeapon[m_weaponsIndex].IsRanged())
+            {
+            m_currentWeapon[m_weaponsIndex].m_ammunition -= m_eatAmmount;
+            m_WeaponUI.setAmmo(m_currentWeapon[m_weaponsIndex].m_ammunition);
+            }
+
+            if(!m_currentWeapon[m_weaponsIndex].IsRanged() || m_currentWeapon[m_weaponsIndex].m_ammunition <= 0)
+            {
+                m_WeaponUI.removeWeapon(m_currentWeapon[m_weaponsIndex].IsRanged());
             print("Destroy Eating");
             Destroy(m_currentWeapon[m_weaponsIndex].gameObject);
             m_currentWeapon[m_weaponsIndex] = null;
+            }
 
         }
     }
@@ -306,7 +318,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         {
 
 
-              if (!m_playerStealthScript.m_crouched && m_currentWeapon[m_weaponsIndex])
+            if (!m_playerStealthScript.m_crouched && m_currentWeapon[m_weaponsIndex])
             {         
                 if( Controller.m_attackTap.triggered)              
                 {    
@@ -319,7 +331,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
                 m_timeSinceLastAttack = m_attackDelay;
                 
                 Attack(Controller.m_attackSlowTap, m_chargedModifier);   
-               } 
+                } 
             }          
         }
         else
@@ -330,7 +342,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             Eat();
         }
 
-
+       
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -345,25 +357,34 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 		}
         else if(collision.GetComponent<WeaponsTemplate_MarioFernandes>() && collision.GetComponent<WeaponsTemplate_MarioFernandes>().IsRanged())
         {
-            if(!m_currentWeapon[1])
-            { 
-            m_currentWeapon[1] = collision.GetComponent<WeaponsTemplate_MarioFernandes>();
-            collision.gameObject.SetActive(false);
-            collision.transform.parent = transform;
-            m_WeaponUI.WeaponChange(m_currentWeapon[1].m_foodType, true, m_currentWeapon[1].m_ammunition);
-            m_WeaponUI.SetWeaponsUIAnimation(true);
-            }else{
-                if(m_currentWeapon[1].m_foodType == collision.GetComponent<WeaponsTemplate_MarioFernandes>().m_foodType)
-                {
-                m_currentWeapon[1].m_ammunition += collision.GetComponent<WeaponsTemplate_MarioFernandes>().m_ammunition;
-                Destroy(collision.gameObject);
-                print("Destroy ammunition");
+            if(!m_currentWeapon[1] )
+            {                 
+                m_currentWeapon[1] = collision.GetComponent<WeaponsTemplate_MarioFernandes>();
+                m_eatAmmount = m_currentWeapon[1].m_ammunition;
+                collision.gameObject.SetActive(false);
+                collision.transform.parent = transform;
                 m_WeaponUI.WeaponChange(m_currentWeapon[1].m_foodType, true, m_currentWeapon[1].m_ammunition);
                 m_WeaponUI.SetWeaponsUIAnimation(true);
+            }
+            else{                
+                
+                if(collision.gameObject.activeSelf && m_currentWeapon[1].m_foodType == collision.GetComponent<WeaponsTemplate_MarioFernandes>().m_foodType)
+                {
+                                       
+                    collision.gameObject.SetActive(false);
+                    m_currentWeapon[1].m_ammunition += collision.GetComponent<WeaponsTemplate_MarioFernandes>().m_ammunition;
+                    Destroy(collision.gameObject);
+
+                    Debug.Log("ammunition: " + m_currentWeapon[1].m_ammunition.ToString());
+                    m_WeaponUI.WeaponChange(m_currentWeapon[1].m_foodType, true, m_currentWeapon[1].m_ammunition);
+                    m_WeaponUI.SetWeaponsUIAnimation(true);
                 }
             }
         }
-    }
+    }    
 }
+
+
+
 
 
