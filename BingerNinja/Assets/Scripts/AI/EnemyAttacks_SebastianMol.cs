@@ -139,5 +139,7 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
             m_attackTimer -= Time.deltaTime;
             return false;
         }
+
+        return false;
     }
 }

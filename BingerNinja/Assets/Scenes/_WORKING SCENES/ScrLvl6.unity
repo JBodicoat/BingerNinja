@@ -240,7 +240,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 76610186}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -286,10 +286,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_functionality: 4
-  m_maxTicks: 0
-  m_damageInterval: 0
-  m_damageAmount: 0
-  m_freezerCooldown: 0
+  m_maxTicks: 1
+  m_damageInterval: 1
+  m_damageAmount: 133.33333
+  m_freezerCooldown: 10
   m_pickColor: 000000
   m_stunLight: 0
 --- !u!1001 &94314011

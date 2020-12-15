@@ -99,11 +99,26 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     {
         if(m_currentEnemyType == m_enemyType.PETTIGER)
         {
-            
+            if (showPathBeforAttackTigerBoss)
+            {
+                if (doOnceShowPath)
+                {
+                    doOnceShowPath = false;
+                    pathFinder = GameObject.FindObjectOfType<Pathfinder_SebastianMol>();
+                    daPath = pathFinder.PathFind((Vector2Int)pathFinder.m_tileMap.WorldToCell(m_playerTransform.position), (Vector2Int)pathFinder.m_tileMap.WorldToCell(transform.position));
+                    for (int i = 0; i < daPath.Count; i++)
+                    {
+                        Debug.Log(daPath[i].x + " " + daPath[i].y);
+                        floortilemap.SetTileFlags(new Vector3Int(daPath[i].x, daPath[i].y, 0), TileFlags.None);
+                        floortilemap.SetColor(new Vector3Int(daPath[i].x, daPath[i].y, 0), Color.red);
+                    }
+                }
+            }
 
             if (EnemyAttacks_SebastianMol.ChargeAttack(m_playerTransform, ref m_attackTimer, 
                 m_attackCollider, m_hitSpeed, gameObject, m_chargeAttackSpeed)) //make this ibnto a public variable
             {
+                //here teh tatack has not yet happened
                 if (showPathBeforAttackTigerBoss)
                 {
                     doOnceShowPath = true;
@@ -116,6 +131,7 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
             }
             else
             {
+                //here the attack has happened
                 if (showPathBeforAttackTigerBoss)
                 {
                     if (doOnceShowPath)
