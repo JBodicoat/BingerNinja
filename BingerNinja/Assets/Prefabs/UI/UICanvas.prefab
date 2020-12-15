@@ -1384,7 +1384,7 @@ GameObject:
   - component: {fileID: 1035174120}
   m_Layer: 5
   m_Name: ThumbstickBG
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1458,7 +1458,7 @@ GameObject:
   - component: {fileID: 1120569084}
   m_Layer: 5
   m_Name: MobileUI
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2471,7 +2471,7 @@ GameObject:
   - component: {fileID: 1072227366}
   m_Layer: 5
   m_Name: WeaponsUI
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2717,7 +2717,7 @@ GameObject:
   - component: {fileID: 2013042080}
   m_Layer: 5
   m_Name: MobileButtons
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3003,7 +3003,7 @@ GameObject:
   - component: {fileID: 2985987601992920497}
   m_Layer: 5
   m_Name: SliderOverlay
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3195,6 +3195,7 @@ MonoBehaviour:
   mobileBtnUI: {fileID: 2013042079}
   normalUI: {fileID: 1799900212}
   mobileJoystickUI: {fileID: 1035174118}
+  vendingMachine: {fileID: 3074607439574447818}
 --- !u!114 &961257346956623159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3271,7 +3272,7 @@ GameObject:
   - component: {fileID: 7882151871300385335}
   m_Layer: 5
   m_Name: HealthSlider
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3359,7 +3360,7 @@ GameObject:
   - component: {fileID: 7882151872303810090}
   m_Layer: 5
   m_Name: HungerSlider
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4325,6 +4326,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7882151871028722937}
     m_Modifications:
+    - target: {fileID: 3797544675770019507, guid: fabfca3ea8d1eae4a81f3104272aa87e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5010286235027138124, guid: fabfca3ea8d1eae4a81f3104272aa87e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4411,15 +4416,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5010286235027138124, guid: fabfca3ea8d1eae4a81f3104272aa87e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.37729
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5010286235027138124, guid: fabfca3ea8d1eae4a81f3104272aa87e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.37729
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5010286235027138124, guid: fabfca3ea8d1eae4a81f3104272aa87e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.37729
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5010286235027138125, guid: fabfca3ea8d1eae4a81f3104272aa87e, type: 3}
       propertyPath: m_Name
@@ -4427,10 +4432,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5010286235027138125, guid: fabfca3ea8d1eae4a81f3104272aa87e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fabfca3ea8d1eae4a81f3104272aa87e, type: 3}
+--- !u!1 &3074607439574447818 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5010286235027138125, guid: fabfca3ea8d1eae4a81f3104272aa87e, type: 3}
+  m_PrefabInstance: {fileID: 8008297226718269575}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3074607439574447819 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5010286235027138124, guid: fabfca3ea8d1eae4a81f3104272aa87e, type: 3}

@@ -11,8 +11,11 @@ public class UIManager_LouieWilliamson : MonoBehaviour
     public GameObject mobileBtnUI;
     public GameObject normalUI;
     public GameObject mobileJoystickUI;
+    public GameObject vendingMachine;
+
     void Start()
     {
+        vendingMachine.SetActive(false);
         SetMobileUI(false);
 
         if (Application.isMobilePlatform)

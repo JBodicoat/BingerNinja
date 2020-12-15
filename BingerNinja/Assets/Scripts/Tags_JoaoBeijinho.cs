@@ -25,4 +25,5 @@ public static class Tags_JoaoBeijinho
     static public string m_stunLightTag = "StunLight";
     static public string m_plant = "Plant";
     static public string m_lightTag = "Light";
+    static public string m_UI = "UI";
 }

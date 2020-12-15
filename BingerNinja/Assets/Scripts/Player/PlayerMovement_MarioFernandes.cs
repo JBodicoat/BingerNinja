@@ -65,7 +65,7 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
             StartCoroutine("RollTimer");
         }
 
-
+        
     }
         //m_direction = m_speed * m_old_direction;
         //m_direction.Normalize();
@@ -79,9 +79,12 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
     {
         if (!isRolling)
         {
+            
             if (m_direction.x != 0 || m_direction.y != 0)
             {
+
                 m_old_direction = m_direction;
+                StartCoroutine("RollTimer");
             }
             m_direction = vector;
             
