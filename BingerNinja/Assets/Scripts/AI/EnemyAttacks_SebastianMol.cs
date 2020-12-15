@@ -118,7 +118,7 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
     /// <returns>weather the attack has been done</returns>
     public static bool ChargeAttack(Transform m_playerTransform, ref float m_attackTimer, 
         GameObject m_attackCollider, float m_hitSpeed, GameObject m_thisEnemy, float chargeForce)
-    {
+    {                  
         if (m_attackTimer <= 0)
         {
             //shoot at enemy
@@ -131,13 +131,15 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
             EnemyDamager_SebastianMol enemyDamager = m_attackCollider.GetComponent<EnemyDamager_SebastianMol>();
             enemyDamager.m_damage = enemyDamager.m_baseDamage;
             m_attackTimer = m_hitSpeed;
-
             return true;
+
         }
         else
         {
             m_attackTimer -= Time.deltaTime;
             return false;
         }
+
+        return false;
     }
 }

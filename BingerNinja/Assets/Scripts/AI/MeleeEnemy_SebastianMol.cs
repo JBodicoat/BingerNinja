@@ -10,6 +10,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 
 /// <summary>
@@ -41,6 +42,10 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     [Tooltip("speed of the enemies charge attack")]
     public float m_chargeAttackSpeed = 500;
 
+    private bool doOnceShowPath = true;
+    public bool showPathBeforAttackTigerBoss = false;
+    private Pathfinder_SebastianMol pathFinder;
+    private List<Vector2Int> daPath;
 
     protected bool m_doStunOnce = false;
     protected bool m_doMoveAwayFromWallOnce = false;
@@ -55,7 +60,7 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
             = m_attackCollider.GetComponent<EnemyDamager_SebastianMol>().m_baseDamage;
         m_attackCollider.SetActive(true);
         yield return new WaitForSeconds(attackDeactivationSpeed);
-        m_attackCollider.SetActive(false);
+       // m_attackCollider.SetActive(false);
     }
 
     /// <summary>
@@ -69,7 +74,7 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
         dameger.m_damage = dameger.m_baseDamage * m_chargeAttackMultiplier;
         m_attackCollider.SetActive(true);
         yield return new WaitForSeconds(attackDeactivationSpeed);
-        m_attackCollider.SetActive(false);
+        //m_attackCollider.SetActive(false);
     }
 
     protected void QuickAttack()
@@ -94,13 +99,63 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     {
         if(m_currentEnemyType == m_enemyType.PETTIGER)
         {
-            EnemyAttacks_SebastianMol.ChargeAttack(m_playerTransform, ref m_attackTimer, 
-                m_attackCollider, m_hitSpeed, gameObject, m_chargeAttackSpeed); //make this ibnto a public variable
+            if (showPathBeforAttackTigerBoss)
+            {
+                if (doOnceShowPath)
+                {
+                    doOnceShowPath = false;
+                    pathFinder = GameObject.FindObjectOfType<Pathfinder_SebastianMol>();
+                    daPath = pathFinder.PathFind((Vector2Int)pathFinder.m_tileMap.WorldToCell(m_playerTransform.position), (Vector2Int)pathFinder.m_tileMap.WorldToCell(transform.position));
+                    for (int i = 0; i < daPath.Count; i++)
+                    {
+                        Debug.Log(daPath[i].x + " " + daPath[i].y);
+                        floortilemap.SetTileFlags(new Vector3Int(daPath[i].x, daPath[i].y, 0), TileFlags.None);
+                        floortilemap.SetColor(new Vector3Int(daPath[i].x, daPath[i].y, 0), Color.red);
+                    }
+                }
+            }
+
+            if (EnemyAttacks_SebastianMol.ChargeAttack(m_playerTransform, ref m_attackTimer, 
+                m_attackCollider, m_hitSpeed, gameObject, m_chargeAttackSpeed)) //make this ibnto a public variable
+            {
+                //here teh tatack has not yet happened
+                if (showPathBeforAttackTigerBoss)
+                {
+                    doOnceShowPath = true;
+                    for (int i = 0; i < daPath.Count; i++)
+                    {
+                        floortilemap.SetColor(new Vector3Int(daPath[i].x, daPath[i].y, 0), Color.white);
+                    }
+                }
+
+            }
+            else
+            {
+                //here the attack has happened
+                if (showPathBeforAttackTigerBoss)
+                {
+                    if (doOnceShowPath)
+                    {
+                        doOnceShowPath = false;
+                        pathFinder = GameObject.FindObjectOfType<Pathfinder_SebastianMol>();
+                        daPath = pathFinder.PathFind((Vector2Int)pathFinder.m_tileMap.WorldToCell(m_playerTransform.position), (Vector2Int)pathFinder.m_tileMap.WorldToCell(transform.position));
+                        for (int i = 0; i < daPath.Count; i++)
+                        {
+                            Debug.Log(daPath[i].x + " " + daPath[i].y);
+                            floortilemap.SetTileFlags(new Vector3Int(daPath[i].x, daPath[i].y, 0), TileFlags.None);
+                            floortilemap.SetColor(new Vector3Int(daPath[i].x, daPath[i].y, 0), Color.red);
+                        }
+                    }
+                }
+            }
         }
         else
         {
-            EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility, QuickAttack,
-                                               ChargeAttack, StunAfterAttack, m_currentEnemyType, m_hitSpeed, GetComponent<Enemy_Animation_LouieWilliamson>());
+            if(EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility, QuickAttack,
+                                               ChargeAttack, StunAfterAttack, m_currentEnemyType, m_hitSpeed, GetComponent<Enemy_Animation_LouieWilliamson>()))
+            {
+                Debug.Log("attack");
+            }
         }
        
     }
