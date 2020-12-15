@@ -122,9 +122,9 @@ public class LevelScripting : MonoBehaviour
                 break;
             case 13:
                 {
-                    keyTrigger = GameObject.Find("Real Key");
+                    keyTrigger = GameObject.Find("Key Trigger");
                     walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
-                    objInfWalls = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
+                    walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
                 }
                 break;
             case 14:
@@ -570,7 +570,7 @@ public class LevelScripting : MonoBehaviour
                         if (!keyTrigger.activeInHierarchy)
                         {
                             walls2.SetTile(new Vector3Int(22, 28, 0), null);
-                            walls2.SetTile(new Vector3Int(23, 29, 0), null);
+                            walls2.SetTile(new Vector3Int(22, 29, 0), null);
                             walls2.SetTile(new Vector3Int(22, 27, 0), null);
 
                             walls1.SetTile(new Vector3Int(21, 27, 0), null);
@@ -696,7 +696,7 @@ public class LevelScripting : MonoBehaviour
                         if (!keyTrigger.activeInHierarchy)
                         {
                             wpnUI.setKey(false);
-                            keyUsed = true;
+                            
                             //door top
                             walls2.SetTile(new Vector3Int(33, 17, 0), null);
                             walls2.SetTile(new Vector3Int(34, 17, 0), null);
@@ -705,6 +705,7 @@ public class LevelScripting : MonoBehaviour
                             walls1.SetTile(new Vector3Int(34, 16, 0), null);
                             walls1.SetTile(new Vector3Int(33, 16, 0), null);
                             walls1.SetTile(new Vector3Int(32, 16, 0), null);
+                            keyUsed = true;
                         }
                     }
                 }
