@@ -32,6 +32,7 @@ public class ControlPanel_JoaoBeijinho : MonoBehaviour
         {
            
             m_canPressButton = true;
+            print("Can Press");
         }
     }
 
@@ -41,6 +42,7 @@ public class ControlPanel_JoaoBeijinho : MonoBehaviour
         {
          
             m_canPressButton = false;
+            print("Cannot Press");
         }
     }
 
@@ -70,6 +72,7 @@ public class ControlPanel_JoaoBeijinho : MonoBehaviour
             for (int i = 0; i < m_activateObjectScript.Length; i++)
             {
                 m_activateObjectScript[i].ActivateObject();
+                print("SMOKE");
             }
         }
     }
