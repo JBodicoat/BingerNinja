@@ -96,7 +96,7 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     }
     public void setAmmo(int addToAmmo)
     {
-        rangedAmmo += addToAmmo;
+        rangedAmmo = addToAmmo;
         if (rangedAmmo < 0) rangedAmmo = 0;
         ammoText.text = rangedAmmo.ToString();
     }
