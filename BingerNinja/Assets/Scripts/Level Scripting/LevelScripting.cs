@@ -13,7 +13,7 @@ using UnityEngine.InputSystem;
 public class LevelScripting : MonoBehaviour
 {
     #region VARIABLES
-    private bool enemyDead = false, keyUsed = false, levelBossIntro, bossDead = false, doorsClosed = false, cinematicDone = true, ventDialogueDisabled = false, endVentDialogueCanPlay = false;
+    internal bool enemyDead = false, keyUsed = false, levelBossIntro, bossDead = false, doorsClosed = false, cinematicDone = true, ventDialogueDisabled = false, endVentDialogueCanPlay = false, drawFreezer = true;
     private GameObject levelLiftTrigger, keyTrigger, keyTriggerTwo, doorCloseTrigger, dialogBox, ventsDialogue, endVentDialogue;
     public GameObject vents;
     private BaseEnemy_SebastianMol boss, level2Enemy1, level2Enemy2;
@@ -80,6 +80,8 @@ public class LevelScripting : MonoBehaviour
                     boss = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BaseEnemy_SebastianMol>();
                     bossDialogue = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BossDialogue_MarioFernandes>();
                     levelLiftTrigger = GameObject.Find("Level 6 Lift");
+                    walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
+                    walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
                 }
                 break;
             case 7:
@@ -551,6 +553,26 @@ public class LevelScripting : MonoBehaviour
 
                         }
                    }
+                   if(!drawFreezer)
+                    {
+                        walls2.SetTile(new Vector3Int(23, 10, 0), null);
+                        walls2.SetTile(new Vector3Int(23, 9, 0), null);
+                        walls2.SetTile(new Vector3Int(23,8, 0), null);
+
+                        walls1.SetTile(new Vector3Int(22, 7, 0), null);
+                        walls1.SetTile(new Vector3Int(22, 8, 0), null);
+                        walls1.SetTile(new Vector3Int(22, 9, 0), null);
+                    }
+                    else if (drawFreezer)
+                    {
+                        walls2.SetTile(new Vector3Int(23, 10, 0),topDoorTile);
+                        walls2.SetTile(new Vector3Int(23, 9, 0), topDoorTile);
+                        walls2.SetTile(new Vector3Int(23, 8, 0), topDoorTile);
+
+                        walls1.SetTile(new Vector3Int(22, 7, 0), bottomDoorTile);
+                        walls1.SetTile(new Vector3Int(22, 8, 0), bottomDoorTile);
+                        walls1.SetTile(new Vector3Int(22, 9, 0), bottomDoorTile);
+                    }
                 }
                 break;
 

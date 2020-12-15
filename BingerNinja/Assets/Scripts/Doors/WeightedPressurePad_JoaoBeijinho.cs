@@ -53,15 +53,13 @@ public class WeightedPressurePad_JoaoBeijinho : MonoBehaviour
 
                 if (m_otherPressurePad.m_activated)//Check if the other pressure pad is also activated
                 {
-                    walls1.SetTile(new Vector3Int(32, 19, 0), null);
-                    walls1.SetTile(new Vector3Int(32, 20, 0), null);
-                    walls1.SetTile(new Vector3Int(32, 21, 0), null);
-                    walls1.SetTile(new Vector3Int(32, 22, 0), null);
+                    walls1.SetTile(new Vector3Int(31, 19, 0), null);
+                    walls1.SetTile(new Vector3Int(31, 20, 0), null);
+                    walls1.SetTile(new Vector3Int(31, 21, 0), null);
 
-                    walls2.SetTile(new Vector3Int(33, 20, 0), null);
-                    walls2.SetTile(new Vector3Int(33, 21, 0), null);
-                    walls2.SetTile(new Vector3Int(33, 22, 0), null);
-                    walls2.SetTile(new Vector3Int(33, 23, 0), null);
+                    walls2.SetTile(new Vector3Int(32, 20, 0), null);
+                    walls2.SetTile(new Vector3Int(32, 21, 0), null);
+                    walls2.SetTile(new Vector3Int(32, 22, 0), null);
                 }
             }
         }
@@ -92,15 +90,13 @@ public class WeightedPressurePad_JoaoBeijinho : MonoBehaviour
             {
                 if (!m_activated)//Check if the pressure pad is deactivated
                 {
-                    walls1.SetTile(new Vector3Int(32, 19, 0), m_downDoorPart);
-                    walls1.SetTile(new Vector3Int(32, 20, 0), m_downDoorPart);
-                    walls1.SetTile(new Vector3Int(32, 21, 0), m_downDoorPart);
-                    walls1.SetTile(new Vector3Int(32, 22, 0), m_downDoorPart);
+                    walls1.SetTile(new Vector3Int(31, 19, 0), m_downDoorPart);
+                    walls1.SetTile(new Vector3Int(31, 20, 0), m_downDoorPart);
+                    walls1.SetTile(new Vector3Int(31, 21, 0), m_downDoorPart);
 
-                    walls2.SetTile(new Vector3Int(33, 20, 0), m_upDoorPart);
-                    walls2.SetTile(new Vector3Int(33, 21, 0), m_upDoorPart);
-                    walls2.SetTile(new Vector3Int(33, 22, 0), m_upDoorPart);
-                    walls2.SetTile(new Vector3Int(33, 23, 0), m_upDoorPart);
+                    walls2.SetTile(new Vector3Int(32, 20, 0), m_upDoorPart);
+                    walls2.SetTile(new Vector3Int(32, 21, 0), m_upDoorPart);
+                    walls2.SetTile(new Vector3Int(32, 22, 0), m_upDoorPart);
                 }
             }
         }
