@@ -20,7 +20,7 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
 
     private DialogueManager_MarioFernandes m_dialogueManager;
     
-    public float m_fadeTime = 0.8f;
+    public float m_fadeTime = 0.8f, m_portalFadeTime = 0.8f, m_transitionTime = 1.0f;
     private RectTransform m_fader;
     private bool m_fading;
     private Vector2 center, below = new Vector2(0f, 1000f);
@@ -69,10 +69,12 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
     public void LoadNextLevel()
     {
         FadeIn();
+
+        StartCoroutine(Load(SceneManager.GetActiveScene().buildIndex + 1));
+
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        //SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     //Reloads the current scene using its buildIndex
@@ -83,7 +85,7 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
     
     IEnumerator Load(int level)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(m_transitionTime);
         
         SceneManager.LoadScene(level);
         
@@ -146,7 +148,7 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
     {
         m_dialogueManager.PauseGame();
         
-        float fadeDelta = m_fadeTime / 2f;
+        float fadeDelta = m_portalFadeTime / 2f;
         StartCoroutine(FadeImage(fadeDelta, false));
         StartCoroutine(FadeImage(fadeDelta, true, fadeDelta));
     }
