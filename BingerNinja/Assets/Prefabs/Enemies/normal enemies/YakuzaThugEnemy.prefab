@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 220513390732296407}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.54, y: 0.91, z: 0}
+  m_LocalPosition: {x: -2.46, y: 0.91, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 8631870844753434286}
@@ -46,7 +46,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.28255796, y: -0.24377573}
+  m_Offset: {x: 0.5870962, y: -0.44432557}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -57,7 +57,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5651155, y: 2.1302354}
+  m_Size: {x: 2.1741917, y: 2.5313356}
   m_EdgeRadius: 0
 --- !u!50 &1386623927498531794
 Rigidbody2D:
@@ -398,10 +398,11 @@ MonoBehaviour:
   m_currentEnemyType: 0
   m_questionmark: {fileID: 3783213463638213574, guid: 40acaa4f65aeeaf44aad51d83f2decd0, type: 3}
   m_excalmationmark: {fileID: 6264025296151744314, guid: a776e246d259fa04188f7ffb2c9d5113, type: 3}
+  m_inventory: {fileID: 0}
   m_notifcaionOffset: 0.1
   m_dropItem: {fileID: 0}
-  m_health: 100
-  m_speed: 2
+  m_health: 120
+  m_speed: 1
   showPath: 0
   floortilemap: {fileID: 0}
   m_patrolPoints: []
@@ -411,7 +412,7 @@ MonoBehaviour:
   m_outOfSightDeley: 4
   m_sneakDamageMultiplier: 1.5
   m_sneakDamageMultiplierStack: 0
-  m_attackRange: 0.6
+  m_attackRange: 0.88
   m_attckRangeDevider: 1
   m_tiggerBossLooseTargetDistance: 2
   m_secondPhaseStartPercentage: 0.3

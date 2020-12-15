@@ -174,6 +174,10 @@ MonoBehaviour:
   m_playerDetected: 0
   m_currentState: 0
   m_currentEnemyType: 0
+  m_questionmark: {fileID: 0}
+  m_excalmationmark: {fileID: 0}
+  m_inventory: {fileID: 0}
+  m_notifcaionOffset: 0
   m_dropItem: {fileID: 0}
   m_health: 0
   m_speed: 0
@@ -11989,6 +11993,7 @@ MonoBehaviour:
   m_stealthed: 0
   m_crouched: 0
   m_inVent: 0
+  crouchSpeed: 0
 --- !u!114 &1963334539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12126,11 +12131,27 @@ MonoBehaviour:
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
+  m_aim:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
   m_roll:
     m_Name: Roll
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 7f67cb6e-6999-4cea-829b-83ab0178f977
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+  m_changeLevel:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -12158,6 +12179,14 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Drop Weapons
       m_Flags: 0
+  m_passDialogue:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
 --- !u!114 &1963334542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12186,7 +12215,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectile: {fileID: 0}
-  m_weaponTemplate: {fileID: 0}
   m_attackDelay: 1
   m_timeSinceLastAttack: 0
   m_meleeAttackRadius: 3
@@ -12338,7 +12366,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectile: {fileID: 3054722901687453429, guid: 8accb0c1bced7b44ba7f3753243e922a, type: 3}
-  m_weaponTemplate: {fileID: 0}
   m_attackDelay: 1
   m_timeSinceLastAttack: 0
   m_meleeAttackRadius: 3
@@ -12470,30 +12497,6 @@ PrefabInstance:
     - target: {fileID: 4362767424123825802, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_Enabled
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
-      propertyPath: m_dropWeapons.m_SingletonActionBindings.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
-      propertyPath: m_dropWeapons.m_Id
-      value: 07255a9d-faae-4ef3-a9f8-9752cbb1bb8a
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
-      propertyPath: m_dropWeapons.m_Name
-      value: Drop Weapons
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
-      propertyPath: m_dropWeapons.m_SingletonActionBindings.Array.data[0].m_Id
-      value: b91b7307-40e0-4996-b464-58ade661f245
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
-      propertyPath: m_dropWeapons.m_SingletonActionBindings.Array.data[0].m_Action
-      value: Drop Weapons
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
-      propertyPath: m_dropWeapons.m_SingletonActionBindings.Array.data[0].m_Path
-      value: <Keyboard>/q
       objectReference: {fileID: 0}
     - target: {fileID: 4362767424123825805, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_weaponTemplate

@@ -1,9 +1,11 @@
 ﻿// Mário Fernandes
+
 /// This script contains the taemplay for the effects of the player
 
 ///This class takes care of the current effects on the manager
 
 // Mário 16/10/2020 - Creation of the  Manager (Ticks, array of effects and update each effect per tick )
+//Mário 05/12/20 - Remove repeated effects
 
 using System.Collections;
 using System.Collections.Generic;
@@ -24,6 +26,17 @@ public class EffectManager_MarioFernandes : MonoBehaviour
     //It lets you add a pre created effect to the list
     public void AddEffect(StatusEffect_MarioFernandes newEffect)
     {
+        foreach (var item in m_effects)
+        {
+            if(item.GetType().Equals(newEffect.GetType()))
+            {
+               m_effects.Remove(item);
+               m_effects.Add(newEffect);
+               m_effects[m_effects.Count - 1].Activate(gameObject);
+               return;
+            }
+        }
+
         m_effects.Add(newEffect);
         m_effects[m_effects.Count - 1].Activate(gameObject);
     }

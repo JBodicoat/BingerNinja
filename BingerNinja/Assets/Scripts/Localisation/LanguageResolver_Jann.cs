@@ -2,6 +2,7 @@
 
 //Jann  - 18/11/20 - Implementation
 //Jann  - 25/11/20 - Caching implemented
+//Jann  - 13/12/20 - Resources folder instead of assets folder is now used
 
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,7 +15,7 @@ using UnityEngine.UI;
 /// </summary>
 public class LanguageResolver_Jann : Singleton_Jann<LanguageResolver_Jann>
 {
-    private const string FilePath = "Assets/Scripts/Localisation/";
+    private const string FilePath = "";
     private const char Separator = '=';
     private Dictionary<string, TextAsset> m_languageFiles = new Dictionary<string, TextAsset>();
     private Dictionary<string, string> m_translations = new Dictionary<string, string>();
@@ -79,13 +80,13 @@ public class LanguageResolver_Jann : Singleton_Jann<LanguageResolver_Jann>
             return m_languageFiles[language];
         }
         
-        TextAsset file = AssetDatabase.LoadAssetAtPath<TextAsset>(FilePath + language + ".txt");
+        TextAsset file = Resources.Load<TextAsset>(FilePath + language);
         
         if (file == null)
         {
             Debug.LogWarning("File not found: " + FilePath + language + ".txt");
             Debug.LogWarning("Loading default language...");
-            file = AssetDatabase.LoadAssetAtPath<TextAsset>(FilePath + "English.txt");
+            file = Resources.Load<TextAsset>(FilePath + "English");
         }
         m_languageFiles.Add(language, file);
         return file;

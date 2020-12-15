@@ -26,9 +26,16 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     private Animator weaponsAnim;
     public Animator pickupAnim;
     public Animator keyAnim;
+    public GameObject MeleeHighlight;
+    public GameObject RangedHighlight;
 
     public List<Sprite> WeaponSprites = new List<Sprite>();
     private int rangedAmmo;
+
+    public Texture2D rangedCursor;
+    public Texture2D normalCursor;
+    private Vector2 normalOffset;
+    private Vector2 rangedOffset;
 
     //---- LIST KEY ----   //
     //  0     =   Fugu     //
@@ -40,6 +47,12 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     //  6     =   Sake     //
     //  7     =   Noodles  //
     //  8     =   None     //
+    public void SetActiveWeapon(bool isMelee)
+    {
+        MeleeHighlight.SetActive(isMelee);
+        RangedHighlight.SetActive(!isMelee);
+        SetCursor(!isMelee);
+    }
     public void SetWeaponsUIAnimation(bool isShownIfTrue)
     {
         weaponsAnim.SetBool("isOnScreen", isShownIfTrue);
@@ -83,7 +96,7 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     }
     public void setAmmo(int addToAmmo)
     {
-        rangedAmmo += addToAmmo;
+        rangedAmmo = addToAmmo;
         if (rangedAmmo < 0) rangedAmmo = 0;
         ammoText.text = rangedAmmo.ToString();
     }
@@ -92,6 +105,8 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
         weaponsAnim = GetComponent<Animator>();
         removeWeapon(true);
         removeWeapon(false);
+        normalOffset = new Vector2(4, 0);
+        rangedOffset = new Vector2( 8, 8);
     }
 
     void setName(string name, bool isRanged)
@@ -117,5 +132,16 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
         }
     }
 
+    void SetCursor(bool isRanged)
+    {
+        if (isRanged)
+        {
+            Cursor.SetCursor(rangedCursor, rangedOffset, CursorMode.Auto);
+        }
+        else
+        {
+            Cursor.SetCursor(normalCursor, normalOffset, CursorMode.Auto);
+        }
+    }
 
 }

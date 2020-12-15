@@ -19,10 +19,11 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class MainMenu_Manager_Elliott : MonoBehaviour
 {
+    public Button m_continueButton;
     public GameObject m_settingMenu;
     protected bool m_openSettings;
     private int m_lastCheckpointLevel;
-    
+
     public void Resume()
     {
         if (m_lastCheckpointLevel > 0)
@@ -34,6 +35,7 @@ public class MainMenu_Manager_Elliott : MonoBehaviour
     public void StartNewGame()
     {
         ///load level 1 here
+        SaveLoadSystem_JamieG.DeleteSaves();
         SceneManager_JamieG.Instance.LoadNextLevel();
         print("start");
     }
@@ -57,6 +59,7 @@ public class MainMenu_Manager_Elliott : MonoBehaviour
         m_openSettings = false;
 
         m_lastCheckpointLevel = SaveLoadSystem_JamieG.LoadCheckpoint().m_lastCheckpointLevel;
+        m_continueButton.enabled = m_lastCheckpointLevel > 0;
     }
 
     // Update is called once per frame

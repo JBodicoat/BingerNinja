@@ -115,7 +115,7 @@ TilemapRenderer:
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 3
-  m_Mode: 0
+  m_Mode: 1
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
 --- !u!1 &6674240104814263016
@@ -225,15 +225,15 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1702960287
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -2137332843
+  m_SortingLayer: 3
+  m_SortingOrder: 10
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 3
-  m_Mode: 0
+  m_Mode: 1
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
 --- !u!1 &6674240104884466792
@@ -351,7 +351,7 @@ TilemapRenderer:
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 3
-  m_Mode: 0
+  m_Mode: 1
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
 --- !u!1 &6674240106099362085
@@ -365,8 +365,8 @@ GameObject:
   - component: {fileID: 6674240106099362086}
   - component: {fileID: 6674240106099362136}
   - component: {fileID: 6674240106099362087}
-  - component: {fileID: 8337731497924358376}
-  m_Layer: 0
+  - component: {fileID: 7810794530950044135}
+  m_Layer: 2
   m_Name: Walls2_map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,10 +470,10 @@ TilemapRenderer:
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 3
-  m_Mode: 0
+  m_Mode: 1
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!19719996 &8337731497924358376
+--- !u!19719996 &7810794530950044135
 TilemapCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -604,7 +604,7 @@ TilemapRenderer:
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 3
-  m_Mode: 0
+  m_Mode: 1
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
 --- !u!1 &6674240106857007331

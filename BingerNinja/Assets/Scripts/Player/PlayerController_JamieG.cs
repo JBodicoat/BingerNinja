@@ -13,6 +13,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController_JamieG : MonoBehaviour
 {
@@ -26,11 +27,15 @@ public class PlayerController_JamieG : MonoBehaviour
     public InputAction m_eat;
     public InputAction m_attackTap;
     public InputAction m_attackSlowTap;
+    public InputAction m_aim;
     public InputAction m_roll;
     public InputAction m_changeLevel;
 
     public InputAction m_switchWeapons;
     public InputAction m_dropWeapons;
+    public InputAction m_passDialogue;
+
+    protected int CurrentLevel;
 
     //Reference to the other player scripts
     private PlayerMovement_MarioFernandes m_playerMovementScript;
@@ -41,9 +46,10 @@ public class PlayerController_JamieG : MonoBehaviour
     void Awake()
     {
         m_player = GameObject.FindGameObjectWithTag("Player");
-
+        CurrentLevel = SceneManager.GetActiveScene().buildIndex;
         m_playerMovementScript = m_player.GetComponent<PlayerMovement_MarioFernandes>();
         m_playerStealthScript = gameObject.GetComponent<PlayerStealth_JoaoBeijinho>();
+        m_passDialogue.Enable();
     }
     
     void FixedUpdate()
@@ -56,12 +62,17 @@ public class PlayerController_JamieG : MonoBehaviour
     }
 
     private void Update()
-    {   
-        if(m_roll.triggered&& m_playerMovementScript.isRolling==false)
+    {
+        
+        if (CurrentLevel >= 13)
         {
-            m_playerMovementScript.isRolling = true;
-            m_playerMovementScript.RollMovement();
+            if (m_roll.triggered && m_playerMovementScript.isRolling == false)
+            {
+                m_playerMovementScript.isRolling = true;
+                m_playerMovementScript.RollMovement();
+            }
         }
+
         if (m_crouch.triggered)
         {
             m_playerStealthScript.Crouch();
@@ -81,6 +92,7 @@ public class PlayerController_JamieG : MonoBehaviour
         m_roll.Enable();
         m_switchWeapons.Enable();
         m_dropWeapons.Enable();
+        m_aim.Enable();
         m_changeLevel.Enable();
     }
 
@@ -95,6 +107,7 @@ public class PlayerController_JamieG : MonoBehaviour
         m_roll.Disable();
         m_switchWeapons.Disable();
         m_dropWeapons.Disable();
+        m_aim.Disable();
         m_changeLevel.Disable();
     }
     #endregion

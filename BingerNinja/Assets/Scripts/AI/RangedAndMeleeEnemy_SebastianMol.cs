@@ -1,6 +1,6 @@
 ﻿//sebastian mol 14/11/2020 class created
 //sebastian mol 29/11/2020 finished and commeneted all logic for final boss
-
+// louie        11/12/2020 Attack animation
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -55,7 +55,6 @@ using UnityEngine;
     private float m_tadashiLastFaseAttackRand;
     private float m_attackRangeeAfterCharge;
 
-
     /// <summary>
     /// ovveride class that holds logic for what the enemy shoudl do when in the attack state
     /// </summary>
@@ -65,15 +64,14 @@ using UnityEngine;
         {
             if (m_randAttackChance == m_RangedAttackRandomChance - 1)
             {
-                if (EnemyAttacks_SebastianMol.RangedAttack(m_playerTransform, transform, m_aimer, 
+                if (EnemyAttacks_SebastianMol.RangedAttack(GetComponent<Enemy_Animation_LouieWilliamson>(), m_playerTransform, transform, m_aimer, 
                     ref m_attackTimer, m_projectile, m_shootDeley)) m_generateRandomNumberOnce = false;
-
             }
             else
             {
                 if (EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility, 
                     QuickAttack, ChargeAttack, StunAfterAttack,
-                    m_currentEnemyType, m_hitSpeed)) m_generateRandomNumberOnce = false;
+                    m_currentEnemyType, m_hitSpeed, GetComponent<Enemy_Animation_LouieWilliamson>())) m_generateRandomNumberOnce = false;
             }
         }
 
@@ -137,7 +135,6 @@ using UnityEngine;
             
         }
     }
-
     /// <summary>
     /// logic for tadashi tripple shot attack
     /// </summary>
@@ -147,7 +144,7 @@ using UnityEngine;
         {
             m_ProjectileDisplay.sprite = null;
             m_currentProjectile = m_tadashiNormalPorjectile;
-            if (EnemyAttacks_SebastianMol.RangedAttack(m_playerTransform, transform, m_aimer,
+            if (EnemyAttacks_SebastianMol.RangedAttack(GetComponent<Enemy_Animation_LouieWilliamson>(), m_playerTransform, transform, m_aimer,
                 ref m_attackTimer, m_currentProjectile, 0.3f))
             {
                 m_tadashiMultiShotCounter++;
@@ -170,7 +167,7 @@ using UnityEngine;
     {
         if (EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility,
                    QuickAttack, ChargeAttack, StunAfterAttack,
-                   m_currentEnemyType, m_hitSpeed))
+                   m_currentEnemyType, m_hitSpeed, GetComponent<Enemy_Animation_LouieWilliamson>()))
         {
             m_generateRandomNumberOnceTadashi = false;
         }
@@ -191,7 +188,7 @@ using UnityEngine;
     {
         if (m_currentProjectile)
         {
-            if (EnemyAttacks_SebastianMol.RangedAttack(m_playerTransform, transform, m_aimer,
+            if (EnemyAttacks_SebastianMol.RangedAttack(GetComponent<Enemy_Animation_LouieWilliamson>(), m_playerTransform, transform, m_aimer,
                              ref m_attackTimer, m_currentProjectile, m_shootDeley))
             {
                 m_generateRandomNumberOnceTadashi = false;

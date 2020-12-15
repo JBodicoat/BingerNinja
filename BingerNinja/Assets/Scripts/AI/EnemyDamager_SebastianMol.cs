@@ -34,6 +34,7 @@ public class EnemyDamager_SebastianMol : MonoBehaviour
 			MeleeEnemy_SebastianMol currentEnemyScript = GetComponentInParent<MeleeEnemy_SebastianMol>();
            // m_HitEffectElliott.StartHitEffect(false);
             collision.GetComponent<HitEffectElliott>().StartHitEffect(false);
+            print(collision.name);
             if (currentEnemyScript.m_currentEnemyType == m_enemyType.SPACENINJABOSS)
             {
 				if(currentEnemyScript.m_doseAffect)
@@ -59,7 +60,7 @@ public class EnemyDamager_SebastianMol : MonoBehaviour
 	}
     private void Start()
     {
-       // m_HitEffectElliott = GetComponent<HitEffectElliott>();
+       m_HitEffectElliott = GetComponent<HitEffectElliott>();
     }
 
 }

@@ -4,6 +4,7 @@
 //sebastian mol 09/11/20 chrage attack fixed 
 //sebastian mol 20/11/2020 spce ninja enemy logic done
 //sebastian mol 22/11/2020 tiuger logic in place
+// louie        11/12/2020 Attack animation
 
 using System;
 using System.Collections;
@@ -43,7 +44,6 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
 
     protected bool m_doStunOnce = false;
     protected bool m_doMoveAwayFromWallOnce = false;
-
 
     /// <summary>
     /// activates the "enemy weapon" object that damages the player uses quick attack
@@ -100,7 +100,7 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
         else
         {
             EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility, QuickAttack,
-                                               ChargeAttack, StunAfterAttack, m_currentEnemyType, m_hitSpeed);
+                                               ChargeAttack, StunAfterAttack, m_currentEnemyType, m_hitSpeed, GetComponent<Enemy_Animation_LouieWilliamson>());
         }
        
     }
@@ -184,8 +184,6 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
             }
         }
     }
-
-
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
