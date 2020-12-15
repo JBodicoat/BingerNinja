@@ -14,6 +14,7 @@ public class Timeline_Script : MonoBehaviour
     }  
     public void PlayTimeline()
     {
+        if (playableDirector != null)
         playableDirector.playableGraph.GetRootPlayable(0).SetSpeed(1);
         //nextButton.SetActive(false);
     }
