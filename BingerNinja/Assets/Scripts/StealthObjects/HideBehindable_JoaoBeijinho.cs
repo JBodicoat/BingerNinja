@@ -10,6 +10,8 @@
 //                   Moved particle system onto the prefab rather than on the player
 //Joao Beijinho 09/11/2020 - Replaced tags with the tags in the Tags_JoaoBeijinho script
 //sebastian mol 11/12/2020 - chnaged the layer of plants based on stealth
+//Joao Beijinho 14/12/2020 - Change player sprite order instead of the plant sprite order
+//                           Change player position to plant position when hiding
 
 using System.Collections;
 using System.Collections.Generic;
@@ -21,9 +23,12 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
 {
-    //change layer in sprite renderer to render this gameObject above or below the player
-    SpriteRenderer m_changeLayer;
+    //Required to change sprite orders
+    private SpriteRenderer m_changeLayer;
+    private SpriteRenderer m_playerSprite;
+    private string m_playerSpriteLayer;
 
+    private GameObject m_player;
     private ParticleSystem m_smokeParticleSystem;
     private bool m_canHide = false;
     private bool m_isHiding = false;
@@ -55,6 +60,9 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
 
     void Start()
     {
+        m_player = GameObject.Find("Player");
+        m_playerSprite = m_player.GetComponent<SpriteRenderer>();
+        m_playerSpriteLayer = m_playerSprite.sortingLayerName;
         m_changeLayer = GetComponent<SpriteRenderer>();
         m_smokeParticleSystem = GetComponentInChildren<ParticleSystem>();
     }
@@ -70,7 +78,8 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
         {
             m_canHide = true;
             m_isHiding = false;
-            m_changeLayer.sortingOrder = 9;
+            m_playerSprite.sortingOrder = 10;
+            m_playerSprite.sortingLayerName = m_playerSpriteLayer;
             Hide();
             m_playerControllerScript.m_movement.Enable();
             m_playerControllerScript.m_crouch.Enable();
@@ -81,7 +90,9 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
             // hide behind this object
             m_canHide = false;
             m_isHiding = true;
-            m_changeLayer.sortingOrder = 11;
+            m_playerSprite.sortingOrder = 8;
+            m_playerSprite.sortingLayerName = m_changeLayer.sortingLayerName;
+            m_player.transform.position = gameObject.transform.position;
             Hide();
             m_playerControllerScript.m_movement.Disable();
             m_playerControllerScript.m_crouch.Disable();
