@@ -66,6 +66,9 @@ public class PlayerSpoted_Elliott : MonoBehaviour
     void Start()
     {
         m_allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        m_eyeCosed.SetActive(false);
+        m_eyeOpen.SetActive(false);
+
     }
 
     // Update is called once per frame
