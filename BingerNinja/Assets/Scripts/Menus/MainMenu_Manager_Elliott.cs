@@ -35,6 +35,7 @@ public class MainMenu_Manager_Elliott : MonoBehaviour
     public void StartNewGame()
     {
         ///load level 1 here
+        SaveLoadSystem_JamieG.DeleteSaves();
         SceneManager_JamieG.Instance.LoadNextLevel();
         print("start");
     }

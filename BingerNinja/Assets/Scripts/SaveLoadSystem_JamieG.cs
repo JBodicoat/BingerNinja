@@ -24,6 +24,16 @@ public static class SaveLoadSystem_JamieG
 
     private static SaveSystemCache m_Cache = new SaveSystemCache();
 
+    public static void DeleteSaves()
+    {
+        DirectoryInfo dir = new DirectoryInfo(Application.persistentDataPath);
+
+        foreach(FileInfo fi in dir.GetFiles())
+        {
+            fi.Delete();
+        }
+    }
+    
     #region Saving
 
     // Saves the configurations of the settings menu into the Settings.save file 
