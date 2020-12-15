@@ -11,6 +11,8 @@ public class CameraShakeElliott : MonoBehaviour
 {
     public float m_duration;
     public float m_magnitude;
+    public float m_cameraLerp;
+    private Transform playerTrans;
     public IEnumerator Shake(float duration, float magnitude)
     {
         duration = m_duration;
@@ -33,6 +35,17 @@ public class CameraShakeElliott : MonoBehaviour
         }
         transform.localPosition = orgignalPos;
     }
+
+    //private void LateUpdate()
+    //{       
+    //    Vector2.Lerp(transform.position, playerTrans.position, m_cameraLerp);
+    //}
+
+    //private void Start()
+    //{
+    //    playerTrans = transform.parent;
+    //    transform.parent = null;
+    //}
 
     public void StartShake()
     {

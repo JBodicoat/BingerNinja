@@ -56,6 +56,8 @@ public class EnemyDamager_SebastianMol : MonoBehaviour
 					}
 				}					
 			}
+
+			gameObject.SetActive(false);
 		}
 	}
     private void Start()

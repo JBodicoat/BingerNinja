@@ -29,7 +29,7 @@ using UnityEngine.UIElements;
 using UnityEngine.Tilemaps;
 
 public enum state { WONDER, CHASE, ATTACK, CURIOUS };
-public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN, PETTIGER, ALIEN, TIGERBOSS, SPACENINJABOSS, TADASHI };
+public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN, PETTIGER, ALIEN, TIGERBOSS, SPACENINJABOSS, TADASHI, CHEFBOSS };
 public enum m_damageType { MELEE, RANGE, SNEAK, STUN };
 /// <summary>
 ///base class for enemies to inherit from with logic for detection, patrole, movment, stats managment
@@ -328,7 +328,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     private void PlayerDetectionRaycasLogic(GameObject col)
     {
         m_detectionCollider.enabled = false;
-        RaycastHit2D hit = Physics2D.Linecast(m_rayCastStart.position, col.transform.position, m_crouchObjectLayer);
+        RaycastHit2D hit = Physics2D.Linecast(m_rayCastStart.position, col.transform.position);
         Debug.DrawLine(m_rayCastStart.position, col.transform.position, Color.red);
 
         //RaycastHit2D crouchedHit = Physics2D.Linecast(m_rayCastStart.position, col.transform.position);
@@ -369,33 +369,36 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <returns>weather the player is in line of sight</returns>
     protected bool IsPlayerInLineOfSight()
     {
-        m_detectionCollider.enabled = false;
-        RaycastHit2D hit = Physics2D.Linecast(m_rayCastStart.position, m_playerTransform.position, m_crouchObjectLayer);
-        Debug.DrawLine(m_rayCastStart.position, m_playerTransform.position, Color.red);
-
-        if (hit.collider.gameObject.CompareTag("Player"))
+        if (m_playerTransform)
         {
             m_detectionCollider.enabled = false;
-            return true;
-        }
-        else
-        {
+            RaycastHit2D hit = Physics2D.Linecast(m_rayCastStart.position, m_playerTransform.position);
+            Debug.DrawLine(m_rayCastStart.position, m_playerTransform.position, Color.red);
 
-            RaycastHit2D hitTwo = Physics2D.Linecast(m_rayCastStartBackup.position, m_playerTransform.position);
-            Debug.DrawLine(m_rayCastStartBackup.position, m_playerTransform.position, Color.red);
-
-            if (hitTwo.collider.gameObject.CompareTag("Player"))
+            if (hit.collider.gameObject.CompareTag("Player"))
             {
                 m_detectionCollider.enabled = false;
                 return true;
             }
             else
             {
-                m_detectionCollider.enabled = true;
-                return false;
+
+                RaycastHit2D hitTwo = Physics2D.Linecast(m_rayCastStartBackup.position, m_playerTransform.position);
+                Debug.DrawLine(m_rayCastStartBackup.position, m_playerTransform.position, Color.red);
+
+                if (hitTwo.collider.gameObject.CompareTag("Player"))
+                {
+                    m_detectionCollider.enabled = false;
+                    return true;
+                }
+                else
+                {
+                    m_detectionCollider.enabled = true;
+                    return false;
+                }
             }
         }
-        
+        return false;
     }
 
     #endregion
@@ -615,6 +618,10 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 }   
                 break;
 
+            case m_enemyType.CHEFBOSS:
+
+                break;
+
             case m_enemyType.BARISTA:
                 if(m_playerTransform.position.x < transform.position.x) //player on the left
                 {
@@ -711,6 +718,8 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 break;
 
         }
+
+        m_currentState = state.CHASE;
 
         OnDeath();//checks to see if enemy is dead 
     }
@@ -835,7 +844,6 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
         m_inventory = GameObject.Find("Player").GetComponent<Inventory_JoaoBeijinho>();
         m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
-        m_crouchObjectLayer = ~m_crouchObjectLayer;
         m_HitEffectElliott = GetComponent<HitEffectElliott>();
         m_cameraShake = Camera.main.GetComponent<CameraShakeElliott>();
     }

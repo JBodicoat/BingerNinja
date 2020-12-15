@@ -675,7 +675,7 @@ MonoBehaviour:
   m_testButton: 0
   m_startPos: {x: 0, y: 0}
   m_targetPos: {x: 0, y: 0}
-  m_pathTile: {fileID: 0}
+  m_pathTile: {fileID: 11400000, guid: e36c7a8ca6e2ec7488bf78cae90527c3, type: 2}
 --- !u!19719996 &629446813
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -1032,6 +1032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac23b8902ad07454dbab100c921e85d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vents: {fileID: 0}
   bottomDoorTile: {fileID: 0}
   topDoorTile: {fileID: 0}
   currentLevel: 0
@@ -31065,6 +31066,18 @@ PrefabInstance:
       propertyPath: m_attackRange
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: ebfa8304057df7b41bb9b382eac4061d, type: 3}
+      propertyPath: doOnceShowPath
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: ebfa8304057df7b41bb9b382eac4061d, type: 3}
+      propertyPath: showPath
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: ebfa8304057df7b41bb9b382eac4061d, type: 3}
+      propertyPath: showPathBeforAttackTigerBoss
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434322, guid: ebfa8304057df7b41bb9b382eac4061d, type: 3}
       propertyPath: m_Name
       value: Toby the Tiger
@@ -31418,6 +31431,10 @@ PrefabInstance:
       propertyPath: floortilemap
       value: 
       objectReference: {fileID: 1904228287}
+    - target: {fileID: 8631870844753434320, guid: 3e0ee63d73999dd43a0e0964d6e22963, type: 3}
+      propertyPath: showPath
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434322, guid: 3e0ee63d73999dd43a0e0964d6e22963, type: 3}
       propertyPath: m_Name
       value: PetTigerEnemy (1)

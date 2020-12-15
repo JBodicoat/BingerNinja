@@ -55,6 +55,12 @@ using UnityEngine;
     private float m_tadashiLastFaseAttackRand;
     private float m_attackRangeeAfterCharge;
 
+
+    //i have to put this here i cba to find a cleaner way to do this future seb get your shit togther
+    private bool doOnce = true;
+    private Pathfinder_SebastianMol pathFinder;
+    private List<Vector2Int> daPath;
+
     /// <summary>
     /// ovveride class that holds logic for what the enemy shoudl do when in the attack state
     /// </summary>
@@ -64,14 +70,20 @@ using UnityEngine;
         {
             if (m_randAttackChance == m_RangedAttackRandomChance - 1)
             {
-                if (EnemyAttacks_SebastianMol.RangedAttack(GetComponent<Enemy_Animation_LouieWilliamson>(), m_playerTransform, transform, m_aimer, 
-                    ref m_attackTimer, m_projectile, m_shootDeley)) m_generateRandomNumberOnce = false;
+                if (EnemyAttacks_SebastianMol.RangedAttack(GetComponent<Enemy_Animation_LouieWilliamson>(), m_playerTransform, transform, m_aimer,
+                    ref m_attackTimer, m_projectile, m_shootDeley))
+                {
+                    m_generateRandomNumberOnce = false;
+                }
             }
             else
             {
-                if (EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility, 
+                if (EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility,
                     QuickAttack, ChargeAttack, StunAfterAttack,
-                    m_currentEnemyType, m_hitSpeed, GetComponent<Enemy_Animation_LouieWilliamson>())) m_generateRandomNumberOnce = false;
+                    m_currentEnemyType, m_hitSpeed, GetComponent<Enemy_Animation_LouieWilliamson>()))
+                {
+                    m_generateRandomNumberOnce = false;
+                }
             }
         }
 
@@ -350,7 +362,7 @@ using UnityEngine;
     /// </summary>
     private void UpdateAttackAlien()
     {
-        if(m_currentEnemyType == m_enemyType.ALIEN)
+        if(m_currentEnemyType == m_enemyType.ALIEN || m_currentEnemyType == m_enemyType.NORMAL)
         {
             if (!m_generateRandomNumberOnce)
             {
