@@ -1020,6 +1020,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UICanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7882151871028722941, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7882151871300385332, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 163.7998
@@ -1963,9 +1967,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BindingMode: 1
   m_FollowOffset: {x: 0, y: 0, z: -10}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
+  m_XDamping: 0
+  m_YDamping: 0
+  m_ZDamping: 0
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0
@@ -2400,7 +2404,7 @@ PlayableDirector:
   - key: {fileID: 0}
     value: {fileID: 0}
   - key: {fileID: 6389601071912901450, guid: 77b1b2f920ed62646998439116c1a9ab, type: 2}
-    value: {fileID: 1302698444}
+    value: {fileID: 1356611678}
   - key: {fileID: -4770719213050237617, guid: 77b1b2f920ed62646998439116c1a9ab, type: 2}
     value: {fileID: 41071352}
   - key: {fileID: -8318709354188893784, guid: 77b1b2f920ed62646998439116c1a9ab, type: 2}
@@ -2414,6 +2418,7 @@ PlayableDirector:
     - 55426f9846dc7fa45af0aa53a794d9c8: {fileID: 1546466229}
     - 6d872c982540e6c459ac364d11fa5f8d: {fileID: 1043890422}
     - 485532bdadbf4664e9dde86b63e4243b: {fileID: 1043890422}
+    - 418e3838d357896498d63650dd85a101: {fileID: 924312629}
     - 7a95be8758c2a10459cd6cfc172fcf55: {fileID: 904262828}
     - 15e7a151a2a859c4dad784fc9678955d: {fileID: 1043890422}
     - 580f0d89c914b8f4c9583f1d5995e358: {fileID: 762478330}
