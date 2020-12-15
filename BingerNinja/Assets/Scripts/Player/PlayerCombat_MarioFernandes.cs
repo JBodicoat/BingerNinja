@@ -211,32 +211,39 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
         if (m_currentWeapon[m_weaponsIndex])
         {
-            GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_currentWeapon[m_weaponsIndex].m_instaHeal);
+            PlayerHealthHunger_MarioFernandes playerHunger = GetComponent<PlayerHealthHunger_MarioFernandes>();
+            playerHunger.Heal(m_currentWeapon[m_weaponsIndex].m_instaHeal);
 
             switch (m_currentWeapon[m_weaponsIndex].m_foodType)
             {
                 case FoodType.FUGU:                   
                     if (Random.Range(0, 101) >= 50)
-                        m_effectManager.AddEffect(new PoisionDefuff_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_poisonDmg));                        
+                        m_effectManager.AddEffect(new PoisionDefuff_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_poisonDmg));
+                    playerHunger.Buff(1);
                     break;
-                case FoodType.SQUID:                    
+                case FoodType.SQUID: 
                     break;
                 case FoodType.RICEBALL:                    
                     break;
                 case FoodType.KOBEBEEF:                   
                     m_effectManager.AddEffect(new SpeedEffect_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_speedModifier));
+                    playerHunger.Buff(6);
                     break;
                 case FoodType.SASHIMI:                    
                     m_effectManager.AddEffect(new StrengthEffect_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_strengthModifier));
+                    playerHunger.Buff(5);
                     break;
-                case FoodType.TEMPURA:                   
+                case FoodType.TEMPURA:
+                    playerHunger.Buff(3);
                     break;
                 case FoodType.DANGO:
                     break;
-                case FoodType.SAKE:                    
+                case FoodType.SAKE:
+                    playerHunger.Buff(4);
                     break;
                 case FoodType.NOODLES:
                     m_effectManager.AddEffect(new StrengthEffect_MarioFernandes(30, m_currentWeapon[m_weaponsIndex].m_strengthModifier));
+                    playerHunger.Buff(2);
                     break;
                 default:
                     break;

@@ -87,7 +87,6 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
             {
 
                 m_old_direction = m_direction;
-                StartCoroutine("RollTimer");
             }
             m_direction = vector;
             

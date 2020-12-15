@@ -27,8 +27,64 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
     public Slider m_healthSlider;
     public Slider m_hungerSlider;
 
+    public Slider m_buffSlider;
+    protected float m_currentTime =0;
+    protected float m_startingTime =0;
+
     private PlayerDeathEffect_Elliott m_DeathEffect;
     private PlayerController_JamieG m_PauseInput;
+
+    public void Buff (int weapon)
+    {
+        m_currentTime = m_startingTime;
+
+        switch (weapon)
+        {
+            case 1: //fugu
+                m_startingTime = 5;
+                m_currentTime -= 1 * Time.deltaTime;
+                m_buffSlider.value = m_currentTime;
+                break;
+            case 2: //noodles
+                m_startingTime = 15;
+                m_currentTime -= 1 * Time.deltaTime;
+                m_buffSlider.value = m_currentTime;
+                break;
+            case 3: //tempura
+                m_startingTime = 30;
+                m_currentTime -= 1 * Time.deltaTime;
+                m_buffSlider.value = m_currentTime;
+                break;
+            case 4: //sake
+                m_startingTime = 30;
+                m_currentTime -= 1 * Time.deltaTime;
+                m_buffSlider.value = m_currentTime;
+                break;
+            case 5://sashimi
+                m_startingTime = 5;
+                m_currentTime -= 1 * Time.deltaTime;
+                m_buffSlider.value = m_currentTime;
+                break;
+            case 6://kobe beef
+                m_startingTime = 5;
+                m_currentTime -= 1 * Time.deltaTime;
+                m_buffSlider.value = m_currentTime;
+                break;
+            default:
+                break;
+        }
+        /// if (food is equal to noodles)
+        /// {
+        ///     starting time == blah blah
+        ///     slider will move in relation to how long buff is active
+        /// }
+        /// if ( food is equal to sake) 
+        /// {
+        ///  do the same crap but with a shorter time ect.
+        /// }
+
+    }
+
 
     // Increase players health by amount passed
     public void Eat(float amount)
@@ -100,6 +156,10 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+       
+        
+       
+
         m_healthSlider.maxValue = m_maxHealth;
         m_healthSlider.value = m_currentHealth;
 
@@ -114,7 +174,10 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!m_paused)
+        m_buffSlider.maxValue = m_startingTime;
+        m_buffSlider.value = m_currentTime;
+
+        if (!m_paused)
         {
             m_currentHunger -= m_fullnessDrainRate * Time.deltaTime;
             m_hungerSlider.value = m_currentHunger;
