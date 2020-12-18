@@ -659,15 +659,18 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             case m_enemyType.BUSSINESMAN:
             case m_enemyType.INTERN:
                 //sneak multiplier
+                Debug.Log(m_playerDetected);
                 if (m_playerDetected == false)
                 {
                     m_health -= damage * (m_sneakDamageMultiplier + m_sneakDamageMultiplierStack);
-                   
+                    m_HitEffectElliott.StartHitEffect(true);
+
                 }
                 else
                 {
                     m_health -= damage;
-                    
+                    m_HitEffectElliott.StartHitEffect(false);
+
                 }
                 break;
 
@@ -685,10 +688,12 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                     if (m_playerDetected == false)
                     {
                         m_health -= damage * (m_sneakDamageMultiplier + m_sneakDamageMultiplierStack);
+                        m_HitEffectElliott.StartHitEffect(true);
                     }
                     else
                     {
                         m_health -= damage;
+                        m_HitEffectElliott.StartHitEffect(false);
                     }
                 }
                 break;

@@ -398,6 +398,7 @@ MonoBehaviour:
   m_currentEnemyType: 0
   m_questionmark: {fileID: 3783213463638213574, guid: 049ec75e55b7e8f4da5d740b5243440f, type: 3}
   m_excalmationmark: {fileID: 6264025296151744314, guid: d36af638ed0d3714ba36621302ee691a, type: 3}
+  m_inventory: {fileID: 0}
   m_notifcaionOffset: 0.2
   m_dropItem: {fileID: 0}
   m_health: 100
@@ -411,7 +412,7 @@ MonoBehaviour:
   m_outOfSightDeley: 2
   m_sneakDamageMultiplier: 1.5
   m_sneakDamageMultiplierStack: 0
-  m_attackRange: 0.6
+  m_attackRange: 1
   m_attckRangeDevider: 1
   m_tiggerBossLooseTargetDistance: 2
   m_secondPhaseStartPercentage: 0.3
@@ -429,6 +430,7 @@ MonoBehaviour:
   m_maxChargTimeBeforDamege: 0.2
   m_amountOfTimeToMoveAwayFromWall: 0.2
   m_chargeAttackSpeed: 500
+  showPathBeforAttackTigerBoss: 0
 --- !u!114 &6890218618640264603
 MonoBehaviour:
   m_ObjectHideFlags: 0
