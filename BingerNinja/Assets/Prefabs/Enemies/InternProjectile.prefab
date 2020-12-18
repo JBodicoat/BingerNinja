@@ -53,7 +53,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c32d50fb846c662449889d803366ef5d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: -2137332843
   m_SortingLayer: 3
   m_SortingOrder: 101
-  m_Sprite: {fileID: 21300000, guid: 6cc2d4131b18e5540a1078249ef93880, type: 3}
-  m_Color: {r: 0.009433985, g: 0.00050433184, b: 0.00050433184, a: 1}
+  m_Sprite: {fileID: -5378558562916051623, guid: 7eec9656956eec34baf6f874b2f50d24, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -119,6 +119,12 @@ MonoBehaviour:
   m_poisonDamageChance: 0
   m_poisionDamage: 0
   m_posionDamageTime: 0
+  m_doseStunDamage: 0
+  m_stunAmount: 0
+  m_stunDamageTime: 0
+  m_doseHeal: 0
+  m_healDuration: 0
+  m_HealAmount: 0
 --- !u!50 &3623586587531974837
 Rigidbody2D:
   serializedVersion: 4
