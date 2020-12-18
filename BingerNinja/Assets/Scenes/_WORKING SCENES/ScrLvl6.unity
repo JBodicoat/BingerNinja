@@ -1095,6 +1095,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UICanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7882151871028722941, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7882151872350534479, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -26136,6 +26140,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3232699639532327789, guid: c55a2c65ac41fb341beef8971df506e0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3232699639532327789, guid: c55a2c65ac41fb341beef8971df506e0, type: 3}
+      propertyPath: MusicPrefab
+      value: 
+      objectReference: {fileID: 2124965157}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c55a2c65ac41fb341beef8971df506e0, type: 3}
 --- !u!1 &1703995460
@@ -26362,6 +26374,11 @@ Transform:
   m_Father: {fileID: 347475556}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &2124965157 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5732119696114794830, guid: 0f30ac85b546af741b6be479a7ad4717, type: 3}
+  m_PrefabInstance: {fileID: 42766695}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2140366200
 GameObject:
   m_ObjectHideFlags: 0
