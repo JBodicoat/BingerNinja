@@ -1761,11 +1761,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4434442803191826689, guid: 8a10a703267ea9c4e807922f46109cfa, type: 3}
       propertyPath: m_Offset.x
-      value: 0.040605545
+      value: -0.0016543865
       objectReference: {fileID: 0}
     - target: {fileID: 4434442803191826689, guid: 8a10a703267ea9c4e807922f46109cfa, type: 3}
       propertyPath: m_Size.x
-      value: 0.9187889
+      value: 2.307341
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434442803191826689, guid: 8a10a703267ea9c4e807922f46109cfa, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4434442803191826690, guid: 8a10a703267ea9c4e807922f46109cfa, type: 3}
       propertyPath: floortilemap
@@ -1782,6 +1786,14 @@ PrefabInstance:
     - target: {fileID: 4434442803191826690, guid: 8a10a703267ea9c4e807922f46109cfa, type: 3}
       propertyPath: m_dosePatrole
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434442803191826690, guid: 8a10a703267ea9c4e807922f46109cfa, type: 3}
+      propertyPath: m_attackRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434442803191826690, guid: 8a10a703267ea9c4e807922f46109cfa, type: 3}
+      propertyPath: m_playerMoveAllowance
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4434442803191826812, guid: 8a10a703267ea9c4e807922f46109cfa, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1826,6 +1838,22 @@ PrefabInstance:
     - target: {fileID: 4434442803191826812, guid: 8a10a703267ea9c4e807922f46109cfa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434442803191826814, guid: 8a10a703267ea9c4e807922f46109cfa, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].x
+      value: -3.4630609
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434442803191826814, guid: 8a10a703267ea9c4e807922f46109cfa, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].y
+      value: 4.788391
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434442803191826814, guid: 8a10a703267ea9c4e807922f46109cfa, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x
+      value: -1.9749155
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434442803191826814, guid: 8a10a703267ea9c4e807922f46109cfa, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].y
+      value: -3.1311302
       objectReference: {fileID: 0}
     - target: {fileID: 5282640114672852740, guid: 8a10a703267ea9c4e807922f46109cfa, type: 3}
       propertyPath: m_baseDamage
