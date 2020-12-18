@@ -443,7 +443,7 @@ MonoBehaviour:
   m_outOfSightDeley: 2
   m_sneakDamageMultiplier: 1.5
   m_sneakDamageMultiplierStack: 0
-  m_attackRange: 0.6
+  m_attackRange: 1
   m_attckRangeDevider: 1
   m_tiggerBossLooseTargetDistance: 2
   m_secondPhaseStartPercentage: 0.3
@@ -461,6 +461,7 @@ MonoBehaviour:
   m_maxChargTimeBeforDamege: 0.2
   m_amountOfTimeToMoveAwayFromWall: 0.2
   m_chargeAttackSpeed: 500
+  showPathBeforAttackTigerBoss: 0
   m_aimer: {fileID: 1488481114249787428}
   m_projectile: {fileID: 1986204507551107328, guid: c719167a814eda848a315ea7dbef9a8a, type: 3}
   m_shootDeley: 0

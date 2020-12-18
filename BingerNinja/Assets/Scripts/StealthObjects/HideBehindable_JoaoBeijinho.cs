@@ -93,7 +93,7 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
             m_isHiding = true;
             m_playerSprite.sortingOrder = 8;
             m_playerSprite.sortingLayerName = m_changeLayer.sortingLayerName;
-            m_player.transform.position = gameObject.transform.position;
+            m_player.transform.position = new Vector3( gameObject.transform.position.x, gameObject.transform.position.y, m_player.transform.position.z);
             Hide();
             m_playerControllerScript.m_movement.Disable();
             m_playerControllerScript.m_crouch.Disable();
