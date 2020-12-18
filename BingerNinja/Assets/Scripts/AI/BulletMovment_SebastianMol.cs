@@ -29,6 +29,8 @@ public class BulletMovment_SebastianMol : MonoBehaviour
     public float m_healDuration;
     public float m_HealAmount = 0;
 
+    public float  m_rotateSpeed;
+
 
     private AudioManager_LouieWilliamson m_audioManager;
 
@@ -40,6 +42,7 @@ public class BulletMovment_SebastianMol : MonoBehaviour
     void Update()
     {
         transform.position += (Vector3)m_direction * m_speed * Time.deltaTime ;
+        transform.Rotate(new Vector3(0, 0, m_rotateSpeed * Time.deltaTime));
     }
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -72,7 +75,8 @@ public class BulletMovment_SebastianMol : MonoBehaviour
 
             FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damage);
             //TODO collision.GetComponent<HitEffectElliott>().StartHitEffect(false);
-           
+
+         
 
             Destroy(gameObject);
         }  
