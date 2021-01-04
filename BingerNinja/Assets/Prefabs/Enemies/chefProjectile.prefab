@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1986204507551107328}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.2379129, y: -7.9592347, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -53,7 +53,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c32d50fb846c662449889d803366ef5d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: -2137332843
   m_SortingLayer: 3
   m_SortingOrder: 101
-  m_Sprite: {fileID: 21300000, guid: 6cc2d4131b18e5540a1078249ef93880, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: -1507713481849634344, guid: 7eec9656956eec34baf6f874b2f50d24, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b46ed57b13bb64f45ac2bba8e1bce14b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_speed: 2
+  m_speed: 5
   m_damage: 2
   m_dosePoisonDamage: 0
   m_poisonDamageChance: 0
@@ -125,6 +125,7 @@ MonoBehaviour:
   m_doseHeal: 0
   m_healDuration: 0
   m_HealAmount: 0
+  m_rotateSpeed: 1000
 --- !u!50 &3623586587531974837
 Rigidbody2D:
   serializedVersion: 4
