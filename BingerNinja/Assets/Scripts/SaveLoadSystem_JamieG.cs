@@ -28,12 +28,15 @@ public static class SaveLoadSystem_JamieG
     {
         DirectoryInfo dir = new DirectoryInfo(Application.persistentDataPath);
 
+        string[] files = new[] {SettingsFile, InventoryFile, GameplayFile, CheckpointFile};
         foreach(FileInfo fi in dir.GetFiles())
         {
-            fi.Delete();
+            if (files.Contains("/" + fi.Name))
+            {
+                fi.Delete();   
+            }
         }
     }
-    
     #region Saving
 
     // Saves the configurations of the settings menu into the Settings.save file 
