@@ -551,7 +551,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     {
         if(m_health <= 0)
         {
-            PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_Death);
+            PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_Damage);
             if (m_dropItem)
             {
                 Instantiate(m_dropItem, transform.position, Quaternion.identity);
@@ -600,7 +600,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <param name="damage">amount of damage</param>
     public void TakeDamage(m_damageType damageType, float damage)
     {
-
+        
         switch (m_currentEnemyType)
         {
             case m_enemyType.NORMAL:
