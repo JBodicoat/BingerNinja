@@ -17,7 +17,7 @@ public class LevelScripting : MonoBehaviour
     private GameObject levelLiftTrigger, keyTrigger, keyTriggerTwo, doorCloseTrigger, dialogBox, ventsDialogue, endVentDialogue;
     public GameObject vents;
     private BaseEnemy_SebastianMol boss, boss2, level2Enemy1, level2Enemy2;
-    private BossDialogue_MarioFernandes bossDialogue, level2End;
+    private BossDialogue_MarioFernandes bossDialogue, boss2Dialogue, level2End;
     private Tilemap objInfWalls, walls1, objBehWalls, walls2;
     public Tile bottomDoorTile, topDoorTile;
     private int bossDialogIndex = 0, boss2DialogIndex = 0;
@@ -177,8 +177,9 @@ public class LevelScripting : MonoBehaviour
             case 20:
                 {
                     boss = GameObject.Find("Ninjaroth").GetComponent<BaseEnemy_SebastianMol>();
-                    //boss2 = GameObject.Find("Tadashi").GetComponent<BaseEnemy_SebastianMol>();
+                    boss2 = GameObject.Find("Tadashi").GetComponent<BaseEnemy_SebastianMol>();
                     bossDialogue = GameObject.Find("Ninjaroth").GetComponent<BossDialogue_MarioFernandes>();
+                    boss2Dialogue = GameObject.Find("Tadashi").GetComponent<BossDialogue_MarioFernandes>();
                     dialogBox = GameObject.Find("DialogBox");
                     levelLiftTrigger = GameObject.Find("Level 20 Lift");
                     // find game object with timeline script to change playable director
@@ -845,7 +846,7 @@ public class LevelScripting : MonoBehaviour
                             {
                                 // just for timeline QA
                                 timeline.ChangeDirector("Good Ending");
-                                bossDialogue.TriggerDialogue(boss2DialogIndex);
+                                boss2Dialogue.TriggerDialogue(boss2DialogIndex);
                                 boss2DialogIndex++;
                                 if (boss2DialogIndex == 8)
                                 bossDead = true;
