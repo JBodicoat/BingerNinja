@@ -339,6 +339,11 @@ public class LevelScripting : MonoBehaviour
                     walls2.SetTile(new Vector3Int(13, 25, 0), null);
                 }
                 break;
+            case 15:
+                {
+                    levelLiftTrigger.SetActive(false);
+                }
+                break;
             case 18:
                 {
                     boss = GameObject.Find("Space Ninja").GetComponent<BaseEnemy_SebastianMol>();
@@ -692,22 +697,13 @@ public class LevelScripting : MonoBehaviour
                     {
                         if (!levelBossIntro)
                         {
-                            cinematicDone = false;
-                            cinematics.PlayZoomIn();
                             bossDialogue.TriggerDialogue(0);
-                            
-                            cinematicsTimer++;
-                            if(cinematicsTimer >= 2.0f)
-                            {
-                                cinematics.PlayZoomOut();
-                                levelBossIntro = true;
-                                cinematicDone = true;
-                            }
+                            levelBossIntro = true;
+
                             
                         }
                         if (boss.m_health <= 0)
                         {
-                            cinematics.PlayZoomIn();
                             bossDialogue.TriggerDialogue(1);
                             levelLiftTrigger.SetActive(true);
                             bossDead = true;
