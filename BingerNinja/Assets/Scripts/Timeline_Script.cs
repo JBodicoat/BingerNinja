@@ -6,12 +6,22 @@ public class Timeline_Script : MonoBehaviour
 {
     public PlayableDirector[] timeline;
     public PlayableDirector playableDirector;
-    public GameObject nextButton;
+    public GameObject nextButton, dialogBox;
     void Awake()
     {
         playableDirector = timeline[0];
         playableDirector.playableGraph.GetRootPlayable(0).SetSpeed(1);
     }  
+    void Update()
+    {
+        // if (waited)
+        // {
+        //     if (!dialogBox.activeInHierarchy)
+        //     {
+        //         playableDirector.Stop();
+        //     }
+        // }
+    }
     public void PlayTimeline()
     {
         if (playableDirector != null)
@@ -22,6 +32,12 @@ public class Timeline_Script : MonoBehaviour
     {
         playableDirector.playableGraph.GetRootPlayable(0).SetSpeed(0);
        // nextButton.SetActive(true);
+       if (dialogBox.activeInHierarchy == false)
+            {
+                Debug.Log("kurwa");
+                playableDirector.playableGraph.GetRootPlayable(0).SetSpeed(5);
+                //playableDirector.Stop();
+            }
     }
     public void ChangeDirector(string directorName = "Good Ending / Bad Ending")
     {

@@ -16,11 +16,11 @@ public class LevelScripting : MonoBehaviour
     internal bool enemyDead = false, keyUsed = false, levelBossIntro, bossDead = false, doorsClosed = false, cinematicDone = true, ventDialogueDisabled = false, endVentDialogueCanPlay = false, drawFreezer = true;
     private GameObject levelLiftTrigger, keyTrigger, keyTriggerTwo, doorCloseTrigger, dialogBox, ventsDialogue, endVentDialogue;
     public GameObject vents;
-    private BaseEnemy_SebastianMol boss, level2Enemy1, level2Enemy2;
+    private BaseEnemy_SebastianMol boss, boss2, level2Enemy1, level2Enemy2;
     private BossDialogue_MarioFernandes bossDialogue, level2End;
     private Tilemap objInfWalls, walls1, objBehWalls, walls2;
     public Tile bottomDoorTile, topDoorTile;
-    private int bossDialogIndex = 0;
+    private int bossDialogIndex = 0, boss2DialogIndex = 0;
     public int currentLevel;
     private PlayerController_JamieG controller;
     private BossIntroCineScript_AdamG cinematics;
@@ -177,6 +177,7 @@ public class LevelScripting : MonoBehaviour
             case 20:
                 {
                     boss = GameObject.Find("Ninjaroth").GetComponent<BaseEnemy_SebastianMol>();
+                    //boss2 = GameObject.Find("Tadashi").GetComponent<BaseEnemy_SebastianMol>();
                     bossDialogue = GameObject.Find("Ninjaroth").GetComponent<BossDialogue_MarioFernandes>();
                     dialogBox = GameObject.Find("DialogBox");
                     levelLiftTrigger = GameObject.Find("Level 20 Lift");
@@ -836,21 +837,23 @@ public class LevelScripting : MonoBehaviour
                             {
                                 bossDead = true;
                             }
-                            //if (bossDialogIndex == 19)
-                            //{
-                            //    // just for timeline QA
-                            //    timeline.ChangeDirector("Good Ending");
-                            //    bossDialogue.TriggerDialogue(bossDialogIndex);
-                            //    bossDialogIndex++;
-                            //    if (bossDialogIndex == 27)
-                            //    bossDead = true;
-                            //    //dramatic death SE
-                            //    //freeze on enemy as he dies  
-                            //    //end cinematic
-                            //    levelLiftTrigger.SetActive(true);
-                            //}
+                            
 
                         }
+                        else if (boss2 != null)
+                            if (boss2.m_health <= 0 && !dialogBox.activeInHierarchy)
+                            {
+                                // just for timeline QA
+                                timeline.ChangeDirector("Good Ending");
+                                bossDialogue.TriggerDialogue(boss2DialogIndex);
+                                boss2DialogIndex++;
+                                if (boss2DialogIndex == 8)
+                                bossDead = true;
+                                //dramatic death SE
+                                //freeze on enemy as he dies  
+                                //end cinematic
+                                levelLiftTrigger.SetActive(true);
+                            }
                     }
                 }
                 break;

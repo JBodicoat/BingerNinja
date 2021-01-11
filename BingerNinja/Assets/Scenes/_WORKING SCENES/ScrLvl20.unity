@@ -223,6 +223,7 @@ MonoBehaviour:
   - {fileID: 1031327597}
   playableDirector: {fileID: 104772523}
   nextButton: {fileID: 703568993}
+  dialogBox: {fileID: 882541124}
 --- !u!114 &41071352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1891,7 +1892,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 677286058}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 139246ae6a1c4324f9ac2007a58a30fb, type: 3}
   m_Name: 
@@ -2277,6 +2278,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9900a7709e43ef24db5e30819e9f6874, type: 3}
+--- !u!1 &882541124 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 185714203, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+  m_PrefabInstance: {fileID: 290902861}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &904262826
 GameObject:
   m_ObjectHideFlags: 0
@@ -3320,6 +3326,10 @@ PrefabInstance:
     - target: {fileID: 4362767424123825809, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596827981554471766, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8116294513426094757, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_IsActive
