@@ -23,7 +23,7 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
     protected Vector2 m_old_direction = new Vector2(0, 0);
 
     public float m_speed = 3.0f;
-    private float m_roll_speed = 7.5f;
+    public float m_roll_speed = 5f;
 
     public float m_baseSpeed = 3.0f;
     public bool isRolling= false;

@@ -49,7 +49,7 @@ public class Projectile_MarioFernandes : MonoBehaviour
         Destroy(gameObject);
         else
         m_timeAlive -= Time.deltaTime;
-    }
+     }
 
     private void OnTriggerEnter2D(Collider2D other) {
          print(other.gameObject.name);

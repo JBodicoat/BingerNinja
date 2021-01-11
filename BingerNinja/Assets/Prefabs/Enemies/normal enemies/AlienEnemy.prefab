@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be6def35fff5c7d48811166bd65116d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_baseDamage: 1
+  m_baseDamage: 5
   m_percentageChanceOfAffect: 0.5
   m_poisionDamage: 1
   m_slowDebuff: 0.5
@@ -393,7 +393,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.008592963, y: 0.007166326}
@@ -463,7 +463,7 @@ MonoBehaviour:
   m_chargeAttackSpeed: 500
   showPathBeforAttackTigerBoss: 0
   m_aimer: {fileID: 1488481114249787428}
-  m_projectile: {fileID: 1986204507551107328, guid: c719167a814eda848a315ea7dbef9a8a, type: 3}
+  m_projectile: {fileID: 1986204507551107328, guid: 4cffbeeab73b78d49afbe716680e88a1, type: 3}
   m_shootDeley: 0
   m_projectileSpeed: 5
   m_RangedAttackRandomChance: 2
