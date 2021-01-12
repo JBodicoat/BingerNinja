@@ -29,7 +29,7 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
     {
         base.Awake();
         
-        Cursor.lockState = CursorLockMode.Confined;
+        //Cursor.lockState = CursorLockMode.Confined;
 
         SettingsData settingsData = SaveLoadSystem_JamieG.LoadSettings();
         if (!settingsData.Equals(default(SettingsData)))

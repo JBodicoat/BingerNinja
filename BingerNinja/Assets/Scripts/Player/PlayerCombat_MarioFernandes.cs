@@ -295,7 +295,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         m_playerHealthHungerScript = FindObjectOfType<PlayerHealthHunger_MarioFernandes>();
         m_audioManager = FindObjectOfType<AudioManager_LouieWilliamson>();
         Controller = GetComponent<PlayerController_JamieG>();
-        m_WeaponUI = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
+        m_WeaponUI = GameObject.Find("WeaponsUI").GetComponentInChildren<WeaponUI_LouieWilliamson>();
         m_effectManager = gameObject.GetComponent<EffectManager_MarioFernandes>();
     }
 

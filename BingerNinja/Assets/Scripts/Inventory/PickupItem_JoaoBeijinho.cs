@@ -34,7 +34,7 @@ public class PickupItem_JoaoBeijinho : MonoBehaviour
     }
     private void Start()
     {
-        weaponUI = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
+        weaponUI = GameObject.Find("WeaponsUI").GetComponentInChildren<WeaponUI_LouieWilliamson>();
     }
 }
 

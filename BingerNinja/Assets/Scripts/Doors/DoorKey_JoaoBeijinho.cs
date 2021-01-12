@@ -36,6 +36,6 @@ public class DoorKey_JoaoBeijinho : MonoBehaviour
     void Start()
     {
         m_inventory = FindObjectOfType<Inventory_JoaoBeijinho>();
-        weaponUI = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
+        weaponUI = GameObject.Find("WeaponsUI").GetComponentInChildren<WeaponUI_LouieWilliamson>();
     }
 }

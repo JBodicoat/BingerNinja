@@ -363,7 +363,7 @@ public class LevelScripting : MonoBehaviour
             default:
                 break;
         }
-        wpnUI = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
+        wpnUI = GameObject.Find("WeaponsUI").GetComponentInChildren<WeaponUI_LouieWilliamson>();
 
         //if (SceneManager.GetActiveScene().buildIndex == 2)
         //{

@@ -243,7 +243,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
     {
         m_dialogBox = m_nameText.transform.parent.gameObject;
         playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
-        m_wpnUI = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
+        m_wpnUI = GameObject.Find("WeaponsUI").GetComponentInChildren<WeaponUI_LouieWilliamson>();
         m_sentences = new Queue<string>();
         
         LoadDialog(SceneManager.GetActiveScene().buildIndex);

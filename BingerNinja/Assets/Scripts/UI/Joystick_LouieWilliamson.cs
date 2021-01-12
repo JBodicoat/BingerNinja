@@ -76,6 +76,7 @@ namespace UnityEngine.InputSystem.OnScreen
         private void FixedUpdate()
         {
             m_MovementScript.RecieveVector(m_MoveVector);
+            print(m_MoveVector);
         }
     }
 }
