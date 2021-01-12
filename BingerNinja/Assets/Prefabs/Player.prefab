@@ -45,7 +45,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -147,6 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_duration: 0.15
   m_magnitude: 0.4
+  m_cameraLerp: 0
 --- !u!1 &4362767424123825799
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,6 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2fd2888d90a8e8468d086baac360ca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_fullnessDrainRate: 2.5
   m_paused: 0
   m_healthSlider: {fileID: 0}
   m_hungerSlider: {fileID: 0}
@@ -594,6 +596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_speed: 3
+  m_roll_speed: 4
   m_baseSpeed: 3
   isRolling: 0
 --- !u!114 &4362767424123825801
@@ -625,7 +628,7 @@ MonoBehaviour:
   m_stealthed: 0
   m_crouched: 0
   m_inVent: 0
-  crouchSpeed: 2.5
+  crouchSpeed: 1
 --- !u!114 &4272470005486940903
 MonoBehaviour:
   m_ObjectHideFlags: 0

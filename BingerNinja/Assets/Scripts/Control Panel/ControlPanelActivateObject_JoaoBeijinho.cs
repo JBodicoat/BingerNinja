@@ -8,6 +8,8 @@
 //                           Added cooldown to the freezer usage and one usage(not spammable)
 //Joao Beijinho 27/11/2020 - Created LightColor() to change the color of the light to a color of the ColorChanger()
 //Joao Beijinho 07/12/2020 - Replaced activation of sprite on stun light to activate/deactivate gameObject
+//Joao Beijinho 12/01/2021 - Turn levelScripting.drawFreezer TRUE when freezer IS in use
+//                           Turn levelScripting.drawFreezer FALSE when freezer ISN'T in use
 
 using System.Collections;
 using System.Collections.Generic;
@@ -33,6 +35,7 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
     protected FreezerTrigger_JoaoBeijinho m_freezerArea;//Reference script that checks if enemy is in the freezer
     private BaseEnemy_SebastianMol m_baseEnemyScript;
     private ColorChanger_Jann m_colorChangerScript;
+    private LevelScripting levelScripting;
 
     [Header("Freezer Settings")]
     public int m_maxTicks;
@@ -76,7 +79,7 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
             case ObjectType.Freezer:
                 if (!m_freezerInUse)
                 {
-                    gameObject.GetComponent<Collider2D>().enabled = true;//Lock freezer door
+                    levelScripting.drawFreezer = true;//Enable freezer
                     StartCoroutine(FreezerLockAndDamage());
                 }
                 break;
@@ -97,16 +100,16 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
 
                 print("Dealt " + m_damageAmount + " damage");
                 m_baseEnemyScript.StunEnemyWithDeleyFunc(m_damageInterval);
-                m_baseEnemyScript.m_health -= m_damageAmount;//Do damage, ThugEnemy for test
+                m_baseEnemyScript.m_health -= m_damageAmount;//Deal damage
                 print("Enemy HP: " + m_baseEnemyScript.m_health);
             }
 
             yield return new WaitForSeconds(m_damageInterval);//Delay before doing damage again
         }
         
-        gameObject.GetComponent<Collider2D>().enabled = false;//Unlock freezer door
+        levelScripting.drawFreezer = false;//Unlock freezer door
         yield return new WaitForSeconds(m_freezerCooldown);
-        m_freezerInUse = false;
+        m_freezerInUse = false;print("CD over");
     }
 
     private void LightColor()
@@ -141,6 +144,7 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
 
     void Awake()
     {
+        levelScripting = GameObject.Find("Player").GetComponent<LevelScripting>();
         m_freezerArea = FindObjectOfType<FreezerTrigger_JoaoBeijinho>();
         m_colorChangerScript = FindObjectOfType<ColorChanger_Jann>();
 

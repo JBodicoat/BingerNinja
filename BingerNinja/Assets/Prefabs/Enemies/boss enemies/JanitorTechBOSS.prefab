@@ -393,7 +393,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.19958687, y: -0.10082722}
@@ -429,6 +429,7 @@ MonoBehaviour:
   m_currentEnemyType: 0
   m_questionmark: {fileID: 3783213463638213574, guid: 049ec75e55b7e8f4da5d740b5243440f, type: 3}
   m_excalmationmark: {fileID: 6264025296151744314, guid: d36af638ed0d3714ba36621302ee691a, type: 3}
+  m_inventory: {fileID: 0}
   m_notifcaionOffset: 0.2
   m_dropItem: {fileID: 0}
   m_health: 100
@@ -460,6 +461,7 @@ MonoBehaviour:
   m_maxChargTimeBeforDamege: 0.2
   m_amountOfTimeToMoveAwayFromWall: 0.2
   m_chargeAttackSpeed: 500
+  showPathBeforAttackTigerBoss: 0
   m_aimer: {fileID: 1488481114249787428}
   m_projectile: {fileID: 1986204507551107328, guid: d27f3aeac9b841a4687df15667cd609c, type: 3}
   m_shootDeley: 0

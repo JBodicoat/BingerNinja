@@ -78,8 +78,19 @@ public class Inventory_JoaoBeijinho : MonoBehaviour
 
     private void Start()
     {
-         m_EnemyList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));    
+         m_EnemyList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+         
+         // Load inventory
+         InventoryData inventoryData = SaveLoadSystem_JamieG.LoadInventory();
+         if (!inventoryData.Equals(default(InventoryData)))
+         {
+             foreach (ItemData itemData in inventoryData.m_items)
+             {
+                 GiveItem(itemData.m_type, itemData.m_amount);
+             }
+         }
     }
+    
     public void CheckDeadEnemies()
     {
         int count = 0;
