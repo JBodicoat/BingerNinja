@@ -102,6 +102,7 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
                 m_baseEnemyScript.StunEnemyWithDeleyFunc(m_damageInterval);
                 m_baseEnemyScript.m_health -= m_damageAmount;//Deal damage
                 print("Enemy HP: " + m_baseEnemyScript.m_health);
+                m_baseEnemyScript.OnDeath();
             }
 
             yield return new WaitForSeconds(m_damageInterval);//Delay before doing damage again

@@ -209,7 +209,7 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     }
 
 
-    protected void OnCollisionEnter2D(Collision2D collision)
+    protected void OnTriggerEnter2D(Collision2D collision)
     {
         if (m_currentEnemyType == m_enemyType.PETTIGER || m_currentEnemyType == m_enemyType.TADASHI)
         {
