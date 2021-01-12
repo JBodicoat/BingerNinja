@@ -23,6 +23,7 @@ using UnityEngine;
 public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
 {
     private GameObject m_player;
+    private GameObject m_ventBlockers;
 
     #region Enter and Exit triggers
     private void OnTriggerEnter2D(Collider2D collision)//Enter and Exit vent
@@ -71,6 +72,7 @@ public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
         
         m_player.GetComponentInChildren<SpriteRenderer>().enabled = true;
         gameObject.SetActive(false);
+        m_ventBlockers.SetActive(true);
 
         Physics2D.IgnoreLayerCollision(0, 10, false);
     } 
@@ -80,6 +82,8 @@ public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
     {
         //Get the player GameObject for sprite changing
         m_player = GameObject.Find("Player");
+
+        m_ventBlockers = GameObject.Find("VentBlockers");
 
         //Turn VentPath GameObject OFF at the start, it will only be enabled after the player passes a trigger
         gameObject.SetActive(false);
