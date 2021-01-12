@@ -547,7 +547,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <summary>
     /// actions that happen before enemy death.
     /// </summary>
-    protected void OnDeath() 
+    public void OnDeath() 
     {
         if(m_health <= 0)
         {
