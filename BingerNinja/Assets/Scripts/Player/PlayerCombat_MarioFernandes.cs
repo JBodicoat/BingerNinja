@@ -171,6 +171,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             
             if(m_currentWeapon[m_weaponsIndex].m_ammunition <= 0)
             {
+                m_WeaponUI.removeWeapon(m_currentWeapon[m_weaponsIndex].IsRanged());
                 print("Destroy usege");
                 Destroy(m_currentWeapon[m_weaponsIndex].gameObject);
                 m_currentWeapon[m_weaponsIndex] = null;
@@ -258,6 +259,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             m_currentWeapon[m_weaponsIndex].m_ammunition -= m_eatAmmount;
             m_WeaponUI.setAmmo(m_currentWeapon[m_weaponsIndex].m_ammunition);
             }
+
 
             if(!m_currentWeapon[m_weaponsIndex].IsRanged() || m_currentWeapon[m_weaponsIndex].m_ammunition <= 0)
             {

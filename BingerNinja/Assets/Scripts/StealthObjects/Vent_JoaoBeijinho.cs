@@ -11,6 +11,7 @@
 //                           Put VentExit() on OnTriggerExit2D for use in VentPath instead of vent enter and exit
 //                           Erased m_playerPos from VentEnter() and VentExit() to stop player from snapping to vent position
 //                           Removed ForEach from VentEnter() and VentExit(), no need to enable/disable the walls
+//Joao Beijinho 12/01/2021 - Changed OnTriggerExit2D to toggle VentPath OFF
 
 using System.Collections;
 using System.Collections.Generic;
@@ -69,7 +70,8 @@ public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
         ToggleVent();
         
         m_player.GetComponentInChildren<SpriteRenderer>().enabled = true;
-        
+        gameObject.SetActive(false);
+
         Physics2D.IgnoreLayerCollision(0, 10, false);
     } 
 

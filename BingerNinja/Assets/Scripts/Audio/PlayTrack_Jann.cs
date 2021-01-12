@@ -11,8 +11,6 @@ using UnityEngine;
 
 public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
 {
-    private static PlayTrack_Jann m_instance;
-    
     private int SamplingFrequency = 48000;
 
     [SerializeField] private TextAsset m_musicOnStart;
@@ -29,16 +27,17 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
 
     private void Awake()
     {
-
-        Cursor.lockState = CursorLockMode.Confined;
-        // Singleton setup
-        if (m_instance != null && m_instance != this)
-        {
-            Destroy(gameObject);
-        } else {
-            m_instance = this;
-        }
+        base.Awake();
         
+        Cursor.lockState = CursorLockMode.Confined;
+
+        SettingsData settingsData = SaveLoadSystem_JamieG.LoadSettings();
+        if (!settingsData.Equals(default(SettingsData)))
+        {
+            UpdateMusicVolume(settingsData.m_musicVolume);
+            UpdateSfxVolume(settingsData.m_sfxVolume);
+        }
+
         foreach (AudioSource musicSource in m_musicAudioSources)
         {
             musicSource.volume = m_volumeMusic;
@@ -162,26 +161,23 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
     }
     #endregion
 
-    #region Properties
-
-    public float VolumeSound
+    public void UpdateMusicVolume(float volume)
     {
-        get => m_volumeSound;
-        set => m_volumeSound = value;
+        m_volumeMusic = volume;
+
+        foreach (var source in m_musicAudioSources)
+        {
+            source.volume = volume / 10f;
+        }
     }
 
-    public float VolumeMusic
+    public void UpdateSfxVolume(float volume)
     {
-        get => m_volumeMusic;
-        set => m_volumeMusic = value;
+        m_volumeSound = volume;
+        
+        foreach (var source in m_soundAudioSources)
+        {
+            source.volume = volume / 10f;
+        }
     }
-
-    public bool LoopMusic
-    {
-        get => m_loopMusic;
-        set => m_loopMusic = value;
-    }
-
-    public static PlayTrack_Jann Instance => m_instance;
-    #endregion
 }

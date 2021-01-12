@@ -68,13 +68,12 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
     //Assumes that the scenes are in the correct order of build indexes in build settings
     public void LoadNextLevel()
     {
+        Inventory_JoaoBeijinho inventory = GameObject.Find("Player").GetComponent<Inventory_JoaoBeijinho>();
+        SaveLoadSystem_JamieG.SaveInventory(inventory);
+        
         FadeIn();
 
         StartCoroutine(Load(SceneManager.GetActiveScene().buildIndex + 1));
-
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        
-        //SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     //Reloads the current scene using its buildIndex
@@ -102,6 +101,7 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
         }
         
         LoadGameState();
+        LoadSoundSettings();
         
         if (m_player == null)
         {
@@ -144,6 +144,17 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
         }
     }
 
+    public void LoadSoundSettings()
+    {
+        SettingsData settingsData = SaveLoadSystem_JamieG.LoadSettings();
+
+        if (!settingsData.Equals(default(SettingsData)))
+        {
+            PlayTrack_Jann.Instance.UpdateMusicVolume(settingsData.m_musicVolume);
+            PlayTrack_Jann.Instance.UpdateSfxVolume(settingsData.m_sfxVolume);
+        }
+    }
+
     public void FadeBoth()
     {
         m_dialogueManager.PauseGame();
@@ -162,7 +173,6 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
     {
         StartCoroutine(FadeImage(m_fadeTime / 2f, true));
     }
-
 
     IEnumerator FadeImage(float fadeTime, bool fadeAway, float delay = 0f)
     {

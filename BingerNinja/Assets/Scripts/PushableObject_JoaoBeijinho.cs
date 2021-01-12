@@ -23,7 +23,8 @@ public class PushableObject_JoaoBeijinho : MonoBehaviour
 {
     protected PlayerController_JamieG m_playerControllerScript;
     protected PlayerHealthHunger_MarioFernandes m_playerHealthScript;
-
+    private PlayerMovement_MarioFernandes m_playerSpeed;
+    private EffectManager_MarioFernandes m_effectManager;
     private Transform m_playerTransform;
     private Collider2D m_collider;
 
@@ -40,6 +41,7 @@ public class PushableObject_JoaoBeijinho : MonoBehaviour
         m_playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
         m_playerHealthScript = FindObjectOfType<PlayerHealthHunger_MarioFernandes>();
         m_collider = GetComponent<Collider2D>();
+        m_playerSpeed = GameObject.Find("Player").GetComponent<PlayerMovement_MarioFernandes>();
 
         this.transform.gameObject.tag = "Untagged";//Remove tag from this GameObject
         m_normalTag = Tags_JoaoBeijinho.m_crateTag;
@@ -69,6 +71,8 @@ public class PushableObject_JoaoBeijinho : MonoBehaviour
         m_isGrabbed = true;
         transform.parent = m_playerTransform;
         Physics2D.IgnoreCollision(gameObject.transform.parent.GetComponent<Collider2D>(), m_collider);
+        m_playerSpeed.m_baseSpeed = 1;
+        m_playerSpeed.m_speed = 1;
 
         foreach (GameObject crate in m_crates)
         {
@@ -83,6 +87,8 @@ public class PushableObject_JoaoBeijinho : MonoBehaviour
 
     private void UnGrab(bool canGrab, bool isGrabbed)
     {
+        m_playerSpeed.m_baseSpeed = 3;
+        m_playerSpeed.m_speed = 3;
         m_canGrab = canGrab;
         m_isGrabbed = isGrabbed;
         Physics2D.IgnoreCollision(gameObject.transform.parent.GetComponent<Collider2D>(), m_collider, false);
