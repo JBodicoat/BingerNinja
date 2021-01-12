@@ -57,8 +57,10 @@ public class PlayerController_JamieG : MonoBehaviour
         //Read input from the InputAction and associate it with the movementVector 
         Vector2 movementvector = m_movement.ReadValue<Vector2>();
 
+//#if UNITY_STANDALONE
         //Pass the movement vector from InputAction component to the PlayerMovement script
-        m_playerMovementScript.RecieveVector(movementvector);
+        //m_playerMovementScript.RecieveVector(movementvector);
+
     }
 
     private void Update()
