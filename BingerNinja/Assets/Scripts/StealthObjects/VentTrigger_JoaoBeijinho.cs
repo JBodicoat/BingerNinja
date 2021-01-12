@@ -2,6 +2,7 @@
 //                           Created reference to ventPath GameObject
 //                           Created OnTriggerEnter2D which toggles ventPath ON/OFF
 //                           Changed reference on start to reference on awake
+//Joao Beijinho 12/01/2021 - Changed OnTriggerEnter2D to only toggle the ventPath ON
 
 using System.Collections;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ public class VentTrigger_JoaoBeijinho : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
         {
-            m_ventPath.SetActive(!m_ventPath.activeInHierarchy);
+            m_ventPath.SetActive(true);
         }
     }
 }
