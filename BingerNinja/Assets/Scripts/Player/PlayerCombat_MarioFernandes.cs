@@ -89,8 +89,8 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
     {
         if(m_currentWeapon[(int) index])
         {
-        
-        Transform dropW = transform.Find(m_currentWeapon[(int) index].name);
+            m_WeaponUI.removeWeapon(m_currentWeapon[m_weaponsIndex].IsRanged());
+            Transform dropW = transform.Find(m_currentWeapon[(int) index].name);
 
         dropW.gameObject.SetActive(true);
         dropW.position = transform.position + Vector3.down*0.75f;
