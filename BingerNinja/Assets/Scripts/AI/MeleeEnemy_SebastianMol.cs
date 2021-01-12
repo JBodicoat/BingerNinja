@@ -99,54 +99,54 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     {
         if(m_currentEnemyType == m_enemyType.PETTIGER)
         {
-            if (showPathBeforAttackTigerBoss)
-            {
-                if (doOnceShowPath)
-                {
-                    doOnceShowPath = false;
-                    pathFinder = GameObject.FindObjectOfType<Pathfinder_SebastianMol>();
-                    daPath = pathFinder.PathFind((Vector2Int)pathFinder.m_tileMap.WorldToCell(m_playerTransform.position), (Vector2Int)pathFinder.m_tileMap.WorldToCell(transform.position));
-                    for (int i = 0; i < daPath.Count; i++)
-                    {
-                        Debug.Log(daPath[i].x + " " + daPath[i].y);
-                        floortilemap.SetTileFlags(new Vector3Int(daPath[i].x, daPath[i].y, 0), TileFlags.None);
-                        floortilemap.SetColor(new Vector3Int(daPath[i].x, daPath[i].y, 0), Color.red);
-                    }
-                }
-            }
+            //if (showPathBeforAttackTigerBoss)
+            //{
+            //    if (doOnceShowPath)
+            //    {
+            //        doOnceShowPath = false;
+            //        pathFinder = GameObject.FindObjectOfType<Pathfinder_SebastianMol>();
+            //        daPath = pathFinder.PathFind((Vector2Int)pathFinder.m_tileMap.WorldToCell(m_playerTransform.position), (Vector2Int)pathFinder.m_tileMap.WorldToCell(transform.position));
+            //        for (int i = 0; i < daPath.Count; i++)
+            //        {
+            //            Debug.Log(daPath[i].x + " " + daPath[i].y);
+            //            floortilemap.SetTileFlags(new Vector3Int(daPath[i].x, daPath[i].y, 0), TileFlags.None);
+            //            floortilemap.SetColor(new Vector3Int(daPath[i].x, daPath[i].y, 0), Color.red);
+            //        }
+            //    }
+            //}
 
             if (EnemyAttacks_SebastianMol.ChargeAttack(m_playerTransform, ref m_attackTimer, 
                 m_attackCollider, m_hitSpeed, gameObject, m_chargeAttackSpeed)) //make this ibnto a public variable
             {
-                //here teh tatack has not yet happened
-                if (showPathBeforAttackTigerBoss)
-                {
-                    doOnceShowPath = true;
-                    for (int i = 0; i < daPath.Count; i++)
-                    {
-                        floortilemap.SetColor(new Vector3Int(daPath[i].x, daPath[i].y, 0), Color.white);
-                    }
-                }
+                ////here teh tatack has not yet happened
+                //if (showPathBeforAttackTigerBoss)
+                //{
+                //    doOnceShowPath = true;
+                //    for (int i = 0; i < daPath.Count; i++)
+                //    {
+                //        floortilemap.SetColor(new Vector3Int(daPath[i].x, daPath[i].y, 0), Color.white);
+                //    }
+                //}
 
             }
             else
             {
                 //here the attack has happened
-                if (showPathBeforAttackTigerBoss)
-                {
-                    if (doOnceShowPath)
-                    {
-                        doOnceShowPath = false;
-                        pathFinder = GameObject.FindObjectOfType<Pathfinder_SebastianMol>();
-                        daPath = pathFinder.PathFind((Vector2Int)pathFinder.m_tileMap.WorldToCell(m_playerTransform.position), (Vector2Int)pathFinder.m_tileMap.WorldToCell(transform.position));
-                        for (int i = 0; i < daPath.Count; i++)
-                        {
-                            Debug.Log(daPath[i].x + " " + daPath[i].y);
-                            floortilemap.SetTileFlags(new Vector3Int(daPath[i].x, daPath[i].y, 0), TileFlags.None);
-                            floortilemap.SetColor(new Vector3Int(daPath[i].x, daPath[i].y, 0), Color.red);
-                        }
-                    }
-                }
+                //if (showPathBeforAttackTigerBoss)
+                //{
+                //    if (doOnceShowPath)
+                //    {
+                //        doOnceShowPath = false;
+                //        pathFinder = GameObject.FindObjectOfType<Pathfinder_SebastianMol>();
+                //        daPath = pathFinder.PathFind((Vector2Int)pathFinder.m_tileMap.WorldToCell(m_playerTransform.position), (Vector2Int)pathFinder.m_tileMap.WorldToCell(transform.position));
+                //        for (int i = 0; i < daPath.Count; i++)
+                //        {
+                //            Debug.Log(daPath[i].x + " " + daPath[i].y);
+                //            floortilemap.SetTileFlags(new Vector3Int(daPath[i].x, daPath[i].y, 0), TileFlags.None);
+                //            floortilemap.SetColor(new Vector3Int(daPath[i].x, daPath[i].y, 0), Color.red);
+                //        }
+                //    }
+                //}
             }
         }
         else
@@ -209,35 +209,38 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     }
 
 
-    protected void OnTriggerEnter2D(Collision2D collision)
+    protected void OnTriggerEnter2D(Collider2D collision)
     {
-        if (m_currentEnemyType == m_enemyType.PETTIGER || m_currentEnemyType == m_enemyType.TADASHI)
+        if(collision.gameObject.tag != Tags_JoaoBeijinho.m_enemyTag && collision.gameObject.tag != "Untagged")
         {
-            Debug.Log(collision.gameObject.tag);
-            Rigidbody2D rijy = GetComponent<Rigidbody2D>();
-            if (rijy.bodyType == RigidbodyType2D.Dynamic)
+            if (m_currentEnemyType == m_enemyType.PETTIGER || m_currentEnemyType == m_enemyType.TADASHI)
             {
-
-                rijy.bodyType = RigidbodyType2D.Kinematic;
-                rijy.velocity = Vector2.zero;
-                m_attackCollider.SetActive(false);
-                //if hit wall walk away one tile 
-                //if hit wall stunn
-                if (collision.gameObject.name == "Walls1_map")
+                Debug.Log(collision.gameObject.tag);
+                Rigidbody2D rijy = GetComponent<Rigidbody2D>();
+                if (rijy.bodyType == RigidbodyType2D.Dynamic)
                 {
-                    m_attackRange = 0.01f;
-                    m_doMoveAwayFromWallOnce = true;
-                    StunEnemyWithDeleyFunc(m_afterAttackDeley);
-                }
 
-                if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
-                {
-                    if (m_currentEnemyType == m_enemyType.PETTIGER || m_tadashiPhase == 1)
-                        FindObjectOfType<EffectManager_MarioFernandes>().AddEffect
-                                (new SpeedEffect_MarioFernandes(1, 0)); //change thesey to not be magic numbers
+                    rijy.bodyType = RigidbodyType2D.Kinematic;
+                    rijy.velocity = Vector2.zero;
+                    m_attackCollider.SetActive(false);
+                    //if hit wall walk away one tile 
+                    //if hit wall stunn
+                    if (collision.gameObject.name == "Walls1_map")
+                    {
+                        m_attackRange = 0.01f;
+                        m_doMoveAwayFromWallOnce = true;
+                        StunEnemyWithDeleyFunc(m_afterAttackDeley);
+                    }
+
+                    if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+                    {
+                        if (m_currentEnemyType == m_enemyType.PETTIGER || m_tadashiPhase == 1)
+                            FindObjectOfType<EffectManager_MarioFernandes>().AddEffect
+                                    (new SpeedEffect_MarioFernandes(1, 0)); //change thesey to not be magic numbers
+                    }
                 }
             }
-        }
+        }      
     }
     void OnDrawGizmosSelected()
     {
