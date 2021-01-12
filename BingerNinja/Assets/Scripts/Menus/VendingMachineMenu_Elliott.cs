@@ -82,7 +82,7 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
             Debug.Log("Dango");
             Inventory.RemoveItem(ItemType.NinjaPoints, 50);
             Inventory.GiveItem(ItemType.Dango, 1);
-            CookieColor.color = Color.red;
+            CookieColor.color = Color.black;
             PurchasedCookie = true;
  
         }
@@ -97,7 +97,7 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
             Debug.Log("noodles");
             Inventory.RemoveItem(ItemType.NinjaPoints, 50);
             Inventory.GiveItem(ItemType.Noodles, 1);
-            NoodleColor.color = Color.red;
+            NoodleColor.color = Color.black;
             PurchasedNoodle = true;
 
         }
