@@ -43,9 +43,9 @@ public class WeightedPressurePad_JoaoBeijinho : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)//Open door when an Object is on top of it
     {
-        gameObject.GetComponent<SpriteRenderer>().sprite = activatedPressurePad;
+        gameObject.GetComponent<SpriteRenderer>().sprite = inactivePressurePad;
 
-        if(SceneManager.GetActiveScene().buildIndex == 17)
+        if (SceneManager.GetActiveScene().buildIndex == 17)
         {
             if (collision.tag == m_crateTag)//collision with crates
             {

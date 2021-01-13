@@ -566,14 +566,14 @@ public class LevelScripting : MonoBehaviour
                         }
                    }
                    if(!drawFreezer)
-                    {
+                   {
                         walls2.SetTile(new Vector3Int(23, 10, 0), null);
                         walls2.SetTile(new Vector3Int(23, 9, 0), null);
                         walls2.SetTile(new Vector3Int(23,8, 0), null);
 
-                        walls1.SetTile(new Vector3Int(22, 7, 0), null);
-                        walls1.SetTile(new Vector3Int(22, 8, 0), null);
-                        walls1.SetTile(new Vector3Int(22, 9, 0), null);
+                        walls2.SetTile(new Vector3Int(22, 7, 0), null);
+                        walls2.SetTile(new Vector3Int(22, 8, 0), null);
+                        walls2.SetTile(new Vector3Int(22, 9, 0), null);
                     }
                     else if (drawFreezer)
                     {
@@ -581,9 +581,9 @@ public class LevelScripting : MonoBehaviour
                         walls2.SetTile(new Vector3Int(23, 9, 0), topDoorTile);
                         walls2.SetTile(new Vector3Int(23, 8, 0), topDoorTile);
 
-                        walls1.SetTile(new Vector3Int(22, 7, 0), bottomDoorTile);
-                        walls1.SetTile(new Vector3Int(22, 8, 0), bottomDoorTile);
-                        walls1.SetTile(new Vector3Int(22, 9, 0), bottomDoorTile);
+                        walls2.SetTile(new Vector3Int(22, 7, 0), bottomDoorTile);
+                        walls2.SetTile(new Vector3Int(22, 8, 0), bottomDoorTile);
+                        walls2.SetTile(new Vector3Int(22, 9, 0), bottomDoorTile);
                     }
                 }
                 break;
