@@ -167,7 +167,7 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
 
         foreach (var source in m_musicAudioSources)
         {
-            source.volume = volume / 10f;
+            source.volume = volume / 30f;
         }
     }
 
@@ -177,7 +177,7 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
         
         foreach (var source in m_soundAudioSources)
         {
-            source.volume = volume / 10f;
+            source.volume = volume / 50f;
         }
     }
 }
