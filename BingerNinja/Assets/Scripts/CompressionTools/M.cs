@@ -25,7 +25,7 @@ public class M : MonoBehaviour
         return GameObject.FindGameObjectWithTag(s);
     }
 
-    public T F<T>() where T : Object
+    public T FOT<T>() where T : Object
     {
         return FindObjectOfType<T>();
     }

@@ -27,10 +27,11 @@ public class Minifier_Jann : M
     {
         m_codeReplacements = new Dictionary<string, string>();
         m_codeReplacements.Add("MonoBehaviour", "M");
-        // m_codeReplacements.Add("GetComponent", "G");
-        m_codeReplacements.Add("GameObject.Find", "F");
         m_codeReplacements.Add("GameObject.FindGameObjectWithTag", "FT");
-        m_codeReplacements.Add("FindObjectOfType", "F");
+        m_codeReplacements.Add("GameObject.FindObjectOfType", "FOT");
+        m_codeReplacements.Add("GameObject.FindObjectsOfType", "Fs");
+        m_codeReplacements.Add("GameObject.Find", "F");
+        m_codeReplacements.Add("FindObjectOfType", "FOT");
         m_codeReplacements.Add("FindObjectsOfType", "Fs");
         m_codeReplacements.Add("StartCoroutine", "SC");
         m_codeReplacements.Add("Destroy", "D");
@@ -40,8 +41,8 @@ public class Minifier_Jann : M
 
         RetrieveAllScripts(m_AssetsPath);
 
-        // Remove compression tools from files
-        m_files.RemoveAll(path => path.Contains("Minifier_Jann.cs") || path.Contains("M.cs"));
+        // Remove compression tools and files with problems from files
+        m_files.RemoveAll(path => path.Contains("Minifier_Jann.cs") || path.Contains("M.cs") || path.Contains("Joystick_LouieWilliamson"));
 
         if (Directory.Exists(m_OutputDirectory))
         {
@@ -64,10 +65,10 @@ public class Minifier_Jann : M
             codebase.Add(SaveFile(directory, filename, minified));
         }
 
-        // if (CanCompile(codebase.ToArray()))
-        // {
-        //     print("Minified code compiled successfully");
-        // }
+        if (CanCompile(codebase.ToArray()))
+        {
+            print("Minified code compiled successfully");
+        }
     }
 
     public string Minify(string[] code)
@@ -88,7 +89,7 @@ public class Minifier_Jann : M
         {
             if (Regex.Match(line, @"(?<=^.*)\b\w+$").Value.Equals("else"))
             {
-                output += line.Trim();
+                output += line.Trim() + " ";
             }
             else
             {
@@ -107,16 +108,7 @@ public class Minifier_Jann : M
         {
             foreach (var pair in m_codeReplacements)
             {
-                switch (pair.Key)
-                {
-                    case "GetComponent":
-                        // if(!code[i].Contains("gameObject.GetComponent"))
-                        //     code[i] = ReplaceWithDefault(code[i], pair.Key, pair.Value);
-                        break;
-                    default:
-                        code[i] = ReplaceWithDefault(code[i], pair.Key, pair.Value);
-                        break;
-                }
+                code[i] = ReplaceWithDefault(code[i], pair.Key, pair.Value);
             }
         }
 
@@ -126,6 +118,10 @@ public class Minifier_Jann : M
     private string ReplaceWithDefault(string line, string from, string to)
     {
         string pattern = $@"\b{from}\b";
+        if (line.Contains("m_MovementScript = GameObject.Find(\"Player\")"))
+        {
+            print("Find");
+        }
         return Regex.Replace(line, pattern, to);
     }
 
@@ -167,7 +163,7 @@ public class Minifier_Jann : M
                     // Check for multiline comment in a single line
                     if (source[i].Contains("/*") && source[i].Contains("*/"))
                     {
-                        sourceWithoutComments.Add(source[i].Substring(0, source[i].IndexOf("/*") - 1));
+                        sourceWithoutComments.Add(source[i].Substring(0, source[i].IndexOf("/*")));
                         sourceWithoutComments.Add(source[i].Substring(source[i].IndexOf("*/") + 2));
                         continue;
                     }
@@ -277,41 +273,41 @@ public class Minifier_Jann : M
 
     #region CompilationUtils
 
-    // private bool CanCompile(string[] program)
-    // {
-    //     var errors = Compile(program).Errors;
-    //     if (!errors.HasErrors)
-    //         return true;
-    //     else
-    //     {
-    //         foreach (CompilerError error in errors)
-    //         {
-    //             if (!error.IsWarning)
-    //                 print(error.ToString());
-    //         }
-    //
-    //         return false;
-    //     }
-    // }
-    //
-    // private CompilerResults Compile(string[] filenames)
-    // {
-    //     CompilerResults compilerResults = null;
-    //     using (CSharpCodeProvider provider = new CSharpCodeProvider())
-    //     {
-    //         CompilerParameters compilerParameters = new CompilerParameters();
-    //         compilerParameters.GenerateExecutable = false;
-    //
-    //         var assemblies = from asm in AppDomain.CurrentDomain.GetAssemblies()
-    //             where !asm.IsDynamic
-    //             select asm.Location;
-    //         compilerParameters.ReferencedAssemblies.AddRange(assemblies.ToArray());
-    //
-    //         compilerResults = provider.CompileAssemblyFromFile(compilerParameters, filenames);
-    //     }
-    //
-    //     return compilerResults;
-    // }
+    private bool CanCompile(string[] program)
+    {
+        var errors = Compile(program).Errors;
+        if (!errors.HasErrors)
+            return true;
+        else
+        {
+            foreach (CompilerError error in errors)
+            {
+                if (!error.IsWarning)
+                    print(error.ToString());
+            }
+    
+            return false;
+        }
+    }
+    
+    private CompilerResults Compile(string[] filenames)
+    {
+        CompilerResults compilerResults = null;
+        using (CSharpCodeProvider provider = new CSharpCodeProvider())
+        {
+            CompilerParameters compilerParameters = new CompilerParameters();
+            compilerParameters.GenerateExecutable = false;
+    
+            var assemblies = from asm in AppDomain.CurrentDomain.GetAssemblies()
+                where !asm.IsDynamic
+                select asm.Location;
+            compilerParameters.ReferencedAssemblies.AddRange(assemblies.ToArray());
+    
+            compilerResults = provider.CompileAssemblyFromFile(compilerParameters, filenames);
+        }
+    
+        return compilerResults;
+    }
 
     #endregion
 }
