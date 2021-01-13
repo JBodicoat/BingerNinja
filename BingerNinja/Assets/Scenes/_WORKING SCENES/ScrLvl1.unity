@@ -17839,6 +17839,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_changeLevel.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_roll.m_Id
       value: 93a90cd6-7b3f-4aa5-a2fa-27728b9cede6
       objectReference: {fileID: 0}
@@ -17869,6 +17873,14 @@ PrefabInstance:
     - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_roll.m_Interactions
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_changeLevel.m_SingletonActionBindings.Array.data[0].m_Id
+      value: fac89390-c593-4336-8ab4-7cfb82334856
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498, type: 3}
+      propertyPath: m_changeLevel.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/n
       objectReference: {fileID: 0}
     - target: {fileID: 4362767424123825809, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_LocalPosition.x

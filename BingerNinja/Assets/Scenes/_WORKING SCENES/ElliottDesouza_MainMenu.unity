@@ -505,6 +505,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5707122398059885782, guid: 14cb30499ff202a4b9d2b516a51ad2f2, type: 3}
   m_PrefabInstance: {fileID: 5707122396823514207}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1247778954 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5707122398059885781, guid: 14cb30499ff202a4b9d2b516a51ad2f2, type: 3}
+  m_PrefabInstance: {fileID: 5707122396823514207}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247778952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 478fb4a10b83c2146a4565fb4207df98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1372992188 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 932207672, guid: 14cb30499ff202a4b9d2b516a51ad2f2, type: 3}
@@ -927,14 +938,14 @@ PrefabInstance:
     - target: {fileID: 5707122396701061907, guid: 14cb30499ff202a4b9d2b516a51ad2f2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1627522624}
+      objectReference: {fileID: 1247778954}
     - target: {fileID: 5707122396701061907, guid: 14cb30499ff202a4b9d2b516a51ad2f2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CLICKMEBITCH
+      value: StartNewGame
       objectReference: {fileID: 0}
     - target: {fileID: 5707122396701061907, guid: 14cb30499ff202a4b9d2b516a51ad2f2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: fixscript, Assembly-CSharp
+      value: MainMenu_Manager_Elliott, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5707122398059885781, guid: 14cb30499ff202a4b9d2b516a51ad2f2, type: 3}
       propertyPath: m_continueButton
@@ -1035,6 +1046,22 @@ PrefabInstance:
     - target: {fileID: 5707122398059885783, guid: 14cb30499ff202a4b9d2b516a51ad2f2, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5707122398180366368, guid: 14cb30499ff202a4b9d2b516a51ad2f2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 3.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5707122398180366368, guid: 14cb30499ff202a4b9d2b516a51ad2f2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.00018692
+      objectReference: {fileID: 0}
+    - target: {fileID: 5707122398180366368, guid: 14cb30499ff202a4b9d2b516a51ad2f2, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1138.6948
+      objectReference: {fileID: 0}
+    - target: {fileID: 5707122398180366368, guid: 14cb30499ff202a4b9d2b516a51ad2f2, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1913.7445
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cb30499ff202a4b9d2b516a51ad2f2, type: 3}

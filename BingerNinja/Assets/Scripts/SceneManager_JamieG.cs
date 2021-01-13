@@ -68,9 +68,17 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
     //Assumes that the scenes are in the correct order of build indexes in build settings
     public void LoadNextLevel()
     {
-        Inventory_JoaoBeijinho inventory = GameObject.Find("Player").GetComponent<Inventory_JoaoBeijinho>();
-        SaveLoadSystem_JamieG.SaveInventory(inventory);
-        
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            Inventory_JoaoBeijinho inventory = GameObject.Find("Player").GetComponent<Inventory_JoaoBeijinho>();
+            if(inventory.HasItem(ItemType.LiftKey, inventory.m_inventoryItems[ItemType.LiftKey]))
+            {
+                inventory.RemoveItem(ItemType.LiftKey, inventory.m_inventoryItems[ItemType.LiftKey]);
+            }
+           
+            SaveLoadSystem_JamieG.SaveInventory(inventory);
+        }
+
         FadeIn();
 
         StartCoroutine(Load(SceneManager.GetActiveScene().buildIndex + 1));
