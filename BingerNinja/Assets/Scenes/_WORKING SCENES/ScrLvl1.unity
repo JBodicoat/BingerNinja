@@ -18394,6 +18394,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498,
         type: 3}
+      propertyPath: m_interact.m_SingletonActionBindings.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498,
+        type: 3}
       propertyPath: m_roll.m_Id
       value: 93a90cd6-7b3f-4aa5-a2fa-27728b9cede6
       objectReference: {fileID: 0}
@@ -18431,6 +18436,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_roll.m_Interactions
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498,
+        type: 3}
+      propertyPath: m_attackTap.m_SingletonActionBindings.Array.data[1].m_Path
+      value: <Touchscreen>/press
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498,
+        type: 3}
+      propertyPath: m_attackSlowTap.m_SingletonActionBindings.Array.data[1].m_Path
+      value: <Touchscreen>/press
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498,
+        type: 3}
+      propertyPath: m_interact.m_SingletonActionBindings.Array.data[2].m_Id
+      value: 77f442bf-425d-4649-9bca-b747e383c3d4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498,
+        type: 3}
+      propertyPath: m_interact.m_SingletonActionBindings.Array.data[2].m_Action
+      value: Interact
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498,
+        type: 3}
+      propertyPath: m_interact.m_SingletonActionBindings.Array.data[2].m_Path
+      value: <Touchscreen>/press
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362767424123825803, guid: 126326fb385628f48915dd9419c89498,
+        type: 3}
+      propertyPath: m_interact.m_SingletonActionBindings.Array.data[2].m_Interactions
+      value: Tap
       objectReference: {fileID: 0}
     - target: {fileID: 4362767424123825809, guid: 126326fb385628f48915dd9419c89498,
         type: 3}
