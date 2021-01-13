@@ -67,7 +67,8 @@ namespace UnityEngine.InputSystem.OnScreen
 
         private Vector2 m_MoveVector;
         private PlayerMovement_MarioFernandes m_MovementScript;
-
+        
+        public GameObject dialogueBox;
         protected override string controlPathInternal
         {
             get => m_ControlPath;
@@ -75,7 +76,14 @@ namespace UnityEngine.InputSystem.OnScreen
         }
         private void FixedUpdate()
         {
-            m_MovementScript.RecieveVector(m_MoveVector);
+            if(!dialogueBox.activeInHierarchy)
+            {
+                m_MovementScript.RecieveVector(m_MoveVector);
+            }
+            else
+            {
+                m_MovementScript.RecieveVector(Vector2.zero);
+            }
             print(m_MoveVector);
         }
     }

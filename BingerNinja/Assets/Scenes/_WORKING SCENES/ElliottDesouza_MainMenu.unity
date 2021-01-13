@@ -899,11 +899,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
+  m_ReferencePixelsPerUnit: 32
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1172,6 +1172,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 2166.4897
+      objectReference: {fileID: 0}
+    - target: {fileID: 5707122398180366368, guid: 14cb30499ff202a4b9d2b516a51ad2f2,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5.6078877
+      objectReference: {fileID: 0}
+    - target: {fileID: 5707122398180366368, guid: 14cb30499ff202a4b9d2b516a51ad2f2,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5.6078877
+      objectReference: {fileID: 0}
+    - target: {fileID: 5707122398180366368, guid: 14cb30499ff202a4b9d2b516a51ad2f2,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5.6078877
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cb30499ff202a4b9d2b516a51ad2f2, type: 3}
