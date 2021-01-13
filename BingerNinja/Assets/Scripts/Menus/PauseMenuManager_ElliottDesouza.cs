@@ -21,8 +21,8 @@ public class PauseMenuManager_ElliottDesouza : MonoBehaviour
         //set active to false
         gameObject.SetActive(false);
         Time.timeScale = 1f;
+        print("RESUME");
     }
-    
     public void ReturnToCheckpoint()
     {
         // m_player.transform.position = GameObject.FindGameObjectWithTag("SaveCheckpoint").GetComponent<SaveSystem_ElliottDesouza>().m_currentCheckpoint.position;
@@ -42,6 +42,7 @@ public class PauseMenuManager_ElliottDesouza : MonoBehaviour
     {
         //set ative to settings 
         m_settingMenu.SetActive(true);
+        print("SETTINGS");
     }
 
     public void ExitToMainMenu()

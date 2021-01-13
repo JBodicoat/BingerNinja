@@ -29,7 +29,6 @@ public class DoorKey_JoaoBeijinho : MonoBehaviour
         {
             gameObject.SetActive(false);
             m_inventory.RemoveItem(ItemType.Key, m_keysRequired);
-            weaponUI.setKey(true);
         }
     }
 

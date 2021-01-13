@@ -69,17 +69,20 @@ public class SettingsMenu_ElliottDesouza : MonoBehaviour
     public void ExitSettingMenu()
     {
         SaveLoadSystem_JamieG.SaveSettings(this);
-        
+
         // Change language in DialogManager if it is present in scene
-        GameObject dialogManager = GameObject.Find("DialogManager");
-        if (dialogManager != null)
+        if (SceneManager.GetActiveScene().buildIndex != 5)
         {
-            dialogManager.GetComponent<DialogueManager_MarioFernandes>().LoadLanguageFile();
+            GameObject dialogManager = GameObject.Find("DialogManager");
+            if (dialogManager != null)
+            {
+                dialogManager.GetComponent<DialogueManager_MarioFernandes>().LoadLanguageFile();
+            }
         }
-        
+
         gameObject.SetActive(false);
     }
-
+    
     void Update()
     {
         var gamepad = Keyboard.current;

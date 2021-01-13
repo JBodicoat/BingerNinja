@@ -14,16 +14,14 @@ public class MobileInteract_LouieWilliamson : MonoBehaviour
     // Update is called once per frame
     private void LateUpdate()
     {
-        ResetInteract();
+        if (isPressed) ResetInteract();
     }
     public void Interact()
     {
         isPressed = true;
-        print("USE");
     }
     public void ResetInteract()
     {
         isPressed = false;
-        print("STOP");
     }
 }
