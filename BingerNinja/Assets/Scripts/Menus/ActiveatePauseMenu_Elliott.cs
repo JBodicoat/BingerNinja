@@ -25,8 +25,8 @@ public class ActiveatePauseMenu_Elliott : MonoBehaviour
         var gamepad = Keyboard.current;
         if (gamepad == null)
             return;
- 
-        if (gamepad.pKey.wasPressedThisFrame)
+
+        if (gamepad.escapeKey.wasPressedThisFrame)
         {
             OpenPauseMenu();
         }
