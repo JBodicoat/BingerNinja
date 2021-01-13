@@ -47467,6 +47467,10 @@ PrefabInstance:
       propertyPath: m_pickColor.Array.data[2]
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5614580471412607723, guid: a502b082ac8b4fb40a5d2f392ef4a49e, type: 3}
+      propertyPath: m_functionality
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a502b082ac8b4fb40a5d2f392ef4a49e, type: 3}
 --- !u!114 &751810363 stripped
@@ -47691,6 +47695,10 @@ PrefabInstance:
     - target: {fileID: 5614580471412607723, guid: a502b082ac8b4fb40a5d2f392ef4a49e, type: 3}
       propertyPath: m_pickColor.Array.data[2]
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5614580471412607723, guid: a502b082ac8b4fb40a5d2f392ef4a49e, type: 3}
+      propertyPath: m_functionality
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a502b082ac8b4fb40a5d2f392ef4a49e, type: 3}
@@ -48272,11 +48280,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4362767424123825809, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.45
+      value: -0.55
       objectReference: {fileID: 0}
     - target: {fileID: 4362767424123825809, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 133.42
+      value: 133.28
       objectReference: {fileID: 0}
     - target: {fileID: 4362767424123825809, guid: 126326fb385628f48915dd9419c89498, type: 3}
       propertyPath: m_LocalPosition.z
@@ -49664,6 +49672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_activateObjectScript:
+  - {fileID: 791088832}
   - {fileID: 751810363}
   m_canPressButton: 0
 --- !u!212 &1503508017
