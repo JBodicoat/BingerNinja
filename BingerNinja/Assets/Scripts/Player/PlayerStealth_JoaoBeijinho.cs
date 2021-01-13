@@ -73,6 +73,6 @@ public class PlayerStealth_JoaoBeijinho : MonoBehaviour
     }
     private void Start()
     {
-        m_pAnimation = GetComponentInChildren<PlayerAnimation_LouieWilliamson>();
+        m_pAnimation = GetComponent<PlayerAnimation_LouieWilliamson>();
     }
 }
