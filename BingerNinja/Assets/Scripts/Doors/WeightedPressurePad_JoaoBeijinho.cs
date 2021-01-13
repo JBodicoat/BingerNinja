@@ -82,7 +82,7 @@ public class WeightedPressurePad_JoaoBeijinho : MonoBehaviour
         
     private void OnTriggerExit2D(Collider2D collision)//Close door when an object is removed from it
     {
-        gameObject.GetComponent<SpriteRenderer>().sprite = activatedPressurePad;
+        gameObject.GetComponent<SpriteRenderer>().sprite = inactivePressurePad;
 
         if (SceneManager.GetActiveScene().buildIndex == 17)
         {
