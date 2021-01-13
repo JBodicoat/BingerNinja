@@ -36,6 +36,8 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
 
     private string m_playerTag = "Player";
 
+    private MobileInteract_LouieWilliamson mobileInteract;
+
     /// <summary>
     /// Enable player ability to hide
     /// </summary>
@@ -65,6 +67,7 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
         m_playerSpriteLayer = m_playerSprite.sortingLayerName;
         m_changeLayer = GetComponent<SpriteRenderer>();
         m_smokeParticleSystem = GetComponentInChildren<ParticleSystem>();
+        mobileInteract = GameObject.Find("InteractButton").GetComponent<MobileInteract_LouieWilliamson>();
     }
 
     /// <summary>
@@ -74,7 +77,7 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
     {
       //  m_isCrouching = m_playerStealthScript.m_crouched;
 
-        if (m_playerControllerScript.m_interact.triggered && m_isHiding == true)
+        if (m_isHiding == true && mobileInteract.isPressed)
         {
             m_canHide = true;
             m_isHiding = false;
@@ -86,7 +89,7 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
             gameObject.layer = 2; 
             Debug.Log(gameObject.layer);
         }
-        else if (m_playerControllerScript.m_interact.triggered && m_canHide == true && !m_playerStealthScript.m_crouched)
+        else if (m_canHide == true && !m_playerStealthScript.m_crouched && mobileInteract.isPressed)
         {
             // hide behind this object
             m_canHide = false;

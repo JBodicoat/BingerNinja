@@ -28,6 +28,7 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
     public bool m_doorIsOpen = false;
 
     public string buttonName = "";
+    private MobileInteract_LouieWilliamson mobileInteract;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -54,12 +55,13 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
         m_playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
         walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
         walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
+        mobileInteract = GameObject.Find("InteractButton").GetComponent<MobileInteract_LouieWilliamson>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (m_playerControllerScript.m_interact.triggered && m_canPressButton && buttonName == "")//Player interaction with button
+        if (mobileInteract.isPressed && m_canPressButton && buttonName == "")//Player interaction with button
         {
             PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_PlayerThrow);
             if (!m_doorIsOpen)
@@ -89,7 +91,7 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
             }
         }
 
-        if (m_playerControllerScript.m_interact.triggered && m_canPressButton && buttonName == "S11.B1")//Player interaction with button
+        if (mobileInteract.isPressed && m_canPressButton && buttonName == "S11.B1")//Player interaction with button
         {
             if (!m_doorIsOpen)
             {
@@ -115,9 +117,8 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
                 walls1.SetTile(new Vector3Int(11, 19, 0), bottomDoor);
                 m_doorIsOpen = false;
             }
-
         }
-        if (m_playerControllerScript.m_interact.triggered && m_canPressButton && buttonName == "S11.B2")//Player interaction with button
+        if (mobileInteract.isPressed && m_canPressButton && buttonName == "S11.B2")//Player interaction with button
         {
             if (!m_doorIsOpen)
             {
@@ -143,9 +144,8 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
                 walls1.SetTile(new Vector3Int(17, 19, 0), bottomDoor);
                 m_doorIsOpen = false;
             }
-
         }
-        if (m_playerControllerScript.m_interact.triggered && m_canPressButton && buttonName == "S11.B3")//Player interaction with button
+        if (mobileInteract.isPressed && m_canPressButton && buttonName == "S11.B3")//Player interaction with button
         {
             if (!m_doorIsOpen)
             {
@@ -171,7 +171,6 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
                 walls1.SetTile(new Vector3Int(23, 19, 0), bottomDoor);
                 m_doorIsOpen = false;
             }
-
         }
     }
 }

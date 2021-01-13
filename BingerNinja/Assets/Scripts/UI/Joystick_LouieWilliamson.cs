@@ -47,6 +47,7 @@ namespace UnityEngine.InputSystem.OnScreen
         {
             m_StartPos = ((RectTransform)transform).anchoredPosition;
             m_MovementScript = GameObject.Find("Player").GetComponent<PlayerMovement_MarioFernandes>();
+            player = m_MovementScript.gameObject.GetComponent<SpriteRenderer>();
             m_MoveVector = Vector2.zero;
         }
 
@@ -69,6 +70,7 @@ namespace UnityEngine.InputSystem.OnScreen
         private PlayerMovement_MarioFernandes m_MovementScript;
         
         public GameObject dialogueBox;
+        private SpriteRenderer player;
         protected override string controlPathInternal
         {
             get => m_ControlPath;
@@ -76,7 +78,8 @@ namespace UnityEngine.InputSystem.OnScreen
         }
         private void FixedUpdate()
         {
-            if(!dialogueBox.activeInHierarchy)
+
+            if(!dialogueBox.activeInHierarchy && player.sortingLayerName == "Characters")
             {
                 m_MovementScript.RecieveVector(m_MoveVector);
             }
@@ -84,7 +87,6 @@ namespace UnityEngine.InputSystem.OnScreen
             {
                 m_MovementScript.RecieveVector(Vector2.zero);
             }
-            print(m_MoveVector);
         }
     }
 }

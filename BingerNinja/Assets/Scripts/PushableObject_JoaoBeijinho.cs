@@ -35,6 +35,7 @@ public class PushableObject_JoaoBeijinho : MonoBehaviour
     public bool m_canGrab = false;
     public bool m_isGrabbed = false;
 
+    private MobileInteract_LouieWilliamson mobileInteract;
     private void Start()
     {
         m_playerTransform = GameObject.Find("Player").transform;
@@ -47,6 +48,7 @@ public class PushableObject_JoaoBeijinho : MonoBehaviour
         m_normalTag = Tags_JoaoBeijinho.m_crateTag;
         m_crates = GameObject.FindGameObjectsWithTag(m_normalTag);//Object with the crate tag
         this.gameObject.tag = m_normalTag;//Reassign tag back to this GameObject
+        mobileInteract = GameObject.Find("InteractButton").GetComponent<MobileInteract_LouieWilliamson>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -97,11 +99,11 @@ public class PushableObject_JoaoBeijinho : MonoBehaviour
 
     void Update()
     {
-        if (m_playerControllerScript.m_interact.triggered && m_canGrab == true)//Press interact to grab object and move it freely
+        if (mobileInteract.isPressed && m_canGrab == true)//Press interact to grab object and move it freely
         {
             Grab(false, true);
         }
-        else if (m_playerControllerScript.m_interact.triggered && m_isGrabbed == true)//Press interact to let go of object
+        else if (mobileInteract.isPressed && m_isGrabbed == true)//Press interact to let go of object
         {
             UnGrab(true, false);
         }

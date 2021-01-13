@@ -22,6 +22,7 @@ public class ControlPanel_JoaoBeijinho : MonoBehaviour
     private string m_playerTag = "Player";
 
     public bool m_canPressButton = false;
+    private MobileInteract_LouieWilliamson mobileInteract;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -47,17 +48,17 @@ public class ControlPanel_JoaoBeijinho : MonoBehaviour
     void Awake()
     {
         m_playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
+        mobileInteract = GameObject.Find("InteractButton").GetComponent<MobileInteract_LouieWilliamson>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (m_playerControllerScript.m_interact.triggered && m_canPressButton == true)//Player interaction with button
+        if (mobileInteract.isPressed && m_canPressButton == true)//Player interaction with button
         {
             for (int i = 0; i < m_activateObjectScript.Length; i++)
             {
                 m_activateObjectScript[i].ActivateObject();
-                print("SMOKE");
             }
         }
     }
