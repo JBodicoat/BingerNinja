@@ -27,7 +27,7 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
 
     public float m_baseSpeed = 3.0f;
     public bool isRolling= false;
-    private PlayerAnimation_LouieWilliamson m_pAnimation;
+     PlayerAnimation_LouieWilliamson q;
 
     public void ResetSpeed()
     {
@@ -35,7 +35,7 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
     }
     public void RollMovement()
     {
-        m_pAnimation.RollAnimation(true);
+        q.RollAnimation(true);
 
         if (m_old_direction.y < 0)
         {
@@ -75,7 +75,7 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
        
     
     //Recieves vector from the PlayerController script and is assigned to the m_direction vector
-    public void RecieveVector(Vector2 vector)
+    public void RecieveVector(Vector2 w)
     {
         if (!isRolling)
         {
@@ -83,7 +83,7 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
             {
                 m_old_direction = m_direction;
             }
-            m_direction = vector;
+            m_direction = w;
             
         }
     }
@@ -93,7 +93,7 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
         ResetSpeed();
         Physics2D.gravity = Vector2.zero;
         m_rb = GetComponent<Rigidbody2D>();
-        m_pAnimation = GetComponentInChildren<PlayerAnimation_LouieWilliamson>();
+        q = GetComponentInChildren<PlayerAnimation_LouieWilliamson>();
     }
 
     void Update()
@@ -107,7 +107,7 @@ public class PlayerMovement_MarioFernandes : MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f);
         isRolling = false;
-        m_pAnimation.RollAnimation(false);
+        q.RollAnimation(false);
         m_speed = m_baseSpeed;
     }
 }

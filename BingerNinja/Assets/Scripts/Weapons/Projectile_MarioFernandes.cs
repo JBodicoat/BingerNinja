@@ -22,11 +22,11 @@ public class Projectile_MarioFernandes : MonoBehaviour
 
     public float m_distractTime =0;
 
-    float m_timeAlive = 3;
+    float q = 3;
 
     public Vector3 m_direction;
 
-    private PlayerController_JamieG Controller;
+     PlayerController_JamieG w;
  
 
     // Start is called before the first frame update
@@ -42,22 +42,22 @@ public class Projectile_MarioFernandes : MonoBehaviour
     }
 
      void Update() {
-        if(m_timeAlive <= 0)
+        if(q <= 0)
         Destroy(gameObject);
         else
-        m_timeAlive -= Time.deltaTime;
+        q -= Time.deltaTime;
      }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+     void OnTriggerEnter2D(Collider2D e) {
 
-        if(/*!other.isTrigger &&*/ other.tag == Tags_JoaoBeijinho.m_enemyTag)
+        if(/*!other.isTrigger &&*/ e.tag == Tags_JoaoBeijinho.m_enemyTag)
         {
            
-            other.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage( m_damageType.RANGE ,m_dmg);
+            e.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage( m_damageType.RANGE ,m_dmg);
 
             if(m_distractTime >0)
             {
-                other.GetComponentInParent<BaseEnemy_SebastianMol>().StunEnemyWithDeleyFunc(m_distractTime);
+                e.GetComponentInParent<BaseEnemy_SebastianMol>().StunEnemyWithDeleyFunc(m_distractTime);
                 //other.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage(m_damageType.RANGE ,m_dmg);
            
                 //StartCoroutine(other.GetComponentInParent<BaseEnemy_SebastianMol>().StunEnemyWithDeley(m_distractTime));
@@ -65,7 +65,7 @@ public class Projectile_MarioFernandes : MonoBehaviour
 
             Destroy(gameObject);
         }else 
-        if(other.isTrigger && other.GetComponent<Renderer>() && other.GetComponent<Renderer>().sortingLayerName == "Walls2")
+        if(e.isTrigger && e.GetComponent<Renderer>() && e.GetComponent<Renderer>().sortingLayerName == "Walls2")
         {
             Destroy(gameObject);
         }

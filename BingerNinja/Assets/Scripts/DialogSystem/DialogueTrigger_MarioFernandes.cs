@@ -13,7 +13,7 @@ public class DialogueTrigger_MarioFernandes : MonoBehaviour
 {
 	public Dialogue m_dialogue;
 
-	bool m_state = true;
+	bool q = true;
 
 	///<summary>Call the dialog </summary>
 	public void TriggerDialogue ()
@@ -21,11 +21,11 @@ public class DialogueTrigger_MarioFernandes : MonoBehaviour
 		FindObjectOfType<DialogueManager_MarioFernandes>().StartDialogue(m_dialogue);
 	}
 
-	private void OnTriggerEnter2D(Collider2D other) {
-		if(other.tag == "Player" && m_state)
+	 void OnTriggerEnter2D(Collider2D w) {
+		if(w.tag == "Player" && q)
 		{
 			TriggerDialogue();
-			m_state = false;
+			q = false;
 			gameObject.SetActive(false);
 		}
 	}	

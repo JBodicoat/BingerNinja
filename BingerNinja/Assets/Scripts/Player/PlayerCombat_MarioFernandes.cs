@@ -54,8 +54,8 @@ public enum WeaponType
 ///<summary>
 public class PlayerCombat_MarioFernandes : MonoBehaviour
 { 
-    private WeaponUI_LouieWilliamson m_WeaponUI;
-    private PlayerAnimation_LouieWilliamson m_animationScript;
+     WeaponUI_LouieWilliamson q;
+     PlayerAnimation_LouieWilliamson w;
     public GameObject m_projectile = null;
     public float m_attackDelay = 1;
     public float m_timeSinceLastAttack = 0;
@@ -72,30 +72,30 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
     protected WeaponsTemplate_MarioFernandes[] m_currentWeapon;
 
     public int m_weaponsIndex = 0; 
-    PlayerHealthHunger_MarioFernandes m_playerHealthHungerScript;
+    PlayerHealthHunger_MarioFernandes h;
 
-    private AudioManager_LouieWilliamson m_audioManager;
+     AudioManager_LouieWilliamson e;
 
-    private PlayerController_JamieG Controller;
+     PlayerController_JamieG r;
 
-    private EffectManager_MarioFernandes m_effectManager;
+     EffectManager_MarioFernandes t;
 
-    private int m_eatAmmount = 0;
+     int y = 0;
 
 
-    public void DropWeapon(WeaponType index)
+    public void DropWeapon(WeaponType u)
     {
-        if(m_currentWeapon[(int) index])
+        if(m_currentWeapon[(int) u])
         {
-            m_WeaponUI.removeWeapon(m_currentWeapon[m_weaponsIndex].IsRanged());
-            Transform dropW = transform.Find(m_currentWeapon[(int) index].name);
+            q.removeWeapon(m_currentWeapon[m_weaponsIndex].IsRanged());
+            Transform o = transform.Find(m_currentWeapon[(int) u].name);
 
-        dropW.gameObject.SetActive(true);
-        dropW.position = transform.position + Vector3.down*0.75f;
-        dropW.parent = null;
+        o.gameObject.SetActive(true);
+        o.position = transform.position + Vector3.down*0.75f;
+        o.parent = null;
 
-        m_currentWeapon[(int)index].enabled = false;
-        m_currentWeapon[(int)index] = null;
+        m_currentWeapon[(int)u].enabled = false;
+        m_currentWeapon[(int)u] = null;
         }
     }
   public  bool IsHoldingFood()
@@ -110,9 +110,9 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         m_strenght = 1;
     }
 
-    void Attack(InputAction cx, float chargedModifier = 1)
+    void Attack(InputAction p, float a = 1)
     {
-        m_animationScript.TriggerAttackAnim();        
+        w.TriggerAttackAnim();        
             
         if (EventSystem.current.currentSelectedGameObject != null && Application.isMobilePlatform)
         {
@@ -120,43 +120,43 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         }else
         if(m_currentWeapon[m_weaponsIndex].IsRanged())
         {
-            Vector3 m_direction;
+            Vector3 s;
 
             if(Application.isMobilePlatform)
             {
-                m_direction = Camera.main.ScreenToWorldPoint(Controller.m_aim.ReadValue<Vector2>());
+                s = Camera.main.ScreenToWorldPoint(r.m_aim.ReadValue<Vector2>());
                 
-                m_direction = m_direction - transform.position;
+                s = s - transform.position;
 
             }else          
             if(Gamepad.current != null)
             {
-            if(Controller.m_aim.ReadValue<Vector2>() != Vector2.zero)
+            if(r.m_aim.ReadValue<Vector2>() != Vector2.zero)
             {
-                m_direction = Controller.m_aim.ReadValue<Vector2>();
+                s = r.m_aim.ReadValue<Vector2>();
             }else
             return;
 
             }else
             {
             
-            m_direction = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            s = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         
-            m_direction = m_direction - transform.position;            
+            s = s - transform.position;            
             }
-            m_direction.z = 0; 
+            s.z = 0; 
 
-            m_direction.Normalize();
+            s.Normalize();
             PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_PlayerThrow); //added by alanna 10/12/20
             //TODO undo this comment
             //m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
             GameObject projectile = Instantiate(m_projectile, transform.position, transform.rotation);
-            projectile.GetComponent<Projectile_MarioFernandes>().m_dmg = (int)(m_currentWeapon[m_weaponsIndex].dmg * m_strenght * chargedModifier);
+            projectile.GetComponent<Projectile_MarioFernandes>().m_dmg = (int)(m_currentWeapon[m_weaponsIndex].dmg * m_strenght * a);
             projectile.GetComponent<Projectile_MarioFernandes>().m_distractTime = m_currentWeapon[m_weaponsIndex].m_distractTime;
             projectile.GetComponent<SpriteRenderer>().sprite = m_currentWeapon[m_weaponsIndex].m_mySprite;
-            projectile.GetComponent<Projectile_MarioFernandes>().m_direction = m_direction;
+            projectile.GetComponent<Projectile_MarioFernandes>().m_direction = s;
             --m_currentWeapon[m_weaponsIndex].m_ammunition;
-            m_WeaponUI.setAmmo(m_currentWeapon[m_weaponsIndex].m_ammunition);
+            q.setAmmo(m_currentWeapon[m_weaponsIndex].m_ammunition);
 
             if(m_currentWeapon[m_weaponsIndex].m_foodType == FoodType.DANGO)
             {
@@ -169,7 +169,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             
             if(m_currentWeapon[m_weaponsIndex].m_ammunition <= 0)
             {
-                m_WeaponUI.removeWeapon(m_currentWeapon[m_weaponsIndex].IsRanged());
+                q.removeWeapon(m_currentWeapon[m_weaponsIndex].IsRanged());
                 print("Destroy usege");
                 Destroy(m_currentWeapon[m_weaponsIndex].gameObject);
                 m_currentWeapon[m_weaponsIndex] = null;
@@ -183,23 +183,23 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             // m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
             PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_PlayerAttack); //added by alanna 10/12/20
 
-            float distanceToClosestsEnemy = Mathf.Infinity;
-                GameObject CloseEnemy = null;
-                GameObject[] allEnemys = GameObject.FindGameObjectsWithTag("Enemy");
+            float d = Mathf.Infinity;
+                GameObject f = null;
+                GameObject[] g = GameObject.FindGameObjectsWithTag("Enemy");
 
-                foreach (GameObject CurrentEnemy in allEnemys)
+                foreach (GameObject h in g)
                 {
-                    float distanceToEnemy = (CurrentEnemy.transform.position - this.transform.position).sqrMagnitude;
-                    if(distanceToEnemy < distanceToClosestsEnemy)
+                    float j = (h.transform.position - this.transform.position).sqrMagnitude;
+                    if(j < d)
                     {
-                        distanceToClosestsEnemy = distanceToEnemy;
-                        CloseEnemy = CurrentEnemy;
+                        d = j;
+                        f = h;
                     }
                 }
 
-                if(CloseEnemy && distanceToClosestsEnemy <= m_meleeAttackRadius)
+                if(f && d <= m_meleeAttackRadius)
                 {
-                    CloseEnemy.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage( m_damageType.MELEE , (int)(m_currentWeapon[m_weaponsIndex].dmg * m_strenght * chargedModifier));
+                    f.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage( m_damageType.MELEE , (int)(m_currentWeapon[m_weaponsIndex].dmg * m_strenght * a));
                 }                
             }
 
@@ -211,7 +211,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
     {
 
      
-        if (m_currentWeapon[m_weaponsIndex] && (!m_currentWeapon[m_weaponsIndex].IsRanged() || m_currentWeapon[m_weaponsIndex].IsRanged() && m_currentWeapon[m_weaponsIndex].m_ammunition >= m_eatAmmount))
+        if (m_currentWeapon[m_weaponsIndex] && (!m_currentWeapon[m_weaponsIndex].IsRanged() || m_currentWeapon[m_weaponsIndex].IsRanged() && m_currentWeapon[m_weaponsIndex].m_ammunition >= y))
         {            
             PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_Eating); //aaded by alanna 10/12/20
 
@@ -223,17 +223,17 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             {
                 case FoodType.FUGU:                   
                     if (Random.Range(0, 101) >= 50)
-                        m_effectManager.AddEffect(new PoisionDefuff_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_poisonDmg));                        
+                        t.AddEffect(new PoisionDefuff_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_poisonDmg));                        
                     break;
                 case FoodType.SQUID:                    
                     break;
                 case FoodType.RICEBALL:                    
                     break;
                 case FoodType.KOBEBEEF:                   
-                    m_effectManager.AddEffect(new SpeedEffect_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_speedModifier));
+                    t.AddEffect(new SpeedEffect_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_speedModifier));
                     break;
                 case FoodType.SASHIMI:                    
-                    m_effectManager.AddEffect(new StrengthEffect_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_strengthModifier));
+                    t.AddEffect(new StrengthEffect_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_strengthModifier));
                     break;
                 case FoodType.TEMPURA:                   
                     break;
@@ -242,7 +242,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
                 case FoodType.SAKE:                    
                     break;
                 case FoodType.NOODLES:
-                    m_effectManager.AddEffect(new StrengthEffect_MarioFernandes(30, m_currentWeapon[m_weaponsIndex].m_strengthModifier));
+                    t.AddEffect(new StrengthEffect_MarioFernandes(30, m_currentWeapon[m_weaponsIndex].m_strengthModifier));
                     break;
                 default:
                     break;
@@ -250,19 +250,19 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
             
  
-            m_playerHealthHungerScript.Eat(m_currentWeapon[m_weaponsIndex].m_hungerRestoreAmount);
+            h.Eat(m_currentWeapon[m_weaponsIndex].m_hungerRestoreAmount);
 
             if(m_currentWeapon[m_weaponsIndex].IsRanged())
             {
-            m_currentWeapon[m_weaponsIndex].m_ammunition -= m_eatAmmount;
-            m_WeaponUI.setAmmo(m_currentWeapon[m_weaponsIndex].m_ammunition);
+            m_currentWeapon[m_weaponsIndex].m_ammunition -= y;
+            q.setAmmo(m_currentWeapon[m_weaponsIndex].m_ammunition);
             }
 
 
             if(!m_currentWeapon[m_weaponsIndex].IsRanged() || m_currentWeapon[m_weaponsIndex].m_ammunition <= 0)
             {
-                m_WeaponUI.removeWeapon(m_currentWeapon[m_weaponsIndex].IsRanged());
-            print("Destroy Eating");
+                q.removeWeapon(m_currentWeapon[m_weaponsIndex].IsRanged());
+            
             Destroy(m_currentWeapon[m_weaponsIndex].gameObject);
             m_currentWeapon[m_weaponsIndex] = null;
             }
@@ -275,12 +275,12 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         if (m_weaponsIndex == 1)
         {
             m_weaponsIndex = 0;
-            m_WeaponUI.SetActiveWeapon(true);
+            q.SetActiveWeapon(true);
         }
         else
         {
             m_weaponsIndex = 1;
-            m_WeaponUI.SetActiveWeapon(false);
+            q.SetActiveWeapon(false);
         }
     }
 
@@ -289,25 +289,25 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
     {
         m_currentWeapon = new WeaponsTemplate_MarioFernandes[2];
         m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
-        m_animationScript = GetComponent<PlayerAnimation_LouieWilliamson>();
-        m_playerHealthHungerScript = FindObjectOfType<PlayerHealthHunger_MarioFernandes>();
-        m_audioManager = FindObjectOfType<AudioManager_LouieWilliamson>();
-        Controller = GetComponent<PlayerController_JamieG>();
-        m_WeaponUI = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
-        m_effectManager = gameObject.GetComponent<EffectManager_MarioFernandes>();
+        w = GetComponent<PlayerAnimation_LouieWilliamson>();
+        h = FindObjectOfType<PlayerHealthHunger_MarioFernandes>();
+        e = FindObjectOfType<AudioManager_LouieWilliamson>();
+        r = GetComponent<PlayerController_JamieG>();
+        q = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
+        t = gameObject.GetComponent<EffectManager_MarioFernandes>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Controller.m_dropWeapons.triggered)
+        if(r.m_dropWeapons.triggered)
         {
         DropWeapon((WeaponType) m_weaponsIndex); 
         }
 
         // 0 - Melee weapon
         // 1 - Ranged weapon
-         if(Controller.m_switchWeapons.triggered)
+         if(r.m_switchWeapons.triggered)
          {
              ChangeWeapon();             
 
@@ -319,24 +319,24 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
             if (!m_playerStealthScript.m_crouched && m_currentWeapon[m_weaponsIndex])
             {         
-                if( Controller.m_attackTap.triggered)              
+                if( r.m_attackTap.triggered)              
                 {    
                 m_timeSinceLastAttack = m_attackDelay;
                 
-                Attack( Controller.m_attackTap);   
+                Attack( r.m_attackTap);   
                 } else
-                if( Controller.m_attackSlowTap.triggered)              
+                if( r.m_attackSlowTap.triggered)              
                 {    
                 m_timeSinceLastAttack = m_attackDelay;
                 
-                Attack(Controller.m_attackSlowTap, m_chargedModifier);   
+                Attack(r.m_attackSlowTap, m_chargedModifier);   
                 } 
             }          
         }
         else
         m_timeSinceLastAttack -= Time.deltaTime;
 
-        if(Controller.m_eat.triggered)
+        if(r.m_eat.triggered)
         {
             Eat();
         }
@@ -344,39 +344,39 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
        
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+     void OnTriggerEnter2D(Collider2D j)
 	{
-		if(!m_currentWeapon[0] && collision.GetComponent<WeaponsTemplate_MarioFernandes>() && !collision.GetComponent<WeaponsTemplate_MarioFernandes>().IsRanged())
+		if(!m_currentWeapon[0] && j.GetComponent<WeaponsTemplate_MarioFernandes>() && !j.GetComponent<WeaponsTemplate_MarioFernandes>().IsRanged())
         {
-            m_currentWeapon[0] = collision.GetComponent<WeaponsTemplate_MarioFernandes>();
-            collision.gameObject.SetActive(false);
-            collision.transform.parent = transform;
-            m_WeaponUI.WeaponChange(m_currentWeapon[0].m_foodType, false, 0);
-            m_WeaponUI.SetWeaponsUIAnimation(true);
+            m_currentWeapon[0] = j.GetComponent<WeaponsTemplate_MarioFernandes>();
+            j.gameObject.SetActive(false);
+            j.transform.parent = transform;
+            q.WeaponChange(m_currentWeapon[0].m_foodType, false, 0);
+            q.SetWeaponsUIAnimation(true);
 		}
-        else if(collision.GetComponent<WeaponsTemplate_MarioFernandes>() && collision.GetComponent<WeaponsTemplate_MarioFernandes>().IsRanged())
+        else if(j.GetComponent<WeaponsTemplate_MarioFernandes>() && j.GetComponent<WeaponsTemplate_MarioFernandes>().IsRanged())
         {
             if(!m_currentWeapon[1] )
             {                 
-                m_currentWeapon[1] = collision.GetComponent<WeaponsTemplate_MarioFernandes>();
-                m_eatAmmount = m_currentWeapon[1].m_ammunition;
-                collision.gameObject.SetActive(false);
-                collision.transform.parent = transform;
-                m_WeaponUI.WeaponChange(m_currentWeapon[1].m_foodType, true, m_currentWeapon[1].m_ammunition);
-                m_WeaponUI.SetWeaponsUIAnimation(true);
+                m_currentWeapon[1] = j.GetComponent<WeaponsTemplate_MarioFernandes>();
+                y = m_currentWeapon[1].m_ammunition;
+                j.gameObject.SetActive(false);
+                j.transform.parent = transform;
+                q.WeaponChange(m_currentWeapon[1].m_foodType, true, m_currentWeapon[1].m_ammunition);
+                q.SetWeaponsUIAnimation(true);
             }
             else{                
                 
-                if(collision.gameObject.activeSelf && m_currentWeapon[1].m_foodType == collision.GetComponent<WeaponsTemplate_MarioFernandes>().m_foodType)
+                if(j.gameObject.activeSelf && m_currentWeapon[1].m_foodType == j.GetComponent<WeaponsTemplate_MarioFernandes>().m_foodType)
                 {
                                        
-                    collision.gameObject.SetActive(false);
-                    m_currentWeapon[1].m_ammunition += collision.GetComponent<WeaponsTemplate_MarioFernandes>().m_ammunition;
-                    Destroy(collision.gameObject);
+                    j.gameObject.SetActive(false);
+                    m_currentWeapon[1].m_ammunition += j.GetComponent<WeaponsTemplate_MarioFernandes>().m_ammunition;
+                    Destroy(j.gameObject);
 
                     
-                    m_WeaponUI.WeaponChange(m_currentWeapon[1].m_foodType, true, m_currentWeapon[1].m_ammunition);
-                    m_WeaponUI.SetWeaponsUIAnimation(true);
+                    q.WeaponChange(m_currentWeapon[1].m_foodType, true, m_currentWeapon[1].m_ammunition);
+                    q.SetWeaponsUIAnimation(true);
                 }
             }
         }

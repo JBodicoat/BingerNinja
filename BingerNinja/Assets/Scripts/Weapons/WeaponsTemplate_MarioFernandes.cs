@@ -33,7 +33,7 @@ public class WeaponsTemplate_MarioFernandes : MonoBehaviour
 
     public Sprite m_mySprite;
 
-    private void Start() {
+     void Start() {
         m_mySprite = GetComponent<SpriteRenderer>().sprite;
     }
     public bool IsRanged()

@@ -15,29 +15,29 @@ public class EffectManager_MarioFernandes : MonoBehaviour
     //How much time is one tick
     public float m_Tick = 1;
 
-    private float m_tickDuration = 0;
+     float q = 0;
 
     public bool m_paused = false;
 
     //List of effects
-    private List<StatusEffect_MarioFernandes> m_effects = new List<StatusEffect_MarioFernandes>{};
+     List<StatusEffect_MarioFernandes> w = new List<StatusEffect_MarioFernandes>{};
 
     //It lets you add a pre created effect to the list
-    public void AddEffect(StatusEffect_MarioFernandes newEffect)
+    public void AddEffect(StatusEffect_MarioFernandes e)
     {
-        foreach (var item in m_effects)
+        foreach (var r in w)
         {
-            if(item.GetType().Equals(newEffect.GetType()))
+            if(r.GetType().Equals(e.GetType()))
             {
-               m_effects.Remove(item);
-               m_effects.Add(newEffect);
-               m_effects[m_effects.Count - 1].Activate(gameObject);
+               w.Remove(r);
+               w.Add(e);
+               w[w.Count - 1].Activate(gameObject);
                return;
             }
         }
 
-        m_effects.Add(newEffect);
-        m_effects[m_effects.Count - 1].Activate(gameObject);
+        w.Add(e);
+        w[w.Count - 1].Activate(gameObject);
     }
 
     // Update is called once per frame
@@ -46,22 +46,22 @@ public class EffectManager_MarioFernandes : MonoBehaviour
         if(!m_paused)
         {
             //Detects if you have an effect each tick
-            if(m_effects.Count > 0 && m_tickDuration >= (m_Tick))
+            if(w.Count > 0 && q >= (m_Tick))
             {
                 //Update or destroy the  effects every tick
-                for (int i = 0; i <= m_effects.Count - 1; i++)
+                for (int i = 0; i <= w.Count - 1; i++)
                 {                
-                    if( m_effects[i].m_isEnable)
+                    if( w[i].m_isEnable)
                     {
-                    m_effects[i].Update();
+                    w[i].Update();
                     }
                     else
-                    m_effects.Remove(m_effects[i]);
+                    w.Remove(w[i]);
                 }
-            m_tickDuration =0;
+            q =0;
             }
             else
-            m_tickDuration += Time.deltaTime;
+            q += Time.deltaTime;
         }
     }
 }

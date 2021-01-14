@@ -28,13 +28,13 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
     public Slider m_healthSlider;
     public Slider m_hungerSlider;
 
-    private PlayerDeathEffect_Elliott m_DeathEffect;
-    private PlayerController_JamieG m_PauseInput;
+     PlayerDeathEffect_Elliott q;
+     PlayerController_JamieG w;
 
     // Increase players health by amount passed
-    public void Eat(float amount)
+    public void Eat(float e)
     {
-        m_currentHunger += amount;
+        m_currentHunger += e;
         if(m_currentHunger > m_maxHunger)
         {
             m_currentHunger = m_maxHunger;
@@ -44,9 +44,9 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
 	}
 
     // Reduce players health by amount passed
-    public void Hit(float amount)
+    public void Hit(float r)
     {
-        m_currentHealth -= amount;
+        m_currentHealth -= r;
        
         if (m_currentHealth < 0)
             m_currentHealth = 0;
@@ -54,7 +54,7 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
         if(m_currentHealth == 0)
         {
             PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_Death);
-            m_DeathEffect.SpriteFlash();
+            q.SpriteFlash();
             //Invoke("Die", 2f);
             Die();
         }
@@ -64,9 +64,9 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
     }
 
     // Increase players health by amount passed
-    public void Heal(float amount)
+    public void Heal(float t)
     {
-        m_currentHealth += amount;
+        m_currentHealth += t;
         if(m_currentHealth > m_maxHealth)
         {
             m_currentHealth = m_maxHealth;
@@ -75,22 +75,22 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
         m_healthSlider.value = m_currentHealth;
 	}
 
-    public void SetMaxHealth(float amount)
+    public void SetMaxHealth(float t)
     {
-        m_maxHealth = amount;
+        m_maxHealth = t;
     }
 
-    public void IncreaseMaxHealt(float amount)
+    public void IncreaseMaxHealt(float t)
     {
-        m_maxHealth += amount;
+        m_maxHealth += t;
     }
-     public void DecreaseMaxHealt(float amount)
+     public void DecreaseMaxHealt(float t)
     {
-        m_maxHealth -= amount;
+        m_maxHealth -= t;
     }
 
         // Run death sequence
-    private void Die()
+     void Die()
     {
         m_currentHealth = m_maxHealth;
         m_currentHunger = 100;
@@ -100,27 +100,27 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
         SceneManager_JamieG.Instance.ResetToCheckpoint();
     }
 
-    private void HealAllEnemies()
+     void HealAllEnemies()
     {
-        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag(Tags_JoaoBeijinho.m_enemyTag);
-        foreach (GameObject enemy in allEnemies)
+        GameObject[] y = GameObject.FindGameObjectsWithTag(Tags_JoaoBeijinho.m_enemyTag);
+        foreach (GameObject u in y)
         {
-            if(enemy.activeSelf)
+            if(u.activeSelf)
             {
-                BaseEnemy_SebastianMol baseScript = enemy.GetComponent<BaseEnemy_SebastianMol>();
-                baseScript.m_health = baseScript.m_maxHealth;
+                BaseEnemy_SebastianMol i = u.GetComponent<BaseEnemy_SebastianMol>();
+                i.m_health = i.m_maxHealth;
             }          
         }
     }
 
-    private void AllEnemiesLooseIntrest()
+     void AllEnemiesLooseIntrest()
     {
-        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag(Tags_JoaoBeijinho.m_enemyTag);
-        foreach (GameObject enemy in allEnemies)
+        GameObject[] o = GameObject.FindGameObjectsWithTag(Tags_JoaoBeijinho.m_enemyTag);
+        foreach (GameObject p in o)
         {
-            if (enemy.activeSelf)
+            if (p.activeSelf)
             {
-                enemy.GetComponent<BaseEnemy_SebastianMol>().ForceLooseIntrest();
+                p.GetComponent<BaseEnemy_SebastianMol>().ForceLooseIntrest();
             }
         }
     }
@@ -134,8 +134,8 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
         m_hungerSlider.maxValue = m_maxHunger;
         m_hungerSlider.value = m_currentHunger;
 
-        m_DeathEffect = GetComponent<PlayerDeathEffect_Elliott>();
-        m_PauseInput = GetComponent<PlayerController_JamieG>();
+        q = GetComponent<PlayerDeathEffect_Elliott>();
+        w = GetComponent<PlayerController_JamieG>();
 
     }
 

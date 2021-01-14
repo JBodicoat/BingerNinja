@@ -33,10 +33,10 @@ public abstract class StatusEffect_MarioFernandes
     }
 
     //Called whene the effect starts
-    public virtual void Activate(GameObject target) 
+    public virtual void Activate(GameObject q) 
     {
         m_isEnable = true;
-        m_target = target;
+        m_target = q;
     }
 
     //Called when the effect ends
@@ -67,11 +67,11 @@ public class PoisionDefuff_MarioFernandes : StatusEffect_MarioFernandes
     /// * Duration (How many seconds)
     /// * The Damage (per second)    
     ///</summary>
-    public PoisionDefuff_MarioFernandes(float duration, float damagePerTick)
+    public PoisionDefuff_MarioFernandes(float w, float e)
 
     {
-        m_duration = duration;
-        m_damagePerTick = damagePerTick;        
+        m_duration = w;
+        m_damagePerTick = e;        
     }
 
     protected override void Effect()
@@ -90,16 +90,16 @@ public class HealBuff_MarioFernandes : StatusEffect_MarioFernandes
     /// * Duration (How many seconds)
     /// * The Heal (Max hp and heal)    
     ///</summary>
-    public HealBuff_MarioFernandes(float duration, float healthIncrease)
+    public HealBuff_MarioFernandes(float w, float e)
     {
-        m_healthIncrease = healthIncrease;
-        m_duration = duration;    
+        m_healthIncrease = e;
+        m_duration = w;    
     }
 
-    public override void Activate(GameObject target)
+    public override void Activate(GameObject r)
     {
         m_isEnable = true;
-        m_target = target;
+        m_target = r;
         m_target.GetComponent<PlayerHealthHunger_MarioFernandes>().Heal(m_healthIncrease);
     }
 }
@@ -113,16 +113,16 @@ public class SpeedEffect_MarioFernandes : StatusEffect_MarioFernandes
     /// * Duration (How many seconds)
     /// * The speed, to increace (1-2), Default is 1 (Normal speed)
     ///</summary>
-    public SpeedEffect_MarioFernandes(float duration, float speedMultiplier = 1)
+    public SpeedEffect_MarioFernandes(float w, float e = 1)
     {
-        m_duration = duration;
-        m_speedMultiplier = speedMultiplier;        
+        m_duration = w;
+        m_speedMultiplier = e;        
     }
 
-    public override void Activate(GameObject target)
+    public override void Activate(GameObject w)
     {
         m_isEnable = true;
-        m_target = target;
+        m_target = w;
         m_target.GetComponent<PlayerMovement_MarioFernandes>().m_speed =  (m_target.GetComponent<PlayerMovement_MarioFernandes>().m_baseSpeed * m_speedMultiplier);
     }
     public override void DeactivateEffect()
@@ -141,15 +141,15 @@ public class StrengthEffect_MarioFernandes : StatusEffect_MarioFernandes
     /// * Duration (How many seconds)
     /// * Strength Modifier
     ///</summary>
-    public StrengthEffect_MarioFernandes(float duration, float strengthModifier = 1)
+    public StrengthEffect_MarioFernandes(float w, float e = 1)
     {
-        m_duration = duration;
-        m_strengthModifier = strengthModifier;        
+        m_duration = w;
+        m_strengthModifier = e;        
     }
 
-    public override void Activate(GameObject target)
+    public override void Activate(GameObject w)
     {
-        base.Activate(target);
+        base.Activate(w);
         m_target.GetComponent<PlayerCombat_MarioFernandes>().m_strenght = m_strengthModifier;
     }
 
