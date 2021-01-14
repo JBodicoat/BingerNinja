@@ -44,7 +44,7 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
 	}
 
     // Reduce players health by amount passed
-    public void Hit(float r)
+    public void j(float r)
     {
         m_currentHealth -= r;
        
@@ -108,7 +108,7 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
             if(u.activeSelf)
             {
                 BaseEnemy_SebastianMol i = u.GetComponent<BaseEnemy_SebastianMol>();
-                i.I = i.QR;
+                i.CO = i.QR;
             }          
         }
     }
@@ -153,7 +153,7 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
 
             if (m_currentHunger == 0)
             {
-                Hit(m_healthDrainRate * Time.deltaTime);
+                j(m_healthDrainRate * Time.deltaTime);
 		    }
         }
     }

@@ -17,45 +17,45 @@ using UnityEngine;
 class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
 {
 
-    public float m_hitSpeed;
+    public float Q;
 
-    public GameObject m_attackCollider;
+    public GameObject WR;
 
-    public float attackDeactivationSpeed;
+    public float E;
 
-    public bool m_hasChargeAttack = false;
+    public bool R = false;
 
-    public float m_chargeAttackDeley;
+    public float T;
 
-    public int m_chargAttackPosibility;
+    public int Y;
 
-    public float m_chargeAttackMultiplier = 3;
+    public float U = 3;
 
-    public float m_afterAttackDeley;
+    public float I;
 
-    public float m_maxChargTimeBeforDamege = 0.2f;
+    public float O = 0.2f;
 
-    public float m_amountOfTimeToMoveAwayFromWall = 0.2f;
-    public float m_chargeAttackSpeed = 500;
+    public float P = 0.2f;
+    public float S = 500;
 
-    private bool A = true;
-    public bool showPathBeforAttackTigerBoss = false;
-    private Pathfinder_SebastianMol ab;
-    private List<Vector2Int> ac;
+     bool A = true;
+    public bool D = false;
+     Pathfinder_SebastianMol ab;
+     List<Vector2Int> ac;
 
-    protected bool m_doStunOnce = false;
-    protected bool m_doMoveAwayFromWallOnce = false;
+    protected bool F = false;
+    protected bool G = false;
 
     /// <summary>
     /// activates the "enemy weapon" object that damages the player uses quick attack
     /// </summary>
     /// <returns></returns>
-    protected IEnumerator QuickAttackCo()
+    protected IEnumerator H()
     {
-        m_attackCollider.GetComponent<EnemyDamager_SebastianMol>().m_damage
-            = m_attackCollider.GetComponent<EnemyDamager_SebastianMol>().m_baseDamage;
-        m_attackCollider.SetActive(true);
-        yield return new WaitForSeconds(attackDeactivationSpeed);
+        WR.GetComponent<EnemyDamager_SebastianMol>().XW
+            = WR.GetComponent<EnemyDamager_SebastianMol>().XQ;
+        WR.SetActive(true);
+        yield return new WaitForSeconds(E);
        // m_attackCollider.SetActive(false);
     }
 
@@ -63,29 +63,29 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     /// activates the "enemy weapon" object that damages the player uses charge attack
     /// </summary>
     /// <returns></returns>
-    protected IEnumerator ChargeAttackCo()
+    protected IEnumerator J()
     {
-        yield return new WaitForSeconds(m_chargeAttackDeley);
-        EnemyDamager_SebastianMol dameger = m_attackCollider.GetComponent<EnemyDamager_SebastianMol>();
-        dameger.m_damage = dameger.m_baseDamage * m_chargeAttackMultiplier;
-        m_attackCollider.SetActive(true);
-        yield return new WaitForSeconds(attackDeactivationSpeed);
+        yield return new WaitForSeconds(T);
+        EnemyDamager_SebastianMol K = WR.GetComponent<EnemyDamager_SebastianMol>();
+        K.XW = K.XQ * U;
+        WR.SetActive(true);
+        yield return new WaitForSeconds(E);
         //m_attackCollider.SetActive(false);
     }
 
     protected void QuickAttack()
     {
-        StartCoroutine(QuickAttackCo());
+        StartCoroutine(H());
     }
 
     protected void ChargeAttack()
     {
-        StartCoroutine(ChargeAttackCo());
+        StartCoroutine(J());
     }
 
     protected void StunAfterAttack()
     {
-        RO(m_afterAttackDeley);
+        RO(I);
     }
 
     /// <summary>
@@ -93,16 +93,16 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     /// </summary>
     internal override void ET()
     {
-        if(W == WU.WF)
+        if(base.CA == WU.WF)
         {
 
-            EnemyAttacks_SebastianMol.ChargeAttack(QY, ref QO,
-                m_attackCollider, m_hitSpeed, gameObject, m_chargeAttackSpeed); //make this ibnto a public variable
+            EnemyAttacks_SebastianMol.E(QY, ref QO,
+                WR, Q, gameObject, S); //make this ibnto a public variable
         }
         else
         {
-            EnemyAttacks_SebastianMol.MelleAttack(ref QO, m_hasChargeAttack, m_chargAttackPosibility, QuickAttack,
-                                               ChargeAttack, StunAfterAttack, W, m_hitSpeed, GetComponent<Enemy_Animation_LouieWilliamson>());
+            EnemyAttacks_SebastianMol.Q(ref QO, R, Y, this.QuickAttack,
+                                               this.ChargeAttack, this.StunAfterAttack, base.CA, Q, GetComponent<Enemy_Animation_LouieWilliamson>());
         }
        
     }
@@ -110,48 +110,48 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     /// <summary>
     /// make the attack range bigg again the reson it is small so that the enenmy walks toward the player befor attacking
     /// </summary>
-    /// <param name="amaountOfTime"> amnount of time befor the attack is big again</param>
+    /// <param name="ER"> amnount of time befor the attack is big again</param>
     /// <returns></returns>
-    protected IEnumerator MoveAwayFromeWall(float amaountOfTime, float attackRange = 0) //this is a very not clean way to do things but it doseent look bad in teh game 
+    protected IEnumerator EE(float ER, float ET = 0) //this is a very not clean way to do things but it doseent look bad in teh game 
     {
-        yield return new WaitForSeconds(amaountOfTime);
+        yield return new WaitForSeconds(ER);
         if (V != QS )
         {
-            if( attackRange == 0)
+            if( ET == 0)
             {
                 V = QS; //change teh attack range back to normal 
             }
             else
             {
-                V = attackRange;
+                V = ET;
             }
             
         }
-        m_doMoveAwayFromWallOnce = false;
+        G = false;
     }
     void LateUpdate()
     {
-        if(W == WU.WJ)
+        if(base.CA == WU.WJ)
         {
-            if ((I / QR) > M)
+            if ((base.CO / QR) > M)
                 if (GameObject.FindObjectOfType<PlayerStealth_JoaoBeijinho>().F()) //confusuion when player stelths
                 {
-                    if (!m_doStunOnce)
+                    if (!F)
                     {
                         RO(QQ);
-                        m_doStunOnce = true;
+                        F = true;
                     }
                 }
                 else
                 {
-                    m_doStunOnce = false;
+                    F = false;
                 }
         }
 
         if(!QD)
-        if(m_doMoveAwayFromWallOnce)
+        if(G)
         {
-            StartCoroutine(MoveAwayFromeWall(m_amountOfTimeToMoveAwayFromWall));
+            StartCoroutine(EE(P));
         }
     }
 
@@ -160,7 +160,7 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     {
         if(a.gameObject.tag != Tags_JoaoBeijinho.m_enemyTag && a.gameObject.tag != "Untagged")
         {
-            if (W == WU.WF || W == WU.WK)
+            if (base.CA == WU.WF || base.CA == WU.WK)
             {
                 Rigidbody2D rijy = GetComponent<Rigidbody2D>();
                 if (rijy.bodyType == RigidbodyType2D.Dynamic)
@@ -168,20 +168,20 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
 
                     rijy.bodyType = RigidbodyType2D.Kinematic;
                     rijy.velocity = Vector2.zero;
-                    m_attackCollider.SetActive(false);
+                    WR.SetActive(false);
                     //if hit wall walk away one tile 
                     //if hit wall stunn
                     if (a.gameObject.name == "Walls1_map")
                     {
                         V = 0.01f;
-                        m_doMoveAwayFromWallOnce = true;
-                        RO(m_afterAttackDeley);
+                        G = true;
+                        RO(I);
                     }
 
                     if (a.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
                     {
-                        if (W == WU.WF || QF == 1)
-                            FindObjectOfType<EffectManager_MarioFernandes>().AddEffect
+                        if (base.CA == WU.WF || QF == 1)
+                            FindObjectOfType<EffectManager_MarioFernandes>().h
                                     (new SpeedEffect_MarioFernandes(1, 0)); //change thesey to not be magic numbers
                     }
                 }

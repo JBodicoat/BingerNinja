@@ -13,18 +13,18 @@ using UnityEngine.Tilemaps;
 /// </summary>
 public class Node
 {
-    public Node m_parentNode = null;
-    public float m_g = 0, m_h = 0, m_f = 0;
-    public bool m_traversable;
-    public Vector2Int m_pos;
+    public Node QA = null;
+    public float QS = 0, QD = 0, QF = 0;
+    public bool QG;
+    public Vector2Int QH;
    
-    public Node(bool trav, Vector2Int newPos) { m_traversable = trav; m_pos = newPos; }
-    public void ResetData()
+    public Node(bool QJ, Vector2Int QK) { QG = QJ; QH = QK; }
+    public void QL()
     {
-        m_g = 0;
-        m_h = 0;
-        m_f = 0;
-        m_parentNode = null;
+        QS = 0;
+        QD = 0;
+        QF = 0;
+        QA = null;
     }
 }
 
@@ -33,27 +33,27 @@ public class Node
 /// </summary>
 public class Pathfinder_SebastianMol : MonoBehaviour
 {
-    const float MOVE_COST = 1;
-    const float MOVE_COST_DIAG = 1.414f;
-    Node[,] m_allTiles;
-    public Tile[] m_wallTiles;
-    public Tilemap m_tileMap;
-    int count = 0;
+    const float QZ = 1;
+    const float QX = 1.414f;
+    Node[,] QC;
+    public Tile[] QV;
+    public Tilemap QB;
+    int QN = 0;
 
-    public Vector2Int m_startPos;
-    public Vector2Int m_targetPos;
-    public Tile m_pathTile;
+    public Vector2Int QM;
+    public Vector2Int WQ;
+    public Tile WW;
 
     /// <summary>
     /// creates a list of nodes that represents a path
     /// </summary>
-    /// <param name="startPos"> the start of the path</param>
-    /// <param name="targetPos">the end of the path</param>
+    /// <param name="WR"> the start of the path</param>
+    /// <param name="WT">the end of the path</param>
     /// <returns></returns>
-    public List<Vector2Int> PathFind(Vector2Int startPos, Vector2Int targetPos)
+    public List<Vector2Int> WE(Vector2Int WR, Vector2Int WT)
     {
-        Node a = m_allTiles[startPos.x, startPos.y];
-        Node b = m_allTiles[targetPos.x, targetPos.y];
+        Node a = QC[WR.x, WR.y];
+        Node b = QC[WT.x, WT.y];
 
         List<Node> q = new List<Node>();
         List<Node> w = new List<Node>();
@@ -77,44 +77,44 @@ public class Pathfinder_SebastianMol : MonoBehaviour
                     //skip checks
                     if (x == 0 && y == 0) continue; //skips current tile
                     //if (math.abs(x) == math.abs(y)) continue; //skip diagonals
-                    Vector2Int worldPos = new Vector2Int(r.m_pos.x + x, r.m_pos.y + y); //curret poss that is begi checked relative to the currentnode
-                    if (CheckOutOfBounds(worldPos)) continue; // skips out of bounds
-                    if (m_allTiles[worldPos.x, worldPos.y].m_traversable == false) continue; // skips walls
-                    if (w.Contains(m_allTiles[worldPos.x, worldPos.y])) continue; //skips nodes already checked
+                    Vector2Int WU = new Vector2Int(r.QH.x + x, r.QH.y + y); //curret poss that is begi checked relative to the currentnode
+                    if (WY(WU)) continue; // skips out of bounds
+                    if (QC[WU.x, WU.y].QG == false) continue; // skips walls
+                    if (w.Contains(QC[WU.x, WU.y])) continue; //skips nodes already checked
                     if (math.abs(x) == math.abs(y))
                     {
-                        if (!m_allTiles[worldPos.x - x, worldPos.y].m_traversable) continue;
-                        if (!m_allTiles[worldPos.x, worldPos.y - y].m_traversable) continue;
+                        if (!QC[WU.x - x, WU.y].QG) continue;
+                        if (!QC[WU.x, WU.y - y].QG) continue;
 
                     }
                     //==================================================
 
-                    float movementCost = (math.abs(x) == math.abs(y)) ? MOVE_COST_DIAG : MOVE_COST;
+                    float WO = (math.abs(x) == math.abs(y)) ? QX : QZ;
 
-                    if (q.Contains(m_allTiles[worldPos.x, worldPos.y]))
+                    if (q.Contains(QC[WU.x, WU.y]))
                     {
-                        if (r.m_g + movementCost < m_allTiles[worldPos.x, worldPos.y].m_g) // find cheaper path
+                        if (r.QS + WO < QC[WU.x, WU.y].QS) // find cheaper path
                         {
                             //update node with new data
-                            m_allTiles[worldPos.x, worldPos.y].m_parentNode = r;
-                            m_allTiles[worldPos.x, worldPos.y].m_g = r.m_g + movementCost;
-                            m_allTiles[worldPos.x, worldPos.y].m_f = m_allTiles[worldPos.x, worldPos.y].m_g + m_allTiles[worldPos.x, worldPos.y].m_h;
+                            QC[WU.x, WU.y].QA = r;
+                            QC[WU.x, WU.y].QS = r.QS + WO;
+                            QC[WU.x, WU.y].QF = QC[WU.x, WU.y].QS + QC[WU.x, WU.y].QD;
                         }
                     }
                     else
                     {
                         //update node with new data
-                        m_allTiles[worldPos.x, worldPos.y].m_parentNode = r;
-                        m_allTiles[worldPos.x, worldPos.y].m_g = r.m_g + movementCost;
-                        m_allTiles[worldPos.x, worldPos.y].m_h = math.abs(b.m_pos.x - worldPos.x) + math.abs(b.m_pos.y - worldPos.y);
-                        m_allTiles[worldPos.x, worldPos.y].m_f = m_allTiles[worldPos.x, worldPos.y].m_g + m_allTiles[worldPos.x, worldPos.y].m_h;
-                        q.Add(m_allTiles[worldPos.x, worldPos.y]);
+                        QC[WU.x, WU.y].QA = r;
+                        QC[WU.x, WU.y].QS = r.QS + WO;
+                        QC[WU.x, WU.y].QD = math.abs(b.QH.x - WU.x) + math.abs(b.QH.y - WU.y);
+                        QC[WU.x, WU.y].QF = QC[WU.x, WU.y].QS + QC[WU.x, WU.y].QD;
+                        q.Add(QC[WU.x, WU.y]);
                     }
 
                     //have i reached the target
-                    if (m_allTiles[worldPos.x, worldPos.y] == b)
+                    if (QC[WU.x, WU.y] == b)
                     {
-                        w.Add(m_allTiles[worldPos.x, worldPos.y]);
+                        w.Add(QC[WU.x, WU.y]);
                         r = b;
                     }
                 }
@@ -127,24 +127,24 @@ public class Pathfinder_SebastianMol : MonoBehaviour
             Node t = q[0];
             foreach (Node node in q)
             {
-                if (node.m_f < t.m_f) t = node;
+                if (node.QF < t.QF) t = node;
             }
             r = t;
         }
 
-        e = AddNodeToPath(r, e);
+        e = WP(r, e);
         if (e.Count == 0) return new List<Vector2Int>();
         if (e[0] != b) return new List<Vector2Int>();
 
         List<Vector2Int> m = new List<Vector2Int>();
         for (int i = e.Count - 1; i >= 0; --i)
         {
-            m.Add(new Vector2Int(e[i].m_pos.x, e[i].m_pos.y));
+            m.Add(new Vector2Int(e[i].QH.x, e[i].QH.y));
         }
 
         //preapre data for next search
-        foreach (Node item in w) item.ResetData();
-        foreach (Node item in q) item.ResetData();
+        foreach (Node item in w) item.QL();
+        foreach (Node item in q) item.QL();
 
         return m;
     }
@@ -156,7 +156,7 @@ public class Pathfinder_SebastianMol : MonoBehaviour
     /// <param name="trav">the travercibilty of the tile</param>
     public void setTravercible(Vector2Int pos, bool trav)
     {
-        m_allTiles[pos.x, pos.y].m_traversable = trav;
+        QC[pos.x, pos.y].QG = trav;
     }
 
     /// <summary>
@@ -165,18 +165,18 @@ public class Pathfinder_SebastianMol : MonoBehaviour
     /// <param name="n"></param>
     /// <param name="a"></param>
     /// <returns></returns>
-    List<Node> AddNodeToPath(Node n, List<Node> a)
+    List<Node> WP(Node n, List<Node> a)
     {
-        if (count<60)
+        if (QN<60)
         {
-            count++;
+            QN++;
             a.Add(n);
-            if (n.m_parentNode != null) AddNodeToPath(n.m_parentNode, a);
+            if (n.QA != null) WP(n.QA, a);
             return a;
         }
         else
         {
-            count = 0;
+            QN = 0;
             return a;
         }
     }
@@ -186,9 +186,9 @@ public class Pathfinder_SebastianMol : MonoBehaviour
     /// </summary>
     /// <param name="p"></param>
     /// <returns></returns>
-    bool CheckOutOfBounds(Vector2Int p)
+    bool WY(Vector2Int p)
     {
-        return p.x < 0 || p.x > m_allTiles.GetLength(0) - 1 || p.y < 0 || p.y > m_allTiles.GetLength(1) - 1 ? true : false;
+        return p.x < 0 || p.x > QC.GetLength(0) - 1 || p.y < 0 || p.y > QC.GetLength(1) - 1 ? true : false;
     }
 
     void Start()
@@ -196,24 +196,24 @@ public class Pathfinder_SebastianMol : MonoBehaviour
         Vector3Int a = GetComponent<Tilemap>().size;
 
         //might need to change script order
-        m_allTiles = new Node[a.x, a.y];
+        QC = new Node[a.x, a.y];
         for (int y = 0; y < a.y; y++)
             for (int x = 0; x < a.x; x++)
             {
-                m_allTiles[x, y] = new Node(true, new Vector2Int(x, y));
+                QC[x, y] = new Node(true, new Vector2Int(x, y));
             }
 
 
-        m_tileMap = GetComponent<Tilemap>();
-        for (int y = 0; y < m_tileMap.size.y; y++)
+        QB = GetComponent<Tilemap>();
+        for (int y = 0; y < QB.size.y; y++)
         {
-            for (int x = 0; x < m_tileMap.size.x; x++)
+            for (int x = 0; x < QB.size.x; x++)
             {
-                for (int i = 0; i < m_wallTiles.Length; i++)
+                for (int i = 0; i < QV.Length; i++)
                 {
-                    if (m_tileMap.GetTile(new Vector3Int(x, y, 0)))
+                    if (QB.GetTile(new Vector3Int(x, y, 0)))
                     {
-                        m_allTiles[x, y].m_traversable = false;
+                        QC[x, y].QG = false;
                     }
                 }
             }

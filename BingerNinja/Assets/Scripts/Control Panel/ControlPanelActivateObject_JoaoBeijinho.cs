@@ -93,7 +93,7 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
                 a = enemy.GetComponent<BaseEnemy_SebastianMol>();
 
                 a.RO(m_damageInterval);
-                a.I -= m_damageAmount;//Deal damage
+                a.CO -= m_damageAmount;//Deal damage
                 a.EB();
             }
 
@@ -140,7 +140,7 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
         m_freezerArea = FindObjectOfType<FreezerTrigger_JoaoBeijinho>();
         b = FindObjectOfType<ColorChanger_Jann>();
 
-        if (gameObject.CompareTag(Tags_JoaoBeijinho.m_lightTag))
+        if (gameObject.CompareTag(Tags_JoaoBeijinho.UL))
         {
             s();
         }

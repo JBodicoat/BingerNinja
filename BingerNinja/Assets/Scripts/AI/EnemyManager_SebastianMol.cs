@@ -13,12 +13,12 @@ public class EnemyManager_SebastianMol : MonoBehaviour
     /// is the player seen by any enemy
     /// </summary>
     /// <returns>weather it has been seen by any enemy</returns>
-    public bool IsPlayerSeen()
+    public bool ZQ()
     {
         for (int i = 0; i < a.Length; i++)
         {
             a = GameObject.FindGameObjectsWithTag("Enemy");
-            if(a[i].GetComponent<BaseEnemy_SebastianMol>().F)
+            if(a[i].GetComponent<BaseEnemy_SebastianMol>().CW)
             {
                 return true;
             }

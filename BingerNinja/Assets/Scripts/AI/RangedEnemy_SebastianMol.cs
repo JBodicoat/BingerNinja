@@ -11,10 +11,10 @@ using UnityEngine;
 class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
 {
 
-    public GameObject m_aimer;
-    public GameObject m_projectile;
-    public float m_shootDeley;
-    public float m_projectileSpeed;
+    public GameObject PQ;
+    public GameObject AQ;
+    public float AW;
+    public float AE;
 
 
     /// <summary>
@@ -22,6 +22,6 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
     /// </summary>
     internal override void ET()
     {
-        EnemyAttacks_SebastianMol.RangedAttack(GetComponent<Enemy_Animation_LouieWilliamson>(), QY, transform, m_aimer, ref QO, m_projectile, m_shootDeley);
+        EnemyAttacks_SebastianMol.W(GetComponent<Enemy_Animation_LouieWilliamson>(), QY, transform, PQ, ref QO, AQ, AW);
     }
 }

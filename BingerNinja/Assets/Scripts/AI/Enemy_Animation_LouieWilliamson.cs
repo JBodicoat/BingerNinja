@@ -13,7 +13,7 @@ public class Enemy_Animation_LouieWilliamson : MonoBehaviour
      float r;
      bool t;
 
-    public void AttackAnimation()
+    public void Q()
     {
         q.SetTrigger("isAttacking");
     }

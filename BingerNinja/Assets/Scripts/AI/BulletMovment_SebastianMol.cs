@@ -10,24 +10,24 @@ using UnityEngine;
 /// </summary>
 public class BulletMovment_SebastianMol : MonoBehaviour
 {
-    public float m_speed;
-    internal Vector2 m_direction;
-    public float m_damage;
+    public float q;
+    internal Vector2 w;
+    public float e;
 
-    public bool m_dosePoisonDamage = false;
-    public int m_poisonDamageChance;
-    public float m_poisionDamage;
-    public float m_posionDamageTime;  
+    public bool r = false;
+    public int t;
+    public float y;
+    public float u;  
     
-    public bool m_doseStunDamage = false;
-    public float m_stunAmount = 0;
-    public float m_stunDamageTime; 
+    public bool i = false;
+    public float o = 0;
+    public float p; 
     
-    public bool m_doseHeal = false;
-    public float m_healDuration;
-    public float m_HealAmount = 0;
+    public bool a = false;
+    public float s;
+    public float d = 0;
 
-    public float  m_rotateSpeed;
+    public float  f;
 
      void Start()
     {
@@ -35,8 +35,8 @@ public class BulletMovment_SebastianMol : MonoBehaviour
     }
     void Update()
     {
-        transform.position += (Vector3)m_direction * m_speed * Time.deltaTime ;
-        transform.Rotate(new Vector3(0, 0, m_rotateSpeed * Time.deltaTime));
+        transform.position += (Vector3)w * q * Time.deltaTime ;
+        transform.Rotate(new Vector3(0, 0, f * Time.deltaTime));
     }
 
 	 void OnTriggerEnter2D(Collider2D a)
@@ -50,23 +50,23 @@ public class BulletMovment_SebastianMol : MonoBehaviour
         if (a.tag == "Player")
         {
             a.GetComponent<HitEffectElliott>().RT(false);
-            if (m_dosePoisonDamage)
+            if (r)
             {
-                int rand = Random.Range(0, m_poisonDamageChance);
-                if(rand == m_poisonDamageChance) FindObjectOfType<EffectManager_MarioFernandes>().AddEffect(new PoisionDefuff_MarioFernandes(m_poisionDamage, m_posionDamageTime));
+                int g = Random.Range(0, t);
+                if(g == t) FindObjectOfType<EffectManager_MarioFernandes>().h(new PoisionDefuff_MarioFernandes(y, u));
             }
             
-            if(m_doseStunDamage)
+            if(i)
             {
-                FindObjectOfType<EffectManager_MarioFernandes>().AddEffect(new SpeedEffect_MarioFernandes(m_stunDamageTime, 0));
+                FindObjectOfType<EffectManager_MarioFernandes>().h(new SpeedEffect_MarioFernandes(p, 0));
             } 
             
-            if(m_doseHeal)
+            if(this.a)
             {
-                FindObjectOfType<EffectManager_MarioFernandes>().AddEffect(new HealBuff_MarioFernandes(m_healDuration,m_HealAmount));
+                FindObjectOfType<EffectManager_MarioFernandes>().h(new HealBuff_MarioFernandes(s, d));
             }
 
-            FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damage);
+            FindObjectOfType<PlayerHealthHunger_MarioFernandes>().j(e);
             //TODO collision.GetComponent<HitEffectElliott>().StartHitEffect(false);
 
          

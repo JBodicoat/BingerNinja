@@ -23,7 +23,7 @@ public class EffectManager_MarioFernandes : MonoBehaviour
      List<StatusEffect_MarioFernandes> w = new List<StatusEffect_MarioFernandes>{};
 
     //It lets you add a pre created effect to the list
-    public void AddEffect(StatusEffect_MarioFernandes e)
+    public void h(StatusEffect_MarioFernandes e)
     {
         foreach (var r in w)
         {

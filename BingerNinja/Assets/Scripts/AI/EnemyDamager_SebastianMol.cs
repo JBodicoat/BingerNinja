@@ -10,36 +10,36 @@ using UnityEngine;
 /// </summary>
 public class EnemyDamager_SebastianMol : MonoBehaviour
 {
-	public float m_baseDamage;
-	internal float m_damage;
-	public float m_percentageChanceOfAffect = 0.5f;
-	public float m_poisionDamage = 1;
-	public float m_slowDebuff = 0.5f; //make thsi a range
-	public float m_affectTime = 5;
-    public HitEffectElliott m_HitEffectElliott;
+	public float XQ;
+	internal float XW;
+	public float XE = 0.5f;
+	public float XR = 1;
+	public float XT = 0.5f; //make thsi a range
+	public float XY = 5;
+    public HitEffectElliott XU;
 	 void OnTriggerEnter2D(Collider2D b)
 	{
 		if (b.tag == "Player")
 		{
-			FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damage);
+			FindObjectOfType<PlayerHealthHunger_MarioFernandes>().j(XW);
 			MeleeEnemy_SebastianMol a = GetComponentInParent<MeleeEnemy_SebastianMol>();
            // m_HitEffectElliott.StartHitEffect(false);
             b.GetComponent<HitEffectElliott>().RT(false);
-            if (a.W == WU.WJ)
+            if (a.CA == WU.WJ)
             {
 				if(a.QW)
                 {
-					float rand = Random.Range(0, 2);
+					float I = Random.Range(0, 2);
 
-					if (rand > m_percentageChanceOfAffect)
+					if (I > XE)
 					{
-						FindObjectOfType<EffectManager_MarioFernandes>().AddEffect
-							(new PoisionDefuff_MarioFernandes(m_poisionDamage, m_affectTime));
+						FindObjectOfType<EffectManager_MarioFernandes>().h
+							(new PoisionDefuff_MarioFernandes(XR, XY));
 					}
 					else
 					{
-						FindObjectOfType<EffectManager_MarioFernandes>().AddEffect
-							(new SpeedEffect_MarioFernandes(m_affectTime, m_slowDebuff));
+						FindObjectOfType<EffectManager_MarioFernandes>().h
+							(new SpeedEffect_MarioFernandes(XY, XT));
 					}
 				}					
 			}
@@ -49,7 +49,7 @@ public class EnemyDamager_SebastianMol : MonoBehaviour
 	}
     void Start()
     {
-       m_HitEffectElliott = GetComponent<HitEffectElliott>();
+       XU = GetComponent<HitEffectElliott>();
     }
 
 }

@@ -15,7 +15,7 @@ public class SecurityCamera_SebastianMol : MonoBehaviour
                 if (Vector2.Distance(enemy.transform.position, transform.position) < m_alertRadius)
                 {
                     BaseEnemy_SebastianMol c = enemy.GetComponent<BaseEnemy_SebastianMol>();
-                    if (c.Q == WW.WE)
+                    if (c.CQ == WW.WE)
                     {
                         float x = Random.Range(-0.3f, 0.3f);
                         float y = Random.Range(-0.3f, 0.3f);

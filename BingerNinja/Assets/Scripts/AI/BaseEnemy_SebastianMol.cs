@@ -35,36 +35,36 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 {
     public Transform a; //start position of the ray cast
     public Transform b; //secondary rey cast for better detection neer walls
-    public PolygonCollider2D D; // the collder cone used for player detection
-    public bool F = false; //has the player been detected   
-    public WW Q = WW.WE;//current state of teh enemy   
-    public WU W;
-    public GameObject E;
-    public GameObject R;
-    public Inventory_JoaoBeijinho T; 
-    public float Y;
+    public PolygonCollider2D CE; // the collder cone used for player detection
+    public bool CW = false; //has the player been detected   
+    public WW CQ = WW.WE;//current state of teh enemy   
+    public WU CA;
+    public GameObject CR;
+    public GameObject CT;
+    public Inventory_JoaoBeijinho CY; 
+    public float CU;
 
-    public GameObject U; // itme that i sdropped when enemie dies
+    public GameObject CI; // itme that i sdropped when enemie dies
     
-    public float I; //enemy health with getter and setter
+    public float CO; //enemy health with getter and setter
    
-    public float O; //movment speed
+    public float CP; //movment speed
 
 
     
-    public bool P = false;
+    public bool CS = false;
   
-    public Tilemap G;
+    public Tilemap CD;
  
-    public Transform[] H;
+    public Transform[] CF;
    
-    public float J;
+    public float CG;
     
-    public float K;
+    public float CH;
    
-    public bool L;
+    public bool CJ;
     
-    public float Z;
+    public float CK;
     
      float m = 0.5f;
 
@@ -123,13 +123,13 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// </summary>
      void g()
     {
-        if (L)
+        if (CJ)
         {
             WM();
         }
         else
         {
-            D.enabled = true;
+            CE.enabled = true;
             if (Vector2.Distance(transform.position, QI) > 0.5f)
             {
                 EQ(QI);
@@ -151,7 +151,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             if (Vector2.Distance(transform.position, QY.position) < V / B) //if the player is in range
             {
                 EE(false);
-                Q = WW.WT;
+                CQ = WW.WT;
             }
             else// if the player is out fo range
             {
@@ -167,8 +167,8 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 if (QP <= 0)
                 {
                     i = false;
-                    Q = WW.WE;
-                    F = false;
+                    CQ = WW.WE;
+                    CW = false;
                 }
                 else
                 {
@@ -218,19 +218,19 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             }
             else
             {
-                Q = WW.WR;
+                CQ = WW.WR;
             }
 
-            QP = Z;
-            F = true;
+            QP = CK;
+            CW = true;
 
         }
         else
         {
-            F = false;
+            CW = false;
             if (QP <= 0)
             {
-                Q = WW.WE;
+                CQ = WW.WE;
             }
             else
             {
@@ -247,8 +247,8 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         if (Vector2.Distance( transform.position, o) < 1 ) 
         if (QP <= 0)
         {
-            Q = WW.WE;
-            QP = Z;
+            CQ = WW.WE;
+            QP = CK;
         }
         else
         {
@@ -262,7 +262,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// </summary>
      void z()
     {
-        switch (Q)
+        switch (CQ)
         {
             case WW.WE:
                 g();
@@ -291,7 +291,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
             PlayerStealth_JoaoBeijinho EU = EI.GetComponent<PlayerStealth_JoaoBeijinho>();
 
-            if (W == WU.WF)
+            if (CA == WU.WF)
             {
                 if(!EU.H())
                 {
@@ -311,7 +311,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <param name="EO"> a collsion that is checked to see if it is the player</param>
      void x(GameObject EO)
     {
-        D.enabled = false;
+        CE.enabled = false;
         RaycastHit2D EP = Physics2D.Linecast(a.position, EO.transform.position);
 
         //RaycastHit2D crouchedHit = Physics2D.Linecast(m_rayCastStart.position, col.transform.position);
@@ -320,15 +320,15 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         if (!QH.G() && EP.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag)) //player is not crouched and it hits him
         {
             //  m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Detection);
-            F = true;
+            CW = true;
             QY = EP.transform;
-            Q = WW.WT;
+            CQ = WW.WT;
             EA();
             EE();
         }
         else
         {
-            D.enabled = true;
+            CE.enabled = true;
         }
         //else if (m_playerStealthScript.IsCrouched() && crouchedHit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag)) //player is croucheed and it hits 
         //{
@@ -354,13 +354,13 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     {
         if (QY)
         {
-            D.enabled = false;
+            CE.enabled = false;
             RaycastHit2D ES = Physics2D.Linecast(a.position, QY.position);
          
 
             if (ES.collider.gameObject.CompareTag("Player"))
             {
-                D.enabled = false;
+                CE.enabled = false;
                 return true;
             }
             else
@@ -370,12 +370,12 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
                 if (ED.collider.gameObject.CompareTag("Player"))
                 {
-                    D.enabled = false;
+                    CE.enabled = false;
                     return true;
                 }
                 else
                 {
-                    D.enabled = true;
+                    CE.enabled = true;
                     return false;
                 }
             }
@@ -391,16 +391,16 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <param name="EG">the destination of the enemy</param>
     protected void EF(Vector3 EG)
     {
-        Vector2Int EH = (Vector2Int)q.m_tileMap.WorldToCell(transform.position);
-        Vector2Int EJ = (Vector2Int)q.m_tileMap.WorldToCell(EG);
-        QT = q.PathFind(EH, EJ);
+        Vector2Int EH = (Vector2Int)q.QB.WorldToCell(transform.position);
+        Vector2Int EJ = (Vector2Int)q.QB.WorldToCell(EG);
+        QT = q.WE(EH, EJ);
 
-        if(P)
+        if(CS)
         {
             for (int i = 0; i < QT.Count; i++)
             {
-                G.SetTileFlags(new Vector3Int(QT[i].x, QT[i].y, 0), TileFlags.None);
-                G.SetColor(new Vector3Int(QT[i].x, QT[i].y, 0), Color.green);
+                CD.SetTileFlags(new Vector3Int(QT[i].x, QT[i].y, 0), TileFlags.None);
+                CD.SetColor(new Vector3Int(QT[i].x, QT[i].y, 0), Color.green);
                 //Debug.Log(floortilemap.GetCellCenterWorld(new Vector3Int(m_currentPath[i].x, m_currentPath[i].y, 0)));
             }
         }
@@ -413,12 +413,12 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     {
         if (QT.Count == 0) return;//skip check
 
-        float EL = O * Time.deltaTime; //movment allowed this frame
+        float EL = CP * Time.deltaTime; //movment allowed this frame
 
         while (EL > 0)
         {
             //gets the center of the target tile
-            Vector2 EZ = (Vector2)q.m_tileMap.CellToWorld(new Vector3Int( QT[0].x, QT[0].y, 0)) + ((Vector2)q.m_tileMap.cellSize / 2);
+            Vector2 EZ = (Vector2)q.QB.CellToWorld(new Vector3Int( QT[0].x, QT[0].y, 0)) + ((Vector2)q.QB.cellSize / 2);
             EZ += new Vector2(-0.5f, 0);
             float EX = Vector2.Distance(transform.position, EZ); //distance to the target tile center               
                
@@ -431,7 +431,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             {
                 transform.position = Vector2.MoveTowards(transform.position, EZ, EX);//move
                 EL -= EX;
-                if (P) G.SetColor(new Vector3Int(QT[0].x, QT[0].y, 0), Color.white);
+                if (CS) CD.SetColor(new Vector3Int(QT[0].x, QT[0].y, 0), Color.white);
                 QT.RemoveAt(0);
                 if (QT.Count == 0) break;
             }            
@@ -444,15 +444,15 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <param name="EC">desides weather to center the enemy at the end of the path</param>
     protected void EE(bool EC = true) // use this to stop walking
     {
-        if (P)
+        if (CS)
         {
             for (int i = 0; i < QT.Count; i++)
             {
-                G.SetColor(new Vector3Int(QT[i].x, QT[i].y, 0), Color.white);
+                CD.SetColor(new Vector3Int(QT[i].x, QT[i].y, 0), Color.white);
             }
         }
         QT.Clear();
-        if(EC) QT.Add((Vector2Int)q.m_tileMap.WorldToCell(transform.position));
+        if(EC) QT.Add((Vector2Int)q.QB.WorldToCell(transform.position));
         y = Vector3.zero;
     }
 
@@ -463,11 +463,11 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     {
         if (t == null) return;
         //not sure what this dose might be a bit late at night, maybe initilaziation???? it just works
-        if (t.position.x == 0 && t.position.y == 0) t = H[0];
+        if (t.position.x == 0 && t.position.y == 0) t = CF[0];
         //if theres no were to go go to the first patrole point
-        if (QT.Count == 0) EF(H[QA].position);
+        if (QT.Count == 0) EF(CF[QA].position);
         //if close neough to the next patrole point start to swap patrole points
-        if (Vector2.Distance(transform.position, H[QA].position) <= 0.4f) EV();
+        if (Vector2.Distance(transform.position, CF[QA].position) <= 0.4f) EV();
         //start the patrole
         EK();
     }
@@ -477,20 +477,20 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// </summary>
     protected void EV()
     {
-        if(H.Length > 0) //are there any patrole points
+        if(CF.Length > 0) //are there any patrole points
         {
             if (r <= 0) //if the timer has reached 0 start the swap
             {
                 if (QA == e) // see if the itterator is at its limit
                 {
                     QA = 0; //set to first iteration
-                    t = H[QA]; //move to destination
+                    t = CF[QA]; //move to destination
                 }
                 else// else go through the list 
                 {
-                    t = H[++QA];
+                    t = CF[++QA];
                 }
-                r = K; //reset the timer
+                r = CH; //reset the timer
             }
             else
             {
@@ -515,7 +515,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             y = pos;
         }
 
-        if (Vector2.Distance(y, pos) > J) //if players old pos is a distance away to his new pos go to new pos
+        if (Vector2.Distance(y, pos) > CG) //if players old pos is a distance away to his new pos go to new pos
         {
             EE();
             EF(pos);
@@ -530,15 +530,15 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// </summary>
     public void EB() 
     {
-        if(I <= 0)
+        if(CO <= 0)
         {
             PlayTrack_Jann.Instance.EM(AudioFiles.Sound_Damage);
-            if (U)
+            if (CI)
             {
-                Instantiate(U, transform.position, Quaternion.identity);
+                Instantiate(CI, transform.position, Quaternion.identity);
             }
             gameObject.SetActive(false);
-            T.EN();
+            CY.EN();
         }    
     }
 
@@ -548,7 +548,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     protected void RQ()
     {
         if(!i)
-        if(F)
+        if(CW)
         {
             if(QY.position.x > transform.position.x)
             {
@@ -582,7 +582,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public void RW(WZ RE, float RR)
     {
         
-        switch (W)
+        switch (CA)
         {
             case WU.WI:
                 v(RR);
@@ -622,7 +622,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 //half damage melle when not sneaked
                 if (RE == WZ.WX)
                 {
-                    if(F == false) // in stealth
+                    if(CW == false) // in stealth
                     {
                         v(RR); // normal melle stealth attack
                     }
@@ -640,23 +640,23 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             case WU.WD:
             case WU.WA:
                 //sneak multiplier
-                Debug.Log(F);
-                if (F == false)
+                Debug.Log(CW);
+                if (CW == false)
                 {
-                    I -= RR * (X + C);
+                    CO -= RR * (X + C);
                     aa.RT(true);
 
                 }
                 else
                 {
-                    I -= RR;
+                    CO -= RR;
                     aa.RT(false);
 
                 }
                 break;
 
             case WU.WJ:             
-                if ((I / QR) <= M) //second fase
+                if ((CO / QR) <= M) //second fase
                 {
                     v(RR);
                     QO *= QE;
@@ -666,21 +666,21 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 else
                 {
                      //sneak multiplier
-                    if (F == false)
+                    if (CW == false)
                     {
-                        I -= RR * (X + C);
+                        CO -= RR * (X + C);
                         aa.RT(true);
                     }
                     else
                     {
-                        I -= RR;
+                        CO -= RR;
                         aa.RT(false);
                     }
                 }
                 break;
 
             case WU.WK:
-                float RY = I / QR;
+                float RY = CO / QR;
                 if (RY > 0.6f)
                 {
                     QF = 1;
@@ -689,12 +689,12 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 else if( RY > 0.3f)
                 {
                     QF = 2;
-                    I -= RR;
+                    CO -= RR;
                 }
                 else//health below 30
                 {
                     QF = 3;
-                    I -= RR;
+                    CO -= RR;
                 }
 
                 break;
@@ -705,7 +705,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
         }
 
-        Q = WW.WR;
+        CQ = WW.WR;
 
         EB();//checks to see if enemy is dead 
     }
@@ -736,7 +736,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <param name="RP">amaount of time to stun in seconds</param>
     public void RO(float RP)
     {
-        if(W != WU.WG) StartCoroutine(RU(RP));
+        if(CA != WU.WG) StartCoroutine(RU(RP));
     }
 
     /// <summary>
@@ -754,16 +754,16 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <param name="RD">amount of damage</param>
      void v( float RD )
     {
-        if (F == false) //if sneak damage
+        if (CW == false) //if sneak damage
         {
-            I -= RD * X;
+            CO -= RD * X;
             s.RF();
             aa.RT(true);
-            T.RG(ItemType.NinjaPoints, 1);
+            CY.RG(ItemType.NinjaPoints, 1);
         }
         else
         {
-            I -= RD;
+            CO -= RD;
             aa.RT(false);
         }
     }
@@ -775,7 +775,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public void RH(Vector3 pos)
     {
         EE(false);
-        Q = WW.WY;
+        CQ = WW.WY;
         o = pos;
         EQ(o);
     }
@@ -785,7 +785,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// </summary>
     public void EA()
     {
-       GameObject RK = Instantiate(R, new Vector3(transform.position.x,transform.position.y + Y,transform.position.z), Quaternion.identity);
+       GameObject RK = Instantiate(CT, new Vector3(transform.position.x,transform.position.y + CU,transform.position.z), Quaternion.identity);
         RK.transform.parent = transform;
         
     }
@@ -794,7 +794,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     {
         if (!QG)
         {
-            GameObject A = Instantiate(E, new Vector3(transform.position.x, transform.position.y + Y, transform.position.z), Quaternion.identity);
+            GameObject A = Instantiate(CR, new Vector3(transform.position.x, transform.position.y + CU, transform.position.z), Quaternion.identity);
             A.transform.parent = transform;
             QG = true;
            
@@ -805,9 +805,9 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     {
         transform.position = QI;
         i = false;
-        Q = WW.WE;
-        F = false;
-        QP = Z;
+        CQ = WW.WE;
+        CW = false;
+        QP = CK;
         ER();
     }
 
@@ -818,15 +818,15 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         QU = transform.localScale.x;
         w = transform.position;
         QI = transform.position;
-        e = H.Length-1;
-        r = K;
-        if (H.Length > 0) t = H[0];
+        e = CF.Length-1;
+        r = CH;
+        if (CF.Length > 0) t = CF[0];
         u = m;
-        QR = I;
-        QP = Z;
+        QR = CO;
+        QP = CK;
         QS = V;
 
-        T = GameObject.Find("Player").GetComponent<Inventory_JoaoBeijinho>();
+        CY = GameObject.Find("Player").GetComponent<Inventory_JoaoBeijinho>();
         QH = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
         aa = GetComponent<HitEffectElliott>();
         s = Camera.main.GetComponent<CameraShakeElliott>();
@@ -847,7 +847,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
      void OnTriggerEnter2D(Collider2D RL)
     {
         if(!QD)
-            if(!F)
+            if(!CW)
             {
                 EY(RL.gameObject);
             }      
@@ -856,7 +856,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
      void OnTriggerStay2D(Collider2D RZ)
     {
         if (!QD)
-            if (!F)
+            if (!CW)
             {
                 EY(RZ.gameObject);
             }

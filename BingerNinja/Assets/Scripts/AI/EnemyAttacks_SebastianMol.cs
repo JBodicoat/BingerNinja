@@ -25,7 +25,7 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
     /// <param name="u"></param>
     /// <param name="p"></param>
     /// <returns>weather the attack has been done</returns>
-    public static bool MelleAttack(ref float a, bool q, int w,
+    public static bool Q(ref float a, bool q, int w,
         Action e, Action r, Action t,
         WU y, float u, Enemy_Animation_LouieWilliamson i, bool p = false)
 
@@ -60,7 +60,7 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
         else
         {
             a -= Time.deltaTime;
-            i.AttackAnimation();
+            i.Q();
             return false;
         }
     }
@@ -75,7 +75,7 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
     /// <param name="j"></param>
     /// <param name="k"></param>
     /// <returns>weather the attack has been done</returns>
-    public static bool RangedAttack(Enemy_Animation_LouieWilliamson s, Transform d, Transform f, GameObject g, 
+    public static bool W(Enemy_Animation_LouieWilliamson s, Transform d, Transform f, GameObject g, 
         ref float h, GameObject j, float k,float l = 0, float z = 0)
     {
         if (d != null)
@@ -88,10 +88,10 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
             {
                 GameObject v = Instantiate(j, f.position, Quaternion.Euler(new Vector3(x.x, x.y, 0)));
                 v.transform.localScale += new Vector3(l, z, 0);
-                v.GetComponent<BulletMovment_SebastianMol>().m_direction = (d.position - f.position).normalized;
+                v.GetComponent<BulletMovment_SebastianMol>().w = (d.position - f.position).normalized;
                 ColorChanger_Jann.Instance.UpdateColor(v.GetComponent<SpriteRenderer>());
                 h = k;
-                s.AttackAnimation();
+                s.Q();
                 return true;
             }
             else
@@ -113,7 +113,7 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
     /// <param name="t"></param>
     /// <param name="y"></param>
     /// <returns>weather the attack has been done</returns>
-    public static bool ChargeAttack(Transform q, ref float w, 
+    public static bool E(Transform q, ref float w, 
         GameObject e, float r, GameObject t, float y)
     {                  
         if (w <= 0)
@@ -126,7 +126,7 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
             rijy.freezeRotation = true;
             rijy.AddForce((q.position - t.transform.position).normalized * y );
             EnemyDamager_SebastianMol u = e.GetComponent<EnemyDamager_SebastianMol>();
-            u.m_damage = u.m_baseDamage;
+            u.XW = u.XQ;
             w = r;
             return true;
 

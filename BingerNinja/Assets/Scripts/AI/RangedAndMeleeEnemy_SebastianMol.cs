@@ -9,31 +9,31 @@ using UnityEngine;
 class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
  {
 
-    public GameObject m_aimer;
-    public GameObject m_projectile;
+    public GameObject EQ;
+    public GameObject RQ;
 
-    public float m_shootDeley;
+    public float TQ;
 
-    public float m_projectileSpeed;
+    public float YQ;
 
-    public int m_RangedAttackRandomChance;
+    public int UQ;
 
-    public float m_rangedAttackRange = 3;
+    public float UW = 3;
 
-    public float m_meleeAttackRange = 1;
-    private int m_randomChanceOfRangedAttack;
-    private bool m_generateRandomNumberOnce = false;
-    private int m_randAttackChance;
+    public float UE = 1;
+    private int UR;
+    private bool UT = false;
+    private int UY;
 
-    public float m_chargeAttackRangeTadashi = 10;
-    public float m_rangedAttackRangeTadashi = 3;
-    public float m_meleeAttackRangeTadashi = 1;
+    public float UU = 10;
+    public float UI = 3;
+    public float UO = 1;
 
-    public GameObject m_normalAttackColider;
-    public GameObject m_chargeAttackColider;
-    public GameObject[] m_tadashiProjectiles;
-    public SpriteRenderer m_ProjectileDisplay;
-    public GameObject m_tadashiNormalPorjectile;
+    public GameObject UP;
+    public GameObject UA;
+    public GameObject[] US;
+    public SpriteRenderer UD;
+    public GameObject UF;
 
     private int q;
     private float w;
@@ -53,81 +53,81 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
     /// </summary>
     internal override void ET()
     {                    
-        if(W == WU.WG || W == WU.WI)
+        if(CA == WU.WG || CA == WU.WI)
         {
-            if (m_randAttackChance == m_RangedAttackRandomChance - 1)
+            if (UY == UQ - 1)
             {
-                if (EnemyAttacks_SebastianMol.RangedAttack(GetComponent<Enemy_Animation_LouieWilliamson>(), QY, transform, m_aimer,
-                    ref QO, m_projectile, m_shootDeley))
+                if (EnemyAttacks_SebastianMol.W(GetComponent<Enemy_Animation_LouieWilliamson>(), QY, transform, EQ,
+                    ref QO, RQ, TQ))
                 {
-                    m_generateRandomNumberOnce = false;
+                    UT = false;
                 }
             }
             else
             {
-                if (EnemyAttacks_SebastianMol.MelleAttack(ref QO, m_hasChargeAttack, m_chargAttackPosibility,
+                if (EnemyAttacks_SebastianMol.Q(ref QO, R, Y,
                     QuickAttack, ChargeAttack, StunAfterAttack,
-                    W, m_hitSpeed, GetComponent<Enemy_Animation_LouieWilliamson>()))
+                    CA, Q, GetComponent<Enemy_Animation_LouieWilliamson>()))
                 {
-                    m_generateRandomNumberOnce = false;
+                    UT = false;
                 }
             }
         }
 
-        if (W == WU.WK)
+        if (CA == WU.WK)
         {
             //health above 60
             if(QF == 1)
             {
                 if (q == 0)
                 {
-                    TadashiChargeAttack();
+                    UG();
                 }
                 else
                 {
-                    TadashiQuickAttack();
+                    UH();
                     //TODO cool down
                 }
             }
             else if(QF == 2)//health above 30 change this later
             {
-                GameObject[] allLights = GameObject.FindGameObjectsWithTag(Tags_JoaoBeijinho.m_lightTag);
-                foreach (var light in allLights)
+                GameObject[] UJ = GameObject.FindGameObjectsWithTag(Tags_JoaoBeijinho.UL);
+                foreach (var UK in UJ)
                 {
-                    light.SetActive(false);
+                    UK.SetActive(false);
                     //add effect for light goign off or on or whatever
                 }
 
                 if (w > 0.3f)
                 {
-                    TadashiCrazyRangeAttack();
+                    UZ();
                 }
                 else
                 {
-                    TadashiTripleShot();
+                    UX();
                 }
             }
             else if (QF == 3)//health below 30
             {
                 //destroy all plants on this lvl
-                GameObject[] allPlants = GameObject.FindGameObjectsWithTag(Tags_JoaoBeijinho.m_plant);
-                foreach (var plant in allPlants)
+                GameObject[] UC = GameObject.FindGameObjectsWithTag(Tags_JoaoBeijinho.UB);
+                foreach (var UV in UC)
                 {
-                    plant.SetActive(false);
+                    UV.SetActive(false);
                     //do an effect for plants to dissapoear
                 }
 
                 if (u < 0.33f)
                 {
-                   TadashiQuickAttack();
+                   UH();
                 }
                 else if (u < 0.66f)
                 {
-                    TadashiChargeAttack();
+                    UG();
                 }
                 else if (u >= 0.66f)
                 {
-                    TadashiCrazyRangeAttack();
+                    UZ();
                 }
             }
             
@@ -137,13 +137,13 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
     /// <summary>
     /// logic for tadashi tripple shot attack
     /// </summary>
-    void TadashiTripleShot()
+    void UX()
     {
         if (t < y)
         {
-            m_ProjectileDisplay.sprite = null;
-            r = m_tadashiNormalPorjectile;
-            if (EnemyAttacks_SebastianMol.RangedAttack(GetComponent<Enemy_Animation_LouieWilliamson>(), QY, transform, m_aimer,
+            UD.sprite = null;
+            r = UF;
+            if (EnemyAttacks_SebastianMol.W(GetComponent<Enemy_Animation_LouieWilliamson>(), QY, transform, EQ,
                 ref QO, r, 0.3f))
             {
                 t++;
@@ -154,7 +154,7 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
         else
         {
             t = 0;
-            QO = m_shootDeley;
+            QO = TQ;
             e = false;
             r = null;
         }
@@ -162,11 +162,11 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
     /// <summary>
     /// logic for tadashi normal attack
     /// </summary>
-    void TadashiQuickAttack()
+    void UH()
     {
-        if (EnemyAttacks_SebastianMol.MelleAttack(ref QO, m_hasChargeAttack, m_chargAttackPosibility,
+        if (EnemyAttacks_SebastianMol.Q(ref QO, R, Y,
                    QuickAttack, ChargeAttack, StunAfterAttack,
-                   W, m_hitSpeed, GetComponent<Enemy_Animation_LouieWilliamson>()))
+                   CA, Q, GetComponent<Enemy_Animation_LouieWilliamson>()))
         {
             e = false;
         }
@@ -174,21 +174,21 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
     /// <summary>
     /// logic for tadashi charg attack
     /// </summary>       
-    void TadashiChargeAttack()
+    void UG()
     {
-        if (EnemyAttacks_SebastianMol.ChargeAttack(QY, ref QO,
-                   m_attackCollider, m_hitSpeed, gameObject, m_chargeAttackSpeed))
+        if (EnemyAttacks_SebastianMol.E(QY, ref QO,
+                   WR, Q, gameObject, S))
             e = false; //make this ibnto a public variable
     }
     /// <summary>
     /// logic for tadashi ranged attack that uses multiple projectiles
     /// </summary>
-    void TadashiCrazyRangeAttack()
+    void UZ()
     {
         if (r)
         {
-            if (EnemyAttacks_SebastianMol.RangedAttack(GetComponent<Enemy_Animation_LouieWilliamson>(), QY, transform, m_aimer,
-                             ref QO, r, m_shootDeley))
+            if (EnemyAttacks_SebastianMol.W(GetComponent<Enemy_Animation_LouieWilliamson>(), QY, transform, EQ,
+                             ref QO, r, TQ))
             {
                 e = false;
                 r = null;
@@ -200,40 +200,40 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
     /// <summary>
     /// set up for tadashi quick attack
     /// </summary>
-    void TadashiQuickAttackSetUp()
+    void IQ()
     {    
-        V = m_meleeAttackRangeTadashi;
-        m_attackCollider = m_normalAttackColider;
-        if(m_chargeAttackColider) m_chargeAttackColider.SetActive(false);
-        m_ProjectileDisplay.sprite = null;
+        V = UO;
+        WR = UP;
+        if(UA) UA.SetActive(false);
+        UD.sprite = null;
         e = true;
-        QO = m_hitSpeed;
-        i = m_meleeAttackRangeTadashi;
+        QO = Q;
+        i = UO;
     }
     /// <summary>
     /// set up for tadashi charged attack
     /// </summary>
-    void TadashiChargeAttackSetUp()
+    void IW()
     {
-        V = m_chargeAttackRangeTadashi;
-        m_attackCollider = m_chargeAttackColider;
-        if (m_normalAttackColider) m_normalAttackColider.SetActive(false);
-        m_ProjectileDisplay.sprite = null;
+        V = UU;
+        WR = UA;
+        if (UP) UP.SetActive(false);
+        UD.sprite = null;
         e = true;
-        QO = m_chargeAttackDeley;
-        i = m_chargeAttackRangeTadashi;
+        QO = T;
+        i = UU;
     }
     /// <summary>
     /// set up for tadashi ranged attack with multiple projectiles
     /// </summary>
-    void TadashiCrazyRangeAttackSetUp()
+    void IE()
     {
-        V = m_rangedAttackRange;
-        m_attackCollider = m_normalAttackColider;
+        V = UW;
+        WR = UP;
         w = Random.Range(0.0f, 1.0f);
         e = true;
-        QO = m_shootDeley;
-        i = m_rangedAttackRange;
+        QO = TQ;
+        i = UW;
 
         if (!r)
         {
@@ -242,26 +242,26 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
             switch (rand)
             {
                 case 0:
-                    m_projectile = m_tadashiProjectiles[0];
+                    RQ = US[0];
                     break;
 
                 case 1:
-                    m_projectile = m_tadashiProjectiles[1];
+                    RQ = US[1];
                     break;
 
                 case 2:
-                    m_projectile = m_tadashiProjectiles[2];
+                    RQ = US[2];
                     break;
 
                 case 3:
-                    m_projectile = m_tadashiProjectiles[3];
+                    RQ = US[3];
                     break;
             }
 
-            m_ProjectileDisplay.sprite = m_projectile.GetComponent<SpriteRenderer>().sprite;
-            m_ProjectileDisplay.color = m_projectile.GetComponent<SpriteRenderer>().color; //delete thsi line when yi get the art for projectiles
+            UD.sprite = RQ.GetComponent<SpriteRenderer>().sprite;
+            UD.color = RQ.GetComponent<SpriteRenderer>().color; //delete thsi line when yi get the art for projectiles
 
-            r = m_projectile;
+            r = RQ;
 
         }
         
@@ -270,8 +270,8 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
     /// <summary>
     /// handles the set up for each fase of tadashi boss fight
     /// </summary>
-   void UpdateTadashi()
-    {    if(W == WU.WK)
+   void IR()
+    {    if(CA == WU.WK)
         switch (QF)
         {
             case 1:
@@ -281,12 +281,12 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
                     e = true;
                     if (q == 0)
                     {
-                        TadashiChargeAttackSetUp();
+                        IW();
                   
                     }
                     else
                     {
-                        TadashiQuickAttackSetUp();
+                        IQ();
               
                     }
                 }
@@ -295,7 +295,7 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
             case 2:
                 if (!e)
                 {
-                    TadashiCrazyRangeAttackSetUp();
+                    IE();
                 }
                 break;
 
@@ -303,23 +303,23 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
               if(!e)
               {
                     r = null;
-                    m_ProjectileDisplay.sprite = null;
+                    UD.sprite = null;
                     u = Random.Range(0.0f, 1.0f);
 
                     if (u < 0.33f)
                     {
-                        TadashiQuickAttackSetUp();
+                        IQ();
            
 
                     }
                     else if (u < 0.66f)
                     {
-                        TadashiChargeAttackSetUp();
+                        IW();
                 
                     }
                     else if (u > 0.66f)
                     {
-                        TadashiCrazyRangeAttackSetUp();
+                        IE();
                    
                     }
 
@@ -328,7 +328,7 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
         }
 
 
-        WalkAwayFromWallBasedOnRange(i);
+        IT(i);
 
     }
 
@@ -336,42 +336,42 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
     /// used to walk away from all after charge attack so tadashi dosent get stuck
     /// </summary>
     /// <param name="a"></param>
-     void WalkAwayFromWallBasedOnRange(float a)
+     void IT(float a)
     {
         if (!QD)
-            if (m_doMoveAwayFromWallOnce)
-                StartCoroutine(MoveAwayFromeWall(m_amountOfTimeToMoveAwayFromWall, a));
+            if (G)
+                StartCoroutine(EE(P, a));
     }
 
 
     /// <summary>
     /// updates teh attack ranged based on what attack is coming up e.g. more range for ranged attacks
     /// </summary>
-    void UpdateAttackAlien()
+    void IY()
     {
-        if(W == WU.WG || W == WU.WI)
+        if(CA == WU.WG || CA == WU.WI)
         {
-            if (!m_generateRandomNumberOnce)
+            if (!UT)
             {
-                m_randAttackChance = Random.Range(0, m_RangedAttackRandomChance);
-                m_generateRandomNumberOnce = true;
+                UY = Random.Range(0, UQ);
+                UT = true;
             }
 
-            if (m_randAttackChance == m_RangedAttackRandomChance - 1)
+            if (UY == UQ - 1)
             {
-                V = m_rangedAttackRange;
+                V = UW;
                 
             }
             else
             {
-                V = m_meleeAttackRange;
+                V = UE;
                
             }
 
             if (!QD)
-                if (m_doMoveAwayFromWallOnce)
+                if (G)
                 {
-                    StartCoroutine(MoveAwayFromeWall(m_amountOfTimeToMoveAwayFromWall));
+                    StartCoroutine(EE(P));
                 }
         }
         
@@ -379,7 +379,7 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
 
     void LateUpdate()
     {
-        UpdateAttackAlien();
-        UpdateTadashi();      
+        IY();
+        IR();      
     }
 }
