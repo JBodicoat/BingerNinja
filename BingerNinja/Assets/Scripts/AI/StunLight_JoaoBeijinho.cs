@@ -11,28 +11,28 @@ using UnityEngine;
 /// </summary>
 internal class StunLight_JoaoBeijinho : MonoBehaviour
 {
-    protected BaseEnemy_SebastianMol y;
-    protected ControlPanelActivateObject_JoaoBeijinho u;
-    private Collider2D i;
-    private Collider2D o;
+    protected BaseEnemy_SebastianMol m_baseEnemyScript;
+    protected ControlPanelActivateObject_JoaoBeijinho m_stunLightFunctionalityScript;
+    private Collider2D m_enemyCollider;
+    private Collider2D m_collider;
 
-    public float p;
+    public float m_stunLightDuration;
 
-    private bool a = false; //Check if enemy is under the stun light
-    private bool s = false; //Check if enemy can be stunned
+    private bool m_underLight = false; //Check if enemy is under the stun light
+    private bool m_stun = false; //Check if enemy can be stunned
 
     /// <summary>
     /// Store the stun script and collider of the stun light that the enemy is currently under of
     /// </summary>
-    private void OnTriggerEnter2D(Collider2D d)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (i.IsTouching(d) && d.gameObject.CompareTag(Tags_JoaoBeijinho.f))
+        if (m_enemyCollider.IsTouching(collision) && collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_stunLightTag))
         {
             //m_stunLightFunctionalityScript = collision.GetComponent<ControlPanelActivateObject_JoaoBeijinho>();
-            o = d.GetComponent<Collider2D>();
+            m_collider = collision.GetComponent<Collider2D>();
 
-            a = true; //Enemy is under the stun light
-            s = true; //Enemy can be stunned
+            m_underLight = true; //Enemy is under the stun light
+            m_stun = true; //Enemy can be stunned
         }
     }
 
@@ -42,57 +42,57 @@ internal class StunLight_JoaoBeijinho : MonoBehaviour
     /// Check if the enemy is stunned, if it is, then disable stun
     /// After stun enable enemy stun so that the enemy can be stunned again
     /// </summary>
-    private void OnTriggerStay2D(Collider2D g)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (i.IsTouching(g) && g.gameObject.CompareTag(Tags_JoaoBeijinho.f))
+        if (m_enemyCollider.IsTouching(collision) && collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_stunLightTag))
         {
-            u = g.GetComponent<ControlPanelActivateObject_JoaoBeijinho>();
+            m_stunLightFunctionalityScript = collision.GetComponent<ControlPanelActivateObject_JoaoBeijinho>();
 
-            if (u.h && s)
+            if (m_stunLightFunctionalityScript.m_stunLight == true && m_stun == true)
             {
-                u.h = false;
-                s = false;
+                m_stunLightFunctionalityScript.m_stunLight = false;
+                m_stun = false;
 
-                StartCoroutine(j());
+                StartCoroutine(Stun());
             }
         }
     }
 
-    private IEnumerator j()
+    private IEnumerator Stun()
     {
-        y.WM(p);
+        m_baseEnemyScript.StunEnemyWithLightsDeleyFunc(m_stunLightDuration);
 
-        yield return new WaitForSeconds(p);
+        yield return new WaitForSeconds(m_stunLightDuration);
 
-        if (a) //Check if the enemy continues under the stun light
+        if (m_underLight == true) //Check if the enemy continues under the stun light
         {
-            s = true; //Enemy can be stunned again
+            m_stun = true; //Enemy can be stunned again
         }
     }
 
     /// <summary>
     /// Clear cache of the light that the enemy was under of and enable stun of an already activate stun light
     /// </summary>
-    private void OnTriggerExit2D(Collider2D k)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (i.IsTouching(k) && k.gameObject.CompareTag(Tags_JoaoBeijinho.f))
+        if (m_enemyCollider.IsTouching(collision) && collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_stunLightTag))
         {
-            if (k.GetComponent<SpriteRenderer>().enabled && !u.h)
+            if (collision.GetComponent<SpriteRenderer>().enabled == true && m_stunLightFunctionalityScript.m_stunLight == false)
             {
-                u.h = true;
-                s = false;
+                m_stunLightFunctionalityScript.m_stunLight = true;
+                m_stun = false;
             }
 
-            u = null;
-            o = null;
-            a = false;
+            m_stunLightFunctionalityScript = null;
+            m_collider = null;
+            m_underLight = false;
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        y = GetComponent<BaseEnemy_SebastianMol>();
-        i = GetComponent<BoxCollider2D>();
+        m_baseEnemyScript = GetComponent<BaseEnemy_SebastianMol>();
+        m_enemyCollider = GetComponent<BoxCollider2D>();
     }
 }

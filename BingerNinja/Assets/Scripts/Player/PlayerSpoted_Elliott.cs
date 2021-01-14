@@ -53,7 +53,7 @@ public class PlayerSpoted_Elliott : MonoBehaviour
         for (int i = 0; i < m_allEnemies.Length; i++)
         {
            
-            if (m_allEnemies[i].GetComponent<BaseEnemy_SebastianMol>().Q)
+            if (m_allEnemies[i].GetComponent<BaseEnemy_SebastianMol>().m_playerDetected)
             {
                 return true;
             }

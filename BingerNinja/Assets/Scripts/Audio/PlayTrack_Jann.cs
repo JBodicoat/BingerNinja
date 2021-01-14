@@ -13,17 +13,17 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
 {
     private int SF = 48000;
 
-    [SerializeField] private TextAsset w;
+    [SerializeField] private TextAsset m_musicOnStart;
     
-    [SerializeField] private float e = 0.1f;
-    [SerializeField] private float r = 0.1f;
-    [SerializeField] private bool t;
+    [SerializeField] private float m_volumeSound = 0.1f;
+    [SerializeField] private float m_volumeMusic = 0.1f;
+    [SerializeField] private bool m_loopMusic;
     
     private int pos;
     private float cf;
 
-    [SerializeField] private AudioSource[] y; // Three channels for music
-    [SerializeField] private AudioSource[] u; // Five channels for sounds
+    [SerializeField] private AudioSource[] m_musicAudioSources; // Three channels for music
+    [SerializeField] private AudioSource[] m_soundAudioSources; // Five channels for sounds
 
     private void Awake()
     {
@@ -31,39 +31,40 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
         
         Cursor.lockState = CursorLockMode.Confined;
 
-        o sd = SaveLoadSystem_JamieG.i();
-        if (!sd.Equals(default(o)))
+        SettingsData sd = SaveLoadSystem_JamieG.LoadSettings();
+        if (!sd.Equals(default(SettingsData)))
         {
-            p(sd.a);
-            s(sd.d);
+            UpdateMusicVolume(sd.m_musicVolume);
+            UpdateSfxVolume(sd.m_sfxVolume);
         }
 
-        foreach (AudioSource ms in y)
+        foreach (AudioSource ms in m_musicAudioSources)
         {
-            ms.volume = r;
-            ms.loop = t;
+            ms.volume = m_volumeMusic;
+            ms.loop = m_loopMusic;
         }
         
-        foreach (AudioSource ss in u)
+        foreach (AudioSource ss in m_soundAudioSources)
         {
-            ss.volume = e;
+            ss.volume = m_volumeSound;
         }
     }
     
     private void Start()
     {
-        if (w != null)
+        if (m_musicOnStart != null)
         {
-            g(w);
+            PlayMusic(m_musicOnStart);
         }
     }
 
-    public void WS(string an)
+    #region Play audio
+    public void PlaySound(string an)
     {
-        Track_Jann t = g(an);
-        AudioClip c = h(t.n, (float)t.b / 60, t.f[0]);
+        Track_Jann t = LoadTrack(an);
+        AudioClip c = CreateClip(t.n, (float)t.b / 60, t.f[0]);
 
-        foreach (AudioSource ss in u)
+        foreach (AudioSource ss in m_soundAudioSources)
         {
             ss.clip = c;
             if (!ss.isPlaying)
@@ -80,42 +81,44 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
         }
     }
 
-    public void q(string an)
+    public void PlayMusic(string an)
     {
-        Track_Jann t = g(an);
+        Track_Jann t = LoadTrack(an);
 
         for (int i = 0; i < t.f.Length; i++)
         {
-            AudioClip c = h(t.n, (float) t.b / 60, t.f[i]);
-            y[i].clip = c;
-            y[i].Play();
+            AudioClip c = CreateClip(t.n, (float) t.b / 60, t.f[i]);
+            m_musicAudioSources[i].clip = c;
+            m_musicAudioSources[i].Play();
         }
     }
     
-    public void g(TextAsset tf)
+    public void PlayMusic(TextAsset tf)
     {
         Track_Jann t = JsonUtility.FromJson<Track_Jann>(tf.text);
-        t.j();
+        t.GenerateFrequencies();
             
         for (int i = 0; i < t.f.Length; i++)
         {
-            AudioClip c = h(t.n, (float) t.b / 60, t.f[i]);
-            y[i].clip = c;
-            y[i].Play();
+            AudioClip c = CreateClip(t.n, (float) t.b / 60, t.f[i]);
+            m_musicAudioSources[i].clip = c;
+            m_musicAudioSources[i].Play();
         }
     }
+    #endregion
 
-    public Track_Jann g(string an)
+    #region Generate audio from track file
+    public Track_Jann LoadTrack(string an)
     {
-        TextAsset tf = AudioFiles.q(an);
+        TextAsset tf = AudioFiles.GetAudio(an);
         Track_Jann t = JsonUtility.FromJson<Track_Jann>(tf.text);
-        t.j();
+        t.GenerateFrequencies();
 
         return t;
     }
     
     // Creates an AudioClip from the notes in a channel
-    private AudioClip h(string tn, float bps, int[] f)
+    private AudioClip CreateClip(string tn, float bps, int[] f)
     {
         int ls = (int) (SF / bps);
         float[] d = new float[ls * f.Length];
@@ -124,7 +127,7 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
         for (int i = 0; i < f.Length; i++)
         {
             cf = f[i];
-            AudioClip c = AudioClip.Create("", ls, 1, SF, false, k, l);
+            AudioClip c = AudioClip.Create("", ls, 1, SF, false, OnAudioRead, OnAudioSetPosition);
             
             float[] buffer = new float[c.samples];
             c.GetData(buffer, 0);
@@ -138,7 +141,7 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
     }
 
     // Called once at clip creation
-    void k(float[] d)
+    void OnAudioRead(float[] d)
     {
         int c = 0;
         while (c < d.Length)
@@ -152,29 +155,29 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
     }
     
     // Called when track loops or changes playback position
-    void l(int np)
+    void OnAudioSetPosition(int np)
     {
         pos = np;
     }
+    #endregion
 
-
-    public void p(float v)
+    public void UpdateMusicVolume(float v)
     {
-        r = v;
+        m_volumeMusic = v;
 
-        foreach (var z in y)
+        foreach (var source in m_musicAudioSources)
         {
-            z.volume = v / 30f;
+            source.volume = v / 30f;
         }
     }
 
-    public void s(float v)
+    public void UpdateSfxVolume(float v)
     {
-        e = v;
+        m_volumeSound = v;
         
-        foreach (var x in u)
+        foreach (var source in m_soundAudioSources)
         {
-            x.volume = v / 50f;
+            source.volume = v / 50f;
         }
     }
 }

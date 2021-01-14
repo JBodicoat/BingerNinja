@@ -19,130 +19,130 @@ using UnityEngine;
 /// </summary>
 public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
 {
-    public enum a
+    public enum ObjectType
     {
-        q,
-        w,
-        e,
-        r,
-        t,
-        y,
+        Door,
+        Light,
+        StunLight,
+        Computer,
+        Freezer,
+        SecurityCamera,
     }
 
-    public a u;
+    public ObjectType m_functionality;
 
-    protected FreezerTrigger_JoaoBeijinho i;//Reference script that checks if enemy is in the freezer
-    private BaseEnemy_SebastianMol o;
-    private ColorChanger_Jann p;
-    private LevelScripting s;
+    protected FreezerTrigger_JoaoBeijinho m_freezerArea;//Reference script that checks if enemy is in the freezer
+    private BaseEnemy_SebastianMol m_baseEnemyScript;
+    private ColorChanger_Jann m_colorChangerScript;
+    private LevelScripting levelScripting;
 
-    public int d;
-    public float f;
-    public float g;
-    public float j;
-    private bool k = false;
-    public bool[] l = new bool[] {false, false, false};
-    private Color z;
+    public int m_maxTicks;
+    public float m_damageInterval;
+    public float m_damageAmount;
+    public float m_freezerCooldown;
+    private bool m_freezerInUse = false;
+    public bool[] m_pickColor = new bool[] {false, false, false};
+    private Color m_color;
 
-    public bool h = false; //stun effect on/off
+    public bool m_stunLight = false; //stun effect on/off
 
-    public void x()//Call this function to activate object functionality
+    public void ActivateObject()//Call this function to activate object functionality
     {
-        switch (u)//Define object functionality
+        switch (m_functionality)//Define object functionality
         {
-            case a.q:
+            case ObjectType.Door:
                 gameObject.GetComponent<Collider2D>().enabled = false;//Unlock door
                 break;
-            case a.w:
+            case ObjectType.Light:
                 gameObject.GetComponent<SpriteRenderer>().enabled = !gameObject.GetComponent<SpriteRenderer>().enabled;//Light On
                 break;
-            case a.e:
+            case ObjectType.StunLight:
                 if (gameObject.activeSelf == false)
                 {
                     gameObject.SetActive(true);//Light On
-                    Q();
+                    StunLight();
                 }
                 else
                 {
                     gameObject.SetActive(false);
                 }
                 break;
-            case a.r:
+            case ObjectType.Computer:
                 //make computer sound
                 break;
-            case a.t:
-                if (!k)
+            case ObjectType.Freezer:
+                if (!m_freezerInUse)
                 {
-                    s.c = true;//Enable freezer
-                    StartCoroutine(v());
+                    levelScripting.drawFreezer = true;//Enable freezer
+                    StartCoroutine(FreezerLockAndDamage());
                 }
                 break;
-            case a.y:
+            case ObjectType.SecurityCamera:
                 gameObject.GetComponent<CircleCollider2D>().enabled = false;
                 break;
         }
     }
 
-    private IEnumerator v()
+    private IEnumerator FreezerLockAndDamage()
     {
-        k = true;
-        for (int i = 0; i < d; i++)
+        m_freezerInUse = true;
+        for (int i = 0; i < m_maxTicks; i++)
         {
-            foreach (Collider2D n in this.i.b)
+            foreach (Collider2D enemy in m_freezerArea.m_enemyList)
             {
-                o = n.GetComponent<BaseEnemy_SebastianMol>();
+                m_baseEnemyScript = enemy.GetComponent<BaseEnemy_SebastianMol>();
 
-                o.WB(f);
-                o.O -= g;//Deal damage
-                o.WA();
+                m_baseEnemyScript.StunEnemyWithDeleyFunc(m_damageInterval);
+                m_baseEnemyScript.m_health -= m_damageAmount;//Deal damage
+                m_baseEnemyScript.OnDeath();
             }
 
-            yield return new WaitForSeconds(f);//Delay before doing damage again
+            yield return new WaitForSeconds(m_damageInterval);//Delay before doing damage again
         }
         
-        s.c = false;//Unlock freezer door
-        yield return new WaitForSeconds(j);
+        levelScripting.drawFreezer = false;//Unlock freezer door
+        yield return new WaitForSeconds(m_freezerCooldown);
     }
 
-    private void m()
+    private void LightColor()
     {
-        if (l[0] == true)
+        if (m_pickColor[0] == true)
         {
-            z = p.w;
+            m_color = m_colorChangerScript.m_colorOutGrey60;
         }
-        else if (l[1] == true)
+        else if (m_pickColor[1] == true)
         {
-            z = p.e;
+            m_color = m_colorChangerScript.m_colorOutGrey122;
         }
-        else if (l[2] == true)
+        else if (m_pickColor[2] == true)
         {
-            z = p.r;
+            m_color = m_colorChangerScript.m_colorOutGrey174;
         }
 
-        gameObject.GetComponent<SpriteRenderer>().color = z;
+        gameObject.GetComponent<SpriteRenderer>().color = m_color;
     }
 
-    private void Q()
+    private void StunLight()
     {
         if (gameObject.activeSelf)
         {
-            h = true;
+            m_stunLight = true;
         }
         else
         {
-            h = false;
+            m_stunLight = false;
         }
     }
 
     void Awake()
     {
-        s = GameObject.Find("Player").GetComponent<LevelScripting>();
-        i = FindObjectOfType<FreezerTrigger_JoaoBeijinho>();
-        p = FindObjectOfType<ColorChanger_Jann>();
+        levelScripting = GameObject.Find("Player").GetComponent<LevelScripting>();
+        m_freezerArea = FindObjectOfType<FreezerTrigger_JoaoBeijinho>();
+        m_colorChangerScript = FindObjectOfType<ColorChanger_Jann>();
 
         if (gameObject.CompareTag(Tags_JoaoBeijinho.m_lightTag))
         {
-            m();
+            LightColor();
         }
     }
 }

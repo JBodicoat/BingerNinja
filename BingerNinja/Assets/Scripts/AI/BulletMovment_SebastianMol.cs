@@ -10,24 +10,24 @@ using UnityEngine;
 /// </summary>
 public class BulletMovment_SebastianMol : MonoBehaviour
 {
-    public float q;
-    internal Vector2 w;
-    public float e;
+    public float m_speed;
+    internal Vector2 m_direction;
+    public float m_damage;
 
-    public bool r = false;
-    public int t;
-    public float y;
-    public float u;  
+    public bool m_dosePoisonDamage = false;
+    public int m_poisonDamageChance;
+    public float m_poisionDamage;
+    public float m_posionDamageTime;  
     
-    public bool i = false;
-    public float o = 0;
-    public float p; 
+    public bool m_doseStunDamage = false;
+    public float m_stunAmount = 0;
+    public float m_stunDamageTime; 
     
-    public bool a = false;
-    public float s;
-    public float d = 0;
+    public bool m_doseHeal = false;
+    public float m_healDuration;
+    public float m_HealAmount = 0;
 
-    public float  f;
+    public float  m_rotateSpeed;
 
     private void Start()
     {
@@ -35,38 +35,38 @@ public class BulletMovment_SebastianMol : MonoBehaviour
     }
     void Update()
     {
-        transform.position += (Vector3)w * q * Time.deltaTime ;
-        transform.Rotate(new Vector3(0, 0, f * Time.deltaTime));
+        transform.position += (Vector3)m_direction * m_speed * Time.deltaTime ;
+        transform.Rotate(new Vector3(0, 0, m_rotateSpeed * Time.deltaTime));
     }
 
-	private void OnTriggerEnter2D(Collider2D g)
+	private void OnTriggerEnter2D(Collider2D collision)
 	{
 
-        if (g.gameObject.name == "Walls1_map")
+        if (collision.gameObject.name == "Walls1_map")
         {
            Destroy(gameObject);
         }
 
-        if (g.tag == "Player")
+        if (collision.tag == "Player")
         {
-            g.GetComponent<HitEffectElliott>().WL(false);
-            if (r)
+            collision.GetComponent<HitEffectElliott>().StartHitEffect(false);
+            if (m_dosePoisonDamage)
             {
-                int h = Random.Range(0, t);
-                if(h == t) FindObjectOfType<EffectManager_MarioFernandes>().Z(new PoisionDefuff_MarioFernandes(y, u));
+                int rand = Random.Range(0, m_poisonDamageChance);
+                if(rand == m_poisonDamageChance) FindObjectOfType<EffectManager_MarioFernandes>().AddEffect(new PoisionDefuff_MarioFernandes(m_poisionDamage, m_posionDamageTime));
             }
             
-            if(i)
+            if(m_doseStunDamage)
             {
-                FindObjectOfType<EffectManager_MarioFernandes>().Z(new SpeedEffect_MarioFernandes(p, 0));
+                FindObjectOfType<EffectManager_MarioFernandes>().AddEffect(new SpeedEffect_MarioFernandes(m_stunDamageTime, 0));
             } 
             
-            if(a)
+            if(m_doseHeal)
             {
-                FindObjectOfType<EffectManager_MarioFernandes>().Z(new HealBuff_MarioFernandes(s,d));
+                FindObjectOfType<EffectManager_MarioFernandes>().AddEffect(new HealBuff_MarioFernandes(m_healDuration,m_HealAmount));
             }
 
-            FindObjectOfType<PlayerHealthHunger_MarioFernandes>().u(e);
+            FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damage);
             //TODO collision.GetComponent<HitEffectElliott>().StartHitEffect(false);
 
          
@@ -76,7 +76,7 @@ public class BulletMovment_SebastianMol : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D k)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
       
         Destroy(gameObject);

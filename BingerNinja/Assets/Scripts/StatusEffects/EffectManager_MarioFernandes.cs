@@ -17,13 +17,13 @@ public class EffectManager_MarioFernandes : MonoBehaviour
 
     private float m_tickDuration = 0;
 
-    public bool D = false;
+    public bool m_paused = false;
 
     //List of effects
     private List<StatusEffect_MarioFernandes> m_effects = new List<StatusEffect_MarioFernandes>{};
 
     //It lets you add a pre created effect to the list
-    public void Z(StatusEffect_MarioFernandes newEffect)
+    public void AddEffect(StatusEffect_MarioFernandes newEffect)
     {
         foreach (var item in m_effects)
         {
@@ -43,7 +43,7 @@ public class EffectManager_MarioFernandes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {        
-        if(!D)
+        if(!m_paused)
         {
             //Detects if you have an effect each tick
             if(m_effects.Count > 0 && m_tickDuration >= (m_Tick))

@@ -52,7 +52,7 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
         RangedHighlight.SetActive(!isMelee);
         SetCursor(!isMelee);
     }
-    public void g(bool isShownIfTrue)
+    public void SetWeaponsUIAnimation(bool isShownIfTrue)
     {
         weaponsAnim.SetBool("isOnScreen", isShownIfTrue);
     }

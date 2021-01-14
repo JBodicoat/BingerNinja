@@ -11,21 +11,21 @@ using UnityEngine;
 /// </summary>
 public class DialogueTrigger_MarioFernandes : MonoBehaviour
 {
-	public w P;
+	public Dialogue m_dialogue;
 
-	bool q = true;
+	bool m_state = true;
 
 	///<summary>Call the dialog </summary>
-	public void w ()
+	public void TriggerDialogue ()
 	{
-		FindObjectOfType<DialogueManager_MarioFernandes>().f(P);
+		FindObjectOfType<DialogueManager_MarioFernandes>().StartDialogue(m_dialogue);
 	}
 
-	private void OnTriggerEnter2D(Collider2D e) {
-		if(e.tag == "Player" && q)
+	private void OnTriggerEnter2D(Collider2D other) {
+		if(other.tag == "Player" && m_state)
 		{
-			w();
-			q = false;
+			TriggerDialogue();
+			m_state = false;
 			gameObject.SetActive(false);
 		}
 	}	

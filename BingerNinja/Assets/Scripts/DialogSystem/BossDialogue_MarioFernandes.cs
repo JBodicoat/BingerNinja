@@ -10,13 +10,13 @@ using UnityEngine;
 /// </summary>
 public class BossDialogue_MarioFernandes : MonoBehaviour
 {
-    public List<w> q;
+    public List<Dialogue> m_dialogue;
     
     ///<summary>Call the dialog you want, giving it the number on the index</summary>
-	public void TriggerDialogue (int e)
+	public void TriggerDialogue (int index)
 	{
-        if (e < q.Capacity - 1 && e >= 0)
-            FindObjectOfType<DialogueManager_MarioFernandes>().f(q[e]);
+        if (index < m_dialogue.Capacity - 1 && index >= 0)
+            FindObjectOfType<DialogueManager_MarioFernandes>().StartDialogue(m_dialogue[index]);
 
 	}
 

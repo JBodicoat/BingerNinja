@@ -21,7 +21,7 @@ public class VentTrigger_JoaoBeijinho : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)//Enter and Exit vent
     {
-        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.QC))
+        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
         {
             m_ventPath.SetActive(true);
         }

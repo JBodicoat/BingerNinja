@@ -9,93 +9,93 @@ using UnityEngine;
 /// this script changes the color to an object that has been hit
 public class HitEffectElliott : MonoBehaviour
 {
-    public int q = 174;
-    public int w = 122;
-    internal SpriteRenderer e;
-    internal Texture2D r;
-    internal Color[] t;
-    float y = 0.0f;
-    const float u = 0.3f;
-    private Color[] o;
+    public int m_critical = 174;
+    public int m_nonCritical = 122;
+    internal SpriteRenderer mSpriteRenderer;
+    internal Texture2D mColorSwapTex;
+    internal Color[] mSpriteColors;
+    float mHitEffectTimer = 0.0f;
+    const float cHitEffectTime = 0.3f;
+    private Color[] mStoreColor;
 
     //Sets every pixel’s color of the sprite to the passed color
-    public void p(Color a)
+    public void SwapAllSpritesColorsTemporarily(Color color)
     {
-        for (int i = 0; i < r.width; ++i)
+        for (int i = 0; i < mColorSwapTex.width; ++i)
         {
-            r.SetPixel(i, 0, a);
-            r.Apply();
+            mColorSwapTex.SetPixel(i, 0, color);
+            mColorSwapTex.Apply();
         }
     }
 
     // Resets the sprites original color 
-    public void s()
+    public void ResetAllSpritesColors()
     {
-        for (int i = 0; i < r.width; ++i)
+        for (int i = 0; i < mColorSwapTex.width; ++i)
         {
-            r.SetPixel(i, 0, o[i]);
-            r.Apply();
+            mColorSwapTex.SetPixel(i, 0, mStoreColor[i]);
+            mColorSwapTex.Apply();
         }
     }
 
-    public void WL(bool d)
+    public void StartHitEffect(bool isCritical)
     {
-        y = u;
-        p(o[d ? q : w]);
+        mHitEffectTimer = cHitEffectTime;
+        SwapAllSpritesColorsTemporarily(mStoreColor[isCritical ? m_critical : m_nonCritical]);
     }
     
-    public void f()
+    public void InitColorSwapTex()
     {
-        Texture2D g = new Texture2D(256, 1, TextureFormat.RGBA32, false, false);
-        g.filterMode = FilterMode.Point;
+        Texture2D colorSwapTex = new Texture2D(256, 1, TextureFormat.RGBA32, false, false);
+        colorSwapTex.filterMode = FilterMode.Point;
 
-        for (int i = 0; i < g.width; ++i)
+        for (int i = 0; i < colorSwapTex.width; ++i)
         {
-            g.SetPixel(i, 0, new Color(0.0f, 0.0f, 0.0f, 0.0f));
+            colorSwapTex.SetPixel(i, 0, new Color(0.0f, 0.0f, 0.0f, 0.0f));
         }
-        g.Apply();
+        colorSwapTex.Apply();
 
-        e.material.SetTexture("_SwapTex", g);
+        mSpriteRenderer.material.SetTexture("_SwapTex", colorSwapTex);
 
-        t = new Color[g.width];
-        r = g;
+        mSpriteColors = new Color[colorSwapTex.width];
+        mColorSwapTex = colorSwapTex;
     }
     
-    private void h(int j, Color k)
+    private void SwapColor(int index, Color color)
     {
-        t[j] = k;
-        r.SetPixel(j, 0, k);
+        mSpriteColors[index] = color;
+        mColorSwapTex.SetPixel(index, 0, color);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        if (gameObject.CompareTag(Tags_JoaoBeijinho.QC))
+        if (gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
         {
-            e = GetComponent<SpriteRenderer>();
+            mSpriteRenderer = GetComponent<SpriteRenderer>();
         }
         else
         {
-            e = GetComponentInChildren<SpriteRenderer>();
+            mSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
-        o = ColorChanger_Jann.Instance.f;
+        mStoreColor = ColorChanger_Jann.Instance.m_spriteColors;
         
-        f();
+        InitColorSwapTex();
         
-        h(60, o[60]);
-        h(122, o[122]);
-        h(174, o[174]);
-        r.Apply();
+        SwapColor(60, mStoreColor[60]);
+        SwapColor(122, mStoreColor[122]);
+        SwapColor(174, mStoreColor[174]);
+        mColorSwapTex.Apply();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (y > 0.0f)
+        if (mHitEffectTimer > 0.0f)
         {
-            y -= Time.deltaTime;
-            if (y <= 0.0f)
-                s();
+            mHitEffectTimer -= Time.deltaTime;
+            if (mHitEffectTimer <= 0.0f)
+                ResetAllSpritesColors();
         }
     }
 }

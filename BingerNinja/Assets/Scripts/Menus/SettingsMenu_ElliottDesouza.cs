@@ -24,10 +24,10 @@ public class SettingsMenu_ElliottDesouza : MonoBehaviour
 
     private void Start()
     {
-        o settings = SaveLoadSystem_JamieG.i();
-        m_musicSlider.value = settings.a;
-        m_SFXSlider.value = settings.d;
-        m_selectedLanguage = settings.s;
+        SettingsData settings = SaveLoadSystem_JamieG.LoadSettings();
+        m_musicSlider.value = settings.m_musicVolume;
+        m_SFXSlider.value = settings.m_sfxVolume;
+        m_selectedLanguage = settings.m_chosenLanguage;
         
         m_englishButton.interactable = !m_selectedLanguage.Equals("English");
         m_portugueseButton.interactable = m_selectedLanguage.Equals("English");
@@ -73,7 +73,7 @@ public class SettingsMenu_ElliottDesouza : MonoBehaviour
         GameObject dialogManager = GameObject.Find("DialogManager");
         if (dialogManager != null)
         {
-            dialogManager.GetComponent<DialogueManager_MarioFernandes>().f();
+            dialogManager.GetComponent<DialogueManager_MarioFernandes>().LoadLanguageFile();
         }
         
         gameObject.SetActive(false);

@@ -154,18 +154,18 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
 
     public void LoadSoundSettings()
     {
-        o settingsData = SaveLoadSystem_JamieG.i();
+        SettingsData settingsData = SaveLoadSystem_JamieG.LoadSettings();
 
-        if (!settingsData.Equals(default(o)))
+        if (!settingsData.Equals(default(SettingsData)))
         {
-            PlayTrack_Jann.Instance.p(settingsData.a);
-            PlayTrack_Jann.Instance.s(settingsData.d);
+            PlayTrack_Jann.Instance.UpdateMusicVolume(settingsData.m_musicVolume);
+            PlayTrack_Jann.Instance.UpdateSfxVolume(settingsData.m_sfxVolume);
         }
     }
 
     public void FadeBoth()
     {
-        m_dialogueManager.j();
+        m_dialogueManager.PauseGame();
         
         float fadeDelta = m_portalFadeTime / 2f;
         StartCoroutine(FadeImage(fadeDelta, false));
@@ -208,9 +208,9 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
             yield return null;
         }
 
-        if (!m_dialogueManager.q.activeInHierarchy)
+        if (!m_dialogueManager.m_dialogBox.activeInHierarchy)
         {
-            m_dialogueManager.W();   
+            m_dialogueManager.ResumeGame();   
         }
     }
 }

@@ -18,7 +18,7 @@ public class Phone_JoaoBeijinho : StealthObject_JoaoBeijinho
 
     private bool m_onPhone = false;
 
-    private w m_dialogue;
+    private Dialogue m_dialogue;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -64,10 +64,10 @@ public class Phone_JoaoBeijinho : StealthObject_JoaoBeijinho
         {
             m_clueSystemScript.GetCurrentClue();//Refresh current clue
 
-            m_dialogue.k = "Phone";//Set phone as dialogue name
-            m_dialogue.z = m_clueSystemScript.m_currentClue;//Set current clue as dialogue sentence
+            m_dialogue.m_name = "Phone";//Set phone as dialogue name
+            m_dialogue.m_sentences = m_clueSystemScript.m_currentClue;//Set current clue as dialogue sentence
 
-            m_dialogueManagerScript.f(m_dialogue);//Show dialogue in-game
+            m_dialogueManagerScript.StartDialogue(m_dialogue);//Show dialogue in-game
         }
     }
 }

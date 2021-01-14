@@ -123,10 +123,10 @@ class Synthesizer_Jann : EditorWindow
             EditorGUILayout.BeginHorizontal();
             for (int x = 0; x < len; x++)
             {
-                chd[y][x].NM = (NotesCreator_Jann.q) EditorGUILayout.EnumPopup(
+                chd[y][x].NM = (NotesCreator_Jann.Note) EditorGUILayout.EnumPopup(
                     "", chd[y][x].NM,
                     GUILayout.Width(50));
-                chd[y][x].F = nc.w(chd[y][x].NM);
+                chd[y][x].F = nc.GetFrequency(chd[y][x].NM);
             }
             EditorGUILayout.EndHorizontal();
         }
@@ -149,7 +149,7 @@ class Synthesizer_Jann : EditorWindow
                 if (y >= chd.Length || x >= chd[y].Count)
                 {
                     t[y].Add(
-                        new Note_Jann(NotesCreator_Jann.q.None, 
+                        new Note_Jann(NotesCreator_Jann.Note.None, 
                         0)
                         );
                 }
@@ -202,7 +202,7 @@ class Synthesizer_Jann : EditorWindow
             {
                 int f = t.d[y * len + x];
                 chd[y][x].F = f;
-                chd[y][x].NM = nc.e(f);
+                chd[y][x].NM = nc.GetNote(f);
             }
         }
     }
@@ -218,7 +218,7 @@ class Synthesizer_Jann : EditorWindow
             
             for (int x = 0; x < len; x++)
             {
-                chd[y].Add(new Note_Jann(NotesCreator_Jann.q.None, 0));
+                chd[y].Add(new Note_Jann(NotesCreator_Jann.Note.None, 0));
             }
         }
     }

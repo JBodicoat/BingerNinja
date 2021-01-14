@@ -17,45 +17,45 @@ using UnityEngine;
 class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
 {
 
-    public float q;
+    public float m_hitSpeed;
 
-    public GameObject w;
+    public GameObject m_attackCollider;
 
-    public float e;
+    public float attackDeactivationSpeed;
 
-    public bool r = false;
+    public bool m_hasChargeAttack = false;
 
-    public float t;
+    public float m_chargeAttackDeley;
 
-    public int y;
+    public int m_chargAttackPosibility;
 
-    public float u = 3;
+    public float m_chargeAttackMultiplier = 3;
 
-    public float i;
+    public float m_afterAttackDeley;
 
-    public float o = 0.2f;
+    public float m_maxChargTimeBeforDamege = 0.2f;
 
-    public float p = 0.2f;
-    public float a = 500;
+    public float m_amountOfTimeToMoveAwayFromWall = 0.2f;
+    public float m_chargeAttackSpeed = 500;
 
-    private bool s = true;
-    public bool d = false;
-    private Pathfinder_SebastianMol f;
-    private List<Vector2Int> g;
+    private bool doOnceShowPath = true;
+    public bool showPathBeforAttackTigerBoss = false;
+    private Pathfinder_SebastianMol pathFinder;
+    private List<Vector2Int> daPath;
 
-    protected bool h = false;
-    protected bool j = false;
+    protected bool m_doStunOnce = false;
+    protected bool m_doMoveAwayFromWallOnce = false;
 
     /// <summary>
     /// activates the "enemy weapon" object that damages the player uses quick attack
     /// </summary>
     /// <returns></returns>
-    protected IEnumerator k()
+    protected IEnumerator QuickAttackCo()
     {
-        w.GetComponent<EnemyDamager_SebastianMol>().O
-            = w.GetComponent<EnemyDamager_SebastianMol>().P;
-        w.SetActive(true);
-        yield return new WaitForSeconds(e);
+        m_attackCollider.GetComponent<EnemyDamager_SebastianMol>().m_damage
+            = m_attackCollider.GetComponent<EnemyDamager_SebastianMol>().m_baseDamage;
+        m_attackCollider.SetActive(true);
+        yield return new WaitForSeconds(attackDeactivationSpeed);
        // m_attackCollider.SetActive(false);
     }
 
@@ -63,46 +63,46 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     /// activates the "enemy weapon" object that damages the player uses charge attack
     /// </summary>
     /// <returns></returns>
-    protected IEnumerator l()
+    protected IEnumerator ChargeAttackCo()
     {
-        yield return new WaitForSeconds(t);
-        EnemyDamager_SebastianMol a = w.GetComponent<EnemyDamager_SebastianMol>();
-        a.O = a.P * u;
-        w.SetActive(true);
-        yield return new WaitForSeconds(e);
+        yield return new WaitForSeconds(m_chargeAttackDeley);
+        EnemyDamager_SebastianMol dameger = m_attackCollider.GetComponent<EnemyDamager_SebastianMol>();
+        dameger.m_damage = dameger.m_baseDamage * m_chargeAttackMultiplier;
+        m_attackCollider.SetActive(true);
+        yield return new WaitForSeconds(attackDeactivationSpeed);
         //m_attackCollider.SetActive(false);
     }
 
-    protected void S()
+    protected void QuickAttack()
     {
-        StartCoroutine(k());
+        StartCoroutine(QuickAttackCo());
     }
 
-    protected void D()
+    protected void ChargeAttack()
     {
-        StartCoroutine(l());
+        StartCoroutine(ChargeAttackCo());
     }
 
-    protected void F()
+    protected void StunAfterAttack()
     {
-        WB(i);
+        StunEnemyWithDeleyFunc(m_afterAttackDeley);
     }
 
     /// <summary>
     /// ovveride class that holds logic for what the enemy shoudl do when in the attack state
     /// </summary>
-    internal override void QP()
+    internal override void AttackBehaviour()
     {
-        if(E == global::y.d)
+        if(m_currentEnemyType == m_enemyType.PETTIGER)
         {
 
-            EnemyAttacks_SebastianMol.m(qt, ref qo,
-                w, q, gameObject, a); //make this ibnto a public variable
+            EnemyAttacks_SebastianMol.ChargeAttack(m_playerTransform, ref m_attackTimer,
+                m_attackCollider, m_hitSpeed, gameObject, m_chargeAttackSpeed); //make this ibnto a public variable
         }
         else
         {
-            EnemyAttacks_SebastianMol.q(ref qo, r, y, this.S,
-                                               this.D, this.F, E, q, GetComponent<Enemy_Animation_LouieWilliamson>());
+            EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility, QuickAttack,
+                                               ChargeAttack, StunAfterAttack, m_currentEnemyType, m_hitSpeed, GetComponent<Enemy_Animation_LouieWilliamson>());
         }
        
     }
@@ -110,78 +110,78 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     /// <summary>
     /// make the attack range bigg again the reson it is small so that the enenmy walks toward the player befor attacking
     /// </summary>
-    /// <param name="H"> amnount of time befor the attack is big again</param>
+    /// <param name="amaountOfTime"> amnount of time befor the attack is big again</param>
     /// <returns></returns>
-    protected IEnumerator G(float H, float J = 0) //this is a very not clean way to do things but it doseent look bad in teh game 
+    protected IEnumerator MoveAwayFromeWall(float amaountOfTime, float attackRange = 0) //this is a very not clean way to do things but it doseent look bad in teh game 
     {
-        yield return new WaitForSeconds(H);
-        if (X != qs )
+        yield return new WaitForSeconds(amaountOfTime);
+        if (m_attackRange != m_maxAttackRange )
         {
-            if( J == 0)
+            if( attackRange == 0)
             {
-                X = qs; //change teh attack range back to normal 
+                m_attackRange = m_maxAttackRange; //change teh attack range back to normal 
             }
             else
             {
-                X = J;
+                m_attackRange = attackRange;
             }
             
         }
-        j = false;
+        m_doMoveAwayFromWallOnce = false;
     }
     private void LateUpdate()
     {
-        if(E == global::y.h)
+        if(m_currentEnemyType == m_enemyType.SPACENINJABOSS)
         {
-            if ((O / qw) > B)
-                if (GameObject.FindObjectOfType<PlayerStealth_JoaoBeijinho>().QL()) //confusuion when player stelths
+            if ((m_health / m_maxHealth) > m_secondPhaseStartPercentage)
+                if (GameObject.FindObjectOfType<PlayerStealth_JoaoBeijinho>().IsStealthed()) //confusuion when player stelths
                 {
-                    if (!h)
+                    if (!m_doStunOnce)
                     {
-                        WB(N);
-                        h = true;
+                        StunEnemyWithDeleyFunc(m_amountOfStunWhenPlayerStealthed);
+                        m_doStunOnce = true;
                     }
                 }
                 else
                 {
-                    h = false;
+                    m_doStunOnce = false;
                 }
         }
 
-        if(!qj)
-        if(j)
+        if(!m_isStuned)
+        if(m_doMoveAwayFromWallOnce)
         {
-            StartCoroutine(G(p));
+            StartCoroutine(MoveAwayFromeWall(m_amountOfTimeToMoveAwayFromWall));
         }
     }
 
 
-    protected void OnTriggerEnter2D(Collider2D K)
+    protected void OnTriggerEnter2D(Collider2D collision)
     {
-        if(K.gameObject.tag != Tags_JoaoBeijinho.m_enemyTag && K.gameObject.tag != "Untagged")
+        if(collision.gameObject.tag != Tags_JoaoBeijinho.m_enemyTag && collision.gameObject.tag != "Untagged")
         {
-            if (E == global::y.d || E == global::y.j)
+            if (m_currentEnemyType == m_enemyType.PETTIGER || m_currentEnemyType == m_enemyType.TADASHI)
             {
-                Rigidbody2D L = GetComponent<Rigidbody2D>();
-                if (L.bodyType == RigidbodyType2D.Dynamic)
+                Rigidbody2D rijy = GetComponent<Rigidbody2D>();
+                if (rijy.bodyType == RigidbodyType2D.Dynamic)
                 {
 
-                    L.bodyType = RigidbodyType2D.Kinematic;
-                    L.velocity = Vector2.zero;
-                    w.SetActive(false);
+                    rijy.bodyType = RigidbodyType2D.Kinematic;
+                    rijy.velocity = Vector2.zero;
+                    m_attackCollider.SetActive(false);
                     //if hit wall walk away one tile 
                     //if hit wall stunn
-                    if (K.gameObject.name == "Walls1_map")
+                    if (collision.gameObject.name == "Walls1_map")
                     {
-                        X = 0.01f;
-                        j = true;
-                        WB(i);
+                        m_attackRange = 0.01f;
+                        m_doMoveAwayFromWallOnce = true;
+                        StunEnemyWithDeleyFunc(m_afterAttackDeley);
                     }
 
-                    if (K.gameObject.CompareTag(Tags_JoaoBeijinho.QC))
+                    if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
                     {
-                        if (E == global::y.d || qx == 1)
-                            FindObjectOfType<EffectManager_MarioFernandes>().Z
+                        if (m_currentEnemyType == m_enemyType.PETTIGER || m_tadashiPhase == 1)
+                            FindObjectOfType<EffectManager_MarioFernandes>().AddEffect
                                     (new SpeedEffect_MarioFernandes(1, 0)); //change thesey to not be magic numbers
                     }
                 }

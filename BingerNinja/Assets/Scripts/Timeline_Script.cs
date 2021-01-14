@@ -65,7 +65,7 @@ public class Timeline_Script : MonoBehaviour
         playerMadeChoice = true;
         playableDirector.playableGraph.GetRootPlayable(0).SetSpeed(10);
         dialogBox.SetActive(false);
-        dialogBox.GetComponentInParent<DialogueManager_MarioFernandes>().W();
+        dialogBox.GetComponentInParent<DialogueManager_MarioFernandes>().ResumeGame();
         tadashi.SetActive(true);
         ninjaroth.SetActive(false);
 
@@ -75,7 +75,7 @@ public class Timeline_Script : MonoBehaviour
         playerMadeChoice = true;
         playableDirector.playableGraph.GetRootPlayable(0).SetSpeed(10);
         dialogBox.SetActive(false);
-        dialogBox.GetComponentInParent<DialogueManager_MarioFernandes>().W();
+        dialogBox.GetComponentInParent<DialogueManager_MarioFernandes>().ResumeGame();
         tadashi.SetActive(false);
         ninjaroth.SetActive(true);
 
@@ -96,7 +96,7 @@ public class Timeline_Script : MonoBehaviour
                 ninjaroth.SetActive(true);
             }
             dialogBox.SetActive(false);
-            dialogBox.GetComponentInParent<DialogueManager_MarioFernandes>().W();
+            dialogBox.GetComponentInParent<DialogueManager_MarioFernandes>().ResumeGame();
 
         }
         else

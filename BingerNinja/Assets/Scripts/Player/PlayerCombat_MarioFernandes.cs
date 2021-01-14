@@ -147,7 +147,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             m_direction.z = 0; 
 
             m_direction.Normalize();
-            PlayTrack_Jann.Instance.WS(AudioFiles.e); //added by alanna 10/12/20
+            PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_PlayerThrow); //added by alanna 10/12/20
             //TODO undo this comment
             //m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
             GameObject projectile = Instantiate(m_projectile, transform.position, transform.rotation);
@@ -175,13 +175,13 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
                 m_currentWeapon[m_weaponsIndex] = null;
             }
             
-            ColorChanger_Jann.Instance.g(projectile.GetComponent<SpriteRenderer>());
+            ColorChanger_Jann.Instance.UpdateColor(projectile.GetComponent<SpriteRenderer>());
         }
         else
         {
             //TODO uncomment this
             // m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
-            PlayTrack_Jann.Instance.WS(AudioFiles.f); //added by alanna 10/12/20
+            PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_PlayerAttack); //added by alanna 10/12/20
 
             float distanceToClosestsEnemy = Mathf.Infinity;
                 GameObject CloseEnemy = null;
@@ -199,7 +199,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
                 if(CloseEnemy && distanceToClosestsEnemy <= m_meleeAttackRadius)
                 {
-                    CloseEnemy.GetComponentInParent<BaseEnemy_SebastianMol>().WG( l.z , (int)(m_currentWeapon[m_weaponsIndex].dmg * m_strenght * chargedModifier));
+                    CloseEnemy.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage( m_damageType.MELEE , (int)(m_currentWeapon[m_weaponsIndex].dmg * m_strenght * chargedModifier));
                 }                
             }
 
@@ -213,7 +213,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
      
         if (m_currentWeapon[m_weaponsIndex] && (!m_currentWeapon[m_weaponsIndex].IsRanged() || m_currentWeapon[m_weaponsIndex].IsRanged() && m_currentWeapon[m_weaponsIndex].m_ammunition >= m_eatAmmount))
         {            
-            PlayTrack_Jann.Instance.WS(AudioFiles.d); //aaded by alanna 10/12/20
+            PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_Eating); //aaded by alanna 10/12/20
 
             
 
@@ -223,17 +223,17 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             {
                 case FoodType.FUGU:                   
                     if (Random.Range(0, 101) >= 50)
-                        m_effectManager.Z(new PoisionDefuff_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_poisonDmg));                        
+                        m_effectManager.AddEffect(new PoisionDefuff_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_poisonDmg));                        
                     break;
                 case FoodType.SQUID:                    
                     break;
                 case FoodType.RICEBALL:                    
                     break;
                 case FoodType.KOBEBEEF:                   
-                    m_effectManager.Z(new SpeedEffect_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_speedModifier));
+                    m_effectManager.AddEffect(new SpeedEffect_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_speedModifier));
                     break;
                 case FoodType.SASHIMI:                    
-                    m_effectManager.Z(new StrengthEffect_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_strengthModifier));
+                    m_effectManager.AddEffect(new StrengthEffect_MarioFernandes(5, m_currentWeapon[m_weaponsIndex].m_strengthModifier));
                     break;
                 case FoodType.TEMPURA:                   
                     break;
@@ -242,7 +242,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
                 case FoodType.SAKE:                    
                     break;
                 case FoodType.NOODLES:
-                    m_effectManager.Z(new StrengthEffect_MarioFernandes(30, m_currentWeapon[m_weaponsIndex].m_strengthModifier));
+                    m_effectManager.AddEffect(new StrengthEffect_MarioFernandes(30, m_currentWeapon[m_weaponsIndex].m_strengthModifier));
                     break;
                 default:
                     break;
@@ -352,7 +352,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             collision.gameObject.SetActive(false);
             collision.transform.parent = transform;
             m_WeaponUI.WeaponChange(m_currentWeapon[0].m_foodType, false, 0);
-            m_WeaponUI.g(true);
+            m_WeaponUI.SetWeaponsUIAnimation(true);
 		}
         else if(collision.GetComponent<WeaponsTemplate_MarioFernandes>() && collision.GetComponent<WeaponsTemplate_MarioFernandes>().IsRanged())
         {
@@ -363,7 +363,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
                 collision.gameObject.SetActive(false);
                 collision.transform.parent = transform;
                 m_WeaponUI.WeaponChange(m_currentWeapon[1].m_foodType, true, m_currentWeapon[1].m_ammunition);
-                m_WeaponUI.g(true);
+                m_WeaponUI.SetWeaponsUIAnimation(true);
             }
             else{                
                 
@@ -376,7 +376,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
                     
                     m_WeaponUI.WeaponChange(m_currentWeapon[1].m_foodType, true, m_currentWeapon[1].m_ammunition);
-                    m_WeaponUI.g(true);
+                    m_WeaponUI.SetWeaponsUIAnimation(true);
                 }
             }
         }

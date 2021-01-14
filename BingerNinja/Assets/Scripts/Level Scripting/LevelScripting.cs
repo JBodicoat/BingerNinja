@@ -9,7 +9,7 @@ using UnityEngine.Tilemaps;
 
 public class LevelScripting : MonoBehaviour
 {
-    internal bool enemyDead = false, keyUsed = false, levelBossIntro, bossDead = false, doorsClosed = false, cinematicDone = true, ventDialogueDisabled = false, endVentDialogueCanPlay = false, c = false;
+    internal bool enemyDead = false, keyUsed = false, levelBossIntro, bossDead = false, doorsClosed = false, cinematicDone = true, ventDialogueDisabled = false, endVentDialogueCanPlay = false, drawFreezer = false;
     private GameObject levelLiftTrigger, keyTrigger, keyTriggerTwo, doorCloseTrigger, dialogBox, ventsDialogue, endVentDialogue;
     public GameObject vents;
     private BaseEnemy_SebastianMol boss, boss2, level2Enemy1, level2Enemy2;
@@ -465,7 +465,7 @@ public class LevelScripting : MonoBehaviour
                 {
                     if(!enemyDead)
                     {
-                        if (level2Enemy1.O <= 0 || level2Enemy2.O <= 0)
+                        if (level2Enemy1.m_health <= 0 || level2Enemy2.m_health <= 0)
                         {
                             levelLiftTrigger.SetActive(true);
                             level2End.TriggerDialogue(0);
@@ -485,7 +485,7 @@ public class LevelScripting : MonoBehaviour
                             bossDialogue.TriggerDialogue(0);
                             levelBossIntro = true;
                         }
-                        if (boss.O <= 0)
+                        if (boss.m_health <= 0)
                         {
                             //dramatic death SE
                             //freeze on enemy as he dies  
@@ -549,7 +549,7 @@ public class LevelScripting : MonoBehaviour
                             bossDialogue.TriggerDialogue(0);
                             levelBossIntro = true;
                         }
-                        if (boss.O <= 0)
+                        if (boss.m_health <= 0)
                         {
                             //dramatic death SE
                             //freeze on enemy as he dies  
@@ -559,7 +559,7 @@ public class LevelScripting : MonoBehaviour
 
                         }
                    }
-                   if(!c)
+                   if(!drawFreezer)
                    {
                         walls2.SetTile(new Vector3Int(23, 10, 0), null);
                         walls2.SetTile(new Vector3Int(23, 9, 0), null);
@@ -569,7 +569,7 @@ public class LevelScripting : MonoBehaviour
                         walls2.SetTile(new Vector3Int(22, 8, 0), null);
                         walls2.SetTile(new Vector3Int(22, 9, 0), null);
                     }
-                    else if (c)
+                    else if (drawFreezer)
                     {
                         walls2.SetTile(new Vector3Int(23, 10, 0),topDoorTile);
                         walls2.SetTile(new Vector3Int(23, 9, 0), topDoorTile);
@@ -628,7 +628,7 @@ public class LevelScripting : MonoBehaviour
                             bossDialogue.TriggerDialogue(0);
                             levelBossIntro = true;
                         }
-                        if (boss.O <= 0)
+                        if (boss.m_health <= 0)
                         {
                             //dramatic death SE
                             //freeze on enemy as he dies  
@@ -698,7 +698,7 @@ public class LevelScripting : MonoBehaviour
 
                             
                         }
-                        if (boss.O <= 0)
+                        if (boss.m_health <= 0)
                         {
                             bossDialogue.TriggerDialogue(1);
                             levelLiftTrigger.SetActive(true);
@@ -747,7 +747,7 @@ public class LevelScripting : MonoBehaviour
                             bossDialogue.TriggerDialogue(0);
                             levelBossIntro = true;
                         }
-                        if (boss.O <= 0)
+                        if (boss.m_health <= 0)
                         {
                             //dramatic death SE
                             //freeze on enemy as he dies  
@@ -779,7 +779,7 @@ public class LevelScripting : MonoBehaviour
                                 levelBossIntro = true;
                             }
                         }
-                        if (boss.O <= 0)
+                        if (boss.m_health <= 0)
                         {
 
                             bossDialogue.TriggerDialogue(9);
@@ -820,7 +820,7 @@ public class LevelScripting : MonoBehaviour
                                 //cinematic
                                 levelBossIntro = true;
                         }
-                        if (boss.O <= 0 && !dialogBox.activeInHierarchy)
+                        if (boss.m_health <= 0 && !dialogBox.activeInHierarchy)
                         {
                             //if boss is ninjaroth change to Good Ending
                             if(timeline.playableDirector != timeline.timeline[1])
@@ -836,7 +836,7 @@ public class LevelScripting : MonoBehaviour
 
                         }
                         else if (boss2 != null)
-                            if (boss2.O <= 0 && !dialogBox.activeInHierarchy)
+                            if (boss2.m_health <= 0 && !dialogBox.activeInHierarchy)
                             {
                                 // just for timeline QA
                                 timeline.ChangeDirector("Good Ending");

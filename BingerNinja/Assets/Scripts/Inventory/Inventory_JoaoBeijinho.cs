@@ -90,7 +90,7 @@ public class Inventory_JoaoBeijinho : MonoBehaviour
          }
     }
     
-    public void WD()
+    public void CheckDeadEnemies()
     {
         int count = 0;
         for (int i = 0; i < m_EnemyList.Count; i++)

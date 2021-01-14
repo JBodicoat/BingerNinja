@@ -9,64 +9,64 @@ using UnityEngine.SceneManagement;
 public class AudioManager_LouieWilliamson : MonoBehaviour
 {
     //Sound Effect Enum and Dictionary setup
-    public enum q { w, e, r, t, y, u, i, o };
-    public List<AudioClip> p = new List<AudioClip>();
-    private Dictionary<q, AudioClip> a = new Dictionary<q, AudioClip>();
-    public GameObject d;
+    public enum SFX { PlayerDamage, PlayerDeath, PlayerAttack, PlayerThrowAttack, Detection, Eating, EnemyAttack, EnemyThrowAttack };
+    public List<AudioClip> SFXList = new List<AudioClip>();
+    private Dictionary<SFX, AudioClip> SFXDictionary = new Dictionary<SFX, AudioClip>();
+    public GameObject SFXPrefab;
    // private PlayTrack_Jann music;
 
     //Music enum and Dictionary setup
-    public enum f { g, h };
-    public AudioSource j;
-    public List<AudioClip> k = new List<AudioClip>();
-    private Dictionary<f, AudioClip> l = new Dictionary<f, AudioClip>();
+    public enum Music { MainMenu, Level1 };
+    public AudioSource MusicPrefab;
+    public List<AudioClip> MusicList = new List<AudioClip>();
+    private Dictionary<Music, AudioClip> MusicDictionary = new Dictionary<Music, AudioClip>();
     
     //This function plays a sfx given an enum value from the SFX enum
-    public void z(q s)
+    public void PlaySFX(SFX s)
     {
         //spawn sfx prefab and get audio source component
-        AudioSource x = Instantiate(d).GetComponent<AudioSource>();
+        AudioSource SoundEffect = Instantiate(SFXPrefab).GetComponent<AudioSource>();
         //play sfx
-        x.PlayOneShot(a[s]);
+        SoundEffect.PlayOneShot(SFXDictionary[s]);
         //destroy prefab instance when sound has played
-        Destroy(x.gameObject, a[s].length);
+        Destroy(SoundEffect.gameObject, SFXDictionary[s].length);
     }
     //This function sets the music to the track given through a Music enum value
-    public void c(f m)
+    public void SetMusicSource(Music m)
     {
-        j.clip = l[m];
-        j.Play();
+        MusicPrefab.clip = MusicDictionary[m];
+        MusicPrefab.Play();
     }
 
     //This function pauses/ plays the music depending on the bool value given
-    public void v(bool b) //Jack or Mario I know this is a bad bool name so pls advise on what I should call it XD
+    public void SetMusicOnorOff(bool on) //Jack or Mario I know this is a bad bool name so pls advise on what I should call it XD
     {
-        if (b)
+        if (on == true)
         {
-            j.Play();
+            MusicPrefab.Play();
         }
         else
         {
-            j.Pause();
+            MusicPrefab.Pause();
         }
     }
     
     void Start()
     {
         //Populate Dictionaries
-        a.Add(q.w, p[0]);
-        a.Add(q.e, p[1]);
-        a.Add(q.r, p[2]);
-        a.Add(q.t, p[3]);
-        a.Add(q.y, p[4]);
-        a.Add(q.u, p[5]);
-        a.Add(q.i, p[6]);
-        a.Add(q.o, p[7]);
+        SFXDictionary.Add(SFX.PlayerDamage, SFXList[0]);
+        SFXDictionary.Add(SFX.PlayerDeath, SFXList[1]);
+        SFXDictionary.Add(SFX.PlayerAttack, SFXList[2]);
+        SFXDictionary.Add(SFX.PlayerThrowAttack, SFXList[3]);
+        SFXDictionary.Add(SFX.Detection, SFXList[4]);
+        SFXDictionary.Add(SFX.Eating, SFXList[5]);
+        SFXDictionary.Add(SFX.EnemyAttack, SFXList[6]);
+        SFXDictionary.Add(SFX.EnemyThrowAttack, SFXList[7]);
 
-        l.Add(f.g, k[0]);
-        l.Add(f.h, k[1]);
+        MusicDictionary.Add(Music.MainMenu, MusicList[0]);
+        MusicDictionary.Add(Music.Level1, MusicList[1]);
 
-        n();
+        GetBuildIndex();
     }
 
 
@@ -74,80 +74,80 @@ public class AudioManager_LouieWilliamson : MonoBehaviour
     {
 
     }
-    private void n()
+    private void GetBuildIndex()
     {
-        int m = SceneManager.GetActiveScene().buildIndex;
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
 
-        switch (m)
+        switch (currentScene)
         {
             case 0:
-                PlayTrack_Jann.Instance.q(AudioFiles.h);
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_MainMenu);
                 // SetMusicSource(Music.MainMenu);
                 break;
             case 1:
-                PlayTrack_Jann.Instance.q(AudioFiles.i);
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level1);
               //  SetMusicSource(Music.Level1);
                 break;
             case 2:
-                PlayTrack_Jann.Instance.q(AudioFiles.i);
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level1);
                 //SetMusicSource(Music.Level1);
                 break;
             case 3:
-                PlayTrack_Jann.Instance.q(AudioFiles.i);
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level1);
                 break;
             case 4:
-                PlayTrack_Jann.Instance.q(AudioFiles.j);
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level2);
                 break;
             case 5:
-                PlayTrack_Jann.Instance.q(AudioFiles.j);
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level2);
                 break;
             case 6:
-                PlayTrack_Jann.Instance.q(AudioFiles.j);
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level2);
                 break;
             case 7:
-                PlayTrack_Jann.Instance.q(AudioFiles.k);
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level3);
                 break;
             case 8:
-                PlayTrack_Jann.Instance.q(AudioFiles.k);
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level3);
                 break;
             case 9:
-                PlayTrack_Jann.Instance.q(AudioFiles.k);
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level3);
                 break;
             case 10:
-                PlayTrack_Jann.Instance.q(AudioFiles.l);
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level4);
                 break;
             case 11:
-                PlayTrack_Jann.Instance.q(AudioFiles.l);
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level4);
                 break;
             case 12:
-                PlayTrack_Jann.Instance.q(AudioFiles.l);
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level4);
                 break;
             case 13:
-                PlayTrack_Jann.Instance.q(AudioFiles.m);
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level5);
                 break;
             case 14:
-                PlayTrack_Jann.Instance.q(AudioFiles.m);
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level5);
                 break;
             case 15:
-                PlayTrack_Jann.Instance.q(AudioFiles.m);
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level5);
                 break;
             case 16:
-                PlayTrack_Jann.Instance.q(AudioFiles.n);
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level6);
                 break;
             case 17:
-                PlayTrack_Jann.Instance.q(AudioFiles.n);
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level6);
                 break;
             case 18:
-                PlayTrack_Jann.Instance.q(AudioFiles.n);
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level6);
                 break;
             case 19:
-                PlayTrack_Jann.Instance.q(AudioFiles.o);
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level7);
                 break;
             case 20:
-                PlayTrack_Jann.Instance.q(AudioFiles.o);
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_Level7);
                 break;
             case 21:
-                PlayTrack_Jann.Instance.q(AudioFiles.h);
+                PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_MainMenu);
                 break;
             default:
                 break;

@@ -20,27 +20,27 @@ using UnityEngine.UI;
 
 public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
 {
-    public Material q;
+    public Material m_swapMaterial;
 
-    public Color w = new Color(0, 0, 0, 1);
-    public Color e = new Color(0, 0, 0, 1);
-    public Color r = new Color(0, 0, 0, 1);
+    public Color m_colorOutGrey60 = new Color(0, 0, 0, 1);
+    public Color m_colorOutGrey122 = new Color(0, 0, 0, 1);
+    public Color m_colorOutGrey174 = new Color(0, 0, 0, 1);
 
-    public y t = y.u;
+    public OriginalColor m_particleColor = OriginalColor.Grey60;
 
     private List<Image> sb = new List<Image>();
     private List<Image> sf = new List<Image>();
 
-    public y o = y.u;
-    public y p = y.a;
+    public OriginalColor m_sliderBackgroundColor = OriginalColor.Grey60;
+    public OriginalColor m_sliderFillColor = OriginalColor.Grey122;
     
-    public y s = y.a;
+    public OriginalColor m_textColor = OriginalColor.Grey122;
 
-    public enum y
+    public enum OriginalColor
     {
-        u = 60,
-        a = 122,
-        d = 174
+        Grey60 = 60,
+        Grey122 = 122,
+        Grey174 = 174
     }
 
     private List<Renderer> rs;
@@ -49,7 +49,7 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
     private List<Text> txts;
 
     private Texture2D cst;
-    public Color[] f;
+    public Color[] m_spriteColors;
 
     void Awake()
     {
@@ -79,25 +79,25 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
 
         cST.Apply();
 
-        q.SetTexture("_SwapTex", cST);
+        m_swapMaterial.SetTexture("_SwapTex", cST);
 
-        f = new Color[cST.width];
+        m_spriteColors = new Color[cST.width];
         cst = cST;
         
-        SC((int) y.u, w);
-        SC((int) y.a, e);
-        SC((int) y.d, r);
+        SC((int) OriginalColor.Grey60, m_colorOutGrey60);
+        SC((int) OriginalColor.Grey122, m_colorOutGrey122);
+        SC((int) OriginalColor.Grey174, m_colorOutGrey174);
         cst.Apply();
     }
 
-    public void g(SpriteRenderer sr)
+    public void UpdateColor(SpriteRenderer sr)
     {
-        sr.material = q;
+        sr.material = m_swapMaterial;
     }
 
     private void SC(int i, Color c)
     {
-        f[i] = c;
+        m_spriteColors[i] = c;
         cst.SetPixel(i, 0, c);
     }
     
@@ -105,38 +105,38 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
     {
         foreach (Renderer rr in rs)
         {
-            rr.material = q;
+            rr.material = m_swapMaterial;
         }
 
         foreach (Image img in sb)
         {
-            img.color = f[(int) o];
+            img.color = m_spriteColors[(int) m_sliderBackgroundColor];
         }
 
         // Set slider color
-        sf.ForEach(i => i.color = f[(int) p]);
-        sb.ForEach(i => i.color = f[(int) o]);
+        sf.ForEach(i => i.color = m_spriteColors[(int) m_sliderFillColor]);
+        sb.ForEach(i => i.color = m_spriteColors[(int) m_sliderBackgroundColor]);
 
         foreach (Image img in imgs)
         {
-            img.material = q;
+            img.material = m_swapMaterial;
         }
 
         foreach (ParticleSystem ps in pss)
         {
             var m = ps.main;
-            m.startColor = f[(int) t];
+            m.startColor = m_spriteColors[(int) m_particleColor];
         }
 
         foreach (Text t in txts)
         {
-            t.color = f[(int) s];
+            t.color = m_spriteColors[(int) m_textColor];
         }
     }
 
-    private void GSI(string h)
+    private void GSI(string gameObjectName)
     {
-        GameObject s = GameObject.Find(h);
+        GameObject s = GameObject.Find(gameObjectName);
         if (s != null)
         {
             sb.Add(s.transform.Find("Background").GetComponent<Image>());

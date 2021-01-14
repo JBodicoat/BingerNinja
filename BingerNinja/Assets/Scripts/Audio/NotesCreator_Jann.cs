@@ -27,9 +27,9 @@ public class NotesCreator_Jann
     private float ph;
     private int cn;
 
-    private Dictionary<q, int> nfs = new Dictionary<q, int>();
+    private Dictionary<Note, int> nfs = new Dictionary<Note, int>();
 
-    public enum q
+    public enum Note
     {
         None = 0, 
         C2, Db2, D2, Eb2, E2, F2, Gb2, G2, Ab2, A2, Bb2, B2, 
@@ -44,25 +44,25 @@ public class NotesCreator_Jann
         GN();
     }
 
-    public int w(q n)
+    public int GetFrequency(Note n)
     {
         return nfs[n];
     }
 
-    public q e(int f)
+    public Note GetNote(int f)
     {
         return nfs.FirstOrDefault(pair => Math.Abs(pair.Value - f) < 0.1f).Key;
     }
     
     private void GN()
     {
-        nfs.Add(q.None, 0);
+        nfs.Add(Note.None, 0);
 
         int i = 0;
         for (int fr = F; fr < T + 1; fr++)
         {
             i++;
-            nfs.Add((q) i, (int) (BF * Mathf.Pow(FR, fr)));
+            nfs.Add((Note) i, (int) (BF * Mathf.Pow(FR, fr)));
         }
     }
 }

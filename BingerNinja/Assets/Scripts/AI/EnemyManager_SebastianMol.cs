@@ -7,18 +7,18 @@ using UnityEngine;
 /// </summary>
 public class EnemyManager_SebastianMol : MonoBehaviour
 {
-    private GameObject[] q;
+    private GameObject[] m_allEnemies;
 
     /// <summary>
     /// is the player seen by any enemy
     /// </summary>
     /// <returns>weather it has been seen by any enemy</returns>
-    public bool w()
+    public bool IsPlayerSeen()
     {
-        for (int i = 0; i < q.Length; i++)
+        for (int i = 0; i < m_allEnemies.Length; i++)
         {
-            q = GameObject.FindGameObjectsWithTag("Enemy");
-            if(q[i].GetComponent<BaseEnemy_SebastianMol>().Q)
+            m_allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+            if(m_allEnemies[i].GetComponent<BaseEnemy_SebastianMol>().m_playerDetected)
             {
                 return true;
             }

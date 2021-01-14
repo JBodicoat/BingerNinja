@@ -25,155 +25,155 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public enum q { w, e, r, t };
-public enum y { u, i, o, p, a, s, d, f, g, h, j, k };
-public enum l { z, x, c, v };
+public enum state { WONDER, CHASE, ATTACK, CURIOUS };
+public enum m_enemyType { NORMAL, CHEF, BARISTA, INTERN, NINJA, BUSSINESMAN, PETTIGER, ALIEN, TIGERBOSS, SPACENINJABOSS, TADASHI, CHEFBOSS };
+public enum m_damageType { MELEE, RANGE, SNEAK, STUN };
 /// <summary>
 ///base class for enemies to inherit from with logic for detection, patrole, movment, stats managment
 /// </summary>
 abstract class BaseEnemy_SebastianMol : MonoBehaviour
 {
-    public Transform b; //start position of the ray cast
-    public Transform n; //secondary rey cast for better detection neer walls
-    public PolygonCollider2D m; // the collder cone used for player detection
-    public bool Q = false; //has the player been detected   
-    public q W = q.w;//current state of teh enemy   
-    public y E;
-    public GameObject R;
-    public GameObject T;
-    public Inventory_JoaoBeijinho Y; 
-    public float U;
+    public Transform m_rayCastStart; //start position of the ray cast
+    public Transform m_rayCastStartBackup; //secondary rey cast for better detection neer walls
+    public PolygonCollider2D m_detectionCollider; // the collder cone used for player detection
+    public bool m_playerDetected = false; //has the player been detected   
+    public state m_currentState = state.WONDER;//current state of teh enemy   
+    public m_enemyType m_currentEnemyType;
+    public GameObject m_questionmark;
+    public GameObject m_excalmationmark;
+    public Inventory_JoaoBeijinho m_inventory; 
+    public float m_notifcaionOffset;
 
-    public GameObject I; // itme that i sdropped when enemie dies
+    public GameObject m_dropItem; // itme that i sdropped when enemie dies
     
-    public float O; //enemy health with getter and setter
+    public float m_health; //enemy health with getter and setter
    
-    public float P; //movment speed
+    public float m_speed; //movment speed
 
 
     
-    public bool A = false;
+    public bool showPath = false;
   
-    public Tilemap S;
+    public Tilemap floortilemap;
  
-    public Transform[] D;
+    public Transform[] m_patrolPoints;
    
-    public float F;
+    public float m_playerMoveAllowance;
     
-    public float G;
+    public float m_deleyBetweenPatrol;
    
-    public bool H;
+    public bool m_dosePatrole;
     
-    public float J;
+    public float m_outOfSightDeley;
     
-    private float K = 0.5f;
+    private float m_lookLeftAndRightTimer = 0.5f;
 
     
-    public float L;
+    public float m_sneakDamageMultiplier;
     
-    public float Z;
+    public float m_sneakDamageMultiplierStack;
    
-    public float X;
-    public float C = 1f;
+    public float m_attackRange;
+    public float m_attckRangeDevider = 1f;
     
-    public float V = 2;
+    public float m_tiggerBossLooseTargetDistance = 2;
 
     
-    public float B = 0.3f;
+    public float m_secondPhaseStartPercentage = 0.3f;
    
-    public float N = 3;
+    public float m_amountOfStunWhenPlayerStealthed = 3;
    
-    public bool M = true;
+    public bool m_doseAffect = true;
     
-    public float qq = 1.5f;
+    public float m_attackSpeedIncrease = 1.5f;
 
-    internal float qw; //max amount of health an enemy has
+    internal float m_maxHealth; //max amount of health an enemy has
 
-    private Pathfinder_SebastianMol qe;
-    protected List<Vector2Int> qr = new List<Vector2Int>();
-    protected Transform qt; //used to get player position can be null if undedteceted
-    protected float qy; //player scale at start
-    private Vector3 qu; //the last position the enemy was at
-    protected Vector3 qi;//the starting position of the enemy
-    protected float qo; //timer for attack deley
-    protected float qp; //timer for line of sight check
-    protected int qa = 0; //iterated through patrole points
-    protected float qs;
-    private int qd; //the max for teh iterator so it dosent go out of range  
-    private float qf; // timer for waiting at each patrole pos
-    private Transform qg; //the current patrole pos were haeding to / are at 
-    private Vector3 qh; //last given to the path finder to find a path e.g. player position
-    protected bool qj = false; //used to stunn the enemy
-    private float qk; //used to remeber m_lookLeftAndRightTimer varaibale at the start for later resents
-    private bool ql = false; // if the enemy serching for player
-    private Vector3 qz;  //the point of curiosity for an enemy to cheak
-    protected int qx = 1; //the phase tadashi is on
+    private Pathfinder_SebastianMol m_pathfinder;
+    protected List<Vector2Int> m_currentPath = new List<Vector2Int>();
+    protected Transform m_playerTransform; //used to get player position can be null if undedteceted
+    protected float m_scale; //player scale at start
+    private Vector3 m_lastPos; //the last position the enemy was at
+    protected Vector3 m_startPos;//the starting position of the enemy
+    protected float m_attackTimer; //timer for attack deley
+    protected float m_outOfSightTimer; //timer for line of sight check
+    protected int m_patrolIterator = 0; //iterated through patrole points
+    protected float m_maxAttackRange;
+    private int m_patrolIteratorMax; //the max for teh iterator so it dosent go out of range  
+    private float m_patroleTimer; // timer for waiting at each patrole pos
+    private Transform m_currentPatrolePos; //the current patrole pos were haeding to / are at 
+    private Vector3 m_lastPathFinfToPos; //last given to the path finder to find a path e.g. player position
+    protected bool m_isStuned = false; //used to stunn the enemy
+    private float m_lookLeftAndRightTimerMax; //used to remeber m_lookLeftAndRightTimer varaibale at the start for later resents
+    private bool m_isSerching = false; // if the enemy serching for player
+    private Vector3 m_curiousTarget;  //the point of curiosity for an enemy to cheak
+    protected int m_tadashiPhase = 1; //the phase tadashi is on
 
 
-    private HitEffectElliott qc;
-    private CameraShakeElliott qv;
-    protected bool qb = false;
-    private PlayerSpoted_Elliott qn;
+    private HitEffectElliott m_HitEffectElliott;
+    private CameraShakeElliott m_cameraShake;
+    protected bool m_showquestionMarkonce = false;
+    private PlayerSpoted_Elliott playerSpoted_Elliott;
     
 
-    protected PlayerStealth_JoaoBeijinho qm;
-    private int QQ = 1 << 8;
+    protected PlayerStealth_JoaoBeijinho m_playerStealthScript;
+    private int m_crouchObjectLayer = 1 << 8;
     /// <summary>
     /// abstract class used to provied the logic for the wonder state
     /// </summary>
-    private void QW()
+    private void WonderState()
     {
-        if (H)
+        if (m_dosePatrole)
         {
-            QE();
+            Patrol();
         }
         else
         {
-            m.enabled = true;
-            if (Vector2.Distance(transform.position, qi) > 0.5f)
+            m_detectionCollider.enabled = true;
+            if (Vector2.Distance(transform.position, m_startPos) > 0.5f)
             {
-                QR(qi);
+                PathfindTo(m_startPos);
             }
 
-            if(Vector2.Distance(transform.position, qi) <= 0.5f) transform.localScale = new Vector3(qy, transform.localScale.y, transform.localScale.z);
+            if(Vector2.Distance(transform.position, m_startPos) <= 0.5f) transform.localScale = new Vector3(m_scale, transform.localScale.y, transform.localScale.z);
 
         }
-        qb = false;
+        m_showquestionMarkonce = false;
     }
 
     /// <summary>
     /// abstract class used to provied the logic for the chase state
     /// </summary>
-    private void QT()
+    private void ChaseState()
     {
-        if (QY()) // if you can see player
+        if (IsPlayerInLineOfSight()) // if you can see player
         {
-            if (Vector2.Distance(transform.position, qt.position) < X / C) //if the player is in range
+            if (Vector2.Distance(transform.position, m_playerTransform.position) < m_attackRange / m_attckRangeDevider) //if the player is in range
             {
-                QU(false);
-                W = q.r;
+                ClearPath(false);
+                m_currentState = state.ATTACK;
             }
             else// if the player is out fo range
             {
-                QR(qt.position);
+                PathfindTo(m_playerTransform.position);
             }
         }
         else
         {
-            QI();
-            ql = true;
-            if (qr.Count == 0)
+            OnceLostContactEffect();
+            m_isSerching = true;
+            if (m_currentPath.Count == 0)
             {
-                if (qp <= 0)
+                if (m_outOfSightTimer <= 0)
                 {
-                    ql = false;
-                    W = q.w;
-                    Q = false;
+                    m_isSerching = false;
+                    m_currentState = state.WONDER;
+                    m_playerDetected = false;
                 }
                 else
                 {
-                    QO();
-                    qp -= Time.deltaTime;
+                    LookLeftAndRight();
+                    m_outOfSightTimer -= Time.deltaTime;
                 }
             }
         }
@@ -182,59 +182,59 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <summary>
     /// contains logic for when the enemy is serching for the player it looks left and right every half second
     /// </summary>
-    private void QO()
+    private void LookLeftAndRight()
     {
-        if(K <= 0)
+        if(m_lookLeftAndRightTimer <= 0)
         {
             if(transform.localScale.x > 0)
             {
-                transform.localScale = new Vector3(-qy, transform.localScale.y, transform.localScale.z);
+                transform.localScale = new Vector3(-m_scale, transform.localScale.y, transform.localScale.z);
             }
             else
             {
-                transform.localScale = new Vector3(qy, transform.localScale.y, transform.localScale.z);
+                transform.localScale = new Vector3(m_scale, transform.localScale.y, transform.localScale.z);
             }
-            K = qk;
+            m_lookLeftAndRightTimer = m_lookLeftAndRightTimerMax;
         }
         else
         {
-            K -= Time.deltaTime;
+            m_lookLeftAndRightTimer -= Time.deltaTime;
         }
     }
 
     /// <summary>
     /// abstract class used to provied the logic for the attack state
     /// </summary>
-    abstract internal void QP();
+    abstract internal void AttackBehaviour();
 
-    private void QA()
+    private void AttackState()
     {
-        if (QY())
+        if (IsPlayerInLineOfSight())
         {
-            if (Vector2.Distance(transform.position, qt.position) < X)
+            if (Vector2.Distance(transform.position, m_playerTransform.position) < m_attackRange)
             {
-                QP();
+                AttackBehaviour();
 
             }
             else
             {
-                W = q.e;
+                m_currentState = state.CHASE;
             }
 
-            qp = J;
-            Q = true;
+            m_outOfSightTimer = m_outOfSightDeley;
+            m_playerDetected = true;
 
         }
         else
         {
-            Q = false;
-            if (qp <= 0)
+            m_playerDetected = false;
+            if (m_outOfSightTimer <= 0)
             {
-                W = q.w;
+                m_currentState = state.WONDER;
             }
             else
             {
-                qp -= Time.deltaTime;
+                m_outOfSightTimer -= Time.deltaTime;
             }
         }
     }
@@ -242,39 +242,39 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <summary>
     /// a state that occurs when enemy is forced to look at a specific location
     /// </summary>
-    private void QS()
+    private void CuriousState()
     {
-        if (Vector2.Distance( transform.position, qz) < 1 ) 
-        if (qp <= 0)
+        if (Vector2.Distance( transform.position, m_curiousTarget) < 1 ) 
+        if (m_outOfSightTimer <= 0)
         {
-            W = q.w;
-            qp = J;
+            m_currentState = state.WONDER;
+            m_outOfSightTimer = m_outOfSightDeley;
         }
         else
         {
-            qp -= Time.deltaTime;
-            QI();
+            m_outOfSightTimer -= Time.deltaTime;
+            OnceLostContactEffect();
         }
     }
 
     /// <summary>
     /// contains the switch that stores the dofferent behavoiurs the enemy dose in each state
     /// </summary>
-    private void QD()
+    private void AILogic()
     {
-        switch (W)
+        switch (m_currentState)
         {
-            case q.w:
-                QW();
+            case state.WONDER:
+                WonderState();
                 break;
-            case q.e:
-                QT();
+            case state.CHASE:
+                ChaseState();
                 break;
-            case q.r:
-                QA();
+            case state.ATTACK:
+                AttackState();
                 break;
-            case q.t:
-                QS();
+            case state.CURIOUS:
+                CuriousState();
                 break;
         }
     }
@@ -283,24 +283,24 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <summary>
     /// detect player in vision cone the establishes line of sight
     /// </summary>
-    /// <param name="QH"> the collion date from the onTrigger functions</param>
-    protected void QF(GameObject QH)
+    /// <param name="collision"> the collion date from the onTrigger functions</param>
+    protected void PlayerDetection(GameObject collision)
     {
-        if(QH.CompareTag("Player")) // is it a the player 
+        if(collision.CompareTag("Player")) // is it a the player 
         {
 
-            PlayerStealth_JoaoBeijinho QG = QH.GetComponent<PlayerStealth_JoaoBeijinho>();
+            PlayerStealth_JoaoBeijinho playerStealth = collision.GetComponent<PlayerStealth_JoaoBeijinho>();
 
-            if (E == y.d)
+            if (m_currentEnemyType == m_enemyType.PETTIGER)
             {
-                if(!QG.QJ())
+                if(!playerStealth.IsinVent())
                 {
-                    QK(QH);
+                    PlayerDetectionRaycasLogic(collision);
                 }          
             }
-            else if(!QG.QL()) //is the player in stealth/
+            else if(!playerStealth.IsStealthed()) //is the player in stealth/
             {
-                QK(QH);
+                PlayerDetectionRaycasLogic(collision);
             }
         }
     }
@@ -308,27 +308,28 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <summary>
     /// holds the logic for casting a ray when the player is first detected
     /// </summary>
-    /// <param name="QL"> a collsion that is checked to see if it is the player</param>
-    private void QK(GameObject QL)
+    /// <param name="col"> a collsion that is checked to see if it is the player</param>
+    private void PlayerDetectionRaycasLogic(GameObject col)
     {
-        m.enabled = false;
-        RaycastHit2D QZ = Physics2D.Linecast(b.position, QL.transform.position);
+        m_detectionCollider.enabled = false;
+        RaycastHit2D hit = Physics2D.Linecast(m_rayCastStart.position, col.transform.position);
+        Debug.DrawLine(m_rayCastStart.position, col.transform.position, Color.red);
 
         //RaycastHit2D crouchedHit = Physics2D.Linecast(m_rayCastStart.position, col.transform.position);
         //Debug.DrawLine(m_rayCastStart.position, col.transform.position, Color.green);
 
-        if (!qm.QX() && QZ.collider.gameObject.CompareTag(Tags_JoaoBeijinho.QC)) //player is not crouched and it hits him
+        if (!m_playerStealthScript.IsCrouched() && hit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag)) //player is not crouched and it hits him
         {
             //  m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Detection);
-            Q = true;
-            qt = QZ.transform;
-            W = q.r;
-            QV();
-            QU();
+            m_playerDetected = true;
+            m_playerTransform = hit.transform;
+            m_currentState = state.ATTACK;
+            NoticePlayerEffect();
+            ClearPath();
         }
         else
         {
-            m.enabled = true;
+            m_detectionCollider.enabled = true;
         }
         //else if (m_playerStealthScript.IsCrouched() && crouchedHit.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag)) //player is croucheed and it hits 
         //{
@@ -350,32 +351,33 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// returns waeether the player is in line of sight of the enemy
     /// </summary>
     /// <returns>weather the player is in line of sight</returns>
-    protected bool QY()
+    protected bool IsPlayerInLineOfSight()
     {
-        if (qt)
+        if (m_playerTransform)
         {
-            m.enabled = false;
-            RaycastHit2D QB = Physics2D.Linecast(b.position, qt.position);
+            m_detectionCollider.enabled = false;
+            RaycastHit2D hit = Physics2D.Linecast(m_rayCastStart.position, m_playerTransform.position);
+            Debug.DrawLine(m_rayCastStart.position, m_playerTransform.position, Color.red);
 
-            if (QB.collider.gameObject.CompareTag("Player"))
+            if (hit.collider.gameObject.CompareTag("Player"))
             {
-                m.enabled = false;
+                m_detectionCollider.enabled = false;
                 return true;
             }
             else
             {
 
-                RaycastHit2D QN = Physics2D.Linecast(n.position, qt.position);
+                RaycastHit2D hitTwo = Physics2D.Linecast(m_rayCastStartBackup.position, m_playerTransform.position);
+                Debug.DrawLine(m_rayCastStartBackup.position, m_playerTransform.position, Color.red);
 
-
-                if (QN.collider.gameObject.CompareTag("Player"))
+                if (hitTwo.collider.gameObject.CompareTag("Player"))
                 {
-                    m.enabled = false;
+                    m_detectionCollider.enabled = false;
                     return true;
                 }
                 else
                 {
-                    m.enabled = true;
+                    m_detectionCollider.enabled = true;
                     return false;
                 }
             }
@@ -388,19 +390,19 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <summary>
     /// set the position to move to in world coords
     /// </summary>
-    /// <param name="WQ">the destination of the enemy</param>
-    protected void QM(Vector3 WQ)
+    /// <param name="destentaion">the destination of the enemy</param>
+    protected void MoveToWorldPos(Vector3 destentaion)
     {
-        Vector2Int WW = (Vector2Int)qe.WE.WorldToCell(transform.position);
-        Vector2Int WR = (Vector2Int)qe.WE.WorldToCell(WQ);
-        qr = qe.k(WW, WR);
+        Vector2Int tileMapSpaceStart = (Vector2Int)m_pathfinder.m_tileMap.WorldToCell(transform.position);
+        Vector2Int tileMapSpaceTarget = (Vector2Int)m_pathfinder.m_tileMap.WorldToCell(destentaion);
+        m_currentPath = m_pathfinder.PathFind(tileMapSpaceStart, tileMapSpaceTarget);
 
-        if(A)
+        if(showPath)
         {
-            for (int i = 0; i < qr.Count; i++)
+            for (int i = 0; i < m_currentPath.Count; i++)
             {
-                S.SetTileFlags(new Vector3Int(qr[i].x, qr[i].y, 0), TileFlags.None);
-                S.SetColor(new Vector3Int(qr[i].x, qr[i].y, 0), Color.green);
+                floortilemap.SetTileFlags(new Vector3Int(m_currentPath[i].x, m_currentPath[i].y, 0), TileFlags.None);
+                floortilemap.SetColor(new Vector3Int(m_currentPath[i].x, m_currentPath[i].y, 0), Color.green);
                 //Debug.Log(floortilemap.GetCellCenterWorld(new Vector3Int(m_currentPath[i].x, m_currentPath[i].y, 0)));
             }
         }
@@ -409,31 +411,31 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <summary>
     /// make the enemy follow the path it has created
     /// </summary>
-    protected void WT()
+    protected void FollowPath()
     {
-        if (qr.Count == 0) return;//skip check
+        if (m_currentPath.Count == 0) return;//skip check
 
-        float WY = P * Time.deltaTime; //movment allowed this frame
+        float movementLeftOver = m_speed * Time.deltaTime; //movment allowed this frame
 
-        while (WY > 0)
+        while (movementLeftOver > 0)
         {
             //gets the center of the target tile
-            Vector2 WU = (Vector2)qe.WE.CellToWorld(new Vector3Int( qr[0].x, qr[0].y, 0)) + ((Vector2)qe.WE.cellSize / 2);
-            WU += new Vector2(-0.5f, 0);
-            float WI = Vector2.Distance(transform.position, WU); //distance to the target tile center               
+            Vector2 targetTileCenter = (Vector2)m_pathfinder.m_tileMap.CellToWorld(new Vector3Int( m_currentPath[0].x, m_currentPath[0].y, 0)) + ((Vector2)m_pathfinder.m_tileMap.cellSize / 2);
+            targetTileCenter += new Vector2(-0.5f, 0);
+            float distance = Vector2.Distance(transform.position, targetTileCenter); //distance to the target tile center               
                
-            if (WI > WY)//if all movment is used up in one move
+            if (distance > movementLeftOver)//if all movment is used up in one move
             {
-                transform.position = Vector2.MoveTowards(transform.position, WU, WY);//move
-                WY = 0;
+                transform.position = Vector2.MoveTowards(transform.position, targetTileCenter, movementLeftOver);//move
+                movementLeftOver = 0;
             }
             else //if theres movment left over after the next tile
             {
-                transform.position = Vector2.MoveTowards(transform.position, WU, WI);//move
-                WY -= WI;
-                if (A) S.SetColor(new Vector3Int(qr[0].x, qr[0].y, 0), Color.white);
-                qr.RemoveAt(0);
-                if (qr.Count == 0) break;
+                transform.position = Vector2.MoveTowards(transform.position, targetTileCenter, distance);//move
+                movementLeftOver -= distance;
+                if (showPath) floortilemap.SetColor(new Vector3Int(m_currentPath[0].x, m_currentPath[0].y, 0), Color.white);
+                m_currentPath.RemoveAt(0);
+                if (m_currentPath.Count == 0) break;
             }            
         }
     }
@@ -441,60 +443,60 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <summary>
     /// clears the path and optionaly adds one last step to center the enemy
     /// </summary>
-    /// <param name="WO">desides weather to center the enemy at the end of the path</param>
-    protected void QU(bool WO = true) // use this to stop walking
+    /// <param name="goBackToCenter">desides weather to center the enemy at the end of the path</param>
+    protected void ClearPath(bool goBackToCenter = true) // use this to stop walking
     {
-        if (A)
+        if (showPath)
         {
-            for (int i = 0; i < qr.Count; i++)
+            for (int i = 0; i < m_currentPath.Count; i++)
             {
-                S.SetColor(new Vector3Int(qr[i].x, qr[i].y, 0), Color.white);
+                floortilemap.SetColor(new Vector3Int(m_currentPath[i].x, m_currentPath[i].y, 0), Color.white);
             }
         }
-        qr.Clear();
-        if(WO) qr.Add((Vector2Int)qe.WE.WorldToCell(transform.position));
-        qh = Vector3.zero;
+        m_currentPath.Clear();
+        if(goBackToCenter) m_currentPath.Add((Vector2Int)m_pathfinder.m_tileMap.WorldToCell(transform.position));
+        m_lastPathFinfToPos = Vector3.zero;
     }
 
     /// <summary>
     /// holds logic for patrole functtionality.
     /// </summary>
-    protected void QE()
+    protected void Patrol()
     {
-        if (qg == null) return;
+        if (m_currentPatrolePos == null) return;
         //not sure what this dose might be a bit late at night, maybe initilaziation???? it just works
-        if (qg.position.x == 0 && qg.position.y == 0) qg = D[0];
+        if (m_currentPatrolePos.position.x == 0 && m_currentPatrolePos.position.y == 0) m_currentPatrolePos = m_patrolPoints[0];
         //if theres no were to go go to the first patrole point
-        if (qr.Count == 0) QM(D[qa].position);
+        if (m_currentPath.Count == 0) MoveToWorldPos(m_patrolPoints[m_patrolIterator].position);
         //if close neough to the next patrole point start to swap patrole points
-        if (Vector2.Distance(transform.position, D[qa].position) <= 0.4f) WP();
+        if (Vector2.Distance(transform.position, m_patrolPoints[m_patrolIterator].position) <= 0.4f) SwapPatrolPoints();
         //start the patrole
-        WT();
+        FollowPath();
     }
 
     /// <summary>
     /// loops through a list of patrole points to set the enemies next destination
     /// </summary>
-    protected void WP()
+    protected void SwapPatrolPoints()
     {
-        if(D.Length > 0) //are there any patrole points
+        if(m_patrolPoints.Length > 0) //are there any patrole points
         {
-            if (qf <= 0) //if the timer has reached 0 start the swap
+            if (m_patroleTimer <= 0) //if the timer has reached 0 start the swap
             {
-                if (qa == qd) // see if the itterator is at its limit
+                if (m_patrolIterator == m_patrolIteratorMax) // see if the itterator is at its limit
                 {
-                    qa = 0; //set to first iteration
-                    qg = D[qa]; //move to destination
+                    m_patrolIterator = 0; //set to first iteration
+                    m_currentPatrolePos = m_patrolPoints[m_patrolIterator]; //move to destination
                 }
                 else// else go through the list 
                 {
-                    qg = D[++qa];
+                    m_currentPatrolePos = m_patrolPoints[++m_patrolIterator];
                 }
-                qf = G; //reset the timer
+                m_patroleTimer = m_deleyBetweenPatrol; //reset the timer
             }
             else
             {
-                qf -= Time.deltaTime;
+                m_patroleTimer -= Time.deltaTime;
             }
         }
     }
@@ -503,361 +505,364 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// used to move the player
     /// </summary>
     /// <param name="pos">where you wnaty the player to be moved</param>
-    protected void QR(Vector3 pos)
+    protected void PathfindTo(Vector3 pos)
     {
-        if (qr.Count == 0)
+        if (m_currentPath.Count == 0)
         {
-            QM(pos);
+            MoveToWorldPos(pos);
         }
 
-        if (qh == Vector3.zero) // if there hasent been an old pos 
+        if (m_lastPathFinfToPos == Vector3.zero) // if there hasent been an old pos 
         {
-            qh = pos;
+            m_lastPathFinfToPos = pos;
         }
 
-        if (Vector2.Distance(qh, pos) > F) //if players old pos is a distance away to his new pos go to new pos
+        if (Vector2.Distance(m_lastPathFinfToPos, pos) > m_playerMoveAllowance) //if players old pos is a distance away to his new pos go to new pos
         {
-            QU();
-            QM(pos);
+            ClearPath();
+            MoveToWorldPos(pos);
         } 
         
-        WT();
+        FollowPath();
     }
 
 
     /// <summary>
     /// actions that happen before enemy death.
     /// </summary>
-    public void WA() 
+    public void OnDeath() 
     {
-        if(O <= 0)
+        if(m_health <= 0)
         {
-            PlayTrack_Jann.Instance.WS(AudioFiles.c);
-            if (I)
+            PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_Damage);
+            if (m_dropItem)
             {
-                Instantiate(I, transform.position, Quaternion.identity);
+                Instantiate(m_dropItem, transform.position, Quaternion.identity);
             }
             gameObject.SetActive(false);
-            Y.WD();
+            m_inventory.CheckDeadEnemies();
         }    
     }
 
     /// <summary>
     /// controls the scale of the enemy based on player or direction
     /// </summary>
-    protected void WF()
+    protected void SwapDirections()
     {
-        if(!ql)
-        if(Q)
+        if(!m_isSerching)
+        if(m_playerDetected)
         {
-            if(qt.position.x > transform.position.x)
+            if(m_playerTransform.position.x > transform.position.x)
             {
-                transform.localScale = new Vector3( -qy, transform.localScale.y, transform.localScale.z);
+                transform.localScale = new Vector3( -m_scale, transform.localScale.y, transform.localScale.z);
             }
             else
             {
-                transform.localScale = new Vector3(qy, transform.localScale.y, transform.localScale.z);
+                transform.localScale = new Vector3(m_scale, transform.localScale.y, transform.localScale.z);
             }
 
         }
         else
         {
-            if(qu.x > transform.position.x)
+            if(m_lastPos.x > transform.position.x)
             {
-                transform.localScale = new Vector3(qy, transform.localScale.y, transform.localScale.z);
+                transform.localScale = new Vector3(m_scale, transform.localScale.y, transform.localScale.z);
             }
-            else if(qu.x < transform.position.x)
+            else if(m_lastPos.x < transform.position.x)
             {
-                transform.localScale = new Vector3(-qy, transform.localScale.y, transform.localScale.z);
+                transform.localScale = new Vector3(-m_scale, transform.localScale.y, transform.localScale.z);
             }
-            qu = transform.position;
+            m_lastPos = transform.position;
         }
     }
 
     /// <summary>
     /// used to apply correct damage amaount and type based on enemy type
     /// </summary>
-    /// <param name="WH">what type of damage e.g. melee</param>
-    /// <param name="WJ">amount of damage</param>
-    public void WG(l WH, float WJ)
+    /// <param name="damageType">what type of damage e.g. melee</param>
+    /// <param name="damage">amount of damage</param>
+    public void TakeDamage(m_damageType damageType, float damage)
     {
         
-        switch (E)
+        switch (m_currentEnemyType)
         {
-            case y.u:
-                WK(WJ);
+            case m_enemyType.NORMAL:
+                NormalTakeDamage(damage);
                 break;
 
-            case y.i:
-                if (WH == l.z)
+            case m_enemyType.CHEF:
+                if (damageType == m_damageType.MELEE)
                 {
-                    WK(WJ * 1.5f);
+                    NormalTakeDamage(damage * 1.5f);
                 }
                 else
                 {
-                    WK(WJ);
+                    NormalTakeDamage(damage);
                 }   
                 break;
 
-            case y.k:
+            case m_enemyType.CHEFBOSS:
 
                 break;
 
-            case y.o:
-                if(qt.position.x < transform.position.x) //player on the left
+            case m_enemyType.BARISTA:
+                if(m_playerTransform.position.x < transform.position.x) //player on the left
                 {
-                    if(transform.localScale.x < 0) WK(WJ); //looking left
+                    if(transform.localScale.x < 0) NormalTakeDamage(damage); //looking left
                 }
-                else if(qt.position.x > transform.position.x) //player on the right
+                else if(m_playerTransform.position.x > transform.position.x) //player on the right
                 {
-                    if (transform.localScale.x > 0) WK(WJ); //looking right
+                    if (transform.localScale.x > 0) NormalTakeDamage(damage); //looking right
                 }
                 else
                 {
-                    WK(WJ*0.25f);
+                    NormalTakeDamage(damage*0.25f);
                 }
                 break;
 
-            case y.a:
+            case m_enemyType.NINJA:
                 //half damage melle when not sneaked
-                if (WH == l.z)
+                if (damageType == m_damageType.MELEE)
                 {
-                    if(Q == false) // in stealth
+                    if(m_playerDetected == false) // in stealth
                     {
-                        WK(WJ); // normal melle stealth attack
+                        NormalTakeDamage(damage); // normal melle stealth attack
                     }
                     else // not stealth 
                     {
-                        WK(WJ * 0.5f); //half damage stealth atatck
+                        NormalTakeDamage(damage * 0.5f); //half damage stealth atatck
                     }                  
                 }
                 else
                 {
-                    WK(WJ); // normal
+                    NormalTakeDamage(damage); // normal
                 }
                 break;
 
-            case y.s:
-            case y.p:
+            case m_enemyType.BUSSINESMAN:
+            case m_enemyType.INTERN:
                 //sneak multiplier
-                if (Q == false)
+                Debug.Log(m_playerDetected);
+                if (m_playerDetected == false)
                 {
-                    O -= WJ * (L + Z);
-                    qc.WL(true);
+                    m_health -= damage * (m_sneakDamageMultiplier + m_sneakDamageMultiplierStack);
+                    m_HitEffectElliott.StartHitEffect(true);
 
                 }
                 else
                 {
-                    O -= WJ;
-                    qc.WL(false);
+                    m_health -= damage;
+                    m_HitEffectElliott.StartHitEffect(false);
 
                 }
                 break;
 
-            case y.h:             
-                if ((O / qw) <= B) //second fase
+            case m_enemyType.SPACENINJABOSS:             
+                if ((m_health / m_maxHealth) <= m_secondPhaseStartPercentage) //second fase
                 {
-                    WK(WJ);
-                    qo *= qq;
-                    M = false;
-                    Z = 0;
+                    NormalTakeDamage(damage);
+                    m_attackTimer *= m_attackSpeedIncrease;
+                    m_doseAffect = false;
+                    m_sneakDamageMultiplierStack = 0;
                 }
                 else
                 {
                      //sneak multiplier
-                    if (Q == false)
+                    if (m_playerDetected == false)
                     {
-                        O -= WJ * (L + Z);
-                        qc.WL(true);
+                        m_health -= damage * (m_sneakDamageMultiplier + m_sneakDamageMultiplierStack);
+                        m_HitEffectElliott.StartHitEffect(true);
                     }
                     else
                     {
-                        O -= WJ;
-                        qc.WL(false);
+                        m_health -= damage;
+                        m_HitEffectElliott.StartHitEffect(false);
                     }
                 }
                 break;
 
-            case y.j:
-                float WZ = O / qw;
-                if (WZ > 0.6f)
+            case m_enemyType.TADASHI:
+                float healthPercentage = m_health / m_maxHealth;
+                if (healthPercentage > 0.6f)
                 {
-                    qx = 1;
-                    WK(WJ);
+                    m_tadashiPhase = 1;
+                    NormalTakeDamage(damage);
                 }
-                else if( WZ > 0.3f)
+                else if( healthPercentage > 0.3f)
                 {
-                    qx = 2;
-                    O -= WJ;
+                    m_tadashiPhase = 2;
+                    m_health -= damage;
                 }
                 else//health below 30
                 {
-                    qx = 3;
-                    O -= WJ;
+                    m_tadashiPhase = 3;
+                    m_health -= damage;
                 }
 
                 break;
 
             default:
-                WK(WJ);
+                NormalTakeDamage(damage);
                 break;
 
         }
 
-        W = q.e;
+        m_currentState = state.CHASE;
 
-        WA();//checks to see if enemy is dead 
+        OnDeath();//checks to see if enemy is dead 
     }
 
     /// <summary>
     /// stop the enemys movment and attack, makes it look liek enemy ios tsunned but can stil be damaged
     /// </summary>
-    private void WX()
+    private void StunEnemyToggle()
     {
-        qj = !qj;
+        m_isStuned = !m_isStuned;
     }
 
     /// <summary>
     /// stund the enemy for an amount of time in seconds
     /// </summary>
-    /// <param name="WV"> the amaount of time the enemy is stunend for</param>
+    /// <param name="amountOfTime"> the amaount of time the enemy is stunend for</param>
     /// <returns></returns>
-    public IEnumerator WC(float WV)
+    public IEnumerator StunEnemyWithDeley(float amountOfTime)
     {
-        WX();
-        yield return new WaitForSeconds(WV);
-        WX();
+        StunEnemyToggle();
+        yield return new WaitForSeconds(amountOfTime);
+        StunEnemyToggle();
     }
 
     /// <summary>
     /// for use with distraction projectile to stun enemies
     /// </summary>
-    /// <param name="WN">amaount of time to stun in seconds</param>
-    public void WB(float WN)
+    /// <param name="amaountOfTime">amaount of time to stun in seconds</param>
+    public void StunEnemyWithDeleyFunc(float amaountOfTime)
     {
-        if(E != y.f) StartCoroutine(WC(WN));
+        if(m_currentEnemyType != m_enemyType.ALIEN) StartCoroutine(StunEnemyWithDeley(amaountOfTime));
     }
 
     /// <summary>
     /// for use with ligths to stun enemies
     /// </summary>
-    /// <param name="EQ">amaount of time to stun in seconds</param>
-    public void WM(float EQ)
+    /// <param name="amaountOfTime">amaount of time to stun in seconds</param>
+    public void StunEnemyWithLightsDeleyFunc(float amaountOfTime)
     {
-        StartCoroutine(WC(EQ));
+        StartCoroutine(StunEnemyWithDeley(amaountOfTime));
     }
 
     /// <summary>
     /// normal way of enemy takign damage
     /// </summary>
-    /// <param name="EW">amount of damage</param>
-    private void WK( float EW )
+    /// <param name="damage">amount of damage</param>
+    private void NormalTakeDamage( float damage )
     {
-        if (Q == false) //if sneak damage
+        if (m_playerDetected == false) //if sneak damage
         {
-            O -= EW * L;
-            qv.EE();
-            qc.WL(true);
-            Y.GiveItem(ItemType.NinjaPoints, 1);
+            m_health -= damage * m_sneakDamageMultiplier;
+            m_cameraShake.StartShake();
+            m_HitEffectElliott.StartHitEffect(true);
+            m_inventory.GiveItem(ItemType.NinjaPoints, 1);
         }
         else
         {
-            O -= EW;
-            qc.WL(false);
+            m_health -= damage;
+            m_HitEffectElliott.StartHitEffect(false);
         }
     }
 
     /// <summary>
     /// forse enemy to look at a certain position and serch for the player
     /// </summary>
-    /// <param name="ET">the postion that you want the enemy to search</param>
-    public void ER(Vector3 ET)
+    /// <param name="pos">the postion that you want the enemy to search</param>
+    public void ForceCuriosity(Vector3 pos)
     {
-        QU(false);
-        W = q.t;
-        qz = ET;
-        QR(qz);
+        ClearPath(false);
+        m_currentState = state.CURIOUS;
+        m_curiousTarget = pos;
+        PathfindTo(m_curiousTarget);
     }
 
     /// <summary>
     /// effect that happens when enemy noticese the player
     /// </summary>
-    public void QV()
+    public void NoticePlayerEffect()
     {
-       GameObject EY = Instantiate(T, new Vector3(transform.position.x,transform.position.y + U,transform.position.z), Quaternion.identity);
-        EY.transform.parent = transform;
+       Debug.Log("!");
+       GameObject excalm = Instantiate(m_excalmationmark, new Vector3(transform.position.x,transform.position.y + m_notifcaionOffset,transform.position.z), Quaternion.identity);
+        excalm.transform.parent = transform;
         
     }
 
-    public void QI()
+    public void OnceLostContactEffect()
     {
-        if (!qb)
+        if (!m_showquestionMarkonce)
         {
-            GameObject A = Instantiate(R, new Vector3(transform.position.x, transform.position.y + U, transform.position.z), Quaternion.identity);
+            Debug.Log("?");
+            GameObject A = Instantiate(m_questionmark, new Vector3(transform.position.x, transform.position.y + m_notifcaionOffset, transform.position.z), Quaternion.identity);
             A.transform.parent = transform;
-            qb = true;
+            m_showquestionMarkonce = true;
            
         }
     }
 
-    public void EU()
+    public void ForceLooseIntrest()
     {
-        transform.position = qi;
-        ql = false;
-        W = q.w;
-        Q = false;
-        qp = J;
-        QI();
+        transform.position = m_startPos;
+        m_isSerching = false;
+        m_currentState = state.WONDER;
+        m_playerDetected = false;
+        m_outOfSightTimer = m_outOfSightDeley;
+        OnceLostContactEffect();
     }
 
 
     private void Start()
     {
-        qe = GameObject.FindObjectOfType<Pathfinder_SebastianMol>();
-        qy = transform.localScale.x;
-        qu = transform.position;
-        qi = transform.position;
-        qd = D.Length-1;
-        qf = G;
-        if (D.Length > 0) qg = D[0];
-        qk = K;
-        qw = O;
-        qp = J;
-        qs = X;
+        m_pathfinder = GameObject.FindObjectOfType<Pathfinder_SebastianMol>();
+        m_scale = transform.localScale.x;
+        m_lastPos = transform.position;
+        m_startPos = transform.position;
+        m_patrolIteratorMax = m_patrolPoints.Length-1;
+        m_patroleTimer = m_deleyBetweenPatrol;
+        if (m_patrolPoints.Length > 0) m_currentPatrolePos = m_patrolPoints[0];
+        m_lookLeftAndRightTimerMax = m_lookLeftAndRightTimer;
+        m_maxHealth = m_health;
+        m_outOfSightTimer = m_outOfSightDeley;
+        m_maxAttackRange = m_attackRange;
 
-        Y = GameObject.Find("Player").GetComponent<Inventory_JoaoBeijinho>();
-        qm = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
-        qc = GetComponent<HitEffectElliott>();
-        qv = Camera.main.GetComponent<CameraShakeElliott>();
+        m_inventory = GameObject.Find("Player").GetComponent<Inventory_JoaoBeijinho>();
+        m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
+        m_HitEffectElliott = GetComponent<HitEffectElliott>();
+        m_cameraShake = Camera.main.GetComponent<CameraShakeElliott>();
     }
 
     private void Update()
     {
 
-        if(!qj)
+        if(!m_isStuned)
         {
-            QD(); // behaviour of the enemy what stste it is in and what it dose
-            WT(); //walk the path that the enemy currently has  
-            WF(); //chnge the scale of the player
+            AILogic(); // behaviour of the enemy what stste it is in and what it dose
+            FollowPath(); //walk the path that the enemy currently has  
+            SwapDirections(); //chnge the scale of the player
         }
 
     }
 
-    private void OnTriggerEnter2D(Collider2D EI)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(!qj)
-            if(!Q)
+        if(!m_isStuned)
+            if(!m_playerDetected)
             {
-                QF(EI.gameObject);
+                PlayerDetection(collision.gameObject);
             }      
     }
 
-    private void OnTriggerStay2D(Collider2D EO)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (!qj)
-            if (!Q)
+        if (!m_isStuned)
+            if (!m_playerDetected)
             {
-                QF(EO.gameObject);
+                PlayerDetection(collision.gameObject);
             }
     }
 }

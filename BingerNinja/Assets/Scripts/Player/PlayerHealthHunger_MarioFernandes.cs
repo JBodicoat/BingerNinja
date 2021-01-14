@@ -24,7 +24,7 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
     public float m_fullnessDrainRate = 2.5f;
     protected float m_healthDrainRate = 7.5f;
 
-    public bool S = false;
+    public bool m_paused = false;
     public Slider m_healthSlider;
     public Slider m_hungerSlider;
 
@@ -44,7 +44,7 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
 	}
 
     // Reduce players health by amount passed
-    public void u(float amount)
+    public void Hit(float amount)
     {
         m_currentHealth -= amount;
        
@@ -53,7 +53,7 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
 
         if(m_currentHealth == 0)
         {
-            PlayTrack_Jann.Instance.WS(AudioFiles.b);
+            PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_Death);
             m_DeathEffect.SpriteFlash();
             //Invoke("Die", 2f);
             Die();
@@ -108,7 +108,7 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
             if(enemy.activeSelf)
             {
                 BaseEnemy_SebastianMol baseScript = enemy.GetComponent<BaseEnemy_SebastianMol>();
-                baseScript.O = baseScript.qw;
+                baseScript.m_health = baseScript.m_maxHealth;
             }          
         }
     }
@@ -120,7 +120,7 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
         {
             if (enemy.activeSelf)
             {
-                enemy.GetComponent<BaseEnemy_SebastianMol>().EU();
+                enemy.GetComponent<BaseEnemy_SebastianMol>().ForceLooseIntrest();
             }
         }
     }
@@ -142,7 +142,7 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!S)
+        if(!m_paused)
         {
             m_currentHunger -= m_fullnessDrainRate * Time.deltaTime;
             m_hungerSlider.value = m_currentHunger;
@@ -153,7 +153,7 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
 
             if (m_currentHunger == 0)
             {
-                u(m_healthDrainRate * Time.deltaTime);
+                Hit(m_healthDrainRate * Time.deltaTime);
 		    }
         }
     }
