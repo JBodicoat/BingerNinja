@@ -33,7 +33,6 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
 
     protected FreezerTrigger_JoaoBeijinho m_freezerArea;//Reference script that checks if enemy is in the freezer
      BaseEnemy_SebastianMol a;
-     ColorChanger_Jann b;
      LevelScripting c;
 
     public int m_maxTicks;
@@ -106,20 +105,7 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
 
      void s()
     {
-        if (m_pickColor[0] == true)
-        {
-            e = b.m_colorOutGrey60;
-        }
-        else if (m_pickColor[1] == true)
-        {
-            e = b.m_colorOutGrey122;
-        }
-        else if (m_pickColor[2] == true)
-        {
-            e = b.m_colorOutGrey174;
-        }
 
-        gameObject.GetComponent<SpriteRenderer>().color = e;
     }
 
      void p()
@@ -138,7 +124,6 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
     {
         c = GameObject.Find("Player").GetComponent<LevelScripting>();
         m_freezerArea = FindObjectOfType<FreezerTrigger_JoaoBeijinho>();
-        b = FindObjectOfType<ColorChanger_Jann>();
 
         if (gameObject.CompareTag(Tags_JoaoBeijinho.UL))
         {

@@ -174,8 +174,6 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
                 Destroy(C[V].gameObject);
                 C[V] = null;
             }
-            
-            ColorChanger_Jann.Instance.QT(projectile.GetComponent<SpriteRenderer>());
         }
         else
         {

@@ -19,7 +19,6 @@ public class LevelScripting : MonoBehaviour
      int s = 0, t = 0;
     public int D;
      PlayerController_JamieG u;
-     BossIntroCineScript_AdamG v;
     // Dan timeline script
      Timeline_Script w;
      float x;
@@ -114,7 +113,6 @@ public class LevelScripting : MonoBehaviour
                     h = GameObject.Find("Yakuza Leader").GetComponent<BaseEnemy_SebastianMol>();
                     l = GameObject.Find("Yakuza Leader").GetComponent<BossDialogue_MarioFernandes>();
                     a = GameObject.Find("Level 12 Lift");
-                    v = GameObject.Find("BossIntroCinematic").GetComponent<BossIntroCineScript_AdamG>();
                 }
                 break;
             case 13:
