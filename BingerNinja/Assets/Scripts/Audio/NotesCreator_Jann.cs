@@ -16,18 +16,18 @@ using UnityEngine;
 
 public class NotesCreator_Jann
 {
-    private const int BaseFrequency = 440;
-    private const int From = -33;
-    private const int To = 15;
-    private const float FrequencyRation = 1.059463094359f;
+    private const int BF = 440;
+    private const int F = -33;
+    private const int T = 15;
+    private const float FR = 1.059463094359f;
 
-    private int m_position;
-    private int m_audioLength;
-    private float m_increment;
-    private float m_phase;
-    private int m_currentNoteIndex;
+    private int pos;
+    private int auLe;
+    private float inc;
+    private float ph;
+    private int cni;
 
-    private Dictionary<Note, int> notesFrequencies = new Dictionary<Note, int>();
+    private Dictionary<Note, int> nfs = new Dictionary<Note, int>();
 
     public enum Note
     {
@@ -41,28 +41,28 @@ public class NotesCreator_Jann
 
     public NotesCreator_Jann()
     {
-        GenerateNotes();
+        GN();
     }
 
     public int GetFrequency(Note note)
     {
-        return notesFrequencies[note];
+        return nfs[note];
     }
 
     public Note GetNote(int frequency)
     {
-        return notesFrequencies.FirstOrDefault(pair => Math.Abs(pair.Value - frequency) < 0.1f).Key;
+        return nfs.FirstOrDefault(pair => Math.Abs(pair.Value - frequency) < 0.1f).Key;
     }
     
-    private void GenerateNotes()
+    private void GN()
     {
-        notesFrequencies.Add(Note.None, 0);
+        nfs.Add(Note.None, 0);
 
         int index = 0;
-        for (int frequency = From; frequency < To + 1; frequency++)
+        for (int frequency = F; frequency < T + 1; frequency++)
         {
             index++;
-            notesFrequencies.Add((Note) index, (int) (BaseFrequency * Mathf.Pow(FrequencyRation, frequency)));
+            nfs.Add((Note) index, (int) (BF * Mathf.Pow(FR, frequency)));
         }
     }
 }

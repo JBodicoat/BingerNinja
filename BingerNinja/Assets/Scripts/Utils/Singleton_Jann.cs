@@ -10,16 +10,16 @@ using UnityEngine;
 /// <typeparam name="Class"></typeparam>
 public class Singleton_Jann<Class> : MonoBehaviour where Class : Singleton_Jann<Class> 
 {
-    private static Class m_instance;
+    private static Class ins;
     public bool isPersistant;
      
     public virtual void Awake() 
     {
         if(isPersistant) 
         {
-            if(!m_instance)
+            if(!ins)
             {
-                m_instance = this as Class;
+                ins = this as Class;
             }
             else 
             {
@@ -29,9 +29,9 @@ public class Singleton_Jann<Class> : MonoBehaviour where Class : Singleton_Jann<
         }
         else 
         {
-            m_instance = this as Class;
+            ins = this as Class;
         }
     }
     
-    public static Class Instance => m_instance;
+    public static Class Instance => ins;
 }

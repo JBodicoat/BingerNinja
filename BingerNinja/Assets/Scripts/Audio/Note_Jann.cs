@@ -6,24 +6,24 @@
 
 public class Note_Jann
 {
-    private NotesCreator_Jann.Note m_noteName;
-    private int m_frequence;
+    private NotesCreator_Jann.Note nn;
+    private int f;
 
     public Note_Jann(NotesCreator_Jann.Note noteName, int frequence)
     {
-        m_noteName = noteName;
-        m_frequence = frequence;
+        nn = noteName;
+        f = frequence;
     }
 
     public NotesCreator_Jann.Note MNoteName
     {
-        get => m_noteName;
-        set => m_noteName = value;
+        get => nn;
+        set => nn = value;
     }
 
     public int Frequence
     {
-        get => m_frequence;
-        set => m_frequence = value;
+        get => f;
+        set => f = value;
     }
 }

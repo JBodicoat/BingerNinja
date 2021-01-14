@@ -28,8 +28,8 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
 
     public OriginalColor m_particleColor = OriginalColor.Grey60;
 
-    private List<Image> m_sliderBackgrounds = new List<Image>();
-    private List<Image> m_sliderFills = new List<Image>();
+    private List<Image> sb = new List<Image>();
+    private List<Image> sf = new List<Image>();
 
     public OriginalColor m_sliderBackgroundColor = OriginalColor.Grey60;
     public OriginalColor m_sliderFillColor = OriginalColor.Grey122;
@@ -43,33 +43,33 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
         Grey174 = 174
     }
 
-    private List<Renderer> m_renderers;
-    private List<Image> m_images;
-    private List<ParticleSystem> m_particleSystems;
-    private List<Text> m_texts;
+    private List<Renderer> rs;
+    private List<Image> imgs;
+    private List<ParticleSystem> pss;
+    private List<Text> txts;
 
-    private Texture2D m_colorSwapTexture;
+    private Texture2D cst;
     public Color[] m_spriteColors;
 
-    private void Awake()
+    void Awake()
     {
         base.Awake();
         
-        m_images = FindObjectsOfTypeAll<Image>();
-        m_particleSystems = FindObjectsOfTypeAll<ParticleSystem>();
-        m_renderers = FindObjectsOfTypeAll<Renderer>();
-        m_texts = FindObjectsOfTypeAll<Text>();
+        imgs = FOTA<Image>();
+        pss = FOTA<ParticleSystem>();
+        rs = FOTA<Renderer>();
+        txts = FOTA<Text>();
 
         // Get slider reference
-        GetSliderImages("HealthSlider");
-        GetSliderImages("HungerSlider");
+        GSI("HealthSlider");
+        GSI("HungerSlider");
         
-        InitializeColorChanger();
+        ICC();
         
-        ApplyColorsToSceneObjects();
+        ACSO();
     }
 
-    private void InitializeColorChanger()
+    private void ICC()
     {
         Texture2D colorSwapTex = new Texture2D(256, 1, TextureFormat.RGBA32, false, false);
         colorSwapTex.filterMode = FilterMode.Point;
@@ -82,12 +82,12 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
         m_swapMaterial.SetTexture("_SwapTex", colorSwapTex);
 
         m_spriteColors = new Color[colorSwapTex.width];
-        m_colorSwapTexture = colorSwapTex;
+        cst = colorSwapTex;
         
-        SwapColor((int) OriginalColor.Grey60, m_colorOutGrey60);
-        SwapColor((int) OriginalColor.Grey122, m_colorOutGrey122);
-        SwapColor((int) OriginalColor.Grey174, m_colorOutGrey174);
-        m_colorSwapTexture.Apply();
+        SC((int) OriginalColor.Grey60, m_colorOutGrey60);
+        SC((int) OriginalColor.Grey122, m_colorOutGrey122);
+        SC((int) OriginalColor.Grey174, m_colorOutGrey174);
+        cst.Apply();
     }
 
     public void UpdateColor(SpriteRenderer spriteRenderer)
@@ -95,57 +95,57 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
         spriteRenderer.material = m_swapMaterial;
     }
 
-    private void SwapColor(int index, Color color)
+    private void SC(int index, Color color)
     {
         m_spriteColors[index] = color;
-        m_colorSwapTexture.SetPixel(index, 0, color);
+        cst.SetPixel(index, 0, color);
     }
     
-    private void ApplyColorsToSceneObjects()
+    private void ACSO()
     {
-        foreach (Renderer renderer in m_renderers)
+        foreach (Renderer rr in rs)
         {
-            renderer.material = m_swapMaterial;
+            rr.material = m_swapMaterial;
         }
 
-        foreach (Image image in m_sliderBackgrounds)
+        foreach (Image img in sb)
         {
-            image.color = m_spriteColors[(int) m_sliderBackgroundColor];
+            img.color = m_spriteColors[(int) m_sliderBackgroundColor];
         }
 
         // Set slider color
-        m_sliderFills.ForEach(i => i.color = m_spriteColors[(int) m_sliderFillColor]);
-        m_sliderBackgrounds.ForEach(i => i.color = m_spriteColors[(int) m_sliderBackgroundColor]);
+        sf.ForEach(i => i.color = m_spriteColors[(int) m_sliderFillColor]);
+        sb.ForEach(i => i.color = m_spriteColors[(int) m_sliderBackgroundColor]);
 
-        foreach (Image image in m_images)
+        foreach (Image img in imgs)
         {
-            image.material = m_swapMaterial;
+            img.material = m_swapMaterial;
         }
 
-        foreach (ParticleSystem particleSystem in m_particleSystems)
+        foreach (ParticleSystem ps in pss)
         {
-            var main = particleSystem.main;
-            main.startColor = m_spriteColors[(int) m_particleColor];
+            var m = ps.main;
+            m.startColor = m_spriteColors[(int) m_particleColor];
         }
 
-        foreach (Text text in m_texts)
+        foreach (Text text in txts)
         {
             text.color = m_spriteColors[(int) m_textColor];
         }
     }
 
-    private void GetSliderImages(string gameObjectName)
+    private void GSI(string gameObjectName)
     {
         GameObject slider = GameObject.Find(gameObjectName);
         if (slider != null)
         {
-            m_sliderBackgrounds.Add(slider.transform.Find("Background").GetComponent<Image>());
-            m_sliderFills.Add(slider.transform.Find("Fill Area").transform.Find("Fill").GetComponent<Image>());
+            sb.Add(slider.transform.Find("Background").GetComponent<Image>());
+            sf.Add(slider.transform.Find("Fill Area").transform.Find("Fill").GetComponent<Image>());
         }
     }
     
     // This get all Components even of inactive GameObjects
-    private List<T> FindObjectsOfTypeAll<T>()
+    private List<T> FOTA<T>()
     {
         return SceneManager.GetActiveScene().GetRootGameObjects()
             .SelectMany(g => g.GetComponentsInChildren<T>(true))

@@ -15,78 +15,78 @@ using UnityEngine;
 
 class Synthesizer_Jann : EditorWindow
 {
-    private static Vector2 m_windowSize = new Vector2(600, 300);
-    private Rect m_settingsBounds;
-    private Rect m_notesBounds;
-    private Vector2 m_scrollPosition;
+    private static Vector2 ws = new Vector2(600, 300);
+    private Rect sbs;
+    private Rect nbs;
+    private Vector2 spos;
     
-    private string m_title;
-    private int m_bpm = 60;
-    private int m_length = 10;
-    private int m_channels = 3;
+    private string tit;
+    private int bpm = 60;
+    private int len = 10;
+    private int ch = 3;
 
-    private NotesCreator_Jann m_noteCreator;
-    private List<Note_Jann>[] m_channelsData = {new List<Note_Jann>()};
+    private NotesCreator_Jann nc;
+    private List<Note_Jann>[] chd = {new List<Note_Jann>()};
 
     [MenuItem ("Tools/Synthesizer")]
     public static void ShowWindow () 
     {
-        EditorWindow window = GetWindow<Synthesizer_Jann>();
+        EditorWindow w = GetWindow<Synthesizer_Jann>();
         
-        window.titleContent = new GUIContent("Synthesizer");
-        window.position = new Rect(window.position.x, window.position.y, m_windowSize.x, m_windowSize.y);
+        w.titleContent = new GUIContent("Synthesizer");
+        w.position = new Rect(w.position.x, w.position.y, ws.x, ws.y);
         
-        window.Show();
+        w.Show();
     }
 
     void Awake()
     {
-        m_noteCreator = new NotesCreator_Jann();
+        nc = new NotesCreator_Jann();
     }
 
     void OnGUI () 
     {
-        if (m_noteCreator == null)
+        if (nc == null)
         {
-            m_noteCreator = new NotesCreator_Jann();
+            nc = new NotesCreator_Jann();
         }
         
-        m_settingsBounds = new Rect(0, 0, position.width, 120);
-        m_notesBounds = new Rect(0, m_settingsBounds.height, position.width, position.height - m_settingsBounds.height);
+        sbs = new Rect(0, 0, position.width, 120);
+        nbs = new Rect(0, sbs.height, position.width, position.height - sbs.height);
 
         // Create settings menu
-        GUILayout.BeginArea(m_settingsBounds);
-        OnCreateSynthesizerSettings();
+        GUILayout.BeginArea(sbs);
+        OCSS();
         GUILayout.EndArea();
         
         GUILayout.Space(100);
         
         // Generate notes based on settings menu
-        if(m_channelsData.Length * m_channelsData[0].Count != m_length * m_channels)
-            SetupNotes();
+        if(chd.Length * chd[0].Count != len * ch)
+            SN();
 
         // Create notes UI
-        GUILayout.BeginArea(m_notesBounds);
-        OnCreateNotesInterface();
+        GUILayout.BeginArea(nbs);
+        OCNI();
         GUILayout.EndArea();
     }
 
     // Creates the settings UI: Title, bpm, notes per channel, number of channels and buttons for reset and save
-    private void OnCreateSynthesizerSettings()
+    private void OCSS()
     {
         GUILayout.Label("Audio Settings", EditorStyles.boldLabel);
-        m_title = EditorGUILayout.TextField ("Title", m_title);
+        tit = EditorGUILayout.TextField ("Title", tit);
 
         // Clamp values
-        m_bpm = Mathf.Clamp(EditorGUILayout.IntField("BPM", m_bpm), 40, 4000);
-        m_length = Mathf.Clamp(EditorGUILayout.IntField("Length", m_length), 1, 500);
-        m_channels = Mathf.Clamp(EditorGUILayout.IntField("Channels", m_channels), 1, 3);
+        bpm = Mathf.Clamp(EditorGUILayout.IntField("BPM", bpm), 40, 4000);
+        len = Mathf.Clamp(EditorGUILayout.IntField("Length", len), 1, 500);
+        ch = Mathf.Clamp(EditorGUILayout.IntField("Channels", ch), 1, 3);
 
         #region Generate and handle buttons
         EditorGUILayout.BeginHorizontal();
         if(GUILayout.Button("Reset", GUILayout.Width(100), GUILayout.Height(20)))
         {
-            ResetNotes();
+            RN();
         }
         
         EditorGUILayout.Space(10);
@@ -96,7 +96,7 @@ class Synthesizer_Jann : EditorWindow
             string path = EditorUtility.OpenFilePanel("Load audio file", "", "json");
             if (path.Length != 0)
             {
-                LoadTrack(path);
+                LT(path);
             }
         }
         
@@ -104,7 +104,7 @@ class Synthesizer_Jann : EditorWindow
         
         if(GUILayout.Button("Save Track", GUILayout.Width(100), GUILayout.Height(20)))
         {
-            SaveTrack();
+            ST();
         }
         
         EditorGUILayout.EndHorizontal();
@@ -112,21 +112,21 @@ class Synthesizer_Jann : EditorWindow
     }
 
     // Creates the notes for each channel
-    private void OnCreateNotesInterface()
+    private void OCNI()
     {
         GUILayout.Label("Create Notes", EditorStyles.boldLabel);
         
-        m_scrollPosition = GUILayout.BeginScrollView(m_scrollPosition);
+        spos = GUILayout.BeginScrollView(spos);
 
-        for (int y = 0; y < m_channels; y++)
+        for (int y = 0; y < ch; y++)
         {
             EditorGUILayout.BeginHorizontal();
-            for (int x = 0; x < m_length; x++)
+            for (int x = 0; x < len; x++)
             {
-                m_channelsData[y][x].MNoteName = (NotesCreator_Jann.Note) EditorGUILayout.EnumPopup(
-                    "", m_channelsData[y][x].MNoteName,
+                chd[y][x].MNoteName = (NotesCreator_Jann.Note) EditorGUILayout.EnumPopup(
+                    "", chd[y][x].MNoteName,
                     GUILayout.Width(50));
-                m_channelsData[y][x].Frequence = m_noteCreator.GetFrequency(m_channelsData[y][x].MNoteName);
+                chd[y][x].Frequence = nc.GetFrequency(chd[y][x].MNoteName);
             }
             EditorGUILayout.EndHorizontal();
         }
@@ -136,17 +136,17 @@ class Synthesizer_Jann : EditorWindow
 
     // Adjusts the channelsData array to fit given length * channels
     // Keeps old data in the process
-    private void SetupNotes()
+    private void SN()
     {
-        List<Note_Jann>[] temp = new List<Note_Jann>[m_channels];
+        List<Note_Jann>[] temp = new List<Note_Jann>[ch];
         
-        for (int y = 0; y < m_channels; y++)
+        for (int y = 0; y < ch; y++)
         {
             temp[y] = new List<Note_Jann>();
             
-            for (int x = 0; x < m_length; x++)
+            for (int x = 0; x < len; x++)
             {
-                if (y >= m_channelsData.Length || x >= m_channelsData[y].Count)
+                if (y >= chd.Length || x >= chd[y].Count)
                 {
                     temp[y].Add(
                         new Note_Jann(NotesCreator_Jann.Note.None, 
@@ -155,72 +155,72 @@ class Synthesizer_Jann : EditorWindow
                 }
                 else
                 {
-                    temp[y].Add(m_channelsData[y][x]);   
+                    temp[y].Add(chd[y][x]);   
                 }
             }
         }
 
-        m_channelsData = temp;
+        chd = temp;
     }
 
-    private void SaveTrack()
+    private void ST()
     {
-        Track_Jann track = new Track_Jann();
-        track.n = m_title;
-        track.b = m_bpm;
-        track.c = m_length;
+        Track_Jann t = new Track_Jann();
+        t.n = tit;
+        t.b = bpm;
+        t.c = len;
 
-        int[] data = new int[m_channels * m_length];
-        for (int y = 0; y < m_channels; y++)
+        int[] data = new int[ch * len];
+        for (int y = 0; y < ch; y++)
         {
-            for (int x = 0; x < m_length; x++)
+            for (int x = 0; x < len; x++)
             {
-                data[y * m_length + x] = m_channelsData[y][x].Frequence;
+                data[y * len + x] = chd[y][x].Frequence;
             }
         }
 
-        track.d = data;
+        t.d = data;
         
-        string trackJson = JsonUtility.ToJson(track);
-        File.WriteAllText(Application.dataPath + "/Audio/" + track.n + ".json", trackJson);
+        string trackJson = JsonUtility.ToJson(t);
+        File.WriteAllText(Application.dataPath + "/Audio/" + t.n + ".json", trackJson);
     }
 
-    private void LoadTrack(string path)
+    private void LT(string path)
     {
         string json = File.ReadAllText(path);
         
-        Track_Jann track = JsonUtility.FromJson<Track_Jann>(json);
-        m_title = track.n;
-        m_bpm = track.b;
-        m_length = track.c;
-        m_channels = track.d.Length / m_length;
+        Track_Jann t = JsonUtility.FromJson<Track_Jann>(json);
+        tit = t.n;
+        bpm = t.b;
+        len = t.c;
+        ch = t.d.Length / len;
 
-        ResetNotes();
+        RN();
         
         // float[] data = new float[m_channels * m_length];
-        for (int y = 0; y < m_channels; y++)
+        for (int y = 0; y < ch; y++)
         {
-            for (int x = 0; x < m_length; x++)
+            for (int x = 0; x < len; x++)
             {
-                int frequency = track.d[y * m_length + x];
-                m_channelsData[y][x].Frequence = frequency;
-                m_channelsData[y][x].MNoteName = m_noteCreator.GetNote(frequency);
+                int frequency = t.d[y * len + x];
+                chd[y][x].Frequence = frequency;
+                chd[y][x].MNoteName = nc.GetNote(frequency);
             }
         }
     }
     
     // Resets all notes to None/0f in every channel
-    private void ResetNotes()
+    private void RN()
     {
-        m_channelsData = new List<Note_Jann>[m_channels];
+        chd = new List<Note_Jann>[ch];
         
-        for (int y = 0; y < m_channels; y++)
+        for (int y = 0; y < ch; y++)
         {
-            m_channelsData[y] = new List<Note_Jann>();
+            chd[y] = new List<Note_Jann>();
             
-            for (int x = 0; x < m_length; x++)
+            for (int x = 0; x < len; x++)
             {
-                m_channelsData[y].Add(new Note_Jann(NotesCreator_Jann.Note.None, 0));
+                chd[y].Add(new Note_Jann(NotesCreator_Jann.Note.None, 0));
             }
         }
     }

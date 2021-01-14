@@ -14,80 +14,76 @@ using UnityEngine.UI;
 /// </summary>
 public class LanguageResolver_Jann : Singleton_Jann<LanguageResolver_Jann>
 {
-    private const string FilePath = "";
-    private const char Separator = '=';
-    private Dictionary<string, TextAsset> m_languageFiles = new Dictionary<string, TextAsset>();
-    private Dictionary<string, string> m_translations = new Dictionary<string, string>();
+    private const string FP = "";
+    private const char Sep = '=';
+    private Dictionary<string, TextAsset> lfs = new Dictionary<string, TextAsset>();
+    private Dictionary<string, string> trs = new Dictionary<string, string>();
     
     private void Awake()
     {
         base.Awake();
         
-        string language = SaveLoadSystem_JamieG.LoadSettings().m_chosenLanguage;
+        string l = SaveLoadSystem_JamieG.LoadSettings().m_chosenLanguage;
 
-        if (language == null)
+        if (l == null)
         {
-            language = "English"; // Change to English for testing
+            l = "English"; // Change to English for testing
         }
         
-        ReadProperties(language);
+        RP(l);
     }
 
     private void Start()
     {
-        ResolveTexts();
+        RT();
     }
 
     public void RefreshTranslation(string language)
     {
-        ReadProperties(language);
-        ResolveTexts();
+        RP(language);
+        RT();
     }
 
-    private void ResolveTexts()
+    private void RT()
     {
-        LanguageText_Jann[] allTexts = Resources.FindObjectsOfTypeAll<LanguageText_Jann>();
-        foreach (LanguageText_Jann languageText in allTexts)
+        LanguageText_Jann[] ats = Resources.FindObjectsOfTypeAll<LanguageText_Jann>();
+        foreach (LanguageText_Jann lt in ats)
         {
             try
             {
-                Text text = languageText.GetComponent<Text>();
-                text.text = Regex.Unescape(m_translations[languageText.identifier]);
+                Text text = lt.GetComponent<Text>();
+                text.text = Regex.Unescape(trs[lt.identifier]);
             }
             catch (KeyNotFoundException)
             {
-                print("No translation for key found: " + languageText.identifier);
-                throw;
             }
         }
     }
     
-    private void ReadProperties(string language)
+    private void RP(string language)
     {
-        TextAsset languageFile = LoadLanguageFile(language);
+        TextAsset languageFile = LLF(language);
         foreach (string line in languageFile.text.Split('\n'))
         {
-            var prop = line.Split(Separator);
-            m_translations[prop[0]] = prop[1];
+            var prop = line.Split(Sep);
+            trs[prop[0]] = prop[1];
         }
     }
 
-    private TextAsset LoadLanguageFile(string language)
+    private TextAsset LLF(string language)
     {
-        if (m_languageFiles.ContainsKey(language))
+        if (lfs.ContainsKey(language))
         {
-            return m_languageFiles[language];
+            return lfs[language];
         }
         
-        TextAsset file = Resources.Load<TextAsset>(FilePath + language);
+        TextAsset file = Resources.Load<TextAsset>(FP + language);
         
         if (file == null)
         {
-            Debug.LogWarning("File not found: " + FilePath + language + ".txt");
-            Debug.LogWarning("Loading default language...");
-            file = Resources.Load<TextAsset>(FilePath + "English");
+            file = Resources.Load<TextAsset>(FP + "English");
         }
-        m_languageFiles.Add(language, file);
+        lfs.Add(language, file);
         return file;
     }
 }
