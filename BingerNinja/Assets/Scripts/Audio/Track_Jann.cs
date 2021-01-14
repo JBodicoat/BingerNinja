@@ -21,10 +21,10 @@ public class Track_Jann
     // This is used because JsonUtility doesn't support two-dimensional arrays
     public void GenerateFrequencies()
     {
-        int channels = d.Length / c;
-        f = new int[channels][];
+        int ch = d.Length / c;
+        f = new int[ch][];
         
-        for (int i = 0; i < channels; i++)
+        for (int i = 0; i < ch; i++)
         {
             f[i] = new int[c];
             

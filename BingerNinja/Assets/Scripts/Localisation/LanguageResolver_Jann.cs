@@ -15,11 +15,11 @@ using UnityEngine.UI;
 public class LanguageResolver_Jann : Singleton_Jann<LanguageResolver_Jann>
 {
     private const string FP = "";
-    private const char Sep = '=';
+    private const char S = '=';
     private Dictionary<string, TextAsset> lfs = new Dictionary<string, TextAsset>();
     private Dictionary<string, string> trs = new Dictionary<string, string>();
     
-    private void Awake()
+    void Awake()
     {
         base.Awake();
         
@@ -38,9 +38,9 @@ public class LanguageResolver_Jann : Singleton_Jann<LanguageResolver_Jann>
         RT();
     }
 
-    public void RefreshTranslation(string language)
+    public void RefreshTranslation(string l)
     {
-        RP(language);
+        RP(l);
         RT();
     }
 
@@ -51,8 +51,8 @@ public class LanguageResolver_Jann : Singleton_Jann<LanguageResolver_Jann>
         {
             try
             {
-                Text text = lt.GetComponent<Text>();
-                text.text = Regex.Unescape(trs[lt.identifier]);
+                Text t = lt.GetComponent<Text>();
+                t.text = Regex.Unescape(trs[lt.identifier]);
             }
             catch (KeyNotFoundException)
             {
@@ -60,30 +60,30 @@ public class LanguageResolver_Jann : Singleton_Jann<LanguageResolver_Jann>
         }
     }
     
-    private void RP(string language)
+    private void RP(string l)
     {
-        TextAsset languageFile = LLF(language);
-        foreach (string line in languageFile.text.Split('\n'))
+        TextAsset lf = LLF(l);
+        foreach (string li in lf.text.Split('\n'))
         {
-            var prop = line.Split(Sep);
-            trs[prop[0]] = prop[1];
+            var p = li.Split(S);
+            trs[p[0]] = p[1];
         }
     }
 
-    private TextAsset LLF(string language)
+    private TextAsset LLF(string l)
     {
-        if (lfs.ContainsKey(language))
+        if (lfs.ContainsKey(l))
         {
-            return lfs[language];
+            return lfs[l];
         }
         
-        TextAsset file = Resources.Load<TextAsset>(FP + language);
+        TextAsset file = Resources.Load<TextAsset>(FP + l);
         
         if (file == null)
         {
             file = Resources.Load<TextAsset>(FP + "English");
         }
-        lfs.Add(language, file);
+        lfs.Add(l, file);
         return file;
     }
 }

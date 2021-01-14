@@ -71,18 +71,18 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
 
     private void ICC()
     {
-        Texture2D colorSwapTex = new Texture2D(256, 1, TextureFormat.RGBA32, false, false);
-        colorSwapTex.filterMode = FilterMode.Point;
+        Texture2D cST = new Texture2D(256, 1, TextureFormat.RGBA32, false, false);
+        cST.filterMode = FilterMode.Point;
 
-        for (int i = 0; i < colorSwapTex.width; ++i)
-            colorSwapTex.SetPixel(i, 0, new Color(0.0f, 0.0f, 0.0f, 0.0f));
+        for (int i = 0; i < cST.width; ++i)
+            cST.SetPixel(i, 0, new Color(0.0f, 0.0f, 0.0f, 0.0f));
 
-        colorSwapTex.Apply();
+        cST.Apply();
 
-        m_swapMaterial.SetTexture("_SwapTex", colorSwapTex);
+        m_swapMaterial.SetTexture("_SwapTex", cST);
 
-        m_spriteColors = new Color[colorSwapTex.width];
-        cst = colorSwapTex;
+        m_spriteColors = new Color[cST.width];
+        cst = cST;
         
         SC((int) OriginalColor.Grey60, m_colorOutGrey60);
         SC((int) OriginalColor.Grey122, m_colorOutGrey122);
@@ -90,15 +90,15 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
         cst.Apply();
     }
 
-    public void UpdateColor(SpriteRenderer spriteRenderer)
+    public void UpdateColor(SpriteRenderer sr)
     {
-        spriteRenderer.material = m_swapMaterial;
+        sr.material = m_swapMaterial;
     }
 
-    private void SC(int index, Color color)
+    private void SC(int i, Color c)
     {
-        m_spriteColors[index] = color;
-        cst.SetPixel(index, 0, color);
+        m_spriteColors[i] = c;
+        cst.SetPixel(i, 0, c);
     }
     
     private void ACSO()
@@ -128,19 +128,19 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
             m.startColor = m_spriteColors[(int) m_particleColor];
         }
 
-        foreach (Text text in txts)
+        foreach (Text t in txts)
         {
-            text.color = m_spriteColors[(int) m_textColor];
+            t.color = m_spriteColors[(int) m_textColor];
         }
     }
 
     private void GSI(string gameObjectName)
     {
-        GameObject slider = GameObject.Find(gameObjectName);
-        if (slider != null)
+        GameObject s = GameObject.Find(gameObjectName);
+        if (s != null)
         {
-            sb.Add(slider.transform.Find("Background").GetComponent<Image>());
-            sf.Add(slider.transform.Find("Fill Area").transform.Find("Fill").GetComponent<Image>());
+            sb.Add(s.transform.Find("Background").GetComponent<Image>());
+            sf.Add(s.transform.Find("Fill Area").transform.Find("Fill").GetComponent<Image>());
         }
     }
     
