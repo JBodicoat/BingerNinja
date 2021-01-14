@@ -415,6 +415,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5824345605721969732}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &907276243 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5824345605457200374, guid: 7e26e30cdc3cbb44d8ff0bd2c12e43c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 5824345605721969732}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 907276242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd672a6d561b71042b5d80667b194ff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1047053519
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -569,12 +581,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1247778952 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5707122398059885783, guid: 14cb30499ff202a4b9d2b516a51ad2f2,
-    type: 3}
-  m_PrefabInstance: {fileID: 5707122396823514207}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1247778953 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5707122398059885782, guid: 14cb30499ff202a4b9d2b516a51ad2f2,
@@ -587,7 +593,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 5707122396823514207}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1247778952}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 478fb4a10b83c2146a4565fb4207df98, type: 3}
@@ -1457,11 +1463,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1247778952}
+      objectReference: {fileID: 907276243}
     - target: {fileID: 5824345606649097142, guid: 7e26e30cdc3cbb44d8ff0bd2c12e43c5,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824345606649097142, guid: 7e26e30cdc3cbb44d8ff0bd2c12e43c5,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ExitSettingMenu
       objectReference: {fileID: 0}
     - target: {fileID: 5824345606649097143, guid: 7e26e30cdc3cbb44d8ff0bd2c12e43c5,
         type: 3}
@@ -1480,5 +1491,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8232973519749034006, guid: 7e26e30cdc3cbb44d8ff0bd2c12e43c5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7e26e30cdc3cbb44d8ff0bd2c12e43c5, type: 3}
