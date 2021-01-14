@@ -73,7 +73,7 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
             case ObjectType.Freezer:
                 if (!d)
                 {
-                    c.drawFreezer = true;//Enable freezer
+                    c.O = true;//Enable freezer
                     StartCoroutine(r());
                 }
                 break;
@@ -100,7 +100,7 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
             yield return new WaitForSeconds(m_damageInterval);//Delay before doing damage again
         }
         
-        c.drawFreezer = false;//Unlock freezer door
+        c.O = false;//Unlock freezer door
         yield return new WaitForSeconds(m_freezerCooldown);
     }
 

@@ -32,7 +32,7 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
      PlayerController_JamieG w;
 
     // Increase players health by amount passed
-    public void Eat(float e)
+    public void QI(float e)
     {
         m_currentHunger += e;
         if(m_currentHunger > m_maxHunger)

@@ -24,7 +24,7 @@ public class ChangeLevels_CW : MonoBehaviour
             // Assuming the boss is on every third level
             if (b % 3 == 0 || b == 20)
             {
-                SaveLoadSystem_JamieG.SaveCheckpoint(b + 1);                
+                SaveLoadSystem_JamieG.QY(b + 1);                
             }
 
             if (b > 4 && b != 20)
@@ -45,12 +45,12 @@ public class ChangeLevels_CW : MonoBehaviour
     {
         Time.timeScale = 1f;
         VendingMachineMenu_Elliott.m_gameIsPaused = false;
-        SceneManager_JamieG.Instance.LoadNextLevel();
+        SceneManager_JamieG.Instance.F();
     }
 
     public void ReturnToMenu()
     {
         SceneManager.LoadScene("ElliottDesouza_MainMenu");
-        SaveLoadSystem_JamieG.DeleteSaves();  
+        SaveLoadSystem_JamieG.QQ();  
     }
 }

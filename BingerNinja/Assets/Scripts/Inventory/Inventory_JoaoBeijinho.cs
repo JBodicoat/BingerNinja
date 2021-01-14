@@ -80,12 +80,12 @@ public class Inventory_JoaoBeijinho : MonoBehaviour
          m_EnemyList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
          
          // Load inventory
-         InventoryData inventoryData = SaveLoadSystem_JamieG.LoadInventory();
-         if (!inventoryData.Equals(default(InventoryData)))
+         WI inventoryData = SaveLoadSystem_JamieG.QP();
+         if (!inventoryData.Equals(default(WI)))
          {
-             foreach (ItemData itemData in inventoryData.m_items)
+             foreach (WP itemData in inventoryData.WO)
              {
-                 RG(itemData.m_type, itemData.m_amount);
+                 RG(itemData.WA, itemData.WS);
              }
          }
     }

@@ -17,7 +17,7 @@ public class WeaponsTemplate_MarioFernandes : MonoBehaviour
 {
     [SerializeField]
     protected  bool m_ranged;
-    public FoodType m_foodType = FoodType.NULL;
+    public Q m_foodType = Q.A;
     public int m_instaHeal = 0;
     public int m_healOverTime = 0;
     public int m_duration = 5;
@@ -29,14 +29,14 @@ public class WeaponsTemplate_MarioFernandes : MonoBehaviour
     public int m_ammunition = 0;
     public int dmg;
 
-    public float m_hungerRestoreAmount;
+    public float QU;
 
     public Sprite m_mySprite;
 
      void Start() {
         m_mySprite = GetComponent<SpriteRenderer>().sprite;
     }
-    public bool IsRanged()
+    public bool QR()
     {
         return m_ranged;
     }

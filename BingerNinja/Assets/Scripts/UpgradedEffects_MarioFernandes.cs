@@ -28,7 +28,7 @@ public class UpgradedEffects_MarioFernandes : MonoBehaviour
         {
             GetComponent<EffectManager_MarioFernandes>().h(new StrengthEffect_MarioFernandes(30, m_sakeStrengthModifier));
             GetComponent<Inventory_JoaoBeijinho>().RemoveItem(ItemType.Sake, 1);
-            w.setPickupImage(FoodType.SAKE);
+            w.setPickupImage(Q.O);
             w.setPickupAnim(false);
         }
     }
@@ -41,7 +41,7 @@ public class UpgradedEffects_MarioFernandes : MonoBehaviour
             GetComponent<EffectManager_MarioFernandes>().h(new StrengthEffect_MarioFernandes(30, m_TempuraStrengthModifier));
             GetComponent<EffectManager_MarioFernandes>().h(new SpeedEffect_MarioFernandes(30, m_TempuraSpeedhModifier));  
             GetComponent<Inventory_JoaoBeijinho>().RemoveItem(ItemType.Tempura, 1);
-            w.setPickupImage(FoodType.TEMPURA);
+            w.setPickupImage(Q.U);
             w.setPickupAnim(false);
         }
     }
@@ -54,7 +54,7 @@ public class UpgradedEffects_MarioFernandes : MonoBehaviour
            GameObject[] r = GameObject.FindGameObjectsWithTag("PlayerWeapon");     
            foreach (var e in r)
            {
-               if(e.GetComponent<WeaponsTemplate_MarioFernandes>().m_foodType == FoodType.RICEBALL)
+               if(e.GetComponent<WeaponsTemplate_MarioFernandes>().m_foodType == Q.R)
                {
                    Instantiate(m_Dango,e.transform.position, e.transform.rotation);
                    e.SetActive(false);
@@ -71,7 +71,7 @@ public class UpgradedEffects_MarioFernandes : MonoBehaviour
            GameObject[] r = GameObject.FindGameObjectsWithTag("PlayerWeapon");    
            foreach (var e in r)
            {
-               if(e.GetComponent<WeaponsTemplate_MarioFernandes>().m_foodType == FoodType.SQUID)
+               if(e.GetComponent<WeaponsTemplate_MarioFernandes>().m_foodType == Q.E)
                {
                    Instantiate(m_Noodle,e.transform.position, e.transform.rotation);
                    e.SetActive(false);

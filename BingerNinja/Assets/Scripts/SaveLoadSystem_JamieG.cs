@@ -24,7 +24,7 @@ public static class SaveLoadSystem_JamieG
 
      static SaveSystemCache e = new SaveSystemCache();
 
-    public static void DeleteSaves()
+    public static void QQ()
     {
         DirectoryInfo f = new DirectoryInfo(Application.persistentDataPath);
 
@@ -39,101 +39,101 @@ public static class SaveLoadSystem_JamieG
     }
 
     // Saves the configurations of the settings menu into the Settings.save file 
-    public static void SaveSettings(SettingsMenu_ElliottDesouza g)
+    public static void QW(SettingsMenu_ElliottDesouza g)
     {
-        SettingsData l = new SettingsData(g);
-        SaveToFile(a, l);
+        WT l = new WT(g);
+        QE(a, l);
     }
 
     // Saves the current items in the inventory into the Inventory.save file
-    public static void SaveInventory(Inventory_JoaoBeijinho i)
+    public static void QR(Inventory_JoaoBeijinho i)
     {
-        InventoryData j = new InventoryData(i);
-        SaveToFile(b, j);
+        WI j = new WI(i);
+        QE(b, j);
     }
 
     // Saves the current state of the game into the Gameplay.save file
-    public static void SaveGameplay(int k, GameObject[] m, GameObject[] n)
+    public static void QT(int k, GameObject[] m, GameObject[] n)
     {
-        GameplayData o = new GameplayData(k, m, n);
-        SaveToFile(c, o);
+        QB o = new QB(k, m, n);
+        QE(c, o);
     }
     
     // Saves the current checkpoint (after a boss level)
-    public static void SaveCheckpoint(int p)
+    public static void QY(int p)
     {
-        CheckpointData q = new CheckpointData(p);
-        SaveToFile(d, q);
+        WE q = new WE(p);
+        QE(d, q);
     }
 
     // Returns information from the Settings.save file or an empty struct if the file can't be found
-    public static SettingsData LoadSettings()
+    public static WT QU()
     {
-        if (e.IsCached(a))
+        if (e.QZ(a))
         {
-            return (SettingsData) e.GetData(a);
+            return (WT) e.QL(a);
         }
 
-        object r = LoadFromFile(a);
-        if (r is SettingsData s)
+        object r = QI(a);
+        if (r is WT s)
         {
-            if (s.m_chosenLanguage == null)
+            if (s.QO == null)
             {
-                s.m_chosenLanguage = "English";
+                s.QO = "English";
             }
 
             return s;
         }
 
-        return new SettingsData(1f, 1f, "English");
+        return new WT(1f, 1f, "English");
     }
 
     // Returns the items from the Inventory.save file or an empty struct if the file can't be found
-    public static InventoryData LoadInventory()
+    public static WI QP()
     {
-        if (e.IsCached(b))
+        if (e.QZ(b))
         {
-            return (InventoryData) e.GetData(b);
+            return (WI) e.QL(b);
         }
         
-        object t = LoadFromFile(b);
-        if (t is InventoryData inventoryData)
+        object t = QI(b);
+        if (t is WI QA)
         {
-            return inventoryData;
+            return QA;
         }
 
         return default;
     }
 
     // Returns the gameplay data from the Gameplay.save file or an empty struct if the file can't be found
-    public static GameplayData LoadGameplay()
+    public static QB QS()
     {
-        if (e.IsCached(c))
+        if (e.QZ(c))
         {
-            return (GameplayData) e.GetData(c);
+            return (QB) e.QL(c);
         }
         
-        object u = LoadFromFile(c);
-        if (u is GameplayData gameplayData)
+        object u = QI(c);
+        if (u is QB QD)
         {
-            return gameplayData;
+            return QD;
         }
 
         return default;
     }
     
     // Returns the gameplay data from the Gameplay.save file or an empty struct if the file can't be found
-    public static CheckpointData LoadCheckpoint()
+    public static WE QF()
     {
-        if (e.IsCached(d))
+        if (e.QZ(d))
         {
-            return (CheckpointData) e.GetData(d);
+            return (WE) e.QL(d);
         }
         
-        object v = LoadFromFile(d);
-        if (v is CheckpointData checkpointData)
+        object v = QI(d);
+        if (v is WE QG)
         {
-            return checkpointData;
+            return QG;
         }
         return default;
     }
@@ -143,20 +143,20 @@ public static class SaveLoadSystem_JamieG
     /// <summary>
     /// Saves data as file at C:\Users\{user}\AppData\LocalLow\DefaultCompany\BingerNinja
     /// </summary>
-    /// <param name="fileName">Name of the file</param>
-    /// <param name="data">Data that should be saved (struct from the end of this file)</param>
-     static void SaveToFile(string fileName, object data)
+    /// <param name="QH">Name of the file</param>
+    /// <param name="QJ">Data that should be saved (struct from the end of this file)</param>
+     static void QE(string QH, object QJ)
     {
         //Setup formatter
         BinaryFormatter w = new BinaryFormatter();
-        string x = Application.persistentDataPath + fileName;
+        string x = Application.persistentDataPath + QH;
         FileStream y = new FileStream(x, FileMode.Create);
 
         //Save to file
-        w.Serialize(y, data);
+        w.Serialize(y, QJ);
         y.Close();
 
-        e.Cache(fileName, data);
+        e.QK(QH, QJ);
     }
 
     /// <summary>
@@ -164,7 +164,7 @@ public static class SaveLoadSystem_JamieG
     /// </summary>
     /// <param name="C">Name of the file that should be loaded</param>
     /// <returns>A struct (defined at the end of this file)</returns>
-    public static object LoadFromFile(string C)
+    public static object QI(string C)
     {
         string z = Application.persistentDataPath + C;
         if (File.Exists(z))
@@ -186,134 +186,134 @@ public static class SaveLoadSystem_JamieG
 
 internal class SaveSystemCache
 {
-     List<CacheData> E = new List<CacheData>();
+     List<QX> E = new List<QX>();
 
-    public void Cache(string F, object G)
+    public void QK(string F, object G)
     {
-        if (IsCached(F))
+        if (QZ(F))
         {
-            int H = E.IndexOf(E.Find(c => c.type.Equals(F)));
-            E[H] = new CacheData(F, G);
+            int H = E.IndexOf(E.Find(c => c.QC.Equals(F)));
+            E[H] = new QX(F, G);
         }
         else
         {
-            E.Add(new CacheData(F, G));
+            E.Add(new QX(F, G));
         }
     }
 
-    public object GetData(string I)
+    public object QL(string I)
     {
-        return E.Find(data => data.type.Equals(I)).data;
+        return E.Find(data => data.QC.Equals(I)).QV;
     }
 
-    public bool IsCached(string J)
+    public bool QZ(string J)
     {
-        return E.Find(data => data.type.Equals(J)).data != null;
+        return E.Find(data => data.QC.Equals(J)).QV != null;
     }
 
-     struct CacheData
+     struct QX
     {
-        public string type;
-        public object data;
+        public string QC;
+        public object QV;
 
-        public CacheData(string K, object L)
+        public QX(string K, object L)
         {
-            this.data = L;
-            this.type = K;
+            this.QV = L;
+            this.QC = K;
         }
     }
 }
 
 
 [Serializable]
-public struct GameplayData
+public struct QB
 {
-    public int m_currentLevel;
-    public string[] m_enemyIds;
-    public string[] m_doorIds;
+    public int QN;
+    public string[] QM;
+    public string[] WQ;
 
-    public GameplayData(int M, GameObject[] N, GameObject[] O)
+    public QB(int M, GameObject[] N, GameObject[] O)
     {
-        m_currentLevel = M;
+        QN = M;
 
         int P = N.Count(e => e.activeInHierarchy);
-        m_enemyIds = new string[P];
+        QM = new string[P];
         for (int i = 0; i < N.Length; i++)
         {
             if (N[i].activeInHierarchy)
             {
-                m_enemyIds[i] = N[i].name;   
+                QM[i] = N[i].name;   
             }
         }
         
-        m_doorIds = new string[O.Length];
+        WQ = new string[O.Length];
         for (int i = 0; i < O.Length; i++)
         {
-            m_doorIds[i] = O[i].name;
+            WQ[i] = O[i].name;
         }
     }
 };
 
 [Serializable]
-public struct CheckpointData
+public struct WE
 {
-    public int m_lastCheckpointLevel;
+    public int WR;
 
-    public CheckpointData(int P)
+    public WE(int P)
     {
-        m_lastCheckpointLevel = P;
+        WR = P;
     }
 };
 
 [Serializable]
-public struct SettingsData
+public struct WT
 {
-    public float m_musicVolume;
-    public float m_sfxVolume;
-    public string m_chosenLanguage;
+    public float WY;
+    public float WU;
+    public string QO;
 
-    public SettingsData(SettingsMenu_ElliottDesouza Q)
+    public WT(SettingsMenu_ElliottDesouza Q)
     {
-        m_musicVolume = Q.m_musicSlider.normalizedValue;
-        m_sfxVolume = Q.m_SFXSlider.normalizedValue;
-        m_chosenLanguage = Q.m_selectedLanguage;
+        WY = Q.m_musicSlider.normalizedValue;
+        WU = Q.m_SFXSlider.normalizedValue;
+        QO = Q.m_selectedLanguage;
     }
 
-    public SettingsData(float R, float S, string T)
+    public WT(float R, float S, string T)
     {
-        m_musicVolume = R;
-        m_sfxVolume = S;
-        m_chosenLanguage = T;
+        WY = R;
+        WU = S;
+        QO = T;
     }
 };
 
 [Serializable]
-public struct InventoryData
+public struct WI
 {
-    public ItemData[] m_items;
+    public WP[] WO;
 
-    public InventoryData(Inventory_JoaoBeijinho U)
+    public WI(Inventory_JoaoBeijinho U)
     {
-        m_items = new ItemData[U.m_inventoryItems.Count];
+        WO = new WP[U.m_inventoryItems.Count];
 
         int V = 0;
         foreach (KeyValuePair<ItemType, int> pair in U.m_inventoryItems)
         {
-            m_items[V] = new ItemData(pair.Key, pair.Value);
+            WO[V] = new WP(pair.Key, pair.Value);
             V++;
         }
     }
 };
 
 [Serializable]
-public struct ItemData
+public struct WP
 {
-    public ItemType m_type;
-    public int m_amount;
+    public ItemType WA;
+    public int WS;
 
-    public ItemData(ItemType W, int U)
+    public WP(ItemType W, int U)
     {
-        m_type = W;
-        m_amount = U;
+        WA = W;
+        WS = U;
     }
 }

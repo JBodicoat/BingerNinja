@@ -45,9 +45,9 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
      bool y = false;
     public void LoadLanguageFile()
     {
-        SettingsData u = SaveLoadSystem_JamieG.LoadSettings();
+        WT u = SaveLoadSystem_JamieG.QU();
 
-        if(u.m_chosenLanguage != null && u.m_chosenLanguage.Equals("Portuguese"))
+        if(u.QO != null && u.QO.Equals("Portuguese"))
         {
             m_csvFile = m_csvFilePortuguese;
         };
@@ -61,7 +61,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
         ///////////////////
         //Insert Start Animation here if needed
         ///////////////////
-        t.SetWeaponsUIAnimation(false);
+        t.QF(false);
         PauseGame();        
 
         m_dialogBox.SetActive(true);
@@ -145,7 +145,7 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
 
         m_dialogBox.SetActive(false);
 
-        t.SetWeaponsUIAnimation(true);
+        t.QF(true);
         ResumeGame();
     }
 

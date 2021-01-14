@@ -13,7 +13,7 @@ public class PlayerAnimation_LouieWilliamson : MonoBehaviour
     //hey 
      Animator w;
      Rigidbody2D e;
-    public void TriggerAttackAnim()
+    public void QE()
     {
         if (q)
         {
