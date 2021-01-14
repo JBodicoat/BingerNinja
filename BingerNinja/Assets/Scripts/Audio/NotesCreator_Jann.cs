@@ -21,11 +21,11 @@ public class NotesCreator_Jann
     private const int T = 15;
     private const float FR = 1.059463094359f;
 
-    private int pos;
-    private int auLe;
+    private int p;
+    private int a;
     private float inc;
     private float ph;
-    private int cni;
+    private int cn;
 
     private Dictionary<Note, int> nfs = new Dictionary<Note, int>();
 
@@ -44,25 +44,25 @@ public class NotesCreator_Jann
         GN();
     }
 
-    public int GetFrequency(Note note)
+    public int GetFrequency(Note n)
     {
-        return nfs[note];
+        return nfs[n];
     }
 
-    public Note GetNote(int frequency)
+    public Note GetNote(int f)
     {
-        return nfs.FirstOrDefault(pair => Math.Abs(pair.Value - frequency) < 0.1f).Key;
+        return nfs.FirstOrDefault(pair => Math.Abs(pair.Value - f) < 0.1f).Key;
     }
     
     private void GN()
     {
         nfs.Add(Note.None, 0);
 
-        int index = 0;
-        for (int frequency = F; frequency < T + 1; frequency++)
+        int i = 0;
+        for (int fr = F; fr < T + 1; fr++)
         {
-            index++;
-            nfs.Add((Note) index, (int) (BF * Mathf.Pow(FR, frequency)));
+            i++;
+            nfs.Add((Note) i, (int) (BF * Mathf.Pow(FR, fr)));
         }
     }
 }

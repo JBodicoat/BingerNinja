@@ -9,19 +9,19 @@ public class Note_Jann
     private NotesCreator_Jann.Note nn;
     private int f;
 
-    public Note_Jann(NotesCreator_Jann.Note noteName, int frequence)
+    public Note_Jann(NotesCreator_Jann.Note non, int fr)
     {
-        nn = noteName;
-        f = frequence;
+        nn = non;
+        f = fr;
     }
 
-    public NotesCreator_Jann.Note MNoteName
+    public NotesCreator_Jann.Note NM
     {
         get => nn;
         set => nn = value;
     }
 
-    public int Frequence
+    public int F
     {
         get => f;
         set => f = value;

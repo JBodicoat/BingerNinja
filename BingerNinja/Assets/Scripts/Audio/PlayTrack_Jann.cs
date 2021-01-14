@@ -59,9 +59,9 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
     }
 
     #region Play audio
-    public void PlaySound(string audioName)
+    public void PlaySound(string an)
     {
-        Track_Jann t = LoadTrack(audioName);
+        Track_Jann t = LoadTrack(an);
         AudioClip c = CreateClip(t.n, (float)t.b / 60, t.f[0]);
 
         foreach (AudioSource ss in m_soundAudioSources)
@@ -93,9 +93,9 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
         }
     }
     
-    public void PlayMusic(TextAsset trackFile)
+    public void PlayMusic(TextAsset tf)
     {
-        Track_Jann t = JsonUtility.FromJson<Track_Jann>(trackFile.text);
+        Track_Jann t = JsonUtility.FromJson<Track_Jann>(tf.text);
         t.GenerateFrequencies();
             
         for (int i = 0; i < t.f.Length; i++)
@@ -108,9 +108,9 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
     #endregion
 
     #region Generate audio from track file
-    public Track_Jann LoadTrack(string audioName)
+    public Track_Jann LoadTrack(string an)
     {
-        TextAsset tf = AudioFiles.GetAudio(audioName);
+        TextAsset tf = AudioFiles.GetAudio(an);
         Track_Jann t = JsonUtility.FromJson<Track_Jann>(tf.text);
         t.GenerateFrequencies();
 
@@ -118,46 +118,46 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
     }
     
     // Creates an AudioClip from the notes in a channel
-    private AudioClip CreateClip(string trackName, float bps, int[] frequencies)
+    private AudioClip CreateClip(string tn, float bps, int[] f)
     {
         int ls = (int) (SF / bps);
-        float[] data = new float[ls * frequencies.Length];
+        float[] d = new float[ls * f.Length];
         int cl = 0;
         
-        for (int i = 0; i < frequencies.Length; i++)
+        for (int i = 0; i < f.Length; i++)
         {
-            cf = frequencies[i];
+            cf = f[i];
             AudioClip c = AudioClip.Create("", ls, 1, SF, false, OnAudioRead, OnAudioSetPosition);
             
             float[] buffer = new float[c.samples];
             c.GetData(buffer, 0);
-            buffer.CopyTo(data, cl);
+            buffer.CopyTo(d, cl);
             cl += c.samples;
         }
         
-        AudioClip nc = AudioClip.Create(trackName, cl, 1, SF, false);
-        nc.SetData(data, 0);
+        AudioClip nc = AudioClip.Create(tn, cl, 1, SF, false);
+        nc.SetData(d, 0);
         return nc;
     }
 
     // Called once at clip creation
-    void OnAudioRead(float[] data)
+    void OnAudioRead(float[] d)
     {
-        int count = 0;
-        while (count < data.Length)
+        int c = 0;
+        while (c < d.Length)
         {
             // Sets data[count] to -1 or 1, resulting in 8-bit like sounds
-            data[count] = Mathf.Sign(Mathf.Sin(2 * Mathf.PI * cf * pos / SF));
+            d[c] = Mathf.Sign(Mathf.Sin(2 * Mathf.PI * cf * pos / SF));
             
             pos++;
-            count++;
+            c++;
         }
     }
     
     // Called when track loops or changes playback position
-    void OnAudioSetPosition(int newPosition)
+    void OnAudioSetPosition(int np)
     {
-        pos = newPosition;
+        pos = np;
     }
     #endregion
 

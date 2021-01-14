@@ -123,10 +123,10 @@ class Synthesizer_Jann : EditorWindow
             EditorGUILayout.BeginHorizontal();
             for (int x = 0; x < len; x++)
             {
-                chd[y][x].MNoteName = (NotesCreator_Jann.Note) EditorGUILayout.EnumPopup(
-                    "", chd[y][x].MNoteName,
+                chd[y][x].NM = (NotesCreator_Jann.Note) EditorGUILayout.EnumPopup(
+                    "", chd[y][x].NM,
                     GUILayout.Width(50));
-                chd[y][x].Frequence = nc.GetFrequency(chd[y][x].MNoteName);
+                chd[y][x].F = nc.GetFrequency(chd[y][x].NM);
             }
             EditorGUILayout.EndHorizontal();
         }
@@ -138,29 +138,29 @@ class Synthesizer_Jann : EditorWindow
     // Keeps old data in the process
     private void SN()
     {
-        List<Note_Jann>[] temp = new List<Note_Jann>[ch];
+        List<Note_Jann>[] t = new List<Note_Jann>[ch];
         
         for (int y = 0; y < ch; y++)
         {
-            temp[y] = new List<Note_Jann>();
+            t[y] = new List<Note_Jann>();
             
             for (int x = 0; x < len; x++)
             {
                 if (y >= chd.Length || x >= chd[y].Count)
                 {
-                    temp[y].Add(
+                    t[y].Add(
                         new Note_Jann(NotesCreator_Jann.Note.None, 
                         0)
                         );
                 }
                 else
                 {
-                    temp[y].Add(chd[y][x]);   
+                    t[y].Add(chd[y][x]);   
                 }
             }
         }
 
-        chd = temp;
+        chd = t;
     }
 
     private void ST()
@@ -170,26 +170,24 @@ class Synthesizer_Jann : EditorWindow
         t.b = bpm;
         t.c = len;
 
-        int[] data = new int[ch * len];
+        int[] d = new int[ch * len];
         for (int y = 0; y < ch; y++)
         {
             for (int x = 0; x < len; x++)
             {
-                data[y * len + x] = chd[y][x].Frequence;
+                d[y * len + x] = chd[y][x].F;
             }
         }
 
-        t.d = data;
+        t.d = d;
         
-        string trackJson = JsonUtility.ToJson(t);
-        File.WriteAllText(Application.dataPath + "/Audio/" + t.n + ".json", trackJson);
+        string ts = JsonUtility.ToJson(t);
+        File.WriteAllText(Application.dataPath + "/Audio/" + t.n + ".json", ts);
     }
 
-    private void LT(string path)
+    private void LT(string p)
     {
-        string json = File.ReadAllText(path);
-        
-        Track_Jann t = JsonUtility.FromJson<Track_Jann>(json);
+        Track_Jann t = JsonUtility.FromJson<Track_Jann>(File.ReadAllText(p));
         tit = t.n;
         bpm = t.b;
         len = t.c;
@@ -202,9 +200,9 @@ class Synthesizer_Jann : EditorWindow
         {
             for (int x = 0; x < len; x++)
             {
-                int frequency = t.d[y * len + x];
-                chd[y][x].Frequence = frequency;
-                chd[y][x].MNoteName = nc.GetNote(frequency);
+                int f = t.d[y * len + x];
+                chd[y][x].F = f;
+                chd[y][x].NM = nc.GetNote(f);
             }
         }
     }
