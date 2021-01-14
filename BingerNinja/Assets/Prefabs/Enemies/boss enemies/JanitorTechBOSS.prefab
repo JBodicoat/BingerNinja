@@ -92,12 +92,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be6def35fff5c7d48811166bd65116d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_baseDamage: 20
-  m_percentageChanceOfAffect: 0.5
-  m_poisionDamage: 1
-  m_slowDebuff: 0.5
-  m_affectTime: 5
-  m_HitEffectElliott: {fileID: 0}
+  XQ: 20
+  XE: 0.5
+  XR: 1
+  XT: 0.5
+  XY: 5
+  XU: {fileID: 0}
 --- !u!1 &1488481114249787428
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,62 +421,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c031e2360a0cf864fa5aefaf2f790995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_rayCastStart: {fileID: 8631870843932011449}
-  m_rayCastStartBackup: {fileID: 4073614791533693554}
-  m_detectionCollider: {fileID: 8631870844753434284}
-  m_playerDetected: 0
-  m_currentState: 0
-  m_currentEnemyType: 0
-  m_questionmark: {fileID: 3783213463638213574, guid: 049ec75e55b7e8f4da5d740b5243440f, type: 3}
-  m_excalmationmark: {fileID: 6264025296151744314, guid: d36af638ed0d3714ba36621302ee691a, type: 3}
-  m_inventory: {fileID: 0}
-  m_notifcaionOffset: 0.2
-  m_dropItem: {fileID: 0}
-  m_health: 100
-  m_speed: 1
-  showPath: 0
-  floortilemap: {fileID: 0}
-  m_patrolPoints: []
-  m_playerMoveAllowance: 2
-  m_deleyBetweenPatrol: 0
-  m_dosePatrole: 0
-  m_outOfSightDeley: 2
-  m_sneakDamageMultiplier: 1.5
-  m_sneakDamageMultiplierStack: 0
-  m_attackRange: 1.2
-  m_attckRangeDevider: 1
-  m_tiggerBossLooseTargetDistance: 2
-  m_secondPhaseStartPercentage: 0.3
-  m_amountOfStunWhenPlayerStealthed: 3
-  m_doseAffect: 1
-  m_attackSpeedIncrease: 1.5
-  m_hitSpeed: 2
-  m_attackCollider: {fileID: 220513390732296407}
-  attackDeactivationSpeed: 0.1
-  m_hasChargeAttack: 0
-  m_chargeAttackDeley: 1
-  m_chargAttackPosibility: 1
-  m_chargeAttackMultiplier: 3
-  m_afterAttackDeley: 0
-  m_maxChargTimeBeforDamege: 0.2
-  m_amountOfTimeToMoveAwayFromWall: 0.2
-  m_chargeAttackSpeed: 500
-  showPathBeforAttackTigerBoss: 0
-  m_aimer: {fileID: 1488481114249787428}
-  m_projectile: {fileID: 1986204507551107328, guid: d27f3aeac9b841a4687df15667cd609c, type: 3}
-  m_shootDeley: 0
-  m_projectileSpeed: 5
-  m_RangedAttackRandomChance: 2
-  m_rangedAttackRange: 3
-  m_meleeAttackRange: 1
-  m_chargeAttackRangeTadashi: 10
-  m_rangedAttackRangeTadashi: 3
-  m_meleeAttackRangeTadashi: 1
-  m_normalAttackColider: {fileID: 0}
-  m_chargeAttackColider: {fileID: 0}
-  m_tadashiProjectiles: []
-  m_ProjectileDisplay: {fileID: 0}
-  m_tadashiNormalPorjectile: {fileID: 0}
+  a: {fileID: 8631870843932011449}
+  b: {fileID: 4073614791533693554}
+  CE: {fileID: 8631870844753434284}
+  CW: 0
+  CQ: 0
+  CA: 0
+  CR: {fileID: 3783213463638213574, guid: 049ec75e55b7e8f4da5d740b5243440f, type: 3}
+  CT: {fileID: 6264025296151744314, guid: d36af638ed0d3714ba36621302ee691a, type: 3}
+  CY: {fileID: 0}
+  CU: 0.2
+  CI: {fileID: 0}
+  CO: 100
+  CP: 1
+  CS: 0
+  CD: {fileID: 0}
+  CF: []
+  CG: 2
+  CH: 0
+  CJ: 0
+  CK: 2
+  X: 1.5
+  C: 0
+  V: 1.2
+  B: 1
+  N: 2
+  M: 0.3
+  QQ: 3
+  QW: 1
+  QE: 1.5
+  Q: 2
+  WR: {fileID: 220513390732296407}
+  E: 0.1
+  R: 0
+  T: 1
+  Y: 1
+  U: 3
+  I: 0
+  O: 0.2
+  P: 0.2
+  S: 500
+  D: 0
+  EQ: {fileID: 1488481114249787428}
+  RQ: {fileID: 1986204507551107328, guid: d27f3aeac9b841a4687df15667cd609c, type: 3}
+  TQ: 0
+  YQ: 5
+  UQ: 2
+  UW: 3
+  UE: 1
+  UU: 10
+  UI: 3
+  UO: 1
+  UP: {fileID: 0}
+  UA: {fileID: 0}
+  US: []
+  UD: {fileID: 0}
+  UF: {fileID: 0}
 --- !u!114 &1810649366890884935
 MonoBehaviour:
   m_ObjectHideFlags: 0
