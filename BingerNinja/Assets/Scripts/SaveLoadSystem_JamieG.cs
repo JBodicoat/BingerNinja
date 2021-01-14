@@ -17,21 +17,21 @@ using UnityEngine;
 
 public static class SaveLoadSystem_JamieG
 {
-    private const string SettingsFile = "/Settings.save";
-    private const string InventoryFile = "/Inventory.save";
-    private const string GameplayFile = "/Gameplay.save";
-    private const string CheckpointFile = "/Checkpoint.save";
+     const string a = "/Settings.save";
+     const string b = "/Inventory.save";
+     const string c = "/Gameplay.save";
+     const string d = "/Checkpoint.save";
 
-    private static SaveSystemCache m_Cache = new SaveSystemCache();
+     static SaveSystemCache e = new SaveSystemCache();
 
     public static void DeleteSaves()
     {
-        DirectoryInfo dir = new DirectoryInfo(Application.persistentDataPath);
+        DirectoryInfo f = new DirectoryInfo(Application.persistentDataPath);
 
-        string[] files = new[] {SettingsFile, InventoryFile, GameplayFile, CheckpointFile};
-        foreach(FileInfo fi in dir.GetFiles())
+        string[] h = new[] {a, b, c, d};
+        foreach(FileInfo fi in f.GetFiles())
         {
-            if (files.Contains("/" + fi.Name))
+            if (h.Contains("/" + fi.Name))
             {
                 fi.Delete();   
             }
@@ -39,50 +39,50 @@ public static class SaveLoadSystem_JamieG
     }
 
     // Saves the configurations of the settings menu into the Settings.save file 
-    public static void SaveSettings(SettingsMenu_ElliottDesouza settingsMenu)
+    public static void SaveSettings(SettingsMenu_ElliottDesouza g)
     {
-        SettingsData settingsData = new SettingsData(settingsMenu);
-        SaveToFile(SettingsFile, settingsData);
+        SettingsData l = new SettingsData(g);
+        SaveToFile(a, l);
     }
 
     // Saves the current items in the inventory into the Inventory.save file
-    public static void SaveInventory(Inventory_JoaoBeijinho inventory)
+    public static void SaveInventory(Inventory_JoaoBeijinho i)
     {
-        InventoryData inventoryData = new InventoryData(inventory);
-        SaveToFile(InventoryFile, inventoryData);
+        InventoryData j = new InventoryData(i);
+        SaveToFile(b, j);
     }
 
     // Saves the current state of the game into the Gameplay.save file
-    public static void SaveGameplay(int currentLevel, GameObject[] enemies, GameObject[] doors)
+    public static void SaveGameplay(int k, GameObject[] m, GameObject[] n)
     {
-        GameplayData gameplayData = new GameplayData(currentLevel, enemies, doors);
-        SaveToFile(GameplayFile, gameplayData);
+        GameplayData o = new GameplayData(k, m, n);
+        SaveToFile(c, o);
     }
     
     // Saves the current checkpoint (after a boss level)
-    public static void SaveCheckpoint(int lastCheckpointLevel)
+    public static void SaveCheckpoint(int p)
     {
-        CheckpointData checkpointData = new CheckpointData(lastCheckpointLevel);
-        SaveToFile(CheckpointFile, checkpointData);
+        CheckpointData q = new CheckpointData(p);
+        SaveToFile(d, q);
     }
 
     // Returns information from the Settings.save file or an empty struct if the file can't be found
     public static SettingsData LoadSettings()
     {
-        if (m_Cache.IsCached(SettingsFile))
+        if (e.IsCached(a))
         {
-            return (SettingsData) m_Cache.GetData(SettingsFile);
+            return (SettingsData) e.GetData(a);
         }
 
-        object data = LoadFromFile(SettingsFile);
-        if (data is SettingsData settingsData)
+        object r = LoadFromFile(a);
+        if (r is SettingsData s)
         {
-            if (settingsData.m_chosenLanguage == null)
+            if (s.m_chosenLanguage == null)
             {
-                settingsData.m_chosenLanguage = "English";
+                s.m_chosenLanguage = "English";
             }
 
-            return settingsData;
+            return s;
         }
 
         return new SettingsData(1f, 1f, "English");
@@ -91,13 +91,13 @@ public static class SaveLoadSystem_JamieG
     // Returns the items from the Inventory.save file or an empty struct if the file can't be found
     public static InventoryData LoadInventory()
     {
-        if (m_Cache.IsCached(InventoryFile))
+        if (e.IsCached(b))
         {
-            return (InventoryData) m_Cache.GetData(InventoryFile);
+            return (InventoryData) e.GetData(b);
         }
         
-        object data = LoadFromFile(InventoryFile);
-        if (data is InventoryData inventoryData)
+        object t = LoadFromFile(b);
+        if (t is InventoryData inventoryData)
         {
             return inventoryData;
         }
@@ -108,13 +108,13 @@ public static class SaveLoadSystem_JamieG
     // Returns the gameplay data from the Gameplay.save file or an empty struct if the file can't be found
     public static GameplayData LoadGameplay()
     {
-        if (m_Cache.IsCached(GameplayFile))
+        if (e.IsCached(c))
         {
-            return (GameplayData) m_Cache.GetData(GameplayFile);
+            return (GameplayData) e.GetData(c);
         }
         
-        object data = LoadFromFile(GameplayFile);
-        if (data is GameplayData gameplayData)
+        object u = LoadFromFile(c);
+        if (u is GameplayData gameplayData)
         {
             return gameplayData;
         }
@@ -125,13 +125,13 @@ public static class SaveLoadSystem_JamieG
     // Returns the gameplay data from the Gameplay.save file or an empty struct if the file can't be found
     public static CheckpointData LoadCheckpoint()
     {
-        if (m_Cache.IsCached(CheckpointFile))
+        if (e.IsCached(d))
         {
-            return (CheckpointData) m_Cache.GetData(CheckpointFile);
+            return (CheckpointData) e.GetData(d);
         }
         
-        object data = LoadFromFile(CheckpointFile);
-        if (data is CheckpointData checkpointData)
+        object v = LoadFromFile(d);
+        if (v is CheckpointData checkpointData)
         {
             return checkpointData;
         }
@@ -145,37 +145,37 @@ public static class SaveLoadSystem_JamieG
     /// </summary>
     /// <param name="fileName">Name of the file</param>
     /// <param name="data">Data that should be saved (struct from the end of this file)</param>
-    private static void SaveToFile(string fileName, object data)
+     static void SaveToFile(string fileName, object data)
     {
         //Setup formatter
-        BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + fileName;
-        FileStream stream = new FileStream(path, FileMode.Create);
+        BinaryFormatter w = new BinaryFormatter();
+        string x = Application.persistentDataPath + fileName;
+        FileStream y = new FileStream(x, FileMode.Create);
 
         //Save to file
-        formatter.Serialize(stream, data);
-        stream.Close();
+        w.Serialize(y, data);
+        y.Close();
 
-        m_Cache.Cache(fileName, data);
+        e.Cache(fileName, data);
     }
 
     /// <summary>
     /// Loads data from a file from C:\Users\{user}\AppData\LocalLow\DefaultCompany\BingerNinja
     /// </summary>
-    /// <param name="filename">Name of the file that should be loaded</param>
+    /// <param name="C">Name of the file that should be loaded</param>
     /// <returns>A struct (defined at the end of this file)</returns>
-    public static object LoadFromFile(string filename)
+    public static object LoadFromFile(string C)
     {
-        string path = Application.persistentDataPath + filename;
-        if (File.Exists(path))
+        string z = Application.persistentDataPath + C;
+        if (File.Exists(z))
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
+            BinaryFormatter A = new BinaryFormatter();
+            FileStream B = new FileStream(z, FileMode.Open);
 
-            object data = formatter.Deserialize(stream);
-            stream.Close();
+            object D = A.Deserialize(B);
+            B.Close();
             
-            return data;
+            return D;
         }
         else
         {
@@ -186,40 +186,40 @@ public static class SaveLoadSystem_JamieG
 
 internal class SaveSystemCache
 {
-    private List<CacheData> m_cacheData = new List<CacheData>();
+     List<CacheData> E = new List<CacheData>();
 
-    public void Cache(string type, object data)
+    public void Cache(string F, object G)
     {
-        if (IsCached(type))
+        if (IsCached(F))
         {
-            int index = m_cacheData.IndexOf(m_cacheData.Find(c => c.type.Equals(type)));
-            m_cacheData[index] = new CacheData(type, data);
+            int H = E.IndexOf(E.Find(c => c.type.Equals(F)));
+            E[H] = new CacheData(F, G);
         }
         else
         {
-            m_cacheData.Add(new CacheData(type, data));
+            E.Add(new CacheData(F, G));
         }
     }
 
-    public object GetData(string type)
+    public object GetData(string I)
     {
-        return m_cacheData.Find(data => data.type.Equals(type)).data;
+        return E.Find(data => data.type.Equals(I)).data;
     }
 
-    public bool IsCached(string type)
+    public bool IsCached(string J)
     {
-        return m_cacheData.Find(data => data.type.Equals(type)).data != null;
+        return E.Find(data => data.type.Equals(J)).data != null;
     }
 
-    private struct CacheData
+     struct CacheData
     {
         public string type;
         public object data;
 
-        public CacheData(string type, object data)
+        public CacheData(string K, object L)
         {
-            this.data = data;
-            this.type = type;
+            this.data = L;
+            this.type = K;
         }
     }
 }
@@ -232,24 +232,24 @@ public struct GameplayData
     public string[] m_enemyIds;
     public string[] m_doorIds;
 
-    public GameplayData(int currentLevel, GameObject[] enemies, GameObject[] doors)
+    public GameplayData(int M, GameObject[] N, GameObject[] O)
     {
-        m_currentLevel = currentLevel;
+        m_currentLevel = M;
 
-        int count = enemies.Count(e => e.activeInHierarchy);
-        m_enemyIds = new string[count];
-        for (int i = 0; i < enemies.Length; i++)
+        int P = N.Count(e => e.activeInHierarchy);
+        m_enemyIds = new string[P];
+        for (int i = 0; i < N.Length; i++)
         {
-            if (enemies[i].activeInHierarchy)
+            if (N[i].activeInHierarchy)
             {
-                m_enemyIds[i] = enemies[i].name;   
+                m_enemyIds[i] = N[i].name;   
             }
         }
         
-        m_doorIds = new string[doors.Length];
-        for (int i = 0; i < doors.Length; i++)
+        m_doorIds = new string[O.Length];
+        for (int i = 0; i < O.Length; i++)
         {
-            m_doorIds[i] = doors[i].name;
+            m_doorIds[i] = O[i].name;
         }
     }
 };
@@ -259,9 +259,9 @@ public struct CheckpointData
 {
     public int m_lastCheckpointLevel;
 
-    public CheckpointData(int lastCheckpointLevel)
+    public CheckpointData(int P)
     {
-        m_lastCheckpointLevel = lastCheckpointLevel;
+        m_lastCheckpointLevel = P;
     }
 };
 
@@ -272,18 +272,18 @@ public struct SettingsData
     public float m_sfxVolume;
     public string m_chosenLanguage;
 
-    public SettingsData(SettingsMenu_ElliottDesouza settingsMenu)
+    public SettingsData(SettingsMenu_ElliottDesouza Q)
     {
-        m_musicVolume = settingsMenu.m_musicSlider.normalizedValue;
-        m_sfxVolume = settingsMenu.m_SFXSlider.normalizedValue;
-        m_chosenLanguage = settingsMenu.m_selectedLanguage;
+        m_musicVolume = Q.m_musicSlider.normalizedValue;
+        m_sfxVolume = Q.m_SFXSlider.normalizedValue;
+        m_chosenLanguage = Q.m_selectedLanguage;
     }
 
-    public SettingsData(float mMusicVolume, float mSfxVolume, string mChosenLanguage)
+    public SettingsData(float R, float S, string T)
     {
-        m_musicVolume = mMusicVolume;
-        m_sfxVolume = mSfxVolume;
-        m_chosenLanguage = mChosenLanguage;
+        m_musicVolume = R;
+        m_sfxVolume = S;
+        m_chosenLanguage = T;
     }
 };
 
@@ -292,15 +292,15 @@ public struct InventoryData
 {
     public ItemData[] m_items;
 
-    public InventoryData(Inventory_JoaoBeijinho inventory)
+    public InventoryData(Inventory_JoaoBeijinho U)
     {
-        m_items = new ItemData[inventory.m_inventoryItems.Count];
+        m_items = new ItemData[U.m_inventoryItems.Count];
 
-        int index = 0;
-        foreach (KeyValuePair<ItemType, int> pair in inventory.m_inventoryItems)
+        int V = 0;
+        foreach (KeyValuePair<ItemType, int> pair in U.m_inventoryItems)
         {
-            m_items[index] = new ItemData(pair.Key, pair.Value);
-            index++;
+            m_items[V] = new ItemData(pair.Key, pair.Value);
+            V++;
         }
     }
 };
@@ -311,9 +311,9 @@ public struct ItemData
     public ItemType m_type;
     public int m_amount;
 
-    public ItemData(ItemType type, int amount)
+    public ItemData(ItemType W, int U)
     {
-        m_type = type;
-        m_amount = amount;
+        m_type = W;
+        m_amount = U;
     }
 }

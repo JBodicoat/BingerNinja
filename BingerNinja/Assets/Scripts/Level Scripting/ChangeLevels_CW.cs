@@ -9,25 +9,25 @@ public class ChangeLevels_CW : MonoBehaviour
     public GameObject vendingMachine;
     protected Inventory_JoaoBeijinho m_Inventory;
 
-    private void Awake()
+     void Awake()
     {
         m_Inventory = FindObjectOfType<Inventory_JoaoBeijinho>();
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+     void OnTriggerEnter2D(Collider2D a)
     {
-        if(collision.tag == "Player")
+        if(a.tag == "Player")
         {
             m_Inventory.GiveItem(ItemType.NinjaPoints, 15);
 
-            int currentLevel = SceneManager.GetActiveScene().buildIndex;
+            int b = SceneManager.GetActiveScene().buildIndex;
             
             // Assuming the boss is on every third level
-            if (currentLevel % 3 == 0 || currentLevel == 20)
+            if (b % 3 == 0 || b == 20)
             {
-                SaveLoadSystem_JamieG.SaveCheckpoint(currentLevel + 1);                
+                SaveLoadSystem_JamieG.SaveCheckpoint(b + 1);                
             }
 
-            if (currentLevel > 4 && currentLevel != 20)
+            if (b > 4 && b != 20)
             {
                 vendingMachine.SetActive(true);
                 Time.timeScale = 0f;

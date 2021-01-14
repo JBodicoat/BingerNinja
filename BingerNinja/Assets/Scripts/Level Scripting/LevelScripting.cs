@@ -10,175 +10,175 @@ using UnityEngine.Tilemaps;
 public class LevelScripting : MonoBehaviour
 {
     internal bool enemyDead = false, keyUsed = false, levelBossIntro, bossDead = false, doorsClosed = false, cinematicDone = true, ventDialogueDisabled = false, endVentDialogueCanPlay = false, drawFreezer = false;
-    private GameObject levelLiftTrigger, keyTrigger, keyTriggerTwo, doorCloseTrigger, dialogBox, ventsDialogue, endVentDialogue;
+     GameObject a, b, c, d, e, f, g;
     public GameObject vents;
-    private BaseEnemy_SebastianMol boss, boss2, level2Enemy1, level2Enemy2;
-    private BossDialogue_MarioFernandes bossDialogue, boss2Dialogue, level2End;
-    private Tilemap objInfWalls, walls1, objBehWalls, walls2;
+     BaseEnemy_SebastianMol h, i, j, k;
+     BossDialogue_MarioFernandes l, m, n;
+     Tilemap o, p, q, r;
     public Tile bottomDoorTile, topDoorTile;
-    private int bossDialogIndex = 0, boss2DialogIndex = 0;
+     int s = 0, t = 0;
     public int currentLevel;
-    private PlayerController_JamieG controller;
-    private BossIntroCineScript_AdamG cinematics;
+     PlayerController_JamieG u;
+     BossIntroCineScript_AdamG v;
     // Dan timeline script
-    private Timeline_Script timeline;
-    private float cinematicsTimer;
+     Timeline_Script w;
+     float x;
 
-    private WeaponUI_LouieWilliamson wpnUI;
+     WeaponUI_LouieWilliamson y;
 
-    private void Awake()
+     void Awake()
     {
         currentLevel = SceneManager.GetActiveScene().buildIndex;
-        controller = GameObject.Find("Player").GetComponent<PlayerController_JamieG>();
+        u = GameObject.Find("Player").GetComponent<PlayerController_JamieG>();
         switch (currentLevel)
         {
             case 1:
                 {
-                    keyTrigger = GameObject.Find("Key Trigger");
-                    walls1 = GameObject.Find("Walls1_Map").GetComponent<Tilemap>();
-                    walls2 = GameObject.Find("Walls2_Map").GetComponent<Tilemap>();
+                    b = GameObject.Find("Key Trigger");
+                    p = GameObject.Find("Walls1_Map").GetComponent<Tilemap>();
+                    r = GameObject.Find("Walls2_Map").GetComponent<Tilemap>();
                 }
                 break;
             case 2:
                 {
-                    level2End = GameObject.Find("EndLevelTwo").GetComponent<BossDialogue_MarioFernandes>();
-                    level2Enemy1 = GameObject.Find("Enemy 1").GetComponent<BaseEnemy_SebastianMol>();
-                    level2Enemy2 = GameObject.Find("Enemy 2").GetComponent<BaseEnemy_SebastianMol>();
-                    levelLiftTrigger = GameObject.Find("Level 2 Lift");
+                    n = GameObject.Find("EndLevelTwo").GetComponent<BossDialogue_MarioFernandes>();
+                    j = GameObject.Find("Enemy 1").GetComponent<BaseEnemy_SebastianMol>();
+                    k = GameObject.Find("Enemy 2").GetComponent<BaseEnemy_SebastianMol>();
+                    a = GameObject.Find("Level 2 Lift");
                 }
                 break;
             case 3:
                 {
-                    boss = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BaseEnemy_SebastianMol>();
-                    bossDialogue = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BossDialogue_MarioFernandes>();
-                    levelLiftTrigger = GameObject.Find("Level 3 Lift");
+                    h = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BaseEnemy_SebastianMol>();
+                    l = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BossDialogue_MarioFernandes>();
+                    a = GameObject.Find("Level 3 Lift");
                 }
                 break;
             case 4:
                 {
-                    keyTrigger = GameObject.Find("Key Trigger");
-                    walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
-                    objInfWalls = GameObject.Find("ObjectsInFrontOfWalls_map").GetComponent<Tilemap>();
-                    walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
+                    b = GameObject.Find("Key Trigger");
+                    p = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
+                    o = GameObject.Find("ObjectsInFrontOfWalls_map").GetComponent<Tilemap>();
+                    r = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
                 }
                 break;
             case 5:
                 {
-                    keyTrigger = GameObject.Find("Key Trigger");
-                    levelLiftTrigger = GameObject.Find("Level 5 Lift");
-                    ventsDialogue = GameObject.Find("Vents");
-                    endVentDialogue = GameObject.Find("Exit Vent");
+                    b = GameObject.Find("Key Trigger");
+                    a = GameObject.Find("Level 5 Lift");
+                    f = GameObject.Find("Vents");
+                    g = GameObject.Find("Exit Vent");
                 }
                 break;
             case 6:
                 {
-                    boss = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BaseEnemy_SebastianMol>();
-                    bossDialogue = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BossDialogue_MarioFernandes>();
-                    levelLiftTrigger = GameObject.Find("Level 6 Lift");
-                    walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
-                    walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
+                    h = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BaseEnemy_SebastianMol>();
+                    l = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BossDialogue_MarioFernandes>();
+                    a = GameObject.Find("Level 6 Lift");
+                    p = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
+                    r = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
                 }
                 break;
             case 7:
                 {
-                    keyTrigger = GameObject.Find("Key Trigger");
-                    levelLiftTrigger = GameObject.Find("Level 7 Lift");
+                    b = GameObject.Find("Key Trigger");
+                    a = GameObject.Find("Level 7 Lift");
                 }
                 break;
             case 8:
                 {
-                    keyTrigger = GameObject.Find("Key Trigger");
-                    keyTriggerTwo = GameObject.Find("Key Trigger 2");
-                    walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
-                    objInfWalls = GameObject.Find("ObjectsInFrontOfWalls_map").GetComponent<Tilemap>();
-                    objBehWalls = GameObject.Find("ObjectsBehindWalls_map").GetComponent<Tilemap>();
-                    walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
+                    b = GameObject.Find("Key Trigger");
+                    c = GameObject.Find("Key Trigger 2");
+                    p = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
+                    o = GameObject.Find("ObjectsInFrontOfWalls_map").GetComponent<Tilemap>();
+                    q = GameObject.Find("ObjectsBehindWalls_map").GetComponent<Tilemap>();
+                    r = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
                 }
                 break;
             case 9:
                 {
-                    boss = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BaseEnemy_SebastianMol>();
-                    bossDialogue = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BossDialogue_MarioFernandes>();
-                    levelLiftTrigger = GameObject.Find("Level 9 Lift");
+                    h = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BaseEnemy_SebastianMol>();
+                    l = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BossDialogue_MarioFernandes>();
+                    a = GameObject.Find("Level 9 Lift");
                 }
                 break;
             case 11:
                 {
-                    keyTrigger = GameObject.Find("Key Trigger");
-                    walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
-                    walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
+                    b = GameObject.Find("Key Trigger");
+                    p = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
+                    r = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
                 }
                 break;
             case 12:
                 {
-                    boss = GameObject.Find("Yakuza Leader").GetComponent<BaseEnemy_SebastianMol>();
-                    bossDialogue = GameObject.Find("Yakuza Leader").GetComponent<BossDialogue_MarioFernandes>();
-                    levelLiftTrigger = GameObject.Find("Level 12 Lift");
-                    cinematics = GameObject.Find("BossIntroCinematic").GetComponent<BossIntroCineScript_AdamG>();
+                    h = GameObject.Find("Yakuza Leader").GetComponent<BaseEnemy_SebastianMol>();
+                    l = GameObject.Find("Yakuza Leader").GetComponent<BossDialogue_MarioFernandes>();
+                    a = GameObject.Find("Level 12 Lift");
+                    v = GameObject.Find("BossIntroCinematic").GetComponent<BossIntroCineScript_AdamG>();
                 }
                 break;
             case 13:
                 {
-                    keyTrigger = GameObject.Find("Key Trigger");
-                    walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
-                    walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
+                    b = GameObject.Find("Key Trigger");
+                    p = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
+                    r = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
                 }
                 break;
             case 14:
                 {
-                    levelLiftTrigger = GameObject.Find("Level 14 Lift");
-                    keyTrigger = GameObject.Find("Real Key");
-                    doorCloseTrigger = GameObject.Find("DialogTrigger");
-                    walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
-                    walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
-                    bottomDoorTile = walls1.GetTile<Tile>(new Vector3Int(12, 26, 0));
-                    topDoorTile = walls2.GetTile<Tile>(new Vector3Int(13, 27, 0));
+                    a = GameObject.Find("Level 14 Lift");
+                    b = GameObject.Find("Real Key");
+                    d = GameObject.Find("DialogTrigger");
+                    p = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
+                    r = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
+                    bottomDoorTile = p.GetTile<Tile>(new Vector3Int(12, 26, 0));
+                    topDoorTile = r.GetTile<Tile>(new Vector3Int(13, 27, 0));
                 }
                 break;
             case 15:
                 {
-                    boss = GameObject.Find("Toby the Tiger").GetComponent<BaseEnemy_SebastianMol>();
-                    bossDialogue = GameObject.Find("Toby the Tiger").GetComponent<BossDialogue_MarioFernandes>();
-                    levelLiftTrigger = GameObject.Find("Level 15 Lift");
+                    h = GameObject.Find("Toby the Tiger").GetComponent<BaseEnemy_SebastianMol>();
+                    l = GameObject.Find("Toby the Tiger").GetComponent<BossDialogue_MarioFernandes>();
+                    a = GameObject.Find("Level 15 Lift");
                 }
                 break;
             case 17:
                 {
-                    levelLiftTrigger = GameObject.Find("Level 17 Lift");
-                    keyTrigger = GameObject.Find("Key");
-                    walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
-                    walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
+                    a = GameObject.Find("Level 17 Lift");
+                    b = GameObject.Find("Key");
+                    p = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
+                    r = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
                 }
                 break;
             case 18:
                 {
-                    boss = GameObject.Find("Space Ninja").GetComponent<BaseEnemy_SebastianMol>();
-                    bossDialogue = GameObject.Find("Space Ninja").GetComponent<BossDialogue_MarioFernandes>();
-                    levelLiftTrigger = GameObject.Find("Level 18 Lift");
-                    dialogBox = GameObject.Find("DialogBox");
-                    walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
-                    walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
+                    h = GameObject.Find("Space Ninja").GetComponent<BaseEnemy_SebastianMol>();
+                    l = GameObject.Find("Space Ninja").GetComponent<BossDialogue_MarioFernandes>();
+                    a = GameObject.Find("Level 18 Lift");
+                    e = GameObject.Find("DialogBox");
+                    p = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
+                    r = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
                 }
                 break;
             case 19:
                 {
-                    levelLiftTrigger = GameObject.Find("Level 19 Lift");
-                    keyTrigger = GameObject.Find("Key Trigger");
+                    a = GameObject.Find("Level 19 Lift");
+                    b = GameObject.Find("Key Trigger");
                     // keyTrigger = GameObject.Find("My Key");
-                    walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
-                    walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
+                    p = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
+                    r = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
                 }
                 break;
             case 20:
                 {
-                    boss = GameObject.Find("Ninjaroth").GetComponent<BaseEnemy_SebastianMol>();
-                    boss2 = GameObject.Find("Tadashi").GetComponent<BaseEnemy_SebastianMol>();
-                    bossDialogue = GameObject.Find("Ninjaroth").GetComponent<BossDialogue_MarioFernandes>();
-                    boss2Dialogue = GameObject.Find("Tadashi").GetComponent<BossDialogue_MarioFernandes>();
-                    dialogBox = GameObject.Find("DialogBox");
-                    levelLiftTrigger = GameObject.Find("Level 20 Lift");
+                    h = GameObject.Find("Ninjaroth").GetComponent<BaseEnemy_SebastianMol>();
+                    i = GameObject.Find("Tadashi").GetComponent<BaseEnemy_SebastianMol>();
+                    l = GameObject.Find("Ninjaroth").GetComponent<BossDialogue_MarioFernandes>();
+                    m = GameObject.Find("Tadashi").GetComponent<BossDialogue_MarioFernandes>();
+                    e = GameObject.Find("DialogBox");
+                    a = GameObject.Find("Level 20 Lift");
                     // find game object with timeline script to change playable director
-                    timeline = GameObject.Find("Cinematics").GetComponent<Timeline_Script>();
+                    w = GameObject.Find("Cinematics").GetComponent<Timeline_Script>();
                 }
                 break;
 
@@ -284,81 +284,81 @@ public class LevelScripting : MonoBehaviour
         //}
     }
 
-    private void Start()
+     void Start()
     {
         switch (currentLevel)
         {
 
             case 2:
                 {
-                    levelLiftTrigger.SetActive(false);
+                    a.SetActive(false);
                 }
                 break;
             case 3:
                 {
-                    levelLiftTrigger.SetActive(false);
+                    a.SetActive(false);
                 }
                 break;
             case 5:
                 {
-                    levelLiftTrigger.SetActive(false);
-                    endVentDialogue.SetActive(false);
+                    a.SetActive(false);
+                    g.SetActive(false);
                 }
                 break;
             case 6:
                 {
-                    levelLiftTrigger.SetActive(false);
+                    a.SetActive(false);
                 }
                 break;
             case 7:
                 {
-                    levelLiftTrigger.SetActive(false);
+                    a.SetActive(false);
                 }
                 break;
             case 9:
                 {
-                    levelLiftTrigger.SetActive(false);
+                    a.SetActive(false);
                 }
                 break;
             case 12:
                 {
-                    levelLiftTrigger.SetActive(false);
+                    a.SetActive(false);
                 }
                 break;
             case 14:
                 {
-                    levelLiftTrigger.SetActive(false);
-                    walls1.SetTile(new Vector3Int(12, 26, 0), null);
-                    walls1.SetTile(new Vector3Int(12, 25, 0), null);
-                    walls1.SetTile(new Vector3Int(12, 24, 0), null);
-                    walls2.SetTile(new Vector3Int(13, 27, 0), null);
-                    walls2.SetTile(new Vector3Int(13, 26, 0), null);
-                    walls2.SetTile(new Vector3Int(13, 25, 0), null);
+                    a.SetActive(false);
+                    p.SetTile(new Vector3Int(12, 26, 0), null);
+                    p.SetTile(new Vector3Int(12, 25, 0), null);
+                    p.SetTile(new Vector3Int(12, 24, 0), null);
+                    r.SetTile(new Vector3Int(13, 27, 0), null);
+                    r.SetTile(new Vector3Int(13, 26, 0), null);
+                    r.SetTile(new Vector3Int(13, 25, 0), null);
                 }
                 break;
             case 15:
                 {
-                    levelLiftTrigger.SetActive(false);
+                    a.SetActive(false);
                 }
                 break;
             case 18:
                 {
-                    boss = GameObject.Find("Space Ninja").GetComponent<BaseEnemy_SebastianMol>();
-                    bossDialogue = GameObject.Find("Space Ninja").GetComponent<BossDialogue_MarioFernandes>();
-                    levelLiftTrigger = GameObject.Find("Level 18 Lift");
-                    dialogBox = GameObject.Find("DialogBox");
+                    h = GameObject.Find("Space Ninja").GetComponent<BaseEnemy_SebastianMol>();
+                    l = GameObject.Find("Space Ninja").GetComponent<BossDialogue_MarioFernandes>();
+                    a = GameObject.Find("Level 18 Lift");
+                    e = GameObject.Find("DialogBox");
                     levelBossIntro = false;
-                    levelLiftTrigger.SetActive(false);
+                    a.SetActive(false);
                 }
                 break;
 
             case 20:
-                levelLiftTrigger.SetActive(false);
+                a.SetActive(false);
                 break;
             default:
                 break;
         }
-        wpnUI = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
+        y = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
 
         //if (SceneManager.GetActiveScene().buildIndex == 2)
         //{
@@ -429,9 +429,9 @@ public class LevelScripting : MonoBehaviour
             
         //}
     }
-    private void Update()
+     void Update()
     {
-        if (controller.m_changeLevel.triggered)
+        if (u.m_changeLevel.triggered)
         {
             SceneManager_JamieG.Instance.LoadNextLevel();
         }
@@ -441,17 +441,17 @@ public class LevelScripting : MonoBehaviour
                 {
                     if(!keyUsed)
                     {
-                        if (!keyTrigger.activeInHierarchy)
+                        if (!b.activeInHierarchy)
                         {
-                            wpnUI.setKey(false);
+                            y.setKey(false);
 
-                            walls2.SetTile(new Vector3Int(6, 13, 0), null);
-                            walls2.SetTile(new Vector3Int(5, 13, 0), null);
-                            walls2.SetTile(new Vector3Int(4, 13, 0), null);
+                            r.SetTile(new Vector3Int(6, 13, 0), null);
+                            r.SetTile(new Vector3Int(5, 13, 0), null);
+                            r.SetTile(new Vector3Int(4, 13, 0), null);
 
-                            walls1.SetTile(new Vector3Int(3, 12, 0), null);
-                            walls1.SetTile(new Vector3Int(4, 12, 0), null);
-                            walls1.SetTile(new Vector3Int(5, 12, 0), null);
+                            p.SetTile(new Vector3Int(3, 12, 0), null);
+                            p.SetTile(new Vector3Int(4, 12, 0), null);
+                            p.SetTile(new Vector3Int(5, 12, 0), null);
 
 
                             keyUsed = true;
@@ -465,10 +465,10 @@ public class LevelScripting : MonoBehaviour
                 {
                     if(!enemyDead)
                     {
-                        if (level2Enemy1.m_health <= 0 || level2Enemy2.m_health <= 0)
+                        if (j.m_health <= 0 || k.m_health <= 0)
                         {
-                            levelLiftTrigger.SetActive(true);
-                            level2End.TriggerDialogue(0);
+                            a.SetActive(true);
+                            n.TriggerDialogue(0);
                             enemyDead = true;
 
                         }
@@ -482,15 +482,15 @@ public class LevelScripting : MonoBehaviour
                         if (!levelBossIntro)
                         {
                            // cinematics.PlayZoomIn();
-                            bossDialogue.TriggerDialogue(0);
+                            l.TriggerDialogue(0);
                             levelBossIntro = true;
                         }
-                        if (boss.m_health <= 0)
+                        if (h.m_health <= 0)
                         {
                             //dramatic death SE
                             //freeze on enemy as he dies  
-                            bossDialogue.TriggerDialogue(1);
-                            levelLiftTrigger.SetActive(true);
+                            l.TriggerDialogue(1);
+                            a.SetActive(true);
                             bossDead = true;
 
                         }
@@ -501,16 +501,16 @@ public class LevelScripting : MonoBehaviour
                 {
                     if(!keyUsed)
                     {
-                        if (!keyTrigger.activeInHierarchy)
+                        if (!b.activeInHierarchy)
                         {
-                            wpnUI.setKey(false);
+                            y.setKey(false);
                             keyUsed = true;
-                            walls2.SetTile(new Vector3Int(25, 11, 0), null);
-                            walls2.SetTile(new Vector3Int(25, 10, 0), null);
-                            walls2.SetTile(new Vector3Int(25, 9, 0), null);
-                            walls1.SetTile(new Vector3Int(24, 9, 0), null);
-                            walls1.SetTile(new Vector3Int(24, 10, 0), null);
-                            walls1.SetTile(new Vector3Int(24, 8, 0), null);
+                            r.SetTile(new Vector3Int(25, 11, 0), null);
+                            r.SetTile(new Vector3Int(25, 10, 0), null);
+                            r.SetTile(new Vector3Int(25, 9, 0), null);
+                            p.SetTile(new Vector3Int(24, 9, 0), null);
+                            p.SetTile(new Vector3Int(24, 10, 0), null);
+                            p.SetTile(new Vector3Int(24, 8, 0), null);
                         }
                     }
 
@@ -521,16 +521,16 @@ public class LevelScripting : MonoBehaviour
                 {
                     if(!keyUsed)
                     {
-                        if (!keyTrigger.activeInHierarchy)
+                        if (!b.activeInHierarchy)
                         {
-                            wpnUI.setKey(false);
+                            y.setKey(false);
                             keyUsed = true;
-                            levelLiftTrigger.SetActive(true);
+                            a.SetActive(true);
                         }
                     }
-                    if(!vents.activeInHierarchy && !endVentDialogue.activeInHierarchy)
+                    if(!vents.activeInHierarchy && !g.activeInHierarchy)
                     {
-                        endVentDialogue.SetActive(true);
+                        g.SetActive(true);
                     }
                     //if(endVentDialogueCanPlay)
                     //{
@@ -546,47 +546,47 @@ public class LevelScripting : MonoBehaviour
                    {
                         if (!levelBossIntro)
                         {
-                            bossDialogue.TriggerDialogue(0);
+                            l.TriggerDialogue(0);
                             levelBossIntro = true;
                         }
-                        if (boss.m_health <= 0)
+                        if (h.m_health <= 0)
                         {
                             //dramatic death SE
                             //freeze on enemy as he dies  
-                            bossDialogue.TriggerDialogue(1);
-                            levelLiftTrigger.SetActive(true);
+                            l.TriggerDialogue(1);
+                            a.SetActive(true);
                             bossDead = true;
 
                         }
                    }
                    if(!drawFreezer)
                    {
-                        walls2.SetTile(new Vector3Int(23, 10, 0), null);
-                        walls2.SetTile(new Vector3Int(23, 9, 0), null);
-                        walls2.SetTile(new Vector3Int(23,8, 0), null);
+                        r.SetTile(new Vector3Int(23, 10, 0), null);
+                        r.SetTile(new Vector3Int(23, 9, 0), null);
+                        r.SetTile(new Vector3Int(23,8, 0), null);
 
-                        walls2.SetTile(new Vector3Int(22, 7, 0), null);
-                        walls2.SetTile(new Vector3Int(22, 8, 0), null);
-                        walls2.SetTile(new Vector3Int(22, 9, 0), null);
+                        r.SetTile(new Vector3Int(22, 7, 0), null);
+                        r.SetTile(new Vector3Int(22, 8, 0), null);
+                        r.SetTile(new Vector3Int(22, 9, 0), null);
                     }
                     else if (drawFreezer)
                     {
-                        walls2.SetTile(new Vector3Int(23, 10, 0),topDoorTile);
-                        walls2.SetTile(new Vector3Int(23, 9, 0), topDoorTile);
-                        walls2.SetTile(new Vector3Int(23, 8, 0), topDoorTile);
+                        r.SetTile(new Vector3Int(23, 10, 0),topDoorTile);
+                        r.SetTile(new Vector3Int(23, 9, 0), topDoorTile);
+                        r.SetTile(new Vector3Int(23, 8, 0), topDoorTile);
 
-                        walls2.SetTile(new Vector3Int(22, 7, 0), bottomDoorTile);
-                        walls2.SetTile(new Vector3Int(22, 8, 0), bottomDoorTile);
-                        walls2.SetTile(new Vector3Int(22, 9, 0), bottomDoorTile);
+                        r.SetTile(new Vector3Int(22, 7, 0), bottomDoorTile);
+                        r.SetTile(new Vector3Int(22, 8, 0), bottomDoorTile);
+                        r.SetTile(new Vector3Int(22, 9, 0), bottomDoorTile);
                     }
                 }
                 break;
 
             case 7:
                 {
-                    if (!keyTrigger.activeInHierarchy && !keyUsed)
+                    if (!b.activeInHierarchy && !keyUsed)
                     {
-                        levelLiftTrigger.SetActive(true);
+                        a.SetActive(true);
                         keyUsed = true;
                     }
                 }
@@ -595,26 +595,26 @@ public class LevelScripting : MonoBehaviour
                 {
                     if(!keyUsed)
                     {
-                        if (!keyTrigger.activeInHierarchy)
+                        if (!b.activeInHierarchy)
                         {
-                            walls2.SetTile(new Vector3Int(22, 28, 0), null);
-                            walls2.SetTile(new Vector3Int(22, 29, 0), null);
-                            walls2.SetTile(new Vector3Int(22, 27, 0), null);
+                            r.SetTile(new Vector3Int(22, 28, 0), null);
+                            r.SetTile(new Vector3Int(22, 29, 0), null);
+                            r.SetTile(new Vector3Int(22, 27, 0), null);
 
-                            walls1.SetTile(new Vector3Int(21, 27, 0), null);
-                            walls1.SetTile(new Vector3Int(21, 28, 0), null);
-                            walls1.SetTile(new Vector3Int(21, 26, 0), null);
+                            p.SetTile(new Vector3Int(21, 27, 0), null);
+                            p.SetTile(new Vector3Int(21, 28, 0), null);
+                            p.SetTile(new Vector3Int(21, 26, 0), null);
 
                         }
-                        if (!keyTriggerTwo.activeInHierarchy)
+                        if (!c.activeInHierarchy)
                         {
-                            walls2.SetTile(new Vector3Int(29, 10, 0), null);
-                            walls2.SetTile(new Vector3Int(29, 11, 0), null);
-                            walls2.SetTile(new Vector3Int(29, 9, 0), null);
+                            r.SetTile(new Vector3Int(29, 10, 0), null);
+                            r.SetTile(new Vector3Int(29, 11, 0), null);
+                            r.SetTile(new Vector3Int(29, 9, 0), null);
 
-                            walls1.SetTile(new Vector3Int(28, 9, 0), null);
-                            walls1.SetTile(new Vector3Int(28, 10, 0), null);
-                            walls1.SetTile(new Vector3Int(28, 8, 0), null);
+                            p.SetTile(new Vector3Int(28, 9, 0), null);
+                            p.SetTile(new Vector3Int(28, 10, 0), null);
+                            p.SetTile(new Vector3Int(28, 8, 0), null);
                         }
                     }
                 }
@@ -625,15 +625,15 @@ public class LevelScripting : MonoBehaviour
                     {
                         if (!levelBossIntro)
                         {
-                            bossDialogue.TriggerDialogue(0);
+                            l.TriggerDialogue(0);
                             levelBossIntro = true;
                         }
-                        if (boss.m_health <= 0)
+                        if (h.m_health <= 0)
                         {
                             //dramatic death SE
                             //freeze on enemy as he dies  
-                            bossDialogue.TriggerDialogue(1);
-                            levelLiftTrigger.SetActive(true);
+                            l.TriggerDialogue(1);
+                            a.SetActive(true);
                             bossDead = true;
 
                         }
@@ -644,45 +644,45 @@ public class LevelScripting : MonoBehaviour
                 {
                     if(!keyUsed)
                     {
-                        if (!keyTrigger.activeInHierarchy)
+                        if (!b.activeInHierarchy)
                         {
-                            wpnUI.setKey(false);
+                            y.setKey(false);
                             keyUsed = true;
                             //door top
-                            walls2.SetTile(new Vector3Int(36, 32, 0), null);
-                            walls2.SetTile(new Vector3Int(37, 32, 0), null);
-                            walls2.SetTile(new Vector3Int(38, 32, 0), null);
+                            r.SetTile(new Vector3Int(36, 32, 0), null);
+                            r.SetTile(new Vector3Int(37, 32, 0), null);
+                            r.SetTile(new Vector3Int(38, 32, 0), null);
 
-                            walls1.SetTile(new Vector3Int(35, 31, 0), null);
-                            walls1.SetTile(new Vector3Int(36, 31, 0), null);
-                            walls1.SetTile(new Vector3Int(37, 31, 0), null);
+                            p.SetTile(new Vector3Int(35, 31, 0), null);
+                            p.SetTile(new Vector3Int(36, 31, 0), null);
+                            p.SetTile(new Vector3Int(37, 31, 0), null);
 
                             //door mid-right
-                            walls2.SetTile(new Vector3Int(33, 19, 0), null);
-                            walls2.SetTile(new Vector3Int(33, 18, 0), null);
-                            walls2.SetTile(new Vector3Int(33, 17, 0), null);
+                            r.SetTile(new Vector3Int(33, 19, 0), null);
+                            r.SetTile(new Vector3Int(33, 18, 0), null);
+                            r.SetTile(new Vector3Int(33, 17, 0), null);
 
-                            walls1.SetTile(new Vector3Int(32, 18, 0), null);
-                            walls1.SetTile(new Vector3Int(32, 17, 0), null);
-                            walls1.SetTile(new Vector3Int(32, 16, 0), null);
+                            p.SetTile(new Vector3Int(32, 18, 0), null);
+                            p.SetTile(new Vector3Int(32, 17, 0), null);
+                            p.SetTile(new Vector3Int(32, 16, 0), null);
 
                             //door right
-                            walls2.SetTile(new Vector3Int(35, 31, 0), null);
-                            walls2.SetTile(new Vector3Int(36, 31, 0), null);
-                            walls2.SetTile(new Vector3Int(37, 31, 0), null);
+                            r.SetTile(new Vector3Int(35, 31, 0), null);
+                            r.SetTile(new Vector3Int(36, 31, 0), null);
+                            r.SetTile(new Vector3Int(37, 31, 0), null);
 
-                            walls1.SetTile(new Vector3Int(38, 10, 0), null);
-                            walls1.SetTile(new Vector3Int(37, 10, 0), null);
-                            walls1.SetTile(new Vector3Int(36, 10, 0), null);
+                            p.SetTile(new Vector3Int(38, 10, 0), null);
+                            p.SetTile(new Vector3Int(37, 10, 0), null);
+                            p.SetTile(new Vector3Int(36, 10, 0), null);
 
                             //door left
-                            walls2.SetTile(new Vector3Int(11, 26, 0), null);
-                            walls2.SetTile(new Vector3Int(12, 26, 0), null);
-                            walls2.SetTile(new Vector3Int(13, 26, 0), null);
+                            r.SetTile(new Vector3Int(11, 26, 0), null);
+                            r.SetTile(new Vector3Int(12, 26, 0), null);
+                            r.SetTile(new Vector3Int(13, 26, 0), null);
 
-                            walls1.SetTile(new Vector3Int(10, 25, 0), null);
-                            walls1.SetTile(new Vector3Int(11, 25, 0), null);
-                            walls1.SetTile(new Vector3Int(12, 25, 0), null);
+                            p.SetTile(new Vector3Int(10, 25, 0), null);
+                            p.SetTile(new Vector3Int(11, 25, 0), null);
+                            p.SetTile(new Vector3Int(12, 25, 0), null);
                         }
                     }
                 }
@@ -693,15 +693,15 @@ public class LevelScripting : MonoBehaviour
                     {
                         if (!levelBossIntro)
                         {
-                            bossDialogue.TriggerDialogue(0);
+                            l.TriggerDialogue(0);
                             levelBossIntro = true;
 
                             
                         }
-                        if (boss.m_health <= 0)
+                        if (h.m_health <= 0)
                         {
-                            bossDialogue.TriggerDialogue(1);
-                            levelLiftTrigger.SetActive(true);
+                            l.TriggerDialogue(1);
+                            a.SetActive(true);
                             bossDead = true;
 
                         }
@@ -712,18 +712,18 @@ public class LevelScripting : MonoBehaviour
                 {
                     if(!keyUsed)
                     {
-                        if (!keyTrigger.activeInHierarchy)
+                        if (!b.activeInHierarchy)
                         {
-                            wpnUI.setKey(false);
+                            y.setKey(false);
                             
                             //door top
-                            walls2.SetTile(new Vector3Int(33, 17, 0), null);
-                            walls2.SetTile(new Vector3Int(34, 17, 0), null);
-                            walls2.SetTile(new Vector3Int(35, 17, 0), null);
+                            r.SetTile(new Vector3Int(33, 17, 0), null);
+                            r.SetTile(new Vector3Int(34, 17, 0), null);
+                            r.SetTile(new Vector3Int(35, 17, 0), null);
 
-                            walls1.SetTile(new Vector3Int(34, 16, 0), null);
-                            walls1.SetTile(new Vector3Int(33, 16, 0), null);
-                            walls1.SetTile(new Vector3Int(32, 16, 0), null);
+                            p.SetTile(new Vector3Int(34, 16, 0), null);
+                            p.SetTile(new Vector3Int(33, 16, 0), null);
+                            p.SetTile(new Vector3Int(32, 16, 0), null);
                             keyUsed = true;
                         }
                     }
@@ -731,10 +731,10 @@ public class LevelScripting : MonoBehaviour
                 break;
             case 14:
                 {
-                    if (!keyTrigger.activeInHierarchy)
+                    if (!b.activeInHierarchy)
                     {
-                        levelLiftTrigger.SetActive(true);
-                        wpnUI.setKey(false);
+                        a.SetActive(true);
+                        y.setKey(false);
                     }
                 }
                 break;
@@ -744,15 +744,15 @@ public class LevelScripting : MonoBehaviour
                     {
                         if (!levelBossIntro)
                         {
-                            bossDialogue.TriggerDialogue(0);
+                            l.TriggerDialogue(0);
                             levelBossIntro = true;
                         }
-                        if (boss.m_health <= 0)
+                        if (h.m_health <= 0)
                         {
                             //dramatic death SE
                             //freeze on enemy as he dies  
-                            bossDialogue.TriggerDialogue(1);
-                            levelLiftTrigger.SetActive(true);
+                            l.TriggerDialogue(1);
+                            a.SetActive(true);
                             bossDead = true;
                         }
                     }
@@ -770,20 +770,20 @@ public class LevelScripting : MonoBehaviour
                 {
                     if(!bossDead)
                     {
-                        if (!levelBossIntro && !dialogBox.activeInHierarchy)
+                        if (!levelBossIntro && !e.activeInHierarchy)
                         {
-                            bossDialogue.TriggerDialogue(bossDialogIndex);
-                            bossDialogIndex++;
-                            if (bossDialogIndex == 8)
+                            l.TriggerDialogue(s);
+                            s++;
+                            if (s == 8)
                             {
                                 levelBossIntro = true;
                             }
                         }
-                        if (boss.m_health <= 0)
+                        if (h.m_health <= 0)
                         {
 
-                            bossDialogue.TriggerDialogue(9);
-                            levelLiftTrigger.SetActive(true);
+                            l.TriggerDialogue(9);
+                            a.SetActive(true);
                             bossDead = true;
 
                         }
@@ -794,15 +794,15 @@ public class LevelScripting : MonoBehaviour
                 {
                     if (!keyUsed)
                     {
-                        if (!keyTrigger.activeInHierarchy)
+                        if (!b.activeInHierarchy)
                         {
-                            walls1.SetTile(new Vector3Int(24, 9, 0), null);
-                            walls1.SetTile(new Vector3Int(25, 9, 0), null);
-                            walls1.SetTile(new Vector3Int(23, 9, 0), null);
-                            walls2.SetTile(new Vector3Int(25, 10, 0), null);
-                            walls2.SetTile(new Vector3Int(26, 10, 0), null);
-                            walls2.SetTile(new Vector3Int(24, 10, 0), null);
-                            wpnUI.setKey(false);
+                            p.SetTile(new Vector3Int(24, 9, 0), null);
+                            p.SetTile(new Vector3Int(25, 9, 0), null);
+                            p.SetTile(new Vector3Int(23, 9, 0), null);
+                            r.SetTile(new Vector3Int(25, 10, 0), null);
+                            r.SetTile(new Vector3Int(26, 10, 0), null);
+                            r.SetTile(new Vector3Int(24, 10, 0), null);
+                            y.setKey(false);
                             keyUsed = true;
                         }
                     }   
@@ -812,42 +812,42 @@ public class LevelScripting : MonoBehaviour
                 {
                     if(!bossDead)
                     {
-                        if (!levelBossIntro && !dialogBox.activeInHierarchy)
+                        if (!levelBossIntro && !e.activeInHierarchy)
                         {
-                            bossDialogue.TriggerDialogue(bossDialogIndex);
-                            bossDialogIndex++;
-                            if (bossDialogIndex == 14)
+                            l.TriggerDialogue(s);
+                            s++;
+                            if (s == 14)
                                 //cinematic
                                 levelBossIntro = true;
                         }
-                        if (boss.m_health <= 0 && !dialogBox.activeInHierarchy)
+                        if (h.m_health <= 0 && !e.activeInHierarchy)
                         {
                             //if boss is ninjaroth change to Good Ending
-                            if(timeline.playableDirector != timeline.timeline[1])
-                                timeline.ChangeDirector("Bad Ending");
-                            bossDialogue.TriggerDialogue(bossDialogIndex);
-                            bossDialogIndex++;
-                            levelLiftTrigger.SetActive(true);
-                            if(bossDialogIndex == 19)
+                            if(w.playableDirector != w.timeline[1])
+                                w.ChangeDirector("Bad Ending");
+                            l.TriggerDialogue(s);
+                            s++;
+                            a.SetActive(true);
+                            if(s == 19)
                             {
                                 bossDead = true;
                             }
                             
 
                         }
-                        else if (boss2 != null)
-                            if (boss2.m_health <= 0 && !dialogBox.activeInHierarchy)
+                        else if (i != null)
+                            if (i.m_health <= 0 && !e.activeInHierarchy)
                             {
                                 // just for timeline QA
-                                timeline.ChangeDirector("Good Ending");
-                                boss2Dialogue.TriggerDialogue(boss2DialogIndex);
-                                boss2DialogIndex++;
-                                if (boss2DialogIndex == 8)
+                                w.ChangeDirector("Good Ending");
+                                m.TriggerDialogue(t);
+                                t++;
+                                if (t == 8)
                                 bossDead = true;
                                 //dramatic death SE
                                 //freeze on enemy as he dies  
                                 //end cinematic
-                                levelLiftTrigger.SetActive(true);
+                                a.SetActive(true);
                             }
                     }
                 }
@@ -1140,20 +1140,20 @@ public class LevelScripting : MonoBehaviour
         //}
      
     }
-    private void OnTriggerEnter2D(Collider2D other)
+     void OnTriggerEnter2D(Collider2D z)
     {
         if (currentLevel == 14)
         {
             //Mechanic for closing the doors behind the player on lvl 14
-            if (other.gameObject == doorCloseTrigger && !doorsClosed)
+            if (z.gameObject == d && !doorsClosed)
             {
                
-                walls2.SetTile(new Vector3Int(13, 27, 0), topDoorTile);
-                walls2.SetTile(new Vector3Int(13, 26, 0), topDoorTile);
-                walls2.SetTile(new Vector3Int(13, 25, 0), topDoorTile);
-                walls1.SetTile(new Vector3Int(12, 26, 0), bottomDoorTile);
-                walls1.SetTile(new Vector3Int(12, 25, 0), bottomDoorTile);
-                walls1.SetTile(new Vector3Int(12, 24, 0), bottomDoorTile);
+                r.SetTile(new Vector3Int(13, 27, 0), topDoorTile);
+                r.SetTile(new Vector3Int(13, 26, 0), topDoorTile);
+                r.SetTile(new Vector3Int(13, 25, 0), topDoorTile);
+                p.SetTile(new Vector3Int(12, 26, 0), bottomDoorTile);
+                p.SetTile(new Vector3Int(12, 25, 0), bottomDoorTile);
+                p.SetTile(new Vector3Int(12, 24, 0), bottomDoorTile);
                 doorsClosed = true;
             }
         }

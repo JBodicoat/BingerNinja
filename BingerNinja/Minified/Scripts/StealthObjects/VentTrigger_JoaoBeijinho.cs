@@ -1,1 +1,1 @@
-using UnityEngine;public class VentTrigger_JoaoBeijinho : M{private GameObject m_ventPath;void Awake(){m_ventPath = F("VentPath");}private void OnTriggerEnter2D(Collider2D collision){if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag)){m_ventPath.SetActive(true);}}}
+using UnityEngine;public class VentTrigger_JoaoBeijinho : M{GameObject a;void Awake(){a = F("VentPath");}void OnTriggerEnter2D(Collider2D b){if (b.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag)){a.SetActive(true);}}}

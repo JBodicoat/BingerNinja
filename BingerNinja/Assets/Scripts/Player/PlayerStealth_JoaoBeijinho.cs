@@ -17,7 +17,7 @@ public class PlayerStealth_JoaoBeijinho : MonoBehaviour
     public bool m_crouched = false;
     public bool m_inVent = false;
 
-    private PlayerAnimation_LouieWilliamson m_pAnimation;
+     PlayerAnimation_LouieWilliamson b;
     public float crouchSpeed;
     /// <summary>
     /// Call IsStealthed() to check if the player is in stealth, it will return true if it is
@@ -49,30 +49,30 @@ public class PlayerStealth_JoaoBeijinho : MonoBehaviour
     public void Crouch()
     {
 
-        PlayerController_JamieG playerController = GetComponent<PlayerController_JamieG>();
+        PlayerController_JamieG c = GetComponent<PlayerController_JamieG>();
         m_crouched = !m_crouched;
 
-        if (m_crouched == true)
+        if (m_crouched)
         {
             gameObject.GetComponent<PlayerMovement_MarioFernandes>().m_speed = crouchSpeed;
-            playerController.m_attackTap.Disable();
-            playerController.m_attackSlowTap.Disable();
-            playerController.m_roll.Disable();
-            playerController.m_eat.Disable();
-            m_pAnimation.Crouching(true);
+            c.m_attackTap.Disable();
+            c.m_attackSlowTap.Disable();
+            c.m_roll.Disable();
+            c.m_eat.Disable();
+            b.Crouching(true);
         }
         else
         {
             gameObject.GetComponent<PlayerMovement_MarioFernandes>().ResetSpeed();
-            playerController.m_attackTap.Enable();
-            playerController.m_attackSlowTap.Enable();
-            playerController.m_roll.Enable();
-            playerController.m_eat.Enable();
-            m_pAnimation.Crouching(false);
+            c.m_attackTap.Enable();
+            c.m_attackSlowTap.Enable();
+            c.m_roll.Enable();
+            c.m_eat.Enable();
+            b.Crouching(false);
         }
     }
-    private void Start()
+     void Start()
     {
-        m_pAnimation = GetComponentInChildren<PlayerAnimation_LouieWilliamson>();
+        b = GetComponentInChildren<PlayerAnimation_LouieWilliamson>();
     }
 }

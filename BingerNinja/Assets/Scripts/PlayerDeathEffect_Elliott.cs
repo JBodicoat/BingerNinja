@@ -7,13 +7,13 @@ using UnityEngine;
 public class PlayerDeathEffect_Elliott : MonoBehaviour
 {
     public SpriteRenderer m_player;
-    private PlayerController_JamieG m_PauseInput;
+    PlayerController_JamieG a;
 
     public IEnumerator DeathBlink()
     {
         for (int i = 0; i < 5; i++)
         {
-            m_PauseInput.OnDisable();
+            a.OnDisable();
             //gameObject.GetComponent<SpriteRenderer>().enabled = false;
             m_player.enabled = false;
             yield return new WaitForSeconds(.1f);
@@ -21,7 +21,7 @@ public class PlayerDeathEffect_Elliott : MonoBehaviour
            m_player.enabled = true;
             yield return new WaitForSeconds(.1f);
         }
-        m_PauseInput.OnEnable();
+        a.OnEnable();
     }
 
     public void SpriteFlash()
@@ -32,6 +32,6 @@ public class PlayerDeathEffect_Elliott : MonoBehaviour
     void Start()
     {
        m_player = GetComponentInChildren<SpriteRenderer>();
-       m_PauseInput = GetComponent<PlayerController_JamieG>();
+       a = GetComponent<PlayerController_JamieG>();
     }
 }

@@ -10,23 +10,23 @@ public class Portal_Mechanic_AlannaPaxton : MonoBehaviour
     bool canTeleport = true;
     public float portalDelay = 0.8f;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D a)
     {
-        if (collision.gameObject.tag == "Portal")
+        if (a.gameObject.tag == "Portal")
         {
             if (canTeleport)
             {
                 // Portal();
-                if (collision.transform.childCount > 0)
+                if (a.transform.childCount > 0)
                 {
-                    GameObject ChildGameObject1 = collision.transform.GetChild(0).gameObject;
-                    Vector2 child_pos = ChildGameObject1.transform.position;
-                    this.transform.position = child_pos;
+                    GameObject b = a.transform.GetChild(0).gameObject;
+                    Vector2 c = b.transform.position;
+                    transform.position = c;
                     StartCoroutine(PortalExitDelay());
-                } else if (collision.transform.parent != null)
+                } else if (a.transform.parent != null)
                 {
-                    Vector2 parent_pos = collision.transform.parent.position;
-                    this.transform.position = parent_pos;
+                    Vector2 d = a.transform.parent.position;
+                    transform.position = d;
                     StartCoroutine(PortalExitDelay());
                 }
             }

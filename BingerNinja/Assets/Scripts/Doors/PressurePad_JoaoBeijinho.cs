@@ -13,13 +13,13 @@ public class PressurePad_JoaoBeijinho : MonoBehaviour
     //Reference the door collider to turn if on/off(closed/open)
     public Collider2D m_doorCollider;
 
-    private string m_playerTag = "Player";
-    private string m_crateTag = "Crate";
-    private string m_meleeWeaponTag = "MeleeWeapon";
+     string a = "Player";
+     string b = "Crate";
+     string c = "MeleeWeapon";
 
-    private void OnTriggerEnter2D(Collider2D collision)
+     void OnTriggerEnter2D(Collider2D d)
     {
-        if (collision.tag == m_playerTag || collision.tag == m_crateTag || collision.tag == m_meleeWeaponTag)//Collision with specific objects
+        if (d.tag == a || d.tag == b || d.tag == c)//Collision with specific objects
         {
             m_doorCollider.GetComponent<Collider2D>().enabled = false;//Open door
         }

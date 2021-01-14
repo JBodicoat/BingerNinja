@@ -7,7 +7,7 @@
 //Joao Beijinho 06/12/2020 - Changed m_collider type to Collider2D
 //Joao Beijinho 14/12/2020 - Created two functions for the two statements in the Update()
 //                           Reference PlayerHealthHunger Script
-//                           In update, if HealthSlider(Using this since the Die() function is private) is bellow 1, UnGrab
+//                           In update, if HealthSlider(Using this since the Die() function is ) is bellow 1, UnGrab
 //                           Unassign this GameObject Tag while getting the reference of all the other
 //                           gameObject with the same tag, then reassign the tag back to this GameObject
 //                           In the Grab() function, check if any other crate is grabbed, if it is then can't grab
@@ -21,92 +21,92 @@ public class PushableObject_JoaoBeijinho : MonoBehaviour
 {
     protected PlayerController_JamieG m_playerControllerScript;
     protected PlayerHealthHunger_MarioFernandes m_playerHealthScript;
-    private PlayerMovement_MarioFernandes m_playerSpeed;
-    private EffectManager_MarioFernandes m_effectManager;
-    private Transform m_playerTransform;
-    private Collider2D m_collider;
+     PlayerMovement_MarioFernandes a;
+     EffectManager_MarioFernandes b;
+     Transform c;
+     Collider2D d;
 
-    private string m_normalTag;
-    private GameObject[] m_crates;
-    private PushableObject_JoaoBeijinho m_pushableObjectScript;
+     string e;
+     GameObject[] f;
+     PushableObject_JoaoBeijinho g;
 
     public bool m_canGrab = false;
     public bool m_isGrabbed = false;
 
-    private void Start()
+     void Start()
     {
-        m_playerTransform = GameObject.Find("Player").transform;
+        c = GameObject.Find("Player").transform;
         m_playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
         m_playerHealthScript = FindObjectOfType<PlayerHealthHunger_MarioFernandes>();
-        m_collider = GetComponent<Collider2D>();
-        m_playerSpeed = GameObject.Find("Player").GetComponent<PlayerMovement_MarioFernandes>();
+        d = GetComponent<Collider2D>();
+        a = GameObject.Find("Player").GetComponent<PlayerMovement_MarioFernandes>();
 
-        this.transform.gameObject.tag = "Untagged";//Remove tag from this GameObject
-        m_normalTag = Tags_JoaoBeijinho.m_crateTag;
-        m_crates = GameObject.FindGameObjectsWithTag(m_normalTag);//Object with the crate tag
-        this.gameObject.tag = m_normalTag;//Reassign tag back to this GameObject
+        transform.gameObject.tag = "Untagged";//Remove tag from this GameObject
+        e = Tags_JoaoBeijinho.m_crateTag;
+        f = GameObject.FindGameObjectsWithTag(e);//Object with the crate tag
+        gameObject.tag = e;//Reassign tag back to this GameObject
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+     void OnCollisionEnter2D(Collision2D h)
     {
-        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        if (h.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
         {
             m_canGrab = true;
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+     void OnCollisionExit2D(Collision2D i)
     {
-        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        if (i.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
         {
             m_canGrab = false;
         }
     }
 
-    private void Grab(bool canGrab, bool isGrabbed)
+     void x(bool j, bool k)
     {
         m_canGrab = false;
         m_isGrabbed = true;
-        transform.parent = m_playerTransform;
-        Physics2D.IgnoreCollision(gameObject.transform.parent.GetComponent<Collider2D>(), m_collider);
-        m_playerSpeed.m_baseSpeed = 1;
-        m_playerSpeed.m_speed = 1;
+        transform.parent = c;
+        Physics2D.IgnoreCollision(gameObject.transform.parent.GetComponent<Collider2D>(), d);
+        a.m_baseSpeed = 1;
+        a.m_speed = 1;
 
-        foreach (GameObject crate in m_crates)
+        foreach (GameObject crate in f)
         {
-            m_pushableObjectScript = crate.GetComponent<PushableObject_JoaoBeijinho>();
+            g = crate.GetComponent<PushableObject_JoaoBeijinho>();
         
-            if (m_pushableObjectScript.m_isGrabbed == true)
+            if (g.m_isGrabbed)
             {
-                UnGrab(true, false);
+                y(true, false);
             }
         }
     }
 
-    private void UnGrab(bool canGrab, bool isGrabbed)
+     void y(bool l, bool m)
     {
-        m_playerSpeed.m_baseSpeed = 3;
-        m_playerSpeed.m_speed = 3;
-        m_canGrab = canGrab;
-        m_isGrabbed = isGrabbed;
-        Physics2D.IgnoreCollision(gameObject.transform.parent.GetComponent<Collider2D>(), m_collider, false);
+        a.m_baseSpeed = 3;
+        a.m_speed = 3;
+        m_canGrab = l;
+        m_isGrabbed = m;
+        Physics2D.IgnoreCollision(gameObject.transform.parent.GetComponent<Collider2D>(), d, false);
         transform.parent = null;
     }
 
     void Update()
     {
-        if (m_playerControllerScript.m_interact.triggered && m_canGrab == true)//Press interact to grab object and move it freely
+        if (m_playerControllerScript.m_interact.triggered && m_canGrab)//Press interact to grab object and move it freely
         {
-            Grab(false, true);
+            x(false, true);
         }
-        else if (m_playerControllerScript.m_interact.triggered && m_isGrabbed == true)//Press interact to let go of object
+        else if (m_playerControllerScript.m_interact.triggered && m_isGrabbed)//Press interact to let go of object
         {
-            UnGrab(true, false);
+            y(true, false);
         }
 
         if (m_playerHealthScript.m_healthSlider.value <= 1)
         {
-            UnGrab(false, false);
+            y(false, false);
         }
     }
 }

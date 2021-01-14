@@ -14,31 +14,31 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
 {
-    private GameObject m_player;
-    private Vector3 m_checkpointOnReset;
-    private bool m_loadLastCheckpoint = false;
+     GameObject a;
+     Vector3 b;
+     bool c = false;
 
-    private DialogueManager_MarioFernandes m_dialogueManager;
+     DialogueManager_MarioFernandes g;
     
     public float m_fadeTime = 0.8f, m_portalFadeTime = 0.8f, m_transitionTime = 1.0f;
-    private RectTransform m_fader;
-    private bool m_fading;
-    private Vector2 center, below = new Vector2(0f, 1000f);
+     RectTransform e;
+     bool f;
+     Vector2 y, u = new Vector2(0f, 1000f);
 
     public void Awake()
     {
         base.Awake();
 
-        m_fader = GameObject.Find("Fader")?.GetComponent<RectTransform>();
+        e = GameObject.Find("Fader")?.GetComponent<RectTransform>();
         
-        GameObject dialogManager = GameObject.Find("DialogManager");
-        if (dialogManager != null)
+        GameObject s = GameObject.Find("DialogManager");
+        if (s != null)
         {
-            m_dialogueManager = dialogManager.GetComponent<DialogueManager_MarioFernandes>();
+            g = s.GetComponent<DialogueManager_MarioFernandes>();
         }
     }
 
-    private void Start()
+     void Start()
     {
         FadeOut();
     }
@@ -50,8 +50,8 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
 
     public void ResetToCheckpoint()
     {
-        int checkpointLevel = SaveLoadSystem_JamieG.LoadCheckpoint().m_lastCheckpointLevel;
-        StartCoroutine(Load(checkpointLevel > 0 ? checkpointLevel : 1));
+        int x = SaveLoadSystem_JamieG.LoadCheckpoint().m_lastCheckpointLevel;
+        StartCoroutine(Load(x > 0 ? x : 1));
     }
 
     public void LoadLevel(int level)
@@ -70,13 +70,13 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
     {
         if (SceneManager.GetActiveScene().buildIndex != 0)
         {
-            Inventory_JoaoBeijinho inventory = GameObject.Find("Player").GetComponent<Inventory_JoaoBeijinho>();
-            if(inventory.HasItem(ItemType.LiftKey, inventory.m_inventoryItems[ItemType.LiftKey]))
+            Inventory_JoaoBeijinho y = GameObject.Find("Player").GetComponent<Inventory_JoaoBeijinho>();
+            if(y.HasItem(ItemType.LiftKey, y.m_inventoryItems[ItemType.LiftKey]))
             {
-                inventory.RemoveItem(ItemType.LiftKey, inventory.m_inventoryItems[ItemType.LiftKey]);
+                y.RemoveItem(ItemType.LiftKey, y.m_inventoryItems[ItemType.LiftKey]);
             }
            
-            SaveLoadSystem_JamieG.SaveInventory(inventory);
+            SaveLoadSystem_JamieG.SaveInventory(y);
         }
 
         FadeIn();
@@ -85,7 +85,7 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
     }
 
     //Reloads the current scene using its buildIndex
-    private void LoadCurrentLevel()
+     void LoadCurrentLevel()
     {
         StartCoroutine(Load(SceneManager.GetActiveScene().buildIndex));
     }
@@ -101,9 +101,9 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
 
     //This is called everytime a scene is loaded
     //It moves the player to the last checkpoint if m_loadLastCheckpoint is true
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (!m_loadLastCheckpoint)
+        if (!c)
         {
             return;
         }
@@ -111,23 +111,23 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
         LoadGameState();
         LoadSoundSettings();
         
-        if (m_player == null)
+        if (a == null)
         {
-            m_player = GameObject.FindWithTag("Player");
+            a = GameObject.FindWithTag("Player");
         }
 
-        m_player.transform.position = m_checkpointOnReset;
+        a.transform.position = b;
 
-        m_loadLastCheckpoint = false;
+        c = false;
     }
 
     public void SaveGameState()
     {
-        GameObject player = GameObject.Find("Player");
-        if (player != null)
+        GameObject z = GameObject.Find("Player");
+        if (z != null)
         {
-            Inventory_JoaoBeijinho inventory = player.GetComponent<Inventory_JoaoBeijinho>();
-            SaveLoadSystem_JamieG.SaveInventory(inventory);
+            Inventory_JoaoBeijinho j = z.GetComponent<Inventory_JoaoBeijinho>();
+            SaveLoadSystem_JamieG.SaveInventory(j);
             
             SaveLoadSystem_JamieG.SaveGameplay(
                 SceneManager.GetActiveScene().buildIndex,
@@ -139,13 +139,13 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
     
     public void LoadGameState()
     {
-        GameplayData gameplayData = SaveLoadSystem_JamieG.LoadGameplay();
+        GameplayData k = SaveLoadSystem_JamieG.LoadGameplay();
         
         // Load enemies
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (var enemy in enemies)
+        GameObject[] l = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (var enemy in l)
         {
-            if (!gameplayData.m_enemyIds.Contains(enemy.name))
+            if (!k.m_enemyIds.Contains(enemy.name))
             {
                 enemy.SetActive(false);
             }
@@ -154,22 +154,22 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
 
     public void LoadSoundSettings()
     {
-        SettingsData settingsData = SaveLoadSystem_JamieG.LoadSettings();
+        SettingsData m = SaveLoadSystem_JamieG.LoadSettings();
 
-        if (!settingsData.Equals(default(SettingsData)))
+        if (!m.Equals(default(SettingsData)))
         {
-            PlayTrack_Jann.Instance.UpdateMusicVolume(settingsData.m_musicVolume);
-            PlayTrack_Jann.Instance.UpdateSfxVolume(settingsData.m_sfxVolume);
+            PlayTrack_Jann.Instance.UpdateMusicVolume(m.m_musicVolume);
+            PlayTrack_Jann.Instance.UpdateSfxVolume(m.m_sfxVolume);
         }
     }
 
     public void FadeBoth()
     {
-        m_dialogueManager.PauseGame();
+        g.PauseGame();
         
-        float fadeDelta = m_portalFadeTime / 2f;
-        StartCoroutine(FadeImage(fadeDelta, false));
-        StartCoroutine(FadeImage(fadeDelta, true, fadeDelta));
+        float n = m_portalFadeTime / 2f;
+        StartCoroutine(FadeImage(n, false));
+        StartCoroutine(FadeImage(n, true, n));
     }
     
     public void FadeIn()
@@ -182,35 +182,35 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
         StartCoroutine(FadeImage(m_fadeTime / 2f, true));
     }
 
-    IEnumerator FadeImage(float fadeTime, bool fadeAway, float delay = 0f)
+    IEnumerator FadeImage(float p, bool q, float r = 0f)
     {
-        if (m_fader == null)
+        if (e == null)
             yield break;
 
-        if (delay > 0)
-            yield return new WaitForSeconds(delay);
+        if (r > 0)
+            yield return new WaitForSeconds(r);
         
-        m_fading = true;
+        f = true;
         
-        for (float i = 0; i <= fadeTime; i += Time.deltaTime)
+        for (float i = 0; i <= p; i += Time.deltaTime)
         {
-            float normalizedTime = i / fadeTime;
+            float o = i / p;
 
-            if (fadeAway)
+            if (q)
             {
-                m_fader.anchoredPosition = Vector2.Lerp(center, -below, normalizedTime);
+                e.anchoredPosition = Vector2.Lerp(y, -u, o);
             }
             else
             {
-                m_fader.anchoredPosition = Vector2.Lerp(below, center, normalizedTime);
+                e.anchoredPosition = Vector2.Lerp(u, y, o);
             }
             
             yield return null;
         }
 
-        if (!m_dialogueManager.m_dialogBox.activeInHierarchy)
+        if (!g.m_dialogBox.activeInHierarchy)
         {
-            m_dialogueManager.ResumeGame();   
+            g.ResumeGame();   
         }
     }
 }

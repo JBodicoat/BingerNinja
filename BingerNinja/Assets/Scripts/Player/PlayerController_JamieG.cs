@@ -36,17 +36,17 @@ public class PlayerController_JamieG : MonoBehaviour
     protected int CurrentLevel;
 
     //Reference to the other player scripts
-    private PlayerMovement_MarioFernandes m_playerMovementScript;
-    //private PlayerHealthHunger_MarioFernandes playerHHScript;
+     PlayerMovement_MarioFernandes a;
+    // PlayerHealthHunger_MarioFernandes playerHHScript;
     //PlayerCombat script here
-    private PlayerStealth_JoaoBeijinho m_playerStealthScript;
+     PlayerStealth_JoaoBeijinho b;
 
     void Awake()
     {
         m_player = GameObject.FindGameObjectWithTag("Player");
         CurrentLevel = SceneManager.GetActiveScene().buildIndex;
-        m_playerMovementScript = m_player.GetComponent<PlayerMovement_MarioFernandes>();
-        m_playerStealthScript = gameObject.GetComponent<PlayerStealth_JoaoBeijinho>();
+        a = m_player.GetComponent<PlayerMovement_MarioFernandes>();
+        b = gameObject.GetComponent<PlayerStealth_JoaoBeijinho>();
         m_passDialogue.Enable();
     }
     
@@ -56,24 +56,24 @@ public class PlayerController_JamieG : MonoBehaviour
         Vector2 movementvector = m_movement.ReadValue<Vector2>();
 
         //Pass the movement vector from InputAction component to the PlayerMovement script
-        m_playerMovementScript.RecieveVector(movementvector);
+        a.RecieveVector(movementvector);
     }
 
-    private void Update()
+     void Update()
     {
         
         if (CurrentLevel >= 13)
         {
-            if (m_roll.triggered && m_playerMovementScript.isRolling == false)
+            if (m_roll.triggered && a.isRolling == false)
             {
-                m_playerMovementScript.isRolling = true;
-                m_playerMovementScript.RollMovement();
+                a.isRolling = true;
+                a.RollMovement();
             }
         }
 
         if (m_crouch.triggered)
         {
-            m_playerStealthScript.Crouch();
+            b.Crouch();
         }
     }
     //These functions are required for the InputAction component to work

@@ -24,91 +24,78 @@ public class WeightedPressurePad_JoaoBeijinho : MonoBehaviour
     public Collider2D m_doorCollider;
     public Sprite activatedPressurePad, inactivePressurePad;
     public TileBase m_downDoorPart, m_upDoorPart;
-    private string m_playerTag = "Player";
-    private string m_crateTag = "Crate";
-    private string m_meleeWeaponTag = "MeleeWeapon";
-    private Tilemap walls1, walls2;
+     string a = "Player";
+     string b = "Crate";
+     string c = "MeleeWeapon";
+     Tilemap d, e;
 
-    [Header("Level 17")]
     public bool m_activated;
     public WeightedPressurePad_JoaoBeijinho m_otherPressurePad;
 
-    private void Start()
+     void Start()
     {
-        walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
-        walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
+        d = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
+        e = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)//Open door when an Object is on top of it
+     void OnTriggerEnter2D(Collider2D f)//Open door when an Object is on top of it
     {
         gameObject.GetComponent<SpriteRenderer>().sprite = inactivePressurePad;
 
         if (SceneManager.GetActiveScene().buildIndex == 17)
         {
-            if (collision.tag == m_crateTag)//collision with crates
+            if (f.tag == b)//collision with crates
             {
                 m_activated = true;
 
                 if (m_otherPressurePad.m_activated)//Check if the other pressure pad is also activated
                 {
-                    walls1.SetTile(new Vector3Int(31, 19, 0), null);
-                    walls1.SetTile(new Vector3Int(31, 20, 0), null);
-                    walls1.SetTile(new Vector3Int(31, 21, 0), null);
+                    d.SetTile(new Vector3Int(31, 19, 0), null);
+                    d.SetTile(new Vector3Int(31, 20, 0), null);
+                    d.SetTile(new Vector3Int(31, 21, 0), null);
 
-                    walls2.SetTile(new Vector3Int(32, 20, 0), null);
-                    walls2.SetTile(new Vector3Int(32, 21, 0), null);
-                    walls2.SetTile(new Vector3Int(32, 22, 0), null);
+                    e.SetTile(new Vector3Int(32, 20, 0), null);
+                    e.SetTile(new Vector3Int(32, 21, 0), null);
+                    e.SetTile(new Vector3Int(32, 22, 0), null);
                 }
             }
         }
         if (SceneManager.GetActiveScene().buildIndex == 14)
         {
-            if (collision.tag == m_playerTag || collision.tag == m_crateTag || collision.tag == m_meleeWeaponTag)//collision with every array object except Projectile
+            if (f.tag == a || f.tag == b || f.tag == c)//collision with every array object except Projectile
             {
-                walls1.SetTile(new Vector3Int(12, 26, 0), null);
-                walls1.SetTile(new Vector3Int(12, 25, 0), null);
-                walls1.SetTile(new Vector3Int(12, 24, 0), null);
-                walls2.SetTile(new Vector3Int(13, 27, 0), null);
-                walls2.SetTile(new Vector3Int(13, 26, 0), null);
-                walls2.SetTile(new Vector3Int(13, 25, 0), null);
+                d.SetTile(new Vector3Int(12, 26, 0), null);
+                d.SetTile(new Vector3Int(12, 25, 0), null);
+                d.SetTile(new Vector3Int(12, 24, 0), null);
+                e.SetTile(new Vector3Int(13, 27, 0), null);
+                e.SetTile(new Vector3Int(13, 26, 0), null);
+                e.SetTile(new Vector3Int(13, 25, 0), null);
             }
         }
         
         //m_doorCollider.GetComponent<Collider2D>().enabled = false;//Open door
     }
         
-    private void OnTriggerExit2D(Collider2D collision)//Close door when an object is removed from it
+     void OnTriggerExit2D(Collider2D g)//Close door when an object is removed from it
     {
         gameObject.GetComponent<SpriteRenderer>().sprite = activatedPressurePad;
 
         if (SceneManager.GetActiveScene().buildIndex == 17)
         {
-            if (collision.tag == m_crateTag)//collision with crates
+            if (g.tag == b)//collision with crates
             {
                 if (!m_activated)//Check if the pressure pad is deactivated
                 {
-                    walls1.SetTile(new Vector3Int(31, 19, 0), m_downDoorPart);
-                    walls1.SetTile(new Vector3Int(31, 20, 0), m_downDoorPart);
-                    walls1.SetTile(new Vector3Int(31, 21, 0), m_downDoorPart);
+                    d.SetTile(new Vector3Int(31, 19, 0), m_downDoorPart);
+                    d.SetTile(new Vector3Int(31, 20, 0), m_downDoorPart);
+                    d.SetTile(new Vector3Int(31, 21, 0), m_downDoorPart);
 
-                    walls2.SetTile(new Vector3Int(32, 20, 0), m_upDoorPart);
-                    walls2.SetTile(new Vector3Int(32, 21, 0), m_upDoorPart);
-                    walls2.SetTile(new Vector3Int(32, 22, 0), m_upDoorPart);
+                    e.SetTile(new Vector3Int(32, 20, 0), m_upDoorPart);
+                    e.SetTile(new Vector3Int(32, 21, 0), m_upDoorPart);
+                    e.SetTile(new Vector3Int(32, 22, 0), m_upDoorPart);
                 }
             }
         }
-        if (SceneManager.GetActiveScene().buildIndex == 14)
-        {
-            if (collision.tag == m_playerTag || collision.tag == m_crateTag || collision.tag == m_meleeWeaponTag)//collision with every array object except Projectile
-            {
-                //walls1.SetTile(new Vector3Int(12, 26, 0), m_downDoorPart);
-                //walls1.SetTile(new Vector3Int(12, 25, 0), m_downDoorPart);
-                //walls1.SetTile(new Vector3Int(12, 24, 0), m_downDoorPart);
-                //walls2.SetTile(new Vector3Int(13, 27, 0), m_upDoorPart);
-                //walls2.SetTile(new Vector3Int(13, 26, 0), m_upDoorPart);
-                //walls2.SetTile(new Vector3Int(13, 25, 0), m_upDoorPart);
-            }
-            // m_doorCollider.GetComponent<Collider2D>().enabled = true;//Close door
-        }
+      
     }
 }

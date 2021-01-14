@@ -16,7 +16,7 @@ public class HitEffectElliott : MonoBehaviour
     internal Color[] mSpriteColors;
     float mHitEffectTimer = 0.0f;
     const float cHitEffectTime = 0.3f;
-    private Color[] mStoreColor;
+    Color[] a;
 
     //Sets every pixel’s color of the sprite to the passed color
     public void SwapAllSpritesColorsTemporarily(Color color)
@@ -33,15 +33,15 @@ public class HitEffectElliott : MonoBehaviour
     {
         for (int i = 0; i < mColorSwapTex.width; ++i)
         {
-            mColorSwapTex.SetPixel(i, 0, mStoreColor[i]);
+            mColorSwapTex.SetPixel(i, 0, a[i]);
             mColorSwapTex.Apply();
         }
     }
 
-    public void StartHitEffect(bool isCritical)
+    public void StartHitEffect(bool b)
     {
         mHitEffectTimer = cHitEffectTime;
-        SwapAllSpritesColorsTemporarily(mStoreColor[isCritical ? m_critical : m_nonCritical]);
+        SwapAllSpritesColorsTemporarily(a[b ? m_critical : m_nonCritical]);
     }
     
     public void InitColorSwapTex()
@@ -61,10 +61,10 @@ public class HitEffectElliott : MonoBehaviour
         mColorSwapTex = colorSwapTex;
     }
     
-    private void SwapColor(int index, Color color)
+    void SwapColor(int c, Color d)
     {
-        mSpriteColors[index] = color;
-        mColorSwapTex.SetPixel(index, 0, color);
+        mSpriteColors[c] = d;
+        mColorSwapTex.SetPixel(c, 0, d);
     }
 
     // Start is called before the first frame update
@@ -78,13 +78,13 @@ public class HitEffectElliott : MonoBehaviour
         {
             mSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
-        mStoreColor = ColorChanger_Jann.Instance.m_spriteColors;
+        a = ColorChanger_Jann.Instance.m_spriteColors;
         
         InitColorSwapTex();
         
-        SwapColor(60, mStoreColor[60]);
-        SwapColor(122, mStoreColor[122]);
-        SwapColor(174, mStoreColor[174]);
+        SwapColor(60, a[60]);
+        SwapColor(122, a[122]);
+        SwapColor(174, a[174]);
         mColorSwapTex.Apply();
     }
 

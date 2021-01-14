@@ -17,18 +17,18 @@ public class ControlPanel_JoaoBeijinho : MonoBehaviour
 
     public bool m_canPressButton = false;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+     void OnTriggerEnter2D(Collider2D a)
     {
-        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        if (a.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
         {
            
             m_canPressButton = true;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+     void OnTriggerExit2D(Collider2D b)
     {
-        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        if (b.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
         {
          
             m_canPressButton = false;
@@ -44,7 +44,7 @@ public class ControlPanel_JoaoBeijinho : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_playerControllerScript.m_interact.triggered && m_canPressButton == true)//Player interaction with button
+        if (m_playerControllerScript.m_interact.triggered && m_canPressButton)//Player interaction with button
         {
             for (int i = 0; i < m_activateObjectScript.Length; i++)
             {

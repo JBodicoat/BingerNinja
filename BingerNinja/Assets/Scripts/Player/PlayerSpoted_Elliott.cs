@@ -12,10 +12,10 @@ public class PlayerSpoted_Elliott : MonoBehaviour
     public GameObject m_eyeOpen;
     public GameObject m_eyeCosed;
     public float m_timer = 1;
-    private bool m_doSeenOnce = false;
-    private bool m_doLostOnce = true;
+     bool a = false;
+     bool b = true;
 
-    private GameObject[] m_allEnemies;
+     GameObject[] c;
 
     public void EyeNowOpened()
     {
@@ -33,15 +33,15 @@ public class PlayerSpoted_Elliott : MonoBehaviour
     public void SeenByEnemy()
     {
         EyeNowOpened();
-        m_doSeenOnce = true;
-        m_doLostOnce = false;
+        a = true;
+        b = false;
     }
 
     public void EnemyLostSight()
     {
         StartCoroutine(EyeNowShut());
-        m_doLostOnce = true;
-        m_doSeenOnce = false;
+        b = true;
+        a = false;
     }
 
     /// <summary>
@@ -50,10 +50,10 @@ public class PlayerSpoted_Elliott : MonoBehaviour
     /// <returns>weather it has been seen by any enemy</returns>
     public bool IsPlayerSeen()
     {
-        for (int i = 0; i < m_allEnemies.Length; i++)
+        for (int i = 0; i < c.Length; i++)
         {
            
-            if (m_allEnemies[i].GetComponent<BaseEnemy_SebastianMol>().m_playerDetected)
+            if (c[i].GetComponent<BaseEnemy_SebastianMol>().m_playerDetected)
             {
                 return true;
             }
@@ -64,7 +64,7 @@ public class PlayerSpoted_Elliott : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        c = GameObject.FindGameObjectsWithTag("Enemy");
         m_eyeCosed.SetActive(false);
         m_eyeOpen.SetActive(false);
 
@@ -75,15 +75,15 @@ public class PlayerSpoted_Elliott : MonoBehaviour
     {
         if (IsPlayerSeen())
         {
-            if (!m_doSeenOnce) SeenByEnemy();
+            if (!a) SeenByEnemy();
         }
         else
         {
-            if (!m_doLostOnce) EnemyLostSight();
+            if (!b) EnemyLostSight();
         }
-        if(m_allEnemies.Length == 0)
+        if(c.Length == 0)
         {
-            if (!m_doLostOnce) EnemyLostSight();
+            if (!b) EnemyLostSight();
         }
     }
 }

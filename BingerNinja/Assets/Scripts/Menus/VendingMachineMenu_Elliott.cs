@@ -19,9 +19,9 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
     public GameObject SelectSake;
     public GameObject SelectNoodle;
     protected Inventory_JoaoBeijinho Inventory;
-    private Color newcolor;
-    private bool PurchasedCookie = false;
-    private bool PurchasedNoodle = false;
+     Color c;
+     bool a = false;
+     bool b = false;
     public ChangeLevels_CW levelLift;
     public Text Yen;
     public static bool m_gameIsPaused = false;
@@ -74,12 +74,12 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
             Inventory.RemoveItem(ItemType.NinjaPoints, 15);
             Inventory.GiveItem(ItemType.Tempura, 1); 
         }
-        else if (SelectCookie.activeInHierarchy && !PurchasedCookie && Inventory.HasItem(ItemType.NinjaPoints, 50)) 
+        else if (SelectCookie.activeInHierarchy && !a && Inventory.HasItem(ItemType.NinjaPoints, 50)) 
         {
             Inventory.RemoveItem(ItemType.NinjaPoints, 50);
             Inventory.GiveItem(ItemType.Dango, 1);
             CookieColor.color = Color.red;
-            PurchasedCookie = true;
+            a = true;
  
         }
         else if (SelectSake.activeInHierarchy && Inventory.HasItem(ItemType.NinjaPoints,25))
@@ -87,12 +87,12 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
             Inventory.RemoveItem(ItemType.NinjaPoints, 25);
             Inventory.GiveItem(ItemType.Sake, 1);
         }
-        else if (SelectNoodle.activeInHierarchy && !PurchasedNoodle && Inventory.HasItem(ItemType.NinjaPoints, 50)) /*&& ninja point >= 50*/
+        else if (SelectNoodle.activeInHierarchy && !b && Inventory.HasItem(ItemType.NinjaPoints, 50)) /*&& ninja point >= 50*/
         {
             Inventory.RemoveItem(ItemType.NinjaPoints, 50);
             Inventory.GiveItem(ItemType.Noodles, 1);
             NoodleColor.color = Color.red;
-            PurchasedNoodle = true;
+            b = true;
 
         }
     }

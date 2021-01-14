@@ -21,9 +21,9 @@ public class ItemDatabase_JoaoBeijinho : MonoBehaviour
     /// <summary>
     /// This function is called in the inventory script to add an element from the DataBase list to the inventory
     /// </summary>
-    public Item_JoaoBeijinho GetItem(string itemName)
+    public Item_JoaoBeijinho GetItem(string i)
     {
-        return m_items.Find(item => item.m_name == itemName);
+        return m_items.Find(item => item.m_name == i);
     }
 
     /// <summary>

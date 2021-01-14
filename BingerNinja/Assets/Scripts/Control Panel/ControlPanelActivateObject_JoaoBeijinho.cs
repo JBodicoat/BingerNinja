@@ -32,17 +32,17 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
     public ObjectType m_functionality;
 
     protected FreezerTrigger_JoaoBeijinho m_freezerArea;//Reference script that checks if enemy is in the freezer
-    private BaseEnemy_SebastianMol m_baseEnemyScript;
-    private ColorChanger_Jann m_colorChangerScript;
-    private LevelScripting levelScripting;
+     BaseEnemy_SebastianMol a;
+     ColorChanger_Jann b;
+     LevelScripting c;
 
     public int m_maxTicks;
     public float m_damageInterval;
     public float m_damageAmount;
     public float m_freezerCooldown;
-    private bool m_freezerInUse = false;
+     bool d = false;
     public bool[] m_pickColor = new bool[] {false, false, false};
-    private Color m_color;
+     Color e;
 
     public bool m_stunLight = false; //stun effect on/off
 
@@ -60,7 +60,7 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
                 if (gameObject.activeSelf == false)
                 {
                     gameObject.SetActive(true);//Light On
-                    StunLight();
+                    p();
                 }
                 else
                 {
@@ -71,10 +71,10 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
                 //make computer sound
                 break;
             case ObjectType.Freezer:
-                if (!m_freezerInUse)
+                if (!d)
                 {
-                    levelScripting.drawFreezer = true;//Enable freezer
-                    StartCoroutine(FreezerLockAndDamage());
+                    c.drawFreezer = true;//Enable freezer
+                    StartCoroutine(r());
                 }
                 break;
             case ObjectType.SecurityCamera:
@@ -83,46 +83,46 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
         }
     }
 
-    private IEnumerator FreezerLockAndDamage()
+     IEnumerator r()
     {
-        m_freezerInUse = true;
+        d = true;
         for (int i = 0; i < m_maxTicks; i++)
         {
             foreach (Collider2D enemy in m_freezerArea.m_enemyList)
             {
-                m_baseEnemyScript = enemy.GetComponent<BaseEnemy_SebastianMol>();
+                a = enemy.GetComponent<BaseEnemy_SebastianMol>();
 
-                m_baseEnemyScript.StunEnemyWithDeleyFunc(m_damageInterval);
-                m_baseEnemyScript.m_health -= m_damageAmount;//Deal damage
-                m_baseEnemyScript.OnDeath();
+                a.StunEnemyWithDeleyFunc(m_damageInterval);
+                a.m_health -= m_damageAmount;//Deal damage
+                a.OnDeath();
             }
 
             yield return new WaitForSeconds(m_damageInterval);//Delay before doing damage again
         }
         
-        levelScripting.drawFreezer = false;//Unlock freezer door
+        c.drawFreezer = false;//Unlock freezer door
         yield return new WaitForSeconds(m_freezerCooldown);
     }
 
-    private void LightColor()
+     void s()
     {
         if (m_pickColor[0] == true)
         {
-            m_color = m_colorChangerScript.m_colorOutGrey60;
+            e = b.m_colorOutGrey60;
         }
         else if (m_pickColor[1] == true)
         {
-            m_color = m_colorChangerScript.m_colorOutGrey122;
+            e = b.m_colorOutGrey122;
         }
         else if (m_pickColor[2] == true)
         {
-            m_color = m_colorChangerScript.m_colorOutGrey174;
+            e = b.m_colorOutGrey174;
         }
 
-        gameObject.GetComponent<SpriteRenderer>().color = m_color;
+        gameObject.GetComponent<SpriteRenderer>().color = e;
     }
 
-    private void StunLight()
+     void p()
     {
         if (gameObject.activeSelf)
         {
@@ -136,13 +136,13 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
 
     void Awake()
     {
-        levelScripting = GameObject.Find("Player").GetComponent<LevelScripting>();
+        c = GameObject.Find("Player").GetComponent<LevelScripting>();
         m_freezerArea = FindObjectOfType<FreezerTrigger_JoaoBeijinho>();
-        m_colorChangerScript = FindObjectOfType<ColorChanger_Jann>();
+        b = FindObjectOfType<ColorChanger_Jann>();
 
         if (gameObject.CompareTag(Tags_JoaoBeijinho.m_lightTag))
         {
-            LightColor();
+            s();
         }
     }
 }

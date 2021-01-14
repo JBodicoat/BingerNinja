@@ -55,19 +55,19 @@ public class PauseMenuManager_ElliottDesouza : MonoBehaviour
 
     void Update()
     {
-        var gamepad = Keyboard.current;
-        if (gamepad == null)
+        var a = Keyboard.current;
+        if (a == null)
             return;
 
-        if (gamepad.escapeKey.wasPressedThisFrame)
+        if (a.escapeKey.wasPressedThisFrame)
         {
             Resume();
         }
-        if (gamepad.rKey.wasPressedThisFrame)
+        if (a.rKey.wasPressedThisFrame)
         {
             ReturnToCheckpoint();
         }
-        if (gamepad.sKey.wasPressedThisFrame)
+        if (a.sKey.wasPressedThisFrame)
         {
             OpenSettingsMenu();
         }

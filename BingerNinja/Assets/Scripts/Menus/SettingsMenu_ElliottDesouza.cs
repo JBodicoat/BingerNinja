@@ -20,9 +20,9 @@ public class SettingsMenu_ElliottDesouza : MonoBehaviour
     public Slider m_musicSlider;
 
     public string m_selectedLanguage;
-    private bool m_isEnglish;
+     bool d;
 
-    private void Start()
+     void Start()
     {
         SettingsData settings = SaveLoadSystem_JamieG.LoadSettings();
         m_musicSlider.value = settings.m_musicVolume;
@@ -70,10 +70,10 @@ public class SettingsMenu_ElliottDesouza : MonoBehaviour
         SaveLoadSystem_JamieG.SaveSettings(this);
         
         // Change language in DialogManager if it is present in scene
-        GameObject dialogManager = GameObject.Find("DialogManager");
-        if (dialogManager != null)
+        GameObject e = GameObject.Find("DialogManager");
+        if (e != null)
         {
-            dialogManager.GetComponent<DialogueManager_MarioFernandes>().LoadLanguageFile();
+            e.GetComponent<DialogueManager_MarioFernandes>().LoadLanguageFile();
         }
         
         gameObject.SetActive(false);
@@ -81,11 +81,11 @@ public class SettingsMenu_ElliottDesouza : MonoBehaviour
 
     void Update()
     {
-        var gamepad = Keyboard.current;
-        if (gamepad == null)
+        var f = Keyboard.current;
+        if (f == null)
             return;
 
-        if (gamepad.rKey.wasPressedThisFrame)
+        if (f.rKey.wasPressedThisFrame)
         {
             // 'Use' code here          
             //ExitSettingMenu();

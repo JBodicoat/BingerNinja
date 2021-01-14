@@ -4,7 +4,7 @@
 //Joao Beijinho 26/10/2020 - Removed Crouching. Created trigger that toggles stealth/unstealth in the player and disable/enable movement
 //Joao Beijinho 27/10/2020 - Changed order of if statemants in update. Created m_isCrouching so that the player can't hide while crouched and n_changeLayer
 //Elliott Desouza 07/11/2020 - 
-// Jack 07/11/2020 - Set canHide & isHiding to private
+// Jack 07/11/2020 - Set canHide & isHiding to 
 //                   Removed isCrouching
 //                   Added comments within Update
 //                   Moved particle system onto the prefab rather than on the player
@@ -21,47 +21,47 @@ using UnityEngine;
 public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
 {
     //Required to change sprite orders
-    private SpriteRenderer m_changeLayer;
-    private SpriteRenderer m_playerSprite;
-    private string m_playerSpriteLayer;
+     SpriteRenderer a;
+     SpriteRenderer b;
+     string c;
 
-    private GameObject m_player;
-    private ParticleSystem m_smokeParticleSystem;
-    private bool m_canHide = false;
-    private bool m_isHiding = false;
-    //private bool m_isCrouching;
+     GameObject e;
+     ParticleSystem d;
+     bool f = false;
+     bool g = false;
+    // bool m_isCrouching;
 
-    private string m_playerTag = "Player";
+     string h = "Player";
 
     /// <summary>
     /// Enable player ability to hide
     /// </summary>
-    private void OnTriggerEnter2D(Collider2D collision)
+     void OnTriggerEnter2D(Collider2D i)
     {
-        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        if (i.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
         {
-            m_canHide = true;
+            f = true;
         }
     }
 
     /// <summary>
     /// Disable player ability to hide
     /// </summary>
-    private void OnTriggerExit2D(Collider2D collision)
+     void OnTriggerExit2D(Collider2D j)
     {
-        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        if (j.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
         {
-            m_canHide = false;
+            f = false;
         }
     }
 
     void Start()
     {
-        m_player = GameObject.Find("Player");
-        m_playerSprite = m_player.GetComponent<SpriteRenderer>();
-        m_playerSpriteLayer = m_playerSprite.sortingLayerName;
-        m_changeLayer = GetComponent<SpriteRenderer>();
-        m_smokeParticleSystem = GetComponentInChildren<ParticleSystem>();
+        e = GameObject.Find("Player");
+        b = e.GetComponent<SpriteRenderer>();
+        c = b.sortingLayerName;
+        a = GetComponent<SpriteRenderer>();
+        d = GetComponentInChildren<ParticleSystem>();
     }
 
     /// <summary>
@@ -71,29 +71,29 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
     {
       //  m_isCrouching = m_playerStealthScript.m_crouched;
 
-        if (m_playerControllerScript.m_interact.triggered && m_isHiding == true)
+        if (m_playerControllerScript.m_interact.triggered && g)
         {
-            m_canHide = true;
-            m_isHiding = false;
-            m_playerSprite.sortingOrder = 10;
-            m_playerSprite.sortingLayerName = m_playerSpriteLayer;
+            f = true;
+            g = false;
+            b.sortingOrder = 10;
+            b.sortingLayerName = c;
             Hide();
             m_playerControllerScript.m_movement.Enable();
             m_playerControllerScript.m_crouch.Enable();
             gameObject.layer = 2; 
         }
-        else if (m_playerControllerScript.m_interact.triggered && m_canHide == true && !m_playerStealthScript.m_crouched)
+        else if (m_playerControllerScript.m_interact.triggered && f&& !m_playerStealthScript.m_crouched)
         {
             // hide behind this object
-            m_canHide = false;
-            m_isHiding = true;
-            m_playerSprite.sortingOrder = 8;
-            m_playerSprite.sortingLayerName = m_changeLayer.sortingLayerName;
-            m_player.transform.position = new Vector3( gameObject.transform.position.x, gameObject.transform.position.y, m_player.transform.position.z);
+            f = false;
+            g = true;
+            b.sortingOrder = 8;
+            b.sortingLayerName = a.sortingLayerName;
+            e.transform.position = new Vector3( gameObject.transform.position.x, gameObject.transform.position.y, e.transform.position.z);
             Hide();
             m_playerControllerScript.m_movement.Disable();
             m_playerControllerScript.m_crouch.Disable();
-            m_smokeParticleSystem.Play();
+            d.Play();
             gameObject.layer = 0; 
         }
     }

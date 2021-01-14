@@ -15,23 +15,23 @@ public class PickupItem_JoaoBeijinho : MonoBehaviour
     public ItemType m_item;
     public int m_itemQuantity;
 
-    private WeaponUI_LouieWilliamson weaponUI;
-    private void OnTriggerEnter2D(Collider2D collision)
+    WeaponUI_LouieWilliamson b;
+    void OnTriggerEnter2D(Collider2D c)
     {
-        if (collision.tag == "Player")
+        if (c.tag == "Player")
         {
             m_inventory.GiveItem(m_item, m_itemQuantity);
             gameObject.SetActive(false);
 
             if (m_item == ItemType.Key || m_item == ItemType.LiftKey)
             {
-                weaponUI.setKey(true);
+                b.setKey(true);
             }
         }
     }
-    private void Start()
+    void Start()
     {
-        weaponUI = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
+        b = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
     }
 }
 

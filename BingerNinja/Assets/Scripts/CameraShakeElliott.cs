@@ -11,27 +11,27 @@ public class CameraShakeElliott : MonoBehaviour
     public float m_duration;
     public float m_magnitude;
     public float m_cameraLerp;
-    public IEnumerator Shake(float duration, float magnitude)
+    public IEnumerator Shake(float a, float b)
     {
-        duration = m_duration;
-        magnitude = m_magnitude;
+        a = m_duration;
+        b = m_magnitude;
 
-        Vector3 orgignalPos = transform.localPosition;
+        Vector3 d = transform.localPosition;
 
-        float elapsed = 0.0f;
+        float c = 0.0f;
 
-        while (elapsed < m_duration)
+        while (c < m_duration)
         {
             float x = Random.Range(-1f, 1f) * m_magnitude;
             float y = Random.Range(-1f, 1f) * m_magnitude;
 
-            transform.localPosition = new Vector3(x, y, orgignalPos.z);
+            transform.localPosition = new Vector3(x, y, d.z);
 
-            elapsed += Time.deltaTime;
+            c += Time.deltaTime;
 
             yield return null;
         }
-        transform.localPosition = orgignalPos;
+        transform.localPosition = d;
     }
 
     //private void LateUpdate()

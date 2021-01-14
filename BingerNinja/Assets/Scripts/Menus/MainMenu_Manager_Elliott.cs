@@ -17,13 +17,13 @@ public class MainMenu_Manager_Elliott : MonoBehaviour
     public Button m_continueButton;
     public GameObject m_settingMenu;
     protected bool m_openSettings;
-    private int m_lastCheckpointLevel;
+    int a;
 
     public void Resume()
     {
-        if (m_lastCheckpointLevel > 0)
+        if (a > 0)
         {
-            SceneManager_JamieG.Instance.LoadLevel(m_lastCheckpointLevel);
+            SceneManager_JamieG.Instance.LoadLevel(a);
         }
     }
 
@@ -51,18 +51,18 @@ public class MainMenu_Manager_Elliott : MonoBehaviour
     {
         m_openSettings = false;
 
-        m_lastCheckpointLevel = SaveLoadSystem_JamieG.LoadCheckpoint().m_lastCheckpointLevel;
-        m_continueButton.enabled = m_lastCheckpointLevel > 0;
+        a = SaveLoadSystem_JamieG.LoadCheckpoint().m_lastCheckpointLevel;
+        m_continueButton.enabled = a > 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        var gamepad = Keyboard.current;
-        if (gamepad == null)
+        var f = Keyboard.current;
+        if (f == null)
             return; 
 
-        if (gamepad.sKey.wasPressedThisFrame)
+        if (f.sKey.wasPressedThisFrame)
         {       
             //  Quit();
             OpenSettingsMenu();

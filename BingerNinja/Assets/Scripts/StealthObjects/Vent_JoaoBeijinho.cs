@@ -20,26 +20,26 @@ using UnityEngine;
 /// </summary>
 public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
 {
-    private GameObject m_player;
+     GameObject a;
 
-    private void OnTriggerEnter2D(Collider2D collision)//Enter and Exit vent
+     void OnTriggerEnter2D(Collider2D b)//Enter and Exit vent
     {
-        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        if (b.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
         {
             if (!m_playerStealthScript.m_stealthed)//If player isn't stealthed he's not inside the vent
             {
-                VentEnter();
+                e();
             }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+     void OnTriggerExit2D(Collider2D c)
     {
-        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        if (c.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
         {
             if (m_playerStealthScript.m_stealthed)//If player isn't stealthed he's not inside the vent
             {
-                VentExit();
+                f();
             }
         }
     }
@@ -47,12 +47,12 @@ public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
     /// <summary>
     /// Snap player to the position of the vent, disable collision with wall tiles
     /// </summary>
-    private void VentEnter()
+     void e()
     {
         Hide();
         ToggleVent();
         
-        m_player.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        a.GetComponentInChildren<SpriteRenderer>().enabled = false;
         
         Physics2D.IgnoreLayerCollision(0, 10, true);
     }
@@ -60,12 +60,12 @@ public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
     /// <summary>
     /// snap player to the position of the vent, enable collision with wall tiles
     /// </summary>
-    private void VentExit()
+     void f()
     {
         Hide();
         ToggleVent();
         
-        m_player.GetComponentInChildren<SpriteRenderer>().enabled = true;
+        a.GetComponentInChildren<SpriteRenderer>().enabled = true;
         gameObject.SetActive(false);
 
         Physics2D.IgnoreLayerCollision(0, 10, false);
@@ -75,7 +75,7 @@ public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
     void Start()
     {
         //Get the player GameObject for sprite changing
-        m_player = GameObject.Find("Player");
+        a = GameObject.Find("Player");
 
         //Turn VentPath GameObject OFF at the start, it will only be enabled after the player passes a trigger
         gameObject.SetActive(false);

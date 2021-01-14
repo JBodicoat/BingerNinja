@@ -20,28 +20,28 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
     public Collider2D m_doorCollider;
 
     public Tile bottomDoor, topDoor;
-    private Tilemap walls1, walls2;
+     Tilemap a, b;
 
     public bool m_canPressButton = false;
     public bool m_doorIsOpen = false;
 
     public string buttonName = "";
 
-    private void OnTriggerEnter2D(Collider2D collision)
+     void OnTriggerEnter2D(Collider2D c)
     {
-        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))//Collision with Player
+        if (c.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))//Collision with Player
         {
             m_canPressButton = true;//Allow player to open the door
         }
-        else if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_projectileTag))//Collision with Projectile
+        else if (c.gameObject.CompareTag(Tags_JoaoBeijinho.m_projectileTag))//Collision with Projectile
         {
             m_doorCollider.GetComponent<Collider2D>().enabled = false;//Open door
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+     void OnTriggerExit2D(Collider2D d)
     {
-        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))//Collision with Player
+        if (d.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))//Collision with Player
         {
             m_canPressButton = false;//Don't allow player to open the door
         }
@@ -50,8 +50,8 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
     void Awake()
     {
         m_playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
-        walls1 = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
-        walls2 = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
+        a = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
+        b = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
     }
 
     // Update is called once per frame
@@ -63,24 +63,24 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
             if (!m_doorIsOpen)
             {
                 m_doorIsOpen = true;
-                walls2.SetTile(new Vector3Int(24, 9, 0), null);
-                walls2.SetTile(new Vector3Int(24, 10, 0), null);
-                walls2.SetTile(new Vector3Int(24, 11, 0), null);
+                b.SetTile(new Vector3Int(24, 9, 0), null);
+                b.SetTile(new Vector3Int(24, 10, 0), null);
+                b.SetTile(new Vector3Int(24, 11, 0), null);
 
-                walls1.SetTile(new Vector3Int(23, 8, 0), null);
-                walls1.SetTile(new Vector3Int(23, 9, 0), null);
-                walls1.SetTile(new Vector3Int(23, 10, 0), null);
+                a.SetTile(new Vector3Int(23, 8, 0), null);
+                a.SetTile(new Vector3Int(23, 9, 0), null);
+                a.SetTile(new Vector3Int(23, 10, 0), null);
               //  m_doorCollider.GetComponent<Collider2D>().enabled = false;//Open door
             }
             else
             {
-                walls2.SetTile(new Vector3Int(24, 9, 0), topDoor);
-                walls2.SetTile(new Vector3Int(24, 10, 0), topDoor);
-                walls2.SetTile(new Vector3Int(24, 11, 0), topDoor);
+                b.SetTile(new Vector3Int(24, 9, 0), topDoor);
+                b.SetTile(new Vector3Int(24, 10, 0), topDoor);
+                b.SetTile(new Vector3Int(24, 11, 0), topDoor);
 
-                walls1.SetTile(new Vector3Int(23, 8, 0), bottomDoor);
-                walls1.SetTile(new Vector3Int(23, 9, 0), bottomDoor);
-                walls1.SetTile(new Vector3Int(23, 10, 0), bottomDoor);
+                a.SetTile(new Vector3Int(23, 8, 0), bottomDoor);
+                a.SetTile(new Vector3Int(23, 9, 0), bottomDoor);
+                a.SetTile(new Vector3Int(23, 10, 0), bottomDoor);
                 m_doorIsOpen = false;
             }
         }
@@ -90,23 +90,23 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
             if (!m_doorIsOpen)
             {
                 m_doorIsOpen = true;
-                walls2.SetTile(new Vector3Int(12, 20, 0), null);
-                walls2.SetTile(new Vector3Int(13, 20, 0), null);
-                walls2.SetTile(new Vector3Int(14, 20, 0), null);
+                b.SetTile(new Vector3Int(12, 20, 0), null);
+                b.SetTile(new Vector3Int(13, 20, 0), null);
+                b.SetTile(new Vector3Int(14, 20, 0), null);
 
-                walls1.SetTile(new Vector3Int(13, 19, 0), null);
-                walls1.SetTile(new Vector3Int(12, 19, 0), null);
-                walls1.SetTile(new Vector3Int(11, 19, 0), null);
+                a.SetTile(new Vector3Int(13, 19, 0), null);
+                a.SetTile(new Vector3Int(12, 19, 0), null);
+                a.SetTile(new Vector3Int(11, 19, 0), null);
             }
             else
             {
-                walls2.SetTile(new Vector3Int(12, 20, 0), topDoor);
-                walls2.SetTile(new Vector3Int(13, 20, 0), topDoor);
-                walls2.SetTile(new Vector3Int(14, 20, 0), topDoor);
+                b.SetTile(new Vector3Int(12, 20, 0), topDoor);
+                b.SetTile(new Vector3Int(13, 20, 0), topDoor);
+                b.SetTile(new Vector3Int(14, 20, 0), topDoor);
 
-                walls1.SetTile(new Vector3Int(13, 19, 0), bottomDoor);
-                walls1.SetTile(new Vector3Int(12, 19, 0), bottomDoor);
-                walls1.SetTile(new Vector3Int(11, 19, 0), bottomDoor);
+                a.SetTile(new Vector3Int(13, 19, 0), bottomDoor);
+                a.SetTile(new Vector3Int(12, 19, 0), bottomDoor);
+                a.SetTile(new Vector3Int(11, 19, 0), bottomDoor);
                 m_doorIsOpen = false;
             }
 
@@ -117,23 +117,23 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
             {
 
                 m_doorIsOpen = true;
-                walls2.SetTile(new Vector3Int(20, 20, 0), null);
-                walls2.SetTile(new Vector3Int(19, 20, 0), null);
-                walls2.SetTile(new Vector3Int(18, 20, 0), null);
+                b.SetTile(new Vector3Int(20, 20, 0), null);
+                b.SetTile(new Vector3Int(19, 20, 0), null);
+                b.SetTile(new Vector3Int(18, 20, 0), null);
 
-                walls1.SetTile(new Vector3Int(19, 19, 0), null);
-                walls1.SetTile(new Vector3Int(18, 19, 0), null);
-                walls1.SetTile(new Vector3Int(17, 19, 0), null);
+                a.SetTile(new Vector3Int(19, 19, 0), null);
+                a.SetTile(new Vector3Int(18, 19, 0), null);
+                a.SetTile(new Vector3Int(17, 19, 0), null);
             }
             else
             {
-                walls2.SetTile(new Vector3Int(20, 20, 0), topDoor);
-                walls2.SetTile(new Vector3Int(19, 20, 0), topDoor);
-                walls2.SetTile(new Vector3Int(18, 20, 0), topDoor);
+                b.SetTile(new Vector3Int(20, 20, 0), topDoor);
+                b.SetTile(new Vector3Int(19, 20, 0), topDoor);
+                b.SetTile(new Vector3Int(18, 20, 0), topDoor);
 
-                walls1.SetTile(new Vector3Int(19, 19, 0), bottomDoor);
-                walls1.SetTile(new Vector3Int(18, 19, 0), bottomDoor);
-                walls1.SetTile(new Vector3Int(17, 19, 0), bottomDoor);
+                a.SetTile(new Vector3Int(19, 19, 0), bottomDoor);
+                a.SetTile(new Vector3Int(18, 19, 0), bottomDoor);
+                a.SetTile(new Vector3Int(17, 19, 0), bottomDoor);
                 m_doorIsOpen = false;
             }
 
@@ -143,23 +143,23 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
             if (!m_doorIsOpen)
             {
                 m_doorIsOpen = true;
-                walls2.SetTile(new Vector3Int(26, 20, 0), null);
-                walls2.SetTile(new Vector3Int(25, 20, 0), null);
-                walls2.SetTile(new Vector3Int(24, 20, 0), null);
+                b.SetTile(new Vector3Int(26, 20, 0), null);
+                b.SetTile(new Vector3Int(25, 20, 0), null);
+                b.SetTile(new Vector3Int(24, 20, 0), null);
 
-                walls1.SetTile(new Vector3Int(25, 19, 0), null);
-                walls1.SetTile(new Vector3Int(24, 19, 0), null);
-                walls1.SetTile(new Vector3Int(23, 19, 0), null);
+                a.SetTile(new Vector3Int(25, 19, 0), null);
+                a.SetTile(new Vector3Int(24, 19, 0), null);
+                a.SetTile(new Vector3Int(23, 19, 0), null);
             }
             else
             {
-                walls2.SetTile(new Vector3Int(26, 20, 0), topDoor);
-                walls2.SetTile(new Vector3Int(25, 20, 0), topDoor);
-                walls2.SetTile(new Vector3Int(24, 20, 0), topDoor);
+                b.SetTile(new Vector3Int(26, 20, 0), topDoor);
+                b.SetTile(new Vector3Int(25, 20, 0), topDoor);
+                b.SetTile(new Vector3Int(24, 20, 0), topDoor);
 
-                walls1.SetTile(new Vector3Int(25, 19, 0), bottomDoor);
-                walls1.SetTile(new Vector3Int(24, 19, 0), bottomDoor);
-                walls1.SetTile(new Vector3Int(23, 19, 0), bottomDoor);
+                a.SetTile(new Vector3Int(25, 19, 0), bottomDoor);
+                a.SetTile(new Vector3Int(24, 19, 0), bottomDoor);
+                a.SetTile(new Vector3Int(23, 19, 0), bottomDoor);
                 m_doorIsOpen = false;
             }
 

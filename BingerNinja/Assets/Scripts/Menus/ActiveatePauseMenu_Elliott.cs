@@ -14,17 +14,17 @@ public class ActiveatePauseMenu_Elliott : MonoBehaviour
         }
     }
 
-    private void Start()
+    void Start()
     {
         m_pauseMenu.SetActive(false);
     }
     void Update()
     {
-        var gamepad = Keyboard.current;
-        if (gamepad == null)
+        var a = Keyboard.current;
+        if (a == null)
             return;
 
-        if (gamepad.escapeKey.wasPressedThisFrame)
+        if (a.escapeKey.wasPressedThisFrame)
         {
             OpenPauseMenu();
         }

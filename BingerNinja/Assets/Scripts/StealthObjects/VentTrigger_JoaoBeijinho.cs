@@ -11,19 +11,19 @@ using UnityEngine;
 /// </summary>
 public class VentTrigger_JoaoBeijinho : MonoBehaviour
 {
-    private GameObject m_ventPath;
+     GameObject a;
 
     // Start is called before the first frame update
     void Awake()
     {
-        m_ventPath = GameObject.Find("VentPath");
+        a = GameObject.Find("VentPath");
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)//Enter and Exit vent
+     void OnTriggerEnter2D(Collider2D b)//Enter and Exit vent
     {
-        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        if (b.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
         {
-            m_ventPath.SetActive(true);
+            a.SetActive(true);
         }
     }
 }
