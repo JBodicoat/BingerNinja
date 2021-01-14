@@ -38,10 +38,10 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     public float m_amountOfTimeToMoveAwayFromWall = 0.2f;
     public float m_chargeAttackSpeed = 500;
 
-    private bool doOnceShowPath = true;
+    private bool a = true;
     public bool showPathBeforAttackTigerBoss = false;
-    private Pathfinder_SebastianMol pathFinder;
-    private List<Vector2Int> daPath;
+    private Pathfinder_SebastianMol b;
+    private List<Vector2Int> c;
 
     protected bool m_doStunOnce = false;
     protected bool m_doMoveAwayFromWallOnce = false;
@@ -129,7 +129,7 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
         }
         m_doMoveAwayFromWallOnce = false;
     }
-    private void LateUpdate()
+    void LateUpdate()
     {
         if(m_currentEnemyType == m_enemyType.SPACENINJABOSS)
         {
@@ -156,9 +156,9 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     }
 
 
-    protected void OnTriggerEnter2D(Collider2D collision)
+    protected void OnTriggerEnter2D(Collider2D a)
     {
-        if(collision.gameObject.tag != Tags_JoaoBeijinho.m_enemyTag && collision.gameObject.tag != "Untagged")
+        if(a.gameObject.tag != Tags_JoaoBeijinho.m_enemyTag && a.gameObject.tag != "Untagged")
         {
             if (m_currentEnemyType == m_enemyType.PETTIGER || m_currentEnemyType == m_enemyType.TADASHI)
             {
@@ -171,14 +171,14 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
                     m_attackCollider.SetActive(false);
                     //if hit wall walk away one tile 
                     //if hit wall stunn
-                    if (collision.gameObject.name == "Walls1_map")
+                    if (a.gameObject.name == "Walls1_map")
                     {
                         m_attackRange = 0.01f;
                         m_doMoveAwayFromWallOnce = true;
                         StunEnemyWithDeleyFunc(m_afterAttackDeley);
                     }
 
-                    if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+                    if (a.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
                     {
                         if (m_currentEnemyType == m_enemyType.PETTIGER || m_tadashiPhase == 1)
                             FindObjectOfType<EffectManager_MarioFernandes>().AddEffect

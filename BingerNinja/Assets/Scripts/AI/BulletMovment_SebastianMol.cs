@@ -29,7 +29,7 @@ public class BulletMovment_SebastianMol : MonoBehaviour
 
     public float  m_rotateSpeed;
 
-    private void Start()
+     void Start()
     {
         Destroy(gameObject, 2);
     }
@@ -39,17 +39,17 @@ public class BulletMovment_SebastianMol : MonoBehaviour
         transform.Rotate(new Vector3(0, 0, m_rotateSpeed * Time.deltaTime));
     }
 
-	private void OnTriggerEnter2D(Collider2D collision)
+	 void OnTriggerEnter2D(Collider2D a)
 	{
 
-        if (collision.gameObject.name == "Walls1_map")
+        if (a.gameObject.name == "Walls1_map")
         {
            Destroy(gameObject);
         }
 
-        if (collision.tag == "Player")
+        if (a.tag == "Player")
         {
-            collision.GetComponent<HitEffectElliott>().StartHitEffect(false);
+            a.GetComponent<HitEffectElliott>().StartHitEffect(false);
             if (m_dosePoisonDamage)
             {
                 int rand = Random.Range(0, m_poisonDamageChance);
@@ -76,7 +76,7 @@ public class BulletMovment_SebastianMol : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+     void OnCollisionEnter2D(Collision2D b)
     {
       
         Destroy(gameObject);

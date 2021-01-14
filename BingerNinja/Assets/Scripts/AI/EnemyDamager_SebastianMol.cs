@@ -17,17 +17,17 @@ public class EnemyDamager_SebastianMol : MonoBehaviour
 	public float m_slowDebuff = 0.5f; //make thsi a range
 	public float m_affectTime = 5;
     public HitEffectElliott m_HitEffectElliott;
-	private void OnTriggerEnter2D(Collider2D collision)
+	 void OnTriggerEnter2D(Collider2D b)
 	{
-		if (collision.tag == "Player")
+		if (b.tag == "Player")
 		{
 			FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damage);
-			MeleeEnemy_SebastianMol currentEnemyScript = GetComponentInParent<MeleeEnemy_SebastianMol>();
+			MeleeEnemy_SebastianMol a = GetComponentInParent<MeleeEnemy_SebastianMol>();
            // m_HitEffectElliott.StartHitEffect(false);
-            collision.GetComponent<HitEffectElliott>().StartHitEffect(false);
-            if (currentEnemyScript.m_currentEnemyType == m_enemyType.SPACENINJABOSS)
+            b.GetComponent<HitEffectElliott>().StartHitEffect(false);
+            if (a.m_currentEnemyType == m_enemyType.SPACENINJABOSS)
             {
-				if(currentEnemyScript.m_doseAffect)
+				if(a.m_doseAffect)
                 {
 					float rand = Random.Range(0, 2);
 
@@ -47,7 +47,7 @@ public class EnemyDamager_SebastianMol : MonoBehaviour
 			gameObject.SetActive(false);
 		}
 	}
-    private void Start()
+    void Start()
     {
        m_HitEffectElliott = GetComponent<HitEffectElliott>();
     }

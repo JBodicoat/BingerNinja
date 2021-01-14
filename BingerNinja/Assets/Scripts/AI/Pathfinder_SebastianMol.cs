@@ -52,23 +52,23 @@ public class Pathfinder_SebastianMol : MonoBehaviour
     /// <returns></returns>
     public List<Vector2Int> PathFind(Vector2Int startPos, Vector2Int targetPos)
     {
-        Node startNode = m_allTiles[startPos.x, startPos.y];
-        Node targetNode = m_allTiles[targetPos.x, targetPos.y];
+        Node a = m_allTiles[startPos.x, startPos.y];
+        Node b = m_allTiles[targetPos.x, targetPos.y];
 
-        List<Node> openList = new List<Node>();
-        List<Node> closedList = new List<Node>();
-        List<Node> FinalPath = new List<Node>();
+        List<Node> q = new List<Node>();
+        List<Node> w = new List<Node>();
+        List<Node> e = new List<Node>();
 
-        Node currentNode = startNode;
+        Node r = a;
 
-        if (startNode == targetNode) return new List<Vector2Int>();
+        if (a == b) return new List<Vector2Int>();
 
-        openList.Add(currentNode);
+        q.Add(r);
 
-        while (currentNode != targetNode)
+        while (r != b)
         {
-            closedList.Add(currentNode);
-            openList.Remove(currentNode);
+            w.Add(r);
+            q.Remove(r);
 
             for (int y = -1; y <= 1; y++)
             {
@@ -77,10 +77,10 @@ public class Pathfinder_SebastianMol : MonoBehaviour
                     //skip checks
                     if (x == 0 && y == 0) continue; //skips current tile
                     //if (math.abs(x) == math.abs(y)) continue; //skip diagonals
-                    Vector2Int worldPos = new Vector2Int(currentNode.m_pos.x + x, currentNode.m_pos.y + y); //curret poss that is begi checked relative to the currentnode
+                    Vector2Int worldPos = new Vector2Int(r.m_pos.x + x, r.m_pos.y + y); //curret poss that is begi checked relative to the currentnode
                     if (CheckOutOfBounds(worldPos)) continue; // skips out of bounds
                     if (m_allTiles[worldPos.x, worldPos.y].m_traversable == false) continue; // skips walls
-                    if (closedList.Contains(m_allTiles[worldPos.x, worldPos.y])) continue; //skips nodes already checked
+                    if (w.Contains(m_allTiles[worldPos.x, worldPos.y])) continue; //skips nodes already checked
                     if (math.abs(x) == math.abs(y))
                     {
                         if (!m_allTiles[worldPos.x - x, worldPos.y].m_traversable) continue;
@@ -91,62 +91,62 @@ public class Pathfinder_SebastianMol : MonoBehaviour
 
                     float movementCost = (math.abs(x) == math.abs(y)) ? MOVE_COST_DIAG : MOVE_COST;
 
-                    if (openList.Contains(m_allTiles[worldPos.x, worldPos.y]))
+                    if (q.Contains(m_allTiles[worldPos.x, worldPos.y]))
                     {
-                        if (currentNode.m_g + movementCost < m_allTiles[worldPos.x, worldPos.y].m_g) // find cheaper path
+                        if (r.m_g + movementCost < m_allTiles[worldPos.x, worldPos.y].m_g) // find cheaper path
                         {
                             //update node with new data
-                            m_allTiles[worldPos.x, worldPos.y].m_parentNode = currentNode;
-                            m_allTiles[worldPos.x, worldPos.y].m_g = currentNode.m_g + movementCost;
+                            m_allTiles[worldPos.x, worldPos.y].m_parentNode = r;
+                            m_allTiles[worldPos.x, worldPos.y].m_g = r.m_g + movementCost;
                             m_allTiles[worldPos.x, worldPos.y].m_f = m_allTiles[worldPos.x, worldPos.y].m_g + m_allTiles[worldPos.x, worldPos.y].m_h;
                         }
                     }
                     else
                     {
                         //update node with new data
-                        m_allTiles[worldPos.x, worldPos.y].m_parentNode = currentNode;
-                        m_allTiles[worldPos.x, worldPos.y].m_g = currentNode.m_g + movementCost;
-                        m_allTiles[worldPos.x, worldPos.y].m_h = math.abs(targetNode.m_pos.x - worldPos.x) + math.abs(targetNode.m_pos.y - worldPos.y);
+                        m_allTiles[worldPos.x, worldPos.y].m_parentNode = r;
+                        m_allTiles[worldPos.x, worldPos.y].m_g = r.m_g + movementCost;
+                        m_allTiles[worldPos.x, worldPos.y].m_h = math.abs(b.m_pos.x - worldPos.x) + math.abs(b.m_pos.y - worldPos.y);
                         m_allTiles[worldPos.x, worldPos.y].m_f = m_allTiles[worldPos.x, worldPos.y].m_g + m_allTiles[worldPos.x, worldPos.y].m_h;
-                        openList.Add(m_allTiles[worldPos.x, worldPos.y]);
+                        q.Add(m_allTiles[worldPos.x, worldPos.y]);
                     }
 
                     //have i reached the target
-                    if (m_allTiles[worldPos.x, worldPos.y] == targetNode)
+                    if (m_allTiles[worldPos.x, worldPos.y] == b)
                     {
-                        closedList.Add(m_allTiles[worldPos.x, worldPos.y]);
-                        currentNode = targetNode;
+                        w.Add(m_allTiles[worldPos.x, worldPos.y]);
+                        r = b;
                     }
                 }
             }
 
-            if (currentNode == targetNode) break;
-            if (openList.Count == 0) break;
+            if (r == b) break;
+            if (q.Count == 0) break;
 
             //find the cheapest node
-            Node lowestCostNode = openList[0];
-            foreach (Node node in openList)
+            Node t = q[0];
+            foreach (Node node in q)
             {
-                if (node.m_f < lowestCostNode.m_f) lowestCostNode = node;
+                if (node.m_f < t.m_f) t = node;
             }
-            currentNode = lowestCostNode;
+            r = t;
         }
 
-        FinalPath = AddNodeToPath(currentNode, FinalPath);
-        if (FinalPath.Count == 0) return new List<Vector2Int>();
-        if (FinalPath[0] != targetNode) return new List<Vector2Int>();
+        e = AddNodeToPath(r, e);
+        if (e.Count == 0) return new List<Vector2Int>();
+        if (e[0] != b) return new List<Vector2Int>();
 
-        List<Vector2Int> DaPath = new List<Vector2Int>();
-        for (int i = FinalPath.Count - 1; i >= 0; --i)
+        List<Vector2Int> m = new List<Vector2Int>();
+        for (int i = e.Count - 1; i >= 0; --i)
         {
-            DaPath.Add(new Vector2Int(FinalPath[i].m_pos.x, FinalPath[i].m_pos.y));
+            m.Add(new Vector2Int(e[i].m_pos.x, e[i].m_pos.y));
         }
 
         //preapre data for next search
-        foreach (Node item in closedList) item.ResetData();
-        foreach (Node item in openList) item.ResetData();
+        foreach (Node item in w) item.ResetData();
+        foreach (Node item in q) item.ResetData();
 
-        return DaPath;
+        return m;
     }
 
     /// <summary>
@@ -163,42 +163,42 @@ public class Pathfinder_SebastianMol : MonoBehaviour
     /// adds a node to a list of nodes with reccursion.
     /// </summary>
     /// <param name="n"></param>
-    /// <param name="path"></param>
+    /// <param name="a"></param>
     /// <returns></returns>
-    private List<Node> AddNodeToPath(Node n, List<Node> path)
+    List<Node> AddNodeToPath(Node n, List<Node> a)
     {
         if (count<60)
         {
             count++;
-            path.Add(n);
-            if (n.m_parentNode != null) AddNodeToPath(n.m_parentNode, path);
-            return path;
+            a.Add(n);
+            if (n.m_parentNode != null) AddNodeToPath(n.m_parentNode, a);
+            return a;
         }
         else
         {
             count = 0;
-            return path;
+            return a;
         }
     }
 
     /// <summary>
     /// cheack to see if  atile is out of bounds
     /// </summary>
-    /// <param name="pos"></param>
+    /// <param name="p"></param>
     /// <returns></returns>
-    private bool CheckOutOfBounds(Vector2Int pos)
+    bool CheckOutOfBounds(Vector2Int p)
     {
-        return pos.x < 0 || pos.x > m_allTiles.GetLength(0) - 1 || pos.y < 0 || pos.y > m_allTiles.GetLength(1) - 1 ? true : false;
+        return p.x < 0 || p.x > m_allTiles.GetLength(0) - 1 || p.y < 0 || p.y > m_allTiles.GetLength(1) - 1 ? true : false;
     }
 
-    private void Start()
+    void Start()
     {
-        Vector3Int size = GetComponent<Tilemap>().size;
+        Vector3Int a = GetComponent<Tilemap>().size;
 
         //might need to change script order
-        m_allTiles = new Node[size.x, size.y];
-        for (int y = 0; y < size.y; y++)
-            for (int x = 0; x < size.x; x++)
+        m_allTiles = new Node[a.x, a.y];
+        for (int y = 0; y < a.y; y++)
+            for (int x = 0; x < a.x; x++)
             {
                 m_allTiles[x, y] = new Node(true, new Vector2Int(x, y));
             }

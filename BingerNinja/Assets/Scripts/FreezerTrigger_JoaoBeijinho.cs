@@ -14,24 +14,24 @@ public class FreezerTrigger_JoaoBeijinho : MonoBehaviour
 {
     public List<Collider2D> m_enemyList = new List<Collider2D>();
 
-    private void OnTriggerEnter2D(Collider2D collision)
+     void OnTriggerEnter2D(Collider2D a)
     {
-        if (collision is BoxCollider2D && collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_enemyTag))
+        if (a is BoxCollider2D && a.gameObject.CompareTag(Tags_JoaoBeijinho.m_enemyTag))
         {
-            if (!m_enemyList.Contains(collision))
+            if (!m_enemyList.Contains(a))
             {
-                m_enemyList.Add(collision);
+                m_enemyList.Add(a);
             }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    void OnTriggerExit2D(Collider2D b)
     {
-        if (collision is BoxCollider2D && collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_enemyTag))
+        if (b is BoxCollider2D && b.gameObject.CompareTag(Tags_JoaoBeijinho.m_enemyTag))
         {
-            if (m_enemyList.Contains(collision))
+            if (m_enemyList.Contains(b))
             {
-                m_enemyList.Remove(collision);
+                m_enemyList.Remove(b);
             }
         }
     }

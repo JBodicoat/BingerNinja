@@ -66,7 +66,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     
     public float m_outOfSightDeley;
     
-    private float m_lookLeftAndRightTimer = 0.5f;
+     float m_lookLeftAndRightTimer = 0.5f;
 
     
     public float m_sneakDamageMultiplier;
@@ -89,39 +89,39 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
     internal float m_maxHealth; //max amount of health an enemy has
 
-    private Pathfinder_SebastianMol m_pathfinder;
+     Pathfinder_SebastianMol q;
     protected List<Vector2Int> m_currentPath = new List<Vector2Int>();
     protected Transform m_playerTransform; //used to get player position can be null if undedteceted
     protected float m_scale; //player scale at start
-    private Vector3 m_lastPos; //the last position the enemy was at
+     Vector3 w; //the last position the enemy was at
     protected Vector3 m_startPos;//the starting position of the enemy
     protected float m_attackTimer; //timer for attack deley
     protected float m_outOfSightTimer; //timer for line of sight check
     protected int m_patrolIterator = 0; //iterated through patrole points
     protected float m_maxAttackRange;
-    private int m_patrolIteratorMax; //the max for teh iterator so it dosent go out of range  
-    private float m_patroleTimer; // timer for waiting at each patrole pos
-    private Transform m_currentPatrolePos; //the current patrole pos were haeding to / are at 
-    private Vector3 m_lastPathFinfToPos; //last given to the path finder to find a path e.g. player position
+     int e; //the max for teh iterator so it dosent go out of range  
+     float r; // timer for waiting at each patrole pos
+     Transform t; //the current patrole pos were haeding to / are at 
+     Vector3 y; //last given to the path finder to find a path e.g. player position
     protected bool m_isStuned = false; //used to stunn the enemy
-    private float m_lookLeftAndRightTimerMax; //used to remeber m_lookLeftAndRightTimer varaibale at the start for later resents
-    private bool m_isSerching = false; // if the enemy serching for player
-    private Vector3 m_curiousTarget;  //the point of curiosity for an enemy to cheak
+     float u; //used to remeber m_lookLeftAndRightTimer varaibale at the start for later resents
+     bool i = false; // if the enemy serching for player
+     Vector3 o;  //the point of curiosity for an enemy to cheak
     protected int m_tadashiPhase = 1; //the phase tadashi is on
 
 
-    private HitEffectElliott m_HitEffectElliott;
-    private CameraShakeElliott m_cameraShake;
+     HitEffectElliott a;
+     CameraShakeElliott s;
     protected bool m_showquestionMarkonce = false;
-    private PlayerSpoted_Elliott playerSpoted_Elliott;
+     PlayerSpoted_Elliott d;
     
 
     protected PlayerStealth_JoaoBeijinho m_playerStealthScript;
-    private int m_crouchObjectLayer = 1 << 8;
+     int f = 1 << 8;
     /// <summary>
     /// abstract class used to provied the logic for the wonder state
     /// </summary>
-    private void WonderState()
+     void g()
     {
         if (m_dosePatrole)
         {
@@ -144,7 +144,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <summary>
     /// abstract class used to provied the logic for the chase state
     /// </summary>
-    private void ChaseState()
+     void h()
     {
         if (IsPlayerInLineOfSight()) // if you can see player
         {
@@ -161,18 +161,18 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         else
         {
             OnceLostContactEffect();
-            m_isSerching = true;
+            i = true;
             if (m_currentPath.Count == 0)
             {
                 if (m_outOfSightTimer <= 0)
                 {
-                    m_isSerching = false;
+                    i = false;
                     m_currentState = state.WONDER;
                     m_playerDetected = false;
                 }
                 else
                 {
-                    LookLeftAndRight();
+                    j();
                     m_outOfSightTimer -= Time.deltaTime;
                 }
             }
@@ -182,7 +182,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <summary>
     /// contains logic for when the enemy is serching for the player it looks left and right every half second
     /// </summary>
-    private void LookLeftAndRight()
+    void j()
     {
         if(m_lookLeftAndRightTimer <= 0)
         {
@@ -194,7 +194,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             {
                 transform.localScale = new Vector3(m_scale, transform.localScale.y, transform.localScale.z);
             }
-            m_lookLeftAndRightTimer = m_lookLeftAndRightTimerMax;
+            m_lookLeftAndRightTimer = u;
         }
         else
         {
@@ -207,7 +207,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// </summary>
     abstract internal void AttackBehaviour();
 
-    private void AttackState()
+     void k()
     {
         if (IsPlayerInLineOfSight())
         {
@@ -242,9 +242,9 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <summary>
     /// a state that occurs when enemy is forced to look at a specific location
     /// </summary>
-    private void CuriousState()
+     void l()
     {
-        if (Vector2.Distance( transform.position, m_curiousTarget) < 1 ) 
+        if (Vector2.Distance( transform.position, o) < 1 ) 
         if (m_outOfSightTimer <= 0)
         {
             m_currentState = state.WONDER;
@@ -260,21 +260,21 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <summary>
     /// contains the switch that stores the dofferent behavoiurs the enemy dose in each state
     /// </summary>
-    private void AILogic()
+     void z()
     {
         switch (m_currentState)
         {
             case state.WONDER:
-                WonderState();
+                g();
                 break;
             case state.CHASE:
-                ChaseState();
+                h();
                 break;
             case state.ATTACK:
-                AttackState();
+                k();
                 break;
             case state.CURIOUS:
-                CuriousState();
+                l();
                 break;
         }
     }
@@ -295,12 +295,12 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             {
                 if(!playerStealth.IsinVent())
                 {
-                    PlayerDetectionRaycasLogic(collision);
+                    x(collision);
                 }          
             }
             else if(!playerStealth.IsStealthed()) //is the player in stealth/
             {
-                PlayerDetectionRaycasLogic(collision);
+                x(collision);
             }
         }
     }
@@ -309,7 +309,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// holds the logic for casting a ray when the player is first detected
     /// </summary>
     /// <param name="col"> a collsion that is checked to see if it is the player</param>
-    private void PlayerDetectionRaycasLogic(GameObject col)
+     void x(GameObject col)
     {
         m_detectionCollider.enabled = false;
         RaycastHit2D hit = Physics2D.Linecast(m_rayCastStart.position, col.transform.position);
@@ -393,9 +393,9 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <param name="destentaion">the destination of the enemy</param>
     protected void MoveToWorldPos(Vector3 destentaion)
     {
-        Vector2Int tileMapSpaceStart = (Vector2Int)m_pathfinder.m_tileMap.WorldToCell(transform.position);
-        Vector2Int tileMapSpaceTarget = (Vector2Int)m_pathfinder.m_tileMap.WorldToCell(destentaion);
-        m_currentPath = m_pathfinder.PathFind(tileMapSpaceStart, tileMapSpaceTarget);
+        Vector2Int tileMapSpaceStart = (Vector2Int)q.m_tileMap.WorldToCell(transform.position);
+        Vector2Int tileMapSpaceTarget = (Vector2Int)q.m_tileMap.WorldToCell(destentaion);
+        m_currentPath = q.PathFind(tileMapSpaceStart, tileMapSpaceTarget);
 
         if(showPath)
         {
@@ -420,7 +420,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         while (movementLeftOver > 0)
         {
             //gets the center of the target tile
-            Vector2 targetTileCenter = (Vector2)m_pathfinder.m_tileMap.CellToWorld(new Vector3Int( m_currentPath[0].x, m_currentPath[0].y, 0)) + ((Vector2)m_pathfinder.m_tileMap.cellSize / 2);
+            Vector2 targetTileCenter = (Vector2)q.m_tileMap.CellToWorld(new Vector3Int( m_currentPath[0].x, m_currentPath[0].y, 0)) + ((Vector2)q.m_tileMap.cellSize / 2);
             targetTileCenter += new Vector2(-0.5f, 0);
             float distance = Vector2.Distance(transform.position, targetTileCenter); //distance to the target tile center               
                
@@ -454,8 +454,8 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             }
         }
         m_currentPath.Clear();
-        if(goBackToCenter) m_currentPath.Add((Vector2Int)m_pathfinder.m_tileMap.WorldToCell(transform.position));
-        m_lastPathFinfToPos = Vector3.zero;
+        if(goBackToCenter) m_currentPath.Add((Vector2Int)q.m_tileMap.WorldToCell(transform.position));
+        y = Vector3.zero;
     }
 
     /// <summary>
@@ -463,9 +463,9 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// </summary>
     protected void Patrol()
     {
-        if (m_currentPatrolePos == null) return;
+        if (t == null) return;
         //not sure what this dose might be a bit late at night, maybe initilaziation???? it just works
-        if (m_currentPatrolePos.position.x == 0 && m_currentPatrolePos.position.y == 0) m_currentPatrolePos = m_patrolPoints[0];
+        if (t.position.x == 0 && t.position.y == 0) t = m_patrolPoints[0];
         //if theres no were to go go to the first patrole point
         if (m_currentPath.Count == 0) MoveToWorldPos(m_patrolPoints[m_patrolIterator].position);
         //if close neough to the next patrole point start to swap patrole points
@@ -481,22 +481,22 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     {
         if(m_patrolPoints.Length > 0) //are there any patrole points
         {
-            if (m_patroleTimer <= 0) //if the timer has reached 0 start the swap
+            if (r <= 0) //if the timer has reached 0 start the swap
             {
-                if (m_patrolIterator == m_patrolIteratorMax) // see if the itterator is at its limit
+                if (m_patrolIterator == e) // see if the itterator is at its limit
                 {
                     m_patrolIterator = 0; //set to first iteration
-                    m_currentPatrolePos = m_patrolPoints[m_patrolIterator]; //move to destination
+                    t = m_patrolPoints[m_patrolIterator]; //move to destination
                 }
                 else// else go through the list 
                 {
-                    m_currentPatrolePos = m_patrolPoints[++m_patrolIterator];
+                    t = m_patrolPoints[++m_patrolIterator];
                 }
-                m_patroleTimer = m_deleyBetweenPatrol; //reset the timer
+                r = m_deleyBetweenPatrol; //reset the timer
             }
             else
             {
-                m_patroleTimer -= Time.deltaTime;
+                r -= Time.deltaTime;
             }
         }
     }
@@ -512,12 +512,12 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             MoveToWorldPos(pos);
         }
 
-        if (m_lastPathFinfToPos == Vector3.zero) // if there hasent been an old pos 
+        if (y == Vector3.zero) // if there hasent been an old pos 
         {
-            m_lastPathFinfToPos = pos;
+            y = pos;
         }
 
-        if (Vector2.Distance(m_lastPathFinfToPos, pos) > m_playerMoveAllowance) //if players old pos is a distance away to his new pos go to new pos
+        if (Vector2.Distance(y, pos) > m_playerMoveAllowance) //if players old pos is a distance away to his new pos go to new pos
         {
             ClearPath();
             MoveToWorldPos(pos);
@@ -549,7 +549,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// </summary>
     protected void SwapDirections()
     {
-        if(!m_isSerching)
+        if(!i)
         if(m_playerDetected)
         {
             if(m_playerTransform.position.x > transform.position.x)
@@ -564,15 +564,15 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         }
         else
         {
-            if(m_lastPos.x > transform.position.x)
+            if(w.x > transform.position.x)
             {
                 transform.localScale = new Vector3(m_scale, transform.localScale.y, transform.localScale.z);
             }
-            else if(m_lastPos.x < transform.position.x)
+            else if(w.x < transform.position.x)
             {
                 transform.localScale = new Vector3(-m_scale, transform.localScale.y, transform.localScale.z);
             }
-            m_lastPos = transform.position;
+            w = transform.position;
         }
     }
 
@@ -587,17 +587,17 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         switch (m_currentEnemyType)
         {
             case m_enemyType.NORMAL:
-                NormalTakeDamage(damage);
+                v(damage);
                 break;
 
             case m_enemyType.CHEF:
                 if (damageType == m_damageType.MELEE)
                 {
-                    NormalTakeDamage(damage * 1.5f);
+                    v(damage * 1.5f);
                 }
                 else
                 {
-                    NormalTakeDamage(damage);
+                    v(damage);
                 }   
                 break;
 
@@ -608,15 +608,15 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             case m_enemyType.BARISTA:
                 if(m_playerTransform.position.x < transform.position.x) //player on the left
                 {
-                    if(transform.localScale.x < 0) NormalTakeDamage(damage); //looking left
+                    if(transform.localScale.x < 0) v(damage); //looking left
                 }
                 else if(m_playerTransform.position.x > transform.position.x) //player on the right
                 {
-                    if (transform.localScale.x > 0) NormalTakeDamage(damage); //looking right
+                    if (transform.localScale.x > 0) v(damage); //looking right
                 }
                 else
                 {
-                    NormalTakeDamage(damage*0.25f);
+                    v(damage*0.25f);
                 }
                 break;
 
@@ -626,16 +626,16 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 {
                     if(m_playerDetected == false) // in stealth
                     {
-                        NormalTakeDamage(damage); // normal melle stealth attack
+                        v(damage); // normal melle stealth attack
                     }
                     else // not stealth 
                     {
-                        NormalTakeDamage(damage * 0.5f); //half damage stealth atatck
+                        v(damage * 0.5f); //half damage stealth atatck
                     }                  
                 }
                 else
                 {
-                    NormalTakeDamage(damage); // normal
+                    v(damage); // normal
                 }
                 break;
 
@@ -646,13 +646,13 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 if (m_playerDetected == false)
                 {
                     m_health -= damage * (m_sneakDamageMultiplier + m_sneakDamageMultiplierStack);
-                    m_HitEffectElliott.StartHitEffect(true);
+                    a.StartHitEffect(true);
 
                 }
                 else
                 {
                     m_health -= damage;
-                    m_HitEffectElliott.StartHitEffect(false);
+                    a.StartHitEffect(false);
 
                 }
                 break;
@@ -660,7 +660,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             case m_enemyType.SPACENINJABOSS:             
                 if ((m_health / m_maxHealth) <= m_secondPhaseStartPercentage) //second fase
                 {
-                    NormalTakeDamage(damage);
+                    v(damage);
                     m_attackTimer *= m_attackSpeedIncrease;
                     m_doseAffect = false;
                     m_sneakDamageMultiplierStack = 0;
@@ -671,12 +671,12 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                     if (m_playerDetected == false)
                     {
                         m_health -= damage * (m_sneakDamageMultiplier + m_sneakDamageMultiplierStack);
-                        m_HitEffectElliott.StartHitEffect(true);
+                        a.StartHitEffect(true);
                     }
                     else
                     {
                         m_health -= damage;
-                        m_HitEffectElliott.StartHitEffect(false);
+                        a.StartHitEffect(false);
                     }
                 }
                 break;
@@ -686,7 +686,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 if (healthPercentage > 0.6f)
                 {
                     m_tadashiPhase = 1;
-                    NormalTakeDamage(damage);
+                    v(damage);
                 }
                 else if( healthPercentage > 0.3f)
                 {
@@ -702,7 +702,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 break;
 
             default:
-                NormalTakeDamage(damage);
+                v(damage);
                 break;
 
         }
@@ -715,7 +715,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <summary>
     /// stop the enemys movment and attack, makes it look liek enemy ios tsunned but can stil be damaged
     /// </summary>
-    private void StunEnemyToggle()
+     void c()
     {
         m_isStuned = !m_isStuned;
     }
@@ -727,9 +727,9 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// <returns></returns>
     public IEnumerator StunEnemyWithDeley(float amountOfTime)
     {
-        StunEnemyToggle();
+        c();
         yield return new WaitForSeconds(amountOfTime);
-        StunEnemyToggle();
+        c();
     }
 
     /// <summary>
@@ -754,19 +754,19 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// normal way of enemy takign damage
     /// </summary>
     /// <param name="damage">amount of damage</param>
-    private void NormalTakeDamage( float damage )
+     void v( float damage )
     {
         if (m_playerDetected == false) //if sneak damage
         {
             m_health -= damage * m_sneakDamageMultiplier;
-            m_cameraShake.StartShake();
-            m_HitEffectElliott.StartHitEffect(true);
+            s.StartShake();
+            a.StartHitEffect(true);
             m_inventory.GiveItem(ItemType.NinjaPoints, 1);
         }
         else
         {
             m_health -= damage;
-            m_HitEffectElliott.StartHitEffect(false);
+            a.StartHitEffect(false);
         }
     }
 
@@ -778,8 +778,8 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     {
         ClearPath(false);
         m_currentState = state.CURIOUS;
-        m_curiousTarget = pos;
-        PathfindTo(m_curiousTarget);
+        o = pos;
+        PathfindTo(o);
     }
 
     /// <summary>
@@ -787,7 +787,6 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     /// </summary>
     public void NoticePlayerEffect()
     {
-       Debug.Log("!");
        GameObject excalm = Instantiate(m_excalmationmark, new Vector3(transform.position.x,transform.position.y + m_notifcaionOffset,transform.position.z), Quaternion.identity);
         excalm.transform.parent = transform;
         
@@ -797,7 +796,6 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     {
         if (!m_showquestionMarkonce)
         {
-            Debug.Log("?");
             GameObject A = Instantiate(m_questionmark, new Vector3(transform.position.x, transform.position.y + m_notifcaionOffset, transform.position.z), Quaternion.identity);
             A.transform.parent = transform;
             m_showquestionMarkonce = true;
@@ -808,7 +806,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public void ForceLooseIntrest()
     {
         transform.position = m_startPos;
-        m_isSerching = false;
+        i = false;
         m_currentState = state.WONDER;
         m_playerDetected = false;
         m_outOfSightTimer = m_outOfSightDeley;
@@ -816,39 +814,39 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     }
 
 
-    private void Start()
+     void Start()
     {
-        m_pathfinder = GameObject.FindObjectOfType<Pathfinder_SebastianMol>();
+        q = GameObject.FindObjectOfType<Pathfinder_SebastianMol>();
         m_scale = transform.localScale.x;
-        m_lastPos = transform.position;
+        w = transform.position;
         m_startPos = transform.position;
-        m_patrolIteratorMax = m_patrolPoints.Length-1;
-        m_patroleTimer = m_deleyBetweenPatrol;
-        if (m_patrolPoints.Length > 0) m_currentPatrolePos = m_patrolPoints[0];
-        m_lookLeftAndRightTimerMax = m_lookLeftAndRightTimer;
+        e = m_patrolPoints.Length-1;
+        r = m_deleyBetweenPatrol;
+        if (m_patrolPoints.Length > 0) t = m_patrolPoints[0];
+        u = m_lookLeftAndRightTimer;
         m_maxHealth = m_health;
         m_outOfSightTimer = m_outOfSightDeley;
         m_maxAttackRange = m_attackRange;
 
         m_inventory = GameObject.Find("Player").GetComponent<Inventory_JoaoBeijinho>();
         m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
-        m_HitEffectElliott = GetComponent<HitEffectElliott>();
-        m_cameraShake = Camera.main.GetComponent<CameraShakeElliott>();
+        a = GetComponent<HitEffectElliott>();
+        s = Camera.main.GetComponent<CameraShakeElliott>();
     }
 
-    private void Update()
+     void Update()
     {
 
         if(!m_isStuned)
         {
-            AILogic(); // behaviour of the enemy what stste it is in and what it dose
+            z(); // behaviour of the enemy what stste it is in and what it dose
             FollowPath(); //walk the path that the enemy currently has  
             SwapDirections(); //chnge the scale of the player
         }
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+     void OnTriggerEnter2D(Collider2D collision)
     {
         if(!m_isStuned)
             if(!m_playerDetected)
@@ -857,7 +855,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
             }      
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+     void OnTriggerStay2D(Collider2D collision)
     {
         if (!m_isStuned)
             if (!m_playerDetected)

@@ -7,72 +7,72 @@ using UnityEngine;
 
 public class Enemy_Animation_LouieWilliamson : MonoBehaviour
 {
-    private Animator m_animator;
-    private Vector2 m_lastPosition;
-    private float m_xMovement;
-    private float m_yMovement;
-    private bool isFacingLeft;
+    private Animator q;
+    private Vector2 w;
+    private float e;
+    private float r;
+    private bool t;
 
     public void AttackAnimation()
     {
-        m_animator.SetTrigger("isAttacking");
+        q.SetTrigger("isAttacking");
     }
     private void Start()
     {
-        m_animator = GetComponentInChildren<Animator>();
-        m_lastPosition = transform.position;
-        isFacingLeft = true;
+        q = GetComponentInChildren<Animator>();
+        w = transform.position;
+        t = true;
     }
 
     private void Update()
     {
-        m_xMovement = m_lastPosition.x - transform.position.x;
-        m_yMovement = m_lastPosition.y - transform.position.y;
+        e = w.x - transform.position.x;
+        r = w.y - transform.position.y;
         
         //face enemy in the right direction
-        if (m_yMovement > 0)
+        if (r > 0)
         {
-            m_animator.SetBool("isFacing", true);
+            q.SetBool("isFacing", true);
         }
-        else if (m_yMovement < 0)
+        else if (r < 0)
         {
-            m_animator.SetBool("isFacing", false);
+            q.SetBool("isFacing", false);
         }
 
         //Is he moving to the left
-        if (m_xMovement < 0)
+        if (e < 0)
         {
             //is he already facing left?
-            if (!isFacingLeft)
+            if (!t)
             {
-                FlipSprite();
-                isFacingLeft = true;
+                u();
+                t = true;
             }
         }
-        else if (m_xMovement > 0)
+        else if (e > 0)
         {
-            if (isFacingLeft)
+            if (t)
             {
-                FlipSprite();
-                isFacingLeft = false;
+                u();
+                t = false;
             }
         }
 
         //Set Idle/ Moving animation trigger
-        if (m_xMovement == 0 && m_yMovement == 0)
+        if (e == 0 && r == 0)
         {
-            m_animator.SetTrigger("isIdle");
+            q.SetTrigger("isIdle");
         }
         else
         {
-            m_animator.SetTrigger("isMoving");
+            q.SetTrigger("isMoving");
         }
 
         
 
-        m_lastPosition = transform.position;
+        w = transform.position;
     }
-    private void FlipSprite()
+    private void u()
     {
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
     }

@@ -14,54 +14,53 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
     /// <summary>
     /// holds logic for melee attacks
     /// </summary>
-    /// <param name="m_attackTimer"></param>
-    /// <param name="m_hasChargeAttack"></param>
-    /// <param name="m_chargAttackPosibility"></param>
-    /// <param name="QuickAttack"></param>
-    /// <param name="ChargeAttack"></param>
-    /// <param name="StunAfterAttack"></param>
+    /// <param name="a"></param>
+    /// <param name="q"></param>
+    /// <param name="w"></param>
+    /// <param name="e"></param>
+    /// <param name="r"></param>
+    /// <param name="t"></param>
     /// <param name="m_petTigerDeley"></param>
-    /// <param name="m_currentEnemyType"></param>
-    /// <param name="m_hitSpeed"></param>
-    /// <param name="hasRangedAttack"></param>
+    /// <param name="y"></param>
+    /// <param name="u"></param>
+    /// <param name="p"></param>
     /// <returns>weather the attack has been done</returns>
-    public static bool MelleAttack(ref float m_attackTimer, bool m_hasChargeAttack, int m_chargAttackPosibility,
-        Action QuickAttack, Action ChargeAttack, Action StunAfterAttack,
-
-        m_enemyType m_currentEnemyType, float m_hitSpeed, Enemy_Animation_LouieWilliamson enemyAnim, bool hasRangedAttack = false)
+    public static bool MelleAttack(ref float a, bool q, int w,
+        Action e, Action r, Action t,
+        m_enemyType y, float u, Enemy_Animation_LouieWilliamson i, bool p = false)
 
     {
-        if (m_attackTimer <= 0)
+        if (a <= 0)
         {
-            if (m_hasChargeAttack)
+            if (q)
             {
-                int rand = UnityEngine.Random.Range(0, m_chargAttackPosibility);
-                if(rand == m_chargAttackPosibility-1)
+                int m = UnityEngine.Random.Range(0, w);
+                if(m == w-1)
                 {
-                    ChargeAttack();
+                    r();
                 }
                 else
                 {
-                    QuickAttack();
+                    e();
                 }
             }
             else
             {
-                QuickAttack();
+                e();
             }
 
-            if (m_currentEnemyType == m_enemyType.PETTIGER)
+            if (y == m_enemyType.PETTIGER)
             {
-                StunAfterAttack();
+                t();
             }
 
-            m_attackTimer = m_hitSpeed;
+            a = u;
             return true;
         }
         else
         {
-            m_attackTimer -= Time.deltaTime;
-            enemyAnim.AttackAnimation();
+            a -= Time.deltaTime;
+            i.AttackAnimation();
             return false;
         }
     }
@@ -69,35 +68,35 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
     /// <summary>
     /// holds logic for ranged attacks
     /// </summary>
-    /// <param name="m_playerTransform"></param>
-    /// <param name="transform"></param>
-    /// <param name="m_aimer"></param>
-    /// <param name="m_attackTimer"></param>
-    /// <param name="m_projectile"></param>
-    /// <param name="m_shootDeley"></param>
+    /// <param name="d"></param>
+    /// <param name="f"></param>
+    /// <param name="g"></param>
+    /// <param name="h"></param>
+    /// <param name="j"></param>
+    /// <param name="k"></param>
     /// <returns>weather the attack has been done</returns>
-    public static bool RangedAttack(Enemy_Animation_LouieWilliamson enemyAnim, Transform m_playerTransform, Transform transform, GameObject m_aimer, 
-        ref float m_attackTimer, GameObject m_projectile, float m_shootDeley,float sizeIncreaseX = 0, float sizeIncreaseY = 0)
+    public static bool RangedAttack(Enemy_Animation_LouieWilliamson s, Transform d, Transform f, GameObject g, 
+        ref float h, GameObject j, float k,float l = 0, float z = 0)
     {
-        if (m_playerTransform != null)
+        if (d != null)
         {
-            Vector3 dir = Vector3.Normalize(m_playerTransform.position - transform.position);
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            m_aimer.transform.eulerAngles = new Vector3(0, 0, angle);
+            Vector3 x = Vector3.Normalize(d.position - f.position);
+            float c = Mathf.Atan2(x.y, x.x) * Mathf.Rad2Deg;
+            g.transform.eulerAngles = new Vector3(0, 0, c);
 
-            if (m_attackTimer <= 0)
+            if (h <= 0)
             {
-                GameObject projectile = Instantiate(m_projectile, transform.position, Quaternion.Euler(new Vector3(dir.x, dir.y, 0)));
-                projectile.transform.localScale += new Vector3(sizeIncreaseX, sizeIncreaseY, 0);
-                projectile.GetComponent<BulletMovment_SebastianMol>().m_direction = (m_playerTransform.position - transform.position).normalized;
-                ColorChanger_Jann.Instance.UpdateColor(projectile.GetComponent<SpriteRenderer>());
-                m_attackTimer = m_shootDeley;
-                enemyAnim.AttackAnimation();
+                GameObject v = Instantiate(j, f.position, Quaternion.Euler(new Vector3(x.x, x.y, 0)));
+                v.transform.localScale += new Vector3(l, z, 0);
+                v.GetComponent<BulletMovment_SebastianMol>().m_direction = (d.position - f.position).normalized;
+                ColorChanger_Jann.Instance.UpdateColor(v.GetComponent<SpriteRenderer>());
+                h = k;
+                s.AttackAnimation();
                 return true;
             }
             else
             {
-                m_attackTimer -= Time.deltaTime;
+                h -= Time.deltaTime;
                 return false;
             }
         }
@@ -107,34 +106,34 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
     /// <summary>
     /// hold logic for a charge attack.
     /// </summary>
-    /// <param name="m_playerTransform"></param>
-    /// <param name="m_attackTimer"></param>
-    /// <param name="m_attackCollider"></param>
-    /// <param name="m_hitSpeed"></param>
-    /// <param name="m_thisEnemy"></param>
-    /// <param name="chargeForce"></param>
+    /// <param name="q"></param>
+    /// <param name="w"></param>
+    /// <param name="e"></param>
+    /// <param name="r"></param>
+    /// <param name="t"></param>
+    /// <param name="y"></param>
     /// <returns>weather the attack has been done</returns>
-    public static bool ChargeAttack(Transform m_playerTransform, ref float m_attackTimer, 
-        GameObject m_attackCollider, float m_hitSpeed, GameObject m_thisEnemy, float chargeForce)
+    public static bool ChargeAttack(Transform q, ref float w, 
+        GameObject e, float r, GameObject t, float y)
     {                  
-        if (m_attackTimer <= 0)
+        if (w <= 0)
         {
             //shoot at enemy
-            m_attackCollider.SetActive(true);
-            Rigidbody2D rijy = m_thisEnemy.GetComponent<Rigidbody2D>();
+            e.SetActive(true);
+            Rigidbody2D rijy = t.GetComponent<Rigidbody2D>();
             rijy.bodyType = RigidbodyType2D.Dynamic;
             rijy.gravityScale = 0;
             rijy.freezeRotation = true;
-            rijy.AddForce((m_playerTransform.position - m_thisEnemy.transform.position).normalized * chargeForce );
-            EnemyDamager_SebastianMol enemyDamager = m_attackCollider.GetComponent<EnemyDamager_SebastianMol>();
-            enemyDamager.m_damage = enemyDamager.m_baseDamage;
-            m_attackTimer = m_hitSpeed;
+            rijy.AddForce((q.position - t.transform.position).normalized * y );
+            EnemyDamager_SebastianMol u = e.GetComponent<EnemyDamager_SebastianMol>();
+            u.m_damage = u.m_baseDamage;
+            w = r;
             return true;
 
         }
         else
         {
-            m_attackTimer -= Time.deltaTime;
+            w -= Time.deltaTime;
             return false;
         }
     }
