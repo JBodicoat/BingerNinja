@@ -16,7 +16,6 @@ public class EnemyDamager_SebastianMol : MonoBehaviour
 	public float XR = 1;
 	public float XT = 0.5f; //make thsi a range
 	public float XY = 5;
-    public HitEffectElliott XU;
 	 void OnTriggerEnter2D(Collider2D b)
 	{
 		if (b.tag == "Player")
@@ -24,7 +23,6 @@ public class EnemyDamager_SebastianMol : MonoBehaviour
 			FindObjectOfType<PlayerHealthHunger_MarioFernandes>().j(XW);
 			MeleeEnemy_SebastianMol a = GetComponentInParent<MeleeEnemy_SebastianMol>();
            // m_HitEffectElliott.StartHitEffect(false);
-            b.GetComponent<HitEffectElliott>().RT(false);
             if (a.CA == WU.WJ)
             {
 				if(a.QW)
@@ -47,10 +45,6 @@ public class EnemyDamager_SebastianMol : MonoBehaviour
 			gameObject.SetActive(false);
 		}
 	}
-    void Start()
-    {
-       XU = GetComponent<HitEffectElliott>();
-    }
 
 }
 
