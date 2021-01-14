@@ -31,7 +31,7 @@ public class PlayerController_JamieG : MonoBehaviour
 
     public InputAction m_switchWeapons;
     public InputAction m_dropWeapons;
-    public InputAction m_passDialogue;
+    public InputAction H;
 
     protected int CurrentLevel;
 
@@ -47,7 +47,7 @@ public class PlayerController_JamieG : MonoBehaviour
         CurrentLevel = SceneManager.GetActiveScene().buildIndex;
         m_playerMovementScript = m_player.GetComponent<PlayerMovement_MarioFernandes>();
         m_playerStealthScript = gameObject.GetComponent<PlayerStealth_JoaoBeijinho>();
-        m_passDialogue.Enable();
+        H.Enable();
     }
     
     void FixedUpdate()
@@ -92,7 +92,7 @@ public class PlayerController_JamieG : MonoBehaviour
         m_changeLevel.Enable();
     }
 
-    public void OnDisable()
+    public void A()
     {
         m_movement.Disable();
         m_interact.Disable();

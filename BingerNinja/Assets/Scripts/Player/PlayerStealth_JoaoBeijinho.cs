@@ -22,7 +22,7 @@ public class PlayerStealth_JoaoBeijinho : MonoBehaviour
     /// <summary>
     /// Call IsStealthed() to check if the player is in stealth, it will return true if it is
     /// </summary>
-    public bool IsStealthed()
+    public bool QL()
     {
         return m_stealthed;
     }
@@ -30,7 +30,7 @@ public class PlayerStealth_JoaoBeijinho : MonoBehaviour
     /// <summary>
     /// Call IsCrouched() to check if the player is crouched, it will return true if it is
     /// </summary>
-    public bool IsCrouched()
+    public bool QX()
     {
         return m_crouched;
     }
@@ -38,7 +38,7 @@ public class PlayerStealth_JoaoBeijinho : MonoBehaviour
     /// <summary>
     /// Call IsInVent() to check if the player is inside a vent, it will return true if it is
     /// </summary>
-    public bool IsinVent()
+    public bool QJ()
     {
         return m_inVent;
     }

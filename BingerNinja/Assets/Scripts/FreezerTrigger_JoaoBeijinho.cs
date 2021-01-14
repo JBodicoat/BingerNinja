@@ -12,15 +12,15 @@ using UnityEngine;
 /// </summary>
 public class FreezerTrigger_JoaoBeijinho : MonoBehaviour
 {
-    public List<Collider2D> m_enemyList = new List<Collider2D>();
+    public List<Collider2D> b = new List<Collider2D>();
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision is BoxCollider2D && collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_enemyTag))
         {
-            if (!m_enemyList.Contains(collision))
+            if (!b.Contains(collision))
             {
-                m_enemyList.Add(collision);
+                b.Add(collision);
             }
         }
     }
@@ -29,9 +29,9 @@ public class FreezerTrigger_JoaoBeijinho : MonoBehaviour
     {
         if (collision is BoxCollider2D && collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_enemyTag))
         {
-            if (m_enemyList.Contains(collision))
+            if (b.Contains(collision))
             {
-                m_enemyList.Remove(collision);
+                b.Remove(collision);
             }
         }
     }

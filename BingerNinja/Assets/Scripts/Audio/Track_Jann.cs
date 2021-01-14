@@ -19,7 +19,7 @@ public class Track_Jann
     public int[][] f;
 
     // This is used because JsonUtility doesn't support two-dimensional arrays
-    public void GenerateFrequencies()
+    public void j()
     {
         int ch = d.Length / c;
         f = new int[ch][];

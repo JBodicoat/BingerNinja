@@ -38,7 +38,7 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
     /// </summary>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.QC))
         {
             m_canHide = true;
         }
@@ -49,7 +49,7 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
     /// </summary>
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.QC))
         {
             m_canHide = false;
         }

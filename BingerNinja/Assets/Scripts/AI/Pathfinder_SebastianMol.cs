@@ -13,18 +13,18 @@ using UnityEngine.Tilemaps;
 /// </summary>
 public class Node
 {
-    public Node m_parentNode = null;
-    public float m_g = 0, m_h = 0, m_f = 0;
-    public bool m_traversable;
-    public Vector2Int m_pos;
+    public Node a = null;
+    public float q = 0, w = 0, e = 0;
+    public bool r;
+    public Vector2Int t;
    
-    public Node(bool trav, Vector2Int newPos) { m_traversable = trav; m_pos = newPos; }
-    public void ResetData()
+    public Node(bool y, Vector2Int u) { r = y; t = u; }
+    public void i()
     {
-        m_g = 0;
-        m_h = 0;
-        m_f = 0;
-        m_parentNode = null;
+        q = 0;
+        w = 0;
+        e = 0;
+        a = null;
     }
 }
 
@@ -33,42 +33,42 @@ public class Node
 /// </summary>
 public class Pathfinder_SebastianMol : MonoBehaviour
 {
-    const float MOVE_COST = 1;
-    const float MOVE_COST_DIAG = 1.414f;
-    Node[,] m_allTiles;
-    public Tile[] m_wallTiles;
-    public Tilemap m_tileMap;
-    int count = 0;
+    const float o = 1;
+    const float p = 1.414f;
+    Node[,] s;
+    public Tile[] d;
+    public Tilemap WE;
+    int f = 0;
 
-    public Vector2Int m_startPos;
-    public Vector2Int m_targetPos;
-    public Tile m_pathTile;
+    public Vector2Int g;
+    public Vector2Int h;
+    public Tile j;
 
     /// <summary>
     /// creates a list of nodes that represents a path
     /// </summary>
-    /// <param name="startPos"> the start of the path</param>
-    /// <param name="targetPos">the end of the path</param>
+    /// <param name="l"> the start of the path</param>
+    /// <param name="z">the end of the path</param>
     /// <returns></returns>
-    public List<Vector2Int> PathFind(Vector2Int startPos, Vector2Int targetPos)
+    public List<Vector2Int> k(Vector2Int l, Vector2Int z)
     {
-        Node startNode = m_allTiles[startPos.x, startPos.y];
-        Node targetNode = m_allTiles[targetPos.x, targetPos.y];
+        Node c = s[l.x, l.y];
+        Node v = s[z.x, z.y];
 
-        List<Node> openList = new List<Node>();
-        List<Node> closedList = new List<Node>();
-        List<Node> FinalPath = new List<Node>();
+        List<Node> b = new List<Node>();
+        List<Node> n = new List<Node>();
+        List<Node> m = new List<Node>();
 
-        Node currentNode = startNode;
+        Node Q = c;
 
-        if (startNode == targetNode) return new List<Vector2Int>();
+        if (c == v) return new List<Vector2Int>();
 
-        openList.Add(currentNode);
+        b.Add(Q);
 
-        while (currentNode != targetNode)
+        while (Q != v)
         {
-            closedList.Add(currentNode);
-            openList.Remove(currentNode);
+            n.Add(Q);
+            b.Remove(Q);
 
             for (int y = -1; y <= 1; y++)
             {
@@ -77,143 +77,143 @@ public class Pathfinder_SebastianMol : MonoBehaviour
                     //skip checks
                     if (x == 0 && y == 0) continue; //skips current tile
                     //if (math.abs(x) == math.abs(y)) continue; //skip diagonals
-                    Vector2Int worldPos = new Vector2Int(currentNode.m_pos.x + x, currentNode.m_pos.y + y); //curret poss that is begi checked relative to the currentnode
-                    if (CheckOutOfBounds(worldPos)) continue; // skips out of bounds
-                    if (m_allTiles[worldPos.x, worldPos.y].m_traversable == false) continue; // skips walls
-                    if (closedList.Contains(m_allTiles[worldPos.x, worldPos.y])) continue; //skips nodes already checked
+                    Vector2Int W = new Vector2Int(Q.t.x + x, Q.t.y + y); //curret poss that is begi checked relative to the currentnode
+                    if (F(W)) continue; // skips out of bounds
+                    if (s[W.x, W.y].r == false) continue; // skips walls
+                    if (n.Contains(s[W.x, W.y])) continue; //skips nodes already checked
                     if (math.abs(x) == math.abs(y))
                     {
-                        if (!m_allTiles[worldPos.x - x, worldPos.y].m_traversable) continue;
-                        if (!m_allTiles[worldPos.x, worldPos.y - y].m_traversable) continue;
+                        if (!s[W.x - x, W.y].r) continue;
+                        if (!s[W.x, W.y - y].r) continue;
 
                     }
                     //==================================================
 
-                    float movementCost = (math.abs(x) == math.abs(y)) ? MOVE_COST_DIAG : MOVE_COST;
+                    float E = (math.abs(x) == math.abs(y)) ? p : o;
 
-                    if (openList.Contains(m_allTiles[worldPos.x, worldPos.y]))
+                    if (b.Contains(s[W.x, W.y]))
                     {
-                        if (currentNode.m_g + movementCost < m_allTiles[worldPos.x, worldPos.y].m_g) // find cheaper path
+                        if (Q.q + E < s[W.x, W.y].q) // find cheaper path
                         {
                             //update node with new data
-                            m_allTiles[worldPos.x, worldPos.y].m_parentNode = currentNode;
-                            m_allTiles[worldPos.x, worldPos.y].m_g = currentNode.m_g + movementCost;
-                            m_allTiles[worldPos.x, worldPos.y].m_f = m_allTiles[worldPos.x, worldPos.y].m_g + m_allTiles[worldPos.x, worldPos.y].m_h;
+                            s[W.x, W.y].a = Q;
+                            s[W.x, W.y].q = Q.q + E;
+                            s[W.x, W.y].e = s[W.x, W.y].q + s[W.x, W.y].w;
                         }
                     }
                     else
                     {
                         //update node with new data
-                        m_allTiles[worldPos.x, worldPos.y].m_parentNode = currentNode;
-                        m_allTiles[worldPos.x, worldPos.y].m_g = currentNode.m_g + movementCost;
-                        m_allTiles[worldPos.x, worldPos.y].m_h = math.abs(targetNode.m_pos.x - worldPos.x) + math.abs(targetNode.m_pos.y - worldPos.y);
-                        m_allTiles[worldPos.x, worldPos.y].m_f = m_allTiles[worldPos.x, worldPos.y].m_g + m_allTiles[worldPos.x, worldPos.y].m_h;
-                        openList.Add(m_allTiles[worldPos.x, worldPos.y]);
+                        s[W.x, W.y].a = Q;
+                        s[W.x, W.y].q = Q.q + E;
+                        s[W.x, W.y].w = math.abs(v.t.x - W.x) + math.abs(v.t.y - W.y);
+                        s[W.x, W.y].e = s[W.x, W.y].q + s[W.x, W.y].w;
+                        b.Add(s[W.x, W.y]);
                     }
 
                     //have i reached the target
-                    if (m_allTiles[worldPos.x, worldPos.y] == targetNode)
+                    if (s[W.x, W.y] == v)
                     {
-                        closedList.Add(m_allTiles[worldPos.x, worldPos.y]);
-                        currentNode = targetNode;
+                        n.Add(s[W.x, W.y]);
+                        Q = v;
                     }
                 }
             }
 
-            if (currentNode == targetNode) break;
-            if (openList.Count == 0) break;
+            if (Q == v) break;
+            if (b.Count == 0) break;
 
             //find the cheapest node
-            Node lowestCostNode = openList[0];
-            foreach (Node node in openList)
+            Node R = b[0];
+            foreach (Node T in b)
             {
-                if (node.m_f < lowestCostNode.m_f) lowestCostNode = node;
+                if (T.e < R.e) R = T;
             }
-            currentNode = lowestCostNode;
+            Q = R;
         }
 
-        FinalPath = AddNodeToPath(currentNode, FinalPath);
-        if (FinalPath.Count == 0) return new List<Vector2Int>();
-        if (FinalPath[0] != targetNode) return new List<Vector2Int>();
+        m = Y(Q, m);
+        if (m.Count == 0) return new List<Vector2Int>();
+        if (m[0] != v) return new List<Vector2Int>();
 
-        List<Vector2Int> DaPath = new List<Vector2Int>();
-        for (int i = FinalPath.Count - 1; i >= 0; --i)
+        List<Vector2Int> U = new List<Vector2Int>();
+        for (int i = m.Count - 1; i >= 0; --i)
         {
-            DaPath.Add(new Vector2Int(FinalPath[i].m_pos.x, FinalPath[i].m_pos.y));
+            U.Add(new Vector2Int(m[i].t.x, m[i].t.y));
         }
 
         //preapre data for next search
-        foreach (Node item in closedList) item.ResetData();
-        foreach (Node item in openList) item.ResetData();
+        foreach (Node I in n) I.i();
+        foreach (Node O in b) O.i();
 
-        return DaPath;
+        return U;
     }
 
     /// <summary>
     /// set a tile to be travercible.
     /// </summary>
-    /// <param name="pos">postition of the tile</param>
-    /// <param name="trav">the travercibilty of the tile</param>
-    public void setTravercible(Vector2Int pos, bool trav)
+    /// <param name="A">postition of the tile</param>
+    /// <param name="S">the travercibilty of the tile</param>
+    public void P(Vector2Int A, bool S)
     {
-        m_allTiles[pos.x, pos.y].m_traversable = trav;
+        s[A.x, A.y].r = S;
     }
 
     /// <summary>
     /// adds a node to a list of nodes with reccursion.
     /// </summary>
     /// <param name="n"></param>
-    /// <param name="path"></param>
+    /// <param name="D"></param>
     /// <returns></returns>
-    private List<Node> AddNodeToPath(Node n, List<Node> path)
+    private List<Node> Y(Node n, List<Node> D)
     {
-        if (count<60)
+        if (f<60)
         {
-            count++;
-            path.Add(n);
-            if (n.m_parentNode != null) AddNodeToPath(n.m_parentNode, path);
-            return path;
+            f++;
+            D.Add(n);
+            if (n.a != null) Y(n.a, D);
+            return D;
         }
         else
         {
-            count = 0;
-            return path;
+            f = 0;
+            return D;
         }
     }
 
     /// <summary>
     /// cheack to see if  atile is out of bounds
     /// </summary>
-    /// <param name="pos"></param>
+    /// <param name="G"></param>
     /// <returns></returns>
-    private bool CheckOutOfBounds(Vector2Int pos)
+    private bool F(Vector2Int G)
     {
-        return pos.x < 0 || pos.x > m_allTiles.GetLength(0) - 1 || pos.y < 0 || pos.y > m_allTiles.GetLength(1) - 1 ? true : false;
+        return G.x < 0 || G.x > s.GetLength(0) - 1 || G.y < 0 || G.y > s.GetLength(1) - 1 ? true : false;
     }
 
     private void Start()
     {
-        Vector3Int size = GetComponent<Tilemap>().size;
+        Vector3Int H = GetComponent<Tilemap>().size;
 
         //might need to change script order
-        m_allTiles = new Node[size.x, size.y];
-        for (int y = 0; y < size.y; y++)
-            for (int x = 0; x < size.x; x++)
+        s = new Node[H.x, H.y];
+        for (int y = 0; y < H.y; y++)
+            for (int x = 0; x < H.x; x++)
             {
-                m_allTiles[x, y] = new Node(true, new Vector2Int(x, y));
+                s[x, y] = new Node(true, new Vector2Int(x, y));
             }
 
 
-        m_tileMap = GetComponent<Tilemap>();
-        for (int y = 0; y < m_tileMap.size.y; y++)
+        WE = GetComponent<Tilemap>();
+        for (int y = 0; y < WE.size.y; y++)
         {
-            for (int x = 0; x < m_tileMap.size.x; x++)
+            for (int x = 0; x < WE.size.x; x++)
             {
-                for (int i = 0; i < m_wallTiles.Length; i++)
+                for (int i = 0; i < d.Length; i++)
                 {
-                    if (m_tileMap.GetTile(new Vector3Int(x, y, 0)))
+                    if (WE.GetTile(new Vector3Int(x, y, 0)))
                     {
-                        m_allTiles[x, y].m_traversable = false;
+                        s[x, y].r = false;
                     }
                 }
             }

@@ -29,7 +29,7 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))//Collision with Player
+        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.QC))//Collision with Player
         {
             m_canPressButton = true;//Allow player to open the door
         }
@@ -41,7 +41,7 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))//Collision with Player
+        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.QC))//Collision with Player
         {
             m_canPressButton = false;//Don't allow player to open the door
         }
@@ -59,7 +59,7 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
     {
         if (m_playerControllerScript.m_interact.triggered && m_canPressButton && buttonName == "")//Player interaction with button
         {
-            PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_PlayerThrow);
+            PlayTrack_Jann.Instance.WS(AudioFiles.e);
             if (!m_doorIsOpen)
             {
                 m_doorIsOpen = true;

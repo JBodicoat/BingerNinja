@@ -2,17 +2,17 @@
 
 public class TestBossDialog_MarioFernandes : MonoBehaviour
 {
-    public bool dial = false;
+    public bool q = false;
     int a = 0;
 
     // Update is called once per frame
     void Update()
     {
         
-        if (dial)
+        if (q)
         {
             gameObject.GetComponent<BossDialogue_MarioFernandes>().TriggerDialogue(a);
-            dial = false;
+            q = false;
             a++;
 		}
     }

@@ -26,247 +26,247 @@ using UnityEngine.UI;
 /// </summary>
 public class DialogueManager_MarioFernandes : MonoBehaviour
 {
-    public GameObject m_dialogBox;
-    public Text m_nameText;
-    public Text m_dialogueText;
-    public float m_TextAnimationSpeed = 0;
+    public GameObject q;
+    public Text w;
+    public Text e;
+    public float r = 0;
    
-    private Queue<string> m_sentences;
+    private Queue<string> t;
 
-    public TextAsset m_csvFile;
-    public TextAsset m_csvFilePortuguese;
+    public TextAsset y;
+    public TextAsset u;
 
-    string m_TrigerDialoguePrefab = "DialogTrigger";
-    PlayerController_JamieG playerControllerScript;
+    string o = "DialogTrigger";
+    PlayerController_JamieG p;
 
-    private GameObject[] EnemysAI;
-    private WeaponUI_LouieWilliamson m_wpnUI;
+    private GameObject[] a;
+    private WeaponUI_LouieWilliamson s;
 
-    private bool isTyping = false;
-    public void LoadLanguageFile()
+    private bool d = false;
+    public void f()
     {
-        SettingsData settingsData = SaveLoadSystem_JamieG.LoadSettings();
+        o p = SaveLoadSystem_JamieG.i();
 
-        if(settingsData.m_chosenLanguage != null && settingsData.m_chosenLanguage.Equals("Portuguese"))
+        if(p.s != null && p.s.Equals("Portuguese"))
         {
-            m_csvFile = m_csvFilePortuguese;
+            y = u;
         };
         
-        LoadDialog(SceneManager.GetActiveScene().buildIndex);
+        E(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void StartDialogue(Dialogue dialogue)
+    public void f(w h)
     {
 
         ///////////////////
         //Insert Start Animation here if needed
         ///////////////////
-        m_wpnUI.SetWeaponsUIAnimation(false);
-        PauseGame();        
+        s.g(false);
+        j();        
 
-        m_dialogBox.SetActive(true);
+        q.SetActive(true);
 
-        m_nameText.text = dialogue.m_name;
+        w.text = h.k;
 
-        m_sentences.Clear();
+        t.Clear();
 
-        foreach (string sentence in dialogue.m_sentences)
+        foreach (string l in h.z)
         {
-            m_sentences.Enqueue(sentence);
+            t.Enqueue(l);
         }
         
-        DisplayNextSentence();
+        x();
     }
 
-    public void DisplayNextSentence()
+    public void x()
     {
-        if(isTyping)
+        if(d)
         {
-        isTyping = !isTyping;
+        d = !d;
         }
         else{
            
-            if (m_sentences.Count == 0)
+            if (t.Count == 0)
             {
-                EndDialogue();
+                c();
                 return;
             }            
 
-            string sentence =  m_sentences.Dequeue();
+            string v =  t.Dequeue();
 
-            string remains = "";
+            string b = "";
 
 
             //Detect if the sentence is biger that the dialog box and cut extra in a new sentence
-            if(sentence.Length > 181)
+            if(v.Length > 181)
             {
-                for (int i = 181; i < sentence.Length; i++)
+                for (int i = 181; i < v.Length; i++)
                 {
-                    remains += sentence.ToCharArray()[i];                    
+                    b += v.ToCharArray()[i];                    
                 }
-                m_sentences.Enqueue(remains);
+                t.Enqueue(b);
             }
 
             //Letter by letter animation effects
             ////////////////
             StopAllCoroutines();
-            StartCoroutine(TypeSentence(sentence));
+            StartCoroutine(n(v));
             ////////////////
         }
 
     }
 
-    IEnumerator TypeSentence(string sentence)
+    IEnumerator n(string m)
     {
-        PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_DialogSFX);
-        isTyping = true;
-        m_dialogueText.text = "";
-        foreach (char letter in sentence.ToCharArray())
+        PlayTrack_Jann.Instance.WS(AudioFiles.p);
+        d = true;
+        e.text = "";
+        foreach (char Q in m.ToCharArray())
         {
-            if(letter == ' ')
-            PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_DialogSFX);
+            if(Q == ' ')
+            PlayTrack_Jann.Instance.WS(AudioFiles.p);
 
-            m_dialogueText.text += letter;
-            yield return new WaitForSeconds(m_TextAnimationSpeed);
+            e.text += Q;
+            yield return new WaitForSeconds(r);
 
-            if(!isTyping)
+            if(!d)
             {
-                m_dialogueText.text = sentence;
+                e.text = m;
                 break;
             }
             
         }
-        isTyping = false;
+        d = false;
     }
 
-    void EndDialogue()
+    void c()
     {
         //End Effect
 
-        m_dialogBox.SetActive(false);
+        q.SetActive(false);
 
-        m_wpnUI.SetWeaponsUIAnimation(true);
-        ResumeGame();
+        s.g(true);
+        W();
     }
 
 	///<summary>Load the Level dialog from CSV doc</summary>
-    void LoadDialog(int level = 0)
+    void E(int R = 0)
     {
-        GameObject Target;
-        GameObject dialogtrig;
+        GameObject T;
+        GameObject Y;
 
 		//Split Colunes using "\n" as reference
-        string[] lines = m_csvFile.text.Split("\n"[0]);
+        string[] U = y.text.Split("\n"[0]);
 
-        for (int i = 0; i < lines.Length; i++)
+        for (int i = 0; i < U.Length; i++)
         {
 			//Split sentence using "," as reference
-            List<string> parts = lines[i].Split((char)9).ToList();
+            List<string> I = U[i].Split((char)9).ToList();
 
 			//Delete empty spaces
-            if (parts[0] == level.ToString())
+            if (I[0] == R.ToString())
             {
                 //Remove unecessary spaces
-                for (int e = parts.Count - 1; e >= 0; e--)
+                for (int e = I.Count - 1; e >= 0; e--)
                 {
-                    if (parts[e] == "" || parts[e][0] == (char)13)
+                    if (I[e] == "" || I[e][0] == (char)13)
                     {
-                        parts.RemoveAt(e);
+                        I.RemoveAt(e);
                     }
                 }
 
 
-                dialogtrig = null;
-                Target = null;
+                Y = null;
+                T = null;
 
-                Target = GameObject.Find(parts[1]);
-                dialogtrig = Target.transform.Find(m_TrigerDialoguePrefab)?.gameObject;
+                T = GameObject.Find(I[1]);
+                Y = T.transform.Find(o)?.gameObject;
 
                 //Use Dialog triger For normal gameobjects and Boss Dialog to Bosses
-                if (dialogtrig)
+                if (Y)
                 {
-                    DialogueTrigger_MarioFernandes dialogTrigScript = dialogtrig.GetComponent<DialogueTrigger_MarioFernandes>();
-                    if(dialogTrigScript)
+                    DialogueTrigger_MarioFernandes O = Y.GetComponent<DialogueTrigger_MarioFernandes>();
+                    if(O)
                     {
                         //Give the m_name in the VCs file to the dialog
-                        dialogTrigScript.m_dialogue.m_name = parts[2];
+                        O.P.k = I[2];
 
                         //Remove level and m_name value
-                        parts.RemoveRange(0, 3);
-                        dialogTrigScript.m_dialogue.m_sentences = parts.ToArray();
+                        I.RemoveRange(0, 3);
+                        O.P.z = I.ToArray();
 
                     }
                 }
 				//Check if Boss DIalog existes on the scene
-                else if (Target.GetComponent<BossDialogue_MarioFernandes>())
+                else if (T.GetComponent<BossDialogue_MarioFernandes>())
                 {
 
-                    Dialogue a = new Dialogue();
+                    w a = new w();
                     //Give the m_name in the VCs file to the dialog
-                    a.m_name = parts[2];
+                    a.k = I[2];
 
                     //Remove level and m_name value
-                    parts.RemoveRange(0, 3);
-                    a.m_sentences = parts.ToArray();
-                    Target.GetComponent<BossDialogue_MarioFernandes>().m_dialogue.Add(a);
+                    I.RemoveRange(0, 3);
+                    a.z = I.ToArray();
+                    T.GetComponent<BossDialogue_MarioFernandes>().q.Add(a);
                 }
             }
         }
     }
 
-    public void PauseGame()
+    public void j()
     {
-        playerControllerScript.OnDisable();
-        playerControllerScript.GetComponentInParent<PlayerHealthHunger_MarioFernandes>().m_paused = true;
-        playerControllerScript.GetComponentInParent<EffectManager_MarioFernandes>().m_paused = true;
-        EnemysAI = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject Enemy in EnemysAI)
+        p.A();
+        p.GetComponentInParent<PlayerHealthHunger_MarioFernandes>().S = true;
+        p.GetComponentInParent<EffectManager_MarioFernandes>().D = true;
+        a = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject F in a)
         {
-            Enemy.GetComponentInParent<BaseEnemy_SebastianMol>().enabled = false;
+            F.GetComponentInParent<BaseEnemy_SebastianMol>().enabled = false;
         }
     }
 
-    public void ResumeGame()
+    public void W()
     {
-        playerControllerScript.OnEnable();
-        playerControllerScript.GetComponentInParent<PlayerHealthHunger_MarioFernandes>().m_paused = false;
-        playerControllerScript.GetComponentInParent<EffectManager_MarioFernandes>().m_paused = false;
-        EnemysAI = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject Enemy in EnemysAI)
+        p.OnEnable();
+        p.GetComponentInParent<PlayerHealthHunger_MarioFernandes>().S = false;
+        p.GetComponentInParent<EffectManager_MarioFernandes>().D = false;
+        a = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject G in a)
         {
-            Enemy.GetComponentInParent<BaseEnemy_SebastianMol>().enabled = true;
+            G.GetComponentInParent<BaseEnemy_SebastianMol>().enabled = true;
         }
         
     }
     // Use this for initialization
     void Start()
     {
-        m_dialogBox = m_nameText.transform.parent.gameObject;
-        playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
-        m_wpnUI = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
-        m_sentences = new Queue<string>();
+        q = w.transform.parent.gameObject;
+        p = FindObjectOfType<PlayerController_JamieG>();
+        s = GameObject.Find("WeaponsUI").GetComponent<WeaponUI_LouieWilliamson>();
+        t = new Queue<string>();
         
-        LoadDialog(SceneManager.GetActiveScene().buildIndex);
+        E(SceneManager.GetActiveScene().buildIndex);
 
 
-        LoadLanguageFile();
+        f();
     }
 
     private void Update() {
-        if(m_dialogBox.active && playerControllerScript.m_passDialogue.triggered)
+        if(q.active && p.H.triggered)
         {
-            DisplayNextSentence();
+            x();
         }
     }
 }
 
 [Serializable]
-public struct Dialogue
+public struct w
 {
 
-    public string m_name;
+    public string k;
 
     [TextArea(3, 10)]
-    public string[] m_sentences;
+    public string[] z;
 
 }

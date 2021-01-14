@@ -26,7 +26,7 @@ public class UpgradedEffects_MarioFernandes : MonoBehaviour
     {
         if(GetComponent<Inventory_JoaoBeijinho>().HasItem(ItemType.Sake, 1))
         {
-            GetComponent<EffectManager_MarioFernandes>().AddEffect(new StrengthEffect_MarioFernandes(30, m_sakeStrengthModifier));
+            GetComponent<EffectManager_MarioFernandes>().Z(new StrengthEffect_MarioFernandes(30, m_sakeStrengthModifier));
             GetComponent<Inventory_JoaoBeijinho>().RemoveItem(ItemType.Sake, 1);
             wpnUI.setPickupImage(FoodType.SAKE);
             wpnUI.setPickupAnim(false);
@@ -38,8 +38,8 @@ public class UpgradedEffects_MarioFernandes : MonoBehaviour
     {
         if(GetComponent<Inventory_JoaoBeijinho>().HasItem(ItemType.Tempura, 1))
         {
-            GetComponent<EffectManager_MarioFernandes>().AddEffect(new StrengthEffect_MarioFernandes(30, m_TempuraStrengthModifier));
-            GetComponent<EffectManager_MarioFernandes>().AddEffect(new SpeedEffect_MarioFernandes(30, m_TempuraSpeedhModifier));  
+            GetComponent<EffectManager_MarioFernandes>().Z(new StrengthEffect_MarioFernandes(30, m_TempuraStrengthModifier));
+            GetComponent<EffectManager_MarioFernandes>().Z(new SpeedEffect_MarioFernandes(30, m_TempuraSpeedhModifier));  
             GetComponent<Inventory_JoaoBeijinho>().RemoveItem(ItemType.Tempura, 1);
             wpnUI.setPickupImage(FoodType.TEMPURA);
             wpnUI.setPickupAnim(false);

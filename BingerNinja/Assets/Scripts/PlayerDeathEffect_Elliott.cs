@@ -13,7 +13,7 @@ public class PlayerDeathEffect_Elliott : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            m_PauseInput.OnDisable();
+            m_PauseInput.A();
             //gameObject.GetComponent<SpriteRenderer>().enabled = false;
             m_player.enabled = false;
             yield return new WaitForSeconds(.1f);

@@ -17,50 +17,50 @@ using UnityEngine;
 /// </summary>
 public class Minifier_Jann : M
 {
-    private string m_AssetsPath;
-    private string m_OutputDirectory;
+    private string q;
+    private string w;
 
-    private List<string> m_files = new List<string>();
-    private Dictionary<string, string> m_codeReplacements;
+    private List<string> e = new List<string>();
+    private Dictionary<string, string> r;
 
     private void Start()
     {
-        m_codeReplacements = new Dictionary<string, string>();
-        m_codeReplacements.Add("MonoBehaviour", "M");
-        m_codeReplacements.Add("GameObject.FindGameObjectWithTag", "FT");
-        m_codeReplacements.Add("GameObject.FindObjectOfType", "FOT");
-        m_codeReplacements.Add("GameObject.FindObjectsOfType", "Fs");
-        m_codeReplacements.Add("GameObject.Find", "F");
-        m_codeReplacements.Add("FindObjectOfType", "FOT");
-        m_codeReplacements.Add("FindObjectsOfType", "Fs");
-        m_codeReplacements.Add("StartCoroutine", "SC");
-        m_codeReplacements.Add("Destroy", "D");
+        r = new Dictionary<string, string>();
+        r.Add("MonoBehaviour", "M");
+        r.Add("GameObject.FindGameObjectWithTag", "FT");
+        r.Add("GameObject.FindObjectOfType", "FOT");
+        r.Add("GameObject.FindObjectsOfType", "Fs");
+        r.Add("GameObject.Find", "F");
+        r.Add("FindObjectOfType", "FOT");
+        r.Add("FindObjectsOfType", "Fs");
+        r.Add("StartCoroutine", "SC");
+        r.Add("Destroy", "D");
 
-        m_AssetsPath = Application.dataPath;
-        m_OutputDirectory = m_AssetsPath + "/../Minified/";
+        q = Application.dataPath;
+        w = q + "/../Minified/";
 
-        RetrieveAllScripts(m_AssetsPath);
+        t(q);
 
         // Remove compression tools and files with problems from files
-        m_files.RemoveAll(path => path.Contains("Minifier_Jann.cs") || path.Contains("M.cs") || path.Contains("Joystick_LouieWilliamson"));
+        e.RemoveAll(path => path.Contains("Minifier_Jann.cs") || path.Contains("M.cs") || path.Contains("Joystick_LouieWilliamson"));
 
-        if (Directory.Exists(m_OutputDirectory))
+        if (Directory.Exists(w))
         {
-            Directory.Delete(m_OutputDirectory, true);
+            Directory.Delete(w, true);
         }
 
-        Directory.CreateDirectory(m_OutputDirectory);
+        Directory.CreateDirectory(w);
 
         List<string> codebase = new List<string>();
-        foreach (string file in m_files)
+        foreach (string file in e)
         {
-            string relativePath = file.Substring(m_AssetsPath.Length);
+            string relativePath = file.Substring(q.Length);
             string[] splits = relativePath.Split('\\');
             string filename = splits[splits.Length - 1];
             string directory = relativePath.Substring(0, relativePath.Length - filename.Length);
 
             string[] source = File.ReadAllLines(file);
-            string minified = Minify(source);
+            string minified = y(source);
 
             codebase.Add(SaveFile(directory, filename, minified));
         }
@@ -71,21 +71,21 @@ public class Minifier_Jann : M
         }
     }
 
-    public string Minify(string[] code)
+    public string y(string[] u)
     {
         // Remove comments
-        string[] minifed = RemoveSinglelineComments(code);
-        minifed = RemoveMultilineComments(minifed);
+        string[] i = RemoveSinglelineComments(u);
+        i = RemoveMultilineComments(i);
 
         // Remove regions
-        minifed = RemoveRegions(minifed);
+        i = RemoveRegions(i);
 
         // Change methods to use M class
-        minifed = ApplyMethodShortener(minifed);
+        i = ApplyMethodShortener(i);
 
         string output = "";
         
-        foreach (string line in minifed)
+        foreach (string line in i)
         {
             if (Regex.Match(line, @"(?<=^.*)\b\w+$").Value.Equals("else"))
             {
@@ -106,7 +106,7 @@ public class Minifier_Jann : M
     {
         for (int i = 0; i < code.Length; i++)
         {
-            foreach (var pair in m_codeReplacements)
+            foreach (var pair in r)
             {
                 code[i] = ReplaceWithDefault(code[i], pair.Key, pair.Value);
             }
@@ -212,7 +212,7 @@ public class Minifier_Jann : M
 
     #region FileHandling
 
-    private void RetrieveAllScripts(string assetsDirectory)
+    private void t(string assetsDirectory)
     {
         if (File.Exists(assetsDirectory))
         {
@@ -245,15 +245,15 @@ public class Minifier_Jann : M
     {
         if (path.Substring(path.Length - 3).Equals(".cs"))
         {
-            m_files.Add(path);
+            e.Add(path);
         }
     }
 
     private string SaveFile(string directory, string filename, string source)
     {
-        Directory.CreateDirectory(m_OutputDirectory + directory);
+        Directory.CreateDirectory(w + directory);
 
-        string path = $"{m_OutputDirectory}/{directory}/{filename}";
+        string path = $"{w}/{directory}/{filename}";
         File.WriteAllText(path, source);
 
         return path;
@@ -261,9 +261,9 @@ public class Minifier_Jann : M
 
     private string SaveFile(string directory, string filename, string[] source)
     {
-        Directory.CreateDirectory(m_OutputDirectory + directory);
+        Directory.CreateDirectory(w + directory);
 
-        string path = $"{m_OutputDirectory}/{directory}/{filename}";
+        string path = $"{w}/{directory}/{filename}";
         File.WriteAllLines(path, source);
 
         return path;

@@ -6,16 +6,16 @@
 
 public class Note_Jann
 {
-    private NotesCreator_Jann.Note nn;
+    private NotesCreator_Jann.q nn;
     private int f;
 
-    public Note_Jann(NotesCreator_Jann.Note non, int fr)
+    public Note_Jann(NotesCreator_Jann.q non, int fr)
     {
         nn = non;
         f = fr;
     }
 
-    public NotesCreator_Jann.Note NM
+    public NotesCreator_Jann.q NM
     {
         get => nn;
         set => nn = value;

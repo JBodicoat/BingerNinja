@@ -12,43 +12,43 @@ using UnityEngine;
 /// </summary>
 public class ControlPanel_JoaoBeijinho : MonoBehaviour
 {
-    protected PlayerController_JamieG m_playerControllerScript;
-    public ControlPanelActivateObject_JoaoBeijinho[] m_activateObjectScript;
+    protected PlayerController_JamieG q;
+    public ControlPanelActivateObject_JoaoBeijinho[] w;
 
-    public bool m_canPressButton = false;
+    public bool e = false;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D r)
     {
-        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        if (r.gameObject.CompareTag(Tags_JoaoBeijinho.QC))
         {
            
-            m_canPressButton = true;
+            e = true;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D t)
     {
-        if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        if (t.gameObject.CompareTag(Tags_JoaoBeijinho.QC))
         {
          
-            m_canPressButton = false;
+            e = false;
         }
     }
 
     // Start is called before the first frame update
     void Awake()
     {
-        m_playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
+        q = FindObjectOfType<PlayerController_JamieG>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (m_playerControllerScript.m_interact.triggered && m_canPressButton == true)//Player interaction with button
+        if (q.m_interact.triggered && e == true)//Player interaction with button
         {
-            for (int i = 0; i < m_activateObjectScript.Length; i++)
+            for (int i = 0; i < w.Length; i++)
             {
-                m_activateObjectScript[i].ActivateObject();
+                w[i].x();
             }
         }
     }

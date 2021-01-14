@@ -76,7 +76,7 @@ public class PoisionDefuff_MarioFernandes : StatusEffect_MarioFernandes
 
     protected override void Effect()
     {        
-        m_target.GetComponent<PlayerHealthHunger_MarioFernandes>().Hit(m_damagePerTick);
+        m_target.GetComponent<PlayerHealthHunger_MarioFernandes>().u(m_damagePerTick);
     }
 }
 

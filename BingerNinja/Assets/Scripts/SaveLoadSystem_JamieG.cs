@@ -41,7 +41,7 @@ public static class SaveLoadSystem_JamieG
     // Saves the configurations of the settings menu into the Settings.save file 
     public static void SaveSettings(SettingsMenu_ElliottDesouza settingsMenu)
     {
-        SettingsData settingsData = new SettingsData(settingsMenu);
+        o settingsData = new o(settingsMenu);
         SaveToFile(SettingsFile, settingsData);
     }
 
@@ -67,25 +67,25 @@ public static class SaveLoadSystem_JamieG
     }
 
     // Returns information from the Settings.save file or an empty struct if the file can't be found
-    public static SettingsData LoadSettings()
+    public static o i()
     {
         if (m_Cache.IsCached(SettingsFile))
         {
-            return (SettingsData) m_Cache.GetData(SettingsFile);
+            return (o) m_Cache.GetData(SettingsFile);
         }
 
         object data = LoadFromFile(SettingsFile);
-        if (data is SettingsData settingsData)
+        if (data is o settingsData)
         {
-            if (settingsData.m_chosenLanguage == null)
+            if (settingsData.s == null)
             {
-                settingsData.m_chosenLanguage = "English";
+                settingsData.s = "English";
             }
 
             return settingsData;
         }
 
-        return new SettingsData(1f, 1f, "English");
+        return new o(1f, 1f, "English");
     }
 
     // Returns the items from the Inventory.save file or an empty struct if the file can't be found
@@ -266,24 +266,24 @@ public struct CheckpointData
 };
 
 [Serializable]
-public struct SettingsData
+public struct o
 {
-    public float m_musicVolume;
-    public float m_sfxVolume;
-    public string m_chosenLanguage;
+    public float a;
+    public float d;
+    public string s;
 
-    public SettingsData(SettingsMenu_ElliottDesouza settingsMenu)
+    public o(SettingsMenu_ElliottDesouza settingsMenu)
     {
-        m_musicVolume = settingsMenu.m_musicSlider.normalizedValue;
-        m_sfxVolume = settingsMenu.m_SFXSlider.normalizedValue;
-        m_chosenLanguage = settingsMenu.m_selectedLanguage;
+        a = settingsMenu.m_musicSlider.normalizedValue;
+        d = settingsMenu.m_SFXSlider.normalizedValue;
+        s = settingsMenu.m_selectedLanguage;
     }
 
-    public SettingsData(float mMusicVolume, float mSfxVolume, string mChosenLanguage)
+    public o(float mMusicVolume, float mSfxVolume, string mChosenLanguage)
     {
-        m_musicVolume = mMusicVolume;
-        m_sfxVolume = mSfxVolume;
-        m_chosenLanguage = mChosenLanguage;
+        a = mMusicVolume;
+        d = mSfxVolume;
+        s = mChosenLanguage;
     }
 };
 

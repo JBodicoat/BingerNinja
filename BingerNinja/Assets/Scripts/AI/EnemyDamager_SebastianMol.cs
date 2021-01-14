@@ -10,36 +10,36 @@ using UnityEngine;
 /// </summary>
 public class EnemyDamager_SebastianMol : MonoBehaviour
 {
-	public float m_baseDamage;
-	internal float m_damage;
-	public float m_percentageChanceOfAffect = 0.5f;
-	public float m_poisionDamage = 1;
-	public float m_slowDebuff = 0.5f; //make thsi a range
-	public float m_affectTime = 5;
-    public HitEffectElliott m_HitEffectElliott;
-	private void OnTriggerEnter2D(Collider2D collision)
+	public float P;
+	internal float O;
+	public float q = 0.5f;
+	public float w = 1;
+	public float e = 0.5f; //make thsi a range
+	public float r = 5;
+    public HitEffectElliott t;
+	private void OnTriggerEnter2D(Collider2D y)
 	{
-		if (collision.tag == "Player")
+		if (y.tag == "Player")
 		{
-			FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damage);
-			MeleeEnemy_SebastianMol currentEnemyScript = GetComponentInParent<MeleeEnemy_SebastianMol>();
+			FindObjectOfType<PlayerHealthHunger_MarioFernandes>().u(O);
+			MeleeEnemy_SebastianMol i = GetComponentInParent<MeleeEnemy_SebastianMol>();
            // m_HitEffectElliott.StartHitEffect(false);
-            collision.GetComponent<HitEffectElliott>().StartHitEffect(false);
-            if (currentEnemyScript.m_currentEnemyType == m_enemyType.SPACENINJABOSS)
+            y.GetComponent<HitEffectElliott>().WL(false);
+            if (i.E == global::y.h)
             {
-				if(currentEnemyScript.m_doseAffect)
+				if(i.M)
                 {
-					float rand = Random.Range(0, 2);
+					float o = Random.Range(0, 2);
 
-					if (rand > m_percentageChanceOfAffect)
+					if (o > q)
 					{
-						FindObjectOfType<EffectManager_MarioFernandes>().AddEffect
-							(new PoisionDefuff_MarioFernandes(m_poisionDamage, m_affectTime));
+                        FindObjectOfType<EffectManager_MarioFernandes>().Z
+							(new PoisionDefuff_MarioFernandes(w, r));
 					}
 					else
 					{
-						FindObjectOfType<EffectManager_MarioFernandes>().AddEffect
-							(new SpeedEffect_MarioFernandes(m_affectTime, m_slowDebuff));
+                        FindObjectOfType<EffectManager_MarioFernandes>().Z
+							(new SpeedEffect_MarioFernandes(r, e));
 					}
 				}					
 			}
@@ -49,7 +49,7 @@ public class EnemyDamager_SebastianMol : MonoBehaviour
 	}
     private void Start()
     {
-       m_HitEffectElliott = GetComponent<HitEffectElliott>();
+       t = GetComponent<HitEffectElliott>();
     }
 
 }

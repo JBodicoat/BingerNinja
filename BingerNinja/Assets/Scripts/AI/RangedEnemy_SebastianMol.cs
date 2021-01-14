@@ -11,17 +11,17 @@ using UnityEngine;
 class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
 {
 
-    public GameObject m_aimer;
-    public GameObject m_projectile;
-    public float m_shootDeley;
-    public float m_projectileSpeed;
+    public GameObject q;
+    public GameObject w;
+    public float e;
+    public float r;
 
 
     /// <summary>
     /// ovveride class that holds logic for what the enemy shoudl do when in the attack state
     /// </summary>
-    internal override void AttackBehaviour()
+    internal override void QP()
     {
-        EnemyAttacks_SebastianMol.RangedAttack(GetComponent<Enemy_Animation_LouieWilliamson>(), m_playerTransform, transform, m_aimer, ref m_attackTimer, m_projectile, m_shootDeley);
+        EnemyAttacks_SebastianMol.d(GetComponent<Enemy_Animation_LouieWilliamson>(), qt, transform, q, ref qo, w, e);
     }
 }
