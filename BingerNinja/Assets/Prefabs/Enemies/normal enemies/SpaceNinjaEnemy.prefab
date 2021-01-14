@@ -92,12 +92,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be6def35fff5c7d48811166bd65116d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_baseDamage: 10
-  m_percentageChanceOfAffect: 0.5
-  m_poisionDamage: 1
-  m_slowDebuff: 0.5
-  m_affectTime: 5
-  m_HitEffectElliott: {fileID: 0}
+  XQ: 10
+  XE: 0.5
+  XR: 1
+  XT: 0.5
+  XY: 5
+  XU: {fileID: 0}
 --- !u!1 &1886465507647099100
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,47 +390,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131872bffc30dbd4bb3013b65a7f2c34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_rayCastStart: {fileID: 8631870843932011449}
-  m_rayCastStartBackup: {fileID: 4073614791533693554}
-  m_detectionCollider: {fileID: 8631870844753434284}
-  m_playerDetected: 0
-  m_currentState: 0
-  m_currentEnemyType: 4
-  m_questionmark: {fileID: 3783213463638213574, guid: 40acaa4f65aeeaf44aad51d83f2decd0, type: 3}
-  m_excalmationmark: {fileID: 6264025296151744314, guid: a776e246d259fa04188f7ffb2c9d5113, type: 3}
-  m_inventory: {fileID: 0}
-  m_notifcaionOffset: 0.1
-  m_dropItem: {fileID: 0}
-  m_health: 120
-  m_speed: 2
-  showPath: 0
-  floortilemap: {fileID: 0}
-  m_patrolPoints: []
-  m_playerMoveAllowance: 2
-  m_deleyBetweenPatrol: 0
-  m_dosePatrole: 0
-  m_outOfSightDeley: 4
-  m_sneakDamageMultiplier: 1.5
-  m_sneakDamageMultiplierStack: 0
-  m_attackRange: 0.6
-  m_attckRangeDevider: 1
-  m_tiggerBossLooseTargetDistance: 2
-  m_secondPhaseStartPercentage: 0.3
-  m_amountOfStunWhenPlayerStealthed: 3
-  m_doseAffect: 1
-  m_attackSpeedIncrease: 1.5
-  m_hitSpeed: 2
-  m_attackCollider: {fileID: 220513390732296407}
-  attackDeactivationSpeed: 0.1
-  m_hasChargeAttack: 0
-  m_chargeAttackDeley: 0
-  m_chargAttackPosibility: 0
-  m_chargeAttackMultiplier: 3
-  m_afterAttackDeley: 0
-  m_maxChargTimeBeforDamege: 0.2
-  m_amountOfTimeToMoveAwayFromWall: 0.2
-  m_chargeAttackSpeed: 500
-  showPathBeforAttackTigerBoss: 0
+  a: {fileID: 8631870843932011449}
+  b: {fileID: 4073614791533693554}
+  CE: {fileID: 8631870844753434284}
+  CW: 0
+  CQ: 0
+  CA: 4
+  CR: {fileID: 3783213463638213574, guid: 40acaa4f65aeeaf44aad51d83f2decd0, type: 3}
+  CT: {fileID: 6264025296151744314, guid: a776e246d259fa04188f7ffb2c9d5113, type: 3}
+  CY: {fileID: 0}
+  CU: 0.1
+  CI: {fileID: 0}
+  CO: 120
+  CP: 2
+  CS: 0
+  CD: {fileID: 0}
+  CF: []
+  CG: 2
+  CH: 0
+  CJ: 0
+  CK: 4
+  X: 1.5
+  C: 0
+  V: 0.6
+  B: 1
+  N: 2
+  M: 0.3
+  QQ: 3
+  QW: 1
+  QE: 1.5
+  Q: 2
+  WR: {fileID: 220513390732296407}
+  E: 0.1
+  R: 0
+  T: 0
+  Y: 0
+  U: 3
+  I: 0
+  O: 0.2
+  P: 0.2
+  S: 500
+  D: 0
 --- !u!114 &142416290521486900
 MonoBehaviour:
   m_ObjectHideFlags: 0
