@@ -1,1 +1,0 @@
-using UnityEngine;public class EnemyManager_SebastianMol : M{private GameObject[] a;public bool ZQ(){for (int i = 0; i < a.Length; i++){a = GameObject.FindGameObjectsWithTag("Enemy");if(a[i].GetComponent<BaseEnemy_SebastianMol>().CW){return true;}}return false;}}
