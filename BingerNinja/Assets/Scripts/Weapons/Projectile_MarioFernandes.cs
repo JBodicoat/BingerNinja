@@ -49,7 +49,6 @@ public class Projectile_MarioFernandes : MonoBehaviour
      }
 
     private void OnTriggerEnter2D(Collider2D other) {
-         print(other.gameObject.name);
 
         if(/*!other.isTrigger &&*/ other.tag == Tags_JoaoBeijinho.m_enemyTag)
         {

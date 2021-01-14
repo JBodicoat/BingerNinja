@@ -55,7 +55,6 @@ namespace UnityEngine.InputSystem.OnScreen
             set => m_MovementRange = value;
         }
 
-        [FormerlySerializedAs("movementRange")]
         [SerializeField]
         private float m_MovementRange = 50;
 

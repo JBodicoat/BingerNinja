@@ -28,10 +28,4 @@ public class SecurityCamera_SebastianMol : MonoBehaviour
             //initiate curious enemy state
         }
     }
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, m_alertRadius);
-    }
 }

@@ -74,7 +74,6 @@ public class WeightedPressurePad_JoaoBeijinho : MonoBehaviour
             }
         }
         
-        Debug.Log("yay");
         //m_doorCollider.GetComponent<Collider2D>().enabled = false;//Open door
     }
         

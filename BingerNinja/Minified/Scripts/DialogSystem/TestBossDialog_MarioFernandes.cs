@@ -1,0 +1,1 @@
+using UnityEngine;public class TestBossDialog_MarioFernandes : M{public bool dial = false;int a = 0;void Update(){if (dial){gameObject.GetComponent<BossDialogue_MarioFernandes>().TriggerDialogue(a);dial = false;a++;}}}

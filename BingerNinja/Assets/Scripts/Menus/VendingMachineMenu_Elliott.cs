@@ -71,13 +71,11 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
     {
         if (SelectPizza.activeInHierarchy && Inventory.HasItem(ItemType.NinjaPoints, 15))
         {
-            Debug.Log("Tempura");  
             Inventory.RemoveItem(ItemType.NinjaPoints, 15);
             Inventory.GiveItem(ItemType.Tempura, 1); 
         }
         else if (SelectCookie.activeInHierarchy && !PurchasedCookie && Inventory.HasItem(ItemType.NinjaPoints, 50)) 
         {
-            Debug.Log("Dango");
             Inventory.RemoveItem(ItemType.NinjaPoints, 50);
             Inventory.GiveItem(ItemType.Dango, 1);
             CookieColor.color = Color.red;
@@ -86,13 +84,11 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
         }
         else if (SelectSake.activeInHierarchy && Inventory.HasItem(ItemType.NinjaPoints,25))
         {
-            Debug.Log("sake");
             Inventory.RemoveItem(ItemType.NinjaPoints, 25);
             Inventory.GiveItem(ItemType.Sake, 1);
         }
         else if (SelectNoodle.activeInHierarchy && !PurchasedNoodle && Inventory.HasItem(ItemType.NinjaPoints, 50)) /*&& ninja point >= 50*/
         {
-            Debug.Log("noodles");
             Inventory.RemoveItem(ItemType.NinjaPoints, 50);
             Inventory.GiveItem(ItemType.Noodles, 1);
             NoodleColor.color = Color.red;

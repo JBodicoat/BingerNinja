@@ -10,18 +10,11 @@ using UnityEngine;
 /// </summary>
 public class EnemyDamager_SebastianMol : MonoBehaviour
 {
-	[Tooltip("the base damage of teh collider")]
 	public float m_baseDamage;
 	internal float m_damage;
-	[Tooltip("precentage chance of what affect gets applied poison or stun")]
-	[Range(0.0f, 1.0f)]
 	public float m_percentageChanceOfAffect = 0.5f;
-	[Tooltip("amount of poison damage")]
 	public float m_poisionDamage = 1;
-	[Tooltip("how slow the slow effect is on the player")]
-	[Range(0.0f, 1.0f)]
 	public float m_slowDebuff = 0.5f; //make thsi a range
-	[Tooltip("amount of time the effects are applied")]
 	public float m_affectTime = 5;
     public HitEffectElliott m_HitEffectElliott;
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -32,25 +25,21 @@ public class EnemyDamager_SebastianMol : MonoBehaviour
 			MeleeEnemy_SebastianMol currentEnemyScript = GetComponentInParent<MeleeEnemy_SebastianMol>();
            // m_HitEffectElliott.StartHitEffect(false);
             collision.GetComponent<HitEffectElliott>().StartHitEffect(false);
-            print(collision.name);
             if (currentEnemyScript.m_currentEnemyType == m_enemyType.SPACENINJABOSS)
             {
 				if(currentEnemyScript.m_doseAffect)
                 {
 					float rand = Random.Range(0, 2);
-					Debug.Log(rand);
 
 					if (rand > m_percentageChanceOfAffect)
 					{
 						FindObjectOfType<EffectManager_MarioFernandes>().AddEffect
 							(new PoisionDefuff_MarioFernandes(m_poisionDamage, m_affectTime));
-						Debug.Log("poison");
 					}
 					else
 					{
 						FindObjectOfType<EffectManager_MarioFernandes>().AddEffect
 							(new SpeedEffect_MarioFernandes(m_affectTime, m_slowDebuff));
-						Debug.Log("slow");
 					}
 				}					
 			}

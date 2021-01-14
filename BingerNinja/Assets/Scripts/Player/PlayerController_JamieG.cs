@@ -76,8 +76,6 @@ public class PlayerController_JamieG : MonoBehaviour
             m_playerStealthScript.Crouch();
         }
     }
-
-    #region InputAction Functions
     //These functions are required for the InputAction component to work
     public void OnEnable()
     {
@@ -108,6 +106,6 @@ public class PlayerController_JamieG : MonoBehaviour
         m_aim.Disable();
         m_changeLevel.Disable();
     }
-    #endregion
+
 
 }

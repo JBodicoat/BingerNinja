@@ -36,18 +36,14 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
     private ColorChanger_Jann m_colorChangerScript;
     private LevelScripting levelScripting;
 
-    [Header("Freezer Settings")]
     public int m_maxTicks;
     public float m_damageInterval;
     public float m_damageAmount;
     public float m_freezerCooldown;
     private bool m_freezerInUse = false;
-
-    [Header("Light (Each bool corresponds to a ColorChanger color)")]
     public bool[] m_pickColor = new bool[] {false, false, false};
     private Color m_color;
 
-    [Header("Stun Light (shouldn't be touched)")]
     public bool m_stunLight = false; //stun effect on/off
 
     public void ActivateObject()//Call this function to activate object functionality
@@ -72,7 +68,6 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
                 }
                 break;
             case ObjectType.Computer:
-                print("This a computer");
                 //make computer sound
                 break;
             case ObjectType.Freezer:
@@ -97,10 +92,8 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
             {
                 m_baseEnemyScript = enemy.GetComponent<BaseEnemy_SebastianMol>();
 
-                print("Dealt " + m_damageAmount + " damage");
                 m_baseEnemyScript.StunEnemyWithDeleyFunc(m_damageInterval);
                 m_baseEnemyScript.m_health -= m_damageAmount;//Deal damage
-                print("Enemy HP: " + m_baseEnemyScript.m_health);
                 m_baseEnemyScript.OnDeath();
             }
 
@@ -109,7 +102,6 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
         
         levelScripting.drawFreezer = false;//Unlock freezer door
         yield return new WaitForSeconds(m_freezerCooldown);
-        m_freezerInUse = false;print("CD over");
     }
 
     private void LightColor()

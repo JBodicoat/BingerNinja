@@ -1,0 +1,1 @@
+using UnityEngine;public class MobileUIToggle_JamieG : M{private GameObject mobileUI;void Awake(){mobileUI = F("Mobile");if (Application.isEditor){mobileUI.SetActive(true);}else if (Application.isMobilePlatform){mobileUI.SetActive(true);}else {mobileUI.SetActive(false);}}}

@@ -48,24 +48,26 @@ public class PlayerStealth_JoaoBeijinho : MonoBehaviour
     /// </summary>
     public void Crouch()
     {
+
+        PlayerController_JamieG playerController = GetComponent<PlayerController_JamieG>();
         m_crouched = !m_crouched;
 
         if (m_crouched == true)
         {
             gameObject.GetComponent<PlayerMovement_MarioFernandes>().m_speed = crouchSpeed;
-            GetComponent<PlayerController_JamieG>().m_attackTap.Disable();
-            GetComponent<PlayerController_JamieG>().m_attackSlowTap.Disable();
-            GetComponent<PlayerController_JamieG>().m_roll.Disable();
-            GetComponent<PlayerController_JamieG>().m_eat.Disable();
+            playerController.m_attackTap.Disable();
+            playerController.m_attackSlowTap.Disable();
+            playerController.m_roll.Disable();
+            playerController.m_eat.Disable();
             m_pAnimation.Crouching(true);
         }
         else
         {
             gameObject.GetComponent<PlayerMovement_MarioFernandes>().ResetSpeed();
-            GetComponent<PlayerController_JamieG>().m_attackTap.Enable();
-            GetComponent<PlayerController_JamieG>().m_attackSlowTap.Enable();
-            GetComponent<PlayerController_JamieG>().m_roll.Enable();
-            GetComponent<PlayerController_JamieG>().m_eat.Enable();
+            playerController.m_attackTap.Enable();
+            playerController.m_attackSlowTap.Enable();
+            playerController.m_roll.Enable();
+            playerController.m_eat.Enable();
             m_pAnimation.Crouching(false);
         }
     }

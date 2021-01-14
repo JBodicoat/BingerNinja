@@ -1,0 +1,1 @@
+using System.Collections.Generic;using UnityEngine;public class BossDialogue_MarioFernandes : M{public List<Dialogue> m_dialogue;public void TriggerDialogue (int index){if (index < m_dialogue.Capacity - 1 && index >= 0)FOT<DialogueManager_MarioFernandes>().StartDialogue(m_dialogue[index]);}}

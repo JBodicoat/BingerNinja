@@ -22,7 +22,6 @@ public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
 {
     private GameObject m_player;
 
-    #region Enter and Exit triggers
     private void OnTriggerEnter2D(Collider2D collision)//Enter and Exit vent
     {
         if (collision.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
@@ -44,7 +43,6 @@ public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
             }
         }
     }
-    #endregion
     
     /// <summary>
     /// Snap player to the position of the vent, disable collision with wall tiles

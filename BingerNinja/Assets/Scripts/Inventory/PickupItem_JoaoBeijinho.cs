@@ -26,7 +26,6 @@ public class PickupItem_JoaoBeijinho : MonoBehaviour
             if (m_item == ItemType.Key || m_item == ItemType.LiftKey)
             {
                 weaponUI.setKey(true);
-                print("Yay");
             }
         }
     }

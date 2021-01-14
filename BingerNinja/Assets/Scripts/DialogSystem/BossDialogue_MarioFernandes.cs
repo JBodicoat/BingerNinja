@@ -18,8 +18,6 @@ public class BossDialogue_MarioFernandes : MonoBehaviour
         if (index < m_dialogue.Capacity - 1 && index >= 0)
             FindObjectOfType<DialogueManager_MarioFernandes>().StartDialogue(m_dialogue[index]);
 
-        else
-            print("Invalid dialog index");
 	}
 
 }

@@ -103,9 +103,7 @@ public class Inventory_JoaoBeijinho : MonoBehaviour
         }
         if(count == m_EnemyList.Count)
         {
-            Debug.Log(ItemValue(ItemType.NinjaPoints));
             GiveItem(ItemType.NinjaPoints, 5);
-            Debug.Log(ItemValue(ItemType.NinjaPoints));
         }
     }
 }

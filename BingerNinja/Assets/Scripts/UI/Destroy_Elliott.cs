@@ -17,9 +17,4 @@ public class Destroy_Elliott : MonoBehaviour
         Destroy(gameObject, m_lifeTime);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

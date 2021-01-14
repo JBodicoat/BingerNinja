@@ -33,7 +33,6 @@ public class Timeline_Script : MonoBehaviour
        // nextButton.SetActive(true);
        if (dialogBox.activeInHierarchy == false)
             {
-                Debug.Log("kurwa");
                 playableDirector.playableGraph.GetRootPlayable(0).SetSpeed(5);
                 //playableDirector.Stop();
             }

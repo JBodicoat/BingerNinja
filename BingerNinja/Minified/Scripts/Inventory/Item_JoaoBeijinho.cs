@@ -1,0 +1,1 @@
+public class Item_JoaoBeijinho{public int m_id;public string m_name;public string m_description;public Item_JoaoBeijinho(int id, string name, string description){this.m_id = id;this.m_name = name;this.m_description = description;}public void Item(Item_JoaoBeijinho item){this.m_id = item.m_id;this.m_name = item.m_name;this.m_description = item.m_description;}}

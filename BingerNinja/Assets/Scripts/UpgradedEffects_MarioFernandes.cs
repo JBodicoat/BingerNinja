@@ -66,12 +66,9 @@ public class UpgradedEffects_MarioFernandes : MonoBehaviour
     //Switch the Squids to Noodles on the level
     public void NoodlesEffect()
     {
-        Debug.Log("Change Weapon");
         if(GetComponent<Inventory_JoaoBeijinho>().HasItem(ItemType.Noodles, 1))
         {
-           Debug.Log("Change Weapon2");
            GameObject[] changeWeapon = GameObject.FindGameObjectsWithTag("PlayerWeapon");    
-           Debug.Log("Change Weapon3"); 
            foreach (var item in changeWeapon)
            {
                if(item.GetComponent<WeaponsTemplate_MarioFernandes>().m_foodType == FoodType.SQUID)

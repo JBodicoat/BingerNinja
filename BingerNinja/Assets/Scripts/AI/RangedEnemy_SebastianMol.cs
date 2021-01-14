@@ -10,24 +10,12 @@ using UnityEngine;
 /// </summary>
 class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
 {
-    [Header("class based damage variables")]
-    [Header("projectile prefabs")]
+
     public GameObject m_aimer;
     public GameObject m_projectile;
-    [Header("projectile Variables")]
-    [Tooltip("how fast the projectile moves")]
     public float m_shootDeley;
-    [Tooltip("speed of the projectile")]
     public float m_projectileSpeed;
 
-
-    private Enemy_Animation_LouieWilliamson enemyAnim;
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, m_attackRange);
-    }
 
     /// <summary>
     /// ovveride class that holds logic for what the enemy shoudl do when in the attack state

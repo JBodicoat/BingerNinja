@@ -40,9 +40,6 @@ public class Pathfinder_SebastianMol : MonoBehaviour
     public Tilemap m_tileMap;
     int count = 0;
 
-    [Header("testing variables")]
-    [Tooltip("press this button to start path finding")]
-    public bool m_testButton = false;
     public Vector2Int m_startPos;
     public Vector2Int m_targetPos;
     public Tile m_pathTile;
@@ -55,7 +52,6 @@ public class Pathfinder_SebastianMol : MonoBehaviour
     /// <returns></returns>
     public List<Vector2Int> PathFind(Vector2Int startPos, Vector2Int targetPos)
     {
-        #region prep
         Node startNode = m_allTiles[startPos.x, startPos.y];
         Node targetNode = m_allTiles[targetPos.x, targetPos.y];
 
@@ -68,9 +64,7 @@ public class Pathfinder_SebastianMol : MonoBehaviour
         if (startNode == targetNode) return new List<Vector2Int>();
 
         openList.Add(currentNode);
-        #endregion
 
-        #region algorithm
         while (currentNode != targetNode)
         {
             closedList.Add(currentNode);
@@ -137,15 +131,11 @@ public class Pathfinder_SebastianMol : MonoBehaviour
             }
             currentNode = lowestCostNode;
         }
-        #endregion
 
-        #region resolution
         FinalPath = AddNodeToPath(currentNode, FinalPath);
         if (FinalPath.Count == 0) return new List<Vector2Int>();
         if (FinalPath[0] != targetNode) return new List<Vector2Int>();
-        #endregion
 
-        #region clean up
         List<Vector2Int> DaPath = new List<Vector2Int>();
         for (int i = FinalPath.Count - 1; i >= 0; --i)
         {
@@ -155,7 +145,6 @@ public class Pathfinder_SebastianMol : MonoBehaviour
         //preapre data for next search
         foreach (Node item in closedList) item.ResetData();
         foreach (Node item in openList) item.ResetData();
-        #endregion
 
         return DaPath;
     }
@@ -227,23 +216,6 @@ public class Pathfinder_SebastianMol : MonoBehaviour
                         m_allTiles[x, y].m_traversable = false;
                     }
                 }
-            }
-        }
-    }
-
-    private void Update()
-    {
-        if (m_testButton)
-        {
-            m_testButton = false;
-            List<Vector2Int> path = PathFind(m_startPos, m_targetPos);
-            for (int i = 0; i < path.Count; i++)
-            {
-                m_tileMap.SetTile(new Vector3Int(path[i].x, path[i].y, 0), m_pathTile);
-
-                //m_tileMap.SetTileFlags(new Vector3Int(path[i].x, path[i].y, 0), TileFlags.None);
-                //m_tileMap.SetColor(new Vector3Int(path[i].x, path[i].y, 0), Color.green);
-                //Debug.Log(m_tileMap.GetCellCenterWorld(new Vector3Int(path[i].x, path[i].y, 0)));
             }
         }
     }

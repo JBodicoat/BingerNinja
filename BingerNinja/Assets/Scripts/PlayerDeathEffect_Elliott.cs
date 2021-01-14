@@ -21,7 +21,6 @@ public class PlayerDeathEffect_Elliott : MonoBehaviour
            m_player.enabled = true;
             yield return new WaitForSeconds(.1f);
         }
-        Debug.Log("NOW");
         m_PauseInput.OnEnable();
     }
 
@@ -34,11 +33,5 @@ public class PlayerDeathEffect_Elliott : MonoBehaviour
     {
        m_player = GetComponentInChildren<SpriteRenderer>();
        m_PauseInput = GetComponent<PlayerController_JamieG>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //SpriteFlash();
     }
 }

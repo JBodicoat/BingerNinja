@@ -1,0 +1,1 @@
+using UnityEngine;public class Destroy_Elliott : M{public float m_lifeTime = 1.5f;void Start(){D(gameObject, m_lifeTime);}}

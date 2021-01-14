@@ -11,7 +11,6 @@ public class CameraShakeElliott : MonoBehaviour
     public float m_duration;
     public float m_magnitude;
     public float m_cameraLerp;
-    private Transform playerTrans;
     public IEnumerator Shake(float duration, float magnitude)
     {
         duration = m_duration;

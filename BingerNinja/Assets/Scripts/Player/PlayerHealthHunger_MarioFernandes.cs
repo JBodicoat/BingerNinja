@@ -96,7 +96,6 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
         m_currentHunger = 100;
         HealAllEnemies();
         AllEnemiesLooseIntrest();
-        print("GAME OVER");
         
         SceneManager_JamieG.Instance.ResetToCheckpoint();
     }

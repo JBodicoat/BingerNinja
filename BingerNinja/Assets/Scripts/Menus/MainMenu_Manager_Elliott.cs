@@ -32,20 +32,18 @@ public class MainMenu_Manager_Elliott : MonoBehaviour
         ///load level 1 here
         SaveLoadSystem_JamieG.DeleteSaves();
         SceneManager_JamieG.Instance.LoadNextLevel();
-        print("start");
     }
 
     public void OpenSettingsMenu()
     {
         ///open up settings
-        Debug.Log("open Settings");
         m_settingMenu.SetActive(true);
     }
 
     public void Quit()
     {
         ///quit application
-        Debug.Log("quit");
+     
         Application.Quit();
     }
   

@@ -16,28 +16,26 @@ using UnityEngine;
 /// </summary>
 class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
 {
-    [Header("class based damage variables")]
-    [Tooltip("speed of the enemies attack")]
+
     public float m_hitSpeed;
-    [Tooltip("object used to damage the enemy coudl be called the enemy weapon")]
+
     public GameObject m_attackCollider;
-    [Tooltip("time it takess for the attck gameobject to be turneed off this shoudl be realy short")]
+
     public float attackDeactivationSpeed;
-    [Tooltip("dose the enemy have a harge attack")]
+
     public bool m_hasChargeAttack = false;
-    [Tooltip("the deley befor chareg attack is carried out")]
+
     public float m_chargeAttackDeley;
-    [Tooltip("possiility of a charge attack (1/m_chargAttackPosibility)")]
+
     public int m_chargAttackPosibility;
-    [Tooltip("the amaount the charge attack is multiplied by")]
+
     public float m_chargeAttackMultiplier = 3;
-    [Tooltip("the amount of time the enemy is frozen for after it dose its attack")]
+
     public float m_afterAttackDeley;
-    [Tooltip("speed of the enemies attack")]
+
     public float m_maxChargTimeBeforDamege = 0.2f;
-    [Tooltip("the amaount of time that the enemys attack range is very small so that he moves away from wall befor doiugn a chareg attack I RECCOMEND NOT TO CHANGE THIS")]
+
     public float m_amountOfTimeToMoveAwayFromWall = 0.2f;
-    [Tooltip("speed of the enemies charge attack")]
     public float m_chargeAttackSpeed = 500;
 
     private bool doOnceShowPath = true;
@@ -97,21 +95,6 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     {
         if(m_currentEnemyType == m_enemyType.PETTIGER)
         {
-            //if (showPathBeforAttackTigerBoss)
-            //{
-            //    if (doOnceShowPath)
-            //    {
-            //        doOnceShowPath = false;
-            //        pathFinder = GameObject.FindObjectOfType<Pathfinder_SebastianMol>();
-            //        daPath = pathFinder.PathFind((Vector2Int)pathFinder.m_tileMap.WorldToCell(m_playerTransform.position), (Vector2Int)pathFinder.m_tileMap.WorldToCell(transform.position));
-            //        for (int i = 0; i < daPath.Count; i++)
-            //        {
-            //            Debug.Log(daPath[i].x + " " + daPath[i].y);
-            //            floortilemap.SetTileFlags(new Vector3Int(daPath[i].x, daPath[i].y, 0), TileFlags.None);
-            //            floortilemap.SetColor(new Vector3Int(daPath[i].x, daPath[i].y, 0), Color.red);
-            //        }
-            //    }
-            //}
 
             EnemyAttacks_SebastianMol.ChargeAttack(m_playerTransform, ref m_attackTimer,
                 m_attackCollider, m_hitSpeed, gameObject, m_chargeAttackSpeed); //make this ibnto a public variable
@@ -204,10 +187,5 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
                 }
             }
         }      
-    }
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, m_attackRange);
     }
 }

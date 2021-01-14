@@ -311,7 +311,6 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
          {
              ChangeWeapon();             
 
-             print(m_currentWeapon[m_weaponsIndex]);
          }
 
         if(m_timeSinceLastAttack < 0)
@@ -375,7 +374,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
                     m_currentWeapon[1].m_ammunition += collision.GetComponent<WeaponsTemplate_MarioFernandes>().m_ammunition;
                     Destroy(collision.gameObject);
 
-                    Debug.Log("ammunition: " + m_currentWeapon[1].m_ammunition.ToString());
+                    
                     m_WeaponUI.WeaponChange(m_currentWeapon[1].m_foodType, true, m_currentWeapon[1].m_ammunition);
                     m_WeaponUI.SetWeaponsUIAnimation(true);
                 }

@@ -62,7 +62,6 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
             PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_PlayerThrow);
             if (!m_doorIsOpen)
             {
-                Debug.Log("door opened");
                 m_doorIsOpen = true;
                 walls2.SetTile(new Vector3Int(24, 9, 0), null);
                 walls2.SetTile(new Vector3Int(24, 10, 0), null);
@@ -75,7 +74,6 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
             }
             else
             {
-                Debug.Log("door close");
                 walls2.SetTile(new Vector3Int(24, 9, 0), topDoor);
                 walls2.SetTile(new Vector3Int(24, 10, 0), topDoor);
                 walls2.SetTile(new Vector3Int(24, 11, 0), topDoor);
@@ -91,7 +89,6 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
         {
             if (!m_doorIsOpen)
             {
-                Debug.Log("door opened");
                 m_doorIsOpen = true;
                 walls2.SetTile(new Vector3Int(12, 20, 0), null);
                 walls2.SetTile(new Vector3Int(13, 20, 0), null);
@@ -103,7 +100,6 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
             }
             else
             {
-                Debug.Log("door close");
                 walls2.SetTile(new Vector3Int(12, 20, 0), topDoor);
                 walls2.SetTile(new Vector3Int(13, 20, 0), topDoor);
                 walls2.SetTile(new Vector3Int(14, 20, 0), topDoor);
@@ -119,7 +115,7 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
         {
             if (!m_doorIsOpen)
             {
-                Debug.Log("door opened");
+
                 m_doorIsOpen = true;
                 walls2.SetTile(new Vector3Int(20, 20, 0), null);
                 walls2.SetTile(new Vector3Int(19, 20, 0), null);
@@ -131,7 +127,6 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
             }
             else
             {
-                Debug.Log("door close");
                 walls2.SetTile(new Vector3Int(20, 20, 0), topDoor);
                 walls2.SetTile(new Vector3Int(19, 20, 0), topDoor);
                 walls2.SetTile(new Vector3Int(18, 20, 0), topDoor);
@@ -147,7 +142,6 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
         {
             if (!m_doorIsOpen)
             {
-                Debug.Log("door opened");
                 m_doorIsOpen = true;
                 walls2.SetTile(new Vector3Int(26, 20, 0), null);
                 walls2.SetTile(new Vector3Int(25, 20, 0), null);
@@ -159,7 +153,6 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
             }
             else
             {
-                Debug.Log("door close");
                 walls2.SetTile(new Vector3Int(26, 20, 0), topDoor);
                 walls2.SetTile(new Vector3Int(25, 20, 0), topDoor);
                 walls2.SetTile(new Vector3Int(24, 20, 0), topDoor);

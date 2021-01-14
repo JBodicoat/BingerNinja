@@ -9,7 +9,6 @@ using UnityEngine.Tilemaps;
 
 public class LevelScripting : MonoBehaviour
 {
-    #region VARIABLES
     internal bool enemyDead = false, keyUsed = false, levelBossIntro, bossDead = false, doorsClosed = false, cinematicDone = true, ventDialogueDisabled = false, endVentDialogueCanPlay = false, drawFreezer = false;
     private GameObject levelLiftTrigger, keyTrigger, keyTriggerTwo, doorCloseTrigger, dialogBox, ventsDialogue, endVentDialogue;
     public GameObject vents;
@@ -26,7 +25,6 @@ public class LevelScripting : MonoBehaviour
     private float cinematicsTimer;
 
     private WeaponUI_LouieWilliamson wpnUI;
-    #endregion
 
     private void Awake()
     {
@@ -446,7 +444,6 @@ public class LevelScripting : MonoBehaviour
                         if (!keyTrigger.activeInHierarchy)
                         {
                             wpnUI.setKey(false);
-                            Debug.Log("key worked");
 
                             walls2.SetTile(new Vector3Int(6, 13, 0), null);
                             walls2.SetTile(new Vector3Int(5, 13, 0), null);

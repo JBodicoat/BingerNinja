@@ -37,7 +37,6 @@ public static class SaveLoadSystem_JamieG
             }
         }
     }
-    #region Saving
 
     // Saves the configurations of the settings menu into the Settings.save file 
     public static void SaveSettings(SettingsMenu_ElliottDesouza settingsMenu)
@@ -67,10 +66,6 @@ public static class SaveLoadSystem_JamieG
         SaveToFile(CheckpointFile, checkpointData);
     }
 
-    #endregion
-
-    #region Loading
-
     // Returns information from the Settings.save file or an empty struct if the file can't be found
     public static SettingsData LoadSettings()
     {
@@ -90,7 +85,6 @@ public static class SaveLoadSystem_JamieG
             return settingsData;
         }
 
-        Debug.Log("Loading settings didn't return object of type SettingsData");
         return new SettingsData(1f, 1f, "English");
     }
 
@@ -108,7 +102,6 @@ public static class SaveLoadSystem_JamieG
             return inventoryData;
         }
 
-        Debug.Log("Loading inventory didn't return object of type InventoryData");
         return default;
     }
 
@@ -126,7 +119,6 @@ public static class SaveLoadSystem_JamieG
             return gameplayData;
         }
 
-        Debug.Log("Loading gameplayData didn't return object of type GameplayData");
         return default;
     }
     
@@ -143,12 +135,10 @@ public static class SaveLoadSystem_JamieG
         {
             return checkpointData;
         }
-
-        Debug.Log("Loading checkpointData didn't return object of type CheckpointData");
         return default;
     }
 
-    #endregion
+
 
     /// <summary>
     /// Saves data as file at C:\Users\{user}\AppData\LocalLow\DefaultCompany\BingerNinja
@@ -189,7 +179,6 @@ public static class SaveLoadSystem_JamieG
         }
         else
         {
-            Debug.Log("Save file not found in " + path);
             return null;
         }
     }
@@ -235,8 +224,6 @@ internal class SaveSystemCache
     }
 }
 
-
-#region Serializable data
 
 [Serializable]
 public struct GameplayData
@@ -330,5 +317,3 @@ public struct ItemData
         m_amount = amount;
     }
 }
-
-#endregion

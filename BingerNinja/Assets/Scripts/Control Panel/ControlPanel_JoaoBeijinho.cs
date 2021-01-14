@@ -15,8 +15,6 @@ public class ControlPanel_JoaoBeijinho : MonoBehaviour
     protected PlayerController_JamieG m_playerControllerScript;
     public ControlPanelActivateObject_JoaoBeijinho[] m_activateObjectScript;
 
-    private string m_playerTag = "Player";
-
     public bool m_canPressButton = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -25,7 +23,6 @@ public class ControlPanel_JoaoBeijinho : MonoBehaviour
         {
            
             m_canPressButton = true;
-            print("Can Press");
         }
     }
 
@@ -35,7 +32,6 @@ public class ControlPanel_JoaoBeijinho : MonoBehaviour
         {
          
             m_canPressButton = false;
-            print("Cannot Press");
         }
     }
 
@@ -53,7 +49,6 @@ public class ControlPanel_JoaoBeijinho : MonoBehaviour
             for (int i = 0; i < m_activateObjectScript.Length; i++)
             {
                 m_activateObjectScript[i].ActivateObject();
-                print("SMOKE");
             }
         }
     }

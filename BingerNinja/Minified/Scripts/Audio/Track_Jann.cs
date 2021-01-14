@@ -1,0 +1,1 @@
+[System.Serializable]public class Track_Jann{public string n;public int b;public int c;public int[] d;public int[][] f;public void GenerateFrequencies(){int channels = d.Length / c;f = new int[channels][];for (int i = 0; i < channels; i++){f[i] = new int[c];for (int j = 0; j < c; j++){f[i][j] = d[i * c + j];}}}}

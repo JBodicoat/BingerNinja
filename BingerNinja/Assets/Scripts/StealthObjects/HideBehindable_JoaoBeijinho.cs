@@ -81,7 +81,6 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
             m_playerControllerScript.m_movement.Enable();
             m_playerControllerScript.m_crouch.Enable();
             gameObject.layer = 2; 
-            Debug.Log(gameObject.layer);
         }
         else if (m_playerControllerScript.m_interact.triggered && m_canHide == true && !m_playerStealthScript.m_crouched)
         {
@@ -96,7 +95,6 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
             m_playerControllerScript.m_crouch.Disable();
             m_smokeParticleSystem.Play();
             gameObject.layer = 0; 
-            Debug.Log(gameObject.layer);
         }
     }
 }
