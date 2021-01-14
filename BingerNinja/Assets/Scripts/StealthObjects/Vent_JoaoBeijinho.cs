@@ -24,7 +24,7 @@ public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
 
      void OnTriggerEnter2D(Collider2D b)//Enter and Exit vent
     {
-        if (b.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        if (b.gameObject.CompareTag(Tags_JoaoBeijinho.QK))
         {
             if (!B.A)//If player isn't stealthed he's not inside the vent
             {
@@ -35,7 +35,7 @@ public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
 
      void OnTriggerExit2D(Collider2D c)
     {
-        if (c.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        if (c.gameObject.CompareTag(Tags_JoaoBeijinho.QK))
         {
             if (B.A)//If player isn't stealthed he's not inside the vent
             {

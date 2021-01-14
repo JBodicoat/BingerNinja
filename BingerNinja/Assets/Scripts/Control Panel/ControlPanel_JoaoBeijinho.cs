@@ -19,7 +19,7 @@ public class ControlPanel_JoaoBeijinho : MonoBehaviour
 
      void OnTriggerEnter2D(Collider2D a)
     {
-        if (a.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        if (a.gameObject.CompareTag(Tags_JoaoBeijinho.QK))
         {
            
             m_canPressButton = true;
@@ -28,7 +28,7 @@ public class ControlPanel_JoaoBeijinho : MonoBehaviour
 
      void OnTriggerExit2D(Collider2D b)
     {
-        if (b.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        if (b.gameObject.CompareTag(Tags_JoaoBeijinho.QK))
         {
          
             m_canPressButton = false;

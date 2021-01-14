@@ -178,7 +178,7 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
                         RO(I);
                     }
 
-                    if (a.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+                    if (a.gameObject.CompareTag(Tags_JoaoBeijinho.QK))
                     {
                         if (base.CA == WU.WF || QF == 1)
                             FindObjectOfType<EffectManager_MarioFernandes>().h

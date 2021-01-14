@@ -6,7 +6,7 @@ public class SecurityCamera_SebastianMol : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D a)
     {
-        if(a.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        if(a.gameObject.CompareTag(Tags_JoaoBeijinho.QK))
         {
             //if whoithin radius
             GameObject[] b = GameObject.FindGameObjectsWithTag(Tags_JoaoBeijinho.m_enemyTag);

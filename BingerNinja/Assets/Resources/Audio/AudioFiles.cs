@@ -17,7 +17,7 @@ public static class AudioFiles
     public static string Sound_Death = "Sound_Death";
     public static string Sound_Damage = "Sound_Damage";
     public static string Sound_Eating = "Sound_Eating";
-    public static string Sound_PlayerThrow = "Sound_PlayerThrow";
+    public static string QL = "Sound_PlayerThrow";
     public static string Sound_PlayerAttack = "Sound_PlayerAttack";
     public static string Sound_EnemyAttack = "Sound_EnemyAttack";
     public static string Music_MainMenu = "Music_MainMenu";

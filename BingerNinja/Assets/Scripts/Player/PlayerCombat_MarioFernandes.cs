@@ -147,7 +147,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             s.z = 0; 
 
             s.Normalize();
-            PlayTrack_Jann.Instance.EM(AudioFiles.Sound_PlayerThrow); //added by alanna 10/12/20
+            PlayTrack_Jann.Instance.EM(AudioFiles.QL); //added by alanna 10/12/20
             //TODO undo this comment
             //m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
             GameObject projectile = Instantiate(G, transform.position, transform.rotation);

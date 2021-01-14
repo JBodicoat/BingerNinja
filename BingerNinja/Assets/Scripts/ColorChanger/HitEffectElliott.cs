@@ -70,7 +70,7 @@ public class HitEffectElliott : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        if (gameObject.CompareTag(Tags_JoaoBeijinho.QK))
         {
             mSpriteRenderer = GetComponent<SpriteRenderer>();
         }

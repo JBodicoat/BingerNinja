@@ -317,7 +317,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         //RaycastHit2D crouchedHit = Physics2D.Linecast(m_rayCastStart.position, col.transform.position);
         //Debug.DrawLine(m_rayCastStart.position, col.transform.position, Color.green);
 
-        if (!QH.G() && EP.collider.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag)) //player is not crouched and it hits him
+        if (!QH.G() && EP.collider.gameObject.CompareTag(Tags_JoaoBeijinho.QK)) //player is not crouched and it hits him
         {
             //  m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.Detection);
             CW = true;

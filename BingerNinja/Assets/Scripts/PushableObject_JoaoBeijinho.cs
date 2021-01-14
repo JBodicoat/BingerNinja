@@ -49,7 +49,7 @@ public class PushableObject_JoaoBeijinho : MonoBehaviour
 
      void OnCollisionEnter2D(Collision2D h)
     {
-        if (h.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        if (h.gameObject.CompareTag(Tags_JoaoBeijinho.QK))
         {
             m_canGrab = true;
         }
@@ -57,7 +57,7 @@ public class PushableObject_JoaoBeijinho : MonoBehaviour
 
      void OnCollisionExit2D(Collision2D i)
     {
-        if (i.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
+        if (i.gameObject.CompareTag(Tags_JoaoBeijinho.QK))
         {
             m_canGrab = false;
         }
