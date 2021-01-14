@@ -14853,6 +14853,10 @@ PrefabInstance:
       propertyPath: m_dosePatrole
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: 962eeb725a3721f4da7687ec8e2bfe2e, type: 3}
+      propertyPath: G
+      value: 
+      objectReference: {fileID: 675830818}
     - target: {fileID: 8631870844753434322, guid: 962eeb725a3721f4da7687ec8e2bfe2e, type: 3}
       propertyPath: m_Name
       value: SecurityGuardEnemy (3)
@@ -14922,6 +14926,14 @@ PrefabInstance:
       propertyPath: m_dosePatrole
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: 962eeb725a3721f4da7687ec8e2bfe2e, type: 3}
+      propertyPath: R
+      value: 
+      objectReference: {fileID: 6264025296151744314, guid: a776e246d259fa04188f7ffb2c9d5113, type: 3}
+    - target: {fileID: 8631870844753434320, guid: 962eeb725a3721f4da7687ec8e2bfe2e, type: 3}
+      propertyPath: G
+      value: 
+      objectReference: {fileID: 675830818}
     - target: {fileID: 8631870844753434322, guid: 962eeb725a3721f4da7687ec8e2bfe2e, type: 3}
       propertyPath: m_Name
       value: SecurityGuardEnemy (1)
@@ -17330,7 +17342,6 @@ MonoBehaviour:
   m_wallTiles:
   - {fileID: 11400000, guid: 4d4fab222caf5fd4b90f3f0f49a7fdbb, type: 2}
   m_tileMap: {fileID: 675830818}
-  m_testButton: 0
   m_startPos: {x: 0, y: 0}
   m_targetPos: {x: 0, y: 0}
   m_pathTile: {fileID: 0}

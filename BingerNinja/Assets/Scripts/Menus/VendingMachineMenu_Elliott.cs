@@ -72,12 +72,12 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
         if (SelectPizza.activeInHierarchy && Inventory.HasItem(ItemType.NinjaPoints, 15))
         {
             Inventory.RemoveItem(ItemType.NinjaPoints, 15);
-            Inventory.GiveItem(ItemType.Tempura, 1); 
+            Inventory.RG(ItemType.Tempura, 1); 
         }
         else if (SelectCookie.activeInHierarchy && !a && Inventory.HasItem(ItemType.NinjaPoints, 50)) 
         {
             Inventory.RemoveItem(ItemType.NinjaPoints, 50);
-            Inventory.GiveItem(ItemType.Dango, 1);
+            Inventory.RG(ItemType.Dango, 1);
             CookieColor.color = Color.red;
             a = true;
  
@@ -85,12 +85,12 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
         else if (SelectSake.activeInHierarchy && Inventory.HasItem(ItemType.NinjaPoints,25))
         {
             Inventory.RemoveItem(ItemType.NinjaPoints, 25);
-            Inventory.GiveItem(ItemType.Sake, 1);
+            Inventory.RG(ItemType.Sake, 1);
         }
         else if (SelectNoodle.activeInHierarchy && !b && Inventory.HasItem(ItemType.NinjaPoints, 50)) /*&& ninja point >= 50*/
         {
             Inventory.RemoveItem(ItemType.NinjaPoints, 50);
-            Inventory.GiveItem(ItemType.Noodles, 1);
+            Inventory.RG(ItemType.Noodles, 1);
             NoodleColor.color = Color.red;
             b = true;
 
@@ -123,7 +123,7 @@ public class VendingMachineMenu_Elliott : MonoBehaviour
     void Start()
     {
         Inventory = GameObject.FindObjectOfType<Inventory_JoaoBeijinho>();
-        Inventory.GiveItem(ItemType.NinjaPoints, 40);
+        Inventory.RG(ItemType.NinjaPoints, 40);
        
     }
 

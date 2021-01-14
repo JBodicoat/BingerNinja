@@ -27,7 +27,7 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
     /// <returns>weather the attack has been done</returns>
     public static bool MelleAttack(ref float a, bool q, int w,
         Action e, Action r, Action t,
-        m_enemyType y, float u, Enemy_Animation_LouieWilliamson i, bool p = false)
+        WU y, float u, Enemy_Animation_LouieWilliamson i, bool p = false)
 
     {
         if (a <= 0)
@@ -49,7 +49,7 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
                 e();
             }
 
-            if (y == m_enemyType.PETTIGER)
+            if (y == WU.WF)
             {
                 t();
             }

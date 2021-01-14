@@ -84,7 +84,7 @@ public class Minifier_Jann : M
         minifed = ApplyMethodShortener(minifed);
 
         string output = "";
-        
+
         foreach (string line in minifed)
         {
             if (Regex.Match(line, @"(?<=^.*)\b\w+$").Value.Equals("else"))
@@ -285,11 +285,11 @@ public class Minifier_Jann : M
                 if (!error.IsWarning)
                     print(error.ToString());
             }
-    
+
             return false;
         }
     }
-    
+
     private CompilerResults Compile(string[] filenames)
     {
         CompilerResults compilerResults = null;
@@ -297,15 +297,15 @@ public class Minifier_Jann : M
         {
             CompilerParameters compilerParameters = new CompilerParameters();
             compilerParameters.GenerateExecutable = false;
-    
+
             var assemblies = from asm in AppDomain.CurrentDomain.GetAssemblies()
-                where !asm.IsDynamic
-                select asm.Location;
+                             where !asm.IsDynamic
+                             select asm.Location;
             compilerParameters.ReferencedAssemblies.AddRange(assemblies.ToArray());
-    
+
             compilerResults = provider.CompileAssemblyFromFile(compilerParameters, filenames);
         }
-    
+
         return compilerResults;
     }
 

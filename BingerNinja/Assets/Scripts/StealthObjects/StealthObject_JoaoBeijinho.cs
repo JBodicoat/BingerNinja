@@ -12,25 +12,25 @@ using UnityEngine;
 /// </summary>
 public abstract class StealthObject_JoaoBeijinho : MonoBehaviour
 {
-    protected PlayerController_JamieG m_playerControllerScript;
-    protected PlayerStealth_JoaoBeijinho m_playerStealthScript;
+    protected PlayerController_JamieG A;
+    protected PlayerStealth_JoaoBeijinho B;
 
     public void Awake()
     {
-        m_playerControllerScript = FindObjectOfType<PlayerController_JamieG>();
-        m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
+        A = FindObjectOfType<PlayerController_JamieG>();
+        B = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
     }
 
     /// <summary>
     /// Hide() Function toggles stealth on/off
     /// </summary>
-    public void Hide()
+    public void W()
     {
-        m_playerStealthScript.m_stealthed = !m_playerStealthScript.m_stealthed;
+        B.A = !B.A;
     }
 
-    public void ToggleVent()
+    public void Q()
     {
-        m_playerStealthScript.m_inVent = !m_playerStealthScript.m_inVent;
+        B.C = !B.C;
     }
 }

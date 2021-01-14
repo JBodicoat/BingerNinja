@@ -26,7 +26,7 @@ public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
     {
         if (b.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
         {
-            if (!m_playerStealthScript.m_stealthed)//If player isn't stealthed he's not inside the vent
+            if (!B.A)//If player isn't stealthed he's not inside the vent
             {
                 e();
             }
@@ -37,7 +37,7 @@ public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
     {
         if (c.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
         {
-            if (m_playerStealthScript.m_stealthed)//If player isn't stealthed he's not inside the vent
+            if (B.A)//If player isn't stealthed he's not inside the vent
             {
                 f();
             }
@@ -49,8 +49,8 @@ public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
     /// </summary>
      void e()
     {
-        Hide();
-        ToggleVent();
+        W();
+        Q();
         
         a.GetComponentInChildren<SpriteRenderer>().enabled = false;
         
@@ -62,8 +62,8 @@ public class Vent_JoaoBeijinho : StealthObject_JoaoBeijinho
     /// </summary>
      void f()
     {
-        Hide();
-        ToggleVent();
+        W();
+        Q();
         
         a.GetComponentInChildren<SpriteRenderer>().enabled = true;
         gameObject.SetActive(false);

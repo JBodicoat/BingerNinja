@@ -71,18 +71,18 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
     {
       //  m_isCrouching = m_playerStealthScript.m_crouched;
 
-        if (m_playerControllerScript.m_interact.triggered && g)
+        if (A.m_interact.triggered && g)
         {
             f = true;
             g = false;
             b.sortingOrder = 10;
             b.sortingLayerName = c;
-            Hide();
-            m_playerControllerScript.m_movement.Enable();
-            m_playerControllerScript.m_crouch.Enable();
+            W();
+            A.m_movement.Enable();
+            A.m_crouch.Enable();
             gameObject.layer = 2; 
         }
-        else if (m_playerControllerScript.m_interact.triggered && f&& !m_playerStealthScript.m_crouched)
+        else if (A.m_interact.triggered && f&& !B.B)
         {
             // hide behind this object
             f = false;
@@ -90,9 +90,9 @@ public class HideBehindable_JoaoBeijinho : StealthObject_JoaoBeijinho
             b.sortingOrder = 8;
             b.sortingLayerName = a.sortingLayerName;
             e.transform.position = new Vector3( gameObject.transform.position.x, gameObject.transform.position.y, e.transform.position.z);
-            Hide();
-            m_playerControllerScript.m_movement.Disable();
-            m_playerControllerScript.m_crouch.Disable();
+            W();
+            A.m_movement.Disable();
+            A.m_crouch.Disable();
             d.Play();
             gameObject.layer = 0; 
         }

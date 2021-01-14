@@ -73,7 +73,7 @@ public class PlayerController_JamieG : MonoBehaviour
 
         if (m_crouch.triggered)
         {
-            b.Crouch();
+            b.J();
         }
     }
     //These functions are required for the InputAction component to work

@@ -1,1 +1,1 @@
-using UnityEngine;public class EnemyManager_SebastianMol : M{private GameObject[] a;public bool IsPlayerSeen(){for (int i = 0; i < a.Length; i++){a = GameObject.FindGameObjectsWithTag("Enemy");if(a[i].GetComponent<BaseEnemy_SebastianMol>().m_playerDetected){return true;}}return false;}}
+using UnityEngine;public class EnemyManager_SebastianMol : M{private GameObject[] a;public bool IsPlayerSeen(){for (int i = 0; i < a.Length; i++){a = GameObject.FindGameObjectsWithTag("Enemy");if(a[i].GetComponent<BaseEnemy_SebastianMol>().F){return true;}}return false;}}

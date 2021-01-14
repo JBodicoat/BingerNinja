@@ -53,11 +53,11 @@ public class Projectile_MarioFernandes : MonoBehaviour
         if(/*!other.isTrigger &&*/ e.tag == Tags_JoaoBeijinho.m_enemyTag)
         {
            
-            e.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage( m_damageType.RANGE ,m_dmg);
+            e.GetComponentInParent<BaseEnemy_SebastianMol>().RW( WZ.WC ,m_dmg);
 
             if(m_distractTime >0)
             {
-                e.GetComponentInParent<BaseEnemy_SebastianMol>().StunEnemyWithDeleyFunc(m_distractTime);
+                e.GetComponentInParent<BaseEnemy_SebastianMol>().RO(m_distractTime);
                 //other.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage(m_damageType.RANGE ,m_dmg);
            
                 //StartCoroutine(other.GetComponentInParent<BaseEnemy_SebastianMol>().StunEnemyWithDeley(m_distractTime));

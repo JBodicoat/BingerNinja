@@ -53,7 +53,7 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
 
         if(m_currentHealth == 0)
         {
-            PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_Death);
+            PlayTrack_Jann.Instance.EM(AudioFiles.Sound_Death);
             q.SpriteFlash();
             //Invoke("Die", 2f);
             Die();
@@ -108,7 +108,7 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
             if(u.activeSelf)
             {
                 BaseEnemy_SebastianMol i = u.GetComponent<BaseEnemy_SebastianMol>();
-                i.m_health = i.m_maxHealth;
+                i.I = i.QR;
             }          
         }
     }
@@ -120,7 +120,7 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
         {
             if (p.activeSelf)
             {
-                p.GetComponent<BaseEnemy_SebastianMol>().ForceLooseIntrest();
+                p.GetComponent<BaseEnemy_SebastianMol>().RJ();
             }
         }
     }

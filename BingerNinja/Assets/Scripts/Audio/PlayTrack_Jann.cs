@@ -59,7 +59,7 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
     }
 
     #region Play audio
-    public void PlaySound(string an)
+    public void EM(string an)
     {
         Track_Jann t = LoadTrack(an);
         AudioClip c = CreateClip(t.n, (float)t.b / 60, t.f[0]);

@@ -51,33 +51,33 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
     /// <summary>
     /// ovveride class that holds logic for what the enemy shoudl do when in the attack state
     /// </summary>
-    internal override void AttackBehaviour()
+    internal override void ET()
     {                    
-        if(m_currentEnemyType == m_enemyType.ALIEN || m_currentEnemyType == m_enemyType.NORMAL)
+        if(W == WU.WG || W == WU.WI)
         {
             if (m_randAttackChance == m_RangedAttackRandomChance - 1)
             {
-                if (EnemyAttacks_SebastianMol.RangedAttack(GetComponent<Enemy_Animation_LouieWilliamson>(), m_playerTransform, transform, m_aimer,
-                    ref m_attackTimer, m_projectile, m_shootDeley))
+                if (EnemyAttacks_SebastianMol.RangedAttack(GetComponent<Enemy_Animation_LouieWilliamson>(), QY, transform, m_aimer,
+                    ref QO, m_projectile, m_shootDeley))
                 {
                     m_generateRandomNumberOnce = false;
                 }
             }
             else
             {
-                if (EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility,
+                if (EnemyAttacks_SebastianMol.MelleAttack(ref QO, m_hasChargeAttack, m_chargAttackPosibility,
                     QuickAttack, ChargeAttack, StunAfterAttack,
-                    m_currentEnemyType, m_hitSpeed, GetComponent<Enemy_Animation_LouieWilliamson>()))
+                    W, m_hitSpeed, GetComponent<Enemy_Animation_LouieWilliamson>()))
                 {
                     m_generateRandomNumberOnce = false;
                 }
             }
         }
 
-        if (m_currentEnemyType == m_enemyType.TADASHI)
+        if (W == WU.WK)
         {
             //health above 60
-            if(m_tadashiPhase == 1)
+            if(QF == 1)
             {
                 if (q == 0)
                 {
@@ -89,7 +89,7 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
                     //TODO cool down
                 }
             }
-            else if(m_tadashiPhase == 2)//health above 30 change this later
+            else if(QF == 2)//health above 30 change this later
             {
                 GameObject[] allLights = GameObject.FindGameObjectsWithTag(Tags_JoaoBeijinho.m_lightTag);
                 foreach (var light in allLights)
@@ -107,7 +107,7 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
                     TadashiTripleShot();
                 }
             }
-            else if (m_tadashiPhase == 3)//health below 30
+            else if (QF == 3)//health below 30
             {
                 //destroy all plants on this lvl
                 GameObject[] allPlants = GameObject.FindGameObjectsWithTag(Tags_JoaoBeijinho.m_plant);
@@ -143,18 +143,18 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
         {
             m_ProjectileDisplay.sprite = null;
             r = m_tadashiNormalPorjectile;
-            if (EnemyAttacks_SebastianMol.RangedAttack(GetComponent<Enemy_Animation_LouieWilliamson>(), m_playerTransform, transform, m_aimer,
-                ref m_attackTimer, r, 0.3f))
+            if (EnemyAttacks_SebastianMol.RangedAttack(GetComponent<Enemy_Animation_LouieWilliamson>(), QY, transform, m_aimer,
+                ref QO, r, 0.3f))
             {
                 t++;
-                m_attackTimer = 0.1f;
+                QO = 0.1f;
             }
 
         }
         else
         {
             t = 0;
-            m_attackTimer = m_shootDeley;
+            QO = m_shootDeley;
             e = false;
             r = null;
         }
@@ -164,9 +164,9 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
     /// </summary>
     void TadashiQuickAttack()
     {
-        if (EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility,
+        if (EnemyAttacks_SebastianMol.MelleAttack(ref QO, m_hasChargeAttack, m_chargAttackPosibility,
                    QuickAttack, ChargeAttack, StunAfterAttack,
-                   m_currentEnemyType, m_hitSpeed, GetComponent<Enemy_Animation_LouieWilliamson>()))
+                   W, m_hitSpeed, GetComponent<Enemy_Animation_LouieWilliamson>()))
         {
             e = false;
         }
@@ -176,7 +176,7 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
     /// </summary>       
     void TadashiChargeAttack()
     {
-        if (EnemyAttacks_SebastianMol.ChargeAttack(m_playerTransform, ref m_attackTimer,
+        if (EnemyAttacks_SebastianMol.ChargeAttack(QY, ref QO,
                    m_attackCollider, m_hitSpeed, gameObject, m_chargeAttackSpeed))
             e = false; //make this ibnto a public variable
     }
@@ -187,8 +187,8 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
     {
         if (r)
         {
-            if (EnemyAttacks_SebastianMol.RangedAttack(GetComponent<Enemy_Animation_LouieWilliamson>(), m_playerTransform, transform, m_aimer,
-                             ref m_attackTimer, r, m_shootDeley))
+            if (EnemyAttacks_SebastianMol.RangedAttack(GetComponent<Enemy_Animation_LouieWilliamson>(), QY, transform, m_aimer,
+                             ref QO, r, m_shootDeley))
             {
                 e = false;
                 r = null;
@@ -202,12 +202,12 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
     /// </summary>
     void TadashiQuickAttackSetUp()
     {    
-        m_attackRange = m_meleeAttackRangeTadashi;
+        V = m_meleeAttackRangeTadashi;
         m_attackCollider = m_normalAttackColider;
         if(m_chargeAttackColider) m_chargeAttackColider.SetActive(false);
         m_ProjectileDisplay.sprite = null;
         e = true;
-        m_attackTimer = m_hitSpeed;
+        QO = m_hitSpeed;
         i = m_meleeAttackRangeTadashi;
     }
     /// <summary>
@@ -215,12 +215,12 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
     /// </summary>
     void TadashiChargeAttackSetUp()
     {
-        m_attackRange = m_chargeAttackRangeTadashi;
+        V = m_chargeAttackRangeTadashi;
         m_attackCollider = m_chargeAttackColider;
         if (m_normalAttackColider) m_normalAttackColider.SetActive(false);
         m_ProjectileDisplay.sprite = null;
         e = true;
-        m_attackTimer = m_chargeAttackDeley;
+        QO = m_chargeAttackDeley;
         i = m_chargeAttackRangeTadashi;
     }
     /// <summary>
@@ -228,11 +228,11 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
     /// </summary>
     void TadashiCrazyRangeAttackSetUp()
     {
-        m_attackRange = m_rangedAttackRange;
+        V = m_rangedAttackRange;
         m_attackCollider = m_normalAttackColider;
         w = Random.Range(0.0f, 1.0f);
         e = true;
-        m_attackTimer = m_shootDeley;
+        QO = m_shootDeley;
         i = m_rangedAttackRange;
 
         if (!r)
@@ -271,8 +271,8 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
     /// handles the set up for each fase of tadashi boss fight
     /// </summary>
    void UpdateTadashi()
-    {    if(m_currentEnemyType == m_enemyType.TADASHI)
-        switch (m_tadashiPhase)
+    {    if(W == WU.WK)
+        switch (QF)
         {
             case 1:
                 if (!e)
@@ -338,7 +338,7 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
     /// <param name="a"></param>
      void WalkAwayFromWallBasedOnRange(float a)
     {
-        if (!m_isStuned)
+        if (!QD)
             if (m_doMoveAwayFromWallOnce)
                 StartCoroutine(MoveAwayFromeWall(m_amountOfTimeToMoveAwayFromWall, a));
     }
@@ -349,7 +349,7 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
     /// </summary>
     void UpdateAttackAlien()
     {
-        if(m_currentEnemyType == m_enemyType.ALIEN || m_currentEnemyType == m_enemyType.NORMAL)
+        if(W == WU.WG || W == WU.WI)
         {
             if (!m_generateRandomNumberOnce)
             {
@@ -359,16 +359,16 @@ class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
 
             if (m_randAttackChance == m_RangedAttackRandomChance - 1)
             {
-                m_attackRange = m_rangedAttackRange;
+                V = m_rangedAttackRange;
                 
             }
             else
             {
-                m_attackRange = m_meleeAttackRange;
+                V = m_meleeAttackRange;
                
             }
 
-            if (!m_isStuned)
+            if (!QD)
                 if (m_doMoveAwayFromWallOnce)
                 {
                     StartCoroutine(MoveAwayFromeWall(m_amountOfTimeToMoveAwayFromWall));

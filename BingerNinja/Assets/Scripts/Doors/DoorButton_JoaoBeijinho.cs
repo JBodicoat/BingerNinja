@@ -59,7 +59,7 @@ public class DoorButton_JoaoBeijinho : MonoBehaviour
     {
         if (m_playerControllerScript.m_interact.triggered && m_canPressButton && buttonName == "")//Player interaction with button
         {
-            PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_PlayerThrow);
+            PlayTrack_Jann.Instance.EM(AudioFiles.Sound_PlayerThrow);
             if (!m_doorIsOpen)
             {
                 m_doorIsOpen = true;

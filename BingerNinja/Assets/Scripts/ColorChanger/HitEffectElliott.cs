@@ -38,7 +38,7 @@ public class HitEffectElliott : MonoBehaviour
         }
     }
 
-    public void StartHitEffect(bool b)
+    public void RT(bool b)
     {
         mHitEffectTimer = cHitEffectTime;
         SwapAllSpritesColorsTemporarily(a[b ? m_critical : m_nonCritical]);

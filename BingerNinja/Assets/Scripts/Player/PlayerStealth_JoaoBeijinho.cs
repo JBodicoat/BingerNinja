@@ -13,48 +13,48 @@ using UnityEngine;
 /// </summary>
 public class PlayerStealth_JoaoBeijinho : MonoBehaviour
 {
-    public bool m_stealthed = false;
-    public bool m_crouched = false;
-    public bool m_inVent = false;
+    public bool A = false;
+    public bool B = false;
+    public bool C = false;
 
      PlayerAnimation_LouieWilliamson b;
-    public float crouchSpeed;
+    public float D;
     /// <summary>
     /// Call IsStealthed() to check if the player is in stealth, it will return true if it is
     /// </summary>
-    public bool IsStealthed()
+    public bool F()
     {
-        return m_stealthed;
+        return A;
     }
 
     /// <summary>
     /// Call IsCrouched() to check if the player is crouched, it will return true if it is
     /// </summary>
-    public bool IsCrouched()
+    public bool G()
     {
-        return m_crouched;
+        return B;
     }
 
     /// <summary>
     /// Call IsInVent() to check if the player is inside a vent, it will return true if it is
     /// </summary>
-    public bool IsinVent()
+    public bool H()
     {
-        return m_inVent;
+        return C;
     }
 
     /// <summary>
     /// Crouch Function enables/disables player crouching when called    !!!NEED ENEMY CLASS TO TEST!!!
     /// </summary>
-    public void Crouch()
+    public void J()
     {
 
         PlayerController_JamieG c = GetComponent<PlayerController_JamieG>();
-        m_crouched = !m_crouched;
+        B = !B;
 
-        if (m_crouched)
+        if (B)
         {
-            gameObject.GetComponent<PlayerMovement_MarioFernandes>().m_speed = crouchSpeed;
+            gameObject.GetComponent<PlayerMovement_MarioFernandes>().m_speed = D;
             c.m_attackTap.Disable();
             c.m_attackSlowTap.Disable();
             c.m_roll.Disable();

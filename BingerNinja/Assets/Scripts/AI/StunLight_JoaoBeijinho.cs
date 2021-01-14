@@ -60,7 +60,7 @@ internal class StunLight_JoaoBeijinho : MonoBehaviour
 
      IEnumerator Stun()
     {
-        m_baseEnemyScript.StunEnemyWithLightsDeleyFunc(m_stunLightDuration);
+        m_baseEnemyScript.RA(m_stunLightDuration);
 
         yield return new WaitForSeconds(m_stunLightDuration);
 

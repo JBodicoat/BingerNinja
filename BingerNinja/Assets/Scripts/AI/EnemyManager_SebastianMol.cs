@@ -18,7 +18,7 @@ public class EnemyManager_SebastianMol : MonoBehaviour
         for (int i = 0; i < a.Length; i++)
         {
             a = GameObject.FindGameObjectsWithTag("Enemy");
-            if(a[i].GetComponent<BaseEnemy_SebastianMol>().m_playerDetected)
+            if(a[i].GetComponent<BaseEnemy_SebastianMol>().F)
             {
                 return true;
             }

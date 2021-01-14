@@ -49,7 +49,7 @@ public class BulletMovment_SebastianMol : MonoBehaviour
 
         if (a.tag == "Player")
         {
-            a.GetComponent<HitEffectElliott>().StartHitEffect(false);
+            a.GetComponent<HitEffectElliott>().RT(false);
             if (m_dosePoisonDamage)
             {
                 int rand = Random.Range(0, m_poisonDamageChance);

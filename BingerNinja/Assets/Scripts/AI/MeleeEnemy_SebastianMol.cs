@@ -85,24 +85,24 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
 
     protected void StunAfterAttack()
     {
-        StunEnemyWithDeleyFunc(m_afterAttackDeley);
+        RO(m_afterAttackDeley);
     }
 
     /// <summary>
     /// ovveride class that holds logic for what the enemy shoudl do when in the attack state
     /// </summary>
-    internal override void AttackBehaviour()
+    internal override void ET()
     {
-        if(m_currentEnemyType == m_enemyType.PETTIGER)
+        if(W == WU.WF)
         {
 
-            EnemyAttacks_SebastianMol.ChargeAttack(m_playerTransform, ref m_attackTimer,
+            EnemyAttacks_SebastianMol.ChargeAttack(QY, ref QO,
                 m_attackCollider, m_hitSpeed, gameObject, m_chargeAttackSpeed); //make this ibnto a public variable
         }
         else
         {
-            EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility, QuickAttack,
-                                               ChargeAttack, StunAfterAttack, m_currentEnemyType, m_hitSpeed, GetComponent<Enemy_Animation_LouieWilliamson>());
+            EnemyAttacks_SebastianMol.MelleAttack(ref QO, m_hasChargeAttack, m_chargAttackPosibility, QuickAttack,
+                                               ChargeAttack, StunAfterAttack, W, m_hitSpeed, GetComponent<Enemy_Animation_LouieWilliamson>());
         }
        
     }
@@ -115,15 +115,15 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     protected IEnumerator MoveAwayFromeWall(float amaountOfTime, float attackRange = 0) //this is a very not clean way to do things but it doseent look bad in teh game 
     {
         yield return new WaitForSeconds(amaountOfTime);
-        if (m_attackRange != m_maxAttackRange )
+        if (V != QS )
         {
             if( attackRange == 0)
             {
-                m_attackRange = m_maxAttackRange; //change teh attack range back to normal 
+                V = QS; //change teh attack range back to normal 
             }
             else
             {
-                m_attackRange = attackRange;
+                V = attackRange;
             }
             
         }
@@ -131,14 +131,14 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     }
     void LateUpdate()
     {
-        if(m_currentEnemyType == m_enemyType.SPACENINJABOSS)
+        if(W == WU.WJ)
         {
-            if ((m_health / m_maxHealth) > m_secondPhaseStartPercentage)
-                if (GameObject.FindObjectOfType<PlayerStealth_JoaoBeijinho>().IsStealthed()) //confusuion when player stelths
+            if ((I / QR) > M)
+                if (GameObject.FindObjectOfType<PlayerStealth_JoaoBeijinho>().F()) //confusuion when player stelths
                 {
                     if (!m_doStunOnce)
                     {
-                        StunEnemyWithDeleyFunc(m_amountOfStunWhenPlayerStealthed);
+                        RO(QQ);
                         m_doStunOnce = true;
                     }
                 }
@@ -148,7 +148,7 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
                 }
         }
 
-        if(!m_isStuned)
+        if(!QD)
         if(m_doMoveAwayFromWallOnce)
         {
             StartCoroutine(MoveAwayFromeWall(m_amountOfTimeToMoveAwayFromWall));
@@ -160,7 +160,7 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     {
         if(a.gameObject.tag != Tags_JoaoBeijinho.m_enemyTag && a.gameObject.tag != "Untagged")
         {
-            if (m_currentEnemyType == m_enemyType.PETTIGER || m_currentEnemyType == m_enemyType.TADASHI)
+            if (W == WU.WF || W == WU.WK)
             {
                 Rigidbody2D rijy = GetComponent<Rigidbody2D>();
                 if (rijy.bodyType == RigidbodyType2D.Dynamic)
@@ -173,14 +173,14 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
                     //if hit wall stunn
                     if (a.gameObject.name == "Walls1_map")
                     {
-                        m_attackRange = 0.01f;
+                        V = 0.01f;
                         m_doMoveAwayFromWallOnce = true;
-                        StunEnemyWithDeleyFunc(m_afterAttackDeley);
+                        RO(m_afterAttackDeley);
                     }
 
                     if (a.gameObject.CompareTag(Tags_JoaoBeijinho.m_playerTag))
                     {
-                        if (m_currentEnemyType == m_enemyType.PETTIGER || m_tadashiPhase == 1)
+                        if (W == WU.WF || QF == 1)
                             FindObjectOfType<EffectManager_MarioFernandes>().AddEffect
                                     (new SpeedEffect_MarioFernandes(1, 0)); //change thesey to not be magic numbers
                     }

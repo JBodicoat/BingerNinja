@@ -24,10 +24,10 @@ public class EnemyDamager_SebastianMol : MonoBehaviour
 			FindObjectOfType<PlayerHealthHunger_MarioFernandes>().Hit(m_damage);
 			MeleeEnemy_SebastianMol a = GetComponentInParent<MeleeEnemy_SebastianMol>();
            // m_HitEffectElliott.StartHitEffect(false);
-            b.GetComponent<HitEffectElliott>().StartHitEffect(false);
-            if (a.m_currentEnemyType == m_enemyType.SPACENINJABOSS)
+            b.GetComponent<HitEffectElliott>().RT(false);
+            if (a.W == WU.WJ)
             {
-				if(a.m_doseAffect)
+				if(a.QW)
                 {
 					float rand = Random.Range(0, 2);
 

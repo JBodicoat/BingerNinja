@@ -20,7 +20,7 @@ public class PickupItem_JoaoBeijinho : MonoBehaviour
     {
         if (c.tag == "Player")
         {
-            m_inventory.GiveItem(m_item, m_itemQuantity);
+            m_inventory.RG(m_item, m_itemQuantity);
             gameObject.SetActive(false);
 
             if (m_item == ItemType.Key || m_item == ItemType.LiftKey)

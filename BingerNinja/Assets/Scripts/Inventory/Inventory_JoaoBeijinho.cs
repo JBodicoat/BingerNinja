@@ -35,7 +35,7 @@ public class Inventory_JoaoBeijinho : MonoBehaviour
     /// <summary>
     /// Use this function to add a type of item and its quantity to the inventory
     /// </summary>
-    public void GiveItem(ItemType whatType, int howMany)
+    public void RG(ItemType whatType, int howMany)
     {
         if (m_inventoryItems.ContainsKey(whatType))
         {
@@ -85,12 +85,12 @@ public class Inventory_JoaoBeijinho : MonoBehaviour
          {
              foreach (ItemData itemData in inventoryData.m_items)
              {
-                 GiveItem(itemData.m_type, itemData.m_amount);
+                 RG(itemData.m_type, itemData.m_amount);
              }
          }
     }
     
-    public void CheckDeadEnemies()
+    public void EN()
     {
         int count = 0;
         for (int i = 0; i < m_EnemyList.Count; i++)
@@ -103,7 +103,7 @@ public class Inventory_JoaoBeijinho : MonoBehaviour
         }
         if(count == m_EnemyList.Count)
         {
-            GiveItem(ItemType.NinjaPoints, 5);
+            RG(ItemType.NinjaPoints, 5);
         }
     }
 }

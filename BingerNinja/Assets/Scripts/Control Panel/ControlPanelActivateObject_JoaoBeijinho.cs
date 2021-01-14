@@ -92,9 +92,9 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
             {
                 a = enemy.GetComponent<BaseEnemy_SebastianMol>();
 
-                a.StunEnemyWithDeleyFunc(m_damageInterval);
-                a.m_health -= m_damageAmount;//Deal damage
-                a.OnDeath();
+                a.RO(m_damageInterval);
+                a.I -= m_damageAmount;//Deal damage
+                a.EB();
             }
 
             yield return new WaitForSeconds(m_damageInterval);//Delay before doing damage again

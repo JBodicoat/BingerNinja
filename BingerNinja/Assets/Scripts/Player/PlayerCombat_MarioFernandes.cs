@@ -147,7 +147,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
             s.z = 0; 
 
             s.Normalize();
-            PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_PlayerThrow); //added by alanna 10/12/20
+            PlayTrack_Jann.Instance.EM(AudioFiles.Sound_PlayerThrow); //added by alanna 10/12/20
             //TODO undo this comment
             //m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
             GameObject projectile = Instantiate(m_projectile, transform.position, transform.rotation);
@@ -181,7 +181,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         {
             //TODO uncomment this
             // m_audioManager.PlaySFX(AudioManager_LouieWilliamson.SFX.PlayerAttack);
-            PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_PlayerAttack); //added by alanna 10/12/20
+            PlayTrack_Jann.Instance.EM(AudioFiles.Sound_PlayerAttack); //added by alanna 10/12/20
 
             float d = Mathf.Infinity;
                 GameObject f = null;
@@ -199,7 +199,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
 
                 if(f && d <= m_meleeAttackRadius)
                 {
-                    f.GetComponentInParent<BaseEnemy_SebastianMol>().TakeDamage( m_damageType.MELEE , (int)(m_currentWeapon[m_weaponsIndex].dmg * m_strenght * a));
+                    f.GetComponentInParent<BaseEnemy_SebastianMol>().RW( WZ.WX , (int)(m_currentWeapon[m_weaponsIndex].dmg * m_strenght * a));
                 }                
             }
 
@@ -213,7 +213,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
      
         if (m_currentWeapon[m_weaponsIndex] && (!m_currentWeapon[m_weaponsIndex].IsRanged() || m_currentWeapon[m_weaponsIndex].IsRanged() && m_currentWeapon[m_weaponsIndex].m_ammunition >= y))
         {            
-            PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_Eating); //aaded by alanna 10/12/20
+            PlayTrack_Jann.Instance.EM(AudioFiles.Sound_Eating); //aaded by alanna 10/12/20
 
             
 
@@ -317,7 +317,7 @@ public class PlayerCombat_MarioFernandes : MonoBehaviour
         {
 
 
-            if (!m_playerStealthScript.m_crouched && m_currentWeapon[m_weaponsIndex])
+            if (!m_playerStealthScript.B && m_currentWeapon[m_weaponsIndex])
             {         
                 if( r.m_attackTap.triggered)              
                 {    

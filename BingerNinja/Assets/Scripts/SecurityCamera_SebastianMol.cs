@@ -15,12 +15,12 @@ public class SecurityCamera_SebastianMol : MonoBehaviour
                 if (Vector2.Distance(enemy.transform.position, transform.position) < m_alertRadius)
                 {
                     BaseEnemy_SebastianMol c = enemy.GetComponent<BaseEnemy_SebastianMol>();
-                    if (c.m_currentState == state.WONDER)
+                    if (c.Q == WW.WE)
                     {
                         float x = Random.Range(-0.3f, 0.3f);
                         float y = Random.Range(-0.3f, 0.3f);
                         Vector3 e = new Vector3(transform.position.x + x, transform.position.y + y, transform.position.z);
-                        c.ForceCuriosity(e);
+                        c.RH(e);
                     }
                 }
             }

@@ -17,7 +17,7 @@ public class ChangeLevels_CW : MonoBehaviour
     {
         if(a.tag == "Player")
         {
-            m_Inventory.GiveItem(ItemType.NinjaPoints, 15);
+            m_Inventory.RG(ItemType.NinjaPoints, 15);
 
             int b = SceneManager.GetActiveScene().buildIndex;
             

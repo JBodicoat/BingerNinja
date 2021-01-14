@@ -118,13 +118,13 @@ public class DialogueManager_MarioFernandes : MonoBehaviour
 
     IEnumerator TypeSentence(string s)
     {
-        PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_DialogSFX);
+        PlayTrack_Jann.Instance.EM(AudioFiles.Sound_DialogSFX);
         y = true;
         m_dialogueText.text = "";
         foreach (char d in s.ToCharArray())
         {
             if(d == ' ')
-            PlayTrack_Jann.Instance.PlaySound(AudioFiles.Sound_DialogSFX);
+            PlayTrack_Jann.Instance.EM(AudioFiles.Sound_DialogSFX);
 
             m_dialogueText.text += d;
             yield return new WaitForSeconds(m_TextAnimationSpeed);

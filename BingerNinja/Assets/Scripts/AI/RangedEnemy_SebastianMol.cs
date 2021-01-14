@@ -20,8 +20,8 @@ class RangedEnemy_SebastianMol : BaseEnemy_SebastianMol
     /// <summary>
     /// ovveride class that holds logic for what the enemy shoudl do when in the attack state
     /// </summary>
-    internal override void AttackBehaviour()
+    internal override void ET()
     {
-        EnemyAttacks_SebastianMol.RangedAttack(GetComponent<Enemy_Animation_LouieWilliamson>(), m_playerTransform, transform, m_aimer, ref m_attackTimer, m_projectile, m_shootDeley);
+        EnemyAttacks_SebastianMol.RangedAttack(GetComponent<Enemy_Animation_LouieWilliamson>(), QY, transform, m_aimer, ref QO, m_projectile, m_shootDeley);
     }
 }

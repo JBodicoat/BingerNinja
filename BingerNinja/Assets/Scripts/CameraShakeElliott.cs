@@ -45,7 +45,7 @@ public class CameraShakeElliott : MonoBehaviour
     //    transform.parent = null;
     //}
 
-    public void StartShake()
+    public void RF()
     {
         StartCoroutine(Shake(m_duration, m_magnitude));
     }
