@@ -43375,6 +43375,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434320, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
+      propertyPath: CF.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
       propertyPath: showPath
       value: 0
       objectReference: {fileID: 0}
@@ -43400,6 +43404,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434320, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
       propertyPath: m_patrolPoints.Array.data[3]
+      value: 
+      objectReference: {fileID: 1329314316}
+    - target: {fileID: 8631870844753434320, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
+      propertyPath: CF.Array.data[0]
+      value: 
+      objectReference: {fileID: 1494101162}
+    - target: {fileID: 8631870844753434320, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
+      propertyPath: CF.Array.data[1]
+      value: 
+      objectReference: {fileID: 1047703980}
+    - target: {fileID: 8631870844753434320, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
+      propertyPath: CF.Array.data[2]
       value: 
       objectReference: {fileID: 1329314316}
     - target: {fileID: 8631870844753434322, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
@@ -43801,6 +43817,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434320, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
+      propertyPath: CF.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
       propertyPath: showPath
       value: 0
       objectReference: {fileID: 0}
@@ -43824,6 +43844,14 @@ PrefabInstance:
       propertyPath: m_dosePatrole
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
+      propertyPath: CF.Array.data[0]
+      value: 
+      objectReference: {fileID: 587179219}
+    - target: {fileID: 8631870844753434320, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
+      propertyPath: CF.Array.data[1]
+      value: 
+      objectReference: {fileID: 637062910}
     - target: {fileID: 8631870844753434322, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
       propertyPath: m_Name
       value: YakuzaThugEnemy (3)
@@ -44256,13 +44284,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccd87060643625a499c35731d7b90e1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_wallTiles:
-  - {fileID: 11400000, guid: 0aa535be177b93044bafd1486dbb6df5, type: 2}
-  m_tileMap: {fileID: 168276058}
-  m_testButton: 0
-  m_startPos: {x: 0, y: 0}
-  m_targetPos: {x: 0, y: 0}
-  m_pathTile: {fileID: 0}
+  QV: []
+  QB: {fileID: 0}
+  QM: {x: 0, y: 0}
+  WQ: {x: 0, y: 0}
+  WW: {fileID: 0}
 --- !u!4 &1017790082 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 547836159825887446, guid: f21454a5048d98940bd63158bf79d43a, type: 3}

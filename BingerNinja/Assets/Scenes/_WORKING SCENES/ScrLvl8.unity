@@ -1211,6 +1211,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5157954882409207611, guid: 4f9a331a3c85bdc44b5eff3b57e8b13d, type: 3}
+      propertyPath: CF.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157954882409207611, guid: 4f9a331a3c85bdc44b5eff3b57e8b13d, type: 3}
       propertyPath: m_patrolPoints.Array.data[0]
       value: 
       objectReference: {fileID: 52108393}
@@ -1226,6 +1230,14 @@ PrefabInstance:
       propertyPath: m_shootDeley
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5157954882409207611, guid: 4f9a331a3c85bdc44b5eff3b57e8b13d, type: 3}
+      propertyPath: CF.Array.data[0]
+      value: 
+      objectReference: {fileID: 52108393}
+    - target: {fileID: 5157954882409207611, guid: 4f9a331a3c85bdc44b5eff3b57e8b13d, type: 3}
+      propertyPath: CF.Array.data[1]
+      value: 
+      objectReference: {fileID: 1488563296}
     - target: {fileID: 5157954882409207612, guid: 4f9a331a3c85bdc44b5eff3b57e8b13d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.7644134
@@ -2755,6 +2767,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5157954882409207611, guid: 4f9a331a3c85bdc44b5eff3b57e8b13d, type: 3}
+      propertyPath: CF.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157954882409207611, guid: 4f9a331a3c85bdc44b5eff3b57e8b13d, type: 3}
       propertyPath: floortilemap
       value: 
       objectReference: {fileID: 1744601698}
@@ -2778,6 +2794,22 @@ PrefabInstance:
       propertyPath: m_shootDeley
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5157954882409207611, guid: 4f9a331a3c85bdc44b5eff3b57e8b13d, type: 3}
+      propertyPath: CF.Array.data[0]
+      value: 
+      objectReference: {fileID: 231931258}
+    - target: {fileID: 5157954882409207611, guid: 4f9a331a3c85bdc44b5eff3b57e8b13d, type: 3}
+      propertyPath: CF.Array.data[1]
+      value: 
+      objectReference: {fileID: 241885819}
+    - target: {fileID: 5157954882409207611, guid: 4f9a331a3c85bdc44b5eff3b57e8b13d, type: 3}
+      propertyPath: CF.Array.data[2]
+      value: 
+      objectReference: {fileID: 315074500}
+    - target: {fileID: 5157954882409207611, guid: 4f9a331a3c85bdc44b5eff3b57e8b13d, type: 3}
+      propertyPath: CF.Array.data[3]
+      value: 
+      objectReference: {fileID: 1992642932}
     - target: {fileID: 5157954882409207612, guid: 4f9a331a3c85bdc44b5eff3b57e8b13d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.1816106
@@ -2840,6 +2872,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5157954882409207611, guid: 4f9a331a3c85bdc44b5eff3b57e8b13d, type: 3}
+      propertyPath: CF.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157954882409207611, guid: 4f9a331a3c85bdc44b5eff3b57e8b13d, type: 3}
       propertyPath: m_patrolPoints.Array.data[0]
       value: 
       objectReference: {fileID: 626831951}
@@ -2855,6 +2891,14 @@ PrefabInstance:
       propertyPath: m_shootDeley
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5157954882409207611, guid: 4f9a331a3c85bdc44b5eff3b57e8b13d, type: 3}
+      propertyPath: CF.Array.data[0]
+      value: 
+      objectReference: {fileID: 626831951}
+    - target: {fileID: 5157954882409207611, guid: 4f9a331a3c85bdc44b5eff3b57e8b13d, type: 3}
+      propertyPath: CF.Array.data[1]
+      value: 
+      objectReference: {fileID: 1140857474}
     - target: {fileID: 5157954882409207612, guid: 4f9a331a3c85bdc44b5eff3b57e8b13d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.606134
@@ -32674,13 +32718,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccd87060643625a499c35731d7b90e1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_wallTiles:
-  - {fileID: 11400000, guid: a892fc2d8da7e9d47b077a4ccb4aaf28, type: 2}
-  m_tileMap: {fileID: 1744601698}
-  m_testButton: 0
-  m_startPos: {x: 0, y: 0}
-  m_targetPos: {x: 0, y: 0}
-  m_pathTile: {fileID: 0}
+  QV: []
+  QB: {fileID: 0}
+  QM: {x: 0, y: 0}
+  WQ: {x: 0, y: 0}
+  WW: {fileID: 0}
 --- !u!19719996 &1744601703
 TilemapCollider2D:
   m_ObjectHideFlags: 0

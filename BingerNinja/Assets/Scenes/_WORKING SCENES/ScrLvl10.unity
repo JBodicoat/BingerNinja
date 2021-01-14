@@ -1260,6 +1260,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434320, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
+      propertyPath: CF.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
       propertyPath: m_patrolPoints.Array.data[0]
       value: 
       objectReference: {fileID: 1310500317}
@@ -1283,6 +1287,14 @@ PrefabInstance:
       propertyPath: m_playerMoveAllowance
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
+      propertyPath: CF.Array.data[0]
+      value: 
+      objectReference: {fileID: 1310500317}
+    - target: {fileID: 8631870844753434320, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
+      propertyPath: CF.Array.data[1]
+      value: 
+      objectReference: {fileID: 889009976}
     - target: {fileID: 8631870844753434322, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
       propertyPath: m_Name
       value: YakuzaThugEnemy
@@ -1467,6 +1479,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434320, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
+      propertyPath: CF.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
       propertyPath: m_dosePatrole
       value: 1
       objectReference: {fileID: 0}
@@ -1482,6 +1498,14 @@ PrefabInstance:
       propertyPath: m_deleyBetweenPatrol
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
+      propertyPath: CF.Array.data[0]
+      value: 
+      objectReference: {fileID: 310876274}
+    - target: {fileID: 8631870844753434320, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
+      propertyPath: CF.Array.data[1]
+      value: 
+      objectReference: {fileID: 1730579485}
     - target: {fileID: 8631870844753434322, guid: 65f453bc3679f7e4482b614619433af1, type: 3}
       propertyPath: m_Name
       value: YakuzaThugEnemy
@@ -38749,13 +38773,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccd87060643625a499c35731d7b90e1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_wallTiles:
-  - {fileID: 11400000, guid: 0aa535be177b93044bafd1486dbb6df5, type: 2}
-  m_tileMap: {fileID: 935563630}
-  m_testButton: 0
-  m_startPos: {x: 0, y: 0}
-  m_targetPos: {x: 0, y: 0}
-  m_pathTile: {fileID: 0}
+  QV: []
+  QB: {fileID: 0}
+  QM: {x: 0, y: 0}
+  WQ: {x: 0, y: 0}
+  WW: {fileID: 0}
 --- !u!1001 &1670589769
 PrefabInstance:
   m_ObjectHideFlags: 0

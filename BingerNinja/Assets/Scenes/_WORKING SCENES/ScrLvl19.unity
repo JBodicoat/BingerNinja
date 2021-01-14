@@ -929,6 +929,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434320, guid: 962eeb725a3721f4da7687ec8e2bfe2e, type: 3}
+      propertyPath: CF.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: 962eeb725a3721f4da7687ec8e2bfe2e, type: 3}
       propertyPath: floortilemap
       value: 
       objectReference: {fileID: 732928340}
@@ -938,6 +942,14 @@ PrefabInstance:
       objectReference: {fileID: 1450439193}
     - target: {fileID: 8631870844753434320, guid: 962eeb725a3721f4da7687ec8e2bfe2e, type: 3}
       propertyPath: m_patrolPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 1995425559}
+    - target: {fileID: 8631870844753434320, guid: 962eeb725a3721f4da7687ec8e2bfe2e, type: 3}
+      propertyPath: CF.Array.data[0]
+      value: 
+      objectReference: {fileID: 1450439193}
+    - target: {fileID: 8631870844753434320, guid: 962eeb725a3721f4da7687ec8e2bfe2e, type: 3}
+      propertyPath: CF.Array.data[1]
       value: 
       objectReference: {fileID: 1995425559}
     - target: {fileID: 8631870844753434322, guid: 962eeb725a3721f4da7687ec8e2bfe2e, type: 3}
@@ -48030,6 +48042,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434320, guid: 3e0ee63d73999dd43a0e0964d6e22963, type: 3}
+      propertyPath: CF.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: 3e0ee63d73999dd43a0e0964d6e22963, type: 3}
       propertyPath: m_dosePatrole
       value: 1
       objectReference: {fileID: 0}
@@ -48045,6 +48061,14 @@ PrefabInstance:
       propertyPath: floortilemap
       value: 
       objectReference: {fileID: 732928340}
+    - target: {fileID: 8631870844753434320, guid: 3e0ee63d73999dd43a0e0964d6e22963, type: 3}
+      propertyPath: CF.Array.data[0]
+      value: 
+      objectReference: {fileID: 965031078}
+    - target: {fileID: 8631870844753434320, guid: 3e0ee63d73999dd43a0e0964d6e22963, type: 3}
+      propertyPath: CF.Array.data[1]
+      value: 
+      objectReference: {fileID: 2105995635}
     - target: {fileID: 8631870844753434322, guid: 3e0ee63d73999dd43a0e0964d6e22963, type: 3}
       propertyPath: m_Name
       value: PetTigerEnemy
@@ -48699,6 +48723,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434320, guid: 32c4d609b3d0e9c429c137021e2b93b8, type: 3}
+      propertyPath: CF.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: 32c4d609b3d0e9c429c137021e2b93b8, type: 3}
       propertyPath: floortilemap
       value: 
       objectReference: {fileID: 732928340}
@@ -48714,6 +48742,14 @@ PrefabInstance:
       propertyPath: m_dosePatrole
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: 32c4d609b3d0e9c429c137021e2b93b8, type: 3}
+      propertyPath: CF.Array.data[0]
+      value: 
+      objectReference: {fileID: 2090902830}
+    - target: {fileID: 8631870844753434320, guid: 32c4d609b3d0e9c429c137021e2b93b8, type: 3}
+      propertyPath: CF.Array.data[1]
+      value: 
+      objectReference: {fileID: 231559001}
     - target: {fileID: 8631870844753434322, guid: 32c4d609b3d0e9c429c137021e2b93b8, type: 3}
       propertyPath: m_Name
       value: BussinessmanEnemy
@@ -48732,6 +48768,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5157954882409207611, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+      propertyPath: CF.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157954882409207611, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
       propertyPath: m_dosePatrole
       value: 1
       objectReference: {fileID: 0}
@@ -48745,6 +48785,14 @@ PrefabInstance:
       objectReference: {fileID: 1865573810}
     - target: {fileID: 5157954882409207611, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
       propertyPath: m_patrolPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 1676043786}
+    - target: {fileID: 5157954882409207611, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+      propertyPath: CF.Array.data[0]
+      value: 
+      objectReference: {fileID: 1865573810}
+    - target: {fileID: 5157954882409207611, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
+      propertyPath: CF.Array.data[1]
       value: 
       objectReference: {fileID: 1676043786}
     - target: {fileID: 5157954882409207612, guid: 476d86b0fdd298541ae9496a5811311a, type: 3}
@@ -49027,12 +49075,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccd87060643625a499c35731d7b90e1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_wallTiles: []
-  m_tileMap: {fileID: 0}
-  m_testButton: 0
-  m_startPos: {x: 0, y: 0}
-  m_targetPos: {x: 0, y: 0}
-  m_pathTile: {fileID: 0}
+  QV: []
+  QB: {fileID: 0}
+  QM: {x: 0, y: 0}
+  WQ: {x: 0, y: 0}
+  WW: {fileID: 0}
 --- !u!1 &1323033337 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6674240104884466792, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
@@ -50357,6 +50404,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5157954882409207611, guid: 4f9a331a3c85bdc44b5eff3b57e8b13d, type: 3}
+      propertyPath: CF.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157954882409207611, guid: 4f9a331a3c85bdc44b5eff3b57e8b13d, type: 3}
       propertyPath: m_dosePatrole
       value: 1
       objectReference: {fileID: 0}
@@ -50372,6 +50423,14 @@ PrefabInstance:
       propertyPath: floortilemap
       value: 
       objectReference: {fileID: 732928340}
+    - target: {fileID: 5157954882409207611, guid: 4f9a331a3c85bdc44b5eff3b57e8b13d, type: 3}
+      propertyPath: CF.Array.data[0]
+      value: 
+      objectReference: {fileID: 834015311}
+    - target: {fileID: 5157954882409207611, guid: 4f9a331a3c85bdc44b5eff3b57e8b13d, type: 3}
+      propertyPath: CF.Array.data[1]
+      value: 
+      objectReference: {fileID: 453344206}
     - target: {fileID: 5157954882409207612, guid: 4f9a331a3c85bdc44b5eff3b57e8b13d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 23.793493
@@ -51140,6 +51199,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
+      propertyPath: CF.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
       propertyPath: floortilemap
       value: 
       objectReference: {fileID: 732928340}
@@ -51155,6 +51218,18 @@ PrefabInstance:
       propertyPath: m_patrolPoints.Array.data[1]
       value: 
       objectReference: {fileID: 1172983258}
+    - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
+      propertyPath: CF.Array.data[0]
+      value: 
+      objectReference: {fileID: 1172983258}
+    - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
+      propertyPath: CF.Array.data[1]
+      value: 
+      objectReference: {fileID: 650886834}
+    - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
+      propertyPath: CF.Array.data[2]
+      value: 
+      objectReference: {fileID: 650886834}
     - target: {fileID: 8631870844753434322, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
       propertyPath: m_Name
       value: JanitorEnemy
@@ -51173,6 +51248,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4230729524680630626, guid: d3c11a793edf8b6429ec8008aaf2aaad, type: 3}
+      propertyPath: CF.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4230729524680630626, guid: d3c11a793edf8b6429ec8008aaf2aaad, type: 3}
       propertyPath: floortilemap
       value: 
       objectReference: {fileID: 732928340}
@@ -51188,6 +51267,14 @@ PrefabInstance:
       propertyPath: m_dosePatrole
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4230729524680630626, guid: d3c11a793edf8b6429ec8008aaf2aaad, type: 3}
+      propertyPath: CF.Array.data[0]
+      value: 
+      objectReference: {fileID: 831506888}
+    - target: {fileID: 4230729524680630626, guid: d3c11a793edf8b6429ec8008aaf2aaad, type: 3}
+      propertyPath: CF.Array.data[1]
+      value: 
+      objectReference: {fileID: 106928538}
     - target: {fileID: 8631870844753434286, guid: d3c11a793edf8b6429ec8008aaf2aaad, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14.998736

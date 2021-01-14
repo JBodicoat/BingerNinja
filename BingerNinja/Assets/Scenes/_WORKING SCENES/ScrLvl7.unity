@@ -349,6 +349,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
+      propertyPath: CF.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
       propertyPath: floortilemap
       value: 
       objectReference: {fileID: 215852394}
@@ -364,6 +368,14 @@ PrefabInstance:
       propertyPath: m_dosePatrole
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
+      propertyPath: CF.Array.data[0]
+      value: 
+      objectReference: {fileID: 296268110}
+    - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
+      propertyPath: CF.Array.data[1]
+      value: 
+      objectReference: {fileID: 1798796431}
     - target: {fileID: 8631870844753434322, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
       propertyPath: m_Name
       value: EnemyOne
@@ -32765,13 +32777,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccd87060643625a499c35731d7b90e1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_wallTiles:
-  - {fileID: 11400000, guid: a892fc2d8da7e9d47b077a4ccb4aaf28, type: 2}
-  m_tileMap: {fileID: 215852394}
-  m_testButton: 0
-  m_startPos: {x: 0, y: 0}
-  m_targetPos: {x: 0, y: 0}
-  m_pathTile: {fileID: 0}
+  QV: []
+  QB: {fileID: 0}
+  QM: {x: 0, y: 0}
+  WQ: {x: 0, y: 0}
+  WW: {fileID: 0}
 --- !u!19719996 &215852399
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -33672,6 +33682,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
+      propertyPath: CF.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
       propertyPath: floortilemap
       value: 
       objectReference: {fileID: 215852394}
@@ -33687,6 +33701,14 @@ PrefabInstance:
       propertyPath: m_dosePatrole
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
+      propertyPath: CF.Array.data[0]
+      value: 
+      objectReference: {fileID: 440078440}
+    - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
+      propertyPath: CF.Array.data[1]
+      value: 
+      objectReference: {fileID: 1573699065}
     - target: {fileID: 8631870844753434322, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
       propertyPath: m_Name
       value: EnemyTwo
@@ -34135,6 +34157,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
+      propertyPath: CF.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
       propertyPath: floortilemap
       value: 
       objectReference: {fileID: 215852394}
@@ -34150,6 +34176,14 @@ PrefabInstance:
       propertyPath: m_dosePatrole
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
+      propertyPath: CF.Array.data[0]
+      value: 
+      objectReference: {fileID: 119539333}
+    - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
+      propertyPath: CF.Array.data[1]
+      value: 
+      objectReference: {fileID: 614675405}
     - target: {fileID: 8631870844753434322, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
       propertyPath: m_Name
       value: EnemyThree
@@ -35231,6 +35265,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
+      propertyPath: CF.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
       propertyPath: floortilemap
       value: 
       objectReference: {fileID: 215852394}
@@ -35254,6 +35292,14 @@ PrefabInstance:
       propertyPath: m_dropItem
       value: 
       objectReference: {fileID: 1726385028}
+    - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
+      propertyPath: CF.Array.data[0]
+      value: 
+      objectReference: {fileID: 1386543113}
+    - target: {fileID: 8631870844753434320, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
+      propertyPath: CF.Array.data[1]
+      value: 
+      objectReference: {fileID: 1785885866}
     - target: {fileID: 8631870844753434322, guid: 91044c7e0b2d2c04c8e05eb2b0028af7, type: 3}
       propertyPath: m_Name
       value: EnemyTwo (2)
