@@ -20,9 +20,8 @@ public class UIManager_LouieWilliamson : MonoBehaviour
         {
             SetMobileUI(true);
         }
-        //SetMobileUI(true);
     }
-    private void SetMobileUI(bool ShownIfTrue)
+    void SetMobileUI(bool ShownIfTrue)
     {
         mobileWpnUI.SetActive(ShownIfTrue);
         mobileBtnUI.SetActive(ShownIfTrue);

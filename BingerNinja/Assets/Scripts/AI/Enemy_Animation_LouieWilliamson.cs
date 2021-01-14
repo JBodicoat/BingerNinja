@@ -7,24 +7,24 @@ using UnityEngine;
 
 public class Enemy_Animation_LouieWilliamson : MonoBehaviour
 {
-    private Animator q;
-    private Vector2 w;
-    private float e;
-    private float r;
-    private bool t;
+     Animator q;
+     Vector2 w;
+     float e;
+     float r;
+     bool t;
 
     public void AttackAnimation()
     {
         q.SetTrigger("isAttacking");
     }
-    private void Start()
+     void Start()
     {
         q = GetComponentInChildren<Animator>();
         w = transform.position;
         t = true;
     }
 
-    private void Update()
+     void Update()
     {
         e = w.x - transform.position.x;
         r = w.y - transform.position.y;
@@ -72,7 +72,7 @@ public class Enemy_Animation_LouieWilliamson : MonoBehaviour
 
         w = transform.position;
     }
-    private void u()
+     void u()
     {
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
     }

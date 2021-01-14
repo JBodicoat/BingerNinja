@@ -9,80 +9,80 @@ using UnityEngine;
 public class PlayerAnimation_LouieWilliamson : MonoBehaviour
 {
     // Start is called before the first frame update
-    private bool isFacingLeft;
+     bool q;
     //hey 
-    private Animator m_playerAnim;
-    private Rigidbody2D m_rb;
+     Animator w;
+     Rigidbody2D e;
     public void TriggerAttackAnim()
     {
-        if (isFacingLeft)
+        if (q)
         {
             if (transform.localScale.x < 0)
             {
                 FlipSprite();
             }
         }
-        m_playerAnim.SetTrigger("isAttacking");
+        w.SetTrigger("isAttacking");
     }
     public void RollAnimation(bool isRolling)
     {
-        m_playerAnim.SetBool("isRolling", isRolling);
+        w.SetBool("isRolling", isRolling);
     }
     public void Crouching(bool isCrouching)
     {
-        m_playerAnim.SetBool("isCrouching", isCrouching);
+        w.SetBool("isCrouching", isCrouching);
     }
     void Start()
     {
-        isFacingLeft = true;
+        q = true;
 
-        m_playerAnim = GetComponent<Animator>(); 
-        m_rb = GetComponent<Rigidbody2D>();
+        w = GetComponent<Animator>(); 
+        e = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
         //Is he moving?
-        if (m_rb.velocity.x != 0 || m_rb.velocity.y != 0)
+        if (e.velocity.x != 0 || e.velocity.y != 0)
         {
-            m_playerAnim.SetTrigger("isMoving");
+            w.SetTrigger("isMoving");
         }
         else
         {
-            m_playerAnim.SetTrigger("isIdle");
+            w.SetTrigger("isIdle");
         }
 
         //Is he moving to the left
-        if (m_rb.velocity.x < 0)
+        if (e.velocity.x < 0)
         {
             //is he already facing left?
-            if (!isFacingLeft)
+            if (!q)
             {
                 FlipSprite();
-                isFacingLeft = true;
+                q = true;
             }
         }
-        else if (m_rb.velocity.x > 0)
+        else if (e.velocity.x > 0)
         {
-            if (isFacingLeft)
+            if (q)
             {
                 FlipSprite();
-                isFacingLeft = false;
+                q = false;
             }
         }
 
         //Is he moving upwards
-        if (m_rb.velocity.y < 0)
+        if (e.velocity.y < 0)
         {
-            m_playerAnim.SetBool("isFacing" , true);
+            w.SetBool("isFacing" , true);
         }
-        else if (m_rb.velocity.y > 0)
+        else if (e.velocity.y > 0)
         {
-            m_playerAnim.SetBool("isFacing", false);
+            w.SetBool("isFacing", false);
         }
     }
-    private void FlipSprite()
+     void FlipSprite()
     {
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
     }

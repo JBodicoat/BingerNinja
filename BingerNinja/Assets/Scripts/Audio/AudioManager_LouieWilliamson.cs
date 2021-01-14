@@ -11,30 +11,30 @@ public class AudioManager_LouieWilliamson : MonoBehaviour
     //Sound Effect Enum and Dictionary setup
     public enum SFX { PlayerDamage, PlayerDeath, PlayerAttack, PlayerThrowAttack, Detection, Eating, EnemyAttack, EnemyThrowAttack };
     public List<AudioClip> SFXList = new List<AudioClip>();
-    private Dictionary<SFX, AudioClip> SFXDictionary = new Dictionary<SFX, AudioClip>();
+     Dictionary<SFX, AudioClip> q = new Dictionary<SFX, AudioClip>();
     public GameObject SFXPrefab;
-   // private PlayTrack_Jann music;
+   //  PlayTrack_Jann music;
 
     //Music enum and Dictionary setup
     public enum Music { MainMenu, Level1 };
     public AudioSource MusicPrefab;
     public List<AudioClip> MusicList = new List<AudioClip>();
-    private Dictionary<Music, AudioClip> MusicDictionary = new Dictionary<Music, AudioClip>();
+     Dictionary<Music, AudioClip> w = new Dictionary<Music, AudioClip>();
     
     //This function plays a sfx given an enum value from the SFX enum
     public void PlaySFX(SFX s)
     {
         //spawn sfx prefab and get audio source component
-        AudioSource SoundEffect = Instantiate(SFXPrefab).GetComponent<AudioSource>();
+        AudioSource f = Instantiate(SFXPrefab).GetComponent<AudioSource>();
         //play sfx
-        SoundEffect.PlayOneShot(SFXDictionary[s]);
+        f.PlayOneShot(q[s]);
         //destroy prefab instance when sound has played
-        Destroy(SoundEffect.gameObject, SFXDictionary[s].length);
+        Destroy(f.gameObject, q[s].length);
     }
     //This function sets the music to the track given through a Music enum value
     public void SetMusicSource(Music m)
     {
-        MusicPrefab.clip = MusicDictionary[m];
+        MusicPrefab.clip = w[m];
         MusicPrefab.Play();
     }
 
@@ -54,19 +54,19 @@ public class AudioManager_LouieWilliamson : MonoBehaviour
     void Start()
     {
         //Populate Dictionaries
-        SFXDictionary.Add(SFX.PlayerDamage, SFXList[0]);
-        SFXDictionary.Add(SFX.PlayerDeath, SFXList[1]);
-        SFXDictionary.Add(SFX.PlayerAttack, SFXList[2]);
-        SFXDictionary.Add(SFX.PlayerThrowAttack, SFXList[3]);
-        SFXDictionary.Add(SFX.Detection, SFXList[4]);
-        SFXDictionary.Add(SFX.Eating, SFXList[5]);
-        SFXDictionary.Add(SFX.EnemyAttack, SFXList[6]);
-        SFXDictionary.Add(SFX.EnemyThrowAttack, SFXList[7]);
+        q.Add(SFX.PlayerDamage, SFXList[0]);
+        q.Add(SFX.PlayerDeath, SFXList[1]);
+        q.Add(SFX.PlayerAttack, SFXList[2]);
+        q.Add(SFX.PlayerThrowAttack, SFXList[3]);
+        q.Add(SFX.Detection, SFXList[4]);
+        q.Add(SFX.Eating, SFXList[5]);
+        q.Add(SFX.EnemyAttack, SFXList[6]);
+        q.Add(SFX.EnemyThrowAttack, SFXList[7]);
 
-        MusicDictionary.Add(Music.MainMenu, MusicList[0]);
-        MusicDictionary.Add(Music.Level1, MusicList[1]);
+        w.Add(Music.MainMenu, MusicList[0]);
+        w.Add(Music.Level1, MusicList[1]);
 
-        GetBuildIndex();
+        e();
     }
 
 
@@ -74,11 +74,11 @@ public class AudioManager_LouieWilliamson : MonoBehaviour
     {
 
     }
-    private void GetBuildIndex()
+     void e()
     {
-        int currentScene = SceneManager.GetActiveScene().buildIndex;
+        int r = SceneManager.GetActiveScene().buildIndex;
 
-        switch (currentScene)
+        switch (r)
         {
             case 0:
                 PlayTrack_Jann.Instance.PlayMusic(AudioFiles.Music_MainMenu);

@@ -9,71 +9,71 @@ namespace UnityEngine.InputSystem.OnScreen
     /// </summary>
     public class Joystick_LouieWilliamson : OnScreenControl, IPointerDownHandler, IPointerUpHandler, IDragHandler
     {
-        public void OnPointerDown(PointerEventData eventData)
+        public void OnPointerDown(PointerEventData q)
         {
-            if (eventData == null)
-                throw new System.ArgumentNullException(nameof(eventData));
+            if (q == null)
+                throw new System.ArgumentNullException(nameof(q));
 
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent.GetComponentInParent<RectTransform>(), eventData.position, eventData.pressEventCamera, out m_PointerDownPos);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent.GetComponentInParent<RectTransform>(), q.position, q.pressEventCamera, out l);
         }
 
-        public void OnDrag(PointerEventData eventData)
+        public void OnDrag(PointerEventData w)
         {
-            if (eventData == null)
-                throw new System.ArgumentNullException(nameof(eventData));
+            if (w == null)
+                throw new System.ArgumentNullException(nameof(w));
 
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent.GetComponentInParent<RectTransform>(), eventData.position, eventData.pressEventCamera, out var position);
-            var delta = position - m_PointerDownPos;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent.GetComponentInParent<RectTransform>(), w.position, w.pressEventCamera, out var p);
+            var d = p - l;
 
-            delta = Vector2.ClampMagnitude(delta, movementRange);
-            ((RectTransform)transform).anchoredPosition = m_StartPos + (Vector3)delta;
+            d = Vector2.ClampMagnitude(d, movementRange);
+            ((RectTransform)transform).anchoredPosition = k + (Vector3)d;
 
-            var newPos = new Vector2(delta.x / movementRange, delta.y / movementRange);
-            SendValueToControl(newPos);
+            var h = new Vector2(d.x / movementRange, d.y / movementRange);
+            SendValueToControl(h);
 
-            m_MoveVector = newPos;
+            m = h;
         }
 
-        public void OnPointerUp(PointerEventData eventData)
+        public void OnPointerUp(PointerEventData d)
         {
-            ((RectTransform)transform).anchoredPosition = m_StartPos;
+            ((RectTransform)transform).anchoredPosition = k;
             SendValueToControl(Vector2.zero);
 
-            m_MoveVector = Vector2.zero;
+            m = Vector2.zero;
         }
 
-        private void Start()
+         void Start()
         {
-            m_StartPos = ((RectTransform)transform).anchoredPosition;
-            m_MovementScript = GameObject.Find("Player").GetComponent<PlayerMovement_MarioFernandes>();
-            m_MoveVector = Vector2.zero;
+            k = ((RectTransform)transform).anchoredPosition;
+            n = GameObject.Find("Player").GetComponent<PlayerMovement_MarioFernandes>();
+            m = Vector2.zero;
         }
 
         public float movementRange
         {
-            get => m_MovementRange;
-            set => m_MovementRange = value;
+            get => h;
+            set => h = value;
         }
 
         [SerializeField]
-        private float m_MovementRange = 50;
+         float h = 50;
 
-        private string m_ControlPath;
+         string j;
 
-        private Vector3 m_StartPos;
-        private Vector2 m_PointerDownPos;
+         Vector3 k;
+         Vector2 l;
 
-        private Vector2 m_MoveVector;
-        private PlayerMovement_MarioFernandes m_MovementScript;
+         Vector2 m;
+         PlayerMovement_MarioFernandes n;
 
         protected override string controlPathInternal
         {
-            get => m_ControlPath;
-            set => m_ControlPath = value;
+            get => j;
+            set => j = value;
         }
-        private void FixedUpdate()
+         void FixedUpdate()
         {
-            m_MovementScript.RecieveVector(m_MoveVector);
+            n.RecieveVector(m);
         }
     }
 }

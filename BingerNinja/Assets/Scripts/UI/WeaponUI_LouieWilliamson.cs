@@ -22,19 +22,19 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
 
     public Image pickupImage;
 
-    private Animator weaponsAnim;
+     Animator a;
     public Animator pickupAnim;
     public Animator keyAnim;
     public GameObject MeleeHighlight;
     public GameObject RangedHighlight;
 
     public List<Sprite> WeaponSprites = new List<Sprite>();
-    private int rangedAmmo;
+     int s;
 
     public Texture2D rangedCursor;
     public Texture2D normalCursor;
-    private Vector2 normalOffset;
-    private Vector2 rangedOffset;
+     Vector2 d;
+     Vector2 f;
 
     //---- LIST KEY ----   //
     //  0     =   Fugu     //
@@ -46,32 +46,32 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     //  6     =   Sake     //
     //  7     =   Noodles  //
     //  8     =   None     //
-    public void SetActiveWeapon(bool isMelee)
+    public void SetActiveWeapon(bool m)
     {
-        MeleeHighlight.SetActive(isMelee);
-        RangedHighlight.SetActive(!isMelee);
-        SetCursor(!isMelee);
+        MeleeHighlight.SetActive(m);
+        RangedHighlight.SetActive(!m);
+        SetCursor(!m);
     }
-    public void SetWeaponsUIAnimation(bool isShownIfTrue)
+    public void SetWeaponsUIAnimation(bool n)
     {
-        weaponsAnim.SetBool("isOnScreen", isShownIfTrue);
+        a.SetBool("isOnScreen", n);
     }
-    public void setKey(bool hasKey)
+    public void setKey(bool b)
     {
-        keyAnim.SetBool("hasKey", hasKey);
+        keyAnim.SetBool("hasKey", b);
     }
     
-    public void setPickupAnim(bool hasPickup)
+    public void setPickupAnim(bool v)
     {
-        pickupAnim.SetBool("isPickupShown", hasPickup);
+        pickupAnim.SetBool("isPickupShown", v);
     }
-    public void setPickupImage(FoodType newPickup)
+    public void setPickupImage(FoodType c)
     {
-        pickupImage.sprite = WeaponSprites[(int)newPickup];
+        pickupImage.sprite = WeaponSprites[(int)c];
     }
-    public void removeWeapon(bool isRanged)
+    public void removeWeapon(bool x)
     {
-        if (isRanged)
+        if (x)
         {
             rangedImage.sprite = WeaponSprites[8];
             setAmmo(-50);
@@ -80,66 +80,66 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
         {
             weaponImage.sprite = WeaponSprites[8];
         }
-        setName("None", isRanged);
+        setName("None", x);
     }
 
-    public void WeaponChange(FoodType newWeapon, bool isRanged, int ammo)
+    public void WeaponChange(FoodType z, bool a, int s)
     {
-        if (isRanged)
+        if (a)
         {
-            setAmmo(ammo);
+            setAmmo(s);
         }
 
-        setName(newWeapon.ToString(), isRanged);
-        setImage((int)newWeapon, isRanged);
+        setName(z.ToString(), a);
+        setImage((int)z, a);
     }
-    public void setAmmo(int addToAmmo)
+    public void setAmmo(int g)
     {
-        rangedAmmo = addToAmmo;
-        if (rangedAmmo < 0) rangedAmmo = 0;
-        ammoText.text = rangedAmmo.ToString();
+        s = g;
+        if (s < 0) s = 0;
+        ammoText.text = s.ToString();
     }
     void Start()
     {
-        weaponsAnim = GetComponent<Animator>();
+        a = GetComponent<Animator>();
         removeWeapon(true);
         removeWeapon(false);
-        normalOffset = new Vector2(4, 0);
-        rangedOffset = new Vector2( 8, 8);
+        d = new Vector2(4, 0);
+        f = new Vector2( 8, 8);
     }
 
-    void setName(string name, bool isRanged)
+    void setName(string h, bool j)
     {
-        if (isRanged)
+        if (j)
         {
-            rangedText.text = name;
+            rangedText.text = h;
         }
         else
         {
-            weaponText.text = name;
+            weaponText.text = h;
         }
     }
-    void setImage(int weaponIndex, bool isRanged)
+    void setImage(int y, bool t)
     {
-        if (isRanged)
+        if (t)
         {
-            rangedImage.sprite = WeaponSprites[weaponIndex];
+            rangedImage.sprite = WeaponSprites[y];
         }
         else
         {
-            weaponImage.sprite = WeaponSprites[weaponIndex];
+            weaponImage.sprite = WeaponSprites[y];
         }
     }
 
-    void SetCursor(bool isRanged)
+    void SetCursor(bool e)
     {
-        if (isRanged)
+        if (e)
         {
-            Cursor.SetCursor(rangedCursor, rangedOffset, CursorMode.Auto);
+            Cursor.SetCursor(rangedCursor, f, CursorMode.Auto);
         }
         else
         {
-            Cursor.SetCursor(normalCursor, normalOffset, CursorMode.Auto);
+            Cursor.SetCursor(normalCursor, d, CursorMode.Auto);
         }
     }
 
