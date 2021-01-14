@@ -6,8 +6,6 @@
 //Chase Wilding 02/11/2020 - Added itemNeeded & disabled door when key used
 //Joao Beijinho 09/11/2020 - Replaced tags with the tags in the Tags_JoaoBeijinho script
 // louie        11/12/2020 - Key animation
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>

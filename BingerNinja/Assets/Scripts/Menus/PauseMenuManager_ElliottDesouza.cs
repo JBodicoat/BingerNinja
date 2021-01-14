@@ -3,11 +3,7 @@
 
 //Elliott 28/10/2020 - can resume game, return to last check point, reload the scene, open settings and exit to main menu 
 //Elliott 31/10/2020 - binded the keys to functions
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class PauseMenuManager_ElliottDesouza : MonoBehaviour

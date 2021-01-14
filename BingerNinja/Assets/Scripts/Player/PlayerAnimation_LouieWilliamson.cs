@@ -4,8 +4,6 @@
 //Louie 02/11/2020 - First created
 //Louie 30/11/2020 - Roll and crouch animations
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAnimation_LouieWilliamson : MonoBehaviour

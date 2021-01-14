@@ -3,13 +3,7 @@
 //sebastian mol 02/11/20 removed player behaviour switch replaced it with abstract functions
 // louie        11/12/2020 Attack animation
 
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem.UI;
-using UnityEngine.Networking;
-using UnityEngine.Tilemaps;
 
 /// <summary>
 /// class that ranged enemys use

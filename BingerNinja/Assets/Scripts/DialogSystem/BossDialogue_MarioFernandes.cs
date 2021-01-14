@@ -2,7 +2,6 @@
 
 // Mário 26/10/2020 - Creation of the class
 // Mário 28/10/2020 - Check if index exists
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

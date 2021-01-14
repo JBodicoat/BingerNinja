@@ -26,8 +26,6 @@
 // Alanna 10/12/20 added sound effects for Melee hit, ranged hit and eating
 
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;

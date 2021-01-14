@@ -2,8 +2,6 @@
 
 //Joao Beijinho 06/11/2020 - Created script, GetCurrentClue() and NextClue() functions
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>

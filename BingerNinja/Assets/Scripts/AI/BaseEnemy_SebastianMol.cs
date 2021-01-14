@@ -22,10 +22,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Experimental.GlobalIllumination;
-using UnityEngine.UIElements;
 using UnityEngine.Tilemaps;
 
 public enum state { WONDER, CHASE, ATTACK, CURIOUS };
@@ -47,56 +44,47 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     public Inventory_JoaoBeijinho m_inventory; 
     public float m_notifcaionOffset;
 
-
-    [Header("designers Section")]
-    [Header("stats variables")]
-    [Tooltip("the item the enemy drops on death")]
     public GameObject m_dropItem; // itme that i sdropped when enemie dies
-    [Tooltip("health of the enemy")]
+    
     public float m_health; //enemy health with getter and setter
-    [Tooltip("speed of the enemy")]
+   
     public float m_speed; //movment speed
 
-    [Header("enemie movment variables")]
-    [Tooltip("shows the path the enemy is taking")]
+
+    
     public bool showPath = false;
-    [Tooltip("teh tile map u want to show the path onto")]
+  
     public Tilemap floortilemap;
-    [Tooltip("the positions in world space where the enemy patroles")]
+ 
     public Transform[] m_patrolPoints;
-    [Tooltip("the amaout the player can move from his previous position befor new pathfinding is started")]
+   
     public float m_playerMoveAllowance;
-    [Tooltip("the deley in second whan at a patrol pos and waiting to go to the next")]
+    
     public float m_deleyBetweenPatrol;
-    [Tooltip("should the nemey patrole")]
+   
     public bool m_dosePatrole;
-    [Tooltip("deley between line of sight checks")]
+    
     public float m_outOfSightDeley;
-    [Tooltip("how fast the enemy looks left and right when serching for player")]
+    
     private float m_lookLeftAndRightTimer = 0.5f;
 
-    [Header("damage variables")]
-    [Tooltip("the multiply for how much damage to take when enemy cant see player")]
+    
     public float m_sneakDamageMultiplier;
-    [Tooltip("the multiply for how much damage to take on enemie sthat take more sneka damage then normal thsi stacks additivley with the sneakDamageMultiplier")]
+    
     public float m_sneakDamageMultiplierStack;
-    [Tooltip("the disteance between th enemy and the player befor he starts attack")]
+   
     public float m_attackRange;
-    [Tooltip("for ranged enemies only how much to devide the attack range by befor starts attack")]
-    [Range(1.0f, 1.5f)]
     public float m_attckRangeDevider = 1f;
-    [Header("specific enemy variables")]
-    [Tooltip("distance tiger bosss has to be away from player befor it dosen change direction to chase while charrging - ask seb if you ever need to change this")]
+    
     public float m_tiggerBossLooseTargetDistance = 2;
 
-    [Tooltip("with how much health left in a percentage, dose the enemy start second phase ")]
-    [Range(0.0f, 1.0f)]
+    
     public float m_secondPhaseStartPercentage = 0.3f;
-    [Tooltip("amound of stun space ninja has when player gose stealth mode")]
+   
     public float m_amountOfStunWhenPlayerStealthed = 3;
-    [Tooltip("dose the enemy cuse affect on player hwen attacking")]
+   
     public bool m_doseAffect = true;
-    [Tooltip("multiplies how much the attack speed increases by in space ninja boss second fase")]
+    
     public float m_attackSpeedIncrease = 1.5f;
 
     internal float m_maxHealth; //max amount of health an enemy has
@@ -130,8 +118,6 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
     protected PlayerStealth_JoaoBeijinho m_playerStealthScript;
     private int m_crouchObjectLayer = 1 << 8;
-
-    #region finite state machine
     /// <summary>
     /// abstract class used to provied the logic for the wonder state
     /// </summary>
@@ -292,9 +278,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 break;
         }
     }
-    #endregion
 
-    #region player detection
 
     /// <summary>
     /// detect player in vision cone the establishes line of sight
@@ -401,9 +385,8 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         return false;
     }
 
-    #endregion
 
-    #region player movment
+
     /// <summary>
     /// set the position to move to in world coords
     /// </summary>
@@ -542,7 +525,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         
         FollowPath();
     }
-    #endregion
+
 
     /// <summary>
     /// actions that happen before enemy death.

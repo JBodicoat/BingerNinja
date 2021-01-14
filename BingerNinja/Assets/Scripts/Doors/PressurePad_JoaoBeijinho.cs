@@ -3,8 +3,6 @@
 //Joao Beijinho 29/10/2020 - Created trigger for normal pressure pads
 //Joao Beijinho 02/11/2020 - Replaced m_door GameObject with m_doorCollider Collider2D
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>

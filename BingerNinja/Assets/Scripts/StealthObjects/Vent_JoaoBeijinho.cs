@@ -13,8 +13,6 @@
 //                           Removed ForEach from VentEnter() and VentExit(), no need to enable/disable the walls
 //Joao Beijinho 12/01/2021 - Changed OnTriggerExit2D to toggle VentPath OFF
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>

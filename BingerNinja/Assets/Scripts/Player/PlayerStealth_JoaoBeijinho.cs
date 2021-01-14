@@ -6,8 +6,6 @@
 //Joao 11/10/2020 - Added IsInVent()
 //Louie 30/11/2020 - Crouch animation and crouch speed float
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>

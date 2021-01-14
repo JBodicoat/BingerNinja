@@ -8,8 +8,6 @@
 // Mario 28/11/2020 - sprite added
 // Mario 13/12/2020 - Define Normal Foodtype as null
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 ///<Summary>

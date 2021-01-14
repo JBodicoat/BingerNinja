@@ -13,10 +13,7 @@
 // Jack 08/11/2020 - Changed StatusEffect functions from abstract to virtual to cut down on repeated code and empty functions. Some minor format changes
 
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.Interactions;
 
 /// <summary>
 /// Template class used as base to any effet

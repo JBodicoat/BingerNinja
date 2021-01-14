@@ -3,7 +3,6 @@
 //Elliott 07/11/2020 - implented the shake
 //Elliott 09/11/2020 - made public variables so its easyer to edit
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// this script makes the main camara shake

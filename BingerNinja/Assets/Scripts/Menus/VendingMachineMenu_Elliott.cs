@@ -6,8 +6,6 @@
 //Elliott 09/11/2020 - changed the color of the text when item is brought changes, give item now uses enum.
 // Alanna & Elliott 07/12/20- Merged Alanna and Elliotts vending machine code, made the UI work with buttons and formatting, setting ninja points to yen.
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;

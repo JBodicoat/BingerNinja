@@ -4,7 +4,6 @@
 //Joao Beijinho 09/11/2020 - Replaced tags with the tags in the Tags_JoaoBeijinho script
 //Joao Beijinho 19/11/2020 - Changed triggers to add each enemy to a list on enter, and discard them on exit
 
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

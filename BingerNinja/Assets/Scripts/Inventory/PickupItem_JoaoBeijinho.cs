@@ -4,8 +4,6 @@
 //Joao Beijinho 29/10/2020 - update trigger to use new Inventory function, GiveItem()
 //Joao Beijinho 02/11/2020 - Added m_itemQuantity int
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>

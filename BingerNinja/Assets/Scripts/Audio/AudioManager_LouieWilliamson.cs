@@ -2,7 +2,6 @@
 ///This script handles the functionality for playing music and sound effects.
 ///It also contains 2 dictionaries. One each for sfx and music.
 
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;

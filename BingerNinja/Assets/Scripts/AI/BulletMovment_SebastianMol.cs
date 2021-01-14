@@ -3,8 +3,6 @@
 // Louie 03/11/2020 added player damage sfx
 // Elliott 20/11/2020 added hit effect
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -31,13 +29,9 @@ public class BulletMovment_SebastianMol : MonoBehaviour
 
     public float  m_rotateSpeed;
 
-
-    private AudioManager_LouieWilliamson m_audioManager;
-
     private void Start()
     {
         Destroy(gameObject, 2);
-        m_audioManager = FindObjectOfType<AudioManager_LouieWilliamson>();
     }
     void Update()
     {
@@ -47,7 +41,6 @@ public class BulletMovment_SebastianMol : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-        Debug.Log(collision.gameObject.name);
 
         if (collision.gameObject.name == "Walls1_map")
         {

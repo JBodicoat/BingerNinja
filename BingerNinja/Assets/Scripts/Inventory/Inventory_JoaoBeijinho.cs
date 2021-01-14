@@ -7,7 +7,6 @@
 //Mario Fernandes 28/10/2020 - Update Pizza and cookies to Dango and Tempura
 // Alanna & Elliott 07/12/20 - making a list for enemies to keep track of what enemies are left for ninja points CheckDeadEnemies()
 
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

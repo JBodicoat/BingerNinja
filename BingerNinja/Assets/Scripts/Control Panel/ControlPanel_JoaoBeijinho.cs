@@ -5,11 +5,7 @@
 //Joao Beijinho 27/11/2020 - Made an array for ControlPanelActivateObject to allow the control panel to activate multiple objects
 //Joao Beijinho 12/01/2021 - Moved LevelScripting bits to the ControlPanelActivateObject Script
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Tilemaps;
 
 /// <summary>
 /// This class acts as a button which calls interactions from the object that it is referencing

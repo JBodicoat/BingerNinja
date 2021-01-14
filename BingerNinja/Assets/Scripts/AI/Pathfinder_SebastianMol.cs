@@ -2,12 +2,7 @@
 //sebastian mol 21/10/20 started to create the pathfindig class
 //sebastian mol 30/10/20 added headers to classes and functions
 
-using JetBrains.Annotations;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Net.Http.Headers;
-using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Tilemaps;

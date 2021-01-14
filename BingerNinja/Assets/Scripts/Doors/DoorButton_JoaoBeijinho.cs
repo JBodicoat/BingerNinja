@@ -6,8 +6,6 @@
 //Joao Beijinho 09/11/2020 - Replaced tags with the tags in the Tags_JoaoBeijinho script
 //Chase Wilding 16/11/2020 - Edited to add tilemap removal/drawing for doors, added close functionality
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 

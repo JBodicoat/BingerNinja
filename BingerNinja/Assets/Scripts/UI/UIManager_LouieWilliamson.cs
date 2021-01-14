@@ -1,8 +1,6 @@
 ﻿///Louie Williamson
 ///This scripts shows the mobile ui if necessary
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UIManager_LouieWilliamson : MonoBehaviour

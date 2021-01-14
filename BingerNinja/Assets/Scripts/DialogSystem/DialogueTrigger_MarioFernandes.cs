@@ -4,8 +4,6 @@
 // Mário 28/10/2020 - Check if triger is the player and one time only dialog
 //sebastian mol 10/12/2020 - made trigger dissapear after activated
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>

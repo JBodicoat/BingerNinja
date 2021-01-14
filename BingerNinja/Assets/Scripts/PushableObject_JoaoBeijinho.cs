@@ -12,8 +12,6 @@
 //                           gameObject with the same tag, then reassign the tag back to this GameObject
 //                           In the Grab() function, check if any other crate is grabbed, if it is then can't grab
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>

@@ -3,8 +3,6 @@
 // Mário 28/10/2020 - Add useble effects and substitute of the weapons to the upgraded ones
 //Louie  11/12/2020 - Added pickup ui
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

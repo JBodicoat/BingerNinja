@@ -2,9 +2,6 @@
 
 //Joao Beijinho 09/11/2020 - Created and added tags
 
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 /// <summary>
 /// This class stores tags as strings for usage in other scripts

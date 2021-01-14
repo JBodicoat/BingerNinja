@@ -9,8 +9,6 @@
 //Mario 22/11/20 - Added tap Attack and slow tap attack
 //Louie 30/11/20 - Roll and crouch animations
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;

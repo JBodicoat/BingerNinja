@@ -7,7 +7,6 @@
 // Mário 16/10/2020 - Creation of the  Manager (Ticks, array of effects and update each effect per tick )
 //Mário 05/12/20 - Remove repeated effects
 
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

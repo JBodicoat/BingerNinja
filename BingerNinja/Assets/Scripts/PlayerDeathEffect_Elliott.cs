@@ -2,9 +2,7 @@
 
 // Elliott 21/11/2020 - made the function death Blink(turns spite on and off) and spriteFlash 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerDeathEffect_Elliott : MonoBehaviour
 {

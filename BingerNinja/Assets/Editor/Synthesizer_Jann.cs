@@ -9,7 +9,6 @@
 // Jann 25/11/20 - Adapt to smaller .json files
 
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using UnityEditor;
 using UnityEngine;

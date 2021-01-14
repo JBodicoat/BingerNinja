@@ -1,8 +1,6 @@
 ﻿///Louie Williamson
 ///This script links to the crt shader to apply it to the camera as a post process
 ///
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PostProcess_LouieWilliamson : MonoBehaviour

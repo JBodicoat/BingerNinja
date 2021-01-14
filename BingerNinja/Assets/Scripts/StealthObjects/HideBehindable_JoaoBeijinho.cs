@@ -13,10 +13,7 @@
 //Joao Beijinho 14/12/2020 - Change player sprite order instead of the plant sprite order
 //                           Change player position to plant position when hiding
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 /// <summary>
 ///This class allows player to interact with objects that can be used to crouch behind.

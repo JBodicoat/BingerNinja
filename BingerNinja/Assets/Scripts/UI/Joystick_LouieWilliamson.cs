@@ -1,6 +1,5 @@
 ﻿using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
-using UnityEngine.InputSystem.Layouts;
 
 namespace UnityEngine.InputSystem.OnScreen
 {

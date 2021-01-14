@@ -1,43 +1,32 @@
 ﻿//sebastian mol 14/11/2020 class created
 //sebastian mol 29/11/2020 finished and commeneted all logic for final boss
 // louie        11/12/2020 Attack animation
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
 /// class for enemies with ranegd and melee attcks
 /// </summary>
- class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
+class RangedAndMeleeEnemy_SebastianMol :  MeleeEnemy_SebastianMol
  {
-    [Header("class based damage variables")]
-    [Header("projectile prefabs")]
+
     public GameObject m_aimer;
     public GameObject m_projectile;
-    [Header("projectile Variables")]
-    [Tooltip("how fast the projectile moves")]
+
     public float m_shootDeley;
-    [Tooltip("speed of the projectile")]
+
     public float m_projectileSpeed;
-    [Tooltip("random chance of the enemy doing a ranged attack its is 1/ m_RangedAttackRandomChance")]
+
     public int m_RangedAttackRandomChance;
 
-    [Header("special variablees for Alien")]
-    [Tooltip("the attack distance on ranged attack")]
     public float m_rangedAttackRange = 3;
-    [Tooltip("the attack distance on melee attack")]
+
     public float m_meleeAttackRange = 1;
     private int m_randomChanceOfRangedAttack;
     private bool m_generateRandomNumberOnce = false;
     private int m_randAttackChance;
 
-
-    [Header("special variablees for Tadashi")]
-    [Tooltip("the attack distance on ranged attack")]
     public float m_chargeAttackRangeTadashi = 10;
-    [Tooltip("the attack distance on ranged attack")]
     public float m_rangedAttackRangeTadashi = 3;
-    [Tooltip("the attack distance on melee attack")]
     public float m_meleeAttackRangeTadashi = 1;
 
     public GameObject m_normalAttackColider;
@@ -57,9 +46,7 @@ using UnityEngine;
 
 
     //i have to put this here i cba to find a cleaner way to do this future seb get your shit togther
-    private bool doOnce = true;
-    private Pathfinder_SebastianMol pathFinder;
-    private List<Vector2Int> daPath;
+
 
     /// <summary>
     /// ovveride class that holds logic for what the enemy shoudl do when in the attack state
@@ -251,7 +238,7 @@ using UnityEngine;
         if (!m_currentProjectile)
         {
             int rand = Random.Range(0, 4);
-            Debug.Log(rand + "shooting type");
+   
             switch (rand)
             {
                 case 0:
@@ -295,12 +282,12 @@ using UnityEngine;
                     if (m_RandChanceAttackTadashi == 0)
                     {
                         TadashiChargeAttackSetUp();
-                        Debug.Log("C");
+                  
                     }
                     else
                     {
                         TadashiQuickAttackSetUp();
-                        Debug.Log("Q");
+              
                     }
                 }
                 break;
@@ -322,18 +309,18 @@ using UnityEngine;
                     if (m_tadashiLastFaseAttackRand < 0.33f)
                     {
                         TadashiQuickAttackSetUp();
-                        Debug.Log("Q");
+           
 
                     }
                     else if (m_tadashiLastFaseAttackRand < 0.66f)
                     {
                         TadashiChargeAttackSetUp();
-                        Debug.Log("C");
+                
                     }
                     else if (m_tadashiLastFaseAttackRand > 0.66f)
                     {
                         TadashiCrazyRangeAttackSetUp();
-                        Debug.Log("R");
+                   
                     }
 
               }
@@ -394,11 +381,5 @@ using UnityEngine;
     {
         UpdateAttackAlien();
         UpdateTadashi();      
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, m_attackRange);
     }
 }

@@ -2,8 +2,6 @@
 /// my class saves the check point
 
 //Elliott 19/10/2020 - added a currtent checkpoint veriable 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 

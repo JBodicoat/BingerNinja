@@ -2,9 +2,6 @@
 
 //Joao Beijinho 26/10/2020 - Created this script along with the contructors
 
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 /// <summary>
 /// This is a contructor class containing the definition of the items that are to go into the inventory

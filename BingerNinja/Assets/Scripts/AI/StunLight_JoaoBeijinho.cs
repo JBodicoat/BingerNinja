@@ -4,7 +4,6 @@
 //Joao Beijinho 18/11/2020 - Check for Collision only on enemy BoxCollider and update to use StunEnemyWithLightsDeleyFunc
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>

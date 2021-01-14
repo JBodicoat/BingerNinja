@@ -6,11 +6,9 @@
 //sebastian mol 22/11/2020 tiuger logic in place
 // louie        11/12/2020 Attack animation
 
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 
 /// <summary>
@@ -115,47 +113,13 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
             //    }
             //}
 
-            if (EnemyAttacks_SebastianMol.ChargeAttack(m_playerTransform, ref m_attackTimer, 
-                m_attackCollider, m_hitSpeed, gameObject, m_chargeAttackSpeed)) //make this ibnto a public variable
-            {
-                ////here teh tatack has not yet happened
-                //if (showPathBeforAttackTigerBoss)
-                //{
-                //    doOnceShowPath = true;
-                //    for (int i = 0; i < daPath.Count; i++)
-                //    {
-                //        floortilemap.SetColor(new Vector3Int(daPath[i].x, daPath[i].y, 0), Color.white);
-                //    }
-                //}
-
-            }
-            else
-            {
-                //here the attack has happened
-                //if (showPathBeforAttackTigerBoss)
-                //{
-                //    if (doOnceShowPath)
-                //    {
-                //        doOnceShowPath = false;
-                //        pathFinder = GameObject.FindObjectOfType<Pathfinder_SebastianMol>();
-                //        daPath = pathFinder.PathFind((Vector2Int)pathFinder.m_tileMap.WorldToCell(m_playerTransform.position), (Vector2Int)pathFinder.m_tileMap.WorldToCell(transform.position));
-                //        for (int i = 0; i < daPath.Count; i++)
-                //        {
-                //            Debug.Log(daPath[i].x + " " + daPath[i].y);
-                //            floortilemap.SetTileFlags(new Vector3Int(daPath[i].x, daPath[i].y, 0), TileFlags.None);
-                //            floortilemap.SetColor(new Vector3Int(daPath[i].x, daPath[i].y, 0), Color.red);
-                //        }
-                //    }
-                //}
-            }
+            EnemyAttacks_SebastianMol.ChargeAttack(m_playerTransform, ref m_attackTimer,
+                m_attackCollider, m_hitSpeed, gameObject, m_chargeAttackSpeed); //make this ibnto a public variable
         }
         else
         {
-            if(EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility, QuickAttack,
-                                               ChargeAttack, StunAfterAttack, m_currentEnemyType, m_hitSpeed, GetComponent<Enemy_Animation_LouieWilliamson>()))
-            {
-                Debug.Log("attack");
-            }
+            EnemyAttacks_SebastianMol.MelleAttack(ref m_attackTimer, m_hasChargeAttack, m_chargAttackPosibility, QuickAttack,
+                                               ChargeAttack, StunAfterAttack, m_currentEnemyType, m_hitSpeed, GetComponent<Enemy_Animation_LouieWilliamson>());
         }
        
     }
@@ -215,7 +179,6 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
         {
             if (m_currentEnemyType == m_enemyType.PETTIGER || m_currentEnemyType == m_enemyType.TADASHI)
             {
-                Debug.Log(collision.gameObject.tag);
                 Rigidbody2D rijy = GetComponent<Rigidbody2D>();
                 if (rijy.bodyType == RigidbodyType2D.Dynamic)
                 {

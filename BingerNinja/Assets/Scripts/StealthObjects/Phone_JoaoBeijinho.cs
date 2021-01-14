@@ -6,7 +6,6 @@
 //Joao Beijinho 06/11/2020 - Added Dialogue and Clues to the Update()
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>

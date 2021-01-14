@@ -6,7 +6,6 @@
 
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -55,7 +54,7 @@ public class LanguageResolver_Jann : Singleton_Jann<LanguageResolver_Jann>
                 Text text = languageText.GetComponent<Text>();
                 text.text = Regex.Unescape(m_translations[languageText.identifier]);
             }
-            catch (KeyNotFoundException e)
+            catch (KeyNotFoundException)
             {
                 print("No translation for key found: " + languageText.identifier);
                 throw;

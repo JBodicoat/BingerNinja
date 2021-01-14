@@ -1,8 +1,5 @@
 ﻿//sebastian mol
 //sebastian mol ------ enemy manager complete
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 /// <summary>

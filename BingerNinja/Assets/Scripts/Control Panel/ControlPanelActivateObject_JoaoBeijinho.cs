@@ -12,7 +12,6 @@
 //                           Turn levelScripting.drawFreezer FALSE when freezer ISN'T in use
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>

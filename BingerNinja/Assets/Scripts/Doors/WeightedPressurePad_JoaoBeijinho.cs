@@ -11,8 +11,6 @@
 //                           On OnTriggerExit2D, toggle this pressure pad as deactivated
 //                           Make both pressure pads on level 17 open only one door
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;

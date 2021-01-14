@@ -1,6 +1,5 @@
 ﻿// Jann
 
-using System.Globalization;
 
 /// Model class for tracks
 /// Member variable name do not use 'm_' prefix because the name needs

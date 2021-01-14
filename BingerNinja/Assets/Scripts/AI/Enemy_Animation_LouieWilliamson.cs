@@ -3,8 +3,6 @@
 
 //Louie 18/11/2020 - First created
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy_Animation_LouieWilliamson : MonoBehaviour

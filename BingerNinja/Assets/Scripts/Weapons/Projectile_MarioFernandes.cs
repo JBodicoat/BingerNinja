@@ -10,10 +10,7 @@
 // Mario 14/11/2020 - Solve distraction bugs
 // Mario 21/11/2020 - Dettect Wall 2
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 ///<Summary>
 ///This class serves as the template for all the projectiles

@@ -3,7 +3,6 @@
 //Joao Beijinho 26/10/2020 - Created this script along with the BuildDataBase() and GetItem() functions
 //Elliott Desouza 31/ 10/2020 - add some items to the list
 
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

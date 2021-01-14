@@ -5,12 +5,7 @@
 //                   moved class header comment to the correct place and reformated.
 //                   linked this scripts functions with the MainMenu scene buttons
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 

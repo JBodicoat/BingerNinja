@@ -4,8 +4,6 @@
 //                           Changed reference on start to reference on awake
 //Joao Beijinho 12/01/2021 - Changed OnTriggerEnter2D to only toggle the ventPath ON
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>

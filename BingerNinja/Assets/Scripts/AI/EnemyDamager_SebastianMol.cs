@@ -3,8 +3,6 @@
 // sebastian mol 20/11/2020 added randome chance of affect applied to player
 // Elliott 20/11/2020 added hit effect
 //sebastian mol 22/11/2020 commented things
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>

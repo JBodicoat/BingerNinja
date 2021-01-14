@@ -5,7 +5,6 @@
 //Louie 09/11/2020 - Added animations
 //Louie 16/11/2020 - Added Weapon Sprite List
 
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;

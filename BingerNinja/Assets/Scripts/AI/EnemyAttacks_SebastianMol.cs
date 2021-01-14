@@ -4,8 +4,6 @@
 //Louie         11/12/2020 Added enemy attack animation function call
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -139,7 +137,5 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
             m_attackTimer -= Time.deltaTime;
             return false;
         }
-
-        return false;
     }
 }

@@ -4,7 +4,6 @@
 // Jann 13/12/20 - Resources folder instead of assets folder is now used
 
 using System.IO;
-using UnityEditor;
 using UnityEngine;
 
 /// <summary>

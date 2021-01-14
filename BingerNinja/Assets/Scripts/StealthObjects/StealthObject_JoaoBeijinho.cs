@@ -5,8 +5,6 @@
 //Joao Beijinho 25/10/2020 - Moved Trigger back into Vent script. Made class abstract
 //Joao Beijinho 11/10/2020 - Added ToggleVent()
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
