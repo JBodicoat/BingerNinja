@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+//Chase - Script to change levels
 // Elliott 05/12/2020 - made it so the game pauses when veningmachine is up 
 
 //07/12/20 alanna & elliot, added Ninja points when you finished level
