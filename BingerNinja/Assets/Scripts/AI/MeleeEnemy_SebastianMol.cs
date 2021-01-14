@@ -38,10 +38,10 @@ class MeleeEnemy_SebastianMol : BaseEnemy_SebastianMol
     public float m_amountOfTimeToMoveAwayFromWall = 0.2f;
     public float m_chargeAttackSpeed = 500;
 
-    private bool a = true;
+    private bool A = true;
     public bool showPathBeforAttackTigerBoss = false;
-    private Pathfinder_SebastianMol b;
-    private List<Vector2Int> c;
+    private Pathfinder_SebastianMol ab;
+    private List<Vector2Int> ac;
 
     protected bool m_doStunOnce = false;
     protected bool m_doMoveAwayFromWallOnce = false;

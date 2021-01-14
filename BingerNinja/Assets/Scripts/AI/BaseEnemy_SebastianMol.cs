@@ -110,7 +110,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     protected int m_tadashiPhase = 1; //the phase tadashi is on
 
 
-     HitEffectElliott a;
+     HitEffectElliott aa;
      CameraShakeElliott s;
     protected bool m_showquestionMarkonce = false;
      PlayerSpoted_Elliott d;
@@ -646,13 +646,13 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                 if (m_playerDetected == false)
                 {
                     m_health -= damage * (m_sneakDamageMultiplier + m_sneakDamageMultiplierStack);
-                    a.StartHitEffect(true);
+                    aa.StartHitEffect(true);
 
                 }
                 else
                 {
                     m_health -= damage;
-                    a.StartHitEffect(false);
+                    aa.StartHitEffect(false);
 
                 }
                 break;
@@ -671,12 +671,12 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
                     if (m_playerDetected == false)
                     {
                         m_health -= damage * (m_sneakDamageMultiplier + m_sneakDamageMultiplierStack);
-                        a.StartHitEffect(true);
+                        aa.StartHitEffect(true);
                     }
                     else
                     {
                         m_health -= damage;
-                        a.StartHitEffect(false);
+                        aa.StartHitEffect(false);
                     }
                 }
                 break;
@@ -760,13 +760,13 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         {
             m_health -= damage * m_sneakDamageMultiplier;
             s.StartShake();
-            a.StartHitEffect(true);
+            aa.StartHitEffect(true);
             m_inventory.GiveItem(ItemType.NinjaPoints, 1);
         }
         else
         {
             m_health -= damage;
-            a.StartHitEffect(false);
+            aa.StartHitEffect(false);
         }
     }
 
@@ -830,7 +830,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
         m_inventory = GameObject.Find("Player").GetComponent<Inventory_JoaoBeijinho>();
         m_playerStealthScript = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
-        a = GetComponent<HitEffectElliott>();
+        aa = GetComponent<HitEffectElliott>();
         s = Camera.main.GetComponent<CameraShakeElliott>();
     }
 
