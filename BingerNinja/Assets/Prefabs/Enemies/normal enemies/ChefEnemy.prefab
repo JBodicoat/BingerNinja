@@ -164,39 +164,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6d75813f5b8f543aa3dbdb51792783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_rayCastStart: {fileID: 5157954881687136811}
-  m_rayCastStartBackup: {fileID: 1166715896695560533}
-  m_detectionCollider: {fileID: 5157954882409207614}
-  m_playerDetected: 0
-  m_currentState: 0
-  m_currentEnemyType: 1
-  m_questionmark: {fileID: 3783213463638213574, guid: 40acaa4f65aeeaf44aad51d83f2decd0, type: 3}
-  m_excalmationmark: {fileID: 6264025296151744314, guid: a776e246d259fa04188f7ffb2c9d5113, type: 3}
-  m_inventory: {fileID: 0}
-  m_notifcaionOffset: 0.1
-  m_dropItem: {fileID: 0}
-  m_health: 200
-  m_speed: 1
-  showPath: 0
-  floortilemap: {fileID: 0}
-  m_patrolPoints: []
-  m_playerMoveAllowance: 2
-  m_deleyBetweenPatrol: 2
-  m_dosePatrole: 0
-  m_outOfSightDeley: 4
-  m_sneakDamageMultiplier: 1.5
-  m_sneakDamageMultiplierStack: 0
-  m_attackRange: 3
-  m_attckRangeDevider: 1.5
-  m_tiggerBossLooseTargetDistance: 2
-  m_secondPhaseStartPercentage: 0.3
-  m_amountOfStunWhenPlayerStealthed: 3
-  m_doseAffect: 1
-  m_attackSpeedIncrease: 1.5
-  m_aimer: {fileID: 5751295711232786928}
-  m_projectile: {fileID: 1986204507551107328, guid: c719167a814eda848a315ea7dbef9a8a, type: 3}
-  m_shootDeley: 2
-  m_projectileSpeed: 2
+  a: {fileID: 5157954881687136811}
+  b: {fileID: 1166715896695560533}
+  CE: {fileID: 5157954882409207614}
+  CW: 0
+  CQ: 0
+  CA: 1
+  CR: {fileID: 3783213463638213574, guid: 40acaa4f65aeeaf44aad51d83f2decd0, type: 3}
+  CT: {fileID: 6264025296151744314, guid: a776e246d259fa04188f7ffb2c9d5113, type: 3}
+  CY: {fileID: 0}
+  CU: 0.1
+  CI: {fileID: 0}
+  CO: 200
+  CP: 1
+  CS: 0
+  CD: {fileID: 0}
+  CF: []
+  CG: 2
+  CH: 2
+  CJ: 0
+  CK: 4
+  X: 1.5
+  C: 0
+  V: 3
+  B: 1.5
+  N: 2
+  M: 0.3
+  QQ: 3
+  QW: 1
+  QE: 1.5
+  PQ: {fileID: 5751295711232786928}
+  AQ: {fileID: 1986204507551107328, guid: c719167a814eda848a315ea7dbef9a8a, type: 3}
+  AW: 2
+  AE: 2
 --- !u!61 &5157954882409207617
 BoxCollider2D:
   m_ObjectHideFlags: 0
