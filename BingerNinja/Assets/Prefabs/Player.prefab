@@ -258,15 +258,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3fdf7d1a1c091541ab04a515efb546b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_projectile: {fileID: 3054722901687453429, guid: 8accb0c1bced7b44ba7f3753243e922a, type: 3}
-  m_attackDelay: 1
-  m_timeSinceLastAttack: 0
-  m_meleeAttackRadius: 3
-  m_strenght: 1
-  m_chargedModifier: 1.3
-  m_currentWeapon:
-  - {fileID: 0}
-  m_weaponsIndex: 0
+  G: {fileID: 0}
+  H: 1
+  J: 0
+  K: 3
+  L: 1
+  Z: 1.3
+  C: []
+  V: 0
 --- !u!114 &4362767424123825802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,45 +534,45 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Change Level
       m_Flags: 0
-  m_switchWeapons:
-    m_Name: Switch Weapons
+  QS:
+    m_Name: QS
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 308a739c-52e0-47f2-80bf-645732813e82
+    m_Id: 1c116457-0609-4dac-82e8-d46b1b4d1ccb
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: 79905979-8cf3-44f5-a45b-cb454e058b51
+      m_Id: fc7eb1a7-31f3-4db9-b8ae-56b12497df73
       m_Path: <Keyboard>/r
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Switch Weapons
+      m_Action: QS
       m_Flags: 0
     - m_Name: 
-      m_Id: ae5b80d9-55b3-4d1e-890a-40e268b80cca
+      m_Id: 3ddc5a84-ab70-4951-962b-8591c41cdb22
       m_Path: <Gamepad>/buttonNorth
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Switch Weapons
+      m_Action: QS
       m_Flags: 0
-  m_dropWeapons:
-    m_Name: Drop Weapons
+  QA:
+    m_Name: QA
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 3ef26744-0088-497d-92c7-f478d232aa5c
+    m_Id: c7feed22-bff4-4df6-913a-a962df6bf071
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: d66058d5-c53f-4631-930d-14e2fe862f6b
+      m_Id: e1e6f14c-a173-471e-b902-85667db3ed76
       m_Path: <Keyboard>/q
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Drop Weapons
+      m_Action: QA
       m_Flags: 0
   m_passDialogue:
     m_Name: Pass Dialogue
@@ -625,10 +624,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4961d4a7d4a37224eaa72ee4a1cd8d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_stealthed: 0
-  m_crouched: 0
-  m_inVent: 0
-  crouchSpeed: 1
+  A: 0
+  B: 0
+  C: 0
+  D: 0
 --- !u!114 &4272470005486940903
 MonoBehaviour:
   m_ObjectHideFlags: 0
