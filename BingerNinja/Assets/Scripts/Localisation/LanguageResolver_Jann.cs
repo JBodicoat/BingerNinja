@@ -23,7 +23,7 @@ public class LanguageResolver_Jann : Singleton_Jann<LanguageResolver_Jann>
     {
         base.Awake();
         
-        string l = SaveLoadSystem_JamieG.LoadSettings().m_chosenLanguage;
+        string l = SaveLoadSystem_JamieG.QU().QO;
 
         if (l == null)
         {

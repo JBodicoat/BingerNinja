@@ -30,8 +30,8 @@ public class MainMenu_Manager_Elliott : MonoBehaviour
     public void StartNewGame()
     {
         ///load level 1 here
-        SaveLoadSystem_JamieG.DeleteSaves();
-        SceneManager_JamieG.Instance.LoadNextLevel();
+        SaveLoadSystem_JamieG.QQ();
+        SceneManager_JamieG.Instance.F();
     }
 
     public void OpenSettingsMenu()
@@ -51,7 +51,7 @@ public class MainMenu_Manager_Elliott : MonoBehaviour
     {
         m_openSettings = false;
 
-        a = SaveLoadSystem_JamieG.LoadCheckpoint().m_lastCheckpointLevel;
+        a = SaveLoadSystem_JamieG.QF().WR;
         m_continueButton.enabled = a > 0;
     }
 

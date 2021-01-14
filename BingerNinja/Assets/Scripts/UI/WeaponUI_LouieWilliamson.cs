@@ -52,7 +52,7 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
         RangedHighlight.SetActive(!m);
         SetCursor(!m);
     }
-    public void SetWeaponsUIAnimation(bool n)
+    public void QF(bool n)
     {
         a.SetBool("isOnScreen", n);
     }
@@ -65,16 +65,16 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     {
         pickupAnim.SetBool("isPickupShown", v);
     }
-    public void setPickupImage(FoodType c)
+    public void setPickupImage(Q c)
     {
         pickupImage.sprite = WeaponSprites[(int)c];
     }
-    public void removeWeapon(bool x)
+    public void N(bool x)
     {
         if (x)
         {
             rangedImage.sprite = WeaponSprites[8];
-            setAmmo(-50);
+            QO(-50);
         }
         else
         {
@@ -83,17 +83,17 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
         setName("None", x);
     }
 
-    public void WeaponChange(FoodType z, bool a, int s)
+    public void QD(Q z, bool a, int s)
     {
         if (a)
         {
-            setAmmo(s);
+            QO(s);
         }
 
         setName(z.ToString(), a);
         setImage((int)z, a);
     }
-    public void setAmmo(int g)
+    public void QO(int g)
     {
         s = g;
         if (s < 0) s = 0;
@@ -102,8 +102,8 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     void Start()
     {
         a = GetComponent<Animator>();
-        removeWeapon(true);
-        removeWeapon(false);
+        N(true);
+        N(false);
         d = new Vector2(4, 0);
         f = new Vector2( 8, 8);
     }

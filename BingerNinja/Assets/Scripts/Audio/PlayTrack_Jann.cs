@@ -31,11 +31,11 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
         
         Cursor.lockState = CursorLockMode.Confined;
 
-        SettingsData sd = SaveLoadSystem_JamieG.LoadSettings();
-        if (!sd.Equals(default(SettingsData)))
+        WT sd = SaveLoadSystem_JamieG.QU();
+        if (!sd.Equals(default(WT)))
         {
-            UpdateMusicVolume(sd.m_musicVolume);
-            UpdateSfxVolume(sd.m_sfxVolume);
+            UpdateMusicVolume(sd.WY);
+            UpdateSfxVolume(sd.WU);
         }
 
         foreach (AudioSource ms in m_musicAudioSources)

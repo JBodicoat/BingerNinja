@@ -24,10 +24,10 @@ public class SettingsMenu_ElliottDesouza : MonoBehaviour
 
      void Start()
     {
-        SettingsData settings = SaveLoadSystem_JamieG.LoadSettings();
-        m_musicSlider.value = settings.m_musicVolume;
-        m_SFXSlider.value = settings.m_sfxVolume;
-        m_selectedLanguage = settings.m_chosenLanguage;
+        WT settings = SaveLoadSystem_JamieG.QU();
+        m_musicSlider.value = settings.WY;
+        m_SFXSlider.value = settings.WU;
+        m_selectedLanguage = settings.QO;
         
         m_englishButton.interactable = !m_selectedLanguage.Equals("English");
         m_portugueseButton.interactable = m_selectedLanguage.Equals("English");
@@ -67,7 +67,7 @@ public class SettingsMenu_ElliottDesouza : MonoBehaviour
 
     public void ExitSettingMenu()
     {
-        SaveLoadSystem_JamieG.SaveSettings(this);
+        SaveLoadSystem_JamieG.QW(this);
         
         // Change language in DialogManager if it is present in scene
         GameObject e = GameObject.Find("DialogManager");

@@ -150,12 +150,12 @@ public class StrengthEffect_MarioFernandes : StatusEffect_MarioFernandes
     public override void Activate(GameObject w)
     {
         base.Activate(w);
-        m_target.GetComponent<PlayerCombat_MarioFernandes>().m_strenght = m_strengthModifier;
+        m_target.GetComponent<PlayerCombat_MarioFernandes>().L = m_strengthModifier;
     }
 
     public override void DeactivateEffect()
     {
-        m_target.GetComponent<PlayerCombat_MarioFernandes>().ResetStrength();
+        m_target.GetComponent<PlayerCombat_MarioFernandes>().QQ();
         base.DeactivateEffect();
     }
 }

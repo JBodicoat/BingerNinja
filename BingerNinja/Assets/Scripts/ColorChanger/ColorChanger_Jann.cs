@@ -90,7 +90,7 @@ public class ColorChanger_Jann : Singleton_Jann<ColorChanger_Jann>
         cst.Apply();
     }
 
-    public void UpdateColor(SpriteRenderer sr)
+    public void QT(SpriteRenderer sr)
     {
         sr.material = m_swapMaterial;
     }

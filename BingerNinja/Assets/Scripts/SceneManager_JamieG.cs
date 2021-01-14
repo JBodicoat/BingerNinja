@@ -50,7 +50,7 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
 
     public void ResetToCheckpoint()
     {
-        int x = SaveLoadSystem_JamieG.LoadCheckpoint().m_lastCheckpointLevel;
+        int x = SaveLoadSystem_JamieG.QF().WR;
         StartCoroutine(Load(x > 0 ? x : 1));
     }
 
@@ -66,7 +66,7 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
     }
 
     //Assumes that the scenes are in the correct order of build indexes in build settings
-    public void LoadNextLevel()
+    public void F()
     {
         if (SceneManager.GetActiveScene().buildIndex != 0)
         {
@@ -76,7 +76,7 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
                 y.RemoveItem(ItemType.LiftKey, y.m_inventoryItems[ItemType.LiftKey]);
             }
            
-            SaveLoadSystem_JamieG.SaveInventory(y);
+            SaveLoadSystem_JamieG.QR(y);
         }
 
         FadeIn();
@@ -127,9 +127,9 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
         if (z != null)
         {
             Inventory_JoaoBeijinho j = z.GetComponent<Inventory_JoaoBeijinho>();
-            SaveLoadSystem_JamieG.SaveInventory(j);
+            SaveLoadSystem_JamieG.QR(j);
             
-            SaveLoadSystem_JamieG.SaveGameplay(
+            SaveLoadSystem_JamieG.QT(
                 SceneManager.GetActiveScene().buildIndex,
                 GameObject.FindGameObjectsWithTag("Enemy"),
                 new GameObject[0]//GameObject.FindGameObjectsWithTag("Door")
@@ -139,13 +139,13 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
     
     public void LoadGameState()
     {
-        GameplayData k = SaveLoadSystem_JamieG.LoadGameplay();
+        QB k = SaveLoadSystem_JamieG.QS();
         
         // Load enemies
         GameObject[] l = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (var enemy in l)
         {
-            if (!k.m_enemyIds.Contains(enemy.name))
+            if (!k.QM.Contains(enemy.name))
             {
                 enemy.SetActive(false);
             }
@@ -154,12 +154,12 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
 
     public void LoadSoundSettings()
     {
-        SettingsData m = SaveLoadSystem_JamieG.LoadSettings();
+        WT m = SaveLoadSystem_JamieG.QU();
 
-        if (!m.Equals(default(SettingsData)))
+        if (!m.Equals(default(WT)))
         {
-            PlayTrack_Jann.Instance.UpdateMusicVolume(m.m_musicVolume);
-            PlayTrack_Jann.Instance.UpdateSfxVolume(m.m_sfxVolume);
+            PlayTrack_Jann.Instance.UpdateMusicVolume(m.WY);
+            PlayTrack_Jann.Instance.UpdateSfxVolume(m.WU);
         }
     }
 

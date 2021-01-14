@@ -29,8 +29,8 @@ public class PlayerController_JamieG : MonoBehaviour
     public InputAction m_roll;
     public InputAction m_changeLevel;
 
-    public InputAction m_switchWeapons;
-    public InputAction m_dropWeapons;
+    public InputAction QS;
+    public InputAction QA;
     public InputAction m_passDialogue;
 
     protected int CurrentLevel;
@@ -86,8 +86,8 @@ public class PlayerController_JamieG : MonoBehaviour
         m_attackTap.Enable();
         m_attackSlowTap.Enable();
         m_roll.Enable();
-        m_switchWeapons.Enable();
-        m_dropWeapons.Enable();
+        QS.Enable();
+        QA.Enable();
         m_aim.Enable();
         m_changeLevel.Enable();
     }
@@ -101,8 +101,8 @@ public class PlayerController_JamieG : MonoBehaviour
         m_attackTap.Disable();
         m_attackSlowTap.Disable();
         m_roll.Disable();
-        m_switchWeapons.Disable();
-        m_dropWeapons.Disable();
+        QS.Disable();
+        QA.Disable();
         m_aim.Disable();
         m_changeLevel.Disable();
     }

@@ -89,7 +89,7 @@ public class EnemyAttacks_SebastianMol : MonoBehaviour
                 GameObject v = Instantiate(j, f.position, Quaternion.Euler(new Vector3(x.x, x.y, 0)));
                 v.transform.localScale += new Vector3(l, z, 0);
                 v.GetComponent<BulletMovment_SebastianMol>().w = (d.position - f.position).normalized;
-                ColorChanger_Jann.Instance.UpdateColor(v.GetComponent<SpriteRenderer>());
+                ColorChanger_Jann.Instance.QT(v.GetComponent<SpriteRenderer>());
                 h = k;
                 s.Q();
                 return true;

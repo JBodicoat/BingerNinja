@@ -13,7 +13,7 @@ public class BossDialogue_MarioFernandes : MonoBehaviour
     public List<Dialogue> m_dialogue;
     
     ///<summary>Call the dialog you want, giving it the number on the index</summary>
-	public void TriggerDialogue (int i)
+	public void A (int i)
 	{
         if (i < m_dialogue.Capacity - 1 && i >= 0)
             FindObjectOfType<DialogueManager_MarioFernandes>().StartDialogue(m_dialogue[i]);

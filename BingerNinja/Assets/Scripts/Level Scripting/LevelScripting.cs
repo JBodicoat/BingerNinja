@@ -9,15 +9,15 @@ using UnityEngine.Tilemaps;
 
 public class LevelScripting : MonoBehaviour
 {
-    internal bool enemyDead = false, keyUsed = false, levelBossIntro, bossDead = false, doorsClosed = false, cinematicDone = true, ventDialogueDisabled = false, endVentDialogueCanPlay = false, drawFreezer = false;
+    internal bool Q = false, W = false, E, R = false, T = false, Y = true, U = false, I = false, O = false;
      GameObject a, b, c, d, e, f, g;
-    public GameObject vents;
+    public GameObject P;
      BaseEnemy_SebastianMol h, i, j, k;
      BossDialogue_MarioFernandes l, m, n;
      Tilemap o, p, q, r;
-    public Tile bottomDoorTile, topDoorTile;
+    public Tile A, S;
      int s = 0, t = 0;
-    public int currentLevel;
+    public int D;
      PlayerController_JamieG u;
      BossIntroCineScript_AdamG v;
     // Dan timeline script
@@ -28,9 +28,9 @@ public class LevelScripting : MonoBehaviour
 
      void Awake()
     {
-        currentLevel = SceneManager.GetActiveScene().buildIndex;
+        D = SceneManager.GetActiveScene().buildIndex;
         u = GameObject.Find("Player").GetComponent<PlayerController_JamieG>();
-        switch (currentLevel)
+        switch (D)
         {
             case 1:
                 {
@@ -131,8 +131,8 @@ public class LevelScripting : MonoBehaviour
                     d = GameObject.Find("DialogTrigger");
                     p = GameObject.Find("Walls1_map").GetComponent<Tilemap>();
                     r = GameObject.Find("Walls2_map").GetComponent<Tilemap>();
-                    bottomDoorTile = p.GetTile<Tile>(new Vector3Int(12, 26, 0));
-                    topDoorTile = r.GetTile<Tile>(new Vector3Int(13, 27, 0));
+                    A = p.GetTile<Tile>(new Vector3Int(12, 26, 0));
+                    S = r.GetTile<Tile>(new Vector3Int(13, 27, 0));
                 }
                 break;
             case 15:
@@ -286,7 +286,7 @@ public class LevelScripting : MonoBehaviour
 
      void Start()
     {
-        switch (currentLevel)
+        switch (D)
         {
 
             case 2:
@@ -347,7 +347,7 @@ public class LevelScripting : MonoBehaviour
                     l = GameObject.Find("Space Ninja").GetComponent<BossDialogue_MarioFernandes>();
                     a = GameObject.Find("Level 18 Lift");
                     e = GameObject.Find("DialogBox");
-                    levelBossIntro = false;
+                    E = false;
                     a.SetActive(false);
                 }
                 break;
@@ -433,13 +433,13 @@ public class LevelScripting : MonoBehaviour
     {
         if (u.m_changeLevel.triggered)
         {
-            SceneManager_JamieG.Instance.LoadNextLevel();
+            SceneManager_JamieG.Instance.F();
         }
-        switch (currentLevel)
+        switch (D)
         {
             case 1:
                 {
-                    if(!keyUsed)
+                    if(!W)
                     {
                         if (!b.activeInHierarchy)
                         {
@@ -454,7 +454,7 @@ public class LevelScripting : MonoBehaviour
                             p.SetTile(new Vector3Int(5, 12, 0), null);
 
 
-                            keyUsed = true;
+                            W = true;
                             
 
                         }
@@ -463,13 +463,13 @@ public class LevelScripting : MonoBehaviour
                 break;
             case 2:
                 {
-                    if(!enemyDead)
+                    if(!Q)
                     {
                         if (j.CO <= 0 || k.CO <= 0)
                         {
                             a.SetActive(true);
-                            n.TriggerDialogue(0);
-                            enemyDead = true;
+                            n.A(0);
+                            Q = true;
 
                         }
                     }
@@ -477,21 +477,21 @@ public class LevelScripting : MonoBehaviour
                 break;
             case 3:
                 {
-                    if(!bossDead)
+                    if(!R)
                     {
-                        if (!levelBossIntro)
+                        if (!E)
                         {
                            // cinematics.PlayZoomIn();
-                            l.TriggerDialogue(0);
-                            levelBossIntro = true;
+                            l.A(0);
+                            E = true;
                         }
                         if (h.CO <= 0)
                         {
                             //dramatic death SE
                             //freeze on enemy as he dies  
-                            l.TriggerDialogue(1);
+                            l.A(1);
                             a.SetActive(true);
-                            bossDead = true;
+                            R = true;
 
                         }
                     }
@@ -499,12 +499,12 @@ public class LevelScripting : MonoBehaviour
                 break;
             case 4:
                 {
-                    if(!keyUsed)
+                    if(!W)
                     {
                         if (!b.activeInHierarchy)
                         {
                             y.setKey(false);
-                            keyUsed = true;
+                            W = true;
                             r.SetTile(new Vector3Int(25, 11, 0), null);
                             r.SetTile(new Vector3Int(25, 10, 0), null);
                             r.SetTile(new Vector3Int(25, 9, 0), null);
@@ -519,16 +519,16 @@ public class LevelScripting : MonoBehaviour
                 break;
             case 5:
                 {
-                    if(!keyUsed)
+                    if(!W)
                     {
                         if (!b.activeInHierarchy)
                         {
                             y.setKey(false);
-                            keyUsed = true;
+                            W = true;
                             a.SetActive(true);
                         }
                     }
-                    if(!vents.activeInHierarchy && !g.activeInHierarchy)
+                    if(!P.activeInHierarchy && !g.activeInHierarchy)
                     {
                         g.SetActive(true);
                     }
@@ -542,24 +542,24 @@ public class LevelScripting : MonoBehaviour
                 break;
             case 6:
                 {
-                   if(!bossDead)
+                   if(!R)
                    {
-                        if (!levelBossIntro)
+                        if (!E)
                         {
-                            l.TriggerDialogue(0);
-                            levelBossIntro = true;
+                            l.A(0);
+                            E = true;
                         }
                         if (h.CO <= 0)
                         {
                             //dramatic death SE
                             //freeze on enemy as he dies  
-                            l.TriggerDialogue(1);
+                            l.A(1);
                             a.SetActive(true);
-                            bossDead = true;
+                            R = true;
 
                         }
                    }
-                   if(!drawFreezer)
+                   if(!O)
                    {
                         r.SetTile(new Vector3Int(23, 10, 0), null);
                         r.SetTile(new Vector3Int(23, 9, 0), null);
@@ -569,31 +569,31 @@ public class LevelScripting : MonoBehaviour
                         r.SetTile(new Vector3Int(22, 8, 0), null);
                         r.SetTile(new Vector3Int(22, 9, 0), null);
                     }
-                    else if (drawFreezer)
+                    else if (O)
                     {
-                        r.SetTile(new Vector3Int(23, 10, 0),topDoorTile);
-                        r.SetTile(new Vector3Int(23, 9, 0), topDoorTile);
-                        r.SetTile(new Vector3Int(23, 8, 0), topDoorTile);
+                        r.SetTile(new Vector3Int(23, 10, 0),S);
+                        r.SetTile(new Vector3Int(23, 9, 0), S);
+                        r.SetTile(new Vector3Int(23, 8, 0), S);
 
-                        r.SetTile(new Vector3Int(22, 7, 0), bottomDoorTile);
-                        r.SetTile(new Vector3Int(22, 8, 0), bottomDoorTile);
-                        r.SetTile(new Vector3Int(22, 9, 0), bottomDoorTile);
+                        r.SetTile(new Vector3Int(22, 7, 0), A);
+                        r.SetTile(new Vector3Int(22, 8, 0), A);
+                        r.SetTile(new Vector3Int(22, 9, 0), A);
                     }
                 }
                 break;
 
             case 7:
                 {
-                    if (!b.activeInHierarchy && !keyUsed)
+                    if (!b.activeInHierarchy && !W)
                     {
                         a.SetActive(true);
-                        keyUsed = true;
+                        W = true;
                     }
                 }
                 break;
             case 8:
                 {
-                    if(!keyUsed)
+                    if(!W)
                     {
                         if (!b.activeInHierarchy)
                         {
@@ -621,20 +621,20 @@ public class LevelScripting : MonoBehaviour
                 break;
             case 9:
                 {
-                    if(!bossDead)
+                    if(!R)
                     {
-                        if (!levelBossIntro)
+                        if (!E)
                         {
-                            l.TriggerDialogue(0);
-                            levelBossIntro = true;
+                            l.A(0);
+                            E = true;
                         }
                         if (h.CO <= 0)
                         {
                             //dramatic death SE
                             //freeze on enemy as he dies  
-                            l.TriggerDialogue(1);
+                            l.A(1);
                             a.SetActive(true);
-                            bossDead = true;
+                            R = true;
 
                         }
                     }
@@ -642,12 +642,12 @@ public class LevelScripting : MonoBehaviour
                 break;
             case 11:
                 {
-                    if(!keyUsed)
+                    if(!W)
                     {
                         if (!b.activeInHierarchy)
                         {
                             y.setKey(false);
-                            keyUsed = true;
+                            W = true;
                             //door top
                             r.SetTile(new Vector3Int(36, 32, 0), null);
                             r.SetTile(new Vector3Int(37, 32, 0), null);
@@ -689,20 +689,20 @@ public class LevelScripting : MonoBehaviour
                 break;
             case 12:
                 {
-                    if(!bossDead)
+                    if(!R)
                     {
-                        if (!levelBossIntro)
+                        if (!E)
                         {
-                            l.TriggerDialogue(0);
-                            levelBossIntro = true;
+                            l.A(0);
+                            E = true;
 
                             
                         }
                         if (h.CO <= 0)
                         {
-                            l.TriggerDialogue(1);
+                            l.A(1);
                             a.SetActive(true);
-                            bossDead = true;
+                            R = true;
 
                         }
                     }
@@ -710,7 +710,7 @@ public class LevelScripting : MonoBehaviour
                 break;
             case 13:
                 {
-                    if(!keyUsed)
+                    if(!W)
                     {
                         if (!b.activeInHierarchy)
                         {
@@ -724,7 +724,7 @@ public class LevelScripting : MonoBehaviour
                             p.SetTile(new Vector3Int(34, 16, 0), null);
                             p.SetTile(new Vector3Int(33, 16, 0), null);
                             p.SetTile(new Vector3Int(32, 16, 0), null);
-                            keyUsed = true;
+                            W = true;
                         }
                     }
                 }
@@ -740,20 +740,20 @@ public class LevelScripting : MonoBehaviour
                 break;
             case 15:
                 {
-                    if(!bossDead)
+                    if(!R)
                     {
-                        if (!levelBossIntro)
+                        if (!E)
                         {
-                            l.TriggerDialogue(0);
-                            levelBossIntro = true;
+                            l.A(0);
+                            E = true;
                         }
                         if (h.CO <= 0)
                         {
                             //dramatic death SE
                             //freeze on enemy as he dies  
-                            l.TriggerDialogue(1);
+                            l.A(1);
                             a.SetActive(true);
-                            bossDead = true;
+                            R = true;
                         }
                     }
                 }
@@ -768,23 +768,23 @@ public class LevelScripting : MonoBehaviour
                 break;
             case 18:
                 {
-                    if(!bossDead)
+                    if(!R)
                     {
-                        if (!levelBossIntro && !e.activeInHierarchy)
+                        if (!E && !e.activeInHierarchy)
                         {
-                            l.TriggerDialogue(s);
+                            l.A(s);
                             s++;
                             if (s == 8)
                             {
-                                levelBossIntro = true;
+                                E = true;
                             }
                         }
                         if (h.CO <= 0)
                         {
 
-                            l.TriggerDialogue(9);
+                            l.A(9);
                             a.SetActive(true);
-                            bossDead = true;
+                            R = true;
 
                         }
                     }
@@ -792,7 +792,7 @@ public class LevelScripting : MonoBehaviour
                 break;
             case 19:
                 {
-                    if (!keyUsed)
+                    if (!W)
                     {
                         if (!b.activeInHierarchy)
                         {
@@ -803,34 +803,34 @@ public class LevelScripting : MonoBehaviour
                             r.SetTile(new Vector3Int(26, 10, 0), null);
                             r.SetTile(new Vector3Int(24, 10, 0), null);
                             y.setKey(false);
-                            keyUsed = true;
+                            W = true;
                         }
                     }   
                 }
                 break;
             case 20:
                 {
-                    if(!bossDead)
+                    if(!R)
                     {
-                        if (!levelBossIntro && !e.activeInHierarchy)
+                        if (!E && !e.activeInHierarchy)
                         {
-                            l.TriggerDialogue(s);
+                            l.A(s);
                             s++;
                             if (s == 14)
                                 //cinematic
-                                levelBossIntro = true;
+                                E = true;
                         }
                         if (h.CO <= 0 && !e.activeInHierarchy)
                         {
                             //if boss is ninjaroth change to Good Ending
                             if(w.playableDirector != w.timeline[1])
                                 w.ChangeDirector("Bad Ending");
-                            l.TriggerDialogue(s);
+                            l.A(s);
                             s++;
                             a.SetActive(true);
                             if(s == 19)
                             {
-                                bossDead = true;
+                                R = true;
                             }
                             
 
@@ -840,10 +840,10 @@ public class LevelScripting : MonoBehaviour
                             {
                                 // just for timeline QA
                                 w.ChangeDirector("Good Ending");
-                                m.TriggerDialogue(t);
+                                m.A(t);
                                 t++;
                                 if (t == 8)
-                                bossDead = true;
+                                R = true;
                                 //dramatic death SE
                                 //freeze on enemy as he dies  
                                 //end cinematic
@@ -1142,19 +1142,19 @@ public class LevelScripting : MonoBehaviour
     }
      void OnTriggerEnter2D(Collider2D z)
     {
-        if (currentLevel == 14)
+        if (D == 14)
         {
             //Mechanic for closing the doors behind the player on lvl 14
-            if (z.gameObject == d && !doorsClosed)
+            if (z.gameObject == d && !T)
             {
                
-                r.SetTile(new Vector3Int(13, 27, 0), topDoorTile);
-                r.SetTile(new Vector3Int(13, 26, 0), topDoorTile);
-                r.SetTile(new Vector3Int(13, 25, 0), topDoorTile);
-                p.SetTile(new Vector3Int(12, 26, 0), bottomDoorTile);
-                p.SetTile(new Vector3Int(12, 25, 0), bottomDoorTile);
-                p.SetTile(new Vector3Int(12, 24, 0), bottomDoorTile);
-                doorsClosed = true;
+                r.SetTile(new Vector3Int(13, 27, 0), S);
+                r.SetTile(new Vector3Int(13, 26, 0), S);
+                r.SetTile(new Vector3Int(13, 25, 0), S);
+                p.SetTile(new Vector3Int(12, 26, 0), A);
+                p.SetTile(new Vector3Int(12, 25, 0), A);
+                p.SetTile(new Vector3Int(12, 24, 0), A);
+                T = true;
             }
         }
 
