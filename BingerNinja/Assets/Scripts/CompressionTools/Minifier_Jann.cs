@@ -23,291 +23,291 @@ public class Minifier_Jann : M
     private List<string> m_files = new List<string>();
     private Dictionary<string, string> m_codeReplacements;
 
-    private void Start()
-    {
-        m_codeReplacements = new Dictionary<string, string>();
-        m_codeReplacements.Add("MonoBehaviour", "M");
-        m_codeReplacements.Add("GameObject.FindGameObjectWithTag", "FT");
-        m_codeReplacements.Add("GameObject.FindObjectOfType", "FOT");
-        m_codeReplacements.Add("GameObject.FindObjectsOfType", "Fs");
-        m_codeReplacements.Add("GameObject.Find", "F");
-        m_codeReplacements.Add("FindObjectOfType", "FOT");
-        m_codeReplacements.Add("FindObjectsOfType", "Fs");
-        m_codeReplacements.Add("StartCoroutine", "SC");
-        m_codeReplacements.Add("Destroy", "D");
+    //private void Start()
+    //{
+    //    m_codeReplacements = new Dictionary<string, string>();
+    //    m_codeReplacements.Add("MonoBehaviour", "M");
+    //    m_codeReplacements.Add("GameObject.FindGameObjectWithTag", "FT");
+    //    m_codeReplacements.Add("GameObject.FindObjectOfType", "FOT");
+    //    m_codeReplacements.Add("GameObject.FindObjectsOfType", "Fs");
+    //    m_codeReplacements.Add("GameObject.Find", "F");
+    //    m_codeReplacements.Add("FindObjectOfType", "FOT");
+    //    m_codeReplacements.Add("FindObjectsOfType", "Fs");
+    //    m_codeReplacements.Add("StartCoroutine", "SC");
+    //    m_codeReplacements.Add("Destroy", "D");
 
-        m_AssetsPath = Application.dataPath;
-        m_OutputDirectory = m_AssetsPath + "/../Minified/";
+    //    m_AssetsPath = Application.dataPath;
+    //    m_OutputDirectory = m_AssetsPath + "/../Minified/";
 
-        RetrieveAllScripts(m_AssetsPath);
+    //    RetrieveAllScripts(m_AssetsPath);
 
-        // Remove compression tools and files with problems from files
-        m_files.RemoveAll(path => path.Contains("Minifier_Jann.cs") || path.Contains("M.cs") || path.Contains("Joystick_LouieWilliamson"));
+    //    // Remove compression tools and files with problems from files
+    //    m_files.RemoveAll(path => path.Contains("Minifier_Jann.cs") || path.Contains("M.cs") || path.Contains("Joystick_LouieWilliamson"));
 
-        if (Directory.Exists(m_OutputDirectory))
-        {
-            Directory.Delete(m_OutputDirectory, true);
-        }
+    //    if (Directory.Exists(m_OutputDirectory))
+    //    {
+    //        Directory.Delete(m_OutputDirectory, true);
+    //    }
 
-        Directory.CreateDirectory(m_OutputDirectory);
+    //    Directory.CreateDirectory(m_OutputDirectory);
 
-        List<string> codebase = new List<string>();
-        foreach (string file in m_files)
-        {
-            string relativePath = file.Substring(m_AssetsPath.Length);
-            string[] splits = relativePath.Split('\\');
-            string filename = splits[splits.Length - 1];
-            string directory = relativePath.Substring(0, relativePath.Length - filename.Length);
+    //    List<string> codebase = new List<string>();
+    //    foreach (string file in m_files)
+    //    {
+    //        string relativePath = file.Substring(m_AssetsPath.Length);
+    //        string[] splits = relativePath.Split('\\');
+    //        string filename = splits[splits.Length - 1];
+    //        string directory = relativePath.Substring(0, relativePath.Length - filename.Length);
 
-            string[] source = File.ReadAllLines(file);
-            string minified = Minify(source);
+    //        string[] source = File.ReadAllLines(file);
+    //        string minified = Minify(source);
 
-            codebase.Add(SaveFile(directory, filename, minified));
-        }
+    //        codebase.Add(SaveFile(directory, filename, minified));
+    //    }
 
-        if (CanCompile(codebase.ToArray()))
-        {
-            print("Minified code compiled successfully");
-        }
-    }
+    //    if (CanCompile(codebase.ToArray()))
+    //    {
+    //        print("Minified code compiled successfully");
+    //    }
+    //}
 
-    public string Minify(string[] code)
-    {
-        // Remove comments
-        string[] minifed = RemoveSinglelineComments(code);
-        minifed = RemoveMultilineComments(minifed);
+    //public string Minify(string[] code)
+    //{
+    //    // Remove comments
+    //    string[] minifed = RemoveSinglelineComments(code);
+    //    minifed = RemoveMultilineComments(minifed);
 
-        // Remove regions
-        minifed = RemoveRegions(minifed);
+    //    // Remove regions
+    //    minifed = RemoveRegions(minifed);
 
-        // Change methods to use M class
-        minifed = ApplyMethodShortener(minifed);
+    //    // Change methods to use M class
+    //    minifed = ApplyMethodShortener(minifed);
 
-        string output = "";
+    //    string output = "";
         
-        foreach (string line in minifed)
-        {
-            if (Regex.Match(line, @"(?<=^.*)\b\w+$").Value.Equals("else"))
-            {
-                output += line.Trim() + " ";
-            }
-            else
-            {
-                output += line.Trim();
-            }
-        }
+    //    foreach (string line in minifed)
+    //    {
+    //        if (Regex.Match(line, @"(?<=^.*)\b\w+$").Value.Equals("else"))
+    //        {
+    //            output += line.Trim() + " ";
+    //        }
+    //        else
+    //        {
+    //            output += line.Trim();
+    //        }
+    //    }
 
-        return output;
-    }
+    //    return output;
+    //}
 
-    #region Code manipulation methods
+    //#region Code manipulation methods
 
-    private string[] ApplyMethodShortener(string[] code)
-    {
-        for (int i = 0; i < code.Length; i++)
-        {
-            foreach (var pair in m_codeReplacements)
-            {
-                code[i] = ReplaceWithDefault(code[i], pair.Key, pair.Value);
-            }
-        }
+    //private string[] ApplyMethodShortener(string[] code)
+    //{
+    //    for (int i = 0; i < code.Length; i++)
+    //    {
+    //        foreach (var pair in m_codeReplacements)
+    //        {
+    //            code[i] = ReplaceWithDefault(code[i], pair.Key, pair.Value);
+    //        }
+    //    }
 
-        return code;
-    }
+    //    return code;
+    //}
 
-    private string ReplaceWithDefault(string line, string from, string to)
-    {
-        string pattern = $@"\b{from}\b";
-        if (line.Contains("m_MovementScript = GameObject.Find(\"Player\")"))
-        {
-            print("Find");
-        }
-        return Regex.Replace(line, pattern, to);
-    }
+    //private string ReplaceWithDefault(string line, string from, string to)
+    //{
+    //    string pattern = $@"\b{from}\b";
+    //    if (line.Contains("m_MovementScript = GameObject.Find(\"Player\")"))
+    //    {
+    //        print("Find");
+    //    }
+    //    return Regex.Replace(line, pattern, to);
+    //}
 
-    private string[] RemoveSinglelineComments(string[] source)
-    {
-        List<string> sourceWithoutComments = new List<string>();
+    //private string[] RemoveSinglelineComments(string[] source)
+    //{
+    //    List<string> sourceWithoutComments = new List<string>();
 
-        for (int i = 0; i < source.Length; i++)
-        {
-            string line = source[i].Trim();
-            if (line.Length == 0 || (line[0] == '/' && line[1] == '/'))
-                continue;
+    //    for (int i = 0; i < source.Length; i++)
+    //    {
+    //        string line = source[i].Trim();
+    //        if (line.Length == 0 || (line[0] == '/' && line[1] == '/'))
+    //            continue;
 
-            if (line.Contains("//"))
-            {
-                // Add code from before the the start of the comment
-                sourceWithoutComments.Add(line.Substring(0, line.IndexOf("//")));
-            }
-            else
-            {
-                sourceWithoutComments.Add(line);
-            }
-        }
+    //        if (line.Contains("//"))
+    //        {
+    //            // Add code from before the the start of the comment
+    //            sourceWithoutComments.Add(line.Substring(0, line.IndexOf("//")));
+    //        }
+    //        else
+    //        {
+    //            sourceWithoutComments.Add(line);
+    //        }
+    //    }
 
-        return sourceWithoutComments.ToArray();
-    }
+    //    return sourceWithoutComments.ToArray();
+    //}
 
-    private string[] RemoveMultilineComments(string[] source)
-    {
-        List<string> sourceWithoutComments = new List<string>();
-        bool isInsideComment = false;
+    //private string[] RemoveMultilineComments(string[] source)
+    //{
+    //    List<string> sourceWithoutComments = new List<string>();
+    //    bool isInsideComment = false;
 
-        for (int i = 0; i < source.Length; i++)
-        {
-            if (source[i].Contains("/*"))
-            {
-                if (source[i].IndexOf("/*") > 1)
-                {
-                    // Check for multiline comment in a single line
-                    if (source[i].Contains("/*") && source[i].Contains("*/"))
-                    {
-                        sourceWithoutComments.Add(source[i].Substring(0, source[i].IndexOf("/*")));
-                        sourceWithoutComments.Add(source[i].Substring(source[i].IndexOf("*/") + 2));
-                        continue;
-                    }
+    //    for (int i = 0; i < source.Length; i++)
+    //    {
+    //        if (source[i].Contains("/*"))
+    //        {
+    //            if (source[i].IndexOf("/*") > 1)
+    //            {
+    //                // Check for multiline comment in a single line
+    //                if (source[i].Contains("/*") && source[i].Contains("*/"))
+    //                {
+    //                    sourceWithoutComments.Add(source[i].Substring(0, source[i].IndexOf("/*")));
+    //                    sourceWithoutComments.Add(source[i].Substring(source[i].IndexOf("*/") + 2));
+    //                    continue;
+    //                }
 
-                    // Add code from before the opening comment
-                    sourceWithoutComments.Add(source[i].Substring(0, source[i].IndexOf("/*") - 1));
-                }
+    //                // Add code from before the opening comment
+    //                sourceWithoutComments.Add(source[i].Substring(0, source[i].IndexOf("/*") - 1));
+    //            }
 
-                isInsideComment = true;
-                continue;
-            }
+    //            isInsideComment = true;
+    //            continue;
+    //        }
 
-            if (source[i].Contains("*/"))
-            {
-                // Add code from after the closing comment
-                sourceWithoutComments.Add(source[i].Substring(source[i].IndexOf("*/") + 2));
-                isInsideComment = false;
-                continue;
-            }
+    //        if (source[i].Contains("*/"))
+    //        {
+    //            // Add code from after the closing comment
+    //            sourceWithoutComments.Add(source[i].Substring(source[i].IndexOf("*/") + 2));
+    //            isInsideComment = false;
+    //            continue;
+    //        }
 
-            if (!isInsideComment)
-            {
-                sourceWithoutComments.Add(source[i]);
-            }
-        }
+    //        if (!isInsideComment)
+    //        {
+    //            sourceWithoutComments.Add(source[i]);
+    //        }
+    //    }
 
-        return sourceWithoutComments.ToArray();
-    }
+    //    return sourceWithoutComments.ToArray();
+    //}
 
-    private string[] RemoveRegions(string[] source)
-    {
-        List<string> sourceWithoutRegions = new List<string>();
+    //private string[] RemoveRegions(string[] source)
+    //{
+    //    List<string> sourceWithoutRegions = new List<string>();
 
-        for (int i = 0; i < source.Length; i++)
-        {
-            if (source[i].Contains("#region") || source[i].Contains("#endregion"))
-                continue;
+    //    for (int i = 0; i < source.Length; i++)
+    //    {
+    //        if (source[i].Contains("#region") || source[i].Contains("#endregion"))
+    //            continue;
 
-            sourceWithoutRegions.Add(source[i]);
-        }
+    //        sourceWithoutRegions.Add(source[i]);
+    //    }
 
-        return sourceWithoutRegions.ToArray();
-    }
+    //    return sourceWithoutRegions.ToArray();
+    //}
 
-    #endregion
+    //#endregion
 
-    #region FileHandling
+    //#region FileHandling
 
-    private void RetrieveAllScripts(string assetsDirectory)
-    {
-        if (File.Exists(assetsDirectory))
-        {
-            ProcessFile(assetsDirectory);
-        }
-        else if (Directory.Exists(assetsDirectory))
-        {
-            ProcessDirectory(assetsDirectory);
-        }
-    }
+    //private void RetrieveAllScripts(string assetsDirectory)
+    //{
+    //    if (File.Exists(assetsDirectory))
+    //    {
+    //        ProcessFile(assetsDirectory);
+    //    }
+    //    else if (Directory.Exists(assetsDirectory))
+    //    {
+    //        ProcessDirectory(assetsDirectory);
+    //    }
+    //}
 
-    private void ProcessDirectory(string targetDirectory)
-    {
-        // Process the list of files found in the directory.
-        string[] fileEntries = Directory.GetFiles(targetDirectory);
-        foreach (string fileName in fileEntries)
-        {
-            ProcessFile(fileName);
-        }
+    //private void ProcessDirectory(string targetDirectory)
+    //{
+    //    // Process the list of files found in the directory.
+    //    string[] fileEntries = Directory.GetFiles(targetDirectory);
+    //    foreach (string fileName in fileEntries)
+    //    {
+    //        ProcessFile(fileName);
+    //    }
 
-        // Recurse into subdirectories of this directory.
-        string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
-        foreach (string subdirectory in subdirectoryEntries)
-        {
-            ProcessDirectory(subdirectory);
-        }
-    }
+    //    // Recurse into subdirectories of this directory.
+    //    string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
+    //    foreach (string subdirectory in subdirectoryEntries)
+    //    {
+    //        ProcessDirectory(subdirectory);
+    //    }
+    //}
 
-    private void ProcessFile(string path)
-    {
-        if (path.Substring(path.Length - 3).Equals(".cs"))
-        {
-            m_files.Add(path);
-        }
-    }
+    //private void ProcessFile(string path)
+    //{
+    //    if (path.Substring(path.Length - 3).Equals(".cs"))
+    //    {
+    //        m_files.Add(path);
+    //    }
+    //}
 
-    private string SaveFile(string directory, string filename, string source)
-    {
-        Directory.CreateDirectory(m_OutputDirectory + directory);
+    //private string SaveFile(string directory, string filename, string source)
+    //{
+    //    Directory.CreateDirectory(m_OutputDirectory + directory);
 
-        string path = $"{m_OutputDirectory}/{directory}/{filename}";
-        File.WriteAllText(path, source);
+    //    string path = $"{m_OutputDirectory}/{directory}/{filename}";
+    //    File.WriteAllText(path, source);
 
-        return path;
-    }
+    //    return path;
+    //}
 
-    private string SaveFile(string directory, string filename, string[] source)
-    {
-        Directory.CreateDirectory(m_OutputDirectory + directory);
+    //private string SaveFile(string directory, string filename, string[] source)
+    //{
+    //    Directory.CreateDirectory(m_OutputDirectory + directory);
 
-        string path = $"{m_OutputDirectory}/{directory}/{filename}";
-        File.WriteAllLines(path, source);
+    //    string path = $"{m_OutputDirectory}/{directory}/{filename}";
+    //    File.WriteAllLines(path, source);
 
-        return path;
-    }
+    //    return path;
+    //}
 
-    #endregion
+    //#endregion
 
-    #region CompilationUtils
+    //#region CompilationUtils
 
-    private bool CanCompile(string[] program)
-    {
-        var errors = Compile(program).Errors;
-        if (!errors.HasErrors)
-            return true;
-        else
-        {
-            foreach (CompilerError error in errors)
-            {
-                if (!error.IsWarning)
-                    print(error.ToString());
-            }
+    //private bool CanCompile(string[] program)
+    //{
+    //    var errors = Compile(program).Errors;
+    //    if (!errors.HasErrors)
+    //        return true;
+    //    else
+    //    {
+    //        foreach (CompilerError error in errors)
+    //        {
+    //            if (!error.IsWarning)
+    //                print(error.ToString());
+    //        }
     
-            return false;
-        }
-    }
+    //        return false;
+    //    }
+    //}
     
-    private CompilerResults Compile(string[] filenames)
-    {
-        CompilerResults compilerResults = null;
-        using (CSharpCodeProvider provider = new CSharpCodeProvider())
-        {
-            CompilerParameters compilerParameters = new CompilerParameters();
-            compilerParameters.GenerateExecutable = false;
+    //private CompilerResults Compile(string[] filenames)
+    //{
+    //    CompilerResults compilerResults = null;
+    //    using (CSharpCodeProvider provider = new CSharpCodeProvider())
+    //    {
+    //        CompilerParameters compilerParameters = new CompilerParameters();
+    //        compilerParameters.GenerateExecutable = false;
     
-            var assemblies = from asm in AppDomain.CurrentDomain.GetAssemblies()
-                where !asm.IsDynamic
-                select asm.Location;
-            compilerParameters.ReferencedAssemblies.AddRange(assemblies.ToArray());
+    //        var assemblies = from asm in AppDomain.CurrentDomain.GetAssemblies()
+    //            where !asm.IsDynamic
+    //            select asm.Location;
+    //        compilerParameters.ReferencedAssemblies.AddRange(assemblies.ToArray());
     
-            compilerResults = provider.CompileAssemblyFromFile(compilerParameters, filenames);
-        }
+    //        compilerResults = provider.CompileAssemblyFromFile(compilerParameters, filenames);
+    //    }
     
-        return compilerResults;
-    }
+    //    return compilerResults;
+    //}
 
-    #endregion
+    //#endregion
 }
