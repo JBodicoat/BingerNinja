@@ -90,6 +90,7 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
             AudioClip c = CreateClip(t.n, (float) t.b / 60, t.f[i]);
             m_musicAudioSources[i].clip = c;
             m_musicAudioSources[i].Play();
+            UpdateMusicVolume(1);
         }
     }
     
@@ -103,6 +104,7 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
             AudioClip c = CreateClip(t.n, (float) t.b / 60, t.f[i]);
             m_musicAudioSources[i].clip = c;
             m_musicAudioSources[i].Play();
+            UpdateMusicVolume(1);
         }
     }
     #endregion

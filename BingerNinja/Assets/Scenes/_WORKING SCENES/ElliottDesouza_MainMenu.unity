@@ -249,6 +249,10 @@ PrefabInstance:
       propertyPath: MusicPrefab
       value: 
       objectReference: {fileID: 185154411}
+    - target: {fileID: 6693039836503293815, guid: c55a2c65ac41fb341beef8971df506e0, type: 3}
+      propertyPath: m_volumeSound
+      value: 0.001
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c55a2c65ac41fb341beef8971df506e0, type: 3}
 --- !u!1001 &733970506
@@ -718,6 +722,10 @@ PrefabInstance:
     - target: {fileID: 3533301961293631095, guid: 0f30ac85b546af741b6be479a7ad4717, type: 3}
       propertyPath: m_Name
       value: Music_Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732119696114794830, guid: 0f30ac85b546af741b6be479a7ad4717, type: 3}
+      propertyPath: m_Volume
+      value: 0.501
       objectReference: {fileID: 0}
     - target: {fileID: 6691000706662950785, guid: 0f30ac85b546af741b6be479a7ad4717, type: 3}
       propertyPath: m_LocalPosition.x
