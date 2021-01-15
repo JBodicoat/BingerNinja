@@ -28,7 +28,6 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
     public Slider m_healthSlider;
     public Slider m_hungerSlider;
 
-     PlayerDeathEffect_Elliott q;
      PlayerController_JamieG w;
 
     // Increase players health by amount passed
@@ -54,7 +53,6 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
         if(m_currentHealth == 0)
         {
             PlayTrack_Jann.Instance.EM(AudioFiles.Sound_Death);
-            q.SpriteFlash();
             //Invoke("Die", 2f);
             Die();
         }
@@ -134,7 +132,6 @@ public class PlayerHealthHunger_MarioFernandes : MonoBehaviour
         m_hungerSlider.maxValue = m_maxHunger;
         m_hungerSlider.value = m_currentHunger;
 
-        q = GetComponent<PlayerDeathEffect_Elliott>();
         w = GetComponent<PlayerController_JamieG>();
 
     }

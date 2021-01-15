@@ -7,11 +7,9 @@ public class ActiveatePauseMenu_Elliott : MonoBehaviour
 
     public void OpenPauseMenu()
     {
-        if (VendingMachineMenu_Elliott.m_gameIsPaused == false)
-        {
+
             Time.timeScale = 0f;
             m_pauseMenu.SetActive(true);
-        }
     }
 
     void Start()

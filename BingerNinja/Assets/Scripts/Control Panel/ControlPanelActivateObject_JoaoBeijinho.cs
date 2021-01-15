@@ -31,7 +31,7 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
 
     public ObjectType m_functionality;
 
-    protected FreezerTrigger_JoaoBeijinho m_freezerArea;//Reference script that checks if enemy is in the freezer
+
      BaseEnemy_SebastianMol a;
      ColorChanger_Jann b;
      LevelScripting c;
@@ -67,41 +67,7 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
                     gameObject.SetActive(false);
                 }
                 break;
-            case ObjectType.Computer:
-                //make computer sound
-                break;
-            case ObjectType.Freezer:
-                if (!d)
-                {
-                    c.O = true;//Enable freezer
-                    StartCoroutine(r());
-                }
-                break;
-            case ObjectType.SecurityCamera:
-                gameObject.GetComponent<CircleCollider2D>().enabled = false;
-                break;
         }
-    }
-
-     IEnumerator r()
-    {
-        d = true;
-        for (int i = 0; i < m_maxTicks; i++)
-        {
-            foreach (Collider2D enemy in m_freezerArea.m_enemyList)
-            {
-                a = enemy.GetComponent<BaseEnemy_SebastianMol>();
-
-                a.RO(m_damageInterval);
-                a.CO -= m_damageAmount;//Deal damage
-                a.EB();
-            }
-
-            yield return new WaitForSeconds(m_damageInterval);//Delay before doing damage again
-        }
-        
-        c.O = false;//Unlock freezer door
-        yield return new WaitForSeconds(m_freezerCooldown);
     }
 
      void s()
@@ -137,7 +103,6 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
     void Awake()
     {
         c = GameObject.Find("Player").GetComponent<LevelScripting>();
-        m_freezerArea = FindObjectOfType<FreezerTrigger_JoaoBeijinho>();
         b = FindObjectOfType<ColorChanger_Jann>();
 
         if (gameObject.CompareTag(Tags_JoaoBeijinho.UL))

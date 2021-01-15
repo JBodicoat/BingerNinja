@@ -110,9 +110,7 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
     protected int QF = 1; //the phase tadashi is on
 
 
-     CameraShakeElliott s;
     protected bool QG = false;
-     PlayerSpoted_Elliott d;
     
 
     protected PlayerStealth_JoaoBeijinho QH;
@@ -752,7 +750,6 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
         if (CW == false) //if sneak damage
         {
             CO -= RD * X;
-            s.RF();
             CY.RG(ItemType.NinjaPoints, 1);
         }
         else
@@ -821,7 +818,6 @@ abstract class BaseEnemy_SebastianMol : MonoBehaviour
 
         CY = GameObject.Find("Player").GetComponent<Inventory_JoaoBeijinho>();
         QH = FindObjectOfType<PlayerStealth_JoaoBeijinho>();
-        s = Camera.main.GetComponent<CameraShakeElliott>();
     }
 
      void Update()

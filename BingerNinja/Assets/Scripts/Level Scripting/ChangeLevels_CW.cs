@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class ChangeLevels_CW : MonoBehaviour
 {
-    public GameObject vendingMachine;
     protected Inventory_JoaoBeijinho m_Inventory;
 
      void Awake()
@@ -26,25 +25,15 @@ public class ChangeLevels_CW : MonoBehaviour
             {
                 SaveLoadSystem_JamieG.QY(b + 1);                
             }
-
-            if (b > 4 && b != 20)
-            {
-                vendingMachine.SetActive(true);
-                Time.timeScale = 0f;
-                VendingMachineMenu_Elliott.m_gameIsPaused = true;
-
-            }
-            else
-            {                
+              
                 ProgressToNextLevel();
-            }
+          
         }
     }
 
     public void ProgressToNextLevel()
     {
         Time.timeScale = 1f;
-        VendingMachineMenu_Elliott.m_gameIsPaused = false;
         SceneManager_JamieG.Instance.F();
     }
 
