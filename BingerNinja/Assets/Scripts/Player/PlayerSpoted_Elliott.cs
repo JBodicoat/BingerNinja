@@ -73,6 +73,11 @@ public class PlayerSpoted_Elliott : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(m_allEnemies == null)
+        {
+            if (!m_doLostOnce) EnemyLostSight();
+        }
+
         if (IsPlayerSeen())
         {
             if (!m_doSeenOnce) SeenByEnemy();

@@ -101,6 +101,7 @@ public class ControlPanelActivateObject_JoaoBeijinho : MonoBehaviour
         }
         
         levelScripting.drawFreezer = false;//Unlock freezer door
+        m_freezerInUse = false;
         yield return new WaitForSeconds(m_freezerCooldown);
     }
 
