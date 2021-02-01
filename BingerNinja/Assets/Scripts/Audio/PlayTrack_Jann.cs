@@ -35,7 +35,7 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
         if (!settingsData.Equals(default(SettingsData)))
         {
             UpdateMusicVolume(settingsData.m_musicVolume);
-            UpdateSfxVolume(settingsData.m_sfxVolume);
+          //  UpdateSfxVolume(settingsData.m_sfxVolume);
         }
 
         foreach (AudioSource musicSource in m_musicAudioSources)

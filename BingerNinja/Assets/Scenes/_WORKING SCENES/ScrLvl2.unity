@@ -10727,6 +10727,41 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3882659563705978627, guid: c5d3ca60116709046913b0a93335ff21,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882659563705978627, guid: c5d3ca60116709046913b0a93335ff21,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882659563705978627, guid: c5d3ca60116709046913b0a93335ff21,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882659563705978627, guid: c5d3ca60116709046913b0a93335ff21,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1988967597}
+    - target: {fileID: 3882659563705978627, guid: c5d3ca60116709046913b0a93335ff21,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayTrack_Jann, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882659563705978627, guid: c5d3ca60116709046913b0a93335ff21,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdateMusicVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882659563705978627, guid: c5d3ca60116709046913b0a93335ff21,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4993046886194028888, guid: c5d3ca60116709046913b0a93335ff21,
         type: 3}
       propertyPath: m_IsActive
@@ -10861,6 +10896,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952878112884047826, guid: c5d3ca60116709046913b0a93335ff21,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952878112884047826, guid: c5d3ca60116709046913b0a93335ff21,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952878112884047826, guid: c5d3ca60116709046913b0a93335ff21,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952878112884047826, guid: c5d3ca60116709046913b0a93335ff21,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1988967597}
+    - target: {fileID: 7952878112884047826, guid: c5d3ca60116709046913b0a93335ff21,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayTrack_Jann, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952878112884047826, guid: c5d3ca60116709046913b0a93335ff21,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdateSfxVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952878112884047826, guid: c5d3ca60116709046913b0a93335ff21,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7952878112948653224, guid: c5d3ca60116709046913b0a93335ff21,
         type: 3}
@@ -15340,6 +15410,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1988967595}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1988967597 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6693039836503293815, guid: c55a2c65ac41fb341beef8971df506e0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1988967595}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 536f67e7de73d8f4298fbb3115104006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2056939977
 GameObject:
   m_ObjectHideFlags: 0
