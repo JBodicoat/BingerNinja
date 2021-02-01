@@ -27,10 +27,10 @@ public class SettingsMenu_ElliottDesouza : MonoBehaviour
         SettingsData settings = SaveLoadSystem_JamieG.LoadSettings();
         m_musicSlider.value = settings.m_musicVolume;
         m_SFXSlider.value = settings.m_sfxVolume;
-        m_selectedLanguage = settings.m_chosenLanguage;
+        //m_selectedLanguage = settings.m_chosenLanguage;
         
-        m_englishButton.interactable = !m_selectedLanguage.Equals("English");
-        m_portugueseButton.interactable = m_selectedLanguage.Equals("English");
+        //m_englishButton.interactable = !m_selectedLanguage.Equals("English");
+        //m_portugueseButton.interactable = m_selectedLanguage.Equals("English");
     }
 
     public void OnEnglishSelected()
