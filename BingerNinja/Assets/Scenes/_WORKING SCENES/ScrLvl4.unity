@@ -664,7 +664,6 @@ MonoBehaviour:
   m_wallTiles:
   - {fileID: 11400000, guid: eb7ff2405709c494eb41f4a07266ea9f, type: 2}
   m_tileMap: {fileID: 1100928007}
-  m_testButton: 0
   m_startPos: {x: 0, y: 0}
   m_targetPos: {x: 0, y: 0}
   m_pathTile: {fileID: 0}
@@ -1080,6 +1079,14 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 1580939700446338874, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1157423691}
+    - target: {fileID: 1580939700446338874, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdateMusicVolume
+      objectReference: {fileID: 0}
     - target: {fileID: 2563657282041528230, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -1095,6 +1102,14 @@ PrefabInstance:
     - target: {fileID: 4618795917315903057, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5642753617169739755, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1157423691}
+    - target: {fileID: 5642753617169739755, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdateSfxVolume
       objectReference: {fileID: 0}
     - target: {fileID: 5925831477419928967, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_RootOrder
@@ -1855,6 +1870,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c55a2c65ac41fb341beef8971df506e0, type: 3}
+--- !u!114 &1157423691 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6693039836503293815, guid: c55a2c65ac41fb341beef8971df506e0, type: 3}
+  m_PrefabInstance: {fileID: 1157423690}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 536f67e7de73d8f4298fbb3115104006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1165367331
 GameObject:
   m_ObjectHideFlags: 0

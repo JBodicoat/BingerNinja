@@ -10875,9 +10875,37 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 1580939700446338874, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 365022208}
+    - target: {fileID: 1580939700446338874, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdateMusicVolume
+      objectReference: {fileID: 0}
     - target: {fileID: 3074607439574447818, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5642753617169739755, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5642753617169739755, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5642753617169739755, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5642753617169739755, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 365022208}
+    - target: {fileID: 5642753617169739755, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdateSfxVolume
       objectReference: {fileID: 0}
     - target: {fileID: 7882151871028722937, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17330,7 +17358,6 @@ MonoBehaviour:
   m_wallTiles:
   - {fileID: 11400000, guid: 4d4fab222caf5fd4b90f3f0f49a7fdbb, type: 2}
   m_tileMap: {fileID: 675830818}
-  m_testButton: 0
   m_startPos: {x: 0, y: 0}
   m_targetPos: {x: 0, y: 0}
   m_pathTile: {fileID: 0}

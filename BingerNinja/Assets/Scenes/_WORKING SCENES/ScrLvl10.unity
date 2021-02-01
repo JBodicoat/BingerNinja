@@ -369,6 +369,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c55a2c65ac41fb341beef8971df506e0, type: 3}
+--- !u!114 &280372527 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6693039836503293815, guid: c55a2c65ac41fb341beef8971df506e0, type: 3}
+  m_PrefabInstance: {fileID: 280372526}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 536f67e7de73d8f4298fbb3115104006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &294968941 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2076348194425506861, guid: 78dfd7b3bd6f28b469372a3990cbcf9e, type: 3}
@@ -2402,6 +2413,14 @@ PrefabInstance:
       propertyPath: m_pauseMenu
       value: 
       objectReference: {fileID: 1604581957}
+    - target: {fileID: 1580939700446338874, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 280372527}
+    - target: {fileID: 1580939700446338874, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdateMusicVolume
+      objectReference: {fileID: 0}
     - target: {fileID: 2932502618572735700, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: levelLift
       value: 
@@ -2417,6 +2436,14 @@ PrefabInstance:
     - target: {fileID: 3074607439574447818, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5642753617169739755, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 280372527}
+    - target: {fileID: 5642753617169739755, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdateSfxVolume
       objectReference: {fileID: 0}
     - target: {fileID: 7882151871028722937, guid: c5d3ca60116709046913b0a93335ff21, type: 3}
       propertyPath: m_LocalPosition.x
@@ -38752,7 +38779,6 @@ MonoBehaviour:
   m_wallTiles:
   - {fileID: 11400000, guid: 0aa535be177b93044bafd1486dbb6df5, type: 2}
   m_tileMap: {fileID: 935563630}
-  m_testButton: 0
   m_startPos: {x: 0, y: 0}
   m_targetPos: {x: 0, y: 0}
   m_pathTile: {fileID: 0}

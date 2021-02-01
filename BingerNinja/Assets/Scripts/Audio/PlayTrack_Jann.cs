@@ -35,7 +35,7 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
         if (!sd.Equals(default(SettingsData)))
         {
             UpdateMusicVolume(sd.m_musicVolume);
-            UpdateSfxVolume(sd.m_sfxVolume);
+           // UpdateSfxVolume(sd.m_sfxVolume);
         }
 
         foreach (AudioSource ms in m_musicAudioSources)
@@ -48,6 +48,9 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
         {
             ss.volume = m_volumeSound;
         }
+
+
+
     }
     
     private void Start()
@@ -90,7 +93,7 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
             AudioClip c = CreateClip(t.n, (float) t.b / 60, t.f[i]);
             m_musicAudioSources[i].clip = c;
             m_musicAudioSources[i].Play();
-            UpdateMusicVolume(1);
+            UpdateMusicVolume(1f);
         }
     }
     
@@ -104,7 +107,7 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
             AudioClip c = CreateClip(t.n, (float) t.b / 60, t.f[i]);
             m_musicAudioSources[i].clip = c;
             m_musicAudioSources[i].Play();
-            UpdateMusicVolume(1);
+            UpdateMusicVolume(1f);
         }
     }
     #endregion
@@ -179,7 +182,7 @@ public class PlayTrack_Jann : Singleton_Jann<PlayTrack_Jann>
         
         foreach (var source in m_soundAudioSources)
         {
-            source.volume = v / 50f;
+            source.volume = v / 40f;
         }
     }
 }
