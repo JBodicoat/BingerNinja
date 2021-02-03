@@ -36023,7 +36023,7 @@ PrefabInstance:
     - target: {fileID: 6674240106452199667, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
       propertyPath: m_TileAssetArray.Array.data[1].m_Data
       value: 
-      objectReference: {fileID: 11400000, guid: 2360fb4fd45120845ae56804a0d8c671, type: 2}
+      objectReference: {fileID: 11400000, guid: 808aaf9f4015a324b94847440dfe6cba, type: 2}
     - target: {fileID: 6674240106452199667, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[1].m_RefCount
       value: 3
@@ -36031,7 +36031,7 @@ PrefabInstance:
     - target: {fileID: 6674240106452199667, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[1].m_Data
       value: 
-      objectReference: {fileID: 4539557222036227733, guid: 7b1fe243e50ceb441a3a2cd650e545b2, type: 3}
+      objectReference: {fileID: -6291758445645827163, guid: 7eec9656956eec34baf6f874b2f50d24, type: 3}
     - target: {fileID: 6674240106452199667, guid: ded980771a4124f43b1d3c68c987f1cb, type: 3}
       propertyPath: m_Tiles.Array.data[1].second.m_TileIndex
       value: 1
@@ -36307,11 +36307,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5717853694840726511, guid: 50bb58f1a68b5684daf4f4843ee6c34a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.622
+      value: 13.56
       objectReference: {fileID: 0}
     - target: {fileID: 5717853694840726511, guid: 50bb58f1a68b5684daf4f4843ee6c34a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 109.213
+      value: 109.38
       objectReference: {fileID: 0}
     - target: {fileID: 5717853694840726511, guid: 50bb58f1a68b5684daf4f4843ee6c34a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -38325,9 +38325,17 @@ PrefabInstance:
       propertyPath: floortilemap
       value: 
       objectReference: {fileID: 1718480094}
+    - target: {fileID: 8631870844753434320, guid: 3e0ee63d73999dd43a0e0964d6e22963, type: 3}
+      propertyPath: m_chargeAttackDeley
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8631870844753434322, guid: 3e0ee63d73999dd43a0e0964d6e22963, type: 3}
       propertyPath: m_Name
       value: PetTigerEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802191557362704687, guid: 3e0ee63d73999dd43a0e0964d6e22963, type: 3}
+      propertyPath: m_baseDamage
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e0ee63d73999dd43a0e0964d6e22963, type: 3}
@@ -39094,11 +39102,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 26396045094078226, guid: f4f1801ef56b0fe499ff09d8cf5e67b7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.137
+      value: 8.02
       objectReference: {fileID: 0}
     - target: {fileID: 26396045094078226, guid: f4f1801ef56b0fe499ff09d8cf5e67b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 104.594
+      value: 104.58
       objectReference: {fileID: 0}
     - target: {fileID: 26396045094078226, guid: f4f1801ef56b0fe499ff09d8cf5e67b7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -39496,11 +39504,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 26396045094078226, guid: f4f1801ef56b0fe499ff09d8cf5e67b7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.57
+      value: 7.42
       objectReference: {fileID: 0}
     - target: {fileID: 26396045094078226, guid: f4f1801ef56b0fe499ff09d8cf5e67b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 104.3
+      value: 104.35
       objectReference: {fileID: 0}
     - target: {fileID: 26396045094078226, guid: f4f1801ef56b0fe499ff09d8cf5e67b7, type: 3}
       propertyPath: m_LocalPosition.z

@@ -73,12 +73,12 @@ public class WeaponUI_LouieWilliamson : MonoBehaviour
     {
         if (isRanged)
         {
-            rangedImage.sprite = WeaponSprites[8];
+            rangedImage.sprite = WeaponSprites[9];
             setAmmo(-50);
         }
         else
         {
-            weaponImage.sprite = WeaponSprites[8];
+            weaponImage.sprite = WeaponSprites[9];
         }
         setName("None", isRanged);
     }
