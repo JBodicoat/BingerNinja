@@ -33,7 +33,7 @@ public class Timeline_Script : MonoBehaviour
        // nextButton.SetActive(true);
        if (dialogBox.activeInHierarchy == false)
             {
-                playableDirector.playableGraph.GetRootPlayable(0).SetSpeed(5);
+                playableDirector.playableGraph.GetRootPlayable(0).SetSpeed(1);
                 //playableDirector.Stop();
             }
     }
