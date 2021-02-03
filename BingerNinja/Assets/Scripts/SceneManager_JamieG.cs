@@ -71,7 +71,11 @@ public class SceneManager_JamieG : Singleton_Jann<SceneManager_JamieG>
         if (SceneManager.GetActiveScene().buildIndex != 0)
         {
             Inventory_JoaoBeijinho inventory = GameObject.Find("Player").GetComponent<Inventory_JoaoBeijinho>();
-            inventory.RemoveItem(ItemType.LiftKey, inventory.m_inventoryItems[ItemType.LiftKey]);
+            if(inventory.HasItem(ItemType.LiftKey,1))
+            {
+                inventory.RemoveItem(ItemType.LiftKey, 1);
+            }
+
             SaveLoadSystem_JamieG.SaveInventory(inventory);
         }
 
